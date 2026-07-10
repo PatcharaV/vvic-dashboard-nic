@@ -1,9 +1,47 @@
 import unittest
 
 from app.analytics import build_dashboard
+from app.catalog import _apply_season_classification
 
 
 class StraussVariantAggregationTests(unittest.TestCase):
+    def test_infers_product_seasons_from_attributes(self):
+        products = _apply_season_classification(
+            [
+                {
+                    "brand": "strauss",
+                    "brand_label": "Strauss",
+                    "title": "Winter Work Jacket",
+                    "categories": ["Outerwear"],
+                    "subcategories": ["Winter Jackets"],
+                    "material": "Shell 100% Polyamide",
+                },
+                {
+                    "brand": "lululemon",
+                    "brand_label": "lululemon",
+                    "title": "ABC Classic-Fit Golf Short",
+                    "categories": ["Shorts"],
+                    "subcategories": ["Athletic Shorts"],
+                    "innovations": ["Water-resistant stretch fabric"],
+                },
+                {
+                    "brand": "rhone",
+                    "brand_label": "Rhone",
+                    "title": "Commuter Pant",
+                    "categories": ["Pants"],
+                    "subcategories": ["Lifestyle pants"],
+                },
+            ]
+        )
+
+        self.assertEqual(products[0]["season_range"], "Fall / Winter")
+        self.assertEqual(products[1]["season_range"], "Spring / Summer")
+        self.assertEqual(products[2]["season_range"], "All seasons")
+        self.assertEqual(
+            products[2]["season_source"],
+            "Inferred from product attributes",
+        )
+
     def test_strauss_colors_are_merged_into_one_product(self):
         products = [
             {

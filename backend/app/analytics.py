@@ -488,6 +488,7 @@ def _merge_strauss_variants(
             "construction",
             "innovations",
             "product_functions",
+            "season_notes",
         ):
             _append_unique(row.setdefault(field, []), product.get(field))
 

@@ -45,6 +45,97 @@ PERIOD_SEASON_MONTHS = {
     "DEC": "F",
 }
 
+SEASON_LABELS = {
+    "spring_summer": "Spring / Summer",
+    "fall_winter": "Fall / Winter",
+    "all": "All seasons",
+}
+
+SPRING_SUMMER_KEYWORDS = {
+    "athletic shorts",
+    "breathable",
+    "capris",
+    "dress",
+    "dresses",
+    "golf short",
+    "half tights",
+    "light layers",
+    "lightweight",
+    "liner shorts",
+    "polo",
+    "quick-drying",
+    "shirt",
+    "shirts",
+    "short",
+    "shorts",
+    "skirt",
+    "skort",
+    "spring favorite",
+    "summer",
+    "summer essentials",
+    "sun protection",
+    "swim",
+    "tank",
+    "tank tops",
+    "tee",
+    "t-shirt",
+    "t-shirts",
+    "uv",
+    "water-resistant stretch",
+}
+
+FALL_WINTER_KEYWORDS = {
+    "base layer",
+    "beanie",
+    "coat",
+    "corduroy",
+    "crewneck",
+    "down",
+    "fall",
+    "fleece",
+    "full-zip",
+    "hoodie",
+    "hoodies",
+    "insulated",
+    "insulation",
+    "jacket",
+    "jackets",
+    "merino",
+    "midlayer",
+    "minky",
+    "pullover",
+    "snow",
+    "softshell",
+    "sweater",
+    "sweatpants",
+    "sweatshirt",
+    "sweatshirts",
+    "thermal",
+    "vest",
+    "winter",
+    "wool",
+}
+
+ALL_SEASON_KEYWORDS = {
+    "all seasons",
+    "bib",
+    "bibs",
+    "cargo pants",
+    "coveralls",
+    "denim",
+    "double-front",
+    "jeans",
+    "joggers",
+    "leggings",
+    "overalls",
+    "pants",
+    "trouser",
+    "trousers",
+    "underwear",
+    "work pants",
+    "work shirts",
+}
+
 
 def period_key(scrape_period: dict[str, Any] | None) -> str:
     if not scrape_period:
@@ -221,6 +312,137 @@ def _clothing_products(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
             }
         )
     return clothing
+
+
+def _season_text(product: dict[str, Any]) -> str:
+    parts: list[str] = []
+    for key in (
+        "title",
+        "description",
+        "category",
+        "material",
+        "season_code",
+        "season_range",
+    ):
+        value = product.get(key)
+        if value:
+            parts.append(str(value))
+    for key in (
+        "categories",
+        "subcategories",
+        "collections",
+        "features",
+        "shop_highlights",
+        "activities",
+        "tags",
+        "material_details",
+        "technical_features",
+        "fabric_treatment",
+        "construction",
+        "innovations",
+        "product_functions",
+    ):
+        values = product.get(key)
+        if isinstance(values, list):
+            parts.extend(str(value) for value in values if str(value).strip())
+    return " ".join(parts).lower()
+
+
+def _keyword_hits(text: str, keywords: set[str]) -> list[str]:
+    return sorted(
+        {
+            keyword
+            for keyword in keywords
+            if re.search(rf"(?<![a-z0-9]){re.escape(keyword)}(?![a-z0-9])", text)
+        },
+        key=str.lower,
+    )
+
+
+def _normalize_season_label(value: str) -> str:
+    normalized = re.sub(r"\s*/\s*", " / ", str(value or "").strip())
+    normalized_lower = normalized.lower()
+    if normalized_lower in {"spring / summer", "spring summer"}:
+        return SEASON_LABELS["spring_summer"]
+    if normalized_lower in {"fall / winter", "fall winter"}:
+        return SEASON_LABELS["fall_winter"]
+    if normalized_lower in {"all season", "all seasons"}:
+        return SEASON_LABELS["all"]
+    return normalized
+
+
+def _infer_season(product: dict[str, Any]) -> dict[str, Any]:
+    explicit_range = _normalize_season_label(product.get("season_range") or "")
+    explicit_code = str(product.get("season_code") or "").strip()
+    if explicit_range and not explicit_range.lower().startswith("inferred"):
+        return {
+            "season_code": explicit_code,
+            "season_range": explicit_range,
+            "season_source": product.get("season_source") or "Brand/product data",
+            "season_notes": product.get("season_notes", []),
+        }
+
+    text = _season_text(product)
+    ss_hits = _keyword_hits(text, SPRING_SUMMER_KEYWORDS)
+    fw_hits = _keyword_hits(text, FALL_WINTER_KEYWORDS)
+    all_hits = _keyword_hits(text, ALL_SEASON_KEYWORDS)
+
+    if all_hits and not fw_hits and not ss_hits:
+        label = SEASON_LABELS["all"]
+        reason_hits = all_hits[:5]
+    elif fw_hits and not ss_hits:
+        label = SEASON_LABELS["fall_winter"]
+        reason_hits = fw_hits[:5]
+    elif ss_hits and not fw_hits:
+        label = SEASON_LABELS["spring_summer"]
+        reason_hits = ss_hits[:5]
+    elif fw_hits and ss_hits:
+        category_text = " ".join(
+            product.get("categories") or [product.get("category", "")]
+        ).lower()
+        if any(
+            word in category_text
+            for word in ("shorts", "swim", "tank", "dresses", "skirts")
+        ):
+            label = SEASON_LABELS["spring_summer"]
+            reason_hits = ss_hits[:5]
+        elif any(
+            word in category_text
+            for word in ("insulated", "fleece", "thermal", "outerwear")
+        ):
+            label = SEASON_LABELS["fall_winter"]
+            reason_hits = fw_hits[:5]
+        else:
+            label = SEASON_LABELS["all"]
+            reason_hits = (all_hits or ss_hits + fw_hits)[:5]
+    else:
+        label = SEASON_LABELS["all"]
+        reason_hits = ["general apparel"]
+
+    return {
+        "season_code": explicit_code,
+        "season_range": label,
+        "season_source": "Inferred from product attributes",
+        "season_notes": [
+            f"Matched keyword: {hit}" for hit in reason_hits if hit
+        ],
+    }
+
+
+def _apply_season_classification(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    classified: list[dict[str, Any]] = []
+    for product in products:
+        season = _infer_season(product)
+        classified.append(
+            {
+                **product,
+                "season_code": season["season_code"],
+                "season_range": season["season_range"],
+                "season_source": season["season_source"],
+                "season_notes": season["season_notes"],
+            }
+        )
+    return classified
 
 
 def _period_season_code(scrape_period: dict[str, Any] | None) -> str:
@@ -457,12 +679,14 @@ def _apply_lululemon_detail_cache(
 
 
 def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
-    products = _apply_lululemon_detail_cache(
-        _clothing_products(
-            [
-                _normalize_strauss_categories(product)
-                for product in payload.get("products", [])
-            ]
+    products = _apply_season_classification(
+        _apply_lululemon_detail_cache(
+            _clothing_products(
+                [
+                    _normalize_strauss_categories(product)
+                    for product in payload.get("products", [])
+                ]
+            )
         )
     )
     return {
@@ -521,20 +745,24 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         brand_sources, scraped_results
     ):
         if not isinstance(result, Exception):
-            result["products"] = _apply_lululemon_detail_cache(
-                _clothing_products(result.get("products", []))
+            result["products"] = _apply_season_classification(
+                _apply_lululemon_detail_cache(
+                    _clothing_products(result.get("products", []))
+                )
             )
             result["product_count"] = len(result["products"])
             results.append(result)
             continue
 
-        fallback_products = _apply_lululemon_detail_cache(
-            _clothing_products(
-                [
-                    product
-                    for product in cached_products
-                    if product.get("brand") == brand
-                ]
+        fallback_products = _apply_season_classification(
+            _apply_lululemon_detail_cache(
+                _clothing_products(
+                    [
+                        product
+                        for product in cached_products
+                        if product.get("brand") == brand
+                    ]
+                )
             )
         )
         fallback_products = _filter_period_products(

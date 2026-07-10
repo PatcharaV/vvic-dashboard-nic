@@ -272,6 +272,8 @@ async function exportProductsToExcel(products) {
     Brand: product.brand_label,
     "Season Code": product.season_code || "",
     "Season Range": product.season_range || "",
+    "Season Source": product.season_source || "",
+    "Season Notes": formatMultilineList(product.season_notes),
     Category: (product.categories || [product.category]).join(", "),
     "Sub Category": (product.subcategories || []).join(", "),
     Collection: (product.collections || []).join(", "),
@@ -296,18 +298,21 @@ async function exportProductsToExcel(products) {
     { wch: 12 },
     { wch: 18 },
     { wch: 24 },
+    { wch: 44 },
+    { wch: 24 },
     { wch: 28 },
     { wch: 28 },
+    { wch: 32 },
     { wch: 32 },
     { wch: 32 },
     { wch: 50 },
     { wch: 40 },
     { wch: 42 },
     { wch: 50 },
-    { wch: 12 },
     { wch: 10 },
     { wch: 10 },
     { wch: 18 },
+    { wch: 12 },
     { wch: 12 },
     { wch: 64 },
   ];
@@ -677,7 +682,9 @@ function App() {
   const hasSeasonData = dashboard.products.some(
     (product) =>
       product.season_code ||
-      product.season_range,
+      product.season_range ||
+      product.season_source ||
+      product.season_notes?.length,
   );
   const hasSubcategoryFilter =
     (options.subcategories || []).length > 0 || filters.subcategories.length > 0;
@@ -1586,6 +1593,10 @@ function App() {
                                 product.season_range
                                   ? product.season_range
                                   : "",
+                                product.season_source
+                                  ? `Source: ${product.season_source}`
+                                  : "",
+                                ...(product.season_notes || []),
                               ].filter(Boolean)}
                             />
                           </td>
