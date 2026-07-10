@@ -270,8 +270,6 @@ async function exportProductsToExcel(products) {
   const rows = products.map((product) => ({
     Product: product.title,
     Brand: product.brand_label,
-    "Series Number": product.series_number || product.product_id || "",
-    "Style Number": product.style_number || "",
     "Season Code": product.season_code || "",
     "Season Range": product.season_range || "",
     Category: (product.categories || [product.category]).join(", "),
@@ -294,8 +292,6 @@ async function exportProductsToExcel(products) {
   const worksheet = XLSX.utils.json_to_sheet(rows);
   worksheet["!cols"] = [
     { wch: 42 },
-    { wch: 14 },
-    { wch: 18 },
     { wch: 14 },
     { wch: 12 },
     { wch: 18 },
@@ -678,10 +674,8 @@ function App() {
   const hasConstructionData = dashboard.products.some(
     (product) => product.construction?.length,
   );
-  const hasSeriesData = dashboard.products.some(
+  const hasSeasonData = dashboard.products.some(
     (product) =>
-      product.series_number ||
-      product.style_number ||
       product.season_code ||
       product.season_range,
   );
@@ -1517,8 +1511,7 @@ function App() {
                       <th>No.</th>
                       {hasProductImageData && <th>Image</th>}
                       <th>Product</th>
-                      {hasSeriesData && <th>Series</th>}
-                      {hasSeriesData && <th>Season</th>}
+                      {hasSeasonData && <th>Season</th>}
                       <th>Gender</th>
                       <th>Category</th>
                       {hasSubcategoryData && <th>Sub category</th>}
@@ -1583,21 +1576,7 @@ function App() {
                             {product.title}
                           </a>
                         </td>
-                        {hasSeriesData && (
-                          <td className="detail-cell">
-                            <DetailList
-                              values={[
-                                product.series_number
-                                  ? `Series: ${product.series_number}`
-                                  : "",
-                                product.style_number
-                                  ? `Style: ${product.style_number}`
-                                  : "",
-                              ].filter(Boolean)}
-                            />
-                          </td>
-                        )}
-                        {hasSeriesData && (
+                        {hasSeasonData && (
                           <td className="detail-cell">
                             <DetailList
                               values={[
