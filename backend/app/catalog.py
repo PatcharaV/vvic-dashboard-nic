@@ -678,6 +678,70 @@ def _apply_lululemon_detail_cache(
     return enriched
 
 
+def _merge_cached_detail_fields(
+    products: list[dict[str, Any]],
+    cached_products: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if not cached_products:
+        return products
+
+    cached_by_key: dict[str, dict[str, Any]] = {}
+    for cached in cached_products:
+        for key in _dedupe_strings(
+            [
+                cached.get("id"),
+                cached.get("product_id"),
+                cached.get("source_id"),
+                cached.get("handle"),
+                cached.get("url"),
+            ]
+        ):
+            cached_by_key[key] = cached
+
+    detail_fields = (
+        "material",
+        "material_details",
+        "technical_features",
+        "fabric_treatment",
+        "construction",
+        "product_functions",
+        "season_code",
+        "season_year",
+        "season_range",
+        "season_source",
+        "season_notes",
+    )
+    merged: list[dict[str, Any]] = []
+    for product in products:
+        cached = None
+        for key in _dedupe_strings(
+            [
+                product.get("id"),
+                product.get("product_id"),
+                product.get("source_id"),
+                product.get("handle"),
+                product.get("url"),
+            ]
+        ):
+            cached = cached_by_key.get(key)
+            if cached:
+                break
+        if not cached:
+            merged.append(product)
+            continue
+
+        enriched = dict(product)
+        for field in detail_fields:
+            current = enriched.get(field)
+            if current not in (None, "", []):
+                continue
+            cached_value = cached.get(field)
+            if cached_value not in (None, "", []):
+                enriched[field] = cached_value
+        merged.append(enriched)
+    return merged
+
+
 def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
     products = _apply_season_classification(
         _apply_lululemon_detail_cache(
@@ -745,9 +809,17 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         brand_sources, scraped_results
     ):
         if not isinstance(result, Exception):
+            brand_cached_products = [
+                product
+                for product in cached_products
+                if product.get("brand") == brand
+            ]
             result["products"] = _apply_season_classification(
                 _apply_lululemon_detail_cache(
-                    _clothing_products(result.get("products", []))
+                    _merge_cached_detail_fields(
+                        _clothing_products(result.get("products", [])),
+                        brand_cached_products,
+                    )
                 )
             )
             result["product_count"] = len(result["products"])

@@ -92,7 +92,6 @@ async def _listing(
         "language": "en",
         "limit": limit,
         "offset": offset,
-        "refUrl": "",
         "slug": slug,
         "sort": "",
         "url": page_url,
@@ -652,12 +651,13 @@ async def scrape_arcteryx_products(
             for product in products
             if product.get("season_code") == period_season_code
         ]
-    detail_semaphore = asyncio.Semaphore(8)
+    detail_semaphore = asyncio.Semaphore(2)
 
     async def enrich_details(
         details_client: httpx.AsyncClient, product: dict[str, Any]
     ) -> None:
         async with detail_semaphore:
+            await asyncio.sleep(0.2)
             try:
                 details = await _product_details(
                     details_client, str(product.get("handle", ""))
