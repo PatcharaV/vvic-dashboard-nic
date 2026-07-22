@@ -505,77 +505,7 @@ function FilterGroup({ title, options, selected, onChange }) {
   );
 }
 
-function LoginScreen({ onLogin }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setSubmitting(true);
-    setError("");
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-      if (!response.ok) {
-        throw new Error("Invalid username or password");
-      }
-      const session = await response.json();
-      onLogin(session);
-    } catch {
-      setError("Username หรือ Password ไม่ถูกต้อง");
-    } finally {
-      setSubmitting(false);
-    }
-  }
-
-  return (
-    <main className="login-page">
-      <section className="login-card">
-        <div className="brand-mark">N</div>
-        <p className="eyebrow">NAN YANG TEXTILE</p>
-        <h1>NIC Dashboard Login</h1>
-        <p className="page-description">
-          Sign in to view the dashboards available to your account.
-        </p>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label>
-            <span className="filter-title">Username</span>
-            <input
-              autoComplete="username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              placeholder="Enter username"
-              required
-            />
-          </label>
-          <label>
-            <span className="filter-title">Password</span>
-            <input
-              autoComplete="current-password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Enter password"
-              required
-            />
-          </label>
-          {error && <p className="login-error">{error}</p>}
-          <button className="primary-button" type="submit" disabled={submitting}>
-            {submitting ? "Signing in..." : "Sign in"}
-          </button>
-        </form>
-      </section>
-    </main>
-  );
-}
-
 function App() {
-  const [session, setSession] = useState(null);
   const [options, setOptions] = useState(demoOptions);
   const [dashboard, setDashboard] = useState(demoDashboard);
   const [filters, setFilters] = useState({
@@ -624,18 +554,7 @@ function App() {
     () => buildQuery(filters, selectedPeriod),
     [filters, selectedPeriod],
   );
-  const authHeaders = useMemo(
-    () => (session?.token ? { "X-Dashboard-Token": session.token } : {}),
-    [session],
-  );
-  const canViewAllBrands = session?.allowed_brands?.includes("*");
-  const brandOptions = canViewAllBrands
-    ? options.brands?.length
-      ? options.brands
-      : DEFAULT_BRAND_OPTIONS
-    : DEFAULT_BRAND_OPTIONS.filter((brand) =>
-        session?.allowed_brands?.includes(brand.value),
-      );
+  const brandOptions = options.brands?.length ? options.brands : DEFAULT_BRAND_OPTIONS;
   const productCategories = options.categories;
   const availableShopHighlights = options.shop_highlights || [];
   const activityOptions = options.activities || [];
@@ -711,42 +630,13 @@ function App() {
     currentProductPage * productsPerPage,
   );
 
-  function handleLogin(nextSession) {
-    localStorage.removeItem("nic-dashboard-session");
-    setSession(nextSession);
-    setMessage("Connecting to Python API...");
-  }
-
-  function handleLogout() {
-    localStorage.removeItem("nic-dashboard-session");
-    setSession(null);
-    setOptions(demoOptions);
-    setDashboard(demoDashboard);
-    setMessage("Please sign in to view live data");
-  }
-
-  function authorizedFetch(url, options = {}) {
-    return fetch(url, {
-      ...options,
-      headers: {
-        ...(options.headers || {}),
-        ...authHeaders,
-      },
-    });
-  }
-
   async function loadDashboard() {
-    if (!session?.token) return;
     setLoading(true);
     try {
       const [optionsResponse, dashboardResponse] = await Promise.all([
-        authorizedFetch(`/api/options${query ? `?${query}` : ""}`),
-        authorizedFetch(`/api/dashboard${query ? `?${query}` : ""}`),
+        fetch(`/api/options${query ? `?${query}` : ""}`),
+        fetch(`/api/dashboard${query ? `?${query}` : ""}`),
       ]);
-      if (optionsResponse.status === 401 || dashboardResponse.status === 401) {
-        handleLogout();
-        return;
-      }
       if (optionsResponse.status === 404 || dashboardResponse.status === 404) {
         setDashboard(emptyDashboardForPeriod(scrapeMonth, scrapeYear));
         setMessage(`No saved snapshot for ${scrapeMonth} ${scrapeYear}. Run scrape once for this month.`);
@@ -757,11 +647,7 @@ function App() {
       }
       setOptions(await optionsResponse.json());
       setDashboard(await dashboardResponse.json());
-      setMessage(
-        canViewAllBrands
-          ? "Live data for all authorized brands"
-          : `Live data from ${brandOptions.map((brand) => brand.label).join(", ")}`,
-      );
+      setMessage(`Live data from ${brandOptions.map((brand) => brand.label).join(", ")}`);
     } catch {
       setMessage("Demo preview: start the Python API for live data");
     } finally {
@@ -770,10 +656,9 @@ function App() {
   }
 
   useEffect(() => {
-    if (!session?.token) return;
     const timer = setTimeout(loadDashboard, 250);
     return () => clearTimeout(timer);
-  }, [query, session?.token]);
+  }, [query]);
 
   useEffect(() => {
     if (
@@ -810,7 +695,7 @@ function App() {
         month: scrapeMonth,
         year: String(scrapeYear),
       });
-      const response = await authorizedFetch(`/api/scrape?${params.toString()}`, {
+      const response = await fetch(`/api/scrape?${params.toString()}`, {
         method: "POST",
       });
       if (!response.ok) throw new Error("Scrape failed");
@@ -899,10 +784,6 @@ function App() {
     });
   }
 
-  if (!session?.token) {
-    return <LoginScreen onLogin={handleLogin} />;
-  }
-
   return (
     <main>
       <header className="topbar">
@@ -918,9 +799,6 @@ function App() {
           </div>
         </div>
         <div className="header-actions">
-          <button className="secondary-link logout-button" type="button" onClick={handleLogout}>
-            Logout
-          </button>
           <div className="status">
             <span className={message.startsWith("Live") ? "dot live" : "dot"} />
             <div>

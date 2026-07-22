@@ -1,15 +1,12 @@
 import asyncio
-import hashlib
-import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
 
 from .analytics import build_dashboard, build_options, filter_products
 from .catalog import (
@@ -41,72 +38,6 @@ MONTH_LABELS = {
 store: dict[str, Any] = {}
 scrape_lock = asyncio.Lock()
 auto_scrape_task: asyncio.Task | None = None
-
-DASHBOARD_USERS = {
-    "NYKOversea": {
-        "password": "Nanyang",
-        "allowed_brands": ["strauss"],
-    },
-    "NIC": {
-        "password": "Nicnanyang",
-        "allowed_brands": ["*"],
-    },
-}
-LIMITED_BRAND_ORDER = ["strauss"]
-
-
-class LoginRequest(BaseModel):
-    username: str
-    password: str
-
-
-def dashboard_token(username: str, password: str) -> str:
-    payload = f"{username}:{password}:nic-dashboard"
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
-
-
-def user_from_token(token: str) -> dict[str, Any] | None:
-    for username, config in DASHBOARD_USERS.items():
-        expected = dashboard_token(username, config["password"])
-        if secrets.compare_digest(token, expected):
-            return {"username": username, "allowed_brands": config["allowed_brands"]}
-    return None
-
-
-def require_dashboard_auth(
-    x_dashboard_token: str | None = Header(default=None, alias="X-Dashboard-Token"),
-) -> dict[str, Any]:
-    if not x_dashboard_token:
-        raise HTTPException(status_code=401, detail="Authentication required")
-    user = user_from_token(x_dashboard_token)
-    if not user:
-        raise HTTPException(status_code=401, detail="Authentication required")
-    return user
-
-
-def can_view_all_brands(user: dict[str, Any]) -> bool:
-    return "*" in user.get("allowed_brands", [])
-
-
-def allowed_brand_filter(brands: str | None, user: dict[str, Any]) -> list[str]:
-    selected = normalize_csv(brands)
-    if can_view_all_brands(user):
-        return selected
-    allowed = list(user.get("allowed_brands", LIMITED_BRAND_ORDER))
-    allowed_set = set(allowed)
-    if not selected:
-        return allowed.copy()
-    blocked = [brand for brand in selected if brand not in allowed_set]
-    if blocked:
-        raise HTTPException(status_code=403, detail="Brand is not available for this user")
-    return selected
-
-
-def visible_brand_options(options: list[dict[str, str]], user: dict[str, Any]) -> list[dict[str, str]]:
-    if can_view_all_brands(user):
-        return options
-    allowed = set(user.get("allowed_brands", LIMITED_BRAND_ORDER))
-    return [brand for brand in options if brand["value"] in allowed]
 
 
 def make_scrape_period(month: str | None, year: int | None) -> dict[str, Any] | None:
@@ -224,21 +155,6 @@ async def periods() -> dict[str, Any]:
     }
 
 
-@app.post("/api/login")
-async def login(credentials: LoginRequest) -> dict[str, Any]:
-    user_config = DASHBOARD_USERS.get(credentials.username)
-    if not user_config or not secrets.compare_digest(
-        credentials.password,
-        user_config["password"],
-    ):
-        raise HTTPException(status_code=401, detail="Invalid username or password")
-    return {
-        "token": dashboard_token(credentials.username, user_config["password"]),
-        "username": credentials.username,
-        "allowed_brands": user_config["allowed_brands"],
-    }
-
-
 @app.get("/api/options")
 async def options(
     month: str | None = Query(default=None, pattern="^(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$"),
@@ -259,7 +175,6 @@ async def options(
     shop_highlight: str | None = None,
     material: str | None = None,
     season: str | None = None,
-    user: dict[str, Any] = Depends(require_dashboard_auth),
 ) -> dict[str, Any]:
     if min_price is not None and max_price is not None and min_price > max_price:
         raise HTTPException(status_code=400, detail="min_price must not exceed max_price")
@@ -267,7 +182,7 @@ async def options(
     scrape_period = make_scrape_period(month, year)
     data = await get_data(scrape_period=scrape_period)
     selected_categories = normalize_csv(categories)
-    selected_brand_values = allowed_brand_filter(brands, user)
+    selected_brand_values = normalize_csv(brands)
     products = filter_products(
         data["products"],
         search,
@@ -288,10 +203,7 @@ async def options(
         season=season,
     )
     options = build_options(products, selected_categories)
-    options["brands"] = visible_brand_options(
-        build_options(data["products"])["brands"],
-        user,
-    )
+    options["brands"] = build_options(data["products"])["brands"]
     selected_brands = set(selected_brand_values)
     extra_collections = {
         collection
@@ -327,7 +239,6 @@ async def dashboard(
     shop_highlight: str | None = None,
     material: str | None = None,
     season: str | None = None,
-    user: dict[str, Any] = Depends(require_dashboard_auth),
 ) -> dict[str, Any]:
     if min_price is not None and max_price is not None and min_price > max_price:
         raise HTTPException(status_code=400, detail="min_price must not exceed max_price")
@@ -335,7 +246,7 @@ async def dashboard(
     scrape_period = make_scrape_period(month, year)
     data = await get_data(scrape_period=scrape_period)
     selected_categories = normalize_csv(categories)
-    selected_brand_values = allowed_brand_filter(brands, user)
+    selected_brand_values = normalize_csv(brands)
     products = filter_products(
         data["products"],
         search=search,
@@ -385,11 +296,10 @@ async def products(
     material: str | None = None,
     season: str | None = None,
     limit: int = Query(default=100, ge=1, le=500),
-    user: dict[str, Any] = Depends(require_dashboard_auth),
 ) -> dict[str, Any]:
     scrape_period = make_scrape_period(month, year)
     data = await get_data(scrape_period=scrape_period)
-    selected_brand_values = allowed_brand_filter(brands, user)
+    selected_brand_values = normalize_csv(brands)
     rows = filter_products(
         data["products"],
         search=search,
@@ -416,7 +326,6 @@ async def products(
 async def scrape(
     month: str = Query(default="JAN", pattern="^(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$"),
     year: int = Query(default=2026, ge=2020, le=2100),
-    _: dict[str, Any] = Depends(require_dashboard_auth),
 ) -> dict[str, Any]:
     scrape_period = {
         "month": month,
