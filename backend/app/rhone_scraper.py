@@ -16,23 +16,22 @@ AUDIENCE_COLLECTIONS = {
 TOP_SELLER_COLLECTIONS = ("mens-best-sellers", "womens-best-sellers")
 PAGE_SIZE = 250
 CLOTHING_CATEGORIES = {
-    "Blazers/Jackets",
-    "Bras",
-    "Dresses/Jumpsuits",
-    "Leggings/Tights",
-    "Midlayers",
+    "1/4 zips",
+    "Blazers",
+    "Button ups",
+    "Dresses",
+    "Hoodies & pullovers",
+    "Leggings",
     "Outerwear",
     "Pants",
     "Polos",
-    "Shirts",
     "Shorts",
     "Skirts",
-    "Sports bras",
+    "Sports Bras",
     "Sweaters",
     "Swim",
     "Tanks",
     "Tees",
-    "Tees/Tanks",
     "Underwear",
 }
 
@@ -216,6 +215,71 @@ def _rhone_subcategories(
     return subcategories
 
 
+def _rhone_category(
+    title: str,
+    handle: str,
+    raw_category: str,
+    subcategories: list[str],
+) -> str:
+    text = f"{title} {handle}".lower()
+    subcategory_text = " ".join(subcategories).lower()
+    raw = raw_category.strip()
+
+    def has(value: str) -> bool:
+        return value in text or value in subcategory_text or value == raw.lower()
+
+    if has("swim") or "trunk" in text or "surfside" in text:
+        return "Swim"
+    if raw.lower() in {"bras", "sports bras"} or re.search(r"\bbra\b", text):
+        return "Sports Bras"
+    if raw.lower() == "underwear" or has("underwear") or "boxer" in text:
+        return "Underwear"
+    if raw.lower() == "pants" or has("pant") or has("jogger") or has("trouser"):
+        return "Pants"
+    if raw.lower() == "shorts":
+        return "Shorts"
+    if raw.lower() in {"dresses/jumpsuits"} or re.search(r"\bdress\b", text) or has("jumpsuit"):
+        return "Dresses"
+    if raw.lower() in {"skirts"} or has("skirt") or has("skort"):
+        return "Skirts"
+    if raw.lower() in {"leggings/tights"} or has("legging") or has("tight"):
+        return "Leggings"
+    if has("blazer"):
+        return "Blazers"
+    if has("quarter zips") or "1/4 zip" in text or "quarter zip" in text:
+        return "1/4 zips"
+    if (
+        has("hoodies & pullovers")
+        or has("hoodie")
+        or has("hoody")
+        or has("pullover")
+        or "crewneck" in text
+        or "crew neck" in text
+        or "cardi" in text
+        or "cardigan" in text
+        or "full zip" in text
+        or raw.lower() == "midlayers"
+    ):
+        return "Hoodies & pullovers"
+    if has("sweater"):
+        return "Sweaters"
+    if raw.lower() == "outerwear" or has("jacket") or has("vest"):
+        return "Outerwear"
+    if has("polo"):
+        return "Polos"
+    if has("button downs") or has("button ups") or "button down" in text:
+        return "Button ups"
+    if has("tank"):
+        return "Tanks"
+    if has("tee") or "t-shirt" in text or raw.lower() in {"tees", "tees/tanks"}:
+        return "Tees"
+    if raw.lower() == "shirts" or "shirt" in text:
+        return "Button ups"
+    if has("short"):
+        return "Shorts"
+    return raw
+
+
 def _rhone_features(tags: list[str], top_seller: bool) -> list[str]:
     features = [
         *_tag_values(tags, "filter:Activity:"),
@@ -257,6 +321,7 @@ def _normalize(
     material = _rhone_material(description) or _extract_material(html)
     audience_list = sorted(audiences)
     subcategories = _rhone_subcategories(title, handle, category, tags)
+    category = _rhone_category(title, handle, category, subcategories)
     collections = _rhone_collections(title, handle, tags)
     features = _rhone_features(tags, top_seller)
     return {
