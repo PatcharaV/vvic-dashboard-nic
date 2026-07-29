@@ -432,11 +432,6 @@ function MainPage({
   latestAutoScrapeRun,
   navigateToBrand,
 }) {
-  const brandCounts = new Map();
-  for (const product of dashboard.products || []) {
-    if (!product.brand) continue;
-    brandCounts.set(product.brand, (brandCounts.get(product.brand) || 0) + 1);
-  }
   const totalProducts = dashboard.summary?.total_products || 0;
   return (
     <main>
@@ -535,7 +530,6 @@ function MainPage({
 
       <section className="brand-landing-grid" aria-label="Brand dashboards">
         {brandOptions.map((brand) => {
-          const count = brandCounts.get(brand.value) || 0;
           return (
             <button
               type="button"
@@ -545,7 +539,6 @@ function MainPage({
             >
               <span className="filter-title">Brand dashboard</span>
               <strong>{brand.label}</strong>
-              <small>{formatNumber.format(count)} products in this period</small>
               <span className="brand-card-action">Open dashboard</span>
             </button>
           );
