@@ -7,6 +7,13 @@ from typing import Any
 
 from .arcteryx_scraper import scrape_arcteryx_products
 from .lululemon_scraper import scrape_lululemon_products
+from .quality import (
+    backup_file,
+    build_audit_report,
+    utc_stamp,
+    validate_brand,
+    write_json,
+)
 from .rhone_scraper import scrape_rhone_products
 from .scraper import extract_product_functions, scrape_strauss_products
 from .tommy_bahama_scraper import scrape_tommy_bahama_products
@@ -16,6 +23,9 @@ DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 CACHE_PATH = DATA_DIR / "products.json"
 LULULEMON_DETAIL_PATH = DATA_DIR / "lululemon_details.json"
 HISTORY_DIR = DATA_DIR / "history"
+STAGING_DIR = DATA_DIR / "staging"
+AUDIT_DIR = DATA_DIR / "audits"
+BACKUP_DIR = DATA_DIR / "backups"
 MONTH_CODES = [
     "JAN",
     "FEB",
@@ -802,6 +812,14 @@ def _write_payload(path: Path, payload: dict[str, Any]) -> None:
     )
 
 
+def _audit_path(scrape_period: dict[str, Any] | None, stamp: str) -> Path:
+    return AUDIT_DIR / f"{period_key(scrape_period)}-{stamp}.json"
+
+
+def _staging_path(scrape_period: dict[str, Any] | None, stamp: str) -> Path:
+    return STAGING_DIR / f"{period_key(scrape_period)}-{stamp}.json"
+
+
 def load_period_cache(scrape_period: dict[str, Any] | None) -> dict[str, Any] | None:
     if not scrape_period:
         return load_cache()
@@ -843,6 +861,7 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
     )
     results: list[dict[str, Any]] = []
     errors: list[str] = []
+    brand_audits: list[dict[str, Any]] = []
     for (brand, label, source_url), result in zip(
         brand_sources, scraped_results
     ):
@@ -861,6 +880,34 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
                 )
             )
             result["product_count"] = len(result["products"])
+            audit = validate_brand(
+                brand,
+                label,
+                result["products"],
+                brand_cached_products,
+            )
+            brand_audits.append(audit)
+            if audit["decision"] == "fallback" and brand_cached_products:
+                fallback_products = _apply_season_classification(
+                    _apply_lululemon_detail_cache(
+                        _clothing_products(brand_cached_products)
+                    )
+                )
+                fallback_products = _filter_period_products(
+                    fallback_products, brand, scrape_period
+                )
+                result = {
+                    "source": source_url,
+                    "scraped_at": cached_sources.get(brand, {}).get("scraped_at")
+                    or cached.get("scraped_at"),
+                    "product_count": len(fallback_products),
+                    "products": fallback_products,
+                    "collection_options": cached_sources.get(brand, {}).get(
+                        "collection_options", []
+                    ),
+                    "quality_fallback": True,
+                }
+                errors.append(f"{label} used cached data: {'; '.join(audit['warnings'])}")
             results.append(result)
             continue
 
@@ -877,6 +924,15 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         )
         fallback_products = _filter_period_products(
             fallback_products, brand, scrape_period
+        )
+        brand_audits.append(
+            validate_brand(
+                brand,
+                label,
+                [],
+                fallback_products,
+                scrape_error=str(result),
+            )
         )
         if not fallback_products:
             errors.append(f"{label}: {result}")
@@ -925,14 +981,29 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
             if result.get("products")
         ],
         "scrape_warnings": errors,
+        "quality_audit": {
+            "status": "published"
+            if all(audit["decision"] == "publish" for audit in brand_audits)
+            else "published_with_fallback",
+            "brands": brand_audits,
+        },
         "scraped_at": datetime.now(timezone.utc).isoformat(),
         "scrape_period": scrape_period or {},
         "product_count": len(products),
         "products": products,
     }
+    stamp = utc_stamp()
+    write_json(_staging_path(scrape_period, stamp), payload)
+    backup_file(CACHE_PATH, BACKUP_DIR, stamp)
     _write_payload(CACHE_PATH, payload)
     if scrape_period:
+        backup_file(period_cache_path(scrape_period), BACKUP_DIR, stamp)
         _write_payload(period_cache_path(scrape_period), payload)
+    write_json(_audit_path(scrape_period, stamp), build_audit_report(
+        scrape_period,
+        brand_audits,
+        products,
+    ))
     return payload
 
 

@@ -2,9 +2,55 @@ import unittest
 
 from app.analytics import build_dashboard
 from app.catalog import _apply_season_classification
+from app.quality import validate_brand
 
 
 class StraussVariantAggregationTests(unittest.TestCase):
+    def test_quality_validation_falls_back_on_large_product_drop(self):
+        old_products = [
+            {"id": f"old-{index}", "brand": "test", "category": "Shirts", "image": "x", "color": "black"}
+            for index in range(100)
+        ]
+        new_products = [
+            {"id": f"new-{index}", "brand": "test", "category": "Shirts", "image": "x", "color": "black"}
+            for index in range(70)
+        ]
+
+        audit = validate_brand("test", "Test", new_products, old_products)
+
+        self.assertEqual(audit["decision"], "fallback")
+        self.assertTrue(any("Product count dropped" in warning for warning in audit["warnings"]))
+
+    def test_quality_validation_warns_on_missing_material_increase(self):
+        old_products = [
+            {
+                "id": f"old-{index}",
+                "brand": "test",
+                "category": "Shirts",
+                "image": "x",
+                "color": "black",
+                "material": "100% Cotton",
+                "price_min": 10,
+            }
+            for index in range(100)
+        ]
+        new_products = [
+            {
+                "id": f"new-{index}",
+                "brand": "test",
+                "category": "Shirts",
+                "image": "x",
+                "color": "black",
+                "price_min": 10,
+            }
+            for index in range(100)
+        ]
+
+        audit = validate_brand("test", "Test", new_products, old_products)
+
+        self.assertEqual(audit["decision"], "publish")
+        self.assertTrue(any("material missing increased" in warning for warning in audit["warnings"]))
+
     def test_infers_product_seasons_from_attributes(self):
         products = _apply_season_classification(
             [

@@ -1,0 +1,412 @@
+{
+  "created_at": "2026-07-29T06:30:14.179713+00:00",
+  "scrape_period": {},
+  "status": "published",
+  "published_product_count": 8887,
+  "brand_audits": [
+    {
+      "brand": "arcteryx",
+      "label": "Arc'teryx",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 316,
+        "available_count": 316,
+        "category_counts": {
+          "Base Layer": 6,
+          "Collection Only": 96,
+          "Fleece": 26,
+          "Insulated Jackets": 34,
+          "Pants": 36,
+          "Shell Jackets": 56,
+          "Shirts and Tops": 48,
+          "Shorts": 18,
+          "Vests": 3
+        },
+        "audience_counts": {
+          "men": 158,
+          "women": 159
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 9,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 316,
+        "available_count": 316,
+        "category_counts": {
+          "Base Layer": 6,
+          "Collection Only": 96,
+          "Fleece": 26,
+          "Insulated Jackets": 34,
+          "Pants": 36,
+          "Shell Jackets": 56,
+          "Shirts and Tops": 48,
+          "Shorts": 18,
+          "Vests": 3
+        },
+        "audience_counts": {
+          "men": 158,
+          "women": 159
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 9,
+          "price": 0
+        }
+      }
+    },
+    {
+      "brand": "lululemon",
+      "label": "lululemon",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 1765,
+        "available_count": 1765,
+        "category_counts": {
+          "Athletic Shorts": 9,
+          "Button Down Shirts": 14,
+          "Capris": 23,
+          "Coats & Jackets": 11,
+          "Dresses": 60,
+          "Hoodies": 198,
+          "Hoodies & Sweatshirts": 9,
+          "Jackets": 49,
+          "Joggers": 138,
+          "Leggings": 120,
+          "Liner Shorts": 11,
+          "Long Sleeve Shirts": 135,
+          "Pants": 78,
+          "Polo Shirts": 39,
+          "Quarter Zips": 48,
+          "Short Sleeve Shirts": 168,
+          "Shorts": 186,
+          "Sports Bras": 88,
+          "Sweaters": 12,
+          "Sweatpants": 22,
+          "Sweatshirts": 8,
+          "Swim Trunks": 7,
+          "T-Shirts": 19,
+          "Tank Tops": 126,
+          "Trousers": 108,
+          "Underwear": 68,
+          "Vests": 11
+        },
+        "audience_counts": {
+          "men": 660,
+          "women": 1105
+        },
+        "missing": {
+          "image": 1765,
+          "color": 1765,
+          "material": 1765,
+          "price": 1765
+        }
+      },
+      "new": {
+        "product_count": 1765,
+        "available_count": 1765,
+        "category_counts": {
+          "Athletic Shorts": 9,
+          "Button Down Shirts": 14,
+          "Capris": 23,
+          "Coats & Jackets": 11,
+          "Dresses": 60,
+          "Hoodies": 198,
+          "Hoodies & Sweatshirts": 9,
+          "Jackets": 49,
+          "Joggers": 138,
+          "Leggings": 120,
+          "Liner Shorts": 11,
+          "Long Sleeve Shirts": 135,
+          "Pants": 78,
+          "Polo Shirts": 39,
+          "Quarter Zips": 48,
+          "Short Sleeve Shirts": 168,
+          "Shorts": 186,
+          "Sports Bras": 88,
+          "Sweaters": 12,
+          "Sweatpants": 22,
+          "Sweatshirts": 8,
+          "Swim Trunks": 7,
+          "T-Shirts": 19,
+          "Tank Tops": 126,
+          "Trousers": 108,
+          "Underwear": 68,
+          "Vests": 11
+        },
+        "audience_counts": {
+          "men": 660,
+          "women": 1105
+        },
+        "missing": {
+          "image": 1765,
+          "color": 1765,
+          "material": 1765,
+          "price": 1765
+        }
+      }
+    },
+    {
+      "brand": "rhone",
+      "label": "Rhone",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 1727,
+        "available_count": 1147,
+        "category_counts": {
+          "1/4 zips": 109,
+          "Blazers": 27,
+          "Button ups": 112,
+          "Dresses": 64,
+          "Hoodies & pullovers": 229,
+          "Leggings": 106,
+          "Outerwear": 64,
+          "Pants": 184,
+          "Polos": 115,
+          "Shorts": 160,
+          "Skirts": 85,
+          "Sports Bras": 119,
+          "Sweaters": 42,
+          "Swim": 33,
+          "Tanks": 131,
+          "Tees": 125,
+          "Underwear": 22
+        },
+        "audience_counts": {
+          "men": 535,
+          "women": 1192
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 7,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 1727,
+        "available_count": 1147,
+        "category_counts": {
+          "1/4 zips": 109,
+          "Blazers": 27,
+          "Button ups": 112,
+          "Dresses": 64,
+          "Hoodies & pullovers": 229,
+          "Leggings": 106,
+          "Outerwear": 64,
+          "Pants": 184,
+          "Polos": 115,
+          "Shorts": 160,
+          "Skirts": 85,
+          "Sports Bras": 119,
+          "Sweaters": 42,
+          "Swim": 33,
+          "Tanks": 131,
+          "Tees": 125,
+          "Underwear": 22
+        },
+        "audience_counts": {
+          "men": 535,
+          "women": 1192
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 7,
+          "price": 0
+        }
+      }
+    },
+    {
+      "brand": "strauss",
+      "label": "Strauss",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 300,
+        "available_count": 295,
+        "category_counts": {
+          "Hoodies & Sweatshirts": 32,
+          "Leggings": 3,
+          "Outerwear": 51,
+          "Pants": 91,
+          "Shirts": 112,
+          "Shorts": 20,
+          "Thermal Layers": 2
+        },
+        "audience_counts": {
+          "kids": 20,
+          "men": 235,
+          "women": 45
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 0,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 300,
+        "available_count": 295,
+        "category_counts": {
+          "Hoodies & Sweatshirts": 32,
+          "Leggings": 3,
+          "Outerwear": 51,
+          "Pants": 91,
+          "Shirts": 112,
+          "Shorts": 20,
+          "Thermal Layers": 2
+        },
+        "audience_counts": {
+          "kids": 20,
+          "men": 235,
+          "women": 45
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 0,
+          "price": 0
+        }
+      }
+    },
+    {
+      "brand": "tommybahama",
+      "label": "Tommy Bahama",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 3176,
+        "available_count": 3176,
+        "category_counts": {
+          "Dresses": 167,
+          "Hoodies & Sweatshirts": 543,
+          "Jeans": 28,
+          "Outerwear": 62,
+          "Pants": 106,
+          "Polos": 652,
+          "Shirts": 1164,
+          "Shorts": 231,
+          "Skirts": 28,
+          "Sweaters": 29,
+          "Swim": 121,
+          "Tanks": 45
+        },
+        "audience_counts": {
+          "men": 2339,
+          "unisex": 2,
+          "women": 835
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 3176,
+          "price": 3176
+        }
+      },
+      "new": {
+        "product_count": 3176,
+        "available_count": 3176,
+        "category_counts": {
+          "Dresses": 167,
+          "Hoodies & Sweatshirts": 543,
+          "Jeans": 28,
+          "Outerwear": 62,
+          "Pants": 106,
+          "Polos": 652,
+          "Shirts": 1164,
+          "Shorts": 231,
+          "Skirts": 28,
+          "Sweaters": 29,
+          "Swim": 121,
+          "Tanks": 45
+        },
+        "audience_counts": {
+          "men": 2339,
+          "unisex": 2,
+          "women": 835
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 3176,
+          "price": 3176
+        }
+      }
+    },
+    {
+      "brand": "travismathew",
+      "label": "TravisMathew",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 1603,
+        "available_count": 1274,
+        "category_counts": {
+          "Button-Ups": 93,
+          "Dresses": 34,
+          "Hoodies & Pullovers": 110,
+          "Joggers": 7,
+          "Leggings": 3,
+          "Outerwear": 67,
+          "Pants": 41,
+          "Polos": 510,
+          "Quarter Zips": 153,
+          "Shorts": 76,
+          "Skorts & Skirts": 25,
+          "Tanks": 29,
+          "Tees": 455
+        },
+        "audience_counts": {
+          "kids": 56,
+          "men": 1494,
+          "women": 53
+        },
+        "missing": {
+          "image": 9,
+          "color": 0,
+          "material": 1546,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 1603,
+        "available_count": 1274,
+        "category_counts": {
+          "Button-Ups": 93,
+          "Dresses": 34,
+          "Hoodies & Pullovers": 110,
+          "Joggers": 7,
+          "Leggings": 3,
+          "Outerwear": 67,
+          "Pants": 41,
+          "Polos": 510,
+          "Quarter Zips": 153,
+          "Shorts": 76,
+          "Skorts & Skirts": 25,
+          "Tanks": 29,
+          "Tees": 455
+        },
+        "audience_counts": {
+          "kids": 56,
+          "men": 1494,
+          "women": 53
+        },
+        "missing": {
+          "image": 9,
+          "color": 0,
+          "material": 1546,
+          "price": 0
+        }
+      }
+    }
+  ]
+}

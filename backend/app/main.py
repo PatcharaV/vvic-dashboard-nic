@@ -12,6 +12,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .analytics import build_dashboard, build_options, filter_products
 from .catalog import (
+    AUDIT_DIR,
     CACHE_PATH,
     HISTORY_START_MONTH,
     HISTORY_START_YEAR,
@@ -98,6 +99,18 @@ def save_auto_scrape_run(key: str, payload: dict[str, Any]) -> None:
         json.dumps(runs, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
+
+
+def latest_audit_report() -> dict[str, Any] | None:
+    if not AUDIT_DIR.exists():
+        return None
+    reports = sorted(AUDIT_DIR.glob("*.json"), key=lambda path: path.stat().st_mtime)
+    if not reports:
+        return None
+    try:
+        return json.loads(reports[-1].read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
 
 
 async def run_due_one_time_auto_scrapes(now: datetime) -> None:
@@ -212,7 +225,16 @@ async def health() -> dict[str, Any]:
         "data_loaded": "data" in store,
         "available_periods": available_periods(),
         "auto_scrape_runs": load_auto_scrape_runs(),
+        "latest_audit": latest_audit_report(),
     }
+
+
+@app.get("/api/audits/latest")
+async def latest_audit() -> dict[str, Any]:
+    report = latest_audit_report()
+    if not report:
+        raise HTTPException(status_code=404, detail="No audit report available")
+    return report
 
 
 @app.get("/api/periods")
