@@ -1,8 +1,10 @@
 import asyncio
+import json
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -38,6 +40,16 @@ MONTH_LABELS = {
 store: dict[str, Any] = {}
 scrape_lock = asyncio.Lock()
 auto_scrape_task: asyncio.Task | None = None
+LOCAL_TZ = ZoneInfo("Asia/Bangkok")
+AUTO_SCRAPE_RUNS_PATH = CACHE_PATH.parent / "auto_scrape_runs.json"
+ONE_TIME_AUTO_SCRAPES = [
+    {
+        "key": "test-all-brands-2026-07-29-1126-bkk",
+        "run_at": datetime(2026, 7, 29, 11, 26, tzinfo=LOCAL_TZ),
+        "period": {"month": "JUL", "year": 2026},
+        "description": "One-time all-brand auto scrape test requested for 29 Jul 2026 11:26 Bangkok time.",
+    }
+]
 
 
 def make_scrape_period(month: str | None, year: int | None) -> dict[str, Any] | None:
@@ -53,7 +65,7 @@ def make_scrape_period(month: str | None, year: int | None) -> dict[str, Any] | 
 
 
 def current_scrape_period() -> dict[str, Any]:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(LOCAL_TZ)
     month = list(MONTH_LABELS)[now.month - 1]
     year = now.year
     if year < HISTORY_START_YEAR or (
@@ -67,6 +79,61 @@ def current_scrape_period() -> dict[str, Any]:
         "year": 2026,
         "label": "JUN 2026",
     }
+
+
+def load_auto_scrape_runs() -> dict[str, Any]:
+    if not AUTO_SCRAPE_RUNS_PATH.exists():
+        return {}
+    try:
+        return json.loads(AUTO_SCRAPE_RUNS_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def save_auto_scrape_run(key: str, payload: dict[str, Any]) -> None:
+    runs = load_auto_scrape_runs()
+    runs[key] = payload
+    AUTO_SCRAPE_RUNS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    AUTO_SCRAPE_RUNS_PATH.write_text(
+        json.dumps(runs, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+async def run_due_one_time_auto_scrapes(now: datetime) -> None:
+    completed = load_auto_scrape_runs()
+    for schedule in ONE_TIME_AUTO_SCRAPES:
+        key = schedule["key"]
+        if key in completed or now < schedule["run_at"]:
+            continue
+        period_config = schedule["period"]
+        period = make_scrape_period(period_config["month"], period_config["year"])
+        try:
+            data = await get_data(force=True, scrape_period=period)
+        except Exception as exc:
+            save_auto_scrape_run(
+                key,
+                {
+                    "status": "failed",
+                    "description": schedule["description"],
+                    "scheduled_for": schedule["run_at"].isoformat(),
+                    "completed_at": datetime.now(timezone.utc).isoformat(),
+                    "scrape_period": period,
+                    "error": str(exc),
+                },
+            )
+            continue
+        save_auto_scrape_run(
+            key,
+            {
+                "status": "completed",
+                "description": schedule["description"],
+                "scheduled_for": schedule["run_at"].isoformat(),
+                "completed_at": datetime.now(timezone.utc).isoformat(),
+                "scrape_period": data.get("scrape_period", period),
+                "product_count": data.get("product_count"),
+            },
+        )
 
 
 async def get_data(
@@ -100,14 +167,15 @@ async def get_data(
 
 async def monthly_auto_scrape_loop() -> None:
     while True:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(LOCAL_TZ)
         period = current_scrape_period()
         try:
+            await run_due_one_time_auto_scrapes(now)
             if now.day == 1 and load_period_cache(period) is None:
                 await get_data(force=True, scrape_period=period)
         except Exception:
             pass
-        await asyncio.sleep(60 * 60)
+        await asyncio.sleep(60)
 
 
 @asynccontextmanager
@@ -143,6 +211,7 @@ async def health() -> dict[str, Any]:
         "cache_available": CACHE_PATH.exists(),
         "data_loaded": "data" in store,
         "available_periods": available_periods(),
+        "auto_scrape_runs": load_auto_scrape_runs(),
     }
 
 
