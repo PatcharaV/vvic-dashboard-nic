@@ -710,7 +710,24 @@ function App() {
     navigateTo("/");
   }
 
+  async function loadMaintenanceStatus() {
+    try {
+      const response = await fetch("/api/health");
+      if (!response.ok) return;
+      const health = await response.json();
+      setAutoScrapeRuns(health.auto_scrape_runs || {});
+      setMaintenance(health.maintenance || null);
+    } catch {
+      // The landing page can still render without the API.
+    }
+  }
+
   async function loadDashboard() {
+    if (!routeBrand) {
+      loadRequestRef.current += 1;
+      setLoading(false);
+      return;
+    }
     const requestId = loadRequestRef.current + 1;
     loadRequestRef.current = requestId;
     setLoading(true);
@@ -780,9 +797,15 @@ function App() {
   }
 
   useEffect(() => {
+    if (!routeBrand) {
+      loadRequestRef.current += 1;
+      setLoading(false);
+      loadMaintenanceStatus();
+      return undefined;
+    }
     const timer = setTimeout(loadDashboard, 250);
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [query, routeBrand]);
 
   useEffect(() => {
     if (!maintenance?.active) return undefined;
@@ -871,14 +894,11 @@ function App() {
 
   if (!routeBrand) {
     return (
-      <>
-        <MainPage
-          brandOptions={brandOptions}
-          maintenance={maintenance}
-          navigateToBrand={navigateToBrand}
-        />
-        <div className={loading ? "loading-bar active" : "loading-bar"} />
-      </>
+      <MainPage
+        brandOptions={brandOptions}
+        maintenance={maintenance}
+        navigateToBrand={navigateToBrand}
+      />
     );
   }
 
