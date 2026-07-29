@@ -1,0 +1,43 @@
+{
+  "brand": "tommybahama",
+  "label": "Tommy Bahama",
+  "source_url": "https://www.tommybahama.com",
+  "period_key": "2026-07",
+  "period_label": "JUL 2026",
+  "scraped_at": "2026-07-29T03:55:35.096965+00:00",
+  "product_count": 3176,
+  "available_count": 3176,
+  "category_counts": {
+    "Dresses": 167,
+    "Hoodies & Sweatshirts": 543,
+    "Jeans": 28,
+    "Outerwear": 62,
+    "Pants": 106,
+    "Polos": 652,
+    "Shirts": 1164,
+    "Shorts": 231,
+    "Skirts": 28,
+    "Sweaters": 29,
+    "Swim": 121,
+    "Tanks": 45
+  },
+  "audience_counts": {
+    "men": 2339,
+    "unisex": 2,
+    "women": 835
+  },
+  "missing": {
+    "image": 0,
+    "color": 0,
+    "material": 3176,
+    "price": 3176
+  },
+  "quality_decision": "publish",
+  "quality_warnings": [],
+  "monthly_change": {
+    "previous_period": null,
+    "product_count_change": null,
+    "new_product_count": null,
+    "removed_product_count": null
+  }
+}

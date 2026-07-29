@@ -10,6 +10,8 @@ from .lululemon_scraper import scrape_lululemon_products
 from .quality import (
     backup_file,
     build_audit_report,
+    product_key,
+    summarize_brand,
     utc_stamp,
     validate_brand,
     write_json,
@@ -26,6 +28,15 @@ HISTORY_DIR = DATA_DIR / "history"
 STAGING_DIR = DATA_DIR / "staging"
 AUDIT_DIR = DATA_DIR / "audits"
 BACKUP_DIR = DATA_DIR / "backups"
+BRAND_ARCHIVE_DIR = DATA_DIR / "NIC DASHBOARD"
+BRAND_ARCHIVE_FOLDERS = {
+    "strauss": "Strauss",
+    "rhone": "Rhone",
+    "arcteryx": "Arc'Teryx",
+    "lululemon": "Lululemon",
+    "tommybahama": "Tommy Bahama",
+    "travismathew": "Travis Mathew",
+}
 MONTH_CODES = [
     "JAN",
     "FEB",
@@ -820,6 +831,132 @@ def _staging_path(scrape_period: dict[str, Any] | None, stamp: str) -> Path:
     return STAGING_DIR / f"{period_key(scrape_period)}-{stamp}.json"
 
 
+def _brand_archive_period_dir(brand: str, scrape_period: dict[str, Any] | None) -> Path:
+    folder_name = BRAND_ARCHIVE_FOLDERS.get(brand, brand.title())
+    return BRAND_ARCHIVE_DIR / folder_name / period_key(scrape_period)
+
+
+def _previous_brand_archive(
+    brand: str,
+    current_period_key: str,
+) -> dict[str, Any] | None:
+    folder_name = BRAND_ARCHIVE_FOLDERS.get(brand, brand.title())
+    brand_dir = BRAND_ARCHIVE_DIR / folder_name
+    if not brand_dir.exists():
+        return None
+    candidates = [
+        path
+        for path in brand_dir.iterdir()
+        if path.is_dir()
+        and path.name < current_period_key
+        and (path / "products.json").exists()
+    ]
+    if not candidates:
+        return None
+    latest = sorted(candidates, key=lambda path: path.name)[-1] / "products.json"
+    try:
+        return json.loads(latest.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+def _brand_monthly_change(
+    brand: str,
+    current_period_key: str,
+    products: list[dict[str, Any]],
+) -> dict[str, Any]:
+    previous_payload = _previous_brand_archive(brand, current_period_key)
+    if not previous_payload:
+        return {
+            "previous_period": None,
+            "product_count_change": None,
+            "new_product_count": None,
+            "removed_product_count": None,
+        }
+
+    previous_products = previous_payload.get("products", [])
+    previous_ids = {
+        product_key(product)
+        for product in previous_products
+        if product_key(product)
+    }
+    current_ids = {
+        product_key(product)
+        for product in products
+        if product_key(product)
+    }
+    return {
+        "previous_period": previous_payload.get("period_key"),
+        "previous_product_count": len(previous_products),
+        "product_count_change": len(products) - len(previous_products),
+        "new_product_count": len(current_ids - previous_ids),
+        "removed_product_count": len(previous_ids - current_ids),
+    }
+
+
+def write_brand_archives(
+    payload: dict[str, Any],
+    brand_audits: list[dict[str, Any]],
+) -> None:
+    scrape_period = payload.get("scrape_period") or None
+    current_period_key = period_key(scrape_period)
+    audit_by_brand = {audit.get("brand"): audit for audit in brand_audits}
+    source_by_brand = {
+        source.get("brand"): source
+        for source in payload.get("sources", [])
+        if source.get("brand")
+    }
+    brands = sorted(
+        {
+            product.get("brand")
+            for product in payload.get("products", [])
+            if product.get("brand")
+        }
+    )
+
+    for brand in brands:
+        products = [
+            product
+            for product in payload.get("products", [])
+            if product.get("brand") == brand
+        ]
+        products.sort(
+            key=lambda item: (
+                item.get("title", "").lower(),
+                str(item.get("id") or ""),
+            )
+        )
+        source = source_by_brand.get(brand, {})
+        summary = summarize_brand(products)
+        archive_dir = _brand_archive_period_dir(brand, scrape_period)
+        archive_payload = {
+            "brand": brand,
+            "label": source.get("label") or products[0].get("brand_label") or brand,
+            "source_url": source.get("url"),
+            "period_key": current_period_key,
+            "period_label": period_label(scrape_period) or "Latest",
+            "scraped_at": source.get("scraped_at") or payload.get("scraped_at"),
+            "product_count": len(products),
+            "products": products,
+        }
+        audit_payload = audit_by_brand.get(brand, {})
+        summary_payload = {
+            **archive_payload,
+            **summary,
+            "quality_decision": audit_payload.get("decision"),
+            "quality_warnings": audit_payload.get("warnings", []),
+            "monthly_change": _brand_monthly_change(
+                brand,
+                current_period_key,
+                products,
+            ),
+        }
+
+        write_json(archive_dir / "products.json", archive_payload)
+        write_json(archive_dir / "summary.json", summary_payload)
+        write_json(archive_dir / "audit.json", audit_payload)
+
+
 def load_period_cache(scrape_period: dict[str, Any] | None) -> dict[str, Any] | None:
     if not scrape_period:
         return load_cache()
@@ -999,6 +1136,7 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
     if scrape_period:
         backup_file(period_cache_path(scrape_period), BACKUP_DIR, stamp)
         _write_payload(period_cache_path(scrape_period), payload)
+    write_brand_archives(payload, brand_audits)
     write_json(_audit_path(scrape_period, stamp), build_audit_report(
         scrape_period,
         brand_audits,

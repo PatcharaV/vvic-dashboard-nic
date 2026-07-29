@@ -1,0 +1,40 @@
+{
+  "brand": "arcteryx",
+  "label": "Arc'teryx",
+  "source_url": "https://arcteryx.com/us/en",
+  "period_key": "2026-07",
+  "period_label": "JUL 2026",
+  "scraped_at": "2026-07-22T08:28:44.580379+00:00",
+  "product_count": 316,
+  "available_count": 316,
+  "category_counts": {
+    "Base Layer": 6,
+    "Collection Only": 96,
+    "Fleece": 26,
+    "Insulated Jackets": 34,
+    "Pants": 36,
+    "Shell Jackets": 56,
+    "Shirts and Tops": 48,
+    "Shorts": 18,
+    "Vests": 3
+  },
+  "audience_counts": {
+    "men": 158,
+    "women": 159
+  },
+  "missing": {
+    "image": 0,
+    "color": 0,
+    "material": 9,
+    "price": 0
+  },
+  "quality_decision": "publish",
+  "quality_warnings": [],
+  "monthly_change": {
+    "previous_period": "2026-06",
+    "previous_product_count": 322,
+    "product_count_change": -6,
+    "new_product_count": 9,
+    "removed_product_count": 15
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "strauss",
+  "label": "Strauss",
+  "source_url": "https://us.strauss.com",
+  "period_key": "2026-06",
+  "period_label": "JUN 2026",
+  "scraped_at": "2026-06-23T10:13:21.656362+00:00",
+  "product_count": 309,
+  "available_count": 300,
+  "category_counts": {
+    "Hoodies & Sweatshirts": 34,
+    "Leggings": 3,
+    "Outerwear": 52,
+    "Pants": 93,
+    "Shirts": 118,
+    "Shorts": 20
+  },
+  "audience_counts": {
+    "kids": 20,
+    "men": 244,
+    "women": 45
+  },
+  "missing": {
+    "image": 0,
+    "color": 0,
+    "material": 4,
+    "price": 0
+  },
+  "quality_decision": "publish",
+  "quality_warnings": [],
+  "monthly_change": {
+    "previous_period": null,
+    "product_count_change": null,
+    "new_product_count": null,
+    "removed_product_count": null
+  }
+}

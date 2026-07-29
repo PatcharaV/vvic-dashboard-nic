@@ -1,0 +1,44 @@
+{
+  "brand": "travismathew",
+  "label": "TravisMathew",
+  "source_url": "https://travismathew.com",
+  "period_key": "2026-07",
+  "period_label": "JUL 2026",
+  "scraped_at": "2026-07-29T04:02:46.750829+00:00",
+  "product_count": 1603,
+  "available_count": 1274,
+  "category_counts": {
+    "Button-Ups": 93,
+    "Dresses": 34,
+    "Hoodies & Pullovers": 110,
+    "Joggers": 7,
+    "Leggings": 3,
+    "Outerwear": 67,
+    "Pants": 41,
+    "Polos": 510,
+    "Quarter Zips": 153,
+    "Shorts": 76,
+    "Skorts & Skirts": 25,
+    "Tanks": 29,
+    "Tees": 455
+  },
+  "audience_counts": {
+    "kids": 56,
+    "men": 1494,
+    "women": 53
+  },
+  "missing": {
+    "image": 9,
+    "color": 0,
+    "material": 1546,
+    "price": 0
+  },
+  "quality_decision": "publish",
+  "quality_warnings": [],
+  "monthly_change": {
+    "previous_period": null,
+    "product_count_change": null,
+    "new_product_count": null,
+    "removed_product_count": null
+  }
+}
