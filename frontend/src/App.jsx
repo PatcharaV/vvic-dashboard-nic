@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Cell,
   Pie,
@@ -557,6 +557,7 @@ function App() {
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
+  const loadRequestRef = useRef(0);
   const [scrapeMonth, setScrapeMonth] = useState(CURRENT_PERIOD.month);
   const [scrapeYear, setScrapeYear] = useState(CURRENT_PERIOD.year);
 
@@ -574,9 +575,16 @@ function App() {
     }
     return months;
   }, [scrapeYear]);
+  const effectiveFilters = useMemo(
+    () => ({
+      ...filters,
+      brands: routeBrand ? [routeBrand] : filters.brands,
+    }),
+    [filters, routeBrand],
+  );
   const query = useMemo(
-    () => buildQuery(filters, selectedPeriod),
-    [filters, selectedPeriod],
+    () => buildQuery(effectiveFilters, selectedPeriod),
+    [effectiveFilters, selectedPeriod],
   );
   const brandOptions = mergeBrandOptions(options.brands);
   const productCategories = options.categories;
@@ -584,7 +592,7 @@ function App() {
   const activityOptions = options.activities || [];
   const materialKeywords = options.material_keywords || [];
   const seasonOptions = options.seasons || [];
-  const showCategoryTreemap = filters.brands.includes("lululemon");
+  const showCategoryTreemap = effectiveFilters.brands.includes("lululemon");
   const treemapRows = showCategoryTreemap
     ? dashboard.categories || []
     : dashboard.subcategories || [];
@@ -703,6 +711,8 @@ function App() {
   }
 
   async function loadDashboard() {
+    const requestId = loadRequestRef.current + 1;
+    loadRequestRef.current = requestId;
     setLoading(true);
     try {
       const healthPromise = fetch("/api/health").catch(() => null);
@@ -713,8 +723,10 @@ function App() {
         healthPromise,
         wait(900),
       ]);
+      if (requestId !== loadRequestRef.current) return;
       if (quickHealthResponse?.ok) {
         const health = await quickHealthResponse.json();
+        if (requestId !== loadRequestRef.current) return;
         healthWasHandled = true;
         setAutoScrapeRuns(health.auto_scrape_runs || {});
         setMaintenance(health.maintenance || null);
@@ -728,6 +740,7 @@ function App() {
         optionsPromise,
         dashboardPromise,
       ]);
+      if (requestId !== loadRequestRef.current) return;
       if (optionsResponse.status === 404 || dashboardResponse.status === 404) {
         setDashboard(emptyDashboardForPeriod(scrapeMonth, scrapeYear));
         setMessage(`No saved snapshot for ${scrapeMonth} ${scrapeYear}. Run scrape once for this month.`);
@@ -738,7 +751,8 @@ function App() {
       }
       const nextOptions = await optionsResponse.json();
       const nextDashboard = await dashboardResponse.json();
-      const selectedBrands = new Set(filters.brands);
+      if (requestId !== loadRequestRef.current) return;
+      const selectedBrands = new Set(effectiveFilters.brands);
       const visibleBrandLabels = (nextOptions.brands || DEFAULT_BRAND_OPTIONS)
         .filter((brand) => !selectedBrands.size || selectedBrands.has(brand.value))
         .map((brand) => brand.label);
@@ -747,16 +761,21 @@ function App() {
       setMessage(`Live data from ${visibleBrandLabels.join(", ")}`);
       if (!healthWasHandled) {
         const healthResponse = await healthPromise;
+        if (requestId !== loadRequestRef.current) return;
         if (healthResponse?.ok) {
           const health = await healthResponse.json();
+          if (requestId !== loadRequestRef.current) return;
           setAutoScrapeRuns(health.auto_scrape_runs || {});
           setMaintenance(health.maintenance || null);
         }
       }
     } catch {
+      if (requestId !== loadRequestRef.current) return;
       setMessage("Demo preview: start the Python API for live data");
     } finally {
-      setLoading(false);
+      if (requestId === loadRequestRef.current) {
+        setLoading(false);
+      }
     }
   }
 
@@ -834,7 +853,7 @@ function App() {
   function resetFilters() {
     setFilters({
       search: "",
-      brands: filters.brands,
+      brands: routeBrand ? [routeBrand] : filters.brands,
       audiences: [],
       collections: [],
       activities: [],
@@ -1815,4 +1834,5 @@ function App() {
 }
 
 export default App;
+
 
