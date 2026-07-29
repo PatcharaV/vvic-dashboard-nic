@@ -44,10 +44,10 @@ LOCAL_TZ = ZoneInfo("Asia/Bangkok")
 AUTO_SCRAPE_RUNS_PATH = CACHE_PATH.parent / "auto_scrape_runs.json"
 ONE_TIME_AUTO_SCRAPES = [
     {
-        "key": "test-all-brands-2026-07-29-1126-bkk",
-        "run_at": datetime(2026, 7, 29, 11, 26, tzinfo=LOCAL_TZ),
+        "key": "test-all-brands-2026-07-29-1140-bkk",
+        "run_at": datetime(2026, 7, 29, 11, 40, tzinfo=LOCAL_TZ),
         "period": {"month": "JUL", "year": 2026},
-        "description": "One-time all-brand auto scrape test requested for 29 Jul 2026 11:26 Bangkok time.",
+        "description": "One-time all-brand auto scrape test requested for 29 Jul 2026 11:40 Bangkok time.",
     }
 ]
 
