@@ -938,10 +938,6 @@ function App() {
     });
   }
 
-  function selectBrand(brand) {
-    navigateToBrand(brand);
-  }
-
   if (!routeBrand) {
     return (
       <>
@@ -1084,25 +1080,6 @@ function App() {
           </button>
         </div>
       </header>
-
-      <section className="brand-switcher" aria-label="Filter by brand">
-        <div className="brand-switcher-copy">
-          <span className="filter-title">Choose brand</span>
-          <strong>Select one brand to view its dashboard</strong>
-        </div>
-        <div className="brand-switcher-buttons">
-          {brandOptions.map((brand) => (
-            <button
-              className={filters.brands.includes(brand.value) ? "active" : ""}
-              type="button"
-              key={brand.value}
-              onClick={() => selectBrand(brand.value)}
-            >
-              {brand.label}
-            </button>
-          ))}
-        </div>
-      </section>
 
       <nav className="page-nav" aria-label="Page navigation">
         <a href="#overview">Overview</a>
