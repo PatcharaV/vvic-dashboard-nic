@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import {
   Cell,
-  Legend,
   Pie,
   PieChart,
   ResponsiveContainer,
@@ -267,6 +266,20 @@ function brandPath(brand) {
   return `/brand/${brand}`;
 }
 
+function compactChartRows(data, limit = 12) {
+  const sortedRows = [...data].sort(
+    (left, right) => Number(right.value || 0) - Number(left.value || 0),
+  );
+  if (!sortedRows.length || sortedRows.length <= limit) return sortedRows;
+  const topRows = sortedRows.slice(0, limit);
+  const otherValue = sortedRows
+    .slice(limit)
+    .reduce((sum, item) => sum + Number(item.value || 0), 0);
+  return otherValue > 0
+    ? [...topRows, { name: "Other", value: otherValue, grouped: true }]
+    : topRows;
+}
+
 function wait(ms, value = null) {
   return new Promise((resolve) => {
     window.setTimeout(() => resolve(value), ms);
@@ -356,56 +369,81 @@ function DonutChart({
   selectedNames = [],
 }) {
   const total = data.reduce((sum, item) => sum + item.value, 0);
+  const chartData = compactChartRows(data);
   return (
     <div className="chart-shell">
-      <ResponsiveContainer width="100%" height={330}>
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="name"
-            cx="37%"
-            cy="50%"
-            innerRadius={68}
-            outerRadius={104}
-            paddingAngle={1}
-            onClick={(entry) => onSelect?.(entry.name)}
-            className="clickable-chart"
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={entry.name}
-                fill={COLORS[index % COLORS.length]}
-                opacity={
-                  selectedNames.length === 0 || selectedNames.includes(entry.name)
-                    ? 1
-                    : 0.28
-                }
+      <div className="donut-wrap">
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              innerRadius={64}
+              outerRadius={104}
+              paddingAngle={1}
+              onClick={(entry) => !entry.grouped && onSelect?.(entry.name)}
+              className="clickable-chart"
+            >
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={entry.name}
+                  fill={COLORS[index % COLORS.length]}
+                  opacity={
+                    selectedNames.length === 0 ||
+                    selectedNames.includes(entry.name) ||
+                    entry.grouped
+                      ? 1
+                      : 0.28
+                  }
+                />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{ fontSize: 11, padding: "7px 9px" }}
+              itemStyle={{ fontSize: 11 }}
+              formatter={(value, name) => [
+                `${formatNumber.format(value)} (${total ? ((value / total) * 100).toFixed(1) : 0}%)`,
+                name,
+              ]}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+        <div className="donut-center">
+          <strong>{formatNumber.format(centerValue ?? total)}</strong>
+          <span>{centerLabel}</span>
+        </div>
+      </div>
+      <div className="chart-legend-list" aria-label={`${centerLabel} legend`}>
+        {chartData.map((entry, index) => {
+          const selected =
+            selectedNames.length === 0 ||
+            selectedNames.includes(entry.name) ||
+            entry.grouped;
+          return (
+            <button
+              type="button"
+              className={selected ? "chart-legend-row" : "chart-legend-row muted"}
+              key={entry.name}
+              onClick={() => !entry.grouped && onSelect?.(entry.name)}
+              disabled={entry.grouped}
+            >
+              <span
+                className="legend-dot"
+                style={{ backgroundColor: COLORS[index % COLORS.length] }}
               />
-            ))}
-          </Pie>
-          <Tooltip
-            contentStyle={{ fontSize: 11, padding: "7px 9px" }}
-            itemStyle={{ fontSize: 11 }}
-            formatter={(value, name) => [
-              `${formatNumber.format(value)} (${total ? ((value / total) * 100).toFixed(1) : 0}%)`,
-              name,
-            ]}
-          />
-          <Legend
-            layout="vertical"
-            verticalAlign="middle"
-            align="right"
-            iconType="circle"
-            iconSize={7}
-            wrapperStyle={{ fontSize: 9, lineHeight: "14px" }}
-            onClick={(entry) => onSelect?.(entry.value)}
-          />
-        </PieChart>
-      </ResponsiveContainer>
-      <div className="donut-center">
-        <strong>{formatNumber.format(centerValue ?? total)}</strong>
-        <span>{centerLabel}</span>
+              <span>{entry.name}</span>
+              <strong>{formatNumber.format(entry.value)}</strong>
+            </button>
+          );
+        })}
+        {data.length > chartData.length && (
+          <small className="legend-note">
+            Showing top {chartData.length - 1} groups. Remaining groups are combined as Other.
+          </small>
+        )}
       </div>
     </div>
   );
@@ -1777,3 +1815,4 @@ function App() {
 }
 
 export default App;
+

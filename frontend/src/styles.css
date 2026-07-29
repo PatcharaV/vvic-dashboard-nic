@@ -919,26 +919,25 @@ h2 {
 .chart-shell {
   position: relative;
   margin-top: 4px;
-}
-
-.chart-shell .recharts-legend-item {
-  margin-right: 0 !important;
-}
-
-.chart-shell .recharts-legend-item-text {
-  color: #5f6267 !important;
-  font-size: 9px;
-  line-height: 1.2;
+  display: grid;
+  grid-template-columns: minmax(250px, 0.95fr) minmax(180px, 0.8fr);
+  align-items: center;
+  gap: 18px;
 }
 
 .chart-shell .recharts-default-tooltip {
   font-size: 11px;
 }
 
+.donut-wrap {
+  position: relative;
+  min-width: 0;
+}
+
 .donut-center {
   position: absolute;
   top: 50%;
-  left: 37%;
+  left: 50%;
   display: grid;
   width: 118px;
   text-align: center;
@@ -955,6 +954,70 @@ h2 {
   color: #77746e;
   font-size: 10px;
   text-transform: uppercase;
+}
+
+.chart-legend-list {
+  max-height: 252px;
+  padding: 8px;
+  display: grid;
+  gap: 5px;
+  overflow: auto;
+  background: #fafafa;
+  border: 1px solid #e4e5e6;
+  border-radius: 10px;
+}
+
+.chart-legend-row {
+  width: 100%;
+  min-height: 29px;
+  padding: 6px 8px;
+  display: grid;
+  grid-template-columns: 9px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  color: #3e4248;
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.chart-legend-row:hover:not(:disabled) {
+  border-color: #ef3e42;
+}
+
+.chart-legend-row:disabled {
+  cursor: default;
+}
+
+.chart-legend-row.muted {
+  opacity: 0.42;
+}
+
+.chart-legend-row span:nth-child(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart-legend-row strong {
+  color: #151515;
+  font-size: 11px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.legend-note {
+  padding: 5px 2px 0;
+  color: #77746e;
+  font-size: 10px;
+  line-height: 1.35;
 }
 
 .product-panel {
@@ -1526,8 +1589,8 @@ footer a {
     grid-template-columns: 1fr;
   }
 
-  .chart-shell .recharts-legend-wrapper {
-    display: none;
+  .chart-shell {
+    grid-template-columns: 1fr;
   }
 
   .donut-center {
