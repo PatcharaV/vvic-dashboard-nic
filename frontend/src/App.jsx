@@ -8,6 +8,7 @@ import {
   Treemap,
 } from "recharts";
 import { demoDashboard, demoOptions } from "./demoData";
+import snapshotData from "./snapshotData.json";
 
 const COLORS = [
   "#ef3e42",
@@ -43,6 +44,18 @@ function mergeBrandOptions(options = []) {
     }
   }
   return DEFAULT_BRAND_OPTIONS.map((brand) => merged.get(brand.value) || brand);
+}
+
+function snapshotForBrand(brand) {
+  return brand ? snapshotData.brands?.[brand] : null;
+}
+
+function snapshotMessage(brand, options = DEFAULT_BRAND_OPTIONS) {
+  const label =
+    options.find((item) => item.value === brand)?.label ||
+    DEFAULT_BRAND_OPTIONS.find((item) => item.value === brand)?.label ||
+    "brand";
+  return `Cached snapshot for ${label}`;
 }
 
 const DEFAULT_SECTIONS = {
@@ -530,8 +543,11 @@ function FilterGroup({ title, options, selected, onChange }) {
 function App() {
   const [routePath, setRoutePath] = useState(window.location.pathname);
   const routeBrand = getBrandFromPath(routePath);
-  const [options, setOptions] = useState(demoOptions);
-  const [dashboard, setDashboard] = useState(demoDashboard);
+  const initialSnapshot = snapshotForBrand(routeBrand);
+  const [options, setOptions] = useState(initialSnapshot?.options || demoOptions);
+  const [dashboard, setDashboard] = useState(
+    initialSnapshot?.dashboard || demoDashboard,
+  );
   const [filters, setFilters] = useState({
     search: "",
     brands: routeBrand ? [routeBrand] : [],
@@ -549,9 +565,11 @@ function App() {
     season: "all",
   });
   const sections = DEFAULT_SECTIONS;
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialSnapshot);
   const [scraping, setScraping] = useState(false);
-  const [message, setMessage] = useState("Loading dashboard data...");
+  const [message, setMessage] = useState(
+    initialSnapshot ? snapshotMessage(routeBrand, initialSnapshot.options?.brands) : "Loading dashboard data...",
+  );
   const [autoScrapeRuns, setAutoScrapeRuns] = useState({});
   const [maintenance, setMaintenance] = useState(null);
   const [filtersOpen, setFiltersOpen] = useState(true);
@@ -717,6 +735,17 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const nextSnapshot = snapshotForBrand(routeBrand);
+    if (nextSnapshot) {
+      setOptions(nextSnapshot.options);
+      setDashboard(nextSnapshot.dashboard);
+      setMessage(snapshotMessage(routeBrand, nextSnapshot.options?.brands));
+      setLoading(false);
+      if (nextSnapshot.dashboard?.scrape_period?.month && nextSnapshot.dashboard?.scrape_period?.year) {
+        setScrapeMonth(nextSnapshot.dashboard.scrape_period.month);
+        setScrapeYear(Number(nextSnapshot.dashboard.scrape_period.year));
+      }
+    }
     setFilters((current) => ({
       ...current,
       brands: routeBrand ? [routeBrand] : [],
@@ -763,7 +792,7 @@ function App() {
     }
   }
 
-  async function loadDashboard() {
+  async function loadDashboard({ background = false } = {}) {
     if (!routeBrand) {
       loadRequestRef.current += 1;
       setLoading(false);
@@ -771,7 +800,10 @@ function App() {
     }
     const requestId = loadRequestRef.current + 1;
     loadRequestRef.current = requestId;
-    setLoading(true);
+    const showLoading = !background || !dashboard.products?.length;
+    if (showLoading) {
+      setLoading(true);
+    }
     try {
       const healthPromise = fetch("/api/health").catch(() => null);
       const optionsPromise = fetch(`/api/options${query ? `?${query}` : ""}`);
@@ -829,9 +861,11 @@ function App() {
       }
     } catch {
       if (requestId !== loadRequestRef.current) return;
-      setMessage("Demo preview: start the Python API for live data");
+      if (!background) {
+        setMessage("Demo preview: start the Python API for live data");
+      }
     } finally {
-      if (requestId === loadRequestRef.current) {
+      if (showLoading && requestId === loadRequestRef.current) {
         setLoading(false);
       }
     }
@@ -844,7 +878,10 @@ function App() {
       loadMaintenanceStatus();
       return undefined;
     }
-    const timer = setTimeout(loadDashboard, 250);
+    const timer = setTimeout(
+      () => loadDashboard({ background: Boolean(snapshotForBrand(routeBrand)) }),
+      250,
+    );
     return () => clearTimeout(timer);
   }, [query, routeBrand]);
 
@@ -1018,7 +1055,7 @@ function App() {
               className={
                 maintenance?.active
                   ? "dot maintenance"
-                  : message.startsWith("Live")
+                  : message.startsWith("Live") || message.startsWith("Cached")
                     ? "dot live"
                     : "dot"
               }
