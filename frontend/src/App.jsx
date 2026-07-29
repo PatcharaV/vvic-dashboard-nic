@@ -308,10 +308,10 @@ function MaintenanceOverlay({ maintenance }) {
         <h1>Dashboard temporarily closed for maintenance</h1>
         <p>
           We are scraping and validating this month&apos;s product catalog. The
-          dashboard is scheduled to reopen after 09:00 Bangkok time.
+          dashboard is scheduled to reopen after 08:30 Bangkok time.
         </p>
         <div className="maintenance-meta">
-          <span>Window: 08:00-09:00</span>
+          <span>Window: 08:00-08:30</span>
           <span>Timezone: Asia/Bangkok</span>
           {maintenance.latest_run?.status && (
             <span>Status: {maintenance.latest_run.status}</span>

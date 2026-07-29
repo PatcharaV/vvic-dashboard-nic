@@ -48,7 +48,7 @@ LOCAL_TZ = ZoneInfo("Asia/Bangkok")
 AUTO_SCRAPE_RUNS_PATH = CACHE_PATH.parent / "auto_scrape_runs.json"
 MONTHLY_AUTO_STATUS_PATH = CACHE_PATH.parent / "monthly_auto_scrape_status.json"
 MAINTENANCE_START = time(8, 0)
-MAINTENANCE_END = time(9, 0)
+MAINTENANCE_END = time(8, 30)
 ONE_TIME_AUTO_SCRAPES: list[dict[str, Any]] = []
 
 
@@ -140,7 +140,7 @@ def maintenance_window(now: datetime | None = None) -> dict[str, Any]:
         "active": active,
         "scheduled": scheduled,
         "running": running,
-        "message": "Monthly catalog update in progress. The dashboard will reopen after 09:00 Bangkok time.",
+        "message": "Monthly catalog update in progress. The dashboard will reopen after 08:30 Bangkok time.",
         "starts_at": start.isoformat(),
         "ends_at": end.isoformat(),
         "timezone": "Asia/Bangkok",
