@@ -212,6 +212,62 @@ h2 {
   box-shadow: 0 0 0 4px rgba(47, 158, 116, 0.13);
 }
 
+.dot.maintenance {
+  background: #ef3e42;
+  box-shadow: 0 0 0 4px rgba(239, 62, 66, 0.16);
+}
+
+.maintenance-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(239, 62, 66, 0.14), transparent 32%),
+    rgba(247, 248, 248, 0.96);
+  backdrop-filter: blur(8px);
+}
+
+.maintenance-card {
+  width: min(620px, 100%);
+  padding: 36px;
+  background: #fff;
+  border: 1px solid #d8dade;
+  border-radius: 18px;
+  box-shadow: 0 26px 70px rgba(16, 24, 32, 0.16);
+}
+
+.maintenance-card h1 {
+  margin: 8px 0 10px;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+
+.maintenance-card p {
+  max-width: 520px;
+  color: #6f6b64;
+  line-height: 1.6;
+}
+
+.maintenance-meta {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.maintenance-meta span {
+  padding: 8px 10px;
+  color: #151515;
+  background: #f1f1ef;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .primary-button {
   min-height: 44px;
   padding: 12px 18px;

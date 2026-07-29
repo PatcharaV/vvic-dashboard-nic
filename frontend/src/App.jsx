@@ -531,6 +531,7 @@ function App() {
   const [scraping, setScraping] = useState(false);
   const [message, setMessage] = useState("Connecting to Python API...");
   const [autoScrapeRuns, setAutoScrapeRuns] = useState({});
+  const [maintenance, setMaintenance] = useState(null);
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
@@ -645,10 +646,20 @@ function App() {
   async function loadDashboard() {
     setLoading(true);
     try {
-      const [optionsResponse, dashboardResponse, healthResponse] = await Promise.all([
+      const healthResponse = await fetch("/api/health").catch(() => null);
+      if (healthResponse?.ok) {
+        const health = await healthResponse.json();
+        setAutoScrapeRuns(health.auto_scrape_runs || {});
+        setMaintenance(health.maintenance || null);
+        if (health.maintenance?.active) {
+          setMessage("Monthly maintenance in progress");
+          return;
+        }
+      }
+
+      const [optionsResponse, dashboardResponse] = await Promise.all([
         fetch(`/api/options${query ? `?${query}` : ""}`),
         fetch(`/api/dashboard${query ? `?${query}` : ""}`),
-        fetch("/api/health").catch(() => null),
       ]);
       if (optionsResponse.status === 404 || dashboardResponse.status === 404) {
         setDashboard(emptyDashboardForPeriod(scrapeMonth, scrapeYear));
@@ -660,10 +671,6 @@ function App() {
       }
       setOptions(await optionsResponse.json());
       setDashboard(await dashboardResponse.json());
-      if (healthResponse?.ok) {
-        const health = await healthResponse.json();
-        setAutoScrapeRuns(health.auto_scrape_runs || {});
-      }
       setMessage(`Live data from ${brandOptions.map((brand) => brand.label).join(", ")}`);
     } catch {
       setMessage("Demo preview: start the Python API for live data");
@@ -676,6 +683,25 @@ function App() {
     const timer = setTimeout(loadDashboard, 250);
     return () => clearTimeout(timer);
   }, [query]);
+
+  useEffect(() => {
+    if (!maintenance?.active) return undefined;
+    const timer = setInterval(async () => {
+      try {
+        const response = await fetch("/api/health");
+        if (!response.ok) return;
+        const health = await response.json();
+        setAutoScrapeRuns(health.auto_scrape_runs || {});
+        setMaintenance(health.maintenance || null);
+        if (!health.maintenance?.active) {
+          await loadDashboard();
+        }
+      } catch {
+        // Keep the maintenance message visible if the API is briefly unavailable.
+      }
+    }, 30000);
+    return () => clearInterval(timer);
+  }, [maintenance?.active, query]);
 
   useEffect(() => {
     if (
@@ -803,6 +829,25 @@ function App() {
 
   return (
     <main>
+      {maintenance?.active && (
+        <section className="maintenance-screen" role="status" aria-live="polite">
+          <div className="maintenance-card">
+            <p className="eyebrow">MONTHLY CATALOG UPDATE</p>
+            <h1>Dashboard temporarily closed for maintenance</h1>
+            <p>
+              We are scraping and validating this month&apos;s product catalog.
+              The dashboard is scheduled to reopen after 09:00 Bangkok time.
+            </p>
+            <div className="maintenance-meta">
+              <span>Window: 08:00-09:00</span>
+              <span>Timezone: Asia/Bangkok</span>
+              {maintenance.latest_run?.status && (
+                <span>Status: {maintenance.latest_run.status}</span>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
       <header className="topbar">
         <div className="brand-block">
           <div className="brand-mark">M</div>
@@ -817,9 +862,19 @@ function App() {
         </div>
         <div className="header-actions">
           <div className="status">
-            <span className={message.startsWith("Live") ? "dot live" : "dot"} />
+            <span
+              className={
+                maintenance?.active
+                  ? "dot maintenance"
+                  : message.startsWith("Live")
+                    ? "dot live"
+                    : "dot"
+              }
+            />
             <div>
-              <strong>{message}</strong>
+              <strong>
+                {maintenance?.active ? "Monthly maintenance in progress" : message}
+              </strong>
               <small>Updated {formatDate(dashboard.scraped_at)}</small>
               {dashboard.scrape_period?.label && (
                 <small>Scrape period {dashboard.scrape_period.label}</small>

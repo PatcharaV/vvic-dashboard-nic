@@ -1,0 +1,37 @@
+name: Monthly Auto Scrape
+
+on:
+  schedule:
+    # 08:00 Bangkok time on the 1st day of every month.
+    - cron: "0 1 1 * *"
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      APP_URL: https://vvic-dashboard-nic-rebz.onrender.com
+
+    steps:
+      - name: Start monthly scrape
+        run: |
+          curl --fail --show-error --silent --request POST "$APP_URL/api/auto-scrape/monthly"
+
+      - name: Wait for scrape to finish
+        run: |
+          for attempt in $(seq 1 60); do
+            body="$(curl --fail --show-error --silent "$APP_URL/api/auto-scrape/monthly/status")"
+            status="$(python -c 'import json,sys; print(json.load(sys.stdin).get("latest_run", {}).get("status", ""))' <<< "$body")"
+            echo "Attempt $attempt: $status"
+            if [ "$status" = "completed" ]; then
+              exit 0
+            fi
+            if [ "$status" = "failed" ]; then
+              echo "$body"
+              exit 1
+            fi
+            sleep 60
+          done
+          echo "Monthly scrape did not finish within the maintenance window."
+          exit 1

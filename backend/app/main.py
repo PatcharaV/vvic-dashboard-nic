@@ -1,7 +1,7 @@
 import asyncio
 import json
 from contextlib import asynccontextmanager
-from datetime import datetime, timezone
+from datetime import datetime, time, timezone
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -41,8 +41,12 @@ MONTH_LABELS = {
 store: dict[str, Any] = {}
 scrape_lock = asyncio.Lock()
 auto_scrape_task: asyncio.Task | None = None
+monthly_scrape_task: asyncio.Task | None = None
 LOCAL_TZ = ZoneInfo("Asia/Bangkok")
 AUTO_SCRAPE_RUNS_PATH = CACHE_PATH.parent / "auto_scrape_runs.json"
+MONTHLY_AUTO_STATUS_PATH = CACHE_PATH.parent / "monthly_auto_scrape_status.json"
+MAINTENANCE_START = time(8, 0)
+MAINTENANCE_END = time(9, 0)
 ONE_TIME_AUTO_SCRAPES = [
     {
         "key": "test-all-brands-2026-07-29-1140-bkk",
@@ -101,6 +105,54 @@ def save_auto_scrape_run(key: str, payload: dict[str, Any]) -> None:
     )
 
 
+def monthly_scrape_key(period: dict[str, Any]) -> str:
+    return f"monthly-{period['year']}-{period['month']}"
+
+
+def load_monthly_auto_status() -> dict[str, Any]:
+    if not MONTHLY_AUTO_STATUS_PATH.exists():
+        return {}
+    try:
+        return json.loads(MONTHLY_AUTO_STATUS_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def save_monthly_auto_status(payload: dict[str, Any]) -> None:
+    MONTHLY_AUTO_STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    MONTHLY_AUTO_STATUS_PATH.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+def consume_task_exception(task: asyncio.Task) -> None:
+    try:
+        task.exception()
+    except asyncio.CancelledError:
+        pass
+
+
+def maintenance_window(now: datetime | None = None) -> dict[str, Any]:
+    now = now or datetime.now(LOCAL_TZ)
+    start = datetime.combine(now.date(), MAINTENANCE_START, tzinfo=LOCAL_TZ)
+    end = datetime.combine(now.date(), MAINTENANCE_END, tzinfo=LOCAL_TZ)
+    scheduled = now.day == 1 and start <= now < end
+    status = load_monthly_auto_status()
+    running = status.get("status") == "running"
+    active = scheduled or running
+    return {
+        "active": active,
+        "scheduled": scheduled,
+        "running": running,
+        "message": "Monthly catalog update in progress. The dashboard will reopen after 09:00 Bangkok time.",
+        "starts_at": start.isoformat(),
+        "ends_at": end.isoformat(),
+        "timezone": "Asia/Bangkok",
+        "latest_run": status,
+    }
+
+
 def latest_audit_report() -> dict[str, Any] | None:
     if not AUDIT_DIR.exists():
         return None
@@ -111,6 +163,70 @@ def latest_audit_report() -> dict[str, Any] | None:
         return json.loads(reports[-1].read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
+
+
+async def run_monthly_auto_scrape(triggered_by: str = "scheduler") -> dict[str, Any]:
+    period = current_scrape_period()
+    key = monthly_scrape_key(period)
+    latest = load_monthly_auto_status()
+    if latest.get("key") == key and latest.get("status") == "completed":
+        return latest
+
+    started_at = datetime.now(timezone.utc).isoformat()
+    save_monthly_auto_status(
+        {
+            "key": key,
+            "status": "running",
+            "triggered_by": triggered_by,
+            "started_at": started_at,
+            "scrape_period": period,
+        }
+    )
+    try:
+        data = await get_data(force=True, scrape_period=period)
+    except Exception as exc:
+        status = {
+            "key": key,
+            "status": "failed",
+            "triggered_by": triggered_by,
+            "started_at": started_at,
+            "completed_at": datetime.now(timezone.utc).isoformat(),
+            "scrape_period": period,
+            "error": str(exc),
+        }
+        save_monthly_auto_status(status)
+        raise
+
+    status = {
+        "key": key,
+        "status": "completed",
+        "triggered_by": triggered_by,
+        "started_at": started_at,
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "scrape_period": data.get("scrape_period", period),
+        "product_count": data.get("product_count"),
+        "quality_status": data.get("quality_audit", {}).get("status"),
+        "warnings": data.get("scrape_warnings", []),
+    }
+    save_monthly_auto_status(status)
+    return status
+
+
+def start_monthly_auto_scrape(triggered_by: str = "scheduler") -> dict[str, Any]:
+    global monthly_scrape_task
+    period = current_scrape_period()
+    latest = load_monthly_auto_status()
+    if latest.get("key") == monthly_scrape_key(period) and latest.get("status") == "completed":
+        return {"status": "already_completed", "latest_run": latest}
+    if monthly_scrape_task and not monthly_scrape_task.done():
+        return {"status": "already_running", "latest_run": latest}
+    monthly_scrape_task = asyncio.create_task(run_monthly_auto_scrape(triggered_by))
+    monthly_scrape_task.add_done_callback(consume_task_exception)
+    return {
+        "status": "started",
+        "scrape_period": period,
+        "latest_run": load_monthly_auto_status(),
+    }
 
 
 async def run_due_one_time_auto_scrapes(now: datetime) -> None:
@@ -181,11 +297,10 @@ async def get_data(
 async def monthly_auto_scrape_loop() -> None:
     while True:
         now = datetime.now(LOCAL_TZ)
-        period = current_scrape_period()
         try:
             await run_due_one_time_auto_scrapes(now)
-            if now.day == 1 and load_period_cache(period) is None:
-                await get_data(force=True, scrape_period=period)
+            if maintenance_window(now)["scheduled"]:
+                start_monthly_auto_scrape("server-loop")
         except Exception:
             pass
         await asyncio.sleep(60)
@@ -225,7 +340,27 @@ async def health() -> dict[str, Any]:
         "data_loaded": "data" in store,
         "available_periods": available_periods(),
         "auto_scrape_runs": load_auto_scrape_runs(),
+        "monthly_auto_scrape": load_monthly_auto_status(),
+        "maintenance": maintenance_window(),
         "latest_audit": latest_audit_report(),
+    }
+
+
+@app.get("/api/maintenance")
+async def maintenance() -> dict[str, Any]:
+    return maintenance_window()
+
+
+@app.post("/api/auto-scrape/monthly")
+async def auto_scrape_monthly() -> dict[str, Any]:
+    return start_monthly_auto_scrape("external-scheduler")
+
+
+@app.get("/api/auto-scrape/monthly/status")
+async def auto_scrape_monthly_status() -> dict[str, Any]:
+    return {
+        "maintenance": maintenance_window(),
+        "latest_run": load_monthly_auto_status(),
     }
 
 
