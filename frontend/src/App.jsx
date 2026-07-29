@@ -389,6 +389,12 @@ function brandPath(brand) {
   return `/brand/${brand}`;
 }
 
+function wait(ms, value = null) {
+  return new Promise((resolve) => {
+    window.setTimeout(() => resolve(value), ms);
+  });
+}
+
 function MaintenanceOverlay({ maintenance }) {
   if (!maintenance?.active) return null;
   return (
@@ -872,9 +878,17 @@ function App() {
   async function loadDashboard() {
     setLoading(true);
     try {
-      const healthResponse = await fetch("/api/health").catch(() => null);
-      if (healthResponse?.ok) {
-        const health = await healthResponse.json();
+      const healthPromise = fetch("/api/health").catch(() => null);
+      const optionsPromise = fetch(`/api/options${query ? `?${query}` : ""}`);
+      const dashboardPromise = fetch(`/api/dashboard${query ? `?${query}` : ""}`);
+      let healthWasHandled = false;
+      const quickHealthResponse = await Promise.race([
+        healthPromise,
+        wait(900),
+      ]);
+      if (quickHealthResponse?.ok) {
+        const health = await quickHealthResponse.json();
+        healthWasHandled = true;
         setAutoScrapeRuns(health.auto_scrape_runs || {});
         setMaintenance(health.maintenance || null);
         if (health.maintenance?.active) {
@@ -884,8 +898,8 @@ function App() {
       }
 
       const [optionsResponse, dashboardResponse] = await Promise.all([
-        fetch(`/api/options${query ? `?${query}` : ""}`),
-        fetch(`/api/dashboard${query ? `?${query}` : ""}`),
+        optionsPromise,
+        dashboardPromise,
       ]);
       if (optionsResponse.status === 404 || dashboardResponse.status === 404) {
         setDashboard(emptyDashboardForPeriod(scrapeMonth, scrapeYear));
@@ -904,6 +918,14 @@ function App() {
       setOptions(nextOptions);
       setDashboard(nextDashboard);
       setMessage(`Live data from ${visibleBrandLabels.join(", ")}`);
+      if (!healthWasHandled) {
+        const healthResponse = await healthPromise;
+        if (healthResponse?.ok) {
+          const health = await healthResponse.json();
+          setAutoScrapeRuns(health.auto_scrape_runs || {});
+          setMaintenance(health.maintenance || null);
+        }
+      }
     } catch {
       setMessage("Demo preview: start the Python API for live data");
     } finally {
