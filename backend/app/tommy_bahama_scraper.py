@@ -62,8 +62,10 @@ EXCLUDE_URL_KEYWORDS = {
     "earring",
     "flip",
     "furniture",
+    "gift",
     "glass",
     "hat",
+    "flask",
     "mat",
     "maui-jim",
     "mug",
@@ -72,14 +74,17 @@ EXCLUDE_URL_KEYWORDS = {
     "perfume",
     "pillow",
     "plate",
+    "pouch",
     "quilt",
     "ring",
     "rug",
     "sandal",
     "sheet",
+    "shelter",
     "shoe",
     "soap",
     "sunglasses",
+    "shortbread",
     "tote",
     "towel",
     "umbrella",
@@ -223,12 +228,17 @@ def _category(title: str, ld_categories: Any) -> str:
 
 def _audiences(title: str, code: str, category: str) -> tuple[list[str], list[str]]:
     text = f"{title} {code}".lower()
+    code_upper = code.upper()
     if re.search(r"\bwomen'?s\b|\bladies\b", text) or code.upper().startswith("TW") or category in {
         "Dresses",
         "Skirts",
     }:
         return ["women"], ["Women"]
-    if re.search(r"\bmen'?s\b|\bmens\b", text) or code.upper().startswith(("T", "M")):
+    if code_upper.startswith(("SW", "TW", "TSW")):
+        return ["women"], ["Women"]
+    if re.search(r"\bmen'?s\b|\bmens\b", text) or code_upper.startswith(
+        ("ST", "BT", "TR", "T", "TB", "SS")
+    ):
         return ["men"], ["Men"]
     return ["unisex"], ["Unisex"]
 

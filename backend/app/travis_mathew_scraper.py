@@ -193,6 +193,63 @@ def _color(product: dict[str, Any]) -> str:
     return ""
 
 
+def _variant_colors(product: dict[str, Any]) -> tuple[list[str], list[str], list[dict[str, Any]]]:
+    variants = product.get("variants") or []
+    images = {
+        image.get("id"): str(image.get("src") or "")
+        for image in product.get("images", [])
+        if isinstance(image, dict)
+    }
+    color_option_index = 0
+    for index, option in enumerate(product.get("options", []), start=1):
+        if str(option.get("name", "")).lower() in {"color", "colour"}:
+            color_option_index = index
+            break
+
+    color_rows: dict[str, dict[str, Any]] = {}
+    for variant in variants:
+        color = str(variant.get(f"option{color_option_index}") or "").strip()
+        if not color:
+            continue
+        row = color_rows.setdefault(
+            color,
+            {
+                "color": color,
+                "image": images.get(variant.get("image_id"), ""),
+                "url": f"{BASE_URL}/products/{product.get('handle', '')}",
+                "available": False,
+                "sizes": [],
+            },
+        )
+        if variant.get("available", True):
+            row["available"] = True
+        size = str(variant.get("option2") or variant.get("option1") or "").strip()
+        if size and size != color and size not in row["sizes"]:
+            row["sizes"].append(size)
+        if not row.get("image") and variant.get("image_id") in images:
+            row["image"] = images[variant.get("image_id")]
+
+    all_option_colors = []
+    for option in product.get("options", []):
+        if str(option.get("name", "")).lower() in {"color", "colour"}:
+            all_option_colors = [str(value).strip() for value in option.get("values", [])]
+            break
+    for color in all_option_colors:
+        if color and color not in color_rows:
+            color_rows[color] = {
+                "color": color,
+                "image": "",
+                "url": f"{BASE_URL}/products/{product.get('handle', '')}",
+                "available": False,
+                "sizes": [],
+            }
+
+    color_variants = list(color_rows.values())
+    available_colors = [row["color"] for row in color_variants if row.get("available")]
+    unavailable_colors = [row["color"] for row in color_variants if not row.get("available")]
+    return available_colors, unavailable_colors, color_variants
+
+
 def _normalize(product: dict[str, Any]) -> dict[str, Any] | None:
     product_type = str(product.get("product_type") or "").strip()
     if product_type in EXCLUDED_TYPES or product_type not in CLOTHING_TYPES:
@@ -216,6 +273,8 @@ def _normalize(product: dict[str, Any]) -> dict[str, Any] | None:
     category = _category(product_type, title, handle)
     audiences, audience_labels = _audiences(title, handle, tags)
     shop_highlights = _highlights(tags)
+    available_colors, unavailable_colors, color_variants = _variant_colors(product)
+    all_colors = _dedupe([*available_colors, *unavailable_colors])
     return {
         "id": f"travismathew:{product.get('id', handle)}",
         "source_id": str(product.get("id", handle)),
@@ -237,9 +296,15 @@ def _normalize(product: dict[str, Any]) -> dict[str, Any] | None:
         "audience_labels": audience_labels,
         "price_min": min(prices, default=0),
         "price_max": max(prices, default=0),
-        "available": any(bool(variant.get("available")) for variant in variants),
+        "available": bool(available_colors)
+        if all_colors
+        else any(bool(variant.get("available")) for variant in variants),
         "variant_count": len(variants),
-        "color": _color(product),
+        "color": " / ".join(available_colors or all_colors) or _color(product),
+        "available_colors": available_colors,
+        "unavailable_colors": unavailable_colors,
+        "all_colors": all_colors,
+        "color_variants": color_variants,
         "tags": tags,
         "image": image_url,
         "url": f"{BASE_URL}/products/{handle}",
