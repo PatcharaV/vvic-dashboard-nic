@@ -174,10 +174,7 @@ async function exportProductsToExcel(products) {
   const rows = products.map((product) => ({
     Product: product.title,
     Brand: product.brand_label,
-    "Season Code": product.season_code || "",
-    "Season Range": product.season_range || "",
-    "Season Source": product.season_source || "",
-    "Season Notes": formatMultilineList(product.season_notes),
+    Season: product.season_range || "",
     Category: (product.categories || [product.category]).join(", "),
     "Sub Category": (product.subcategories || []).join(", "),
     Collection: (product.collections || []).join(", "),
@@ -199,24 +196,20 @@ async function exportProductsToExcel(products) {
   worksheet["!cols"] = [
     { wch: 42 },
     { wch: 14 },
-    { wch: 12 },
     { wch: 18 },
     { wch: 24 },
-    { wch: 44 },
-    { wch: 24 },
     { wch: 28 },
     { wch: 28 },
-    { wch: 32 },
     { wch: 32 },
     { wch: 32 },
     { wch: 50 },
     { wch: 40 },
     { wch: 42 },
     { wch: 50 },
+    { wch: 24 },
     { wch: 10 },
     { wch: 10 },
     { wch: 18 },
-    { wch: 12 },
     { wch: 12 },
     { wch: 64 },
   ];
@@ -658,11 +651,7 @@ function App() {
     (product) => product.construction?.length,
   );
   const hasSeasonData = dashboard.products.some(
-    (product) =>
-      product.season_code ||
-      product.season_range ||
-      product.season_source ||
-      product.season_notes?.length,
+    (product) => Boolean(String(product.season_range || "").trim()),
   );
   const hasSubcategoryFilter =
     (options.subcategories || []).length > 0 || filters.subcategories.length > 0;
@@ -1712,20 +1701,9 @@ function App() {
                         </td>
                         {hasSeasonData && (
                           <td className="detail-cell">
-                            <DetailList
-                              values={[
-                                product.season_code
-                                  ? `Code: ${product.season_code}`
-                                  : "",
-                                product.season_range
-                                  ? product.season_range
-                                  : "",
-                                product.season_source
-                                  ? `Source: ${product.season_source}`
-                                  : "",
-                                ...(product.season_notes || []),
-                              ].filter(Boolean)}
-                            />
+                            {product.season_range || (
+                              <span className="muted-detail">Not specified</span>
+                            )}
                           </td>
                         )}
                         <td>
