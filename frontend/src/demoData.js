@@ -3,6 +3,9 @@ export const demoOptions = {
     { value: "strauss", label: "Strauss" },
     { value: "rhone", label: "Rhone" },
     { value: "arcteryx", label: "Arc'teryx" },
+    { value: "lululemon", label: "lululemon" },
+    { value: "tommybahama", label: "Tommy Bahama" },
+    { value: "travismathew", label: "TravisMathew" },
   ],
   audiences: [
     { value: "men", label: "Men" },

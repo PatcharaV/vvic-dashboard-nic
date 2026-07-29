@@ -36,6 +36,16 @@ const DEFAULT_BRAND_OPTIONS = [
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
 
+function mergeBrandOptions(options = []) {
+  const merged = new Map(DEFAULT_BRAND_OPTIONS.map((brand) => [brand.value, brand]));
+  for (const brand of options) {
+    if (brand?.value) {
+      merged.set(brand.value, { ...merged.get(brand.value), ...brand });
+    }
+  }
+  return DEFAULT_BRAND_OPTIONS.map((brand) => merged.get(brand.value) || brand);
+}
+
 const DEFAULT_SECTIONS = {
   summary: true,
   audience: true,
@@ -416,12 +426,11 @@ function MainPage({
   latestAutoScrapeRun,
   navigateToBrand,
 }) {
-  const brandCounts = new Map(
-    (dashboard.brands || []).map((brand) => [
-      brand.name.toLowerCase().replace(/[^a-z0-9]/g, ""),
-      brand.value,
-    ]),
-  );
+  const brandCounts = new Map();
+  for (const product of dashboard.products || []) {
+    if (!product.brand) continue;
+    brandCounts.set(product.brand, (brandCounts.get(product.brand) || 0) + 1);
+  }
   const totalProducts = dashboard.summary?.total_products || 0;
   return (
     <main>
@@ -520,8 +529,7 @@ function MainPage({
 
       <section className="brand-landing-grid" aria-label="Brand dashboards">
         {brandOptions.map((brand) => {
-          const key = brand.label.toLowerCase().replace(/[^a-z0-9]/g, "");
-          const count = brandCounts.get(key) || 0;
+          const count = brandCounts.get(brand.value) || 0;
           return (
             <button
               type="button"
@@ -735,7 +743,7 @@ function App() {
     () => buildQuery(filters, selectedPeriod),
     [filters, selectedPeriod],
   );
-  const brandOptions = options.brands?.length ? options.brands : DEFAULT_BRAND_OPTIONS;
+  const brandOptions = mergeBrandOptions(options.brands);
   const productCategories = options.categories;
   const availableShopHighlights = options.shop_highlights || [];
   const activityOptions = options.activities || [];
