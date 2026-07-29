@@ -558,14 +558,25 @@ function App() {
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
   const loadRequestRef = useRef(0);
+  const periodInitializedRef = useRef(false);
   const [scrapeMonth, setScrapeMonth] = useState(CURRENT_PERIOD.month);
   const [scrapeYear, setScrapeYear] = useState(CURRENT_PERIOD.year);
+  const [periodOptions, setPeriodOptions] = useState([]);
 
   const selectedPeriod = useMemo(
     () => ({ month: scrapeMonth, year: scrapeYear }),
     [scrapeMonth, scrapeYear],
   );
+  const availableYears = useMemo(() => {
+    if (!periodOptions.length) return SCRAPE_YEARS;
+    return [...new Set(periodOptions.map((period) => period.year))];
+  }, [periodOptions]);
   const availableMonths = useMemo(() => {
+    if (periodOptions.length) {
+      return periodOptions
+        .filter((period) => period.year === scrapeYear)
+        .map((period) => period.month);
+    }
     let months = SCRAPE_MONTHS;
     if (scrapeYear === HISTORY_START.year) {
       months = months.slice(SCRAPE_MONTHS.indexOf(HISTORY_START.month));
@@ -673,6 +684,36 @@ function App() {
     const handlePopState = () => setRoutePath(window.location.pathname);
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadAvailablePeriods() {
+      try {
+        const response = await fetch("/api/periods");
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (cancelled) return;
+        const available = (payload.available || []).sort((left, right) =>
+          String(left.key).localeCompare(String(right.key)),
+        );
+        setPeriodOptions(available);
+        if (!periodInitializedRef.current && available.length) {
+          const latest = available[available.length - 1];
+          setScrapeMonth(latest.month);
+          setScrapeYear(latest.year);
+          periodInitializedRef.current = true;
+        }
+      } catch {
+        // Keep the built-in current period when the API is not reachable.
+      }
+    }
+
+    loadAvailablePeriods();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -827,6 +868,17 @@ function App() {
   }, [maintenance?.active, query]);
 
   useEffect(() => {
+    if (periodOptions.length) {
+      const hasSelectedPeriod = periodOptions.some(
+        (period) => period.month === scrapeMonth && period.year === scrapeYear,
+      );
+      if (!hasSelectedPeriod) {
+        const latest = periodOptions[periodOptions.length - 1];
+        setScrapeMonth(latest.month);
+        setScrapeYear(latest.year);
+      }
+      return;
+    }
     if (
       scrapeYear === HISTORY_START.year &&
       SCRAPE_MONTHS.indexOf(scrapeMonth) < SCRAPE_MONTHS.indexOf(HISTORY_START.month)
@@ -840,7 +892,7 @@ function App() {
     ) {
       setScrapeMonth(CURRENT_PERIOD.month);
     }
-  }, [scrapeMonth, scrapeYear]);
+  }, [periodOptions, scrapeMonth, scrapeYear]);
 
   useEffect(() => {
     setProductPage(1);
@@ -1010,7 +1062,7 @@ function App() {
                 onChange={(event) => setScrapeYear(Number(event.target.value))}
                 disabled={scraping}
               >
-                {SCRAPE_YEARS.map((year) => (
+                {availableYears.map((year) => (
                   <option key={year} value={year}>
                     {year}
                   </option>

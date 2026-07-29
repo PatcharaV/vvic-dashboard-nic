@@ -188,6 +188,13 @@ def available_periods() -> list[dict[str, Any]]:
             }
         )
     return periods
+
+
+def load_latest_period_cache() -> dict[str, Any] | None:
+    periods = available_periods()
+    if not periods:
+        return load_cache()
+    return load_period_cache(periods[-1])
 CLOTHING_CATEGORIES = {
     "strauss": {
         "Shirts",

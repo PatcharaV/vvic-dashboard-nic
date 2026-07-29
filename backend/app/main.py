@@ -19,6 +19,7 @@ from .catalog import (
     HISTORY_START_YEAR,
     available_periods,
     load_cache,
+    load_latest_period_cache,
     load_period_cache,
     normalize_csv,
     scrape_products,
@@ -282,16 +283,24 @@ async def get_data(
             if scrape_period:
                 cached = load_period_cache(scrape_period)
                 if not cached:
-                    raise HTTPException(
-                        status_code=404,
-                        detail=(
-                            f"No cached snapshot for {scrape_period['label']}. "
-                            "Run scrape for this month first."
-                        ),
-                    )
+                    cached = load_latest_period_cache()
+                    if not cached:
+                        raise HTTPException(
+                            status_code=404,
+                            detail=(
+                                f"No cached snapshot for {scrape_period['label']} "
+                                "or any previous period. Run scrape once first."
+                            ),
+                        )
                 store[cache_key] = cached
             else:
-                store[cache_key] = load_cache() or await scrape_products()
+                cached = load_cache() or load_latest_period_cache()
+                if not cached:
+                    raise HTTPException(
+                        status_code=404,
+                        detail="No cached catalog snapshot available. Run scrape once first.",
+                    )
+                store[cache_key] = cached
     return store[cache_key]
 
 
