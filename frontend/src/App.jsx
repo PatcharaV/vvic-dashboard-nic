@@ -30,6 +30,8 @@ const DEFAULT_BRAND_OPTIONS = [
   { value: "rhone", label: "Rhone" },
   { value: "arcteryx", label: "Arc'Teryx" },
   { value: "lululemon", label: "lululemon" },
+  { value: "tommybahama", label: "Tommy Bahama" },
+  { value: "travismathew", label: "TravisMathew" },
 ];
 
 const DEFAULT_SECTIONS = {

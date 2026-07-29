@@ -9,6 +9,8 @@ from .arcteryx_scraper import scrape_arcteryx_products
 from .lululemon_scraper import scrape_lululemon_products
 from .rhone_scraper import scrape_rhone_products
 from .scraper import extract_product_functions, scrape_strauss_products
+from .tommy_bahama_scraper import scrape_tommy_bahama_products
+from .travis_mathew_scraper import scrape_travis_mathew_products
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 CACHE_PATH = DATA_DIR / "products.json"
@@ -253,6 +255,39 @@ CLOTHING_CATEGORIES = {
         "Trousers",
         "Underwear",
         "Vests",
+    },
+    "tommybahama": {
+        "Dresses",
+        "Hoodies & Sweatshirts",
+        "Jeans",
+        "Outerwear",
+        "Pants",
+        "Polos",
+        "Shirts",
+        "Shorts",
+        "Skirts",
+        "Sweaters",
+        "Swim",
+        "T-Shirts",
+        "Tanks",
+    },
+    "travismathew": {
+        "1/4 zips",
+        "Blazers",
+        "Button-Ups",
+        "Dresses",
+        "Hoodies & Pullovers",
+        "Joggers",
+        "Leggings",
+        "Outerwear",
+        "Pants",
+        "Polos",
+        "Quarter Zips",
+        "Shorts",
+        "Skorts & Skirts",
+        "Tanks",
+        "Tees",
+        "Underwear",
     },
 }
 
@@ -794,6 +829,8 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         scrape_rhone_products(),
         scrape_arcteryx_products(scrape_period=scrape_period),
         scrape_lululemon_products(),
+        scrape_tommy_bahama_products(),
+        scrape_travis_mathew_products(),
         return_exceptions=True,
     )
     brand_sources = (
@@ -801,6 +838,8 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         ("rhone", "Rhone", "https://www.rhone.com"),
         ("arcteryx", "Arc'teryx", "https://arcteryx.com/us/en"),
         ("lululemon", "lululemon", "https://shop.lululemon.com"),
+        ("tommybahama", "Tommy Bahama", "https://www.tommybahama.com"),
+        ("travismathew", "TravisMathew", "https://travismathew.com"),
     )
     results: list[dict[str, Any]] = []
     errors: list[str] = []
