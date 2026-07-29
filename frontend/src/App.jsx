@@ -54,22 +54,6 @@ const DEFAULT_SECTIONS = {
   products: true,
 };
 
-const STRAUSS_PITCH_SLIDES = [
-  "/strauss-pitch-slides/Slide1.PNG",
-  "/strauss-pitch-slides/Slide2.PNG",
-  "/strauss-pitch-slides/Slide3.PNG",
-  "/strauss-pitch-slides/Slide4.PNG",
-  "/strauss-pitch-slides/Slide5.PNG",
-  "/strauss-pitch-slides/Slide6.PNG",
-];
-
-const ARCTERYX_COTTON_SLIDES = [
-  "/arcteryx-cotton-slides/Slide1.PNG",
-  "/arcteryx-cotton-slides/Slide2.PNG",
-  "/arcteryx-cotton-slides/Slide3.PNG",
-  "/arcteryx-cotton-slides/Slide4.PNG",
-];
-
 const SCRAPE_MONTHS = [
   "JAN",
   "FEB",
@@ -170,112 +154,6 @@ function DetailList({ values, fallback = "Not specified" }) {
         <li key={value}>{value}</li>
       ))}
     </ul>
-  );
-}
-
-function SlideDeckPanel({
-  id,
-  eyebrow,
-  title,
-  downloadHref,
-  downloadLabel = "Download PPTX",
-  extraDownloads = [],
-  slides,
-  slideIndex,
-  setSlideIndex,
-  altPrefix,
-}) {
-  const currentSlide = slides[slideIndex];
-  return (
-    <section className="panel document-panel" id={id}>
-      <div className="panel-heading">
-        <div>
-          <p className="eyebrow">{eyebrow}</p>
-          <h2>{title}</h2>
-        </div>
-        <div className="document-downloads">
-          <a
-            className="export-button"
-            href={downloadHref}
-            target="_blank"
-            rel="noreferrer"
-            download
-          >
-            {downloadLabel}
-          </a>
-          {extraDownloads.map((item) => (
-            <a
-              className="secondary-link"
-              href={item.href}
-              target="_blank"
-              rel="noreferrer"
-              download
-              key={item.href}
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </div>
-      <p className="panel-help">
-        Slide preview rendered from the attached PowerPoint deck.
-      </p>
-      <div className="slide-viewer">
-        <div className="slide-toolbar">
-          <div>
-            <span className="document-type">PPTX PREVIEW</span>
-            <strong>
-              Slide {slideIndex + 1} of {slides.length}
-            </strong>
-          </div>
-          <div className="slide-actions">
-            <button
-              type="button"
-              className="secondary-link"
-              onClick={() =>
-                setSlideIndex((index) =>
-                  index === 0 ? slides.length - 1 : index - 1,
-                )
-              }
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              className="secondary-link"
-              onClick={() =>
-                setSlideIndex((index) =>
-                  index === slides.length - 1 ? 0 : index + 1,
-                )
-              }
-            >
-              Next
-            </button>
-          </div>
-        </div>
-        <div className="slide-stage">
-          <img src={currentSlide} alt={`${altPrefix} slide ${slideIndex + 1}`} />
-        </div>
-        <div className="slide-thumbnails" aria-label={`Select ${title} slide`}>
-          {slides.map((slide, index) => (
-            <button
-              type="button"
-              key={slide}
-              className={index === slideIndex ? "active" : ""}
-              onClick={() => setSlideIndex(index)}
-              aria-label={`Show slide ${index + 1}`}
-            >
-              <img
-                src={slide}
-                alt={`${altPrefix} slide ${index + 1} thumbnail`}
-                loading="lazy"
-              />
-              <span>{index + 1}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -641,8 +519,6 @@ function App() {
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
-  const [pitchSlideIndex, setPitchSlideIndex] = useState(0);
-  const [arcteryxSlideIndex, setArcteryxSlideIndex] = useState(0);
   const [scrapeMonth, setScrapeMonth] = useState(CURRENT_PERIOD.month);
   const [scrapeYear, setScrapeYear] = useState(CURRENT_PERIOD.year);
 
@@ -670,8 +546,6 @@ function App() {
   const activityOptions = options.activities || [];
   const materialKeywords = options.material_keywords || [];
   const seasonOptions = options.seasons || [];
-  const showStraussPitch = filters.brands.includes("strauss");
-  const showArcteryxDeck = filters.brands.includes("arcteryx");
   const showCategoryTreemap = filters.brands.includes("lululemon");
   const treemapRows = showCategoryTreemap
     ? dashboard.categories || []
@@ -1877,35 +1751,6 @@ function App() {
             </div>
           )}
         </section>
-      )}
-
-      {showStraussPitch && (
-        <SlideDeckPanel
-          id="strauss-pitch"
-          eyebrow="NAN YANG TEXTILE"
-          title="NAN YANG STRAUSS PITCH"
-          downloadHref="/nanyang-strauss-pitch.pptx"
-          extraDownloads={[
-            { href: "/nictrend-ss28.pdf", label: "Download Trend PDF" },
-          ]}
-          slides={STRAUSS_PITCH_SLIDES}
-          slideIndex={pitchSlideIndex}
-          setSlideIndex={setPitchSlideIndex}
-          altPrefix="NAN YANG STRAUSS PITCH"
-        />
-      )}
-
-      {showArcteryxDeck && (
-        <SlideDeckPanel
-          id="arcteryx-cotton-groups"
-          eyebrow="NAN YANG TEXTILE"
-          title="NAN YANG ARC'TERYX COTTON GROUPS"
-          downloadHref="/nanyang-arcteryx-cotton-groups.pptx"
-          slides={ARCTERYX_COTTON_SLIDES}
-          slideIndex={arcteryxSlideIndex}
-          setSlideIndex={setArcteryxSlideIndex}
-          altPrefix="NAN YANG ARC'TERYX COTTON GROUPS"
-        />
       )}
 
       <footer>
