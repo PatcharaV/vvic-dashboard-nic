@@ -287,6 +287,113 @@ h2 {
   opacity: 0.65;
 }
 
+.main-hero {
+  min-height: 170px;
+}
+
+.main-overview {
+  margin: 14px 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.main-stat-card {
+  min-height: 132px;
+  padding: 24px;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  background: #fff;
+  border: 1px solid #deddd9;
+  border-radius: 14px;
+}
+
+.main-stat-card.accent {
+  border-left: 5px solid #ef3e42;
+}
+
+.main-stat-card.dark {
+  color: #fff;
+  background: #151515;
+  border-color: #151515;
+}
+
+.main-stat-card span,
+.main-stat-card small {
+  color: #74716c;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.main-stat-card.dark span,
+.main-stat-card.dark small {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.main-stat-card strong {
+  font-family: "Oswald", Arial, sans-serif;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1;
+}
+
+.brand-landing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.brand-landing-card {
+  min-height: 210px;
+  padding: 24px;
+  display: grid;
+  align-content: space-between;
+  gap: 18px;
+  color: #151515;
+  background: #fff;
+  border: 1px solid #deddd9;
+  border-radius: 18px;
+  text-align: left;
+  box-shadow: 0 8px 28px rgba(20, 24, 32, 0.06);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.brand-landing-card:hover {
+  border-color: #ef3e42;
+  box-shadow: 0 16px 36px rgba(20, 24, 32, 0.1);
+  transform: translateY(-2px);
+}
+
+.brand-landing-card strong {
+  font-family: "Oswald", Arial, sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.brand-landing-card small {
+  color: #74716c;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.brand-card-action {
+  width: max-content;
+  padding: 9px 12px;
+  color: #fff;
+  background: #151515;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.home-link {
+  min-height: 40px;
+}
+
 .brand-switcher {
   margin-top: 10px;
   padding: 14px 16px;
@@ -1314,6 +1421,11 @@ footer a {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .main-overview,
+  .brand-landing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -1400,6 +1512,15 @@ footer a {
   .header-actions {
     margin-left: 0;
     flex-direction: column;
+  }
+
+  .main-overview,
+  .brand-landing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-landing-card {
+    min-height: 170px;
   }
 
   .primary-button {

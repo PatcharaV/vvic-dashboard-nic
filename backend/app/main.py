@@ -8,6 +8,7 @@ from zoneinfo import ZoneInfo
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from .analytics import build_dashboard, build_options, filter_products
@@ -573,4 +574,26 @@ async def scrape(
 
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 if FRONTEND_DIST.exists():
-    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
+    app.mount(
+        "/assets",
+        StaticFiles(directory=FRONTEND_DIST / "assets"),
+        name="assets",
+    )
+    for static_name in (
+        "strauss-pitch-slides",
+        "arcteryx-cotton-slides",
+    ):
+        static_dir = FRONTEND_DIST / static_name
+        if static_dir.exists():
+            app.mount(
+                f"/{static_name}",
+                StaticFiles(directory=static_dir),
+                name=static_name,
+            )
+
+    @app.get("/{full_path:path}")
+    async def frontend_app(full_path: str) -> FileResponse:
+        requested = FRONTEND_DIST / full_path
+        if requested.exists() and requested.is_file():
+            return FileResponse(requested)
+        return FileResponse(FRONTEND_DIST / "index.html")

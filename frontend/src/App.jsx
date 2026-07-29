@@ -34,6 +34,8 @@ const DEFAULT_BRAND_OPTIONS = [
   { value: "travismathew", label: "TravisMathew" },
 ];
 
+const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
+
 const DEFAULT_SECTIONS = {
   summary: true,
   audience: true,
@@ -366,6 +368,179 @@ function buildQuery(filters, period) {
   return params.toString();
 }
 
+function getBrandFromPath(pathname = window.location.pathname) {
+  const match = pathname.match(/^\/brand\/([^/]+)/);
+  if (!match) return null;
+  const brand = decodeURIComponent(match[1]).toLowerCase();
+  return BRAND_ROUTES.has(brand) ? brand : null;
+}
+
+function brandPath(brand) {
+  return `/brand/${brand}`;
+}
+
+function MaintenanceOverlay({ maintenance }) {
+  if (!maintenance?.active) return null;
+  return (
+    <section className="maintenance-screen" role="status" aria-live="polite">
+      <div className="maintenance-card">
+        <p className="eyebrow">MONTHLY CATALOG UPDATE</p>
+        <h1>Dashboard temporarily closed for maintenance</h1>
+        <p>
+          We are scraping and validating this month&apos;s product catalog. The
+          dashboard is scheduled to reopen after 09:00 Bangkok time.
+        </p>
+        <div className="maintenance-meta">
+          <span>Window: 08:00-09:00</span>
+          <span>Timezone: Asia/Bangkok</span>
+          {maintenance.latest_run?.status && (
+            <span>Status: {maintenance.latest_run.status}</span>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MainPage({
+  dashboard,
+  brandOptions,
+  maintenance,
+  message,
+  scrapeMonth,
+  scrapeYear,
+  setScrapeMonth,
+  setScrapeYear,
+  availableMonths,
+  scraping,
+  latestAutoScrapeRun,
+  navigateToBrand,
+}) {
+  const brandCounts = new Map(
+    (dashboard.brands || []).map((brand) => [
+      brand.name.toLowerCase().replace(/[^a-z0-9]/g, ""),
+      brand.value,
+    ]),
+  );
+  const totalProducts = dashboard.summary?.total_products || 0;
+  return (
+    <main>
+      <MaintenanceOverlay maintenance={maintenance} />
+      <header className="topbar main-hero">
+        <div className="brand-block">
+          <div className="brand-mark">N</div>
+          <div>
+            <p className="eyebrow">NAN YANG TEXTILE</p>
+            <h1>NIC DASHBOARD</h1>
+            <p className="page-description">
+              Select a brand dashboard, review monthly catalog snapshots, and
+              track product movement from one place.
+            </p>
+          </div>
+        </div>
+        <div className="header-actions">
+          <div className="status">
+            <span
+              className={
+                maintenance?.active
+                  ? "dot maintenance"
+                  : message.startsWith("Live")
+                    ? "dot live"
+                    : "dot"
+              }
+            />
+            <div>
+              <strong>
+                {maintenance?.active ? "Monthly maintenance in progress" : message}
+              </strong>
+              <small>Updated {formatDate(dashboard.scraped_at)}</small>
+              {dashboard.scrape_period?.label && (
+                <small>Scrape period {dashboard.scrape_period.label}</small>
+              )}
+              {latestAutoScrapeRun && (
+                <small>
+                  Auto scrape {latestAutoScrapeRun.status}{" "}
+                  {formatDate(latestAutoScrapeRun.completed_at)} -{" "}
+                  {formatNumber.format(latestAutoScrapeRun.product_count || 0)} products
+                </small>
+              )}
+            </div>
+          </div>
+          <div className="scrape-scheduler" aria-label="Select scrape period">
+            <label>
+              Month
+              <select
+                value={scrapeMonth}
+                onChange={(event) => setScrapeMonth(event.target.value)}
+                disabled={scraping}
+              >
+                {availableMonths.map((month) => (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Year
+              <select
+                value={scrapeYear}
+                onChange={(event) => setScrapeYear(Number(event.target.value))}
+                disabled={scraping}
+              >
+                {SCRAPE_YEARS.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <small>View saved monthly snapshots from JUN 2026 onward.</small>
+          </div>
+        </div>
+      </header>
+
+      <section className="main-overview">
+        <article className="main-stat-card accent">
+          <span>Total products</span>
+          <strong>{formatNumber.format(totalProducts)}</strong>
+          <small>Across the selected month</small>
+        </article>
+        <article className="main-stat-card">
+          <span>Brands</span>
+          <strong>{formatNumber.format(brandOptions.length)}</strong>
+          <small>Available dashboard sections</small>
+        </article>
+        <article className="main-stat-card dark">
+          <span>Current period</span>
+          <strong>{dashboard.scrape_period?.label || `${scrapeMonth} ${scrapeYear}`}</strong>
+          <small>Monthly snapshot view</small>
+        </article>
+      </section>
+
+      <section className="brand-landing-grid" aria-label="Brand dashboards">
+        {brandOptions.map((brand) => {
+          const key = brand.label.toLowerCase().replace(/[^a-z0-9]/g, "");
+          const count = brandCounts.get(key) || 0;
+          return (
+            <button
+              type="button"
+              className="brand-landing-card"
+              key={brand.value}
+              onClick={() => navigateToBrand(brand.value)}
+            >
+              <span className="filter-title">Brand dashboard</span>
+              <strong>{brand.label}</strong>
+              <small>{formatNumber.format(count)} products in this period</small>
+              <span className="brand-card-action">Open dashboard</span>
+            </button>
+          );
+        })}
+      </section>
+    </main>
+  );
+}
+
 function DonutChart({
   data,
   centerLabel,
@@ -508,11 +683,13 @@ function FilterGroup({ title, options, selected, onChange }) {
 }
 
 function App() {
+  const [routePath, setRoutePath] = useState(window.location.pathname);
+  const routeBrand = getBrandFromPath(routePath);
   const [options, setOptions] = useState(demoOptions);
   const [dashboard, setDashboard] = useState(demoDashboard);
   const [filters, setFilters] = useState({
     search: "",
-    brands: ["strauss"],
+    brands: routeBrand ? [routeBrand] : [],
     audiences: [],
     collections: [],
     activities: [],
@@ -643,6 +820,47 @@ function App() {
     )[0];
   }, [autoScrapeRuns]);
 
+  useEffect(() => {
+    const handlePopState = () => setRoutePath(window.location.pathname);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  useEffect(() => {
+    setFilters((current) => ({
+      ...current,
+      brands: routeBrand ? [routeBrand] : [],
+      audiences: [],
+      collections: [],
+      activities: [],
+      categories: [],
+      subcategories: [],
+      color: "",
+      minPrice: "",
+      maxPrice: "",
+      availability: "all",
+      shopHighlight: "all",
+      material: "all",
+      season: "all",
+    }));
+  }, [routeBrand]);
+
+  function navigateTo(path) {
+    if (window.location.pathname !== path) {
+      window.history.pushState({}, "", path);
+    }
+    setRoutePath(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function navigateToBrand(brand) {
+    navigateTo(brandPath(brand));
+  }
+
+  function navigateHome() {
+    navigateTo("/");
+  }
+
   async function loadDashboard() {
     setLoading(true);
     try {
@@ -669,9 +887,15 @@ function App() {
       if (!optionsResponse.ok || !dashboardResponse.ok) {
         throw new Error("API response was not successful");
       }
-      setOptions(await optionsResponse.json());
-      setDashboard(await dashboardResponse.json());
-      setMessage(`Live data from ${brandOptions.map((brand) => brand.label).join(", ")}`);
+      const nextOptions = await optionsResponse.json();
+      const nextDashboard = await dashboardResponse.json();
+      const selectedBrands = new Set(filters.brands);
+      const visibleBrandLabels = (nextOptions.brands || DEFAULT_BRAND_OPTIONS)
+        .filter((brand) => !selectedBrands.size || selectedBrands.has(brand.value))
+        .map((brand) => brand.label);
+      setOptions(nextOptions);
+      setDashboard(nextDashboard);
+      setMessage(`Live data from ${visibleBrandLabels.join(", ")}`);
     } catch {
       setMessage("Demo preview: start the Python API for live data");
     } finally {
@@ -770,22 +994,29 @@ function App() {
   }
 
   function selectBrand(brand) {
-    setFilters({
-      ...filters,
-      brands: [brand],
-      audiences: [],
-      collections: [],
-      activities: [],
-      categories: [],
-      subcategories: [],
-      color: "",
-      minPrice: "",
-      maxPrice: "",
-      availability: "all",
-      shopHighlight: "all",
-      material: "all",
-      season: "all",
-    });
+    navigateToBrand(brand);
+  }
+
+  if (!routeBrand) {
+    return (
+      <>
+        <MainPage
+          dashboard={dashboard}
+          brandOptions={brandOptions}
+          maintenance={maintenance}
+          message={message}
+          scrapeMonth={scrapeMonth}
+          scrapeYear={scrapeYear}
+          setScrapeMonth={setScrapeMonth}
+          setScrapeYear={setScrapeYear}
+          availableMonths={availableMonths}
+          scraping={scraping}
+          latestAutoScrapeRun={latestAutoScrapeRun}
+          navigateToBrand={navigateToBrand}
+        />
+        <div className={loading ? "loading-bar active" : "loading-bar"} />
+      </>
+    );
   }
 
   function toggleCategory(category) {
@@ -829,38 +1060,24 @@ function App() {
 
   return (
     <main>
-      {maintenance?.active && (
-        <section className="maintenance-screen" role="status" aria-live="polite">
-          <div className="maintenance-card">
-            <p className="eyebrow">MONTHLY CATALOG UPDATE</p>
-            <h1>Dashboard temporarily closed for maintenance</h1>
-            <p>
-              We are scraping and validating this month&apos;s product catalog.
-              The dashboard is scheduled to reopen after 09:00 Bangkok time.
-            </p>
-            <div className="maintenance-meta">
-              <span>Window: 08:00-09:00</span>
-              <span>Timezone: Asia/Bangkok</span>
-              {maintenance.latest_run?.status && (
-                <span>Status: {maintenance.latest_run.status}</span>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
+      <MaintenanceOverlay maintenance={maintenance} />
       <header className="topbar">
         <div className="brand-block">
           <div className="brand-mark">M</div>
           <div>
             <p className="eyebrow">PUBLIC CLOTHING CATALOG ANALYTICS</p>
-            <h1>Multi-Brand Clothing Dashboard</h1>
+            <h1>
+              {brandOptions.find((brand) => brand.value === routeBrand)?.label || "Brand"} Dashboard
+            </h1>
             <p className="page-description">
-              Compare clothing from Strauss, Rhone and Arc&apos;teryx. Footwear and
-              gear are excluded.
+              Monthly product analytics for the selected public clothing catalog.
             </p>
           </div>
         </div>
         <div className="header-actions">
+          <button className="secondary-link home-link" type="button" onClick={navigateHome}>
+            Main page
+          </button>
           <div className="status">
             <span
               className={
@@ -882,7 +1099,7 @@ function App() {
               {latestAutoScrapeRun && (
                 <small>
                   Auto scrape {latestAutoScrapeRun.status}{" "}
-                  {formatDate(latestAutoScrapeRun.completed_at)} ·{" "}
+                  {formatDate(latestAutoScrapeRun.completed_at)} -{" "}
                   {formatNumber.format(latestAutoScrapeRun.product_count || 0)} products
                 </small>
               )}
