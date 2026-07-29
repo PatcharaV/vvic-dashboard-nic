@@ -530,6 +530,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [scraping, setScraping] = useState(false);
   const [message, setMessage] = useState("Connecting to Python API...");
+  const [autoScrapeRuns, setAutoScrapeRuns] = useState({});
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
@@ -631,13 +632,23 @@ function App() {
     (currentProductPage - 1) * productsPerPage,
     currentProductPage * productsPerPage,
   );
+  const latestAutoScrapeRun = useMemo(() => {
+    const runs = Object.values(autoScrapeRuns || {});
+    if (!runs.length) return null;
+    return runs.sort((left, right) =>
+      String(right.completed_at || right.scheduled_for || "").localeCompare(
+        String(left.completed_at || left.scheduled_for || ""),
+      ),
+    )[0];
+  }, [autoScrapeRuns]);
 
   async function loadDashboard() {
     setLoading(true);
     try {
-      const [optionsResponse, dashboardResponse] = await Promise.all([
+      const [optionsResponse, dashboardResponse, healthResponse] = await Promise.all([
         fetch(`/api/options${query ? `?${query}` : ""}`),
         fetch(`/api/dashboard${query ? `?${query}` : ""}`),
+        fetch("/api/health").catch(() => null),
       ]);
       if (optionsResponse.status === 404 || dashboardResponse.status === 404) {
         setDashboard(emptyDashboardForPeriod(scrapeMonth, scrapeYear));
@@ -649,6 +660,10 @@ function App() {
       }
       setOptions(await optionsResponse.json());
       setDashboard(await dashboardResponse.json());
+      if (healthResponse?.ok) {
+        const health = await healthResponse.json();
+        setAutoScrapeRuns(health.auto_scrape_runs || {});
+      }
       setMessage(`Live data from ${brandOptions.map((brand) => brand.label).join(", ")}`);
     } catch {
       setMessage("Demo preview: start the Python API for live data");
@@ -808,6 +823,13 @@ function App() {
               <small>Updated {formatDate(dashboard.scraped_at)}</small>
               {dashboard.scrape_period?.label && (
                 <small>Scrape period {dashboard.scrape_period.label}</small>
+              )}
+              {latestAutoScrapeRun && (
+                <small>
+                  Auto scrape {latestAutoScrapeRun.status}{" "}
+                  {formatDate(latestAutoScrapeRun.completed_at)} ·{" "}
+                  {formatNumber.format(latestAutoScrapeRun.product_count || 0)} products
+                </small>
               )}
             </div>
           </div>
