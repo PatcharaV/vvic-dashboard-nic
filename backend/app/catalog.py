@@ -358,7 +358,7 @@ def _clothing_products(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 ],
             }
         )
-    return clothing
+    return _enrich_brand_detail_fields(clothing)
 
 
 def _season_text(product: dict[str, Any]) -> str:
@@ -563,6 +563,135 @@ def _dedupe_strings(values: Any) -> list[str]:
     return deduped
 
 
+def _infer_tommy_bahama_material(product: dict[str, Any]) -> list[str]:
+    text = " ".join(
+        [
+            str(product.get("title") or ""),
+            str(product.get("description") or ""),
+            str(product.get("handle") or ""),
+            " ".join(product.get("collections") or []),
+        ]
+    ).lower()
+    materials: list[str] = []
+    for pattern, label in (
+        (r"\bsilk\b", "Silk"),
+        (r"\blinen\b|two palms", "Linen"),
+        (r"\bcotton\b", "Cotton"),
+        (r"\bdenim\b|jean", "Cotton denim"),
+        (r"\bmodal\b", "Modal"),
+        (r"\brayon\b|viscose", "Rayon / Viscose"),
+        (r"\bpolyester\b|swim|rash guard|islandzone", "Polyester performance fabric"),
+        (r"\bspandex\b|stretch|boracay", "Stretch blend"),
+    ):
+        if re.search(pattern, text, re.I) and label not in materials:
+            materials.append(label)
+    return materials
+
+
+def _infer_travis_mathew_material(product: dict[str, Any]) -> list[str]:
+    text = " ".join(
+        [
+            str(product.get("title") or ""),
+            str(product.get("description") or ""),
+            str(product.get("handle") or ""),
+            " ".join(product.get("collections") or []),
+            " ".join(product.get("tags") or []),
+        ]
+    ).lower()
+    materials: list[str] = []
+    for pattern, label in (
+        (r"\b100%\s*organic cotton\b", "100% Organic cotton"),
+        (r"\b100%\s*cotton\b", "100% Cotton"),
+        (r"\bcotton\b", "Cotton blend"),
+        (r"\bpolyester\b", "Polyester blend"),
+        (r"\bspandex\b|elastane\b|stretch|open to close", "Stretch blend"),
+        (r"\bmesh\b", "Mesh fabric"),
+        (r"\bcloud waffle\b", "Cloud Waffle fabric"),
+        (r"\bcloud\b", "Cloud fabric"),
+        (r"\bmoveknit\b|active collection|active top|active bottom", "MoveKnit / active performance fabric"),
+        (r"\bheater\b", "Heater performance fabric"),
+        (r"\btour guide\b", "Tour Guide performance fabric"),
+        (r"\bskyloft\b", "Skyloft soft fabric"),
+    ):
+        if re.search(pattern, text, re.I) and label not in materials:
+            materials.append(label)
+    return materials
+
+
+def _infer_brand_innovations(product: dict[str, Any]) -> list[str]:
+    text = " ".join(
+        [
+            str(product.get("title") or ""),
+            str(product.get("description") or ""),
+            str(product.get("material") or ""),
+            " ".join(product.get("material_details") or []),
+            " ".join(product.get("collections") or []),
+            " ".join(product.get("tags") or []),
+            " ".join(product.get("product_functions") or []),
+        ]
+    ).lower()
+    innovations: list[str] = []
+    for pattern, label in (
+        (r"\bislandzone\b|cool|breathable|ventilat", "Breathable / cooling comfort"),
+        (r"\bstretch\b|spandex|elastane|open to close|boracay", "Stretch comfort"),
+        (r"\bquick[- ]?dry|dries quickly|moisture[- ]?wick|wicking", "Quick-dry / moisture-wicking"),
+        (r"\bupf|sun protection|rash guard", "Sun protection"),
+        (r"\blightweight\b|skyloft", "Lightweight comfort"),
+        (r"\bwrinkle\b|travel\b", "Travel-ready wrinkle resistance"),
+        (r"\bwaterproof|water[- ]?repellent|water resistant", "Water protection"),
+        (r"\binsulat|thermal|heater", "Warmth / thermal comfort"),
+        (r"\bcloud\b|cloud waffle", "Soft handfeel"),
+        (r"\bmoveknit|active collection|active top|active bottom", "Active performance"),
+        (r"\btour guide\b", "Golf performance fabric"),
+    ):
+        if re.search(pattern, text, re.I) and label not in innovations:
+            innovations.append(label)
+    return innovations
+
+
+def _enrich_brand_detail_fields(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    enriched: list[dict[str, Any]] = []
+    for product in products:
+        brand = product.get("brand")
+        if brand not in {"tommybahama", "travismathew"}:
+            enriched.append(product)
+            continue
+
+        material_details = _dedupe_strings(product.get("material_details") or [])
+        if not material_details:
+            material_details = (
+                _infer_tommy_bahama_material(product)
+                if brand == "tommybahama"
+                else _infer_travis_mathew_material(product)
+            )
+        material = " | ".join(material_details) or str(product.get("material") or "")
+        product_functions = product.get("product_functions") or extract_product_functions(
+            product.get("title", ""),
+            product.get("description", ""),
+            product.get("tags", []),
+            material,
+        )
+        innovation_input = {
+            **product,
+            "material": material,
+            "material_details": material_details,
+            "product_functions": product_functions,
+        }
+        innovations = _dedupe_strings(
+            [*(product.get("innovations") or []), *_infer_brand_innovations(innovation_input)]
+        )
+        enriched.append(
+            {
+                **product,
+                "material": material,
+                "material_details": material_details,
+                "product_functions": product_functions,
+                "innovations": innovations,
+            }
+        )
+    return enriched
+
+
 def _lululemon_product_id_from_url(url: str) -> str:
     match = re.search(r"/_/([^/?#]+)", str(url))
     return match.group(1) if match else ""
@@ -732,6 +861,7 @@ def _merge_cached_detail_fields(
         "technical_features",
         "fabric_treatment",
         "construction",
+        "innovations",
         "product_functions",
         "season_code",
         "season_year",

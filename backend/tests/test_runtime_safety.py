@@ -5,6 +5,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from app import main
+from app.catalog import _clothing_products
 
 
 class RuntimeSafetyTests(unittest.TestCase):
@@ -89,3 +90,47 @@ class RuntimeSafetyTests(unittest.TestCase):
         self.assertFalse(ended["scheduled"])
         self.assertFalse(ended["active"])
         self.assertIn("08:30", ended["message"])
+
+    def test_tommy_bahama_cached_products_get_detail_enrichment(self):
+        products = _clothing_products(
+            [
+                {
+                    "id": "tommybahama:test",
+                    "brand": "tommybahama",
+                    "brand_label": "Tommy Bahama",
+                    "title": "Abby Eyelet Half Zip IslandZone Dress",
+                    "category": "Dresses",
+                    "categories": ["Dresses"],
+                    "collections": ["IslandZone"],
+                    "description": "",
+                    "tags": [],
+                    "material": "",
+                    "material_details": [],
+                }
+            ]
+        )
+
+        self.assertIn("Polyester performance fabric", products[0]["material_details"])
+        self.assertIn("Breathable / cooling comfort", products[0]["innovations"])
+
+    def test_travismathew_cached_products_get_detail_enrichment(self):
+        products = _clothing_products(
+            [
+                {
+                    "id": "travismathew:test",
+                    "brand": "travismathew",
+                    "brand_label": "TravisMathew",
+                    "title": "AB Energy Polo",
+                    "category": "Polos",
+                    "categories": ["Polos"],
+                    "collections": [],
+                    "description": "Our exclusive Tour Guide fabric stays cool when the pace picks up.",
+                    "tags": [],
+                    "material": "",
+                    "material_details": [],
+                }
+            ]
+        )
+
+        self.assertIn("Tour Guide performance fabric", products[0]["material_details"])
+        self.assertIn("Golf performance fabric", products[0]["innovations"])
