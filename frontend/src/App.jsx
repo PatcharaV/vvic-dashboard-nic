@@ -419,22 +419,12 @@ function MaintenanceOverlay({ maintenance }) {
 }
 
 function MainPage({
-  dashboard,
   brandOptions,
   maintenance,
-  message,
-  scrapeMonth,
-  scrapeYear,
-  setScrapeMonth,
-  setScrapeYear,
-  availableMonths,
-  scraping,
-  latestAutoScrapeRun,
   navigateToBrand,
 }) {
-  const totalProducts = dashboard.summary?.total_products || 0;
   return (
-    <main>
+    <main className="landing-page">
       <MaintenanceOverlay maintenance={maintenance} />
       <header className="topbar main-hero">
         <div className="brand-block">
@@ -443,91 +433,21 @@ function MainPage({
             <p className="eyebrow">NAN YANG TEXTILE</p>
             <h1>NIC DASHBOARD</h1>
             <p className="page-description">
-              Select a brand dashboard, review monthly catalog snapshots, and
-              track product movement from one place.
+              Choose a brand workspace to review public catalog movement,
+              monthly snapshots, and product details.
             </p>
           </div>
         </div>
-        <div className="header-actions">
-          <div className="status">
-            <span
-              className={
-                maintenance?.active
-                  ? "dot maintenance"
-                  : message.startsWith("Live")
-                    ? "dot live"
-                    : "dot"
-              }
-            />
-            <div>
-              <strong>
-                {maintenance?.active ? "Monthly maintenance in progress" : message}
-              </strong>
-              <small>Updated {formatDate(dashboard.scraped_at)}</small>
-              {dashboard.scrape_period?.label && (
-                <small>Scrape period {dashboard.scrape_period.label}</small>
-              )}
-              {latestAutoScrapeRun && (
-                <small>
-                  Auto scrape {latestAutoScrapeRun.status}{" "}
-                  {formatDate(latestAutoScrapeRun.completed_at)} -{" "}
-                  {formatNumber.format(latestAutoScrapeRun.product_count || 0)} products
-                </small>
-              )}
-            </div>
-          </div>
-          <div className="scrape-scheduler" aria-label="Select scrape period">
-            <label>
-              Month
-              <select
-                value={scrapeMonth}
-                onChange={(event) => setScrapeMonth(event.target.value)}
-                disabled={scraping}
-              >
-                {availableMonths.map((month) => (
-                  <option key={month} value={month}>
-                    {month}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Year
-              <select
-                value={scrapeYear}
-                onChange={(event) => setScrapeYear(Number(event.target.value))}
-                disabled={scraping}
-              >
-                {SCRAPE_YEARS.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <small>View saved monthly snapshots from JUN 2026 onward.</small>
-          </div>
+        <div className="landing-hero-note">
+          <span>{brandOptions.length} brand workspaces</span>
+          <span>Monthly catalog archive</span>
         </div>
       </header>
 
-      <section className="main-overview">
-        <article className="main-stat-card accent">
-          <span>Total products</span>
-          <strong>{formatNumber.format(totalProducts)}</strong>
-          <small>Across the selected month</small>
-        </article>
-        <article className="main-stat-card">
-          <span>Brands</span>
-          <strong>{formatNumber.format(brandOptions.length)}</strong>
-          <small>Available dashboard sections</small>
-        </article>
-        <article className="main-stat-card dark">
-          <span>Current period</span>
-          <strong>{dashboard.scrape_period?.label || `${scrapeMonth} ${scrapeYear}`}</strong>
-          <small>Monthly snapshot view</small>
-        </article>
-      </section>
-
+      <div className="landing-section-heading">
+        <p className="eyebrow">AVAILABLE BRANDS</p>
+        <h2>Select dashboard</h2>
+      </div>
       <section className="brand-landing-grid" aria-label="Brand dashboards">
         {brandOptions.map((brand) => {
           return (
@@ -537,9 +457,11 @@ function MainPage({
               key={brand.value}
               onClick={() => navigateToBrand(brand.value)}
             >
-              <span className="filter-title">Brand dashboard</span>
+              <span className="brand-card-index">
+                {String(brandOptions.findIndex((item) => item.value === brand.value) + 1).padStart(2, "0")}
+              </span>
               <strong>{brand.label}</strong>
-              <span className="brand-card-action">Open dashboard</span>
+              <span className="brand-card-action">Open workspace</span>
             </button>
           );
         })}
@@ -713,7 +635,7 @@ function App() {
   const sections = DEFAULT_SECTIONS;
   const [loading, setLoading] = useState(true);
   const [scraping, setScraping] = useState(false);
-  const [message, setMessage] = useState("Connecting to Python API...");
+  const [message, setMessage] = useState("Loading dashboard data...");
   const [autoScrapeRuns, setAutoScrapeRuns] = useState({});
   const [maintenance, setMaintenance] = useState(null);
   const [filtersOpen, setFiltersOpen] = useState(true);
@@ -1024,17 +946,8 @@ function App() {
     return (
       <>
         <MainPage
-          dashboard={dashboard}
           brandOptions={brandOptions}
           maintenance={maintenance}
-          message={message}
-          scrapeMonth={scrapeMonth}
-          scrapeYear={scrapeYear}
-          setScrapeMonth={setScrapeMonth}
-          setScrapeYear={setScrapeYear}
-          availableMonths={availableMonths}
-          scraping={scraping}
-          latestAutoScrapeRun={latestAutoScrapeRun}
           navigateToBrand={navigateToBrand}
         />
         <div className={loading ? "loading-bar active" : "loading-bar"} />
