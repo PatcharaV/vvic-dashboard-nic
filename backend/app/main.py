@@ -309,9 +309,22 @@ async def monthly_auto_scrape_loop() -> None:
         await asyncio.sleep(60)
 
 
+def preload_latest_snapshot() -> None:
+    if store:
+        return
+    cached = load_latest_period_cache() or load_cache()
+    if not cached:
+        return
+    store["data"] = cached
+    label = cached.get("scrape_period", {}).get("label")
+    if label:
+        store[f"data:{label}"] = cached
+
+
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     global auto_scrape_task
+    preload_latest_snapshot()
     auto_scrape_task = asyncio.create_task(monthly_auto_scrape_loop())
     try:
         yield
