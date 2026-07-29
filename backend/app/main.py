@@ -49,14 +49,7 @@ AUTO_SCRAPE_RUNS_PATH = CACHE_PATH.parent / "auto_scrape_runs.json"
 MONTHLY_AUTO_STATUS_PATH = CACHE_PATH.parent / "monthly_auto_scrape_status.json"
 MAINTENANCE_START = time(8, 0)
 MAINTENANCE_END = time(9, 0)
-ONE_TIME_AUTO_SCRAPES = [
-    {
-        "key": "test-all-brands-2026-07-29-1140-bkk",
-        "run_at": datetime(2026, 7, 29, 11, 40, tzinfo=LOCAL_TZ),
-        "period": {"month": "JUL", "year": 2026},
-        "description": "One-time all-brand auto scrape test requested for 29 Jul 2026 11:40 Bangkok time.",
-    }
-]
+ONE_TIME_AUTO_SCRAPES: list[dict[str, Any]] = []
 
 
 def make_scrape_period(month: str | None, year: int | None) -> dict[str, Any] | None:
