@@ -29,13 +29,13 @@
     }
   },
   "new": {
-    "product_count": 316,
-    "available_count": 316,
+    "product_count": 317,
+    "available_count": 317,
     "category_counts": {
       "Base Layer": 6,
       "Collection Only": 96,
       "Fleece": 26,
-      "Insulated Jackets": 34,
+      "Insulated Jackets": 35,
       "Pants": 36,
       "Shell Jackets": 56,
       "Shirts and Tops": 48,
@@ -44,12 +44,12 @@
     },
     "audience_counts": {
       "men": 158,
-      "women": 159
+      "women": 160
     },
     "missing": {
       "image": 0,
       "color": 0,
-      "material": 9,
+      "material": 10,
       "price": 0
     }
   }

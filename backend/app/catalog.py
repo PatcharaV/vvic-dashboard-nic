@@ -53,21 +53,6 @@ MONTH_CODES = [
 ]
 HISTORY_START_YEAR = 2026
 HISTORY_START_MONTH = 6
-PERIOD_SEASON_MONTHS = {
-    "JAN": "S",
-    "FEB": "S",
-    "MAR": "S",
-    "APR": "S",
-    "MAY": "S",
-    "JUN": "S",
-    "JUL": "F",
-    "AUG": "F",
-    "SEP": "F",
-    "OCT": "F",
-    "NOV": "F",
-    "DEC": "F",
-}
-
 SEASON_LABELS = {
     "spring_summer": "Spring / Summer",
     "fall_winter": "Fall / Winter",
@@ -500,31 +485,12 @@ def _apply_season_classification(products: list[dict[str, Any]]) -> list[dict[st
     return classified
 
 
-def _period_season_code(scrape_period: dict[str, Any] | None) -> str:
-    if not scrape_period:
-        return ""
-    month = str(scrape_period.get("month", "")).upper()
-    year = scrape_period.get("year")
-    if month not in PERIOD_SEASON_MONTHS or not year:
-        return ""
-    return f"{PERIOD_SEASON_MONTHS[month]}{int(year) % 100:02d}"
-
-
 def _filter_period_products(
     products: list[dict[str, Any]],
     brand: str,
     scrape_period: dict[str, Any] | None,
 ) -> list[dict[str, Any]]:
-    if brand != "arcteryx":
-        return products
-    season_code = _period_season_code(scrape_period)
-    if not season_code:
-        return products
-    return [
-        product
-        for product in products
-        if product.get("season_code") == season_code
-    ]
+    return products
 
 
 def _normalize_strauss_categories(product: dict[str, Any]) -> dict[str, Any]:
