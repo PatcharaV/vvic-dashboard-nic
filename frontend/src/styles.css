@@ -371,7 +371,7 @@ h2 {
 
 .brand-landing-card {
   position: relative;
-  min-height: 210px;
+  min-height: 214px;
   padding: 26px;
   display: grid;
   align-content: stretch;
@@ -379,8 +379,8 @@ h2 {
   overflow: hidden;
   color: #151515;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 255, 255, 0.97) 48%, rgba(255, 255, 255, 0.74) 72%, rgba(255, 255, 255, 0.5) 100%),
-    radial-gradient(circle at 92% 50%, rgba(20, 24, 32, 0.06), transparent 9.5rem),
+    linear-gradient(115deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.98) 50%, rgba(248, 250, 252, 0.82) 51%, rgba(241, 244, 247, 0.92) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.96) 54%, rgba(255, 255, 255, 0.58) 100%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 248, 248, 0.94)),
     #fff;
   border: 1px solid #deddd9;
@@ -398,10 +398,26 @@ h2 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 92% 12%, rgba(239, 62, 66, 0.14), transparent 9rem),
-    linear-gradient(180deg, transparent, rgba(16, 24, 32, 0.03));
-  opacity: 0;
+    linear-gradient(90deg, transparent 0%, transparent 56%, rgba(255, 255, 255, 0.38) 56.2%, transparent 57%),
+    linear-gradient(135deg, transparent 0%, transparent 70%, rgba(239, 62, 66, 0.16) 70.2%, transparent 72%),
+    radial-gradient(ellipse at 88% 50%, rgba(239, 62, 66, 0.1), transparent 54%);
+  opacity: 0.68;
   transition: opacity 0.18s ease;
+}
+
+.brand-landing-card::after {
+  content: "";
+  position: absolute;
+  inset: 16px 14px 16px auto;
+  z-index: 0;
+  width: 40%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.16)),
+    repeating-linear-gradient(90deg, rgba(16, 24, 32, 0.045) 0 1px, transparent 1px 13px);
+  border-left: 1px solid rgba(239, 62, 66, 0.14);
+  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  opacity: 0.72;
+  pointer-events: none;
 }
 
 .brand-landing-card:hover {
@@ -411,7 +427,7 @@ h2 {
 }
 
 .brand-landing-card:hover::before {
-  opacity: 1;
+  opacity: 0.95;
 }
 
 .brand-landing-card > * {
@@ -430,9 +446,11 @@ h2 {
   display: grid;
   align-items: end;
   min-height: 124px;
+  z-index: 2;
 }
 
 .brand-card-copy {
+  width: min(100%, 62%);
   min-width: 0;
   display: grid;
   gap: 22px;
@@ -452,6 +470,7 @@ h2 {
   border-radius: 999px;
   font-size: 11px;
   font-weight: 900;
+  z-index: 2;
 }
 
 .brand-card-logo {
@@ -510,11 +529,11 @@ h2 {
 
 .brand-hero-logo {
   position: absolute;
-  right: 0;
+  right: 18px;
   top: 50%;
-  z-index: 0;
-  width: clamp(148px, 36%, 210px);
-  height: 150px;
+  z-index: 1;
+  width: clamp(126px, 30%, 174px);
+  height: 132px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -524,11 +543,12 @@ h2 {
   background: transparent;
   border: 0;
   border-radius: 0;
-  opacity: 0.11;
-  filter: grayscale(1) saturate(0.15);
+  opacity: 0.18;
+  filter: grayscale(1) saturate(0.2) contrast(1.05);
   pointer-events: none;
   box-shadow: none;
   transform: translateY(-50%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 20%, #000 100%);
 }
 
 .brand-hero-logo-image {
@@ -635,50 +655,55 @@ h2 {
 }
 
 .brand-logo-rhone.brand-hero-logo {
-  width: clamp(178px, 42%, 250px);
-  right: 2px;
-  opacity: 0.12;
+  width: clamp(150px, 35%, 206px);
+  right: 20px;
+  opacity: 0.18;
 }
 
 .brand-logo-arcteryx.brand-hero-logo,
 .brand-logo-travismathew.brand-hero-logo {
-  width: clamp(190px, 46%, 270px);
-  right: -8px;
-  opacity: 0.11;
+  width: clamp(156px, 37%, 218px);
+  right: 16px;
+  opacity: 0.17;
 }
 
 .brand-logo-lululemon.brand-hero-logo {
-  width: clamp(136px, 34%, 196px);
-  right: 20px;
-  opacity: 0.1;
+  width: clamp(124px, 30%, 170px);
+  right: 28px;
+  opacity: 0.16;
 }
 
 .brand-logo-tommybahama.brand-hero-logo {
-  width: clamp(214px, 50%, 300px);
-  right: -18px;
-  opacity: 0.12;
+  width: clamp(166px, 39%, 230px);
+  right: 8px;
+  opacity: 0.18;
 }
 
 .brand-logo-strauss.brand-hero-logo {
-  width: clamp(136px, 34%, 196px);
-  right: 24px;
-  opacity: 0.105;
+  width: clamp(124px, 30%, 170px);
+  right: 30px;
+  opacity: 0.17;
 }
 
 .brand-card-strauss {
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 255, 255, 0.97) 48%, rgba(255, 246, 247, 0.76) 72%, rgba(255, 235, 237, 0.55) 100%),
-    radial-gradient(circle at 92% 50%, rgba(239, 62, 66, 0.1), transparent 9rem),
+    linear-gradient(115deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.98) 50%, rgba(255, 243, 244, 0.86) 51%, rgba(255, 237, 239, 0.94) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.96) 54%, rgba(255, 244, 245, 0.58) 100%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 248, 248, 0.94)),
     #fff;
 }
 
 .brand-card-lululemon {
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 255, 255, 0.97) 48%, rgba(255, 244, 245, 0.74) 72%, rgba(255, 235, 238, 0.52) 100%),
-    radial-gradient(circle at 92% 50%, rgba(210, 32, 48, 0.08), transparent 9rem),
+    linear-gradient(115deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.98) 50%, rgba(255, 244, 245, 0.84) 51%, rgba(255, 238, 240, 0.94) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.96) 54%, rgba(255, 244, 245, 0.58) 100%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 248, 248, 0.94)),
     #fff;
+}
+
+.brand-card-tommybahama .brand-card-copy,
+.brand-card-travismathew .brand-card-copy {
+  width: min(100%, 58%);
 }
 
 .brand-card-action {
@@ -1785,21 +1810,26 @@ footer a {
     min-height: 190px;
   }
 
+  .brand-landing-card::after {
+    width: 42%;
+  }
+
   .brand-card-body {
     min-height: 120px;
   }
 
   .brand-card-copy {
+    width: min(100%, 60%);
     gap: 18px;
   }
 
   .brand-hero-logo {
-    right: -8px;
+    right: 12px;
     top: 50%;
     bottom: auto;
-    width: 160px;
-    height: 124px;
-    opacity: 0.1;
+    width: 132px;
+    height: 104px;
+    opacity: 0.13;
   }
 
   .brand-hero-logo-mark {
