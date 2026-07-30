@@ -398,6 +398,7 @@ function MainPage({
               key={brand.value}
               onClick={() => navigateToBrand(brand.value)}
             >
+              <BrandHeroLogo brand={brand} />
               <span className="brand-card-watermark" aria-hidden="true">
                 {(BRAND_LOGOS[brand.value]?.mark || brand.label.slice(0, 2)).toUpperCase()}
               </span>
@@ -409,7 +410,6 @@ function MainPage({
                   <strong>{brand.label}</strong>
                   <span className="brand-card-action">Open workspace</span>
                 </span>
-                <BrandHeroLogo brand={brand} />
               </span>
             </button>
           );
