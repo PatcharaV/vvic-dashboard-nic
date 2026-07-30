@@ -35,8 +35,8 @@ const DEFAULT_BRAND_OPTIONS = [
 ];
 
 const BRAND_LOGOS = {
-  strauss: { mark: "S", wordmark: "STRAUSS", subline: "WORKWEAR", src: "/brand-logos/strauss.svg" },
-  rhone: { mark: "R", wordmark: "RHONE", subline: "PERFORMANCE", src: "/brand-logos/rhone.svg" },
+  strauss: { mark: "S", wordmark: "STRAUSS", subline: "WORKWEAR", src: "/brand-logos/strauss.png" },
+  rhone: { mark: "R", wordmark: "RHONE", subline: "PERFORMANCE", src: "/brand-logos/rhone.png" },
   arcteryx: { mark: "ARC", wordmark: "ARC'TERYX", subline: "OUTDOOR", src: "/brand-logos/arcteryx.svg" },
   lululemon: { mark: "L", wordmark: "LULULEMON", subline: "ATHLETIC", src: "/brand-logos/lululemon.svg" },
   tommybahama: { mark: "TB", wordmark: "TOMMY BAHAMA", subline: "ISLAND", src: "/brand-logos/tommy-bahama.svg" },
