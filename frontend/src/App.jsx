@@ -34,6 +34,15 @@ const DEFAULT_BRAND_OPTIONS = [
   { value: "travismathew", label: "TravisMathew" },
 ];
 
+const BRAND_LOGOS = {
+  strauss: { mark: "S", wordmark: "STRAUSS", subline: "WORKWEAR", src: "/brand-logos/strauss.svg" },
+  rhone: { mark: "R", wordmark: "RHONE", subline: "PERFORMANCE", src: "/brand-logos/rhone.svg" },
+  arcteryx: { mark: "ARC", wordmark: "ARC'TERYX", subline: "OUTDOOR", src: "/brand-logos/arcteryx.svg" },
+  lululemon: { mark: "L", wordmark: "LULULEMON", subline: "ATHLETIC", src: "/brand-logos/lululemon.svg" },
+  tommybahama: { mark: "TB", wordmark: "TOMMY BAHAMA", subline: "ISLAND", src: "/brand-logos/tommy-bahama.svg" },
+  travismathew: { mark: "TM", wordmark: "TRAVISMATHEW", subline: "GOLF", src: "/brand-logos/travismathew.svg" },
+};
+
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
 
 function mergeBrandOptions(options = []) {
@@ -56,6 +65,41 @@ function snapshotMessage(brand, options = DEFAULT_BRAND_OPTIONS) {
     DEFAULT_BRAND_OPTIONS.find((item) => item.value === brand)?.label ||
     "brand";
   return `Cached snapshot for ${label}`;
+}
+
+function BrandLogo({ brand }) {
+  const logo = BRAND_LOGOS[brand.value] || {
+    mark: brand.label.slice(0, 2).toUpperCase(),
+    wordmark: brand.label,
+  };
+
+  return (
+    <span className={`brand-card-logo brand-logo-${brand.value}`} aria-label={`${brand.label} logo`}>
+      <span className="brand-card-logo-mark">{logo.mark}</span>
+      <span className="brand-card-logo-copy">
+        <span className="brand-card-logo-wordmark">{logo.wordmark}</span>
+        <span className="brand-card-logo-subline">{logo.subline}</span>
+      </span>
+    </span>
+  );
+}
+
+function BrandHeroLogo({ brand }) {
+  const logo = BRAND_LOGOS[brand.value] || {
+    mark: brand.label.slice(0, 2).toUpperCase(),
+    wordmark: brand.label,
+    subline: "BRAND",
+  };
+
+  return (
+    <span className={`brand-hero-logo brand-logo-${brand.value}`} aria-label={`${brand.label} logo`}>
+      <img className="brand-hero-logo-image" src={logo.src} alt={`${brand.label} logo`} />
+    </span>
+  );
+}
+
+function brandCardNumber(brandOptions, value) {
+  return String(brandOptions.findIndex((item) => item.value === value) + 1).padStart(2, "0");
 }
 
 const DEFAULT_SECTIONS = {
@@ -350,15 +394,23 @@ function MainPage({
           return (
             <button
               type="button"
-              className="brand-landing-card"
+              className={`brand-landing-card brand-card-${brand.value}`}
               key={brand.value}
               onClick={() => navigateToBrand(brand.value)}
             >
-              <span className="brand-card-index">
-                {String(brandOptions.findIndex((item) => item.value === brand.value) + 1).padStart(2, "0")}
+              <span className="brand-card-watermark" aria-hidden="true">
+                {(BRAND_LOGOS[brand.value]?.mark || brand.label.slice(0, 2)).toUpperCase()}
               </span>
-              <strong>{brand.label}</strong>
-              <span className="brand-card-action">Open workspace</span>
+              <span className="brand-card-index">
+                {brandCardNumber(brandOptions, brand.value)}
+              </span>
+              <span className="brand-card-body">
+                <span className="brand-card-copy">
+                  <strong>{brand.label}</strong>
+                  <span className="brand-card-action">Open workspace</span>
+                </span>
+                <BrandHeroLogo brand={brand} />
+              </span>
             </button>
           );
         })}

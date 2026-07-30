@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 180" role="img" aria-labelledby="title">
+  <title id="title">Strauss logo</title>
+  <rect width="260" height="180" rx="24" fill="#f05a68"/>
+  <path d="M124 38c24 14 32 34 27 58 15-15 32-17 48-7-21 15-31 35-28 59h-82c3-24-7-44-28-59 17-10 34-8 49 7-5-24 3-44 14-58z" fill="#fff"/>
+  <path d="M137 25c17 5 27 16 31 33-10-6-20-8-31-6v63" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round"/>
+  <text x="130" y="166" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="31" font-weight="900" fill="#fff" letter-spacing="2">STRAUSS</text>
+</svg>

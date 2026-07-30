@@ -597,6 +597,7 @@ if FRONTEND_DIST.exists():
     for static_name in (
         "strauss-pitch-slides",
         "arcteryx-cotton-slides",
+        "brand-logos",
     ):
         static_dir = FRONTEND_DIST / static_name
         if static_dir.exists():

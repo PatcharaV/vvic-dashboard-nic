@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 180" role="img" aria-labelledby="title">
+  <title id="title">lululemon logo</title>
+  <rect width="260" height="180" rx="24" fill="#d22030"/>
+  <circle cx="130" cy="76" r="50" fill="#fff"/>
+  <path d="M112 99c-18-23-8-54 18-54s36 31 18 54c14-8 29-4 36 8-15 16-42 15-54 0-12 15-39 16-54 0 7-12 22-16 36-8z" fill="#d22030"/>
+  <text x="130" y="166" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="27" font-weight="900" fill="#fff" letter-spacing="1">LULULEMON</text>
+</svg>
