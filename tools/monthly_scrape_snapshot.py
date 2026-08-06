@@ -17,6 +17,17 @@ from app.catalog import MONTH_CODES, scrape_products  # noqa: E402
 from app.main import current_scrape_period, make_scrape_period  # noqa: E402
 
 
+def merge_ordered(values: list[str], extra_values: list[str]) -> list[str]:
+    merged: list[str] = []
+    seen: set[str] = set()
+    for value in [*extra_values, *values]:
+        if value in seen:
+            continue
+        seen.add(value)
+        merged.append(value)
+    return merged
+
+
 def write_json(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -28,6 +39,11 @@ def write_json(path: Path, payload: dict) -> None:
 def build_frontend_snapshot(payload: dict) -> dict:
     products = payload.get("products", [])
     brand_options = build_options(products).get("brands", [])
+    collection_options_by_brand = {
+        source.get("brand"): source.get("collection_options", [])
+        for source in payload.get("sources", [])
+        if source.get("brand")
+    }
     snapshot = {
         "period": payload.get("scrape_period", {}),
         "scraped_at": payload.get("scraped_at"),
@@ -38,8 +54,13 @@ def build_frontend_snapshot(payload: dict) -> dict:
         brand_products = [
             product for product in products if product.get("brand") == brand
         ]
+        options = build_options(brand_products)
+        options["collections"] = merge_ordered(
+            options.get("collections", []),
+            collection_options_by_brand.get(brand, []),
+        )
         snapshot["brands"][brand] = {
-            "options": build_options(brand_products),
+            "options": options,
             "dashboard": build_dashboard(
                 brand_products,
                 payload.get("source"),

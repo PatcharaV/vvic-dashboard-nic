@@ -29,6 +29,12 @@ COLLECTION_SLUGS = {
     "Mountain bike": "mountain-bike/wid-6j83rq6l",
 }
 STATIC_COLLECTIONS = ["Walk Gently"]
+COLLECTION_OPTIONS = [
+    "Veilance",
+    "Arc'teryx PRO",
+    "Walk Gently",
+    "Mountain bike",
+]
 ACTIVITY_SLUGS = {
     "Trail Run": "trail/trail-run",
     "Hike": "trail/hike",
@@ -657,7 +663,7 @@ async def scrape_arcteryx_products(
         "source": BASE_URL,
         "scraped_at": datetime.now(timezone.utc).isoformat(),
         "product_count": len(products),
-        "collection_options": sorted([*COLLECTION_SLUGS, *STATIC_COLLECTIONS]),
+        "collection_options": COLLECTION_OPTIONS,
         "period_filter": {},
         "products": products,
     }

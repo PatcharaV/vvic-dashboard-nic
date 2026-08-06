@@ -447,17 +447,21 @@ async def options(
     options = build_options(products, selected_categories)
     options["brands"] = build_options(data["products"])["brands"]
     selected_brands = set(selected_brand_values)
-    extra_collections = {
+    extra_collections = [
         collection
         for source in data.get("sources", [])
         if not selected_brands or source.get("brand") in selected_brands
         for collection in source.get("collection_options", [])
-    }
+    ]
     if extra_collections:
-        options["collections"] = sorted(
-            set(options.get("collections", [])) | extra_collections,
-            key=str.lower,
-        )
+        merged_collections: list[str] = []
+        seen_collections: set[str] = set()
+        for collection in [*extra_collections, *options.get("collections", [])]:
+            if collection in seen_collections:
+                continue
+            seen_collections.add(collection)
+            merged_collections.append(collection)
+        options["collections"] = merged_collections
     return options
 
 
