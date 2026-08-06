@@ -20,6 +20,12 @@ function argValue(name, fallback = "") {
   return hit ? hit.slice(prefix.length) : fallback;
 }
 
+function verboseLog(...args) {
+  if (process.argv.includes("--verbose")) {
+    console.error(...args);
+  }
+}
+
 function productIdFromUrl(url) {
   const match = String(url).match(/\/_\/([^/?#]+)/);
   return match ? match[1] : "";
@@ -271,6 +277,9 @@ async function main() {
   const port = Number(argValue("--port", "9224"));
   const profileDir = path.join(tmpdir(), `lululemon-browser-probe-${Date.now()}`);
   await mkdir(profileDir, { recursive: true });
+  const urls = await urlsFromArgs();
+  const output = argValue("--output");
+  verboseLog(`Preparing to probe ${urls.length} URL(s)`);
 
   const chrome = spawn(await chromePath(), [
     `--remote-debugging-port=${port}`,
@@ -287,16 +296,30 @@ async function main() {
   try {
     await waitForJson(port);
     const results = [];
-    for (const url of await urlsFromArgs()) {
-      const tab = await openTab(port, url);
-      const result = await extractFromTab(tab);
-      results.push({
-        product_id: productIdFromUrl(url),
-        requested_url: url,
-        ...result,
-      });
+    for (const url of urls) {
+      verboseLog(`Opening ${url}`);
+      try {
+        const tab = await openTab(port, url);
+        const result = await extractFromTab(tab);
+        verboseLog(`Captured ${productIdFromUrl(url)}: ${result?.status || "unknown"}`);
+        results.push({
+          product_id: productIdFromUrl(url),
+          requested_url: url,
+          ...result,
+        });
+      } catch (error) {
+        verboseLog(`Failed ${productIdFromUrl(url)}: ${error.message}`);
+        results.push({
+          product_id: productIdFromUrl(url),
+          requested_url: url,
+          status: "probe-error",
+          error: error.message,
+        });
+      }
+      if (output) {
+        await writeFile(output, `${JSON.stringify(results, null, 2)}\n`, "utf8");
+      }
     }
-    const output = argValue("--output");
     if (output) {
       await writeFile(output, `${JSON.stringify(results, null, 2)}\n`, "utf8");
     }
