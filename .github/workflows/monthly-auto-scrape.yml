@@ -4,6 +4,8 @@ on:
   schedule:
     # 08:00 Bangkok time on the 1st day of every month.
     - cron: "0 1 1 * *"
+    # One-time safety rerun: 08:00 Bangkok time on 7 August 2026.
+    - cron: "0 1 7 8 *"
   workflow_dispatch:
     inputs:
       month:
@@ -24,15 +26,40 @@ jobs:
     timeout-minutes: 90
 
     steps:
+      - name: Check scheduled run date
+        id: schedule_guard
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          bangkok_date="$(TZ=Asia/Bangkok date +%Y-%m-%d)"
+          if [ "${{ github.event.schedule }}" = "0 1 1 * *" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ "${{ github.event.schedule }}" = "0 1 7 8 *" ] && [ "$bangkok_date" = "2026-08-07" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Skipping one-time schedule for Bangkok date $bangkok_date."
+          echo "should_run=false" >> "$GITHUB_OUTPUT"
+
       - name: Check out repository
+        if: steps.schedule_guard.outputs.should_run == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Python
+        if: steps.schedule_guard.outputs.should_run == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Set up Node
+        if: steps.schedule_guard.outputs.should_run == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -40,25 +67,32 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install backend dependencies
+        if: steps.schedule_guard.outputs.should_run == 'true'
         run: python -m pip install --timeout 120 --retries 10 -r backend/requirements.txt
 
       - name: Install frontend dependencies
+        if: steps.schedule_guard.outputs.should_run == 'true'
         working-directory: frontend
         run: npm ci
 
       - name: Run monthly scrape and persist snapshot
+        if: steps.schedule_guard.outputs.should_run == 'true'
         run: |
           if [ -n "${{ inputs.month }}" ] && [ -n "${{ inputs.year }}" ]; then
             python tools/monthly_scrape_snapshot.py --month "${{ inputs.month }}" --year "${{ inputs.year }}"
+          elif [ "${{ github.event.schedule }}" = "0 1 7 8 *" ]; then
+            python tools/monthly_scrape_snapshot.py --month AUG --year 2026
           else
             python tools/monthly_scrape_snapshot.py
           fi
 
       - name: Build frontend
+        if: steps.schedule_guard.outputs.should_run == 'true'
         working-directory: frontend
         run: npm run build
 
       - name: Commit monthly scrape output
+        if: steps.schedule_guard.outputs.should_run == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
