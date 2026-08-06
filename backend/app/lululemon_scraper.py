@@ -121,7 +121,6 @@ INNOVATION_PATTERNS = [
     (r"\bWrinkle[- ]?Resistant\b", "Wrinkle-Resistant"),
     (r"\bWater[- ]?Resistant\b", "Water-Resistant"),
     (r"\bAbrasion[- ]?Resistant\b", "Abrasion-Resistant"),
-    (r"\bUV Protective\b|\bUPF\b", "UV Protection"),
     (r"\bBreathable\b", "Breathable"),
     (r"\bVentilation\b|\bVentilated\b", "Ventilation"),
     (r"\bLightweight\b", "Lightweight"),
@@ -152,9 +151,18 @@ def clean_lululemon_innovations(values: Any) -> list[str]:
             .replace("\u00a0", " ")
         )
         normalized = re.sub(r"\s+", " ", normalized)
+        for match in re.finditer(r"\bUPF\s*(\d+)\s*(\+?)", normalized, re.I):
+            suffix = "+" if match.group(2) else ""
+            _append_unique(cleaned, f"UPF {match.group(1)}{suffix}")
+        if "upf" not in normalized.lower() and re.search(
+            r"\bUV Protective\b|\bUV Protection\b", normalized, re.I
+        ):
+            _append_unique(cleaned, "UV Protection")
         for pattern, label in INNOVATION_PATTERNS:
             if re.search(pattern, normalized, re.I):
                 _append_unique(cleaned, label)
+    if any(value.startswith("UPF ") for value in cleaned):
+        cleaned = [value for value in cleaned if value != "UV Protection"]
     return cleaned
 
 

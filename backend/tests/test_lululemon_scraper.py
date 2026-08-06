@@ -170,7 +170,12 @@ class LululemonScraperTests(unittest.TestCase):
                 "material_details": [
                     "Body: 61% Organic Cotton, 32% Polyester (recycled), 7% Elastane"
                 ],
-                "innovations": ["Four-way stretch", "Sweat-wicking"],
+                "innovations": [
+                    "Four-way stretch",
+                    "Sweat-wicking",
+                    "UV protective",
+                    "UPF 40+ provides very good UV protection",
+                ],
             }
         }
 
@@ -183,7 +188,10 @@ class LululemonScraperTests(unittest.TestCase):
             enriched["material"],
             "Body: 61% Organic Cotton, 32% Polyester (recycled), 7% Elastane",
         )
-        self.assertEqual(enriched["innovations"], ["Four-Way Stretch", "Sweat-Wicking"])
+        self.assertEqual(
+            enriched["innovations"],
+            ["Four-Way Stretch", "Sweat-Wicking", "UPF 40+"],
+        )
 
 
 if __name__ == "__main__":
