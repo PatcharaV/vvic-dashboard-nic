@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from .arcteryx_scraper import scrape_arcteryx_products
-from .lululemon_scraper import scrape_lululemon_products
+from .lululemon_scraper import clean_lululemon_innovations, scrape_lululemon_products
 from .quality import (
     backup_file,
     build_audit_report,
@@ -762,7 +762,9 @@ def load_lululemon_detail_cache(
             "material_details": _dedupe_strings(
                 row.get("body_materials") or row.get("material_details") or []
             ),
-            "innovations": _dedupe_strings(row.get("innovations") or []),
+            "innovations": clean_lululemon_innovations(
+                _dedupe_strings(row.get("innovations") or [])
+            ),
         }
         for key in keys:
             details[key] = detail
@@ -808,7 +810,9 @@ def _apply_lululemon_detail_cache(
         material_details = detail.get("material_details") or product.get(
             "material_details", []
         )
-        innovations = detail.get("innovations") or product.get("innovations", [])
+        innovations = clean_lululemon_innovations(
+            detail.get("innovations") or product.get("innovations", [])
+        )
         style_number = product.get("style_number") or _lululemon_style_number(
             color_variants
         )

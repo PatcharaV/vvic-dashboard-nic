@@ -84,6 +84,50 @@ COLLECTION_KEYWORDS = [
     "Zeroed In",
 ]
 
+INNOVATION_PATTERNS = [
+    (r"\bABC\b", "ABC"),
+    (r"\bAlign\b", "Align"),
+    (r"\bDance Studio\b", "Dance Studio"),
+    (r"\bEverlux\b", "Everlux"),
+    (r"\bFast and Free\b", "Fast and Free"),
+    (r"\bLicense to Train\b", "License to Train"),
+    (r"\bLuon\b", "Luon"),
+    (r"\bLuxtreme\b", "Luxtreme"),
+    (r"\bMetal Vent Tech\b", "Metal Vent Tech"),
+    (r"\bNulu(?:TM|™)?\b", "Nulu"),
+    (r"\bNulux(?:TM|™)?\b", "Nulux"),
+    (r"\bPace Breaker\b", "Pace Breaker"),
+    (r"\bPima Cotton\b", "Pima Cotton"),
+    (r"\bSenseKnit\b", "SenseKnit"),
+    (r"\bSilverescent\b", "Silverescent"),
+    (r"\bSoftstreme\b", "Softstreme"),
+    (r"\bSwiftly\b", "Swiftly"),
+    (r"\bUltralu\b", "Ultralu"),
+    (r"\bUtilitech\b", "Utilitech"),
+    (r"\bVersaTwill\b", "VersaTwill"),
+    (r"\bWarpstreme(?:TM|™)?\b", "Warpstreme"),
+    (r"\bWovenAir(?:TM|™)?\b", "WovenAir"),
+    (r"\bWunder Train\b", "Wunder Train"),
+    (r"\bZeroed In\b", "Zeroed In"),
+    (r"\bWaffle[- ]Knit\b", "Waffle-Knit"),
+    (r"\bFrench Terry\b", "French Terry"),
+    (r"\bRipstop\b", "Ripstop"),
+    (r"\bMesh\b", "Mesh"),
+    (r"\bEveryday Performance\b", "Everyday Performance"),
+    (r"\bSweat[- ]?Wicking\b", "Sweat-Wicking"),
+    (r"\bQuick[- ]?Dry(?:ing)?\b", "Quick-Drying"),
+    (r"\bFour[- ]?Way Stretch\b", "Four-Way Stretch"),
+    (r"\bShape Retention\b", "Shape Retention"),
+    (r"\bWrinkle[- ]?Resistant\b", "Wrinkle-Resistant"),
+    (r"\bWater[- ]?Resistant\b", "Water-Resistant"),
+    (r"\bAbrasion[- ]?Resistant\b", "Abrasion-Resistant"),
+    (r"\bUV Protective\b|\bUPF\b", "UV Protection"),
+    (r"\bBreathable\b", "Breathable"),
+    (r"\bVentilation\b|\bVentilated\b", "Ventilation"),
+    (r"\bLightweight\b", "Lightweight"),
+    (r"\bAnti[- ]?Stink\b|\bOdou?r[- ]?Control\b", "Anti-Stink"),
+]
+
 
 def _append_unique(values: list[str], incoming: Any) -> None:
     if incoming is None:
@@ -93,6 +137,25 @@ def _append_unique(values: list[str], incoming: Any) -> None:
         value = str(item).strip()
         if value and value not in values:
             values.append(value)
+
+
+def clean_lululemon_innovations(values: Any) -> list[str]:
+    cleaned: list[str] = []
+    items = values if isinstance(values, list) else [values]
+    for item in items:
+        text = str(item or "").strip()
+        if not text:
+            continue
+        normalized = (
+            text.replace("™", "TM")
+            .replace("®", "")
+            .replace("\u00a0", " ")
+        )
+        normalized = re.sub(r"\s+", " ", normalized)
+        for pattern, label in INNOVATION_PATTERNS:
+            if re.search(pattern, normalized, re.I):
+                _append_unique(cleaned, label)
+    return cleaned
 
 
 def _parse_product_url(url: str) -> dict[str, str] | None:
@@ -494,7 +557,7 @@ def _apply_pdp_details(product: dict[str, Any], pdp_data: dict[str, Any]) -> Non
             )
 
     materials = _material_values(color_attributes)
-    innovations = _innovation_values(color_attributes)
+    innovations = clean_lululemon_innovations(_innovation_values(color_attributes))
     style_number = _style_number(color_attributes)
     product["style_number"] = style_number or product.get("style_number", "")
     existing_variants = product.get("color_variants")

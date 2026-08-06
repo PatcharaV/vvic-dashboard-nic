@@ -96,7 +96,7 @@ class LululemonScraperTests(unittest.TestCase):
         self.assertEqual(product["material_details"], ["Body: 61% Organic Cotton, 32% Polyester"])
         self.assertEqual(
             product["innovations"],
-            ["Soft Cotton-Blend Fabric", "Four-way stretch"],
+            ["Four-Way Stretch"],
         )
 
     def test_applies_schema_details(self):
@@ -183,7 +183,7 @@ class LululemonScraperTests(unittest.TestCase):
             enriched["material"],
             "Body: 61% Organic Cotton, 32% Polyester (recycled), 7% Elastane",
         )
-        self.assertEqual(enriched["innovations"], ["Four-way stretch", "Sweat-wicking"])
+        self.assertEqual(enriched["innovations"], ["Four-Way Stretch", "Sweat-Wicking"])
 
 
 if __name__ == "__main__":
