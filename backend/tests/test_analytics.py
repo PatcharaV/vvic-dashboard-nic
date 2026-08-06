@@ -3,9 +3,27 @@ import unittest
 from app.analytics import build_dashboard
 from app.catalog import _apply_season_classification
 from app.quality import validate_brand
+from app.rhone_scraper import _is_public_catalog_product
 
 
 class StraussVariantAggregationTests(unittest.TestCase):
+    def test_rhone_filters_internal_wholesale_products(self):
+        self.assertFalse(
+            _is_public_catalog_product(
+                {"title": "[WHOLESALE] Course to Court Skort", "tags": []}
+            )
+        )
+        self.assertFalse(
+            _is_public_catalog_product(
+                {"title": "Course to Court Skort", "tags": ["wholesale"]}
+            )
+        )
+        self.assertTrue(
+            _is_public_catalog_product(
+                {"title": "Course to Court Skort", "tags": ["filter:Type:Skirts"]}
+            )
+        )
+
     def test_quality_validation_falls_back_on_large_product_drop(self):
         old_products = [
             {"id": f"old-{index}", "brand": "test", "category": "Shirts", "image": "x", "color": "black"}

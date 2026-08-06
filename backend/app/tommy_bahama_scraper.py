@@ -1,4 +1,5 @@
 import asyncio
+import html
 import json
 import re
 import xml.etree.ElementTree as ET
@@ -108,6 +109,11 @@ CLOTHING_CATEGORIES = {
     "Tanks",
 }
 
+FIBER_TERMS = (
+    r"cotton|polyester|nylon|polyamide|elastane|wool|linen|spandex|"
+    r"viscose|rayon|modal|lyocell|tencel|silk|leather|suede|recycled polyester"
+)
+
 
 def _dedupe(values: list[str]) -> list[str]:
     deduped: list[str] = []
@@ -116,6 +122,138 @@ def _dedupe(values: list[str]) -> list[str]:
         if value and value not in deduped:
             deduped.append(value)
     return deduped
+
+
+def _plain_text(value: Any) -> str:
+    text = html.unescape(str(value or ""))
+    text = re.sub(r"<br\s*/?>", " | ", text, flags=re.I)
+    text = re.sub(r"</(?:p|div|li)>", " | ", text, flags=re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
+    return re.sub(r"\s+", " ", text).strip(" |")
+
+
+def _detail_bullets(detail: dict[str, Any] | None) -> list[str]:
+    if not isinstance(detail, dict):
+        return []
+    bullets = detail.get("productBullets")
+    if not isinstance(bullets, dict):
+        return []
+
+    def bullet_index(item: tuple[str, Any]) -> int:
+        match = re.search(r"(\d+)$", item[0])
+        return int(match.group(1)) if match else 999
+
+    return [
+        text
+        for _, raw in sorted(bullets.items(), key=bullet_index)
+        if (text := _plain_text(raw))
+    ]
+
+
+def _material_bullets(bullets: list[str]) -> list[str]:
+    material_lines: list[str] = []
+    for bullet in bullets[:3]:
+        text = bullet.strip(" .")
+        if not re.search(FIBER_TERMS, text, re.I):
+            continue
+        if re.search(
+            r"\b(?:machine wash|wash|dry clean|clean only|tumble dry|do not bleach|iron)\b",
+            text,
+            re.I,
+        ):
+            continue
+        material_lines.append(text)
+    return _dedupe(material_lines)
+
+
+def _base_product_code(code: str) -> str:
+    return code.rsplit("-", 1)[0] if "-" in code else code
+
+
+async def _product_detail(client: httpx.AsyncClient, code: str) -> dict[str, Any] | None:
+    candidates = _dedupe([code, _base_product_code(code)])
+    for candidate in candidates:
+        for attempt in range(3):
+            try:
+                response = await client.get(f"/p/{candidate}/getProductDetail.json")
+                response.raise_for_status()
+                data = response.json()
+            except (httpx.HTTPError, json.JSONDecodeError):
+                if attempt < 2:
+                    await asyncio.sleep(0.4 * (attempt + 1))
+                continue
+            if isinstance(data, dict):
+                return data
+    return None
+
+
+async def _product_feed(client: httpx.AsyncClient, code: str) -> list[dict[str, Any]]:
+    candidates = _dedupe([_base_product_code(code), code])
+    for candidate in candidates:
+        for attempt in range(3):
+            try:
+                response = await client.get(
+                    f"/p/{candidate}/detailSummary/getProductFeedEom.json",
+                    params={"currency": "USD", "ts": "1"},
+                )
+                response.raise_for_status()
+                data = response.json()
+            except (httpx.HTTPError, json.JSONDecodeError):
+                if attempt < 2:
+                    await asyncio.sleep(0.4 * (attempt + 1))
+                continue
+            if isinstance(data, list):
+                return [item for item in data if isinstance(item, dict)]
+    return []
+
+
+def _feed_by_code(feed: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    return {
+        str(item.get("productCode") or ""): item
+        for item in feed
+        if item.get("productCode")
+    }
+
+
+def _feed_color(feed: list[dict[str, Any]], code: str, fallback: str) -> str:
+    item = _feed_by_code(feed).get(code)
+    color = str(item.get("colorName") or "").strip() if item else ""
+    return color or fallback
+
+
+def _feed_available(item: dict[str, Any]) -> bool:
+    sizes = item.get("sizes")
+    if isinstance(sizes, list):
+        return any(int(size.get("availability") or 0) > 0 for size in sizes if isinstance(size, dict))
+    try:
+        return int(item.get("availability") or 0) > 0
+    except (TypeError, ValueError):
+        return bool(item.get("availability"))
+
+
+def _feed_image(item: dict[str, Any]) -> str:
+    image = str(item.get("scene7Url") or "").strip()
+    if image:
+        return f"{image}?$v26_pdp_alt_desktop$"
+    return ""
+
+
+def _color_variants_from_feed(feed: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    variants: list[dict[str, Any]] = []
+    for item in feed:
+        code = str(item.get("productCode") or "").strip()
+        color = str(item.get("colorName") or "").strip()
+        if not code or not color:
+            continue
+        variants.append(
+            {
+                "color": color,
+                "image": _feed_image(item),
+                "url": f"{BASE_URL}/p/{code}",
+                "available": _feed_available(item),
+            }
+        )
+    return variants
 
 
 async def _sitemap_locs(client: httpx.AsyncClient, url: str) -> list[str]:
@@ -131,8 +269,17 @@ async def _sitemap_locs(client: httpx.AsyncClient, url: str) -> list[str]:
 
 def _candidate_url(url: str) -> bool:
     path = unquote(url).lower()
-    return any(keyword in path for keyword in INCLUDE_URL_KEYWORDS) and not any(
-        keyword in path for keyword in EXCLUDE_URL_KEYWORDS
+    tokens = {token for token in re.split(r"[^a-z0-9]+", path) if token}
+    normalized_tokens = set(tokens)
+    for token in tokens:
+        if token.endswith("ies") and len(token) > 3:
+            normalized_tokens.add(f"{token[:-3]}y")
+        if token.endswith("es") and len(token) > 2:
+            normalized_tokens.add(token[:-2])
+        if token.endswith("s") and len(token) > 1:
+            normalized_tokens.add(token[:-1])
+    return bool(normalized_tokens & INCLUDE_URL_KEYWORDS) and not bool(
+        normalized_tokens & EXCLUDE_URL_KEYWORDS
     )
 
 
@@ -406,19 +553,102 @@ def _normalize_url(url: str) -> dict[str, Any] | None:
     }
 
 
+async def _normalize_url_with_detail(
+    client: httpx.AsyncClient,
+    semaphore: asyncio.Semaphore,
+    url: str,
+) -> dict[str, Any] | None:
+    product = _normalize_url(url)
+    if product is None:
+        return None
+
+    async with semaphore:
+        source_id = str(product["source_id"])
+        detail, feed = await asyncio.gather(
+            _product_detail(client, source_id),
+            _product_feed(client, source_id),
+        )
+
+    feed_map = _feed_by_code(feed)
+    feed_item = feed_map.get(str(product["source_id"]))
+    color = _feed_color(feed, str(product["source_id"]), str(product.get("color") or ""))
+    color_variants = _color_variants_from_feed(feed)
+    available_colors = _dedupe(
+        [variant["color"] for variant in color_variants if variant.get("available")]
+    )
+    unavailable_colors = _dedupe(
+        [variant["color"] for variant in color_variants if not variant.get("available")]
+    )
+    if color:
+        product["color"] = color
+    if color_variants:
+        product.update(
+            {
+                "color_variants": color_variants,
+                "available_colors": available_colors,
+                "unavailable_colors": unavailable_colors,
+                "all_colors": _dedupe(available_colors + unavailable_colors),
+                "available": _feed_available(feed_item) if feed_item else product["available"],
+                "variant_count": max(len(color_variants), product.get("variant_count", 1)),
+                "image": _feed_image(feed_item) if feed_item else product["image"],
+            }
+        )
+
+    if not detail:
+        return product
+
+    title = _plain_text(detail.get("name")) or product["title"]
+    description = _plain_text(detail.get("description"))
+    bullets = _detail_bullets(detail)
+    material_details = _material_bullets(bullets)
+    description_parts = _dedupe([description, *bullets])
+    detail_text = " ".join(description_parts)
+
+    product.update(
+        {
+            "title": title,
+            "description": detail_text,
+            "material": " | ".join(material_details),
+            "material_details": material_details,
+            "product_functions": extract_product_functions(
+                title,
+                detail_text,
+                [],
+                " | ".join(material_details),
+            ),
+            "available": bool(detail.get("activeStatus", product["available"])),
+            "image": str(detail.get("thumbnailUrl") or product["image"]).replace(
+                "$v26_pdp_recs_desktop$",
+                "?$v26_pdp_alt_desktop$",
+            ),
+        }
+    )
+    if detail.get("new") is True:
+        product["shop_highlights"] = _dedupe([*product["shop_highlights"], "New Arrivals"])
+    return product
+
+
 async def scrape_tommy_bahama_products() -> dict[str, Any]:
     headers = {
         "User-Agent": "MultiBrandCatalogDashboard/1.0 (+public product analytics)",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept": "application/json,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     }
     timeout = httpx.Timeout(45.0, connect=15.0)
-    async with httpx.AsyncClient(headers=headers, timeout=timeout, follow_redirects=True) as client:
+    async with httpx.AsyncClient(
+        base_url=BASE_URL,
+        headers=headers,
+        timeout=timeout,
+        follow_redirects=True,
+    ) as client:
         urls = await _product_urls(client)
-    products = [
-        product
-        for product in (_normalize_url(url) for url in urls)
-        if product is not None
-    ]
+        semaphore = asyncio.Semaphore(4)
+        products = [
+            product
+            for product in await asyncio.gather(
+                *(_normalize_url_with_detail(client, semaphore, url) for url in urls)
+            )
+            if product is not None
+        ]
 
     products.sort(key=lambda item: item["title"].lower())
     return {

@@ -9,6 +9,7 @@ from .scraper import _extract_material, _plain_text, extract_product_functions
 
 BASE_URL = "https://travismathew.com"
 PAGE_SIZE = 250
+MAX_RETRIES = 6
 
 CLOTHING_TYPES = {
     "Active Top",
@@ -70,14 +71,20 @@ async def _all_products(client: httpx.AsyncClient) -> list[dict[str, Any]]:
     products: list[dict[str, Any]] = []
     for page in range(1, 80):
         response = None
-        for attempt in range(4):
+        for attempt in range(MAX_RETRIES):
             response = await client.get(
                 f"{BASE_URL}/products.json",
                 params={"limit": PAGE_SIZE, "page": page},
             )
             if response.status_code != 429:
                 break
-            await asyncio.sleep(2.0 * (attempt + 1))
+            retry_after = response.headers.get("Retry-After")
+            wait_seconds = (
+                float(retry_after)
+                if retry_after and retry_after.replace(".", "", 1).isdigit()
+                else min(3.0 * (attempt + 1), 30)
+            )
+            await asyncio.sleep(wait_seconds)
         if response is None:
             break
         response.raise_for_status()
@@ -85,7 +92,7 @@ async def _all_products(client: httpx.AsyncClient) -> list[dict[str, Any]]:
         products.extend(batch)
         if len(batch) < PAGE_SIZE:
             break
-        await asyncio.sleep(0.75)
+        await asyncio.sleep(1.25)
     return products
 
 

@@ -1,0 +1,75 @@
+{
+  "brand": "rhone",
+  "label": "Rhone",
+  "decision": "publish",
+  "warnings": [],
+  "notes": [
+    "Rhone public catalog refreshed with available public clothing products only; unavailable, wholesale, and hidden/internal feed records were excluded."
+  ],
+  "old": {
+    "product_count": 1727,
+    "available_count": 1147,
+    "category_counts": {
+      "1/4 zips": 109,
+      "Blazers": 27,
+      "Button ups": 112,
+      "Dresses": 64,
+      "Hoodies & pullovers": 229,
+      "Leggings": 106,
+      "Outerwear": 64,
+      "Pants": 184,
+      "Polos": 115,
+      "Shorts": 160,
+      "Skirts": 85,
+      "Sports Bras": 119,
+      "Sweaters": 42,
+      "Swim": 33,
+      "Tanks": 131,
+      "Tees": 125,
+      "Underwear": 22
+    },
+    "audience_counts": {
+      "men": 535,
+      "women": 1192
+    },
+    "missing": {
+      "image": 0,
+      "color": 0,
+      "material": 7,
+      "price": 0
+    }
+  },
+  "new": {
+    "product_count": 1163,
+    "available_count": 1163,
+    "category_counts": {
+      "1/4 zips": 85,
+      "Blazers": 19,
+      "Button ups": 88,
+      "Dresses": 44,
+      "Hoodies & pullovers": 131,
+      "Leggings": 49,
+      "Outerwear": 44,
+      "Pants": 127,
+      "Polos": 77,
+      "Shorts": 135,
+      "Skirts": 65,
+      "Sports Bras": 59,
+      "Sweaters": 22,
+      "Swim": 23,
+      "Tanks": 68,
+      "Tees": 106,
+      "Underwear": 21
+    },
+    "audience_counts": {
+      "men": 528,
+      "women": 635
+    },
+    "missing": {
+      "image": 0,
+      "color": 0,
+      "material": 5,
+      "price": 0
+    }
+  }
+}

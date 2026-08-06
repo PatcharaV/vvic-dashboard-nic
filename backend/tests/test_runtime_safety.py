@@ -6,6 +6,13 @@ from zoneinfo import ZoneInfo
 
 from app import main
 from app.catalog import _clothing_products
+from app.tommy_bahama_scraper import (
+    _candidate_url,
+    _color_variants_from_feed,
+    _detail_bullets,
+    _feed_color,
+    _material_bullets,
+)
 
 
 class RuntimeSafetyTests(unittest.TestCase):
@@ -112,6 +119,72 @@ class RuntimeSafetyTests(unittest.TestCase):
 
         self.assertIn("Polyester performance fabric", products[0]["material_details"])
         self.assertIn("Breathable / cooling comfort", products[0]["innovations"])
+
+    def test_tommy_bahama_material_and_care_bullets_are_split(self):
+        detail = {
+            "productBullets": {
+                "productBullet1": "Body: 100% silk.<br>Decoration: 100% rayon.",
+                "productBullet2": "Dry clean only.",
+                "productBullet3": "Traditional camp collar.",
+            }
+        }
+
+        bullets = _detail_bullets(detail)
+        materials = _material_bullets(bullets)
+
+        self.assertEqual(materials, ["Body: 100% silk. | Decoration: 100% rayon"])
+
+    def test_tommy_bahama_candidate_url_matches_whole_terms(self):
+        self.assertFalse(
+            _candidate_url(
+                "https://www.tommybahama.com/en/Glow-Harvest-Moon-Light/p/31970-033"
+            )
+        )
+        self.assertTrue(
+            _candidate_url(
+                "https://www.tommybahama.com/en/Highland-Rocker-Leather-Jacket/p/ST524711-262"
+            )
+        )
+
+    def test_tommy_bahama_leather_material_is_captured(self):
+        materials = _material_bullets(["100% lamb leather.", "Professional leather clean only."])
+
+        self.assertEqual(materials, ["100% lamb leather"])
+
+    def test_tommy_bahama_feed_color_names_are_used(self):
+        feed = [
+            {
+                "productCode": "SW622679-5893",
+                "colorName": "Very Berry",
+                "scene7Url": "https://tommybahama.scene7.com/is/image/TommyBahama/SW622679_5893_main",
+                "sizes": [{"availability": 3}],
+            },
+            {
+                "productCode": "SW622679-033",
+                "colorName": "White",
+                "scene7Url": "https://tommybahama.scene7.com/is/image/TommyBahama/SW622679_033_main",
+                "sizes": [{"availability": 0}],
+            },
+        ]
+
+        self.assertEqual(_feed_color(feed, "SW622679-033", "033"), "White")
+        self.assertEqual(
+            _color_variants_from_feed(feed),
+            [
+                {
+                    "color": "Very Berry",
+                    "image": "https://tommybahama.scene7.com/is/image/TommyBahama/SW622679_5893_main?$v26_pdp_alt_desktop$",
+                    "url": "https://www.tommybahama.com/p/SW622679-5893",
+                    "available": True,
+                },
+                {
+                    "color": "White",
+                    "image": "https://tommybahama.scene7.com/is/image/TommyBahama/SW622679_033_main?$v26_pdp_alt_desktop$",
+                    "url": "https://www.tommybahama.com/p/SW622679-033",
+                    "available": False,
+                },
+            ],
+        )
 
     def test_travismathew_cached_products_get_detail_enrichment(self):
         products = _clothing_products(

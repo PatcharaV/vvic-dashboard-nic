@@ -936,7 +936,15 @@ def _staging_path(scrape_period: dict[str, Any] | None, stamp: str) -> Path:
 
 def _brand_archive_period_dir(brand: str, scrape_period: dict[str, Any] | None) -> Path:
     folder_name = BRAND_ARCHIVE_FOLDERS.get(brand, brand.title())
-    return BRAND_ARCHIVE_DIR / folder_name / period_key(scrape_period)
+    key = period_key(scrape_period)
+    label = period_label(scrape_period)
+    period_folder = f"{key} {label}" if label else key
+    return BRAND_ARCHIVE_DIR / folder_name / period_folder
+
+
+def _archive_period_key(path: Path) -> str:
+    match = re.match(r"^\d{4}-\d{2}", path.name)
+    return match.group(0) if match else path.name
 
 
 def _previous_brand_archive(
@@ -951,12 +959,12 @@ def _previous_brand_archive(
         path
         for path in brand_dir.iterdir()
         if path.is_dir()
-        and path.name < current_period_key
+        and _archive_period_key(path) < current_period_key
         and (path / "products.json").exists()
     ]
     if not candidates:
         return None
-    latest = sorted(candidates, key=lambda path: path.name)[-1] / "products.json"
+    latest = sorted(candidates, key=_archive_period_key)[-1] / "products.json"
     try:
         return json.loads(latest.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
@@ -1003,6 +1011,7 @@ def write_brand_archives(
 ) -> None:
     scrape_period = payload.get("scrape_period") or None
     current_period_key = period_key(scrape_period)
+    current_period_label = period_label(scrape_period) or "Latest"
     audit_by_brand = {audit.get("brand"): audit for audit in brand_audits}
     source_by_brand = {
         source.get("brand"): source
@@ -1037,27 +1046,29 @@ def write_brand_archives(
             "label": source.get("label") or products[0].get("brand_label") or brand,
             "source_url": source.get("url"),
             "period_key": current_period_key,
-            "period_label": period_label(scrape_period) or "Latest",
+            "period_label": current_period_label,
             "scraped_at": source.get("scraped_at") or payload.get("scraped_at"),
             "product_count": len(products),
             "products": products,
         }
         audit_payload = audit_by_brand.get(brand, {})
+        monthly_change = _brand_monthly_change(
+            brand,
+            current_period_key,
+            products,
+        )
         summary_payload = {
             **archive_payload,
             **summary,
             "quality_decision": audit_payload.get("decision"),
             "quality_warnings": audit_payload.get("warnings", []),
-            "monthly_change": _brand_monthly_change(
-                brand,
-                current_period_key,
-                products,
-            ),
+            "monthly_change": monthly_change,
         }
 
         write_json(archive_dir / "products.json", archive_payload)
         write_json(archive_dir / "summary.json", summary_payload)
         write_json(archive_dir / "audit.json", audit_payload)
+
 
 
 def load_period_cache(scrape_period: dict[str, Any] | None) -> dict[str, Any] | None:

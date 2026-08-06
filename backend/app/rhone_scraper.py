@@ -1,4 +1,5 @@
 import asyncio
+import asyncio
 import re
 from datetime import datetime, timezone
 from typing import Any
@@ -15,6 +16,7 @@ AUDIENCE_COLLECTIONS = {
 }
 TOP_SELLER_COLLECTIONS = ("mens-best-sellers", "womens-best-sellers")
 PAGE_SIZE = 250
+MAX_RETRIES = 6
 CLOTHING_CATEGORIES = {
     "1/4 zips",
     "Blazers",
@@ -61,16 +63,29 @@ async def _collection_products(
 ) -> list[dict[str, Any]]:
     products: list[dict[str, Any]] = []
     for page in range(1, 20):
-        response = await client.get(
-            f"{CATALOG_URL}/collections/{collection}/products.json",
-            params={"limit": PAGE_SIZE, "page": page},
-        )
+        response: httpx.Response | None = None
+        for attempt in range(MAX_RETRIES):
+            response = await client.get(
+                f"{CATALOG_URL}/collections/{collection}/products.json",
+                params={"limit": PAGE_SIZE, "page": page},
+            )
+            if response.status_code != 429:
+                break
+            retry_after = response.headers.get("Retry-After")
+            wait_seconds = (
+                float(retry_after)
+                if retry_after and retry_after.replace(".", "", 1).isdigit()
+                else min(3 * (attempt + 1), 30)
+            )
+            await asyncio.sleep(wait_seconds)
+        if response is None:
+            break
         response.raise_for_status()
         batch = response.json().get("products", [])
         products.extend(batch)
         if len(batch) < PAGE_SIZE:
             break
-        await asyncio.sleep(0.25)
+        await asyncio.sleep(1.0)
     return products
 
 
@@ -292,6 +307,16 @@ def _rhone_features(tags: list[str], top_seller: bool) -> list[str]:
     return sorted(dict.fromkeys(feature for feature in features if feature))
 
 
+def _is_public_catalog_product(product: dict[str, Any]) -> bool:
+    title = str(product.get("title", ""))
+    tags = [str(tag).lower() for tag in product.get("tags", [])]
+    if "[wholesale]" in title.lower() or any("wholesale" in tag for tag in tags):
+        return False
+    if any(tag.startswith("internal") or "hidden" in tag for tag in tags):
+        return False
+    return True
+
+
 def _normalize(
     product: dict[str, Any], audiences: set[str], top_seller: bool
 ) -> dict[str, Any]:
@@ -398,7 +423,11 @@ async def scrape_rhone_products() -> dict[str, Any]:
             audiences_by_handle.get(handle, set()),
             handle in top_seller_handles,
         )
-        if normalized["category"] in CLOTHING_CATEGORIES:
+        if (
+            normalized["available"]
+            and _is_public_catalog_product(product)
+            and normalized["category"] in CLOTHING_CATEGORIES
+        ):
             products.append(normalized)
     products.sort(key=lambda item: item["title"].lower())
     return {

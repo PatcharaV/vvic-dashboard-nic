@@ -1,0 +1,92 @@
+{
+  "brand": "lululemon",
+  "label": "lululemon",
+  "decision": "publish",
+  "warnings": [],
+  "old": {
+    "product_count": 1765,
+    "available_count": 1761,
+    "category_counts": {
+      "Athletic Shorts": 9,
+      "Button Down Shirts": 14,
+      "Capris": 23,
+      "Coats & Jackets": 11,
+      "Dresses": 60,
+      "Hoodies": 198,
+      "Hoodies & Sweatshirts": 9,
+      "Jackets": 49,
+      "Joggers": 138,
+      "Leggings": 120,
+      "Liner Shorts": 11,
+      "Long Sleeve Shirts": 135,
+      "Pants": 78,
+      "Polo Shirts": 39,
+      "Quarter Zips": 48,
+      "Short Sleeve Shirts": 168,
+      "Shorts": 186,
+      "Sports Bras": 88,
+      "Sweaters": 12,
+      "Sweatpants": 22,
+      "Sweatshirts": 8,
+      "Swim Trunks": 7,
+      "T-Shirts": 19,
+      "Tank Tops": 126,
+      "Trousers": 108,
+      "Underwear": 68,
+      "Vests": 11
+    },
+    "audience_counts": {
+      "men": 660,
+      "women": 1105
+    },
+    "missing": {
+      "image": 1747,
+      "color": 1747,
+      "material": 1751,
+      "price": 1765
+    }
+  },
+  "new": {
+    "product_count": 1803,
+    "available_count": 1799,
+    "category_counts": {
+      "Athletic Shorts": 9,
+      "Button Down Shirts": 14,
+      "Capris": 23,
+      "Coats & Jackets": 11,
+      "Dresses": 60,
+      "Hoodies": 200,
+      "Hoodies & Sweatshirts": 9,
+      "Jackets": 51,
+      "Joggers": 138,
+      "Leggings": 122,
+      "Liner Shorts": 11,
+      "Long Sleeve Shirts": 139,
+      "Pants": 82,
+      "Polo Shirts": 39,
+      "Quarter Zips": 52,
+      "Short Sleeve Shirts": 172,
+      "Shorts": 186,
+      "Sports Bras": 92,
+      "Sweaters": 12,
+      "Sweatpants": 26,
+      "Sweatshirts": 8,
+      "Swim Trunks": 7,
+      "T-Shirts": 19,
+      "Tank Tops": 130,
+      "Trousers": 112,
+      "Underwear": 68,
+      "Vests": 11
+    },
+    "audience_counts": {
+      "men": 672,
+      "women": 1131
+    },
+    "missing": {
+      "image": 1785,
+      "color": 1785,
+      "material": 1789,
+      "price": 1803
+    }
+  }
+}

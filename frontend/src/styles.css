@@ -296,21 +296,7 @@ h2 {
   position: relative;
   min-height: 240px;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.82)),
-    radial-gradient(circle at 88% 8%, rgba(239, 62, 66, 0.18), transparent 28rem),
-    #fff;
-}
-
-.main-hero::after {
-  content: "";
-  position: absolute;
-  right: -80px;
-  bottom: -110px;
-  width: 320px;
-  height: 320px;
-  border: 42px solid rgba(239, 62, 66, 0.08);
-  border-radius: 50%;
+  background: #fff;
 }
 
 .main-hero .brand-block {
