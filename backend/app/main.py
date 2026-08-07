@@ -572,6 +572,8 @@ async def products(
 async def scrape(
     month: str = Query(default="JAN", pattern="^(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)$"),
     year: int = Query(default=2026, ge=2020, le=2100),
+    record_auto_run: bool = Query(default=False),
+    run_key: str | None = Query(default=None),
 ) -> dict[str, Any]:
     scrape_period = {
         "month": month,
@@ -583,12 +585,35 @@ async def scrape(
         data = await get_data(force=True, scrape_period=scrape_period)
     except Exception as exc:
         raise HTTPException(status_code=502, detail=f"Scraping failed: {exc}") from exc
-    return {
+
+    status = {
         "status": "completed",
         "product_count": data["product_count"],
         "scraped_at": data["scraped_at"],
         "scrape_period": data.get("scrape_period", scrape_period),
     }
+    if record_auto_run:
+        completed_at = datetime.now(timezone.utc).isoformat()
+        monthly_status = {
+            "key": monthly_scrape_key(scrape_period),
+            "status": "completed",
+            "triggered_by": "render-cron",
+            "completed_at": completed_at,
+            "scrape_period": data.get("scrape_period", scrape_period),
+            "product_count": data["product_count"],
+            "quality_status": data.get("quality_audit", {}).get("status"),
+            "warnings": data.get("scrape_warnings", []),
+        }
+        save_monthly_auto_status(monthly_status)
+        save_auto_scrape_run(
+            run_key or f"render-cron-{year}-{month}",
+            {
+                **monthly_status,
+                "description": f"Render Cron scrape for {month} {year}",
+                "scraped_at": data["scraped_at"],
+            },
+        )
+    return status
 
 
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
