@@ -1,13 +1,16 @@
 import argparse
 import asyncio
 import json
+import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 BACKEND_DIR = ROOT / "backend"
 FRONTEND_SNAPSHOT_PATH = ROOT / "frontend" / "src" / "snapshotData.json"
+MONTHLY_AUTO_STATUS_PATH = BACKEND_DIR / "data" / "monthly_auto_scrape_status.json"
 
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
@@ -72,6 +75,27 @@ def build_frontend_snapshot(payload: dict) -> dict:
     return snapshot
 
 
+def write_monthly_status(payload: dict) -> None:
+    period = payload.get("scrape_period") or {}
+    month = period.get("month")
+    year = period.get("year")
+    if not month or not year:
+        return
+    write_json(
+        MONTHLY_AUTO_STATUS_PATH,
+        {
+            "key": f"monthly-{year}-{month}",
+            "status": "completed",
+            "triggered_by": os.environ.get("GITHUB_EVENT_NAME", "manual"),
+            "completed_at": datetime.now(timezone.utc).isoformat(),
+            "scrape_period": period,
+            "product_count": payload.get("product_count"),
+            "quality_status": payload.get("quality_audit", {}).get("status"),
+            "warnings": payload.get("scrape_warnings", []),
+        },
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Scrape a monthly catalog snapshot and persist dashboard data."
@@ -101,6 +125,7 @@ async def main() -> None:
     payload = await scrape_products(scrape_period=period)
     snapshot = build_frontend_snapshot(payload)
     write_json(FRONTEND_SNAPSHOT_PATH, snapshot)
+    write_monthly_status(payload)
     print(
         json.dumps(
             {
