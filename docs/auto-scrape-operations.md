@@ -49,6 +49,16 @@ Schedule it for the monthly maintenance window, for example 08:00 Bangkok time
 on the 1st day of every month. Keep the website running from saved snapshots
 while the job updates the files.
 
+Current Windows task setup:
+
+- Task name: `NIC Dashboard Monthly Auto Scrape`
+- Schedule: every month on day `1` at `07:30` Bangkok/local machine time
+- Script: `C:\Users\Patchara.V\Desktop\Scraping\scripts\run-monthly-scrape.ps1`
+- Next run after setup on 7 Aug 2026: `1 Sep 2026 07:30`
+- Multiple instances: `IgnoreNew`
+- Task execution limit: `20 minutes`
+- Script scrape timeout: `15 minutes`
+
 ## Manual/API Scrape Protection
 
 Manual scraping through the API is disabled by default.
