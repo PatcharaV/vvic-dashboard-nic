@@ -982,22 +982,14 @@ function App() {
     }
   }, [productPage, totalProductPages]);
 
-  async function scrapeLatest() {
+  async function reloadSavedSnapshot() {
     setScraping(true);
     const periodLabel = `${scrapeMonth} ${scrapeYear}`;
-    setMessage(`Scraping ${periodLabel} clothing snapshot...`);
+    setMessage(`Loading saved ${periodLabel} snapshot...`);
     try {
-      const params = new URLSearchParams({
-        month: scrapeMonth,
-        year: String(scrapeYear),
-      });
-      const response = await fetch(`/api/scrape?${params.toString()}`, {
-        method: "POST",
-      });
-      if (!response.ok) throw new Error("Scrape failed");
       await loadDashboard();
     } catch {
-      setMessage("Could not scrape. Check the Python API and network connection.");
+      setMessage("Could not load the saved monthly snapshot.");
     } finally {
       setScraping(false);
     }
@@ -1148,16 +1140,16 @@ function App() {
               </select>
             </label>
             <small>
-              View or refresh monthly catalog snapshots from JUN 2026 onward.
+              View saved monthly catalog snapshots from JUN 2026 onward.
             </small>
           </div>
           <button
             className="primary-button"
             type="button"
-            onClick={scrapeLatest}
+            onClick={reloadSavedSnapshot}
             disabled={scraping}
           >
-            {scraping ? "Scraping..." : "Refresh selected month"}
+            {scraping ? "Loading..." : "Reload saved month"}
           </button>
         </div>
       </header>

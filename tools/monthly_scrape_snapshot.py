@@ -1,9 +1,10 @@
 import argparse
 import asyncio
+import contextlib
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -12,6 +13,8 @@ BACKEND_DIR = ROOT / "backend"
 FRONTEND_SNAPSHOT_PATH = ROOT / "frontend" / "src" / "snapshotData.json"
 MONTHLY_AUTO_STATUS_PATH = BACKEND_DIR / "data" / "monthly_auto_scrape_status.json"
 AUTO_SCRAPE_RUNS_PATH = BACKEND_DIR / "data" / "auto_scrape_runs.json"
+SCRAPE_LOCK_PATH = BACKEND_DIR / "data" / "monthly_scrape.lock"
+LOCK_STALE_MINUTES = int(os.environ.get("SCRAPE_LOCK_STALE_MINUTES", "180"))
 
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
@@ -38,6 +41,38 @@ def write_json(path: Path, payload: dict) -> None:
         json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8",
     )
+
+
+@contextlib.contextmanager
+def scrape_file_lock():
+    SCRAPE_LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    stale_after = datetime.now(timezone.utc) - timedelta(minutes=LOCK_STALE_MINUTES)
+
+    if SCRAPE_LOCK_PATH.exists():
+        try:
+            lock_data = json.loads(SCRAPE_LOCK_PATH.read_text(encoding="utf-8"))
+            created_at = datetime.fromisoformat(lock_data.get("created_at", ""))
+        except (json.JSONDecodeError, OSError, ValueError):
+            created_at = datetime.min.replace(tzinfo=timezone.utc)
+        if created_at > stale_after:
+            raise SystemExit(
+                f"Monthly scrape already running; lock file exists at {SCRAPE_LOCK_PATH}"
+            )
+        SCRAPE_LOCK_PATH.unlink(missing_ok=True)
+
+    lock_fd = os.open(str(SCRAPE_LOCK_PATH), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    try:
+        with os.fdopen(lock_fd, "w", encoding="utf-8") as handle:
+            json.dump(
+                {
+                    "pid": os.getpid(),
+                    "created_at": datetime.now(timezone.utc).isoformat(),
+                },
+                handle,
+            )
+        yield
+    finally:
+        SCRAPE_LOCK_PATH.unlink(missing_ok=True)
 
 
 def build_frontend_snapshot(payload: dict) -> dict:
@@ -147,7 +182,8 @@ async def main() -> None:
     else:
         period = current_scrape_period()
 
-    payload = await scrape_products(scrape_period=period)
+    with scrape_file_lock():
+        payload = await scrape_products(scrape_period=period)
     snapshot = build_frontend_snapshot(payload)
     write_json(FRONTEND_SNAPSHOT_PATH, snapshot)
     write_monthly_status(payload)

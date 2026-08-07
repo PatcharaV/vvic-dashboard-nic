@@ -14,6 +14,7 @@ MONTH = os.environ.get("SCRAPE_MONTH", "AUG").upper()
 YEAR = os.environ.get("SCRAPE_YEAR", "2026")
 RUN_KEY = os.environ.get("AUTO_SCRAPE_RUN_KEY", f"render-cron-{YEAR}-{MONTH}")
 TIMEOUT_SECONDS = int(os.environ.get("SCRAPE_TIMEOUT_SECONDS", "3600"))
+SCRAPE_API_TOKEN = os.environ.get("SCRAPE_API_TOKEN", "")
 
 
 def read_json(request: Request) -> dict:
@@ -30,6 +31,7 @@ def main() -> int:
             "year": YEAR,
             "record_auto_run": "true",
             "run_key": RUN_KEY,
+            **({"token": SCRAPE_API_TOKEN} if SCRAPE_API_TOKEN else {}),
         }
     )
     scrape_url = f"{BASE_URL}/api/scrape?{params}"

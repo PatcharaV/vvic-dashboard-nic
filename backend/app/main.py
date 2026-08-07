@@ -1,5 +1,7 @@
 import asyncio
 import json
+import os
+import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, time, timezone
 from pathlib import Path
@@ -50,6 +52,12 @@ MONTHLY_AUTO_STATUS_PATH = CACHE_PATH.parent / "monthly_auto_scrape_status.json"
 MAINTENANCE_START = time(8, 0)
 MAINTENANCE_END = time(8, 30)
 ONE_TIME_AUTO_SCRAPES: list[dict[str, Any]] = []
+ENABLE_MANUAL_SCRAPE = os.environ.get("ENABLE_MANUAL_SCRAPE", "").lower() in {
+    "1",
+    "true",
+    "yes",
+}
+SCRAPE_API_TOKEN = os.environ.get("SCRAPE_API_TOKEN", "")
 
 
 def make_scrape_period(month: str | None, year: int | None) -> dict[str, Any] | None:
@@ -126,6 +134,22 @@ def consume_task_exception(task: asyncio.Task) -> None:
         task.exception()
     except asyncio.CancelledError:
         pass
+
+
+def validate_scrape_access(token: str | None = None) -> None:
+    if SCRAPE_API_TOKEN:
+        if token and secrets.compare_digest(token, SCRAPE_API_TOKEN):
+            return
+        raise HTTPException(status_code=403, detail="Invalid scrape token")
+    if ENABLE_MANUAL_SCRAPE:
+        return
+    raise HTTPException(
+        status_code=403,
+        detail=(
+            "Manual scraping is disabled. Use the scheduled scraper to refresh "
+            "monthly catalog snapshots."
+        ),
+    )
 
 
 def maintenance_window(now: datetime | None = None) -> dict[str, Any]:
@@ -368,7 +392,8 @@ async def maintenance() -> dict[str, Any]:
 
 
 @app.post("/api/auto-scrape/monthly")
-async def auto_scrape_monthly() -> dict[str, Any]:
+async def auto_scrape_monthly(token: str | None = None) -> dict[str, Any]:
+    validate_scrape_access(token)
     return start_monthly_auto_scrape("external-scheduler")
 
 
@@ -574,7 +599,9 @@ async def scrape(
     year: int = Query(default=2026, ge=2020, le=2100),
     record_auto_run: bool = Query(default=False),
     run_key: str | None = Query(default=None),
+    token: str | None = Query(default=None),
 ) -> dict[str, Any]:
+    validate_scrape_access(token)
     scrape_period = {
         "month": month,
         "month_label": MONTH_LABELS[month],

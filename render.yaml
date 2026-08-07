@@ -7,10 +7,3 @@ services:
     startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
     autoDeploy: true
-  - type: cron
-    name: vvic-dashboard-auto-scrape-test
-    runtime: python
-    plan: starter
-    schedule: "35 3 7 8 *"
-    buildCommand: python --version
-    startCommand: DASHBOARD_BASE_URL=https://vvic-dashboard-nic-rebz.onrender.com SCRAPE_MONTH=AUG SCRAPE_YEAR=2026 AUTO_SCRAPE_RUN_KEY=render-cron-test-2026-08-07-1035 python tools/render_cron_scrape.py
