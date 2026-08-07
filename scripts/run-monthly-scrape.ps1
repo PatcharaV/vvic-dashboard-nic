@@ -40,29 +40,35 @@ if ($ExitCode -ne 0) {
     exit $ExitCode
 }
 
-try {
-    $Npm = (Get-Command npm.cmd -ErrorAction SilentlyContinue).Source
-    if ($Npm) {
-        Write-Log "Building frontend snapshot with npm."
-        Push-Location (Join-Path $ProjectRoot "frontend")
-        try {
-            $BuildOutput = & $Npm run build 2>&1
-            $BuildExitCode = $LASTEXITCODE
-            $BuildOutput | Tee-Object -FilePath $LogFile -Append
-        } finally {
-            Pop-Location
+$RunFrontendBuild = $env:RUN_FRONTEND_BUILD -in @("1", "true", "TRUE", "yes", "YES")
+if ($RunFrontendBuild) {
+    try {
+        $Npm = (Get-Command npm.cmd -ErrorAction SilentlyContinue).Source
+        if ($Npm) {
+            Write-Log "Building frontend snapshot with npm."
+            Push-Location (Join-Path $ProjectRoot "frontend")
+            try {
+                $env:NO_COLOR = "1"
+                $BuildOutput = & $Npm run build 2>&1
+                $BuildExitCode = $LASTEXITCODE
+                $BuildOutput | ForEach-Object { Write-Log $_ }
+            } finally {
+                Pop-Location
+            }
+            if ($BuildExitCode -ne 0) {
+                Write-Log "Frontend build failed with exit code $BuildExitCode."
+                exit $BuildExitCode
+            }
+        } else {
+            Write-Log "npm.cmd was not found. Skipping frontend build."
         }
-        if ($BuildExitCode -ne 0) {
-            Write-Log "Frontend build failed with exit code $BuildExitCode."
-            exit $BuildExitCode
-        }
-    } else {
-        Write-Log "npm.cmd was not found. Skipping frontend build."
+    } catch {
+        Write-Log "Frontend build crashed before completion."
+        Write-Log $_.Exception.Message
+        exit 1
     }
-} catch {
-    Write-Log "Frontend build crashed before completion."
-    Write-Log $_.Exception.Message
-    exit 1
+} else {
+    Write-Log "Skipping frontend build. Set RUN_FRONTEND_BUILD=true to enable it."
 }
 
 Write-Log "NIC Dashboard monthly scrape completed successfully."

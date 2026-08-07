@@ -141721,7 +141721,7 @@
   },
   "quality_decision": "fallback",
   "quality_warnings": [
-    "Scrape error: Client error '429 Too Many Requests' for url 'https://travismathew.com/products.json?limit=250&page=3'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "Scrape error: Client error '429 Too Many Requests' for url 'https://travismathew.com/products.json?limit=250&page=6'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
     "Categories disappeared: Button-Ups, Dresses, Hoodies & Pullovers, Joggers, Leggings, Outerwear, Pants, Polos, Quarter Zips, Shorts, Skorts & Skirts, Tanks"
   ],
   "monthly_change": {

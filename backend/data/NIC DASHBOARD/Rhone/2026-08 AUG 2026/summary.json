@@ -88742,7 +88742,7 @@
   },
   "quality_decision": "fallback",
   "quality_warnings": [
-    "Scrape error: Client error '429 Too Many Requests' for url 'https://rhone.myshopify.com/collections/womens-view-all/products.json?limit=250&page=2'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "Scrape error: Client error '429 Too Many Requests' for url 'https://rhone.myshopify.com/collections/womens-best-sellers/products.json?limit=250&page=1'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
     "Categories disappeared: 1/4 zips, Blazers, Button ups, Dresses, Hoodies & pullovers, Leggings, Outerwear, Pants, Polos, Shorts, Skirts, Sports Bras"
   ],
   "monthly_change": {
