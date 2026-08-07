@@ -114340,8 +114340,11 @@
     "material": 1783,
     "price": 1803
   },
-  "quality_decision": "publish",
-  "quality_warnings": [],
+  "quality_decision": "fallback",
+  "quality_warnings": [
+    "Scrape error: Client error '403 Forbidden' for url 'https://shop.lululemon.com/robots.txt'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+    "Categories disappeared: Athletic Shorts, Button Down Shirts, Capris, Coats & Jackets, Dresses, Hoodies, Hoodies & Sweatshirts, Jackets, Joggers, Leggings, Liner Shorts, Long Sleeve Shirts"
+  ],
   "monthly_change": {
     "previous_period": "2026-07",
     "previous_product_count": 1765,

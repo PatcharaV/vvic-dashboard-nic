@@ -19003,7 +19003,7 @@
   },
   "quality_decision": "fallback",
   "quality_warnings": [
-    "Scrape error: Client error '429 Too Many Requests' for url 'https://us.strauss.com/collections/men/products.json?limit=250&page=2'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "Scrape error: Client error '429 Too Many Requests' for url 'https://us.strauss.com/collections/men?page=4'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
     "Categories disappeared: Hoodies & Sweatshirts, Leggings, Outerwear, Pants, Shirts, Shorts, Thermal Layers"
   ],
   "monthly_change": {

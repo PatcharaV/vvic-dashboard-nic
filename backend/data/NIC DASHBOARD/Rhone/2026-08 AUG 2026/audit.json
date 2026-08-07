@@ -1,42 +1,12 @@
 {
   "brand": "rhone",
   "label": "Rhone",
-  "decision": "publish",
-  "warnings": [],
+  "decision": "fallback",
+  "warnings": [
+    "Scrape error: Client error '429 Too Many Requests' for url 'https://rhone.myshopify.com/collections/womens-view-all/products.json?limit=250&page=2'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+    "Categories disappeared: 1/4 zips, Blazers, Button ups, Dresses, Hoodies & pullovers, Leggings, Outerwear, Pants, Polos, Shorts, Skirts, Sports Bras"
+  ],
   "old": {
-    "product_count": 1163,
-    "available_count": 1163,
-    "category_counts": {
-      "1/4 zips": 85,
-      "Blazers": 19,
-      "Button ups": 88,
-      "Dresses": 44,
-      "Hoodies & pullovers": 131,
-      "Leggings": 49,
-      "Outerwear": 44,
-      "Pants": 127,
-      "Polos": 77,
-      "Shorts": 135,
-      "Skirts": 65,
-      "Sports Bras": 59,
-      "Sweaters": 22,
-      "Swim": 23,
-      "Tanks": 68,
-      "Tees": 106,
-      "Underwear": 21
-    },
-    "audience_counts": {
-      "men": 528,
-      "women": 635
-    },
-    "missing": {
-      "image": 0,
-      "color": 0,
-      "material": 5,
-      "price": 0
-    }
-  },
-  "new": {
     "product_count": 1205,
     "available_count": 1205,
     "category_counts": {
@@ -66,6 +36,18 @@
       "image": 0,
       "color": 0,
       "material": 4,
+      "price": 0
+    }
+  },
+  "new": {
+    "product_count": 0,
+    "available_count": 0,
+    "category_counts": {},
+    "audience_counts": {},
+    "missing": {
+      "image": 0,
+      "color": 0,
+      "material": 0,
       "price": 0
     }
   }
