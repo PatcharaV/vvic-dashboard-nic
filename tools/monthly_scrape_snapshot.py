@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BACKEND_DIR = ROOT / "backend"
 FRONTEND_SNAPSHOT_PATH = ROOT / "frontend" / "src" / "snapshotData.json"
 MONTHLY_AUTO_STATUS_PATH = BACKEND_DIR / "data" / "monthly_auto_scrape_status.json"
+AUTO_SCRAPE_RUNS_PATH = BACKEND_DIR / "data" / "auto_scrape_runs.json"
 
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
@@ -96,6 +97,30 @@ def write_monthly_status(payload: dict) -> None:
     )
 
 
+def write_run_marker(payload: dict) -> None:
+    run_key = os.environ.get("AUTO_SCRAPE_RUN_KEY")
+    if not run_key:
+        return
+
+    existing: dict = {}
+    if AUTO_SCRAPE_RUNS_PATH.exists():
+        try:
+            existing = json.loads(AUTO_SCRAPE_RUNS_PATH.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            existing = {}
+
+    existing[run_key] = {
+        "status": "completed",
+        "triggered_by": os.environ.get("GITHUB_EVENT_NAME", "manual"),
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "scrape_period": payload.get("scrape_period") or {},
+        "product_count": payload.get("product_count"),
+        "quality_status": payload.get("quality_audit", {}).get("status"),
+        "warnings": payload.get("scrape_warnings", []),
+    }
+    write_json(AUTO_SCRAPE_RUNS_PATH, existing)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Scrape a monthly catalog snapshot and persist dashboard data."
@@ -126,6 +151,7 @@ async def main() -> None:
     snapshot = build_frontend_snapshot(payload)
     write_json(FRONTEND_SNAPSHOT_PATH, snapshot)
     write_monthly_status(payload)
+    write_run_marker(payload)
     print(
         json.dumps(
             {

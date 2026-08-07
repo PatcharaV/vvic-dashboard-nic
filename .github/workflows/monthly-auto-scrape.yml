@@ -6,6 +6,8 @@ on:
     - cron: "0 1 1 * *"
     # 08:15 Bangkok time on days 2-7 as a catch-up if day 1 was missed.
     - cron: "15 1 2-7 * *"
+    # One-time validation window: 10:00-10:50 Bangkok time on 7 Aug 2026.
+    - cron: "0,10,20,30,40,50 3 7 8 *"
   workflow_dispatch:
     inputs:
       month:
@@ -19,6 +21,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: monthly-auto-scrape
+  cancel-in-progress: false
 
 jobs:
   scrape:
@@ -42,26 +48,25 @@ jobs:
             exit 0
           fi
 
+          one_time_schedule="0,10,20,30,40,50 3 7 8 *"
+          one_time_key="one-time-2026-08-07-1000"
+          if [ "${{ github.event.schedule }}" = "$one_time_schedule" ]; then
+            if python -c 'import json, sys; from pathlib import Path; path = Path("backend/data/auto_scrape_runs.json"); status = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}; raise SystemExit(0 if status.get(sys.argv[1], {}).get("status") == "completed" else 1)' "$one_time_key"
+            then
+              echo "One-time validation scrape already completed."
+              echo "should_run=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            echo "Running one-time validation scrape for 7 Aug 2026 10:00 Bangkok time."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           bangkok_month="$(TZ=Asia/Bangkok date +%b | tr '[:lower:]' '[:upper:]')"
           bangkok_year="$(TZ=Asia/Bangkok date +%Y)"
           monthly_key="monthly-${bangkok_year}-${bangkok_month}"
-          if python - "$monthly_key" <<'PY'
-          import json
-          import sys
-          from pathlib import Path
-
-          key = sys.argv[1]
-          path = Path("backend/data/monthly_auto_scrape_status.json")
-          if not path.exists():
-              raise SystemExit(1)
-          try:
-              status = json.loads(path.read_text(encoding="utf-8"))
-          except json.JSONDecodeError:
-              raise SystemExit(1)
-          raise SystemExit(
-              0 if status.get("key") == key and status.get("status") == "completed" else 1
-          )
-          PY
+          if python -c 'import json, sys; from pathlib import Path; path = Path("backend/data/monthly_auto_scrape_status.json"); status = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}; raise SystemExit(0 if status.get("key") == sys.argv[1] and status.get("status") == "completed" else 1)' "$monthly_key"
           then
             echo "Monthly scrape already completed for ${monthly_key}."
             echo "should_run=false" >> "$GITHUB_OUTPUT"
@@ -105,6 +110,8 @@ jobs:
         run: |
           if [ -n "${{ inputs.month }}" ] && [ -n "${{ inputs.year }}" ]; then
             python tools/monthly_scrape_snapshot.py --month "${{ inputs.month }}" --year "${{ inputs.year }}"
+          elif [ "${{ github.event.schedule }}" = "0,10,20,30,40,50 3 7 8 *" ]; then
+            AUTO_SCRAPE_RUN_KEY="one-time-2026-08-07-1000" python tools/monthly_scrape_snapshot.py --month AUG --year 2026
           else
             python tools/monthly_scrape_snapshot.py
           fi
@@ -119,7 +126,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add backend/data/history backend/data/NIC\ DASHBOARD backend/data/audits backend/data/products.json backend/data/monthly_auto_scrape_status.json frontend/src/snapshotData.json frontend/dist
+          git add backend/data/history backend/data/NIC\ DASHBOARD backend/data/audits backend/data/products.json backend/data/monthly_auto_scrape_status.json backend/data/auto_scrape_runs.json frontend/src/snapshotData.json frontend/dist
           if git diff --cached --quiet; then
             echo "No monthly scrape changes to commit."
             exit 0
