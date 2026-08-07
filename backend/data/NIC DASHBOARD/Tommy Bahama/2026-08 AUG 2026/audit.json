@@ -4,37 +4,37 @@
   "decision": "publish",
   "warnings": [],
   "old": {
-    "product_count": 3267,
-    "available_count": 2993,
+    "product_count": 3909,
+    "available_count": 3909,
     "category_counts": {
-      "Dresses": 172,
-      "Hoodies & Sweatshirts": 700,
-      "Jeans": 28,
-      "Outerwear": 61,
-      "Pants": 106,
-      "Polos": 655,
-      "Shirts": 1171,
-      "Shorts": 215,
-      "Skirts": 24,
-      "Sweaters": 29,
-      "Swim": 87,
-      "Tanks": 19
+      "Dresses": 213,
+      "Hoodies & Sweatshirts": 859,
+      "Jeans": 37,
+      "Outerwear": 66,
+      "Pants": 124,
+      "Polos": 700,
+      "Shirts": 1485,
+      "Shorts": 238,
+      "Skirts": 32,
+      "Sweaters": 39,
+      "Swim": 93,
+      "Tanks": 23
     },
     "audience_counts": {
-      "men": 2264,
+      "men": 2799,
       "unisex": 1,
-      "women": 1002
+      "women": 1109
     },
     "missing": {
       "image": 0,
       "color": 0,
-      "material": 225,
-      "price": 3267
+      "material": 1,
+      "price": 3909
     }
   },
   "new": {
     "product_count": 3909,
-    "available_count": 3909,
+    "available_count": 3870,
     "category_counts": {
       "Dresses": 213,
       "Hoodies & Sweatshirts": 859,

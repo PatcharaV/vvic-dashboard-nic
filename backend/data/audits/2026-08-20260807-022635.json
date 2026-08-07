@@ -1,0 +1,347 @@
+{
+  "created_at": "2026-08-07T02:26:40.745479+00:00",
+  "scrape_period": {
+    "month": "AUG",
+    "month_label": "August",
+    "year": 2026,
+    "label": "AUG 2026"
+  },
+  "status": "published_with_fallback",
+  "published_product_count": 9101,
+  "brand_audits": [
+    {
+      "brand": "strauss",
+      "label": "Strauss",
+      "decision": "fallback",
+      "warnings": [
+        "Scrape error: Client error '429 Too Many Requests' for url 'https://us.strauss.com/collections/men?page=4'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "Categories disappeared: Hoodies & Sweatshirts, Leggings, Outerwear, Pants, Shirts, Shorts, Thermal Layers"
+      ],
+      "old": {
+        "product_count": 300,
+        "available_count": 295,
+        "category_counts": {
+          "Hoodies & Sweatshirts": 32,
+          "Leggings": 3,
+          "Outerwear": 51,
+          "Pants": 91,
+          "Shirts": 112,
+          "Shorts": 20,
+          "Thermal Layers": 2
+        },
+        "audience_counts": {
+          "kids": 20,
+          "men": 235,
+          "women": 45
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 0,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 0,
+        "available_count": 0,
+        "category_counts": {},
+        "audience_counts": {},
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 0,
+          "price": 0
+        }
+      }
+    },
+    {
+      "brand": "rhone",
+      "label": "Rhone",
+      "decision": "fallback",
+      "warnings": [
+        "Scrape error: Client error '429 Too Many Requests' for url 'https://rhone.myshopify.com/collections/mens-view-all/products.json?limit=250&page=3'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "Categories disappeared: 1/4 zips, Blazers, Button ups, Dresses, Hoodies & pullovers, Leggings, Outerwear, Pants, Polos, Shorts, Skirts, Sports Bras"
+      ],
+      "old": {
+        "product_count": 1163,
+        "available_count": 1163,
+        "category_counts": {
+          "1/4 zips": 85,
+          "Blazers": 19,
+          "Button ups": 88,
+          "Dresses": 44,
+          "Hoodies & pullovers": 131,
+          "Leggings": 49,
+          "Outerwear": 44,
+          "Pants": 127,
+          "Polos": 77,
+          "Shorts": 135,
+          "Skirts": 65,
+          "Sports Bras": 59,
+          "Sweaters": 22,
+          "Swim": 23,
+          "Tanks": 68,
+          "Tees": 106,
+          "Underwear": 21
+        },
+        "audience_counts": {
+          "men": 528,
+          "women": 635
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 5,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 0,
+        "available_count": 0,
+        "category_counts": {},
+        "audience_counts": {},
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 0,
+          "price": 0
+        }
+      }
+    },
+    {
+      "brand": "arcteryx",
+      "label": "Arc'teryx",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 317,
+        "available_count": 317,
+        "category_counts": {
+          "Base Layer": 6,
+          "Collection Only": 96,
+          "Fleece": 26,
+          "Insulated Jackets": 35,
+          "Pants": 36,
+          "Shell Jackets": 56,
+          "Shirts and Tops": 48,
+          "Shorts": 18,
+          "Vests": 3
+        },
+        "audience_counts": {
+          "men": 158,
+          "women": 160
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 10,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 323,
+        "available_count": 323,
+        "category_counts": {
+          "Base Layer": 2,
+          "Collection Only": 104,
+          "Fleece": 32,
+          "Insulated Jackets": 35,
+          "Pants": 34,
+          "Shell Jackets": 59,
+          "Shirts and Tops": 47,
+          "Shorts": 15,
+          "Vests": 2
+        },
+        "audience_counts": {
+          "men": 169,
+          "women": 155
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 61,
+          "price": 7
+        }
+      }
+    },
+    {
+      "brand": "lululemon",
+      "label": "lululemon",
+      "decision": "fallback",
+      "warnings": [
+        "Scrape error: Client error '403 Forbidden' for url 'https://shop.lululemon.com/robots.txt'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+        "Categories disappeared: Athletic Shorts, Button Down Shirts, Capris, Coats & Jackets, Dresses, Hoodies, Hoodies & Sweatshirts, Jackets, Joggers, Leggings, Liner Shorts, Long Sleeve Shirts"
+      ],
+      "old": {
+        "product_count": 1803,
+        "available_count": 1790,
+        "category_counts": {
+          "Athletic Shorts": 9,
+          "Button Down Shirts": 14,
+          "Capris": 23,
+          "Coats & Jackets": 11,
+          "Dresses": 60,
+          "Hoodies": 200,
+          "Hoodies & Sweatshirts": 9,
+          "Jackets": 51,
+          "Joggers": 138,
+          "Leggings": 122,
+          "Liner Shorts": 11,
+          "Long Sleeve Shirts": 139,
+          "Pants": 82,
+          "Polo Shirts": 39,
+          "Quarter Zips": 52,
+          "Short Sleeve Shirts": 172,
+          "Shorts": 186,
+          "Sports Bras": 92,
+          "Sweaters": 12,
+          "Sweatpants": 26,
+          "Sweatshirts": 8,
+          "Swim Trunks": 7,
+          "T-Shirts": 19,
+          "Tank Tops": 130,
+          "Trousers": 112,
+          "Underwear": 68,
+          "Vests": 11
+        },
+        "audience_counts": {
+          "men": 672,
+          "women": 1131
+        },
+        "missing": {
+          "image": 1753,
+          "color": 1753,
+          "material": 1783,
+          "price": 1803
+        }
+      },
+      "new": {
+        "product_count": 0,
+        "available_count": 0,
+        "category_counts": {},
+        "audience_counts": {},
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 0,
+          "price": 0
+        }
+      }
+    },
+    {
+      "brand": "tommybahama",
+      "label": "Tommy Bahama",
+      "decision": "publish",
+      "warnings": [],
+      "old": {
+        "product_count": 3909,
+        "available_count": 3909,
+        "category_counts": {
+          "Dresses": 213,
+          "Hoodies & Sweatshirts": 859,
+          "Jeans": 37,
+          "Outerwear": 66,
+          "Pants": 124,
+          "Polos": 700,
+          "Shirts": 1485,
+          "Shorts": 238,
+          "Skirts": 32,
+          "Sweaters": 39,
+          "Swim": 93,
+          "Tanks": 23
+        },
+        "audience_counts": {
+          "men": 2799,
+          "unisex": 1,
+          "women": 1109
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 1,
+          "price": 3909
+        }
+      },
+      "new": {
+        "product_count": 3909,
+        "available_count": 3870,
+        "category_counts": {
+          "Dresses": 213,
+          "Hoodies & Sweatshirts": 859,
+          "Jeans": 37,
+          "Outerwear": 66,
+          "Pants": 124,
+          "Polos": 700,
+          "Shirts": 1485,
+          "Shorts": 238,
+          "Skirts": 32,
+          "Sweaters": 39,
+          "Swim": 93,
+          "Tanks": 23
+        },
+        "audience_counts": {
+          "men": 2799,
+          "unisex": 1,
+          "women": 1109
+        },
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 1,
+          "price": 3909
+        }
+      }
+    },
+    {
+      "brand": "travismathew",
+      "label": "TravisMathew",
+      "decision": "fallback",
+      "warnings": [
+        "Scrape error: Client error '429 Too Many Requests' for url 'https://travismathew.com/products.json?limit=250&page=2'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "Categories disappeared: Button-Ups, Dresses, Hoodies & Pullovers, Joggers, Leggings, Outerwear, Pants, Polos, Quarter Zips, Shorts, Skorts & Skirts, Tanks"
+      ],
+      "old": {
+        "product_count": 1603,
+        "available_count": 1274,
+        "category_counts": {
+          "Button-Ups": 93,
+          "Dresses": 34,
+          "Hoodies & Pullovers": 110,
+          "Joggers": 7,
+          "Leggings": 3,
+          "Outerwear": 67,
+          "Pants": 41,
+          "Polos": 510,
+          "Quarter Zips": 153,
+          "Shorts": 76,
+          "Skorts & Skirts": 25,
+          "Tanks": 29,
+          "Tees": 455
+        },
+        "audience_counts": {
+          "kids": 56,
+          "men": 1494,
+          "women": 53
+        },
+        "missing": {
+          "image": 9,
+          "color": 0,
+          "material": 853,
+          "price": 0
+        }
+      },
+      "new": {
+        "product_count": 0,
+        "available_count": 0,
+        "category_counts": {},
+        "audience_counts": {},
+        "missing": {
+          "image": 0,
+          "color": 0,
+          "material": 0,
+          "price": 0
+        }
+      }
+    }
+  ]
+}

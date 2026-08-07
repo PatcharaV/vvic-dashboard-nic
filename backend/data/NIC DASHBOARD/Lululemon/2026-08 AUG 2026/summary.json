@@ -64,12 +64,12 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Soft Sweat-Wicking Fabric",
-        "Bodice is made from an ultra-soft, lightweight version of our NuluTM fabric that's brushed for a luxurious feel and an elevated look. It's four-way stretch, sweat wicking, and quick-drying to keep you comfortable all day long",
-        "Soft, silk-blend modal skirt fabric is four-way stretch, sweat-wicking, quick-drying, and naturally breathable",
-        "Fabric is derived from wood-based materials from well-managed forests",
-        "Contours your body",
-        "Falls from the ankle to the floor"
+        "Sweat-Wicking",
+        "Nulu",
+        "Quick-Drying",
+        "Four-Way Stretch",
+        "Lightweight",
+        "Breathable"
       ],
       "product_functions": [
         "Stretch"
@@ -248,16 +248,10 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Sweat-Wicking, Waffle-Knit Fabric",
-        "Sweat-wicking",
-        "Quick-drying",
-        "Soft waffle-knit texture",
-        "Open-knit ventilation",
-        "100% of the polyester in this product is recycled (excluding trims)",
-        "Zippered hand pockets with hidden phone sleeves",
-        "Reflective details",
-        "Ribbed collar",
-        "Designed to fit loosely with extra room in the chest and at the waist"
+        "Waffle-Knit",
+        "Sweat-Wicking",
+        "Quick-Drying",
+        "Ventilation"
       ],
       "product_functions": [
         "Stretch"
@@ -413,21 +407,13 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Everyday Performance, WarpstremeTM Fabric",
-        "Everyday performance",
-        "Shape retention",
-        "Quick-drying",
-        "Four-way stretch",
+        "Warpstreme",
+        "Everyday Performance",
+        "Shape Retention",
+        "Quick-Drying",
+        "Four-Way Stretch",
         "Breathable",
-        "Wrinkle-resistant",
-        "Feels smooth, falls softly away from body",
-        "Hand pockets with hidden phone sleeve",
-        "Discreet zippered pocket",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort",
-        "Intended to sit at ankle"
+        "Wrinkle-Resistant"
       ],
       "product_functions": [],
       "top_seller": false,
@@ -654,16 +640,9 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Water-Resistant Stretch Fabric",
-        "Water-resistant",
-        "Abrasion-resistant",
-        "UV protective",
-        "UPF 40+ provides very good UV protection to only covered areas. This item’s protection may be reduced with use, or if it gets stretched or wet. Sun exposure causes skin damage",
-        "Front pockets; one with a hidden phone sleeve",
-        "Small drop-in pocket on the right-hand side for golf tees",
-        "Back pockets with snap closures fit a phone and score cards",
-        "Stretch elastic panels on the waistband",
-        "Streamlined fit that gives glutes and thighs breathing room"
+        "Water-Resistant",
+        "Abrasion-Resistant",
+        "UPF 40+"
       ],
       "product_functions": [
         "Stretch"
@@ -922,16 +901,9 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Water-Resistant Stretch Fabric",
-        "Water-resistant",
-        "Abrasion-resistant",
-        "UV protective",
-        "UPF 40+ provides very good UV protection to only covered areas. This item’s protection may be reduced with use, or if it gets stretched or wet. Sun exposure causes skin damage",
-        "Front pockets; one with a hidden phone sleeve",
-        "Small drop-in pocket on the right-hand side for golf tees",
-        "Back pockets with snap closures fit a phone and score cards",
-        "Stretch elastic panels on the waistband",
-        "Streamlined fit that gives glutes and thighs breathing room"
+        "Water-Resistant",
+        "Abrasion-Resistant",
+        "UPF 40+"
       ],
       "product_functions": [
         "Stretch"
@@ -1142,17 +1114,11 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Naturally Breathable WovenAirTM Fabric",
-        "Naturally breathable",
-        "Four-way stretch",
-        "Sweat-wicking",
-        "Quick-drying",
-        "100% of the polyester in this product is recycled (excluding trims)",
-        "Hand pockets with hidden phone sleeve",
-        "Discreet zippered seam pocket",
-        "Hidden snaps mean the back pockets won't gape",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our shorts so you can move in comfort"
+        "WovenAir",
+        "Breathable",
+        "Four-Way Stretch",
+        "Sweat-Wicking",
+        "Quick-Drying"
       ],
       "product_functions": [
         "Stretch"
@@ -1602,17 +1568,11 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Naturally Breathable WovenAirTM Fabric",
-        "Naturally breathable",
-        "Four-way stretch",
-        "Sweat-wicking",
-        "Quick-drying",
-        "100% of the polyester in this product is recycled (excluding trims)",
-        "Hand pockets with hidden phone sleeve",
-        "Discreet zippered seam pocket",
-        "Hidden snaps mean the back pockets won't gape",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our shorts so you can move in comfort"
+        "WovenAir",
+        "Breathable",
+        "Four-Way Stretch",
+        "Sweat-Wicking",
+        "Quick-Drying"
       ],
       "product_functions": [
         "Stretch"
@@ -1872,21 +1832,13 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Everyday Performance WarpstremeTM Fabric",
-        "Everyday performance",
-        "Shape retention",
-        "Quick-drying",
-        "Four-way stretch",
+        "Warpstreme",
+        "Everyday Performance",
+        "Shape Retention",
+        "Quick-Drying",
+        "Four-Way Stretch",
         "Breathable",
-        "Wrinkle-resistant",
-        "Feels smooth, falls softly away from body",
-        "100% of the polyester in this product is recycled (excluding trims)",
-        "Discreet zippered pocket on side seam",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Tapers from thigh to hem",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort"
+        "Wrinkle-Resistant"
       ],
       "product_functions": [],
       "top_seller": false,
@@ -2135,21 +2087,13 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Everyday Performance WarpstremeTM Fabric",
-        "Everyday performance",
-        "Shape retention",
-        "Quick-drying",
-        "Four-way stretch",
+        "Warpstreme",
+        "Everyday Performance",
+        "Shape Retention",
+        "Quick-Drying",
+        "Four-Way Stretch",
         "Breathable",
-        "Wrinkle-resistant",
-        "Feels smooth, falls softly away from body",
-        "100% of the polyester in this product is recycled (excluding trims)",
-        "Discreet zippered pocket on side seam",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Tapers from thigh to hem",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort"
+        "Wrinkle-Resistant"
       ],
       "product_functions": [],
       "top_seller": false,
@@ -2483,21 +2427,13 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Everyday Performance WarpstremeTM Fabric",
-        "Everyday performance",
-        "Shape retention",
-        "Quick-drying",
-        "Four-way stretch",
+        "Warpstreme",
+        "Everyday Performance",
+        "Shape Retention",
+        "Quick-Drying",
+        "Four-Way Stretch",
         "Breathable",
-        "Wrinkle-resistant",
-        "Feels smooth, falls softly away from body",
-        "100% of the polyester in this product is recycled (excluding trims)",
-        "Discreet zippered pocket on side seam",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Tapers from thigh to hem",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort"
+        "Wrinkle-Resistant"
       ],
       "product_functions": [],
       "top_seller": false,
@@ -2631,16 +2567,7 @@
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [
-        "Structured, Smooth Twill Fabric",
-        "Structured feel",
-        "Refined, slightly sueded texture",
-        "Discreet zippered pocket on side seam",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort"
-      ],
+      "innovations": [],
       "product_functions": [],
       "top_seller": false,
       "published_at": null,
@@ -2805,17 +2732,9 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Cotton-Blend VersaTwillTM Fabric",
-        "Four-way stretch",
-        "Sweat-wicking",
-        "Quick-drying",
-        "Discreet zippered pocket on side seam",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Tapers from thigh to hem",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort",
-        "Cotton-Blend, VersaTwillTM Fabric"
+        "Four-Way Stretch",
+        "Sweat-Wicking",
+        "Quick-Drying"
       ],
       "product_functions": [
         "Stretch"
@@ -3070,16 +2989,9 @@
       "fabric_treatment": [],
       "construction": [],
       "innovations": [
-        "Naturally Breathable WovenAirTM Fabric",
-        "Naturally breathable",
-        "Four-way stretch",
-        "100% of the polyester in this product is recycled (excluding trims)",
-        "Discreet zippered pocket on side seam",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Tapers from thigh to hem",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort"
+        "WovenAir",
+        "Breathable",
+        "Four-Way Stretch"
       ],
       "product_functions": [
         "Stretch"
@@ -4000,16 +3912,7 @@
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [
-        "Structured, Smooth Twill Fabric",
-        "Structured feel",
-        "Refined, slightly sueded texture",
-        "Discreet zippered pocket on side seam",
-        "Back welt pockets with hidden snaps",
-        "Flip up the cuffs to reveal reflective details",
-        "Streamlined fit that gives glutes and thighs breathing room",
-        "Our ABCTM (Anti-Ball-Crushing) technology uses an ergonomic gusset to remove tension from the crotch of our pants so you can move in comfort"
-      ],
+      "innovations": [],
       "product_functions": [],
       "top_seller": false,
       "published_at": null,
@@ -4154,23 +4057,53 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 10,
+      "color": "Black / Olive Brown / Army Green / Terra Brown / Artifact / Wacky Khaki / Iron Blue / Mojave Tan / Rover / True Navy",
+      "available_colors": [
+        "Black",
+        "Olive Brown",
+        "Army Green",
+        "Terra Brown",
+        "Artifact",
+        "Wacky Khaki",
+        "Iron Blue",
+        "Mojave Tan",
+        "Rover",
+        "True Navy"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Black",
+        "Olive Brown",
+        "Army Green",
+        "Terra Brown",
+        "Artifact",
+        "Wacky Khaki",
+        "Iron Blue",
+        "Mojave Tan",
+        "Rover",
+        "True Navy"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_0001_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
-      "material": "",
-      "material_details": [],
+      "material": "Body: 58% Cotton, 29% Nylon, 13% Elastane",
+      "material_details": [
+        "Body: 58% Cotton, 29% Nylon, 13% Elastane"
+      ],
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [],
-      "product_functions": [],
+      "innovations": [
+        "Four-Way Stretch",
+        "Sweat-Wicking",
+        "Quick-Drying"
+      ],
+      "product_functions": [
+        "Stretch"
+      ],
       "top_seller": false,
       "published_at": null,
       "updated_at": "2026-08-05",
@@ -4180,7 +4113,80 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_071148_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BJUS_045739_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Terra Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_072010_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_019222_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_026865_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Mojave Tan",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_8206_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Rover",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_046696_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX5S_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-VersaTwill-MD/_/prod11750745",
+          "available": true,
+          "sizes": []
+        }
+      ],
+      "style_number": "LM5AX5S"
     },
     {
       "id": "lululemon:prod11720022",
@@ -4216,23 +4222,43 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 5,
+      "color": "Wacky Khaki / Feather Grey / Light Ivory / True Navy / Black",
+      "available_colors": [
+        "Wacky Khaki",
+        "Feather Grey",
+        "Light Ivory",
+        "True Navy",
+        "Black"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Wacky Khaki",
+        "Feather Grey",
+        "Light Ivory",
+        "True Navy",
+        "Black"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AXXS_019222_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-WovenAir/_/prod11720022",
-      "material": "",
-      "material_details": [],
+      "material": "Body: 53% Polyester (recycled), 43% Elastomultiester, 4% Elastane",
+      "material_details": [
+        "Body: 53% Polyester (recycled), 43% Elastomultiester, 4% Elastane"
+      ],
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [],
-      "product_functions": [],
+      "innovations": [
+        "WovenAir",
+        "Breathable",
+        "Four-Way Stretch"
+      ],
+      "product_functions": [
+        "Stretch"
+      ],
       "top_seller": false,
       "published_at": null,
       "updated_at": "2026-08-05",
@@ -4242,7 +4268,45 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXXS_019222_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-WovenAir/_/prod11720022",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Feather Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXXS_074043_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-WovenAir/_/prod11720022",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Light Ivory",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXXS_033454_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-WovenAir/_/prod11720022",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXXS_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-WovenAir/_/prod11720022",
+          "available": true,
+          "sizes": []
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXXS_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-32L-WovenAir/_/prod11720022",
+          "available": true,
+          "sizes": []
+        }
+      ],
+      "style_number": "LM5AXXS"
     },
     {
       "id": "lululemon:prod11500068",
@@ -4278,22 +4342,65 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 15,
+      "color": "Black / Oakwood Tan / Warm Ash Grey / Obsidian / Silver Drop / Solar Grey / Olive Brown / True Navy / Oil Grey / Willow Leaf / Nomad / Wacky Khaki / Sassy Sage / Dusty Diamond",
+      "available_colors": [
+        "Black",
+        "Oakwood Tan",
+        "Warm Ash Grey",
+        "Obsidian",
+        "Silver Drop",
+        "Solar Grey",
+        "Olive Brown",
+        "True Navy",
+        "Oil Grey",
+        "Willow Leaf",
+        "Nomad",
+        "Wacky Khaki",
+        "Sassy Sage",
+        "Dusty Diamond"
+      ],
+      "unavailable_colors": [
+        "Rainforest Green"
+      ],
+      "all_colors": [
+        "Black",
+        "Oakwood Tan",
+        "Warm Ash Grey",
+        "Obsidian",
+        "Silver Drop",
+        "Solar Grey",
+        "Olive Brown",
+        "True Navy",
+        "Oil Grey",
+        "Willow Leaf",
+        "Nomad",
+        "Wacky Khaki",
+        "Sassy Sage",
+        "Dusty Diamond",
+        "Rainforest Green"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_0001_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
-      "material": "",
-      "material_details": [],
+      "material": "Body: 53% Elastomultiester, 47% Polyester (recycled)",
+      "material_details": [
+        "Body: 53% Elastomultiester, 47% Polyester (recycled)"
+      ],
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [],
+      "innovations": [
+        "Warpstreme",
+        "Everyday Performance",
+        "Shape Retention",
+        "Quick-Drying",
+        "Four-Way Stretch",
+        "Breathable",
+        "Wrinkle-Resistant"
+      ],
       "product_functions": [],
       "top_seller": false,
       "published_at": null,
@@ -4304,7 +4411,340 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "36",
+            "35",
+            "32",
+            "44",
+            "42",
+            "40",
+            "31",
+            "33",
+            "29",
+            "34",
+            "30",
+            "46",
+            "38",
+            "28"
+          ]
+        },
+        {
+          "color": "Oakwood Tan",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_075675_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "44",
+            "36",
+            "33",
+            "34",
+            "30",
+            "40",
+            "35",
+            "32",
+            "31",
+            "38",
+            "46",
+            "29",
+            "28",
+            "42"
+          ]
+        },
+        {
+          "color": "Warm Ash Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_070108_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "29",
+            "46",
+            "34",
+            "31",
+            "36",
+            "40",
+            "33",
+            "44",
+            "35",
+            "30",
+            "28",
+            "38",
+            "42",
+            "32"
+          ]
+        },
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_032476_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "40",
+            "46",
+            "35",
+            "32",
+            "30",
+            "36",
+            "34",
+            "33",
+            "28",
+            "29",
+            "38",
+            "31",
+            "44",
+            "42"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_033928_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "44",
+            "34",
+            "29",
+            "30",
+            "40",
+            "35",
+            "32",
+            "36",
+            "42",
+            "28",
+            "33",
+            "31",
+            "38",
+            "46"
+          ]
+        },
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_038426_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "34",
+            "36",
+            "29",
+            "31",
+            "42",
+            "33",
+            "46",
+            "32",
+            "40",
+            "30",
+            "28",
+            "44",
+            "38",
+            "35"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_071148_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "32",
+            "31",
+            "29",
+            "46",
+            "44",
+            "38",
+            "30",
+            "40",
+            "28",
+            "35",
+            "34",
+            "36",
+            "33",
+            "42"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "38",
+            "31",
+            "42",
+            "40",
+            "35",
+            "46",
+            "29",
+            "44",
+            "30",
+            "28",
+            "33",
+            "32",
+            "36",
+            "34"
+          ]
+        },
+        {
+          "color": "Oil Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_033123_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "29",
+            "32",
+            "28",
+            "42",
+            "35",
+            "38",
+            "40",
+            "30",
+            "31",
+            "44",
+            "34",
+            "33",
+            "46",
+            "36"
+          ]
+        },
+        {
+          "color": "Willow Leaf",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_072763_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "46",
+            "42",
+            "31",
+            "36",
+            "40",
+            "35",
+            "33",
+            "30",
+            "44",
+            "29",
+            "34",
+            "32",
+            "38",
+            "28"
+          ]
+        },
+        {
+          "color": "Nomad",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_035955_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "33",
+            "29",
+            "44",
+            "31",
+            "34",
+            "46",
+            "40",
+            "30",
+            "35",
+            "28",
+            "38",
+            "32",
+            "36",
+            "42"
+          ]
+        },
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_019222_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "33",
+            "30",
+            "34",
+            "44",
+            "36",
+            "40",
+            "31",
+            "38",
+            "28",
+            "46",
+            "42",
+            "29",
+            "32",
+            "35"
+          ]
+        },
+        {
+          "color": "Rainforest Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_049106_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": false,
+          "sizes": [
+            "30",
+            "31",
+            "29",
+            "34",
+            "40",
+            "28",
+            "32",
+            "36",
+            "35",
+            "38",
+            "33",
+            "44",
+            "42",
+            "46"
+          ]
+        },
+        {
+          "color": "Sassy Sage",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_077066_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "30",
+            "46",
+            "40",
+            "32",
+            "36",
+            "38",
+            "42",
+            "34",
+            "44",
+            "35",
+            "31",
+            "29",
+            "28",
+            "33"
+          ]
+        },
+        {
+          "color": "Dusty Diamond",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_076950_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme/_/prod11500068",
+          "available": true,
+          "sizes": [
+            "44",
+            "35",
+            "42",
+            "31",
+            "34",
+            "36",
+            "46",
+            "30",
+            "28",
+            "33",
+            "40",
+            "38",
+            "32",
+            "29"
+          ]
+        }
+      ],
+      "style_number": "LM5AR3S"
     },
     {
       "id": "lululemon:prod11660070",
@@ -4340,15 +4780,30 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 6,
+      "color": "Iron Blue / Artifact / Trench / Raw Linen / Steel Blue",
+      "available_colors": [
+        "Iron Blue",
+        "Artifact",
+        "Trench",
+        "Raw Linen",
+        "Steel Blue"
+      ],
+      "unavailable_colors": [
+        "Sheer Oak"
+      ],
+      "all_colors": [
+        "Iron Blue",
+        "Artifact",
+        "Trench",
+        "Raw Linen",
+        "Steel Blue",
+        "Sheer Oak"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_068684_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme-MD/_/prod11660070",
       "material": "",
       "material_details": [],
@@ -4366,7 +4821,142 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Sheer Oak",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_068684_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme-MD/_/prod11660070",
+          "available": false,
+          "sizes": [
+            "35",
+            "28",
+            "30",
+            "38",
+            "33",
+            "34",
+            "36",
+            "46",
+            "32",
+            "29",
+            "31",
+            "44",
+            "40",
+            "42"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_026865_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme-MD/_/prod11660070",
+          "available": true,
+          "sizes": [
+            "40",
+            "33",
+            "35",
+            "36",
+            "38",
+            "44",
+            "34",
+            "28",
+            "46",
+            "31",
+            "42",
+            "32",
+            "29",
+            "30"
+          ]
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme-MD/_/prod11660070",
+          "available": true,
+          "sizes": [
+            "28",
+            "38",
+            "42",
+            "29",
+            "32",
+            "35",
+            "33",
+            "46",
+            "36",
+            "40",
+            "30",
+            "34",
+            "31",
+            "44"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_043731_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme-MD/_/prod11660070",
+          "available": true,
+          "sizes": [
+            "35",
+            "36",
+            "46",
+            "38",
+            "44",
+            "32",
+            "40",
+            "42",
+            "31",
+            "30",
+            "28",
+            "34",
+            "33",
+            "29"
+          ]
+        },
+        {
+          "color": "Raw Linen",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_048432_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme-MD/_/prod11660070",
+          "available": true,
+          "sizes": [
+            "46",
+            "29",
+            "38",
+            "40",
+            "44",
+            "42",
+            "30",
+            "36",
+            "31",
+            "28",
+            "34",
+            "33",
+            "32",
+            "35"
+          ]
+        },
+        {
+          "color": "Steel Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR3S_1179_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34-Warpstreme-MD/_/prod11660070",
+          "available": true,
+          "sizes": [
+            "38",
+            "40",
+            "34",
+            "33",
+            "31",
+            "32",
+            "30",
+            "42",
+            "44",
+            "46",
+            "35",
+            "36",
+            "29",
+            "28"
+          ]
+        }
+      ],
+      "style_number": "LM5AR3S"
     },
     {
       "id": "lululemon:prod11790015",
@@ -4402,15 +4992,30 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 6,
+      "color": "Army Green",
+      "available_colors": [
+        "Army Green"
+      ],
+      "unavailable_colors": [
+        "Black",
+        "Dark Olive",
+        "Sheer Oak",
+        "Light Ivory",
+        "Nomad"
+      ],
+      "all_colors": [
+        "Army Green",
+        "Black",
+        "Dark Olive",
+        "Sheer Oak",
+        "Light Ivory",
+        "Nomad"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5B11S_0001_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-Twill-MD/_/prod11790015",
       "material": "",
       "material_details": [],
@@ -4428,7 +5033,124 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B11S_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-Twill-MD/_/prod11790015",
+          "available": false,
+          "sizes": [
+            "36",
+            "31",
+            "40",
+            "35",
+            "29",
+            "34",
+            "30",
+            "38",
+            "28",
+            "32",
+            "33"
+          ]
+        },
+        {
+          "color": "Dark Olive",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B11S_026083_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-Twill-MD/_/prod11790015",
+          "available": false,
+          "sizes": [
+            "38",
+            "29",
+            "34",
+            "40",
+            "33",
+            "30",
+            "28",
+            "32",
+            "35",
+            "31",
+            "36"
+          ]
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B11S_045739_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-Twill-MD/_/prod11790015",
+          "available": true,
+          "sizes": [
+            "29",
+            "31",
+            "38",
+            "33",
+            "34",
+            "36",
+            "32",
+            "35",
+            "30",
+            "28",
+            "40"
+          ]
+        },
+        {
+          "color": "Sheer Oak",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B11S_068684_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-Twill-MD/_/prod11790015",
+          "available": false,
+          "sizes": [
+            "38",
+            "34",
+            "28",
+            "30",
+            "29",
+            "31",
+            "33",
+            "35",
+            "36",
+            "40",
+            "32"
+          ]
+        },
+        {
+          "color": "Light Ivory",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B11S_033454_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-Twill-MD/_/prod11790015",
+          "available": false,
+          "sizes": [
+            "29",
+            "33",
+            "35",
+            "34",
+            "40",
+            "30",
+            "31",
+            "32",
+            "36",
+            "28",
+            "38"
+          ]
+        },
+        {
+          "color": "Nomad",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B11S_035955_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-Twill-MD/_/prod11790015",
+          "available": false,
+          "sizes": [
+            "35",
+            "40",
+            "29",
+            "28",
+            "34",
+            "32",
+            "33",
+            "31",
+            "38",
+            "36",
+            "30"
+          ]
+        }
+      ],
+      "style_number": "LM5B11S"
     },
     {
       "id": "lululemon:prod11740028",
@@ -4464,15 +5186,36 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 9,
+      "color": "True Navy / Black",
+      "available_colors": [
+        "True Navy",
+        "Black"
+      ],
+      "unavailable_colors": [
+        "Artifact",
+        "Rover",
+        "Wacky Khaki",
+        "Iron Blue",
+        "Mojave Tan",
+        "White",
+        "Oil Grey"
+      ],
+      "all_colors": [
+        "True Navy",
+        "Black",
+        "Artifact",
+        "Rover",
+        "Wacky Khaki",
+        "Iron Blue",
+        "Mojave Tan",
+        "White",
+        "Oil Grey"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_031382_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
       "material": "",
       "material_details": [],
@@ -4490,7 +5233,180 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": true,
+          "sizes": [
+            "33",
+            "31",
+            "34",
+            "30",
+            "36",
+            "35",
+            "32",
+            "29",
+            "40",
+            "38",
+            "28"
+          ]
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": false,
+          "sizes": [
+            "34",
+            "40",
+            "28",
+            "33",
+            "36",
+            "31",
+            "38",
+            "30",
+            "35",
+            "32",
+            "29"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": true,
+          "sizes": [
+            "35",
+            "40",
+            "28",
+            "36",
+            "33",
+            "32",
+            "31",
+            "38",
+            "34",
+            "30",
+            "29"
+          ]
+        },
+        {
+          "color": "Rover",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_046696_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": false,
+          "sizes": [
+            "32",
+            "33",
+            "30",
+            "36",
+            "31",
+            "40",
+            "35",
+            "34",
+            "38",
+            "29",
+            "28"
+          ]
+        },
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_019222_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": false,
+          "sizes": [
+            "31",
+            "36",
+            "29",
+            "30",
+            "40",
+            "38",
+            "34",
+            "28",
+            "33",
+            "32",
+            "35"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_026865_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": false,
+          "sizes": [
+            "34",
+            "40",
+            "28",
+            "36",
+            "30",
+            "31",
+            "32",
+            "35",
+            "29",
+            "33",
+            "38"
+          ]
+        },
+        {
+          "color": "Mojave Tan",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_8206_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": false,
+          "sizes": [
+            "33",
+            "35",
+            "40",
+            "36",
+            "28",
+            "38",
+            "32",
+            "34",
+            "30",
+            "31",
+            "29"
+          ]
+        },
+        {
+          "color": "White",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_0002_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": false,
+          "sizes": [
+            "31",
+            "33",
+            "32",
+            "34",
+            "29",
+            "40",
+            "30",
+            "28",
+            "36",
+            "38"
+          ]
+        },
+        {
+          "color": "Oil Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AX8S_033123_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-VersaTwill-MD/_/prod11740028",
+          "available": false,
+          "sizes": [
+            "29",
+            "40",
+            "31",
+            "33",
+            "30",
+            "38",
+            "36",
+            "28",
+            "35",
+            "34",
+            "32"
+          ]
+        }
+      ],
+      "style_number": "LM5AX8S"
     },
     {
       "id": "lululemon:prod11720016",
@@ -4526,15 +5442,27 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 5,
+      "color": "Light Ivory / Black / Wacky Khaki / Feather Grey / True Navy",
+      "available_colors": [
+        "Light Ivory",
+        "Black",
+        "Wacky Khaki",
+        "Feather Grey",
+        "True Navy"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Light Ivory",
+        "Black",
+        "Wacky Khaki",
+        "Feather Grey",
+        "True Navy"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AXYS_033454_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-WovenAir/_/prod11720016",
       "material": "",
       "material_details": [],
@@ -4552,7 +5480,105 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Light Ivory",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXYS_033454_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-WovenAir/_/prod11720016",
+          "available": true,
+          "sizes": [
+            "28",
+            "35",
+            "32",
+            "40",
+            "34",
+            "33",
+            "36",
+            "38",
+            "29",
+            "31",
+            "30"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXYS_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-WovenAir/_/prod11720016",
+          "available": true,
+          "sizes": [
+            "30",
+            "40",
+            "28",
+            "29",
+            "31",
+            "33",
+            "34",
+            "32",
+            "38",
+            "36",
+            "35"
+          ]
+        },
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXYS_019222_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-WovenAir/_/prod11720016",
+          "available": true,
+          "sizes": [
+            "36",
+            "31",
+            "40",
+            "30",
+            "38",
+            "32",
+            "29",
+            "35",
+            "33",
+            "34",
+            "28"
+          ]
+        },
+        {
+          "color": "Feather Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXYS_074043_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-WovenAir/_/prod11720016",
+          "available": true,
+          "sizes": [
+            "38",
+            "33",
+            "40",
+            "28",
+            "36",
+            "31",
+            "32",
+            "30",
+            "29",
+            "35",
+            "34"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXYS_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-34L-WovenAir/_/prod11720016",
+          "available": true,
+          "sizes": [
+            "30",
+            "32",
+            "36",
+            "35",
+            "40",
+            "34",
+            "33",
+            "28",
+            "38",
+            "29",
+            "31"
+          ]
+        }
+      ],
+      "style_number": "LM5AXYS"
     },
     {
       "id": "lululemon:prod11500069",
@@ -4588,15 +5614,35 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 9,
+      "color": "Obsidian / Nomad / Oil Grey / Black / Silver Drop / True Navy / Wacky Khaki / Rainforest Green / Olive Brown",
+      "available_colors": [
+        "Obsidian",
+        "Nomad",
+        "Oil Grey",
+        "Black",
+        "Silver Drop",
+        "True Navy",
+        "Wacky Khaki",
+        "Rainforest Green",
+        "Olive Brown"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Obsidian",
+        "Nomad",
+        "Oil Grey",
+        "Black",
+        "Silver Drop",
+        "True Navy",
+        "Wacky Khaki",
+        "Rainforest Green",
+        "Olive Brown"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_032476_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
       "material": "",
       "material_details": [],
@@ -4614,7 +5660,208 @@
         "Matched keyword: trouser",
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_032476_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "32",
+            "34",
+            "40",
+            "31",
+            "36",
+            "33",
+            "44",
+            "38",
+            "29",
+            "46",
+            "28",
+            "30",
+            "35",
+            "42"
+          ]
+        },
+        {
+          "color": "Nomad",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_035955_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "30",
+            "28",
+            "29",
+            "36",
+            "35",
+            "38",
+            "46",
+            "31",
+            "34",
+            "44",
+            "40",
+            "42",
+            "33",
+            "32"
+          ]
+        },
+        {
+          "color": "Oil Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_033123_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "30",
+            "33",
+            "44",
+            "40",
+            "31",
+            "36",
+            "38",
+            "32",
+            "42",
+            "29",
+            "34",
+            "46",
+            "28",
+            "35"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "36",
+            "33",
+            "29",
+            "31",
+            "40",
+            "38",
+            "30",
+            "34",
+            "32",
+            "28",
+            "42",
+            "35",
+            "46",
+            "44"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_033928_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "36",
+            "33",
+            "30",
+            "28",
+            "31",
+            "40",
+            "38",
+            "34",
+            "42",
+            "29",
+            "32",
+            "44",
+            "46",
+            "35"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "31",
+            "38",
+            "28",
+            "34",
+            "30",
+            "32",
+            "29",
+            "40",
+            "44",
+            "35",
+            "42",
+            "46",
+            "33",
+            "36"
+          ]
+        },
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_019222_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "32",
+            "34",
+            "40",
+            "36",
+            "44",
+            "38",
+            "42",
+            "46",
+            "29",
+            "30",
+            "28",
+            "31",
+            "33",
+            "35"
+          ]
+        },
+        {
+          "color": "Rainforest Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_049106_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "32",
+            "40",
+            "28",
+            "38",
+            "30",
+            "31",
+            "35",
+            "34",
+            "46",
+            "33",
+            "36",
+            "44",
+            "42",
+            "29"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AR4T_071148_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-37-Warpstreme/_/prod11500069",
+          "available": true,
+          "sizes": [
+            "32",
+            "30",
+            "33",
+            "36",
+            "29",
+            "38",
+            "28",
+            "46",
+            "44",
+            "35",
+            "31",
+            "40",
+            "34",
+            "42"
+          ]
+        }
+      ],
+      "style_number": "LM5AR4T"
     },
     {
       "id": "lululemon:prod11130384",
@@ -4710,24 +5957,41 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 4,
+      "color": "Artifact / Black / Green Jasper / Solar Grey",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Artifact",
+        "Black",
+        "Green Jasper",
+        "Solar Grey"
+      ],
+      "all_colors": [
+        "Artifact",
+        "Black",
+        "Green Jasper",
+        "Solar Grey"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5B02S_029283_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-ClassicFit-Pant-30-Utilitech-MD/_/prod11780330",
-      "material": "",
-      "material_details": [],
+      "material": "Body: Face: 54% Elastomultiester, 33% Cotton, 13% Elastane",
+      "material_details": [
+        "Body: Face: 54% Elastomultiester, 33% Cotton, 13% Elastane"
+      ],
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [],
-      "product_functions": [],
+      "innovations": [
+        "Abrasion-Resistant",
+        "Four-Way Stretch"
+      ],
+      "product_functions": [
+        "Stretch"
+      ],
       "top_seller": false,
       "published_at": null,
       "updated_at": "2026-08-05",
@@ -4736,7 +6000,83 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B02S_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-ClassicFit-Pant-30-Utilitech-MD/_/prod11780330",
+          "available": false,
+          "sizes": [
+            "36",
+            "38",
+            "34",
+            "40",
+            "30",
+            "31",
+            "32",
+            "28",
+            "29",
+            "35",
+            "33"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B02S_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-ClassicFit-Pant-30-Utilitech-MD/_/prod11780330",
+          "available": false,
+          "sizes": [
+            "36",
+            "35",
+            "28",
+            "33",
+            "34",
+            "31",
+            "29",
+            "32",
+            "30",
+            "40",
+            "38"
+          ]
+        },
+        {
+          "color": "Green Jasper",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ALBS_034204_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-ClassicFit-Pant-30-Utilitech-MD/_/prod11780330",
+          "available": false,
+          "sizes": [
+            "36",
+            "33",
+            "38",
+            "32",
+            "34",
+            "29",
+            "30",
+            "31"
+          ]
+        },
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B02S_038426_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-ClassicFit-Pant-30-Utilitech-MD/_/prod11780330",
+          "available": false,
+          "sizes": [
+            "40",
+            "36",
+            "35",
+            "34",
+            "32",
+            "28",
+            "30",
+            "38",
+            "31",
+            "33",
+            "29"
+          ]
+        }
+      ],
+      "style_number": "LM5B02S"
     },
     {
       "id": "lululemon:prod8530240",
@@ -4772,22 +6112,45 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 4,
+      "color": "Obsidian / Olive Brown / True Navy / Black",
+      "available_colors": [
+        "Obsidian",
+        "Olive Brown",
+        "True Navy",
+        "Black"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Obsidian",
+        "Olive Brown",
+        "True Navy",
+        "Black"
+      ],
       "tags": [
         "men-joggers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_032476_1",
       "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger/_/prod8530240",
-      "material": "",
-      "material_details": [],
+      "material": "Body: 52% Polyester (recycled), 48% Elastomultiester | Body: 53% Elastomultiester, 47% Recycled Polyester | Body: 53% Elastomultiester, 47% Polyester (recycled)",
+      "material_details": [
+        "Body: 52% Polyester (recycled), 48% Elastomultiester",
+        "Body: 53% Elastomultiester, 47% Recycled Polyester",
+        "Body: 53% Elastomultiester, 47% Polyester (recycled)"
+      ],
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [],
+      "innovations": [
+        "Warpstreme",
+        "Everyday Performance",
+        "Shape Retention",
+        "Quick-Drying",
+        "Four-Way Stretch",
+        "Breathable",
+        "Wrinkle-Resistant",
+        "Sweat-Wicking"
+      ],
       "product_functions": [],
       "top_seller": false,
       "published_at": null,
@@ -4797,7 +6160,73 @@
       "season_notes": [
         "Matched keyword: joggers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_032476_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger/_/prod8530240",
+          "available": true,
+          "sizes": [
+            "XL",
+            "XXL",
+            "S",
+            "L",
+            "XXXL",
+            "M",
+            "XS"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_071148_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger/_/prod8530240",
+          "available": true,
+          "sizes": [
+            "M",
+            "S",
+            "XXL",
+            "XS",
+            "L",
+            "XL"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AOLS_031382_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger/_/prod8530240",
+          "available": true,
+          "sizes": [
+            "XXXL",
+            "M",
+            "XXL",
+            "L",
+            "S",
+            "XL",
+            "XS",
+            "5XL",
+            "4XL"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AMZS_0001_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger/_/prod8530240",
+          "available": true,
+          "sizes": [
+            "XXXL",
+            "5XL",
+            "4XL",
+            "XS",
+            "S",
+            "L",
+            "XXL",
+            "XL",
+            "M"
+          ]
+        }
+      ],
+      "style_number": "LM5BKOS"
     },
     {
       "id": "lululemon:prod9660994",
@@ -4833,15 +6262,38 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 10,
+      "color": "Warm Ash Grey / Iron Blue / Oil Grey / Silver Drop / Solar Grey / Steel Blue / Feather Grey / Army Green",
+      "available_colors": [
+        "Warm Ash Grey",
+        "Iron Blue",
+        "Oil Grey",
+        "Silver Drop",
+        "Solar Grey",
+        "Steel Blue",
+        "Feather Grey",
+        "Army Green"
+      ],
+      "unavailable_colors": [
+        "Grey Eucalyptus",
+        "Dark Olive"
+      ],
+      "all_colors": [
+        "Warm Ash Grey",
+        "Iron Blue",
+        "Oil Grey",
+        "Silver Drop",
+        "Solar Grey",
+        "Steel Blue",
+        "Feather Grey",
+        "Army Green",
+        "Grey Eucalyptus",
+        "Dark Olive"
+      ],
       "tags": [
         "men-joggers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_070108_1",
       "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
       "material": "",
       "material_details": [],
@@ -4858,7 +6310,156 @@
       "season_notes": [
         "Matched keyword: joggers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Warm Ash Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_070108_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "XS",
+            "XXL",
+            "S",
+            "XL",
+            "L",
+            "M"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_026865_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "XL",
+            "M",
+            "L",
+            "XS",
+            "S",
+            "XXL"
+          ]
+        },
+        {
+          "color": "Oil Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_033123_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "L",
+            "S",
+            "XXL",
+            "M",
+            "XL",
+            "5XL",
+            "XXXL",
+            "4XL",
+            "XS"
+          ]
+        },
+        {
+          "color": "Grey Eucalyptus",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AMZS_064762_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": false,
+          "sizes": [
+            "XL",
+            "S",
+            "4XL",
+            "XS",
+            "XXXL",
+            "XXL",
+            "M",
+            "5XL",
+            "L"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_033928_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "M",
+            "S",
+            "L",
+            "XXL",
+            "XS",
+            "XL"
+          ]
+        },
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_038426_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "XL",
+            "L",
+            "M",
+            "S",
+            "XS",
+            "XXL"
+          ]
+        },
+        {
+          "color": "Steel Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_1179_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "XXL",
+            "XS",
+            "L",
+            "XL",
+            "M",
+            "S"
+          ]
+        },
+        {
+          "color": "Feather Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_074043_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "S",
+            "XL",
+            "L",
+            "XXL",
+            "XS",
+            "M"
+          ]
+        },
+        {
+          "color": "Dark Olive",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AOLS_026083_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": false,
+          "sizes": [
+            "L",
+            "XL",
+            "M",
+            "S",
+            "XXL",
+            "XS"
+          ]
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKOS_045739_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+          "available": true,
+          "sizes": [
+            "L",
+            "M",
+            "XL",
+            "S",
+            "XXL",
+            "XS"
+          ]
+        }
+      ],
+      "style_number": "LM5BKOS"
     },
     {
       "id": "lululemon:prod9270549",
@@ -4894,15 +6495,28 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 5,
+      "color": "Obsidian / True Navy / Olive Brown / Black",
+      "available_colors": [
+        "Obsidian",
+        "True Navy",
+        "Olive Brown",
+        "Black"
+      ],
+      "unavailable_colors": [
+        "Asphalt Grey"
+      ],
+      "all_colors": [
+        "Obsidian",
+        "True Navy",
+        "Olive Brown",
+        "Black",
+        "Asphalt Grey"
+      ],
       "tags": [
         "men-joggers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ8S_032476_1",
       "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Shorter-28/_/prod9270549",
       "material": "",
       "material_details": [],
@@ -4919,7 +6533,80 @@
       "season_notes": [
         "Matched keyword: joggers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ8S_032476_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Shorter-28/_/prod9270549",
+          "available": true,
+          "sizes": [
+            "XL",
+            "M",
+            "S",
+            "XXL",
+            "XS",
+            "L"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKPS_031382_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Shorter-28/_/prod9270549",
+          "available": true,
+          "sizes": [
+            "XL",
+            "M",
+            "S",
+            "XXL",
+            "XS",
+            "L"
+          ]
+        },
+        {
+          "color": "Asphalt Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ8S_035956_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Shorter-28/_/prod9270549",
+          "available": false,
+          "sizes": [
+            "XXL",
+            "S",
+            "M",
+            "XL",
+            "XS",
+            "L"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKPS_071148_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Shorter-28/_/prod9270549",
+          "available": true,
+          "sizes": [
+            "S",
+            "XXL",
+            "XL",
+            "XS",
+            "L",
+            "M"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKPS_0001_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Shorter-28/_/prod9270549",
+          "available": true,
+          "sizes": [
+            "XL",
+            "L",
+            "M",
+            "XXL",
+            "S",
+            "XS"
+          ]
+        }
+      ],
+      "style_number": "LM5AQ8S"
     },
     {
       "id": "lululemon:prod11020101",
@@ -4954,24 +6641,36 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
+      "available": false,
       "variant_count": 1,
-      "color": "",
+      "color": "White Opal",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "White Opal"
+      ],
+      "all_colors": [
+        "White Opal"
+      ],
       "tags": [
         "men-joggers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ5S_047748_1",
       "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Shorter-WovenAir/_/prod11020101",
-      "material": "",
-      "material_details": [],
+      "material": "Body: 53% Polyester (recycled), 43% Elastomultiester, 4% Elastane",
+      "material_details": [
+        "Body: 53% Polyester (recycled), 43% Elastomultiester, 4% Elastane"
+      ],
       "technical_features": [],
       "fabric_treatment": [],
       "construction": [],
-      "innovations": [],
-      "product_functions": [],
+      "innovations": [
+        "WovenAir",
+        "Breathable",
+        "Four-Way Stretch"
+      ],
+      "product_functions": [
+        "Stretch"
+      ],
       "top_seller": false,
       "published_at": null,
       "updated_at": "2026-08-05",
@@ -4980,7 +6679,24 @@
       "season_notes": [
         "Matched keyword: joggers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "White Opal",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ5S_047748_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Shorter-WovenAir/_/prod11020101",
+          "available": false,
+          "sizes": [
+            "XS",
+            "XL",
+            "L",
+            "XXL",
+            "S",
+            "M"
+          ]
+        }
+      ],
+      "style_number": "LM5AQ5S"
     },
     {
       "id": "lululemon:prod11780332",
@@ -5015,16 +6731,24 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 3,
+      "color": "Silver Drop / Black / Utility Blue",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Silver Drop",
+        "Black",
+        "Utility Blue"
+      ],
+      "all_colors": [
+        "Silver Drop",
+        "Black",
+        "Utility Blue"
+      ],
       "tags": [
         "men-joggers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AXNS_033928_1",
       "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Shorter-WovenAir-MD/_/prod11780332",
       "material": "",
       "material_details": [],
@@ -5041,7 +6765,52 @@
       "season_notes": [
         "Matched keyword: joggers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXNS_033928_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Shorter-WovenAir-MD/_/prod11780332",
+          "available": false,
+          "sizes": [
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "S",
+            "XS"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AXNS_0001_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Shorter-WovenAir-MD/_/prod11780332",
+          "available": false,
+          "sizes": [
+            "XXL",
+            "XL",
+            "XS",
+            "L",
+            "M",
+            "S"
+          ]
+        },
+        {
+          "color": "Utility Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ5S_036744_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Shorter-WovenAir-MD/_/prod11780332",
+          "available": false,
+          "sizes": [
+            "M",
+            "L",
+            "XXL",
+            "XS",
+            "XL",
+            "S"
+          ]
+        }
+      ],
+      "style_number": "LM5AXNS"
     },
     {
       "id": "lululemon:prod11780058",
@@ -5076,16 +6845,30 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 6,
+      "color": "Black / Silver Drop / True Navy / Obsidian / Warm Ash Grey / Iron Blue",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Black",
+        "Silver Drop",
+        "True Navy",
+        "Obsidian",
+        "Warm Ash Grey",
+        "Iron Blue"
+      ],
+      "all_colors": [
+        "Black",
+        "Silver Drop",
+        "True Navy",
+        "Obsidian",
+        "Warm Ash Grey",
+        "Iron Blue"
+      ],
       "tags": [
         "men-joggers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AOIS_0001_1",
       "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Skinny-MD/_/prod11780058",
       "material": "",
       "material_details": [],
@@ -5102,7 +6885,94 @@
       "season_notes": [
         "Matched keyword: joggers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AOIS_0001_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Skinny-MD/_/prod11780058",
+          "available": false,
+          "sizes": [
+            "S",
+            "L",
+            "M",
+            "XXL",
+            "XL",
+            "XS"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ7S_033928_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Skinny-MD/_/prod11780058",
+          "available": false,
+          "sizes": [
+            "XS",
+            "L",
+            "XL",
+            "M",
+            "XXL",
+            "S"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ7S_031382_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Skinny-MD/_/prod11780058",
+          "available": false,
+          "sizes": [
+            "XL",
+            "XXL",
+            "S",
+            "XS",
+            "L",
+            "M"
+          ]
+        },
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ7S_032476_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Skinny-MD/_/prod11780058",
+          "available": false,
+          "sizes": [
+            "L",
+            "XXL",
+            "XS",
+            "M",
+            "S",
+            "XL"
+          ]
+        },
+        {
+          "color": "Warm Ash Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKQS_070108_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Skinny-MD/_/prod11780058",
+          "available": false,
+          "sizes": [
+            "S",
+            "M",
+            "XS",
+            "L",
+            "XL",
+            "XXL"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKQS_026865_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-Skinny-MD/_/prod11780058",
+          "available": false,
+          "sizes": [
+            "M",
+            "S",
+            "L",
+            "XL",
+            "XS",
+            "XXL"
+          ]
+        }
+      ],
+      "style_number": "LM5AOIS"
     },
     {
       "id": "lululemon:prod9490156",
@@ -5138,15 +7008,28 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 5,
+      "color": "Obsidian / True Navy / Olive Brown / Black",
+      "available_colors": [
+        "Obsidian",
+        "True Navy",
+        "Olive Brown",
+        "Black"
+      ],
+      "unavailable_colors": [
+        "Warm Ash Grey"
+      ],
+      "all_colors": [
+        "Obsidian",
+        "True Navy",
+        "Olive Brown",
+        "Black",
+        "Warm Ash Grey"
+      ],
       "tags": [
         "men-joggers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5BKRT_070108_1",
       "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Tall/_/prod9490156",
       "material": "",
       "material_details": [],
@@ -5163,7 +7046,83 @@
       "season_notes": [
         "Matched keyword: joggers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Warm Ash Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKRT_070108_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Tall/_/prod9490156",
+          "available": false,
+          "sizes": [
+            "XL",
+            "M",
+            "XS",
+            "L",
+            "S",
+            "XXL"
+          ]
+        },
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQLT_032476_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Tall/_/prod9490156",
+          "available": true,
+          "sizes": [
+            "XXXL",
+            "4XL",
+            "5XL",
+            "XL",
+            "XXL",
+            "XS",
+            "S",
+            "M",
+            "L"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKRT_031382_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Tall/_/prod9490156",
+          "available": true,
+          "sizes": [
+            "XS",
+            "S",
+            "XXL",
+            "M",
+            "XL",
+            "L"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKRT_071148_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Tall/_/prod9490156",
+          "available": true,
+          "sizes": [
+            "L",
+            "XL",
+            "XXL",
+            "S",
+            "M",
+            "XS"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5BKRT_0001_1",
+          "url": "https://shop.lululemon.com/p/men-joggers/ABC-Jogger-Tall/_/prod9490156",
+          "available": true,
+          "sizes": [
+            "M",
+            "XS",
+            "S",
+            "XL",
+            "XXL",
+            "L"
+          ]
+        }
+      ],
+      "style_number": "LM5BKRT"
     },
     {
       "id": "lululemon:prod20001370",
@@ -5198,16 +7157,26 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 4,
+      "color": "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum / Parallel Pinstripe Oak Moss White / Parallel Pinstripe Heathered Club Blue White / Black",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum",
+        "Parallel Pinstripe Oak Moss White",
+        "Parallel Pinstripe Heathered Club Blue White",
+        "Black"
+      ],
+      "all_colors": [
+        "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum",
+        "Parallel Pinstripe Oak Moss White",
+        "Parallel Pinstripe Heathered Club Blue White",
+        "Black"
+      ],
       "tags": [
         "men-shorts"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM7BNFS_070828_1",
       "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-5-MD/_/prod20001370",
       "material": "",
       "material_details": [],
@@ -5225,7 +7194,66 @@
         "Matched keyword: short",
         "Matched keyword: shorts"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BNFS_070828_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-5-MD/_/prod20001370",
+          "available": false,
+          "sizes": [
+            "M",
+            "XS",
+            "L",
+            "S",
+            "XXL",
+            "XL"
+          ]
+        },
+        {
+          "color": "Parallel Pinstripe Oak Moss White",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BNFS_071312_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-5-MD/_/prod20001370",
+          "available": false,
+          "sizes": [
+            "S",
+            "XS",
+            "L",
+            "M",
+            "XL",
+            "XXL"
+          ]
+        },
+        {
+          "color": "Parallel Pinstripe Heathered Club Blue White",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BNFS_070827_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-5-MD/_/prod20001370",
+          "available": false,
+          "sizes": [
+            "XXL",
+            "L",
+            "S",
+            "M",
+            "XL",
+            "XS"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BNDS_0001_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-5-MD/_/prod20001370",
+          "available": false,
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XS",
+            "XL",
+            "XXL"
+          ]
+        }
+      ],
+      "style_number": "LM7BNFS"
     },
     {
       "id": "lululemon:prod20002362",
@@ -5260,16 +7288,24 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 3,
+      "color": "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum / Parallel Pinstripe Oak Moss White / Black",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum",
+        "Parallel Pinstripe Oak Moss White",
+        "Black"
+      ],
+      "all_colors": [
+        "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum",
+        "Parallel Pinstripe Oak Moss White",
+        "Black"
+      ],
       "tags": [
         "men-shorts"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM7BNES_070828_1",
       "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-7-MD/_/prod20002362",
       "material": "",
       "material_details": [],
@@ -5287,7 +7323,52 @@
         "Matched keyword: short",
         "Matched keyword: shorts"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Parallel Pinstripe Heathered Sheer Oak Goodnight Plum",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BNES_070828_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-7-MD/_/prod20002362",
+          "available": false,
+          "sizes": [
+            "M",
+            "XS",
+            "XL",
+            "XXL",
+            "S",
+            "L"
+          ]
+        },
+        {
+          "color": "Parallel Pinstripe Oak Moss White",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BNES_071312_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-7-MD/_/prod20002362",
+          "available": false,
+          "sizes": [
+            "XS",
+            "M",
+            "XL",
+            "S",
+            "L",
+            "XXL"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BNCS_0001_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Modal-Blend-Pull-On-Short-7-MD/_/prod20002362",
+          "available": false,
+          "sizes": [
+            "XXL",
+            "M",
+            "XS",
+            "S",
+            "L",
+            "XL"
+          ]
+        }
+      ],
+      "style_number": "LM7BNES"
     },
     {
       "id": "lululemon:prod10440060",
@@ -5323,15 +7404,35 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 9,
+      "color": "Wacky Khaki / True Navy / Obsidian / Silver Drop / Black / Oil Grey / Nomad / Rainforest Green / Olive Brown",
+      "available_colors": [
+        "Wacky Khaki",
+        "True Navy",
+        "Obsidian",
+        "Silver Drop",
+        "Black",
+        "Oil Grey",
+        "Nomad",
+        "Rainforest Green",
+        "Olive Brown"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Wacky Khaki",
+        "True Navy",
+        "Obsidian",
+        "Silver Drop",
+        "Black",
+        "Oil Grey",
+        "Nomad",
+        "Rainforest Green",
+        "Olive Brown"
+      ],
       "tags": [
         "men-pants"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_019222_1",
       "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
       "material": "",
       "material_details": [],
@@ -5348,7 +7449,182 @@
       "season_notes": [
         "Matched keyword: pants"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_019222_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "34",
+            "33",
+            "29",
+            "35",
+            "36",
+            "30",
+            "40",
+            "32",
+            "38",
+            "31",
+            "28"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_031382_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "34",
+            "40",
+            "31",
+            "38",
+            "32",
+            "35",
+            "33",
+            "28",
+            "36",
+            "29",
+            "30"
+          ]
+        },
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_032476_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "36",
+            "30",
+            "29",
+            "38",
+            "33",
+            "34",
+            "28",
+            "35",
+            "32",
+            "40",
+            "31"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_033928_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "36",
+            "33",
+            "28",
+            "30",
+            "32",
+            "29",
+            "40",
+            "34",
+            "38",
+            "31",
+            "35"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_0001_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "35",
+            "29",
+            "26",
+            "33",
+            "36",
+            "32",
+            "34",
+            "38",
+            "31",
+            "28",
+            "30",
+            "40"
+          ]
+        },
+        {
+          "color": "Oil Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_033123_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "29",
+            "35",
+            "34",
+            "32",
+            "31",
+            "40",
+            "33",
+            "38",
+            "36",
+            "30",
+            "28"
+          ]
+        },
+        {
+          "color": "Nomad",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_035955_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "38",
+            "29",
+            "36",
+            "35",
+            "32",
+            "40",
+            "28",
+            "34",
+            "30",
+            "33",
+            "31"
+          ]
+        },
+        {
+          "color": "Rainforest Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_049106_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "31",
+            "38",
+            "34",
+            "35",
+            "36",
+            "32",
+            "40",
+            "33",
+            "28",
+            "29",
+            "30"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQGS_071148_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-28/_/prod10440060",
+          "available": true,
+          "sizes": [
+            "36",
+            "28",
+            "29",
+            "35",
+            "34",
+            "38",
+            "32",
+            "30",
+            "33",
+            "40",
+            "31"
+          ]
+        }
+      ],
+      "style_number": "LM5AQGS"
     },
     {
       "id": "lululemon:prod11580324",
@@ -5384,15 +7660,26 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 4,
+      "color": "Steel Blue",
+      "available_colors": [
+        "Steel Blue"
+      ],
+      "unavailable_colors": [
+        "Raw Linen",
+        "Artifact",
+        "Army Green"
+      ],
+      "all_colors": [
+        "Steel Blue",
+        "Raw Linen",
+        "Artifact",
+        "Army Green"
+      ],
       "tags": [
         "men-pants"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQHS_048432_1",
       "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-30-MD/_/prod11580324",
       "material": "",
       "material_details": [],
@@ -5409,7 +7696,86 @@
       "season_notes": [
         "Matched keyword: pants"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Raw Linen",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQHS_048432_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-30-MD/_/prod11580324",
+          "available": false,
+          "sizes": [
+            "29",
+            "35",
+            "31",
+            "28",
+            "40",
+            "30",
+            "38",
+            "36",
+            "32",
+            "33",
+            "34"
+          ]
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5A43S_029283_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-30-MD/_/prod11580324",
+          "available": false,
+          "sizes": [
+            "35",
+            "29",
+            "28",
+            "32",
+            "40",
+            "33",
+            "34",
+            "31",
+            "30",
+            "38",
+            "36"
+          ]
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQHS_045739_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-30-MD/_/prod11580324",
+          "available": false,
+          "sizes": [
+            "29",
+            "30",
+            "28",
+            "34",
+            "31",
+            "35",
+            "36",
+            "32",
+            "40",
+            "38",
+            "33"
+          ]
+        },
+        {
+          "color": "Steel Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQHS_1179_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-30-MD/_/prod11580324",
+          "available": true,
+          "sizes": [
+            "38",
+            "35",
+            "28",
+            "31",
+            "29",
+            "30",
+            "36",
+            "32",
+            "40",
+            "33",
+            "34"
+          ]
+        }
+      ],
+      "style_number": "LM5AQHS"
     },
     {
       "id": "lululemon:prod9640029",
@@ -5506,15 +7872,36 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 9,
+      "color": "Raw Linen / Trench / Steel Blue",
+      "available_colors": [
+        "Raw Linen",
+        "Trench",
+        "Steel Blue"
+      ],
+      "unavailable_colors": [
+        "Grey Sage",
+        "Army Green",
+        "Artifact",
+        "Dark Olive",
+        "Sheer Oak",
+        "Light Ivory"
+      ],
+      "all_colors": [
+        "Raw Linen",
+        "Trench",
+        "Steel Blue",
+        "Grey Sage",
+        "Army Green",
+        "Artifact",
+        "Dark Olive",
+        "Sheer Oak",
+        "Light Ivory"
+      ],
       "tags": [
         "men-pants"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5ADES_036763_1",
       "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
       "material": "",
       "material_details": [],
@@ -5531,7 +7918,213 @@
       "season_notes": [
         "Matched keyword: pants"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Grey Sage",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ADES_036763_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": false,
+          "sizes": [
+            "34",
+            "28",
+            "33",
+            "30",
+            "35",
+            "29",
+            "38",
+            "31",
+            "32",
+            "36",
+            "40"
+          ]
+        },
+        {
+          "color": "Raw Linen",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO1S_048432_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": true,
+          "sizes": [
+            "34",
+            "28",
+            "35",
+            "40",
+            "44",
+            "42",
+            "30",
+            "32",
+            "38",
+            "36",
+            "31",
+            "33",
+            "29",
+            "46"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO1S_043731_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": true,
+          "sizes": [
+            "30",
+            "33",
+            "31",
+            "38",
+            "44",
+            "42",
+            "46",
+            "34",
+            "32",
+            "40",
+            "36",
+            "35",
+            "28",
+            "29"
+          ]
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO1S_045739_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": false,
+          "sizes": [
+            "46",
+            "40",
+            "42",
+            "33",
+            "44",
+            "35",
+            "34",
+            "32",
+            "38",
+            "36",
+            "30",
+            "28",
+            "29",
+            "31"
+          ]
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ADES_029283_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": false,
+          "sizes": [
+            "42",
+            "35",
+            "30",
+            "28",
+            "44",
+            "31",
+            "33",
+            "32",
+            "29",
+            "34",
+            "40",
+            "38",
+            "36",
+            "46"
+          ]
+        },
+        {
+          "color": "Dark Olive",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO1S_026083_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": false,
+          "sizes": [
+            "32",
+            "33",
+            "44",
+            "31",
+            "40",
+            "36",
+            "46",
+            "38",
+            "42",
+            "30",
+            "35",
+            "34",
+            "29",
+            "28"
+          ]
+        },
+        {
+          "color": "Steel Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO1S_1179_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": true,
+          "sizes": [
+            "44",
+            "28",
+            "32",
+            "35",
+            "42",
+            "40",
+            "31",
+            "29",
+            "46",
+            "38",
+            "33",
+            "30",
+            "36",
+            "34"
+          ]
+        },
+        {
+          "color": "Sheer Oak",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO1S_068684_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": false,
+          "sizes": [
+            "38",
+            "30",
+            "34",
+            "31",
+            "46",
+            "42",
+            "28",
+            "44",
+            "40",
+            "29",
+            "33",
+            "32",
+            "36",
+            "35"
+          ]
+        },
+        {
+          "color": "Light Ivory",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO1S_033454_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-32-MD/_/prod8900794",
+          "available": false,
+          "sizes": [
+            "30",
+            "26",
+            "32",
+            "46",
+            "24",
+            "25",
+            "27",
+            "28",
+            "29",
+            "31",
+            "33",
+            "34",
+            "35",
+            "37",
+            "38",
+            "39",
+            "40",
+            "42",
+            "48",
+            "50",
+            "44",
+            "36"
+          ]
+        }
+      ],
+      "style_number": "LM5ADES"
     },
     {
       "id": "lululemon:prod9000003",
@@ -5628,15 +8221,47 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 15,
+      "color": "Solar Grey / Willow Leaf / Olive Brown / True Navy / Nomad / Black / Oil Grey / Obsidian / Wacky Khaki / Warm Ash Grey / Silver Drop / Oakwood Tan / Sassy Sage / Rainforest Green / Dusty Diamond",
+      "available_colors": [
+        "Solar Grey",
+        "Willow Leaf",
+        "Olive Brown",
+        "True Navy",
+        "Nomad",
+        "Black",
+        "Oil Grey",
+        "Obsidian",
+        "Wacky Khaki",
+        "Warm Ash Grey",
+        "Silver Drop",
+        "Oakwood Tan",
+        "Sassy Sage",
+        "Rainforest Green",
+        "Dusty Diamond"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Solar Grey",
+        "Willow Leaf",
+        "Olive Brown",
+        "True Navy",
+        "Nomad",
+        "Black",
+        "Oil Grey",
+        "Obsidian",
+        "Wacky Khaki",
+        "Warm Ash Grey",
+        "Silver Drop",
+        "Oakwood Tan",
+        "Sassy Sage",
+        "Rainforest Green",
+        "Dusty Diamond"
+      ],
       "tags": [
         "men-pants"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_038426_1",
       "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
       "material": "",
       "material_details": [],
@@ -5653,7 +8278,348 @@
       "season_notes": [
         "Matched keyword: pants"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_038426_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "44",
+            "30",
+            "33",
+            "35",
+            "36",
+            "38",
+            "29",
+            "40",
+            "31",
+            "28",
+            "32",
+            "46",
+            "42",
+            "34"
+          ]
+        },
+        {
+          "color": "Willow Leaf",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_072763_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "40",
+            "28",
+            "32",
+            "29",
+            "42",
+            "44",
+            "31",
+            "33",
+            "35",
+            "34",
+            "38",
+            "36",
+            "30",
+            "46"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_071148_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "28",
+            "29",
+            "34",
+            "40",
+            "32",
+            "31",
+            "36",
+            "30",
+            "33",
+            "35",
+            "38",
+            "44",
+            "42",
+            "46"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AW5S_031382_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "35",
+            "46",
+            "48",
+            "44",
+            "26",
+            "37",
+            "27",
+            "50",
+            "39",
+            "33",
+            "40",
+            "29",
+            "31",
+            "32",
+            "30",
+            "42",
+            "28",
+            "36",
+            "34",
+            "38"
+          ]
+        },
+        {
+          "color": "Nomad",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_035955_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "46",
+            "40",
+            "28",
+            "31",
+            "38",
+            "35",
+            "30",
+            "29",
+            "32",
+            "33",
+            "44",
+            "42",
+            "34",
+            "36"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_0001_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "31",
+            "28",
+            "29",
+            "36",
+            "38",
+            "30",
+            "35",
+            "42",
+            "40",
+            "33",
+            "32",
+            "44",
+            "34",
+            "46"
+          ]
+        },
+        {
+          "color": "Oil Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_033123_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "40",
+            "38",
+            "31",
+            "44",
+            "42",
+            "30",
+            "46",
+            "32",
+            "34",
+            "29",
+            "28",
+            "33",
+            "35",
+            "36"
+          ]
+        },
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_032476_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "32",
+            "44",
+            "42",
+            "28",
+            "30",
+            "40",
+            "38",
+            "29",
+            "31",
+            "27",
+            "26",
+            "34",
+            "35",
+            "46",
+            "33",
+            "36"
+          ]
+        },
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_019222_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "38",
+            "36",
+            "31",
+            "35",
+            "30",
+            "28",
+            "42",
+            "46",
+            "34",
+            "32",
+            "40",
+            "33",
+            "29",
+            "44"
+          ]
+        },
+        {
+          "color": "Warm Ash Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_070108_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "33",
+            "36",
+            "34",
+            "32",
+            "31",
+            "46",
+            "35",
+            "40",
+            "30",
+            "38",
+            "42",
+            "29",
+            "28",
+            "44"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_033928_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "31",
+            "44",
+            "46",
+            "38",
+            "42",
+            "29",
+            "40",
+            "35",
+            "28",
+            "34",
+            "36",
+            "33",
+            "30",
+            "32"
+          ]
+        },
+        {
+          "color": "Oakwood Tan",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_075675_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "31",
+            "34",
+            "29",
+            "30",
+            "32",
+            "33",
+            "35",
+            "36",
+            "38",
+            "40",
+            "42",
+            "44",
+            "46",
+            "28"
+          ]
+        },
+        {
+          "color": "Sassy Sage",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_077066_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "38",
+            "28",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "36",
+            "40",
+            "42",
+            "46",
+            "44",
+            "29",
+            "35"
+          ]
+        },
+        {
+          "color": "Rainforest Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_049106_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "38",
+            "40",
+            "44",
+            "46",
+            "42"
+          ]
+        },
+        {
+          "color": "Dusty Diamond",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_076950_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34/_/prod3470051",
+          "available": true,
+          "sizes": [
+            "34",
+            "29",
+            "46",
+            "33",
+            "36",
+            "31",
+            "28",
+            "40",
+            "30",
+            "35",
+            "42",
+            "38",
+            "32",
+            "44"
+          ]
+        }
+      ],
+      "style_number": "LM5AQ9S"
     },
     {
       "id": "lululemon:prod8250160",
@@ -5689,15 +8655,38 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 10,
+      "color": "Grey Sage / Raw Linen / Trench / Artifact / Army Green / Steel Blue / Classic Navy",
+      "available_colors": [
+        "Grey Sage",
+        "Raw Linen",
+        "Trench",
+        "Artifact",
+        "Army Green",
+        "Steel Blue",
+        "Classic Navy"
+      ],
+      "unavailable_colors": [
+        "Asphalt Grey",
+        "Iron Blue",
+        "Bone"
+      ],
+      "all_colors": [
+        "Grey Sage",
+        "Raw Linen",
+        "Trench",
+        "Artifact",
+        "Army Green",
+        "Steel Blue",
+        "Classic Navy",
+        "Asphalt Grey",
+        "Iron Blue",
+        "Bone"
+      ],
       "tags": [
         "men-pants"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_036763_1",
       "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
       "material": "",
       "material_details": [],
@@ -5714,7 +8703,226 @@
       "season_notes": [
         "Matched keyword: pants"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Grey Sage",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_036763_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": true,
+          "sizes": [
+            "30",
+            "33",
+            "46",
+            "28",
+            "44",
+            "31",
+            "34",
+            "36",
+            "38",
+            "29",
+            "35",
+            "42",
+            "32",
+            "40"
+          ]
+        },
+        {
+          "color": "Raw Linen",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_048432_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": true,
+          "sizes": [
+            "28",
+            "40",
+            "30",
+            "38",
+            "32",
+            "31",
+            "33",
+            "29",
+            "35",
+            "42",
+            "46",
+            "44",
+            "34",
+            "36"
+          ]
+        },
+        {
+          "color": "Asphalt Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_035956_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": false,
+          "sizes": [
+            "34",
+            "42",
+            "30",
+            "36",
+            "31",
+            "28",
+            "35",
+            "46",
+            "32",
+            "44",
+            "40",
+            "38",
+            "33",
+            "29"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5968S_026865_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": false,
+          "sizes": [
+            "32",
+            "29",
+            "28",
+            "35",
+            "33",
+            "40",
+            "38",
+            "46",
+            "44",
+            "30",
+            "36",
+            "42",
+            "34",
+            "31"
+          ]
+        },
+        {
+          "color": "Bone",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ADFS_027597_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": false,
+          "sizes": [
+            "40",
+            "32",
+            "35",
+            "28",
+            "34",
+            "31",
+            "42",
+            "33",
+            "29",
+            "30",
+            "38",
+            "44",
+            "36"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ADFS_043731_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": true,
+          "sizes": [
+            "48",
+            "34",
+            "31",
+            "46",
+            "40",
+            "44",
+            "35",
+            "42",
+            "28",
+            "29",
+            "30",
+            "36",
+            "38",
+            "32",
+            "33"
+          ]
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ADFS_029283_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": true,
+          "sizes": [
+            "36",
+            "35",
+            "28",
+            "29",
+            "42",
+            "32",
+            "33",
+            "44",
+            "40",
+            "38",
+            "31",
+            "34",
+            "46",
+            "30"
+          ]
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_045739_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": true,
+          "sizes": [
+            "42",
+            "40",
+            "31",
+            "38",
+            "46",
+            "30",
+            "28",
+            "34",
+            "33",
+            "44",
+            "29",
+            "35",
+            "32",
+            "36"
+          ]
+        },
+        {
+          "color": "Steel Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQ9S_1179_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": true,
+          "sizes": [
+            "38",
+            "28",
+            "42",
+            "32",
+            "46",
+            "34",
+            "30",
+            "29",
+            "44",
+            "40",
+            "31",
+            "35",
+            "33",
+            "36"
+          ]
+        },
+        {
+          "color": "Classic Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5426S_020111_1",
+          "url": "https://shop.lululemon.com/p/men-pants/ABC-Pant-Classic-34-MD/_/prod8250160",
+          "available": true,
+          "sizes": [
+            "40",
+            "38",
+            "32",
+            "33",
+            "36",
+            "34",
+            "28",
+            "29",
+            "30",
+            "31"
+          ]
+        }
+      ],
+      "style_number": "LM5AQ9S"
     },
     {
       "id": "lululemon:prod3470052",
@@ -5871,16 +9079,30 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 6,
+      "color": "Solar Grey / Black / Silver Drop / Army Green / Night Sea / Iron Blue",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Solar Grey",
+        "Black",
+        "Silver Drop",
+        "Army Green",
+        "Night Sea",
+        "Iron Blue"
+      ],
+      "all_colors": [
+        "Solar Grey",
+        "Black",
+        "Silver Drop",
+        "Army Green",
+        "Night Sea",
+        "Iron Blue"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQIS_038426_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Classic-Utilitech-32-MD/_/prod11580325",
       "material": "",
       "material_details": [],
@@ -5897,7 +9119,129 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQIS_038426_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Classic-Utilitech-32-MD/_/prod11580325",
+          "available": false,
+          "sizes": [
+            "28",
+            "36",
+            "32",
+            "30",
+            "29",
+            "31",
+            "35",
+            "33",
+            "34",
+            "38",
+            "40"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ABPS_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Classic-Utilitech-32-MD/_/prod11580325",
+          "available": false,
+          "sizes": [
+            "32",
+            "38",
+            "40",
+            "31",
+            "29",
+            "42",
+            "35",
+            "28",
+            "36",
+            "33",
+            "30",
+            "46",
+            "34"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQIS_033928_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Classic-Utilitech-32-MD/_/prod11580325",
+          "available": false,
+          "sizes": [
+            "38",
+            "40",
+            "34",
+            "30",
+            "28",
+            "35",
+            "32",
+            "29",
+            "31",
+            "33",
+            "36"
+          ]
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQIS_045739_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Classic-Utilitech-32-MD/_/prod11580325",
+          "available": false,
+          "sizes": [
+            "29",
+            "36",
+            "40",
+            "31",
+            "32",
+            "38",
+            "34",
+            "28",
+            "33",
+            "35",
+            "30"
+          ]
+        },
+        {
+          "color": "Night Sea",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQIS_047870_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Classic-Utilitech-32-MD/_/prod11580325",
+          "available": false,
+          "sizes": [
+            "46",
+            "33",
+            "40",
+            "30",
+            "38",
+            "28",
+            "31",
+            "34",
+            "44",
+            "35",
+            "36",
+            "42",
+            "29",
+            "32"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ABPS_026865_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Classic-Utilitech-32-MD/_/prod11580325",
+          "available": false,
+          "sizes": [
+            "38",
+            "32",
+            "33",
+            "34",
+            "28",
+            "36",
+            "29",
+            "30",
+            "35",
+            "31",
+            "40"
+          ]
+        }
+      ],
+      "style_number": "LM5AQIS"
     },
     {
       "id": "lululemon:prod10390145",
@@ -5994,15 +9338,25 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 4,
+      "color": "Obsidian / Trench / True Navy / Black",
+      "available_colors": [
+        "Obsidian",
+        "Trench",
+        "True Navy",
+        "Black"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Obsidian",
+        "Trench",
+        "True Navy",
+        "Black"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQOS_032476_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Skinny-MD/_/prod11780149",
       "material": "",
       "material_details": [],
@@ -6019,7 +9373,86 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQOS_032476_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Skinny-MD/_/prod11780149",
+          "available": true,
+          "sizes": [
+            "28",
+            "30",
+            "31",
+            "40",
+            "35",
+            "33",
+            "34",
+            "36",
+            "32",
+            "29",
+            "38"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQOS_043731_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Skinny-MD/_/prod11780149",
+          "available": true,
+          "sizes": [
+            "28",
+            "32",
+            "33",
+            "40",
+            "30",
+            "38",
+            "31",
+            "29",
+            "36",
+            "34",
+            "35"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQOS_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Skinny-MD/_/prod11780149",
+          "available": true,
+          "sizes": [
+            "35",
+            "40",
+            "38",
+            "36",
+            "33",
+            "34",
+            "31",
+            "30",
+            "28",
+            "29",
+            "32"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQOS_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Skinny-MD/_/prod11780149",
+          "available": true,
+          "sizes": [
+            "36",
+            "33",
+            "31",
+            "35",
+            "38",
+            "30",
+            "40",
+            "34",
+            "32",
+            "28",
+            "29"
+          ]
+        }
+      ],
+      "style_number": "LM5AQOS"
     },
     {
       "id": "lululemon:prod11580326",
@@ -6055,15 +9488,34 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 8,
+      "color": "Trench / Raw Linen / Steel Blue",
+      "available_colors": [
+        "Trench",
+        "Raw Linen",
+        "Steel Blue"
+      ],
+      "unavailable_colors": [
+        "Iron Blue",
+        "Gator Green",
+        "Artifact",
+        "Dark Olive",
+        "Sheer Oak"
+      ],
+      "all_colors": [
+        "Trench",
+        "Raw Linen",
+        "Steel Blue",
+        "Iron Blue",
+        "Gator Green",
+        "Artifact",
+        "Dark Olive",
+        "Sheer Oak"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_026865_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
       "material": "",
       "material_details": [],
@@ -6080,7 +9532,162 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_026865_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": false,
+          "sizes": [
+            "32",
+            "31",
+            "36",
+            "30",
+            "34",
+            "28",
+            "33",
+            "40",
+            "38",
+            "29",
+            "35"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_043731_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": true,
+          "sizes": [
+            "32",
+            "40",
+            "36",
+            "30",
+            "34",
+            "33",
+            "35",
+            "29",
+            "28",
+            "38",
+            "31"
+          ]
+        },
+        {
+          "color": "Gator Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_018615_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": false,
+          "sizes": [
+            "33",
+            "30",
+            "34",
+            "31",
+            "32",
+            "29",
+            "40",
+            "28",
+            "38",
+            "35",
+            "36"
+          ]
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AD8S_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": false,
+          "sizes": [
+            "38",
+            "29",
+            "28",
+            "36",
+            "30",
+            "35",
+            "40",
+            "34",
+            "31",
+            "33",
+            "32"
+          ]
+        },
+        {
+          "color": "Raw Linen",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_048432_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": true,
+          "sizes": [
+            "29",
+            "40",
+            "38",
+            "32",
+            "35",
+            "31",
+            "33",
+            "36",
+            "30",
+            "28",
+            "34"
+          ]
+        },
+        {
+          "color": "Dark Olive",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_026083_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": false,
+          "sizes": [
+            "38",
+            "33",
+            "34",
+            "29",
+            "28",
+            "32",
+            "40",
+            "31",
+            "30",
+            "36",
+            "35"
+          ]
+        },
+        {
+          "color": "Sheer Oak",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_068684_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": false,
+          "sizes": [
+            "34",
+            "30",
+            "28",
+            "35",
+            "31",
+            "36",
+            "38",
+            "32",
+            "29",
+            "40",
+            "33"
+          ]
+        },
+        {
+          "color": "Steel Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_1179_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-MD/_/prod11580326",
+          "available": true,
+          "sizes": [
+            "33",
+            "28",
+            "38",
+            "31",
+            "34",
+            "35",
+            "29",
+            "40",
+            "32",
+            "30",
+            "36"
+          ]
+        }
+      ],
+      "style_number": "LM5AQRS"
     },
     {
       "id": "lululemon:prod9610173",
@@ -6116,15 +9723,47 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
+      "variant_count": 15,
+      "color": "Wacky Khaki / Obsidian / Nomad / Silver Drop / True Navy / Olive Brown / Willow Leaf / Warm Ash Grey / Solar Grey / Black / Oil Grey / Sassy Sage / Dusty Diamond / Rainforest Green / Oakwood Tan",
+      "available_colors": [
+        "Wacky Khaki",
+        "Obsidian",
+        "Nomad",
+        "Silver Drop",
+        "True Navy",
+        "Olive Brown",
+        "Willow Leaf",
+        "Warm Ash Grey",
+        "Solar Grey",
+        "Black",
+        "Oil Grey",
+        "Sassy Sage",
+        "Dusty Diamond",
+        "Rainforest Green",
+        "Oakwood Tan"
+      ],
       "unavailable_colors": [],
-      "all_colors": [],
+      "all_colors": [
+        "Wacky Khaki",
+        "Obsidian",
+        "Nomad",
+        "Silver Drop",
+        "True Navy",
+        "Olive Brown",
+        "Willow Leaf",
+        "Warm Ash Grey",
+        "Solar Grey",
+        "Black",
+        "Oil Grey",
+        "Sassy Sage",
+        "Dusty Diamond",
+        "Rainforest Green",
+        "Oakwood Tan"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_019222_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
       "material": "",
       "material_details": [],
@@ -6141,7 +9780,304 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Wacky Khaki",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_019222_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "36",
+            "29",
+            "32",
+            "33",
+            "38",
+            "40",
+            "28",
+            "34",
+            "31",
+            "30",
+            "35"
+          ]
+        },
+        {
+          "color": "Obsidian",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_032476_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "40",
+            "36",
+            "35",
+            "34",
+            "38",
+            "31",
+            "33",
+            "28",
+            "29",
+            "32",
+            "42",
+            "44",
+            "46",
+            "30"
+          ]
+        },
+        {
+          "color": "Nomad",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_035955_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "33",
+            "32",
+            "30",
+            "29",
+            "36",
+            "40",
+            "38",
+            "35",
+            "31",
+            "28",
+            "34"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5B61S_033928_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "29",
+            "33",
+            "28",
+            "35",
+            "36",
+            "40",
+            "30",
+            "38",
+            "31",
+            "32",
+            "34"
+          ]
+        },
+        {
+          "color": "True Navy",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5A45S_031382_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "44",
+            "40",
+            "30",
+            "31",
+            "34",
+            "29",
+            "38",
+            "33",
+            "32",
+            "36",
+            "35",
+            "28",
+            "42",
+            "46"
+          ]
+        },
+        {
+          "color": "Olive Brown",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_071148_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "31",
+            "33",
+            "34",
+            "35",
+            "36",
+            "32",
+            "29",
+            "40",
+            "30",
+            "28",
+            "38"
+          ]
+        },
+        {
+          "color": "Willow Leaf",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_072763_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "38",
+            "29",
+            "32",
+            "31",
+            "28",
+            "34",
+            "30",
+            "40",
+            "36",
+            "33",
+            "35"
+          ]
+        },
+        {
+          "color": "Warm Ash Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_070108_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "34",
+            "35",
+            "40",
+            "28",
+            "30",
+            "36",
+            "38",
+            "29",
+            "33",
+            "32",
+            "31"
+          ]
+        },
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_038426_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "33",
+            "30",
+            "40",
+            "28",
+            "34",
+            "29",
+            "38",
+            "31",
+            "35",
+            "36",
+            "32"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "38",
+            "36",
+            "33",
+            "35",
+            "34",
+            "29",
+            "32",
+            "28",
+            "40",
+            "31",
+            "30",
+            "44",
+            "42",
+            "46"
+          ]
+        },
+        {
+          "color": "Oil Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_033123_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "36",
+            "33",
+            "29",
+            "32",
+            "34",
+            "30",
+            "28",
+            "40",
+            "31",
+            "38",
+            "35"
+          ]
+        },
+        {
+          "color": "Sassy Sage",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_077066_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "31",
+            "30",
+            "34",
+            "29",
+            "38",
+            "40",
+            "32",
+            "33",
+            "35",
+            "28",
+            "36"
+          ]
+        },
+        {
+          "color": "Dusty Diamond",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_076950_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "33",
+            "28",
+            "36",
+            "40",
+            "34",
+            "35",
+            "38",
+            "30",
+            "29",
+            "31",
+            "32"
+          ]
+        },
+        {
+          "color": "Rainforest Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_049106_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "40",
+            "36",
+            "32",
+            "30",
+            "33",
+            "38",
+            "28",
+            "29",
+            "34",
+            "31",
+            "35"
+          ]
+        },
+        {
+          "color": "Oakwood Tan",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQRS_075675_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30/_/prod9610173",
+          "available": true,
+          "sizes": [
+            "33",
+            "31",
+            "38",
+            "29",
+            "34",
+            "32",
+            "36",
+            "30",
+            "28",
+            "40",
+            "35"
+          ]
+        }
+      ],
+      "style_number": "LM5AQRS"
     },
     {
       "id": "lululemon:prod10850117",
@@ -6237,16 +10173,24 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 3,
+      "color": "Seal Grey / Artifact / Solar Grey",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Seal Grey",
+        "Artifact",
+        "Solar Grey"
+      ],
+      "all_colors": [
+        "Seal Grey",
+        "Artifact",
+        "Solar Grey"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AY4S_023315_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-Utilitech-MD/_/prod11780216",
       "material": "",
       "material_details": [],
@@ -6263,7 +10207,67 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Seal Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AY4S_023315_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-Utilitech-MD/_/prod11780216",
+          "available": false,
+          "sizes": [
+            "34",
+            "32",
+            "35",
+            "30",
+            "40",
+            "28",
+            "33",
+            "29",
+            "31",
+            "38",
+            "36"
+          ]
+        },
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AY4S_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-Utilitech-MD/_/prod11780216",
+          "available": false,
+          "sizes": [
+            "28",
+            "35",
+            "31",
+            "40",
+            "30",
+            "36",
+            "34",
+            "38",
+            "29",
+            "33",
+            "32"
+          ]
+        },
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AY4S_038426_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-30-Utilitech-MD/_/prod11780216",
+          "available": false,
+          "sizes": [
+            "29",
+            "36",
+            "32",
+            "30",
+            "34",
+            "40",
+            "28",
+            "31",
+            "33",
+            "35",
+            "38"
+          ]
+        }
+      ],
+      "style_number": "LM5AY4S"
     },
     {
       "id": "lululemon:prod10390149",
@@ -6299,15 +10303,28 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 5,
+      "color": "Artifact / Trench / Black / Seal Grey",
+      "available_colors": [
+        "Artifact",
+        "Trench",
+        "Black",
+        "Seal Grey"
+      ],
+      "unavailable_colors": [
+        "Iron Blue"
+      ],
+      "all_colors": [
+        "Artifact",
+        "Trench",
+        "Black",
+        "Seal Grey",
+        "Iron Blue"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5ABNS_029283_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-32-MD/_/prod10390149",
       "material": "",
       "material_details": [],
@@ -6324,7 +10341,114 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ABNS_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-32-MD/_/prod10390149",
+          "available": true,
+          "sizes": [
+            "38",
+            "33",
+            "29",
+            "42",
+            "34",
+            "28",
+            "30",
+            "36",
+            "35",
+            "44",
+            "40",
+            "32",
+            "46",
+            "31"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ABNS_043731_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-32-MD/_/prod10390149",
+          "available": true,
+          "sizes": [
+            "29",
+            "34",
+            "35",
+            "36",
+            "32",
+            "30",
+            "38",
+            "33",
+            "28",
+            "40",
+            "31"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ABNS_026865_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-32-MD/_/prod10390149",
+          "available": false,
+          "sizes": [
+            "42",
+            "46",
+            "44",
+            "33",
+            "28",
+            "29",
+            "32",
+            "40",
+            "35",
+            "31",
+            "30",
+            "38",
+            "36",
+            "34"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ABNS_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-32-MD/_/prod10390149",
+          "available": true,
+          "sizes": [
+            "36",
+            "29",
+            "28",
+            "35",
+            "34",
+            "38",
+            "33",
+            "44",
+            "31",
+            "32",
+            "30",
+            "46",
+            "40",
+            "42"
+          ]
+        },
+        {
+          "color": "Seal Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5ABNS_023315_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-32-MD/_/prod10390149",
+          "available": true,
+          "sizes": [
+            "35",
+            "29",
+            "40",
+            "31",
+            "30",
+            "28",
+            "38",
+            "36",
+            "33",
+            "34",
+            "32"
+          ]
+        }
+      ],
+      "style_number": "LM5ABNS"
     },
     {
       "id": "lululemon:prod10050065",
@@ -6421,15 +10545,32 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 7,
+      "color": "Artifact / Black / Trench",
+      "available_colors": [
+        "Artifact",
+        "Black",
+        "Trench"
+      ],
+      "unavailable_colors": [
+        "Iron Blue",
+        "Army Green",
+        "Seal Grey",
+        "Solar Grey"
+      ],
+      "all_colors": [
+        "Artifact",
+        "Black",
+        "Trench",
+        "Iron Blue",
+        "Army Green",
+        "Seal Grey",
+        "Solar Grey"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_029283_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
       "material": "",
       "material_details": [],
@@ -6446,7 +10587,149 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Artifact",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_029283_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
+          "available": true,
+          "sizes": [
+            "38",
+            "30",
+            "35",
+            "34",
+            "28",
+            "32",
+            "29",
+            "36",
+            "46",
+            "44",
+            "42",
+            "31",
+            "40",
+            "33"
+          ]
+        },
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_026865_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
+          "available": false,
+          "sizes": [
+            "33",
+            "30",
+            "40",
+            "34",
+            "35",
+            "29",
+            "31",
+            "32",
+            "36",
+            "38",
+            "28"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
+          "available": true,
+          "sizes": [
+            "35",
+            "38",
+            "32",
+            "34",
+            "29",
+            "46",
+            "42",
+            "44",
+            "28",
+            "30",
+            "36",
+            "33",
+            "40",
+            "31"
+          ]
+        },
+        {
+          "color": "Army Green",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_045739_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
+          "available": false,
+          "sizes": [
+            "36",
+            "31",
+            "32",
+            "35",
+            "29",
+            "28",
+            "38",
+            "30",
+            "33",
+            "40",
+            "34"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_043731_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
+          "available": true,
+          "sizes": [
+            "35",
+            "33",
+            "28",
+            "29",
+            "36",
+            "30",
+            "38",
+            "34",
+            "31",
+            "40",
+            "32"
+          ]
+        },
+        {
+          "color": "Seal Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_023315_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
+          "available": false,
+          "sizes": [
+            "35",
+            "38",
+            "28",
+            "29",
+            "33",
+            "30",
+            "40",
+            "36",
+            "32",
+            "31",
+            "34"
+          ]
+        },
+        {
+          "color": "Solar Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AQUS_038426_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Pant-Slim-Utilitech-34-MD/_/prod10390152",
+          "available": false,
+          "sizes": [
+            "33",
+            "36",
+            "31",
+            "30",
+            "34",
+            "38",
+            "32",
+            "29",
+            "28",
+            "40",
+            "35"
+          ]
+        }
+      ],
+      "style_number": "LM5AQUS"
     },
     {
       "id": "lululemon:prod20008890",
@@ -6911,16 +11194,28 @@
       "price_min": 0,
       "price_max": 0,
       "price_known": false,
-      "available": true,
-      "variant_count": 1,
-      "color": "",
+      "available": false,
+      "variant_count": 5,
+      "color": "Iron Blue / Blue Twill / Warm Ash Grey / Trench / Vapor",
       "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "unavailable_colors": [
+        "Iron Blue",
+        "Blue Twill",
+        "Warm Ash Grey",
+        "Trench",
+        "Vapor"
+      ],
+      "all_colors": [
+        "Iron Blue",
+        "Blue Twill",
+        "Warm Ash Grey",
+        "Trench",
+        "Vapor"
+      ],
       "tags": [
         "men-shorts"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM7BMIS_026865_1",
       "url": "https://shop.lululemon.com/p/men-shorts/ABC-Short-Classic-9-MD/_/prod11720691",
       "material": "",
       "material_details": [],
@@ -6938,7 +11233,96 @@
         "Matched keyword: short",
         "Matched keyword: shorts"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Iron Blue",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BMIS_026865_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Short-Classic-9-MD/_/prod11720691",
+          "available": false,
+          "sizes": [
+            "32",
+            "33",
+            "30",
+            "34",
+            "38",
+            "40",
+            "28",
+            "31",
+            "36"
+          ]
+        },
+        {
+          "color": "Blue Twill",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BQJS_071150_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Short-Classic-9-MD/_/prod11720691",
+          "available": false,
+          "sizes": [
+            "34",
+            "30",
+            "36",
+            "38",
+            "31",
+            "33",
+            "40",
+            "28",
+            "32"
+          ]
+        },
+        {
+          "color": "Warm Ash Grey",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BMIS_070108_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Short-Classic-9-MD/_/prod11720691",
+          "available": false,
+          "sizes": [
+            "30",
+            "33",
+            "28",
+            "31",
+            "40",
+            "36",
+            "38",
+            "32",
+            "34"
+          ]
+        },
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BMIS_043731_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Short-Classic-9-MD/_/prod11720691",
+          "available": false,
+          "sizes": [
+            "34",
+            "29",
+            "28",
+            "40",
+            "30",
+            "38",
+            "32",
+            "36",
+            "33",
+            "31"
+          ]
+        },
+        {
+          "color": "Vapor",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM7BMIS_032894_1",
+          "url": "https://shop.lululemon.com/p/men-shorts/ABC-Short-Classic-9-MD/_/prod11720691",
+          "available": false,
+          "sizes": [
+            "36",
+            "34",
+            "33",
+            "40",
+            "30",
+            "28",
+            "31",
+            "38",
+            "32"
+          ]
+        }
+      ],
+      "style_number": "LM7BMIS"
     },
     {
       "id": "lululemon:prod11780082",
@@ -6974,15 +11358,24 @@
       "price_max": 0,
       "price_known": false,
       "available": true,
-      "variant_count": 1,
-      "color": "",
-      "available_colors": [],
-      "unavailable_colors": [],
-      "all_colors": [],
+      "variant_count": 3,
+      "color": "Trench",
+      "available_colors": [
+        "Trench"
+      ],
+      "unavailable_colors": [
+        "Black",
+        "Silver Drop"
+      ],
+      "all_colors": [
+        "Trench",
+        "Black",
+        "Silver Drop"
+      ],
       "tags": [
         "mens-trousers"
       ],
-      "image": "",
+      "image": "https://images.lululemon.com/is/image/lululemon/LM5AO2S_043731_1",
       "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Skinny-Pant-Warp-32-MD/_/prod11780082",
       "material": "",
       "material_details": [],
@@ -6999,7 +11392,67 @@
       "season_notes": [
         "Matched keyword: trousers"
       ],
-      "season_code": ""
+      "season_code": "",
+      "color_variants": [
+        {
+          "color": "Trench",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO2S_043731_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Skinny-Pant-Warp-32-MD/_/prod11780082",
+          "available": true,
+          "sizes": [
+            "40",
+            "33",
+            "35",
+            "34",
+            "32",
+            "30",
+            "38",
+            "29",
+            "28",
+            "31",
+            "36"
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO2S_0001_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Skinny-Pant-Warp-32-MD/_/prod11780082",
+          "available": false,
+          "sizes": [
+            "35",
+            "36",
+            "29",
+            "38",
+            "33",
+            "40",
+            "28",
+            "32",
+            "30",
+            "31",
+            "34"
+          ]
+        },
+        {
+          "color": "Silver Drop",
+          "image": "https://images.lululemon.com/is/image/lululemon/LM5AO2S_033928_1",
+          "url": "https://shop.lululemon.com/p/mens-trousers/ABC-Skinny-Pant-Warp-32-MD/_/prod11780082",
+          "available": false,
+          "sizes": [
+            "34",
+            "38",
+            "33",
+            "30",
+            "29",
+            "35",
+            "32",
+            "36",
+            "28",
+            "40",
+            "31"
+          ]
+        }
+      ],
+      "style_number": "LM5AO2S"
     },
     {
       "id": "lululemon:prod10390084",
@@ -109847,7 +114300,7 @@
       "season_code": ""
     }
   ],
-  "available_count": 1799,
+  "available_count": 1790,
   "category_counts": {
     "Athletic Shorts": 9,
     "Button Down Shirts": 14,
@@ -109882,13 +114335,16 @@
     "women": 1131
   },
   "missing": {
-    "image": 1785,
-    "color": 1785,
-    "material": 1789,
+    "image": 1753,
+    "color": 1753,
+    "material": 1783,
     "price": 1803
   },
-  "quality_decision": "publish",
-  "quality_warnings": [],
+  "quality_decision": "fallback",
+  "quality_warnings": [
+    "Scrape error: Client error '403 Forbidden' for url 'https://shop.lululemon.com/robots.txt'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+    "Categories disappeared: Athletic Shorts, Button Down Shirts, Capris, Coats & Jackets, Dresses, Hoodies, Hoodies & Sweatshirts, Jackets, Joggers, Leggings, Liner Shorts, Long Sleeve Shirts"
+  ],
   "monthly_change": {
     "previous_period": "2026-07",
     "previous_product_count": 1765,

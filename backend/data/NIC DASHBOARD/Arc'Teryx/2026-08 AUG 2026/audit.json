@@ -29,28 +29,28 @@
     }
   },
   "new": {
-    "product_count": 317,
-    "available_count": 317,
+    "product_count": 323,
+    "available_count": 323,
     "category_counts": {
-      "Base Layer": 6,
-      "Collection Only": 96,
-      "Fleece": 26,
+      "Base Layer": 2,
+      "Collection Only": 104,
+      "Fleece": 32,
       "Insulated Jackets": 35,
-      "Pants": 36,
-      "Shell Jackets": 56,
-      "Shirts and Tops": 48,
-      "Shorts": 18,
-      "Vests": 3
+      "Pants": 34,
+      "Shell Jackets": 59,
+      "Shirts and Tops": 47,
+      "Shorts": 15,
+      "Vests": 2
     },
     "audience_counts": {
-      "men": 158,
-      "women": 160
+      "men": 169,
+      "women": 155
     },
     "missing": {
       "image": 0,
       "color": 0,
-      "material": 10,
-      "price": 0
+      "material": 61,
+      "price": 7
     }
   }
 }
