@@ -4,6 +4,12 @@ $ProjectRoot = Split-Path -Parent $PSScriptRoot
 $LogDir = Join-Path $ProjectRoot "backend\data\logs"
 $Timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
 $LogFile = Join-Path $LogDir "auto-scrape-$Timestamp.log"
+if ([string]::IsNullOrWhiteSpace($env:SCRAPE_TASK_TIMEOUT_MINUTES)) {
+    $TaskTimeoutMinutes = 15
+} else {
+    $TaskTimeoutMinutes = [int]$env:SCRAPE_TASK_TIMEOUT_MINUTES
+}
+$TaskTimeoutMilliseconds = $TaskTimeoutMinutes * 60 * 1000
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 Set-Location $ProjectRoot
@@ -25,10 +31,43 @@ Write-Log "Scrape period: $Month $Year"
 try {
     $Python = (Get-Command python.exe -ErrorAction Stop).Source
     Write-Log "Python executable: $Python"
+    Write-Log "Task timeout: $TaskTimeoutMinutes minutes"
 
-    $Output = & $Python "tools\monthly_scrape_snapshot.py" --month $Month --year $Year 2>&1
-    $ExitCode = $LASTEXITCODE
-    $Output | Tee-Object -FilePath $LogFile -Append
+    $StdOutFile = Join-Path $LogDir "auto-scrape-$Timestamp.stdout.log"
+    $StdErrFile = Join-Path $LogDir "auto-scrape-$Timestamp.stderr.log"
+    $Process = Start-Process `
+        -FilePath $Python `
+        -ArgumentList @("tools\monthly_scrape_snapshot.py", "--month", $Month, "--year", $Year) `
+        -WorkingDirectory $ProjectRoot `
+        -RedirectStandardOutput $StdOutFile `
+        -RedirectStandardError $StdErrFile `
+        -NoNewWindow `
+        -PassThru
+
+    if (-not $Process.WaitForExit($TaskTimeoutMilliseconds)) {
+        Write-Log "NIC Dashboard monthly scrape exceeded $TaskTimeoutMinutes minutes. Stopping process $($Process.Id)."
+        Stop-Process -Id $Process.Id -Force
+        $LockFile = Join-Path $ProjectRoot "backend\data\monthly_scrape.lock"
+        if (Test-Path $LockFile) {
+            Remove-Item -LiteralPath $LockFile -Force
+            Write-Log "Removed stale scrape lock after timeout."
+        }
+        if (Test-Path $StdOutFile) {
+            Get-Content $StdOutFile | Tee-Object -FilePath $LogFile -Append
+        }
+        if (Test-Path $StdErrFile) {
+            Get-Content $StdErrFile | Tee-Object -FilePath $LogFile -Append
+        }
+        exit 124
+    }
+
+    $ExitCode = $Process.ExitCode
+    if (Test-Path $StdOutFile) {
+        Get-Content $StdOutFile | Tee-Object -FilePath $LogFile -Append
+    }
+    if (Test-Path $StdErrFile) {
+        Get-Content $StdErrFile | Tee-Object -FilePath $LogFile -Append
+    }
 } catch {
     Write-Log "NIC Dashboard monthly scrape crashed before completion."
     Write-Log $_.Exception.Message

@@ -14,7 +14,7 @@ FRONTEND_SNAPSHOT_PATH = ROOT / "frontend" / "src" / "snapshotData.json"
 MONTHLY_AUTO_STATUS_PATH = BACKEND_DIR / "data" / "monthly_auto_scrape_status.json"
 AUTO_SCRAPE_RUNS_PATH = BACKEND_DIR / "data" / "auto_scrape_runs.json"
 SCRAPE_LOCK_PATH = BACKEND_DIR / "data" / "monthly_scrape.lock"
-LOCK_STALE_MINUTES = int(os.environ.get("SCRAPE_LOCK_STALE_MINUTES", "180"))
+LOCK_STALE_MINUTES = int(os.environ.get("SCRAPE_LOCK_STALE_MINUTES", "20"))
 
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))

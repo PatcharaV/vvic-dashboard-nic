@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -29,6 +30,8 @@ STAGING_DIR = DATA_DIR / "staging"
 AUDIT_DIR = DATA_DIR / "audits"
 BACKUP_DIR = DATA_DIR / "backups"
 BRAND_ARCHIVE_DIR = DATA_DIR / "NIC DASHBOARD"
+SCRAPE_TOTAL_TIMEOUT_SECONDS = int(os.environ.get("SCRAPE_TOTAL_TIMEOUT_SECONDS", "840"))
+SCRAPE_BRAND_TIMEOUT_SECONDS = int(os.environ.get("SCRAPE_BRAND_TIMEOUT_SECONDS", "780"))
 BRAND_ARCHIVE_FOLDERS = {
     "strauss": "Strauss",
     "rhone": "Rhone",
@@ -1095,6 +1098,19 @@ def load_period_cache(scrape_period: dict[str, Any] | None) -> dict[str, Any] | 
         return None
 
 
+async def _scrape_brand_with_timeout(
+    label: str,
+    scrape_call: Any,
+    timeout_seconds: int,
+) -> dict[str, Any]:
+    try:
+        return await asyncio.wait_for(scrape_call, timeout=timeout_seconds)
+    except asyncio.TimeoutError as exc:
+        raise TimeoutError(
+            f"{label} scrape exceeded {timeout_seconds} seconds"
+        ) from exc
+
+
 async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[str, Any]:
     cached = load_cache() or {}
     cached_products = cached.get("products", [])
@@ -1103,14 +1119,27 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         for source in cached.get("sources", [])
         if source.get("brand")
     }
-    scraped_results = await asyncio.gather(
-        scrape_strauss_products(),
-        scrape_rhone_products(),
-        scrape_arcteryx_products(scrape_period=scrape_period),
-        scrape_lululemon_products(),
-        scrape_tommy_bahama_products(),
-        scrape_travis_mathew_products(),
-        return_exceptions=True,
+    scrape_jobs = (
+        ("Strauss", scrape_strauss_products()),
+        ("Rhone", scrape_rhone_products()),
+        ("Arc'teryx", scrape_arcteryx_products(scrape_period=scrape_period)),
+        ("lululemon", scrape_lululemon_products()),
+        ("Tommy Bahama", scrape_tommy_bahama_products()),
+        ("TravisMathew", scrape_travis_mathew_products()),
+    )
+    scraped_results = await asyncio.wait_for(
+        asyncio.gather(
+            *(
+                _scrape_brand_with_timeout(
+                    label,
+                    scrape_call,
+                    SCRAPE_BRAND_TIMEOUT_SECONDS,
+                )
+                for label, scrape_call in scrape_jobs
+            ),
+            return_exceptions=True,
+        ),
+        timeout=SCRAPE_TOTAL_TIMEOUT_SECONDS,
     )
     brand_sources = (
         ("strauss", "Strauss", "https://us.strauss.com"),

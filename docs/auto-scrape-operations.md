@@ -23,6 +23,20 @@ It also uses `backend/data/monthly_scrape.lock` to prevent overlapping scrape
 runs. If a previous run is still active, the next run exits instead of scraping
 again.
 
+## Time Limits
+
+Monthly scrape runs are capped so a scheduled task does not run indefinitely.
+
+Default limits:
+
+- `SCRAPE_BRAND_TIMEOUT_SECONDS=780` per brand, about 13 minutes
+- `SCRAPE_TOTAL_TIMEOUT_SECONDS=840` for the concurrent brand scrape phase, about 14 minutes
+- `SCRAPE_TASK_TIMEOUT_MINUTES=15` for the Windows scheduled task wrapper
+
+If a brand is too slow or rate limited, the scraper falls back to the latest
+saved data for that brand. If the whole Python process exceeds the Windows task
+limit, the wrapper stops it and removes the stale lock file.
+
 ## Scheduler
 
 Use one scheduler outside the web app, for example:
