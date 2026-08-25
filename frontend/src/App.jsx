@@ -34,11 +34,13 @@ const DEFAULT_BRAND_OPTIONS = [
   { value: "travismathew", label: "TravisMathew" },
 ];
 
-const ARCTERYX_WORKSPACE_PAGES = [
+const BRAND_WORKSPACE_PAGES = [
   { value: "profile", label: "Brand Profile" },
   { value: "wallet", label: "Brand Wallet Shared" },
   { value: "product", label: "Product Dashboard" },
 ];
+
+const PROFILE_WORKSPACE_BRANDS = new Set(["arcteryx", "travismathew"]);
 
 const BRAND_LOGOS = {
   strauss: { mark: "S", wordmark: "STRAUSS", subline: "WORKWEAR", src: "/brand-logos/strauss.png" },
@@ -83,6 +85,42 @@ const ARCTERYX_COMPETITORS = [
   { brand: "The North Face", price: "$30-$45", gender: "53% / 47%", satisfaction: "5/5", revenue: "$11,600M" },
   { brand: "Moncler", price: "$345-$440", gender: "53% / 47%", satisfaction: "3/5", revenue: "$2,200M" },
   { brand: "Patagonia", price: "$55-$89", gender: "51% / 49%", satisfaction: "4/5", revenue: "$1,700M" },
+];
+
+const TRAVISMATHEW_PROFILE_STATS = [
+  { value: "56.0%", label: "Male visitors" },
+  { value: "44.0%", label: "Female visitors" },
+  { value: "35-54", label: "Core age range" },
+  { value: "#1 US", label: "Top traffic market" },
+  { value: "$89.95-119.95", label: "Polo price band" },
+  { value: "$685M", label: "Apparel / Gear / Other net sales, FY2025" },
+];
+
+const TRAVISMATHEW_PROFILE_POINTS = [
+  {
+    title: "Lifestyle",
+    text: "Golf-centered, plus hiking, tennis and fitness. Wants pieces that move from the course to everyday wear.",
+  },
+  {
+    title: "Fashion preference",
+    text: "Athletic-inspired with a contemporary twist: clean lines, modern cuts and casual sophistication.",
+  },
+  {
+    title: "Brand loyalty",
+    text: "Loyal to the brand's reputation for high-quality materials and innovative design.",
+  },
+  {
+    title: "Values",
+    text: "Comfort, functionality and performance drive the purchase decision as much as style.",
+  },
+];
+
+const TRAVISMATHEW_COMPETITORS = [
+  { brand: "TravisMathew", price: "$89.95-$119.95", gender: "62% / 38%", satisfaction: "4/5", revenue: "$300M" },
+  { brand: "Peter Millar", price: "$98-$225", gender: "57% / 43%", satisfaction: "4/5", revenue: "$175M" },
+  { brand: "FootJoy (FJ)", price: "$78-$145", gender: "72% / 28%", satisfaction: "4/5", revenue: "$618M" },
+  { brand: "TaylorMade", price: "$110-$188", gender: "72% / 28%", satisfaction: "4/5", revenue: "$1,100M" },
+  { brand: "Rhoback", price: "$96-$98", gender: "53% / 47%", satisfaction: "5/5", revenue: "$17.6M" },
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
@@ -248,6 +286,137 @@ function ArcteryxBrandProfile() {
         <small>
           Data noted in source deck: Similarweb 2025, Amer Sports SEC filings
           and Thingtesting.
+        </small>
+      </article>
+    </section>
+  );
+}
+
+function TravisMathewBrandProfile() {
+  return (
+    <section className="panel arcteryx-profile travismathew-profile">
+      <div className="profile-hero travismathew-profile-hero">
+        <div>
+          <p className="eyebrow">FIELD BRIEF - 02 / GOLF & ACTIVE LIFESTYLE APPAREL</p>
+          <h2>Who&apos;s on the TravisMathew back nine.</h2>
+          <p>
+            A read on the customer base, competitive set and category economics
+            behind TravisMathew, built for NYTG fabric portfolio pitch prep.
+          </p>
+        </div>
+        <a
+          className="profile-download"
+          href="/brand-profiles/travismathew-intel.pptx"
+          download
+        >
+          Download source deck
+        </a>
+      </div>
+
+      <article className="profile-brand-dna">
+        <p className="eyebrow">Brand DNA</p>
+        <h3>Laidback performance, built course-to-street.</h3>
+        <p>
+          Inspired by Southern California&apos;s laidback yet active lifestyle,
+          TravisMathew balances innovative design, superior style and everyday
+          versatility.
+        </p>
+        <div className="profile-dna-grid">
+          <span>Laidback, not sloppy</span>
+          <span>Performance, not flashy</span>
+          <span>Course-to-street versatility</span>
+          <span>SoCal origin, 2007</span>
+        </div>
+      </article>
+
+      <div className="profile-stat-grid">
+        {TRAVISMATHEW_PROFILE_STATS.map((stat) => (
+          <div className="profile-stat-card" key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="profile-grid">
+        <article className="profile-card wide">
+          <p className="eyebrow">01 - Profile</p>
+          <h3>A performance-first golfer who dresses for the 19th hole too.</h3>
+          <div className="profile-point-grid">
+            {TRAVISMATHEW_PROFILE_POINTS.map((point) => (
+              <div className="profile-point" key={point.title}>
+                <strong>{point.title.slice(0, 1)}</strong>
+                <div>
+                  <h4>{point.title}</h4>
+                  <p>{point.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="profile-card">
+          <p className="eyebrow">02 - Demographics</p>
+          <h3>Traffic peaks at 45-54.</h3>
+          <p>
+            Similarweb 2025 shows a 55.97% male / 44.03% female split and a
+            core audience older than Arc&apos;teryx. United States traffic is
+            highly concentrated at 94.9% of visits.
+          </p>
+        </article>
+
+        <article className="profile-card">
+          <p className="eyebrow">04 - Parent Company</p>
+          <h3>Callaway Golf is refocused on golf and soft goods.</h3>
+          <p>
+            After selling Jack Wolfskin and a 60% stake in Topgolf, the parent
+            returned to Callaway Golf Company and now houses TravisMathew inside
+            Apparel, Gear & Other.
+          </p>
+        </article>
+      </div>
+
+      <article className="profile-card">
+        <p className="eyebrow">03 - Competitive Set</p>
+        <h3>TravisMathew undercuts most golf apparel on price.</h3>
+        <div className="profile-table-wrap">
+          <table className="profile-table">
+            <thead>
+              <tr>
+                <th>Brand</th>
+                <th>Polo price</th>
+                <th>Gender ratio (M/F)</th>
+                <th>Satisfaction</th>
+                <th>Revenue Y2022</th>
+              </tr>
+            </thead>
+            <tbody>
+              {TRAVISMATHEW_COMPETITORS.map((row) => (
+                <tr key={row.brand}>
+                  <td>{row.brand}</td>
+                  <td>{row.price}</td>
+                  <td>{row.gender}</td>
+                  <td>{row.satisfaction}</td>
+                  <td>{row.revenue}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article className="profile-summary-card travismathew-summary-card">
+        <p className="eyebrow">Summary</p>
+        <h3>Value-priced, performance-first and newly refocused.</h3>
+        <p>
+          TravisMathew buyers are 35-54, middle-to-upper income and looking for
+          premium activewear that can move between golf, leisure and everyday
+          life. The brand now sits in a smaller $685M Apparel, Gear & Other
+          segment under Callaway Golf Company.
+        </p>
+        <small>
+          Data noted in source deck: Similarweb 2025, Callaway Golf filings and
+          practical-golf.com.
         </small>
       </article>
     </section>
@@ -774,7 +943,7 @@ function App() {
   const [autoScrapeRuns, setAutoScrapeRuns] = useState({});
   const [maintenance, setMaintenance] = useState(null);
   const [filtersOpen, setFiltersOpen] = useState(true);
-  const [arcteryxWorkspacePage, setArcteryxWorkspacePage] = useState("product");
+  const [brandWorkspacePage, setBrandWorkspacePage] = useState("product");
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
   const loadRequestRef = useRef(0);
@@ -818,10 +987,10 @@ function App() {
     [effectiveFilters, selectedPeriod],
   );
   const brandOptions = mergeBrandOptions(options.brands);
-  const isArcteryxWorkspace = routeBrand === "arcteryx";
-  const arcteryxPageLabel =
-    ARCTERYX_WORKSPACE_PAGES.find(
-      (page) => page.value === arcteryxWorkspacePage,
+  const isProfileWorkspace = PROFILE_WORKSPACE_BRANDS.has(routeBrand);
+  const brandWorkspacePageLabel =
+    BRAND_WORKSPACE_PAGES.find(
+      (page) => page.value === brandWorkspacePage,
     )?.label || "Product Dashboard";
   const productCategories = options.categories;
   const availableShopHighlights = options.shop_highlights || [];
@@ -965,7 +1134,7 @@ function App() {
       material: "all",
       season: "all",
     }));
-    setArcteryxWorkspacePage("product");
+    setBrandWorkspacePage("product");
   }, [routeBrand]);
 
   function navigateTo(path) {
@@ -1320,20 +1489,20 @@ function App() {
       <nav
         className="page-nav"
         aria-label={
-          isArcteryxWorkspace
-            ? "Arc'Teryx workspace pages"
+          isProfileWorkspace
+            ? "Brand workspace pages"
             : "Page navigation"
         }
       >
-        {isArcteryxWorkspace ? (
-          ARCTERYX_WORKSPACE_PAGES.map((page) => (
+        {isProfileWorkspace ? (
+          BRAND_WORKSPACE_PAGES.map((page) => (
             <button
               key={page.value}
               className={
-                arcteryxWorkspacePage === page.value ? "active" : undefined
+                brandWorkspacePage === page.value ? "active" : undefined
               }
               type="button"
-              onClick={() => setArcteryxWorkspacePage(page.value)}
+              onClick={() => setBrandWorkspacePage(page.value)}
             >
               {page.label}
             </button>
@@ -1348,19 +1517,22 @@ function App() {
         )}
       </nav>
 
-      {isArcteryxWorkspace && arcteryxWorkspacePage === "profile" ? (
-        <ArcteryxBrandProfile />
-      ) : isArcteryxWorkspace && arcteryxWorkspacePage !== "product" ? (
+      {isProfileWorkspace && brandWorkspacePage === "profile" ? (
+        routeBrand === "travismathew" ? (
+          <TravisMathewBrandProfile />
+        ) : (
+          <ArcteryxBrandProfile />
+        )
+      ) : isProfileWorkspace && brandWorkspacePage !== "product" ? (
         <section className="panel workspace-placeholder">
           <p className="eyebrow">
-            {arcteryxPageLabel === "Brand Profile"
+            {brandWorkspacePageLabel === "Brand Profile"
               ? "BRAND PROFILE"
               : "BRAND WALLET SHARED"}
           </p>
-          <h2>{arcteryxPageLabel}</h2>
+          <h2>{brandWorkspacePageLabel}</h2>
           <p className="section-description">
-            This page is intentionally blank for the next Arc&apos;Teryx
-            planning phase.
+            This page is intentionally blank for the next brand planning phase.
           </p>
         </section>
       ) : (
