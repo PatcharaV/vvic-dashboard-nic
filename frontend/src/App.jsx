@@ -34,6 +34,12 @@ const DEFAULT_BRAND_OPTIONS = [
   { value: "travismathew", label: "TravisMathew" },
 ];
 
+const ARCTERYX_WORKSPACE_PAGES = [
+  { value: "profile", label: "Brand Profile" },
+  { value: "wallet", label: "Brand Wallet Shared" },
+  { value: "product", label: "Product Dashboard" },
+];
+
 const BRAND_LOGOS = {
   strauss: { mark: "S", wordmark: "STRAUSS", subline: "WORKWEAR", src: "/brand-logos/strauss.png" },
   rhone: { mark: "R", wordmark: "RHONE", subline: "PERFORMANCE", src: "/brand-logos/rhone.png" },
@@ -42,6 +48,42 @@ const BRAND_LOGOS = {
   tommybahama: { mark: "TB", wordmark: "TOMMY BAHAMA", subline: "ISLAND", src: "/brand-logos/tommy-bahama.svg" },
   travismathew: { mark: "TM", wordmark: "TRAVISMATHEW", subline: "GOLF", src: "/brand-logos/travismathew.svg" },
 };
+
+const ARCTERYX_PROFILE_STATS = [
+  { value: "59.2%", label: "Male visitors" },
+  { value: "40.8%", label: "Female visitors" },
+  { value: "25-45", label: "Core age range" },
+  { value: "#1 US", label: "Top traffic market" },
+  { value: "$80-110", label: "T-shirt price band" },
+  { value: "$6.57B", label: "Amer Sports revenue, FY2025" },
+];
+
+const ARCTERYX_PROFILE_POINTS = [
+  {
+    title: "Lifestyle",
+    text: "Hiking, climbing, skiing, snowboarding and mountaineering, with gear expected to hold up in rugged conditions.",
+  },
+  {
+    title: "Fashion preference",
+    text: "Function and performance first, while the clean, minimalist technical aesthetic still matters.",
+  },
+  {
+    title: "Brand loyalty",
+    text: "Strong repeat trust in quality and innovation across successive outdoor adventures.",
+  },
+  {
+    title: "Values",
+    text: "Sustainability, durability and ethical manufacturing influence purchase decisions.",
+  },
+];
+
+const ARCTERYX_COMPETITORS = [
+  { brand: "Arc'teryx", price: "$80-$110", gender: "59% / 41%", satisfaction: "4/5", revenue: "$760.6M" },
+  { brand: "Columbia", price: "$28-$50", gender: "42% / 58%", satisfaction: "4/5", revenue: "$3,400M" },
+  { brand: "The North Face", price: "$30-$45", gender: "53% / 47%", satisfaction: "5/5", revenue: "$11,600M" },
+  { brand: "Moncler", price: "$345-$440", gender: "53% / 47%", satisfaction: "3/5", revenue: "$2,200M" },
+  { brand: "Patagonia", price: "$55-$89", gender: "51% / 49%", satisfaction: "4/5", revenue: "$1,700M" },
+];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
 
@@ -95,6 +137,120 @@ function BrandHeroLogo({ brand }) {
     <span className={`brand-hero-logo brand-logo-${brand.value}`} aria-label={`${brand.label} logo`}>
       <img className="brand-hero-logo-image" src={logo.src} alt={`${brand.label} logo`} />
     </span>
+  );
+}
+
+function ArcteryxBrandProfile() {
+  return (
+    <section className="panel arcteryx-profile">
+      <div className="profile-hero">
+        <div>
+          <p className="eyebrow">FIELD BRIEF - 01 / OUTDOOR TECHNICAL APPAREL</p>
+          <h2>Who shows up on the Arc&apos;teryx trailhead.</h2>
+          <p>
+            A read on the customer base, competitive set and category economics
+            behind Arc&apos;teryx, built for NYTG fabric portfolio pitch prep.
+          </p>
+        </div>
+        <a
+          className="profile-download"
+          href="/brand-profiles/arcteryx-profile.pptx"
+          download
+        >
+          Download source deck
+        </a>
+      </div>
+
+      <div className="profile-stat-grid">
+        {ARCTERYX_PROFILE_STATS.map((stat) => (
+          <div className="profile-stat-card" key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="profile-grid">
+        <article className="profile-card wide">
+          <p className="eyebrow">01 - Profile</p>
+          <h3>An adventurous, functionality-first buyer.</h3>
+          <div className="profile-point-grid">
+            {ARCTERYX_PROFILE_POINTS.map((point) => (
+              <div className="profile-point" key={point.title}>
+                <strong>{point.title.slice(0, 1)}</strong>
+                <div>
+                  <h4>{point.title}</h4>
+                  <p>{point.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="profile-card">
+          <p className="eyebrow">02 - Demographics</p>
+          <h3>Traffic still peaks at 25-34.</h3>
+          <p>
+            Similarweb&apos;s public view confirms 25-34 as the leading age
+            bracket for arcteryx.com. Exact per-bracket shares are not
+            published publicly, so age bars in the source deck are directional.
+          </p>
+        </article>
+
+        <article className="profile-card">
+          <p className="eyebrow">04 - Parent Company</p>
+          <h3>Amer Sports revenue nearly tripled since 2020.</h3>
+          <p>
+            Technical Apparel, the segment housing Arc&apos;teryx, led the mix
+            shift from 28.0% in 2020 to 43.5% in 2025.
+          </p>
+        </article>
+      </div>
+
+      <article className="profile-card">
+        <p className="eyebrow">03 - Competitive Set</p>
+        <h3>Premium price, mid-pack satisfaction.</h3>
+        <div className="profile-table-wrap">
+          <table className="profile-table">
+            <thead>
+              <tr>
+                <th>Brand</th>
+                <th>T-shirt price</th>
+                <th>Gender ratio (M/F)</th>
+                <th>Satisfaction</th>
+                <th>Revenue Y2022</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ARCTERYX_COMPETITORS.map((row) => (
+                <tr key={row.brand}>
+                  <td>{row.brand}</td>
+                  <td>{row.price}</td>
+                  <td>{row.gender}</td>
+                  <td>{row.satisfaction}</td>
+                  <td>{row.revenue}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article className="profile-summary-card">
+        <p className="eyebrow">Summary</p>
+        <h3>Premium, performance-first and scaling fast.</h3>
+        <p>
+          Arc&apos;teryx buyers are 25-45, middle-to-upper income and willing to
+          pay a premium for technical apparel. The brand has room to
+          differentiate further on fabric performance while Amer Sports&apos;
+          Technical Apparel segment continues to scale.
+        </p>
+        <small>
+          Data noted in source deck: Similarweb 2025, Amer Sports SEC filings
+          and Thingtesting.
+        </small>
+      </article>
+    </section>
   );
 }
 
@@ -618,6 +774,7 @@ function App() {
   const [autoScrapeRuns, setAutoScrapeRuns] = useState({});
   const [maintenance, setMaintenance] = useState(null);
   const [filtersOpen, setFiltersOpen] = useState(true);
+  const [arcteryxWorkspacePage, setArcteryxWorkspacePage] = useState("product");
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
   const loadRequestRef = useRef(0);
@@ -661,6 +818,11 @@ function App() {
     [effectiveFilters, selectedPeriod],
   );
   const brandOptions = mergeBrandOptions(options.brands);
+  const isArcteryxWorkspace = routeBrand === "arcteryx";
+  const arcteryxPageLabel =
+    ARCTERYX_WORKSPACE_PAGES.find(
+      (page) => page.value === arcteryxWorkspacePage,
+    )?.label || "Product Dashboard";
   const productCategories = options.categories;
   const availableShopHighlights = options.shop_highlights || [];
   const activityOptions = options.activities || [];
@@ -803,6 +965,7 @@ function App() {
       material: "all",
       season: "all",
     }));
+    setArcteryxWorkspacePage("product");
   }, [routeBrand]);
 
   function navigateTo(path) {
@@ -1154,13 +1317,54 @@ function App() {
         </div>
       </header>
 
-      <nav className="page-nav" aria-label="Page navigation">
-        <a href="#overview">Overview</a>
-        <a href="#charts">Charts</a>
-        <a href="#products">Product details</a>
-        <span>Click any chart or table label to filter the dashboard</span>
+      <nav
+        className="page-nav"
+        aria-label={
+          isArcteryxWorkspace
+            ? "Arc'Teryx workspace pages"
+            : "Page navigation"
+        }
+      >
+        {isArcteryxWorkspace ? (
+          ARCTERYX_WORKSPACE_PAGES.map((page) => (
+            <button
+              key={page.value}
+              className={
+                arcteryxWorkspacePage === page.value ? "active" : undefined
+              }
+              type="button"
+              onClick={() => setArcteryxWorkspacePage(page.value)}
+            >
+              {page.label}
+            </button>
+          ))
+        ) : (
+          <>
+            <a href="#overview">Overview</a>
+            <a href="#charts">Charts</a>
+            <a href="#products">Product details</a>
+            <span>Click any chart or table label to filter the dashboard</span>
+          </>
+        )}
       </nav>
 
+      {isArcteryxWorkspace && arcteryxWorkspacePage === "profile" ? (
+        <ArcteryxBrandProfile />
+      ) : isArcteryxWorkspace && arcteryxWorkspacePage !== "product" ? (
+        <section className="panel workspace-placeholder">
+          <p className="eyebrow">
+            {arcteryxPageLabel === "Brand Profile"
+              ? "BRAND PROFILE"
+              : "BRAND WALLET SHARED"}
+          </p>
+          <h2>{arcteryxPageLabel}</h2>
+          <p className="section-description">
+            This page is intentionally blank for the next Arc&apos;Teryx
+            planning phase.
+          </p>
+        </section>
+      ) : (
+        <>
       <section
         className={filtersOpen ? "control-panel" : "control-panel collapsed"}
       >
@@ -1939,6 +2143,9 @@ function App() {
             </div>
           )}
         </section>
+      )}
+
+        </>
       )}
 
       <footer>
