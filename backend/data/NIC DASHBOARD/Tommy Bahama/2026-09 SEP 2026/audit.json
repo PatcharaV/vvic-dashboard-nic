@@ -1,0 +1,50 @@
+{
+  "brand": "tommybahama",
+  "label": "Tommy Bahama",
+  "decision": "fallback",
+  "warnings": [
+    "Scrape error: Tommy Bahama scrape exceeded 780 seconds",
+    "Categories disappeared: Dresses, Hoodies & Sweatshirts, Jeans, Outerwear, Pants, Polos, Shirts, Shorts, Skirts, Sweaters, Swim, Tanks"
+  ],
+  "old": {
+    "product_count": 3871,
+    "available_count": 3871,
+    "category_counts": {
+      "Dresses": 202,
+      "Hoodies & Sweatshirts": 856,
+      "Jeans": 33,
+      "Outerwear": 63,
+      "Pants": 121,
+      "Polos": 699,
+      "Shirts": 1478,
+      "Shorts": 237,
+      "Skirts": 29,
+      "Sweaters": 37,
+      "Swim": 93,
+      "Tanks": 23
+    },
+    "audience_counts": {
+      "men": 2799,
+      "unisex": 1,
+      "women": 1071
+    },
+    "missing": {
+      "image": 0,
+      "color": 0,
+      "material": 1,
+      "price": 3871
+    }
+  },
+  "new": {
+    "product_count": 0,
+    "available_count": 0,
+    "category_counts": {},
+    "audience_counts": {},
+    "missing": {
+      "image": 0,
+      "color": 0,
+      "material": 0,
+      "price": 0
+    }
+  }
+}

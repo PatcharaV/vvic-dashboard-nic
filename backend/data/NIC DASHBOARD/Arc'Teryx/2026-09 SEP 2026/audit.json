@@ -1,0 +1,56 @@
+{
+  "brand": "arcteryx",
+  "label": "Arc'teryx",
+  "decision": "publish",
+  "warnings": [],
+  "old": {
+    "product_count": 323,
+    "available_count": 323,
+    "category_counts": {
+      "Base Layer": 2,
+      "Collection Only": 104,
+      "Fleece": 32,
+      "Insulated Jackets": 35,
+      "Pants": 34,
+      "Shell Jackets": 59,
+      "Shirts and Tops": 47,
+      "Shorts": 15,
+      "Vests": 2
+    },
+    "audience_counts": {
+      "men": 169,
+      "women": 155
+    },
+    "missing": {
+      "image": 0,
+      "color": 0,
+      "material": 61,
+      "price": 7
+    }
+  },
+  "new": {
+    "product_count": 317,
+    "available_count": 317,
+    "category_counts": {
+      "Base Layer": 2,
+      "Collection Only": 104,
+      "Fleece": 32,
+      "Insulated Jackets": 30,
+      "Pants": 33,
+      "Shell Jackets": 58,
+      "Shirts and Tops": 47,
+      "Shorts": 15,
+      "Vests": 2
+    },
+    "audience_counts": {
+      "men": 166,
+      "women": 152
+    },
+    "missing": {
+      "image": 0,
+      "color": 0,
+      "material": 62,
+      "price": 0
+    }
+  }
+}
