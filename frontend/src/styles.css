@@ -1603,6 +1603,7 @@ h2 {
 
 table {
   width: 100%;
+  table-layout: auto;
   border-collapse: collapse;
   font-size: 12px;
   background: #fff;
@@ -1639,28 +1640,47 @@ td:first-child {
 }
 
 .number-cell {
-  min-width: 62px;
+  width: 44px;
+  min-width: 44px;
   color: #77746e;
   font-weight: 800;
 }
 
+.number-heading {
+  width: 44px;
+  min-width: 44px;
+}
+
 .product-title-cell {
-  min-width: 280px;
+  width: 250px;
+  min-width: 220px;
+  max-width: 280px;
   font-weight: 700;
 }
 
+.product-heading {
+  width: 250px;
+  min-width: 220px;
+}
+
 .product-image-cell {
-  min-width: 170px;
-  max-width: 260px;
+  width: 112px;
+  min-width: 112px;
+  max-width: 138px;
   padding: 8px;
   text-align: center;
+}
+
+.image-heading {
+  width: 112px;
+  min-width: 112px;
 }
 
 .product-image-gallery {
   display: flex;
   align-items: flex-start;
-  gap: 7px;
-  max-width: 240px;
+  gap: 6px;
+  max-width: 122px;
   padding: 2px;
   overflow-x: auto;
   scrollbar-width: thin;
@@ -1681,7 +1701,7 @@ td:first-child {
 }
 
 .product-image-cell a span {
-  width: 58px;
+  width: 48px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1693,8 +1713,8 @@ td:first-child {
 
 .product-image-cell img {
   display: block;
-  width: 58px;
-  height: 68px;
+  width: 48px;
+  height: 58px;
   object-fit: contain;
   background: #f4f4f2;
   border: 1px solid #e3e4e6;
@@ -1711,8 +1731,8 @@ td:first-child {
 
 .product-image-placeholder {
   display: inline-flex;
-  width: 64px;
-  height: 76px;
+  width: 52px;
+  height: 62px;
   align-items: center;
   justify-content: center;
   padding: 6px;
@@ -1723,6 +1743,21 @@ td:first-child {
   font-size: 9px;
   font-weight: 750;
   line-height: 1.2;
+}
+
+.season-cell {
+  width: 118px;
+  min-width: 118px;
+  max-width: 130px;
+  color: #5c5a55;
+  font-weight: 650;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.season-heading {
+  width: 118px;
+  min-width: 118px;
 }
 
 .material-cell {

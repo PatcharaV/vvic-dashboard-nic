@@ -2058,10 +2058,10 @@ function App() {
                 <table>
                   <thead>
                     <tr className="table-heading-row">
-                      <th>No.</th>
-                      {hasProductImageData && <th>Image</th>}
-                      <th>Product</th>
-                      {hasSeasonData && <th>Season</th>}
+                      <th className="number-heading">No.</th>
+                      {hasProductImageData && <th className="image-heading">Image</th>}
+                      <th className="product-heading">Product</th>
+                      {hasSeasonData && <th className="season-heading">Season</th>}
                       <th>Gender</th>
                       <th>Category</th>
                       {hasSubcategoryData && <th>Sub category</th>}
@@ -2127,7 +2127,7 @@ function App() {
                           </a>
                         </td>
                         {hasSeasonData && (
-                          <td className="detail-cell">
+                          <td className="season-cell">
                             {product.season_range || (
                               <span className="muted-detail">Not specified</span>
                             )}
