@@ -557,10 +557,25 @@ def _normalize_arcteryx_product_types(product: dict[str, Any]) -> dict[str, Any]
     if str(product.get("brand", "")).lower() != "arcteryx":
         return product
 
-    categories = set(
+    raw_categories = list(
         product.get("categories")
         or [str(product.get("category", "Collection Only"))]
     )
+    categories = set(raw_categories)
+    text = " ".join(
+        str(value or "")
+        for value in (
+            product.get("title"),
+            product.get("name"),
+            product.get("handle"),
+            product.get("url"),
+            product.get("description"),
+        )
+    ).lower()
+
+    def has(pattern: str) -> bool:
+        return re.search(pattern, text) is not None
+
     next_subcategories: list[str] = []
     changed = False
     for subcategory in product.get("subcategories", []):
@@ -585,17 +600,94 @@ def _normalize_arcteryx_product_types(product: dict[str, Any]) -> dict[str, Any]
             and "Insulated Jackets" not in categories
         ):
             next_subcategory = "Softshell Shorts"
+        elif next_subcategory == "Collection Apparel":
+            if has(r"\bfleece\b|\bmidlayer\b"):
+                next_subcategory = "Fleece"
+            elif has(r"\bdown\b"):
+                next_subcategory = "Down Insulation"
+            elif has(r"\binsulated\b|\batom\b|\bproton\b|\bmionn\b|\bconduit\b|\bifora\b"):
+                next_subcategory = "Synthetic Insulation"
+            elif has(r"\bblazer\b"):
+                next_subcategory = "Blazers"
+            elif has(r"\bcoat\b|\bparka\b|\btrench\b|\bbomber\b|\bjacket\b"):
+                next_subcategory = "Jackets"
         changed = changed or next_subcategory != subcategory
         if next_subcategory not in next_subcategories:
             next_subcategories.append(next_subcategory)
+
+    next_categories = _normalize_arcteryx_categories(product, categories, next_subcategories)
+    changed = changed or next_categories != raw_categories
 
     if not changed:
         return product
     return {
         **product,
+        "category": next_categories[0] if next_categories else product.get("category"),
+        "categories": next_categories,
         "subcategories": sorted(next_subcategories),
         "sub_category": sorted(next_subcategories)[0] if next_subcategories else None,
     }
+
+
+def _normalize_arcteryx_categories(
+    product: dict[str, Any], categories: set[str], subcategories: list[str]
+) -> list[str]:
+    if "Collection Only" not in categories:
+        return sorted(categories)
+
+    text = " ".join(
+        str(value or "")
+        for value in (
+            product.get("title"),
+            product.get("name"),
+            product.get("handle"),
+            product.get("url"),
+            product.get("description"),
+        )
+    ).lower()
+    inferred = {
+        category for category in categories if category != "Collection Only"
+    }
+
+    def has(pattern: str) -> bool:
+        return re.search(pattern, text) is not None
+
+    for subcategory in subcategories:
+        if subcategory in {"Pants", "Bib Pants", "Cargo Pants", "Wide Leg Pants", "Joggers", "Leggings", "Hardshell Pants", "Softshell Pants"}:
+            inferred.add("Pants")
+        elif subcategory in {"Shorts", "Skorts", "Half Tights", "Liner Shorts", "Softshell Shorts"}:
+            inferred.add("Shorts")
+        elif subcategory in {"Dresses", "Skirts"}:
+            inferred.add("Dresses and Skirts")
+        elif subcategory in {"Vests", "Down Vests", "Insulated Vests"}:
+            inferred.add("Vests")
+        elif subcategory in {"T-Shirts", "Long Sleeves", "Polos", "Tank Tops", "Overshirts", "Hoodies"}:
+            inferred.add("Shirts and Tops")
+        elif subcategory in {"Fleece", "Fleece Jackets", "Crewnecks", "Zip Necks"}:
+            inferred.add("Fleece")
+        elif subcategory in {"Hardshells", "Softshells", "Windshells", "Shell Jackets"}:
+            inferred.add("Shell Jackets")
+        elif subcategory in {"Down Insulation", "Synthetic Insulation", "Insulated Jackets"}:
+            inferred.add("Insulated Jackets")
+
+    if has(r"\bdown\b|\binsulated\b|\batom\b|\bproton\b|\bmionn\b|\bconduit\b|\bifora\b|\bbomber\b|\bparka\b|\bcoat\b"):
+        inferred.add("Insulated Jackets")
+    elif has(r"\bjacket\b|\bblazer\b|\btrench\b|\bshell\b|\bairshell\b"):
+        inferred.add("Shell Jackets")
+    if has(r"\bfleece\b|\bmidlayer\b"):
+        inferred.add("Fleece")
+    if has(r"\bpant\b|\bbib\b"):
+        inferred.add("Pants")
+    if has(r"\bshort\b|\bskort\b"):
+        inferred.add("Shorts")
+    if has(r"\bdress\b|\bskirt\b"):
+        inferred.add("Dresses and Skirts")
+    if has(r"\bvest\b"):
+        inferred.add("Vests")
+    if has(r"\bshirt\b|\btee\b|\btank\b|\bpolo\b|\bhoody\b|\bhoodie\b|\bovershirt\b"):
+        inferred.add("Shirts and Tops")
+
+    return sorted(inferred) or ["Other"]
 
 
 def _dedupe_strings(values: Any) -> list[str]:

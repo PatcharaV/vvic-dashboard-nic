@@ -101,6 +101,8 @@ SUBCATEGORY_PARENTS = {
     "Quarter Zips": ["Midlayers", "1/4 zips"],
     "Midlayers": "Midlayers",
     "Jackets": [
+        "Shell Jackets",
+        "Insulated Jackets",
         "Blazers/Jackets",
         "Coats & Jackets",
         "Outerwear",
@@ -108,7 +110,7 @@ SUBCATEGORY_PARENTS = {
         "Collection Only",
     ],
     "Jackets & vests": ["Midlayers", "Outerwear"],
-    "Blazers": ["Blazers/Jackets", "Blazers"],
+    "Blazers": ["Shell Jackets", "Blazers/Jackets", "Blazers"],
     "Outerwear": "Outerwear",
     "Tanks": ["Tanks", "Tees/Tanks"],
     "Sports Bras": ["Bras", "Sports Bras", "Sports bras"],
