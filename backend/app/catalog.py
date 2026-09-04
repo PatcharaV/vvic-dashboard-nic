@@ -554,7 +554,7 @@ def _normalize_strauss_categories(product: dict[str, Any]) -> dict[str, Any]:
 
 
 def _normalize_arcteryx_product_types(product: dict[str, Any]) -> dict[str, Any]:
-    if product.get("brand") != "arcteryx":
+    if str(product.get("brand", "")).lower() != "arcteryx":
         return product
 
     categories = set(
@@ -594,6 +594,7 @@ def _normalize_arcteryx_product_types(product: dict[str, Any]) -> dict[str, Any]
     return {
         **product,
         "subcategories": sorted(next_subcategories),
+        "sub_category": sorted(next_subcategories)[0] if next_subcategories else None,
     }
 
 

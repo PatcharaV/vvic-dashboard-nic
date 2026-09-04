@@ -20,7 +20,7 @@ if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
 
 from app.analytics import build_dashboard, build_options  # noqa: E402
-from app.catalog import MONTH_CODES, scrape_products  # noqa: E402
+from app.catalog import MONTH_CODES, scrape_products, _normalize_cached_payload  # noqa: E402
 from app.main import current_scrape_period, make_scrape_period  # noqa: E402
 
 
@@ -76,6 +76,7 @@ def scrape_file_lock():
 
 
 def build_frontend_snapshot(payload: dict) -> dict:
+    payload = _normalize_cached_payload(payload)
     products = payload.get("products", [])
     brand_options = build_options(products).get("brands", [])
     collection_options_by_brand = {
