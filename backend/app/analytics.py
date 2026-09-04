@@ -219,11 +219,33 @@ def _product_all_colors(product: dict[str, Any]) -> list[str]:
 
 def _material_text(product: dict[str, Any]) -> str:
     return " ".join(
-        [
-            str(product.get("material", "")),
-            " ".join(product.get("material_details", [])),
-        ]
+        _body_material_values(product)
     )
+
+
+def _body_material_values(product: dict[str, Any]) -> list[str]:
+    values = [
+        str(value or "").strip()
+        for value in product.get("material_details", [])
+        if str(value or "").strip()
+    ]
+    material = str(product.get("material") or "").strip()
+    if material:
+        values.extend(
+            value.strip()
+            for value in material.split("|")
+            if value.strip()
+        )
+    body_values = [
+        value
+        for value in values
+        if value.lower().startswith("body:")
+    ]
+    deduped: list[str] = []
+    for value in body_values:
+        if value not in deduped:
+            deduped.append(value)
+    return deduped
 
 
 def _season_value(product: dict[str, Any]) -> str:

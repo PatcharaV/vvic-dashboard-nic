@@ -523,8 +523,17 @@ function emptyDashboardForPeriod(month, year) {
 }
 
 function getMaterialValues(product) {
-  if (product.material_details?.length) return product.material_details;
-  return product.material ? [product.material] : [];
+  const values = [
+    ...(product.material_details || []),
+    ...String(product.material || "")
+      .split("|")
+      .map((value) => value.trim())
+      .filter(Boolean),
+  ];
+  const bodyValues = values.filter((value) =>
+    value.toLowerCase().startsWith("body:")
+  );
+  return [...new Set(bodyValues)];
 }
 
 function DetailList({ values, fallback = "Not specified" }) {
@@ -1014,9 +1023,7 @@ function App() {
     (product) => product.subcategories?.length,
   );
   const hasMaterialData = dashboard.products.some(
-    (product) =>
-      Boolean(String(product.material || "").trim()) ||
-      Boolean(product.material_details?.length),
+    (product) => getMaterialValues(product).length,
   );
   const hasProductImageData = dashboard.products.some(
     (product) => product.image || product.color_variants?.length,
