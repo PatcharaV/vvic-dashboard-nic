@@ -332,34 +332,36 @@ def _clothing_products(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if product.get("top_seller") and "Topseller" not in shop_highlights:
             shop_highlights.append("Topseller")
         clothing.append(
-            {
-                **product,
-                "category": matched_categories[0],
-                "categories": matched_categories,
-                "features": features,
-                "shop_highlights": shop_highlights,
-                "top_seller": "Topseller" in shop_highlights,
-                "product_functions": product.get("product_functions")
-                or extract_product_functions(
-                    product.get("title", ""),
-                    product.get("description", ""),
-                    product.get("tags", []),
-                    product.get("material", ""),
-                ),
-                "audiences": [
-                    audience
-                    for audience in product.get("audiences", [])
-                    if audience not in {"footwear", "gear-accessories"}
-                ],
-                "audience_labels": [
-                    label
-                    for value, label in zip(
-                        product.get("audiences", []),
-                        product.get("audience_labels", []),
-                    )
-                    if value not in {"footwear", "gear-accessories"}
-                ],
-            }
+            _normalize_arcteryx_product_types(
+                {
+                    **product,
+                    "category": matched_categories[0],
+                    "categories": matched_categories,
+                    "features": features,
+                    "shop_highlights": shop_highlights,
+                    "top_seller": "Topseller" in shop_highlights,
+                    "product_functions": product.get("product_functions")
+                    or extract_product_functions(
+                        product.get("title", ""),
+                        product.get("description", ""),
+                        product.get("tags", []),
+                        product.get("material", ""),
+                    ),
+                    "audiences": [
+                        audience
+                        for audience in product.get("audiences", [])
+                        if audience not in {"footwear", "gear-accessories"}
+                    ],
+                    "audience_labels": [
+                        label
+                        for value, label in zip(
+                            product.get("audiences", []),
+                            product.get("audience_labels", []),
+                        )
+                        if value not in {"footwear", "gear-accessories"}
+                    ],
+                }
+            )
         )
     return _enrich_brand_detail_fields(clothing)
 
@@ -548,6 +550,50 @@ def _normalize_strauss_categories(product: dict[str, Any]) -> dict[str, Any]:
         "features": features,
         "shop_highlights": shop_highlights,
         "top_seller": "Topseller" in shop_highlights,
+    }
+
+
+def _normalize_arcteryx_product_types(product: dict[str, Any]) -> dict[str, Any]:
+    if product.get("brand") != "arcteryx":
+        return product
+
+    categories = set(
+        product.get("categories")
+        or [str(product.get("category", "Collection Only"))]
+    )
+    next_subcategories: list[str] = []
+    changed = False
+    for subcategory in product.get("subcategories", []):
+        next_subcategory = str(subcategory)
+        if (
+            next_subcategory == "Hardshells"
+            and "Pants" in categories
+            and "Shell Jackets" not in categories
+        ):
+            next_subcategory = "Hardshell Pants"
+        elif (
+            next_subcategory == "Softshells"
+            and "Pants" in categories
+            and "Shell Jackets" not in categories
+            and "Insulated Jackets" not in categories
+        ):
+            next_subcategory = "Softshell Pants"
+        elif (
+            next_subcategory == "Softshells"
+            and "Shorts" in categories
+            and "Shell Jackets" not in categories
+            and "Insulated Jackets" not in categories
+        ):
+            next_subcategory = "Softshell Shorts"
+        changed = changed or next_subcategory != subcategory
+        if next_subcategory not in next_subcategories:
+            next_subcategories.append(next_subcategory)
+
+    if not changed:
+        return product
+    return {
+        **product,
+        "subcategories": sorted(next_subcategories),
     }
 
 
@@ -918,7 +964,9 @@ def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
         _apply_lululemon_detail_cache(
             _clothing_products(
                 [
-                    _normalize_strauss_categories(product)
+                    _normalize_arcteryx_product_types(
+                        _normalize_strauss_categories(product)
+                    )
                     for product in payload.get("products", [])
                 ]
             )

@@ -338,9 +338,9 @@ def _keyword_subcategories(
         if has(r"\bwide[-\s]*leg\b"):
             subcategories.add("Wide Leg Pants")
         if has(r"\balpha\b|\bbeta\b|\brush\b|\bsentinel\b|\bski[-\s]*guide\b|\bgore[-\s]*tex\b"):
-            subcategories.add("Hardshells")
+            subcategories.add("Hardshell Pants")
         if has(r"\bsoftshell\b|\bgamma\b|\bkonseal\b|\brhoam\b|\bpsiphon\b|\bserratus\b|\bnia\b|\bmx\b"):
-            subcategories.add("Softshells")
+            subcategories.add("Softshell Pants")
         if not subcategories:
             subcategories.add("Pants")
 
@@ -382,7 +382,7 @@ def _keyword_subcategories(
         if has(r"\bliner\b"):
             subcategories.add("Liner Shorts")
         if has(r"\bsoftshell\b|\bgamma\b|\brhoam\b|\bsonii\b|\bsilene\b"):
-            subcategories.add("Softshells")
+            subcategories.add("Softshell Shorts")
         if not subcategories:
             subcategories.add("Shorts")
 
