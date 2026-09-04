@@ -437,16 +437,62 @@ def _season_label_from_code(season_code: str, season_range: str = "") -> str:
     return _normalize_season_label(season_range)
 
 
-def _infer_season(product: dict[str, Any]) -> dict[str, Any]:
+def _season_year_suffix_from_product(
+    product: dict[str, Any], scrape_period: dict[str, Any] | None = None
+) -> tuple[str, str]:
+    code = str(product.get("season_code") or "").strip().upper()
+    match = re.match(r"^[SF]\s*['-]?(\d{2})$", code)
+    if match:
+        return match.group(1), "season code"
+
+    for field in ("published_at", "updated_at"):
+        value = str(product.get(field) or "")
+        match = re.search(r"\b(20\d{2})\b", value)
+        if match:
+            return match.group(1)[-2:], field
+
+    if scrape_period and scrape_period.get("year"):
+        try:
+            return f"{int(scrape_period['year']) % 100:02d}", "scrape period"
+        except (TypeError, ValueError):
+            return "", ""
+    return "", ""
+
+
+def _season_label_with_year(label: str, year_suffix: str) -> str:
+    normalized = _normalize_season_label(label)
+    if not year_suffix or normalized == SEASON_LABELS["all"]:
+        return normalized
+    if re.search(r"\b\d{2}$", normalized):
+        return normalized
+    if normalized in {SEASON_LABELS["spring_summer"], SEASON_LABELS["fall_winter"]}:
+        return f"{normalized} {year_suffix}"
+    return normalized
+
+
+def _infer_season(
+    product: dict[str, Any], scrape_period: dict[str, Any] | None = None
+) -> dict[str, Any]:
     explicit_range = _normalize_season_label(product.get("season_range") or "")
     explicit_code = str(product.get("season_code") or "").strip()
     season_label = _season_label_from_code(explicit_code, explicit_range)
     if explicit_range and not explicit_range.lower().startswith("inferred"):
+        year_suffix, year_source = _season_year_suffix_from_product(
+            product, scrape_period
+        )
+        season_label = _season_label_with_year(season_label, year_suffix)
         return {
             "season_code": explicit_code,
             "season_range": season_label,
             "season_source": product.get("season_source") or "Brand/product data",
-            "season_notes": product.get("season_notes", []),
+            "season_notes": [
+                *(product.get("season_notes", []) or []),
+                *(
+                    [f"Season year from {year_source}"]
+                    if year_source and not explicit_code
+                    else []
+                ),
+            ],
         }
 
     text = _season_text(product)
@@ -486,20 +532,28 @@ def _infer_season(product: dict[str, Any]) -> dict[str, Any]:
         label = SEASON_LABELS["all"]
         reason_hits = ["general apparel"]
 
+    year_suffix, year_source = _season_year_suffix_from_product(
+        product, scrape_period
+    )
+    label = _season_label_with_year(label, year_suffix)
     return {
         "season_code": explicit_code,
         "season_range": label,
         "season_source": "Inferred from product attributes",
         "season_notes": [
-            f"Matched keyword: {hit}" for hit in reason_hits if hit
+            *[f"Matched keyword: {hit}" for hit in reason_hits if hit],
+            *([f"Season year from {year_source}"] if year_source else []),
         ],
     }
 
 
-def _apply_season_classification(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _apply_season_classification(
+    products: list[dict[str, Any]],
+    scrape_period: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
     classified: list[dict[str, Any]] = []
     for product in products:
-        season = _infer_season(product)
+        season = _infer_season(product, scrape_period)
         classified.append(
             {
                 **product,
@@ -1078,7 +1132,8 @@ def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
                     for product in payload.get("products", [])
                 ]
             )
-        )
+        ),
+        payload.get("scrape_period") or None,
     )
     return {
         **payload,
@@ -1323,7 +1378,8 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
                         _clothing_products(result.get("products", [])),
                         brand_cached_products,
                     )
-                )
+                ),
+                scrape_period,
             )
             result["product_count"] = len(result["products"])
             audit = validate_brand(
@@ -1337,7 +1393,8 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
                 fallback_products = _apply_season_classification(
                     _apply_lululemon_detail_cache(
                         _clothing_products(brand_cached_products)
-                    )
+                    ),
+                    scrape_period,
                 )
                 fallback_products = _filter_period_products(
                     fallback_products, brand, scrape_period
@@ -1366,7 +1423,8 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
                         if product.get("brand") == brand
                     ]
                 )
-            )
+            ),
+            scrape_period,
         )
         fallback_products = _filter_period_products(
             fallback_products, brand, scrape_period
