@@ -57,8 +57,8 @@ MONTH_CODES = [
 HISTORY_START_YEAR = 2026
 HISTORY_START_MONTH = 6
 SEASON_LABELS = {
-    "spring_summer": "Spring / Summer",
-    "fall_winter": "Fall / Winter",
+    "spring_summer": "Spring Summer",
+    "fall_winter": "Fall Winter",
     "all": "All seasons",
 }
 
@@ -423,13 +423,28 @@ def _normalize_season_label(value: str) -> str:
     return normalized
 
 
+def _season_label_from_code(season_code: str, season_range: str = "") -> str:
+    code = str(season_code or "").strip().upper()
+    match = re.match(r"^([SF])\s*['-]?(\d{2})$", code)
+    if match:
+        prefix, year_suffix = match.groups()
+        season_name = (
+            SEASON_LABELS["spring_summer"]
+            if prefix == "S"
+            else SEASON_LABELS["fall_winter"]
+        )
+        return f"{season_name} {year_suffix}"
+    return _normalize_season_label(season_range)
+
+
 def _infer_season(product: dict[str, Any]) -> dict[str, Any]:
     explicit_range = _normalize_season_label(product.get("season_range") or "")
     explicit_code = str(product.get("season_code") or "").strip()
+    season_label = _season_label_from_code(explicit_code, explicit_range)
     if explicit_range and not explicit_range.lower().startswith("inferred"):
         return {
             "season_code": explicit_code,
-            "season_range": explicit_range,
+            "season_range": season_label,
             "season_source": product.get("season_source") or "Brand/product data",
             "season_notes": product.get("season_notes", []),
         }
