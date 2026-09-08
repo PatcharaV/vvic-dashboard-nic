@@ -2182,13 +2182,28 @@ function App() {
                                       loading="lazy"
                                       decoding="async"
                                     />
-                                    <span>{variant.color}</span>
+                                    <span className="product-image-caption">
+                                      {variant.color}
+                                    </span>
+                                    <span className="product-image-popover" aria-hidden="true">
+                                      <img
+                                        src={variant.image || product.image}
+                                        alt=""
+                                        loading="lazy"
+                                        decoding="async"
+                                      />
+                                      <strong>{variant.color}</strong>
+                                    </span>
                                   </a>
                                 ))}
                               </div>
                             ) : product.image ? (
                               <a href={product.url} target="_blank" rel="noreferrer">
                                 <img src={product.image} alt={product.title} />
+                                <span className="product-image-popover" aria-hidden="true">
+                                  <img src={product.image} alt="" />
+                                  <strong>{product.title}</strong>
+                                </span>
                               </a>
                             ) : (
                               <span className="product-image-placeholder">

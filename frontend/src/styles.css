@@ -1687,6 +1687,7 @@ td:first-child {
 }
 
 .product-image-cell a {
+  position: relative;
   flex: 0 0 auto;
   display: grid;
   justify-items: center;
@@ -1700,11 +1701,75 @@ td:first-child {
   outline-offset: 2px;
 }
 
-.product-image-cell a span {
+.product-image-caption {
   width: 48px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.product-image-popover {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  z-index: 30;
+  display: grid;
+  width: 112px;
+  justify-items: center;
+  gap: 6px;
+  padding: 8px;
+  color: #111111;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(239, 62, 66, 0.26);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+  opacity: 0;
+  transform: translate(-50%, 6px) scale(0.96);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.product-image-popover::after {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 10px;
+  height: 10px;
+  content: "";
+  background: rgba(255, 255, 255, 0.96);
+  border-right: 1px solid rgba(239, 62, 66, 0.2);
+  border-bottom: 1px solid rgba(239, 62, 66, 0.2);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.product-image-popover img {
+  width: 82px;
+  height: 98px;
+  border: 0;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #f7f7f5;
+}
+
+.product-image-popover strong {
+  display: block;
+  max-width: 96px;
+  overflow: hidden;
+  color: #44413d;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-image-cell a:hover .product-image-popover,
+.product-image-cell a:focus-visible .product-image-popover {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
 }
 
 .product-image-cell a:focus-visible {
@@ -1975,7 +2040,7 @@ td a:hover {
   transform: rotate(-3deg);
 }
 
-.particl-product-table .product-image-cell a span {
+.particl-product-table .product-image-caption {
   display: none;
 }
 
@@ -1993,6 +2058,16 @@ td a:hover {
 
 .particl-product-table .product-image-cell a:hover img {
   transform: none;
+}
+
+.product-image-cell .product-image-popover img,
+.particl-product-table .product-image-cell .product-image-popover img {
+  width: 82px;
+  height: 98px;
+  border: 0;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #f7f7f5;
 }
 
 .particl-product-table .product-image-placeholder {
