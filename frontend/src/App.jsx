@@ -2213,9 +2213,12 @@ function App() {
                             <td className="product-image-cell">
                               {product.color_variants?.length ? (
                                 <div className="product-image-gallery">
-                                  {product.color_variants.map((variant) => (
+                                  {product.color_variants.map((variant, variantIndex) => (
                                     <a
                                       key={`${variant.color}-${variant.url}`}
+                                      className={
+                                        variantIndex > 2 ? "is-extra-product-image" : undefined
+                                      }
                                       href={resolveVariantProductUrl(
                                         productUrl,
                                         product,
@@ -2248,6 +2251,14 @@ function App() {
                                     </span>
                                     </a>
                                   ))}
+                                  {isLululemonView && product.color_variants.length > 3 && (
+                                    <span
+                                      className="product-image-count"
+                                      title={`${product.color_variants.length - 3} more product images`}
+                                    >
+                                      +{product.color_variants.length - 3}
+                                    </span>
+                                  )}
                                 </div>
                               ) : product.image ? (
                                 <a href={productUrl} target="_blank" rel="noreferrer">
