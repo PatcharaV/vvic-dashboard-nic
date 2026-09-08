@@ -55,7 +55,7 @@ const BRAND_BASE_URLS = {
   strauss: "https://us.strauss.com",
   rhone: "https://www.rhone.com",
   arcteryx: "https://arcteryx.com/us/en",
-  lululemon: "https://shop.lululemon.com",
+  lululemon: "https://www.lululemon.com.hk/en-th",
   tommybahama: "https://www.tommybahama.com",
   travismathew: "https://www.travismathew.com",
 };
@@ -630,6 +630,52 @@ function resolveProductUrl(url, brand) {
   } catch {
     return value;
   }
+}
+
+function lululemonThailandSlug(product) {
+  const handle = String(product?.handle || "").trim();
+  const source =
+    handle ||
+    String(product?.title || "")
+      .replace(/&/g, " and ")
+      .replace(/\+/g, " plus ");
+
+  return source
+    .replace(/-?MD$/i, "")
+    .replace(/\*/g, "")
+    .replace(/[™®]/g, "")
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/gi, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
+}
+
+function lululemonThailandProductId(product) {
+  const productId = String(product?.product_id || product?.source_id || "")
+    .trim()
+    .toLowerCase();
+  const match = productId.match(/^prod(\d+)$/);
+  if (!match) return "";
+
+  const numericId = Number(match[1]);
+  if (!Number.isFinite(numericId)) return "";
+
+  // Thailand/HK PDPs commonly use the next SKU id for the prod200... markdown pages.
+  if (productId.startsWith("prod200")) {
+    return `prod${numericId + 1}`;
+  }
+  return productId;
+}
+
+function resolveLululemonProductUrl(product) {
+  const slug = lululemonThailandSlug(product);
+  const productId = lululemonThailandProductId(product);
+  const query = encodeURIComponent(product?.title || product?.handle || "lululemon");
+
+  if (slug && productId) {
+    return `${BRAND_BASE_URLS.lululemon}/p/${slug}/${productId}.html`;
+  }
+  return `${BRAND_BASE_URLS.lululemon}/search?q=${query}`;
 }
 
 function lululemonColorCodeFromImage(imageUrl = "") {
@@ -2203,7 +2249,10 @@ function App() {
                   </thead>
                   <tbody>
                     {paginatedProducts.map((product, index) => {
-                      const productUrl = resolveProductUrl(product.url, product.brand);
+                      const productUrl =
+                        product.brand === "lululemon"
+                          ? resolveLululemonProductUrl(product)
+                          : resolveProductUrl(product.url, product.brand);
                       return (
                         <tr key={product.id}>
                           <td className="number-cell">
