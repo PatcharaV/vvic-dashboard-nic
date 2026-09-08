@@ -632,6 +632,31 @@ function resolveProductUrl(url, brand) {
   }
 }
 
+function lululemonColorCodeFromImage(imageUrl = "") {
+  const match = String(imageUrl).match(/_(\d{4,6})(?:_|\?|$)/);
+  if (!match) return "";
+  return String(Number(match[1]));
+}
+
+function resolveVariantProductUrl(productUrl, product, variant) {
+  if (product?.brand !== "lululemon") return productUrl;
+
+  const colorCode =
+    variant?.color_code ||
+    variant?.code ||
+    lululemonColorCodeFromImage(variant?.image || product?.image);
+  if (!colorCode || productUrl === "#") return productUrl;
+
+  try {
+    const url = new URL(productUrl);
+    url.searchParams.set("color", colorCode);
+    return url.href;
+  } catch {
+    const separator = productUrl.includes("?") ? "&" : "?";
+    return `${productUrl}${separator}color=${encodeURIComponent(colorCode)}`;
+  }
+}
+
 function DetailList({ values, fallback = "Not specified" }) {
   if (!values?.length) return <span className="muted-detail">{fallback}</span>;
   return (
@@ -2191,7 +2216,11 @@ function App() {
                                   {product.color_variants.map((variant) => (
                                     <a
                                       key={`${variant.color}-${variant.url}`}
-                                      href={productUrl}
+                                      href={resolveVariantProductUrl(
+                                        productUrl,
+                                        product,
+                                        variant,
+                                      )}
                                       target="_blank"
                                       rel="noreferrer"
                                       aria-label={`Open ${product.title} on brand website`}
