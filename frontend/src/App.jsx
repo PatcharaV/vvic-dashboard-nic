@@ -657,6 +657,76 @@ function resolveVariantProductUrl(productUrl, product, variant) {
   }
 }
 
+function ProductImageBlock({ product, productUrl, isLululemonView }) {
+  if (product.color_variants?.length) {
+    return (
+      <>
+        <div className="product-image-gallery">
+          {product.color_variants.map((variant, variantIndex) => (
+            <a
+              key={`${variant.color}-${variant.url}`}
+              className={variantIndex > 2 ? "is-extra-product-image" : undefined}
+              href={resolveVariantProductUrl(productUrl, product, variant)}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open ${product.title} on brand website`}
+              title={`Open ${product.title}${variant.color ? ` - ${variant.color}` : ""}`}
+            >
+              <img
+                src={variant.image || product.image}
+                alt={`${product.title} - ${variant.color}`}
+                loading="lazy"
+                decoding="async"
+              />
+              <span className="product-image-caption">{variant.color}</span>
+              <span className="product-image-popover" aria-hidden="true">
+                <img
+                  src={variant.image || product.image}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <strong>{variant.color}</strong>
+              </span>
+            </a>
+          ))}
+          {isLululemonView && product.color_variants.length > 3 && (
+            <span
+              className="product-image-count"
+              title={`${product.color_variants.length - 3} more product images`}
+            >
+              +{product.color_variants.length - 3}
+            </span>
+          )}
+        </div>
+        {isLululemonView && <ColorSwatches product={product} />}
+      </>
+    );
+  }
+
+  if (product.image) {
+    return (
+      <>
+        <a href={productUrl} target="_blank" rel="noreferrer">
+          <img src={product.image} alt={product.title} />
+          <span className="product-image-popover" aria-hidden="true">
+            <img src={product.image} alt="" />
+            <strong>{product.title}</strong>
+          </span>
+        </a>
+        {isLululemonView && <ColorSwatches product={product} />}
+      </>
+    );
+  }
+
+  return (
+    <>
+      <span className="product-image-placeholder">No image</span>
+      {isLululemonView && <ColorSwatches product={product} />}
+    </>
+  );
+}
+
 function DetailList({ values, fallback = "Not specified" }) {
   if (!values?.length) return <span className="muted-detail">{fallback}</span>;
   return (
@@ -2183,8 +2253,18 @@ function App() {
                   <thead>
                     <tr className="table-heading-row">
                       <th className="number-heading">No.</th>
-                      {hasProductImageData && <th className="image-heading">Image</th>}
-                      <th className="product-heading">Product</th>
+                      {hasProductImageData && !isLululemonView && (
+                        <th className="image-heading">Image</th>
+                      )}
+                      <th
+                        className={
+                          isLululemonView
+                            ? "product-heading product-media-heading"
+                            : "product-heading"
+                        }
+                      >
+                        Product
+                      </th>
                       {hasSeasonData && <th className="season-heading">Season</th>}
                       <th>Gender</th>
                       <th>Category</th>
@@ -2209,75 +2289,35 @@ function App() {
                           <td className="number-cell">
                             {(currentProductPage - 1) * productsPerPage + index + 1}
                           </td>
-                          {hasProductImageData && (
+                          {hasProductImageData && !isLululemonView && (
                             <td className="product-image-cell">
-                              {product.color_variants?.length ? (
-                                <div className="product-image-gallery">
-                                  {product.color_variants.map((variant, variantIndex) => (
-                                    <a
-                                      key={`${variant.color}-${variant.url}`}
-                                      className={
-                                        variantIndex > 2 ? "is-extra-product-image" : undefined
-                                      }
-                                      href={resolveVariantProductUrl(
-                                        productUrl,
-                                        product,
-                                        variant,
-                                      )}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      aria-label={`Open ${product.title} on brand website`}
-                                      title={`Open ${product.title}${
-                                        variant.color ? ` - ${variant.color}` : ""
-                                      }`}
-                                    >
-                                    <img
-                                      src={variant.image || product.image}
-                                      alt={`${product.title} - ${variant.color}`}
-                                      loading="lazy"
-                                      decoding="async"
-                                    />
-                                    <span className="product-image-caption">
-                                      {variant.color}
-                                    </span>
-                                    <span className="product-image-popover" aria-hidden="true">
-                                      <img
-                                        src={variant.image || product.image}
-                                        alt=""
-                                        loading="lazy"
-                                        decoding="async"
-                                      />
-                                      <strong>{variant.color}</strong>
-                                    </span>
-                                    </a>
-                                  ))}
-                                  {isLululemonView && product.color_variants.length > 3 && (
-                                    <span
-                                      className="product-image-count"
-                                      title={`${product.color_variants.length - 3} more product images`}
-                                    >
-                                      +{product.color_variants.length - 3}
-                                    </span>
-                                  )}
-                                </div>
-                              ) : product.image ? (
-                                <a href={productUrl} target="_blank" rel="noreferrer">
-                                <img src={product.image} alt={product.title} />
-                                <span className="product-image-popover" aria-hidden="true">
-                                  <img src={product.image} alt="" />
-                                  <strong>{product.title}</strong>
-                                </span>
-                                </a>
-                              ) : (
-                                <span className="product-image-placeholder">
-                                  No image
-                                </span>
-                              )}
-                              {isLululemonView && <ColorSwatches product={product} />}
+                              <ProductImageBlock
+                                product={product}
+                                productUrl={productUrl}
+                                isLululemonView={isLululemonView}
+                              />
                             </td>
                           )}
-                          <td className="product-title-cell">
-                            <a href={productUrl} target="_blank" rel="noreferrer">
+                          <td
+                            className={
+                              isLululemonView
+                                ? "product-title-cell product-media-cell"
+                                : "product-title-cell"
+                            }
+                          >
+                            {isLululemonView && hasProductImageData && (
+                              <ProductImageBlock
+                                product={product}
+                                productUrl={productUrl}
+                                isLululemonView={isLululemonView}
+                              />
+                            )}
+                            <a
+                              className="product-title-link"
+                              href={productUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
                               {product.title}
                             </a>
                           </td>

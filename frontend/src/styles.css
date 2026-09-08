@@ -1768,7 +1768,9 @@ td:first-child {
 }
 
 .product-image-cell a:hover .product-image-popover,
-.product-image-cell a:focus-visible .product-image-popover {
+.product-image-cell a:focus-visible .product-image-popover,
+.product-media-cell a:hover .product-image-popover,
+.product-media-cell a:focus-visible .product-image-popover {
   opacity: 1;
   transform: translate(-50%, 0) scale(1);
 }
@@ -2005,6 +2007,14 @@ td a:hover {
   vertical-align: top;
 }
 
+.particl-product-table .product-media-cell {
+  width: 210px;
+  min-width: 190px;
+  max-width: 230px;
+  padding: 8px 12px;
+  vertical-align: top;
+}
+
 .particl-product-table .product-image-gallery {
   width: 78px;
   max-width: 78px;
@@ -2022,7 +2032,17 @@ td a:hover {
   padding-left: 2px;
 }
 
-.particl-product-table .product-image-cell a {
+.particl-product-table .product-media-cell .product-image-gallery {
+  margin: 0 0 6px;
+}
+
+.particl-product-table .product-media-cell .product-color-swatches {
+  margin: 4px 0 7px;
+}
+
+.particl-product-table .product-image-cell a,
+.particl-product-table .product-media-cell .product-image-gallery a,
+.particl-product-table .product-media-cell > a:not(.product-title-link) {
   position: relative;
   width: 42px;
   height: 54px;
@@ -2034,19 +2054,23 @@ td a:hover {
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
 }
 
-.particl-product-table .product-image-cell a:first-child {
+.particl-product-table .product-image-cell a:first-child,
+.particl-product-table .product-media-cell .product-image-gallery a:first-child {
   margin-left: 0;
 }
 
-.particl-product-table .product-image-cell a.is-extra-product-image {
+.particl-product-table .product-image-cell a.is-extra-product-image,
+.particl-product-table .product-media-cell .product-image-gallery a.is-extra-product-image {
   display: none;
 }
 
-.particl-product-table .product-image-cell a:nth-child(2n) {
+.particl-product-table .product-image-cell a:nth-child(2n),
+.particl-product-table .product-media-cell .product-image-gallery a:nth-child(2n) {
   transform: rotate(3deg);
 }
 
-.particl-product-table .product-image-cell a:nth-child(3n) {
+.particl-product-table .product-image-cell a:nth-child(3n),
+.particl-product-table .product-media-cell .product-image-gallery a:nth-child(3n) {
   transform: rotate(-3deg);
 }
 
@@ -2054,23 +2078,30 @@ td a:hover {
   display: none;
 }
 
-.particl-product-table .product-image-cell img {
+.particl-product-table .product-image-cell img,
+.particl-product-table .product-media-cell .product-image-gallery img,
+.particl-product-table .product-media-cell > a:not(.product-title-link) img {
   width: 38px;
   height: 48px;
   border: 0;
   border-radius: 5px;
 }
 
-.particl-product-table .product-image-cell a:hover {
+.particl-product-table .product-image-cell a:hover,
+.particl-product-table .product-media-cell .product-image-gallery a:hover,
+.particl-product-table .product-media-cell > a:not(.product-title-link):hover {
   z-index: 4;
   border-color: #ef3e42;
 }
 
-.particl-product-table .product-image-cell a:hover img {
+.particl-product-table .product-image-cell a:hover img,
+.particl-product-table .product-media-cell .product-image-gallery a:hover img,
+.particl-product-table .product-media-cell > a:not(.product-title-link):hover img {
   transform: none;
 }
 
 .product-image-cell .product-image-popover img,
+.product-media-cell .product-image-popover img,
 .particl-product-table .product-image-cell .product-image-popover img {
   width: 82px;
   height: 98px;
@@ -2084,6 +2115,10 @@ td a:hover {
   width: 42px;
   height: 52px;
   font-size: 8px;
+}
+
+.particl-product-table .product-media-cell .product-image-placeholder {
+  margin-bottom: 7px;
 }
 
 .particl-product-table .product-image-count {
@@ -2114,10 +2149,22 @@ td a:hover {
   max-width: 300px;
 }
 
-.particl-product-table .product-title-cell a {
+.particl-product-table .product-media-cell.product-title-cell,
+.particl-product-table .product-media-heading {
+  width: 210px;
+  min-width: 190px;
+  max-width: 230px;
+}
+
+.particl-product-table .product-title-link {
+  display: block;
+}
+
+.particl-product-table .product-title-cell .product-title-link {
   color: #0f172a;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .particl-product-table .season-cell,
