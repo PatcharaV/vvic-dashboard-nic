@@ -1853,6 +1853,166 @@ td a:hover {
   background: #f9e4e5;
 }
 
+.particl-table-wrap {
+  border-color: #dedede;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.particl-product-table {
+  min-width: 1380px;
+  color: #1f2933;
+  font-size: 11px;
+}
+
+.particl-product-table th,
+.particl-product-table td {
+  padding: 8px 10px;
+  border-bottom-color: #dedede;
+  vertical-align: middle;
+}
+
+.particl-product-table th {
+  color: #2b3036;
+  background: #f7f7f6;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.particl-product-table tbody tr:nth-child(even) {
+  background: #fff;
+}
+
+.particl-product-table tbody tr:hover {
+  background: #fbfbf9;
+}
+
+.particl-product-table .number-cell,
+.particl-product-table .number-heading {
+  width: 42px;
+  min-width: 42px;
+  color: #111827;
+  font-weight: 600;
+  text-align: center;
+}
+
+.particl-product-table .product-image-cell,
+.particl-product-table .image-heading {
+  width: 88px;
+  min-width: 88px;
+  max-width: 88px;
+}
+
+.particl-product-table .product-image-cell {
+  padding: 6px 8px;
+}
+
+.particl-product-table .product-image-gallery {
+  max-width: 76px;
+  min-height: 58px;
+  align-items: center;
+  gap: 0;
+  padding: 0 0 0 12px;
+  overflow: visible;
+}
+
+.particl-product-table .product-image-cell a {
+  position: relative;
+  width: 42px;
+  height: 54px;
+  margin-left: -14px;
+  padding: 2px;
+  background: #fff;
+  border: 1px solid #d8d9dc;
+  border-radius: 7px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.particl-product-table .product-image-cell a:first-child {
+  margin-left: 0;
+}
+
+.particl-product-table .product-image-cell a:nth-child(2n) {
+  transform: rotate(3deg);
+}
+
+.particl-product-table .product-image-cell a:nth-child(3n) {
+  transform: rotate(-3deg);
+}
+
+.particl-product-table .product-image-cell a span {
+  display: none;
+}
+
+.particl-product-table .product-image-cell img {
+  width: 38px;
+  height: 48px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.particl-product-table .product-image-cell a:hover {
+  z-index: 2;
+  border-color: #ef3e42;
+}
+
+.particl-product-table .product-image-cell a:hover img {
+  transform: none;
+}
+
+.particl-product-table .product-image-placeholder {
+  width: 42px;
+  height: 52px;
+  font-size: 8px;
+}
+
+.particl-product-table .product-title-cell,
+.particl-product-table .product-heading {
+  width: 260px;
+  min-width: 240px;
+  max-width: 300px;
+}
+
+.particl-product-table .product-title-cell a {
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.particl-product-table .season-cell,
+.particl-product-table .season-heading {
+  width: 112px;
+  min-width: 112px;
+}
+
+.particl-product-table .color-cell,
+.particl-product-table .collection-cell,
+.particl-product-table .price-cell {
+  min-width: 118px;
+}
+
+.particl-product-table .material-cell,
+.particl-product-table .detail-cell {
+  min-width: 220px;
+  max-width: 320px;
+}
+
+.particl-product-table .detail-list {
+  padding-left: 12px;
+}
+
+.particl-product-table .detail-list li {
+  margin-bottom: 3px;
+}
+
+.particl-product-table .table-filter-button {
+  color: #0f172a;
+  font-size: 11px;
+}
+
 .seller-badge {
   display: inline-block;
   min-width: 68px;

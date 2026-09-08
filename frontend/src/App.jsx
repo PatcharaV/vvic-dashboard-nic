@@ -1006,6 +1006,9 @@ function App() {
   const activityOptions = options.activities || [];
   const materialKeywords = options.material_keywords || [];
   const seasonOptions = options.seasons || [];
+  const isLululemonView =
+    effectiveFilters.brands.length === 1 &&
+    effectiveFilters.brands[0] === "lululemon";
   const showCategoryTreemap = effectiveFilters.brands.includes("lululemon");
   const treemapRows = showCategoryTreemap
     ? dashboard.categories || []
@@ -2054,8 +2057,8 @@ function App() {
           </div>
 
           {dashboard.products.length ? (
-            <div className="table-wrap">
-                <table>
+            <div className={`table-wrap ${isLululemonView ? "particl-table-wrap" : ""}`}>
+                <table className={isLululemonView ? "particl-product-table" : undefined}>
                   <thead>
                     <tr className="table-heading-row">
                       <th className="number-heading">No.</th>
