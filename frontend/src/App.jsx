@@ -536,6 +536,79 @@ function getMaterialValues(product) {
   return [...new Set(bodyValues)];
 }
 
+function colorNameToSwatch(colorName = "") {
+  const color = colorName.toLowerCase();
+  const pairs = [
+    ["black", "#151515"],
+    ["white", "#f8f8f4"],
+    ["ivory", "#f1eadc"],
+    ["bone", "#eee7d8"],
+    ["cream", "#efe5cf"],
+    ["navy", "#102947"],
+    ["blue", "#4f81c7"],
+    ["purple", "#8060b6"],
+    ["violet", "#8060b6"],
+    ["pink", "#ed8eb5"],
+    ["berry", "#b71f5d"],
+    ["red", "#d33b39"],
+    ["orange", "#d97931"],
+    ["yellow", "#d9ad38"],
+    ["gold", "#c9982d"],
+    ["green", "#4f7d55"],
+    ["olive", "#667246"],
+    ["khaki", "#b5a27b"],
+    ["army", "#687157"],
+    ["grey", "#8b9094"],
+    ["gray", "#8b9094"],
+    ["silver", "#b7bcc1"],
+    ["brown", "#7b5742"],
+    ["beige", "#c8b99e"],
+    ["tan", "#b89570"],
+  ];
+  const match = pairs.find(([keyword]) => color.includes(keyword));
+  return match ? match[1] : "#c9cdd2";
+}
+
+function getProductColorNames(product) {
+  const colorSources = [
+    ...(product.color_variants || []).map((variant) => variant.color),
+    ...(product.available_colors || []),
+    ...(product.unavailable_colors || []),
+    ...(product.all_colors || []),
+    product.color,
+  ];
+  return [
+    ...new Set(
+      colorSources
+        .flatMap((value) => String(value || "").split("/"))
+        .map((value) => value.trim())
+        .filter(Boolean),
+    ),
+  ];
+}
+
+function ColorSwatches({ product }) {
+  const colors = getProductColorNames(product);
+  if (!colors.length) return null;
+  return (
+    <div className="product-color-swatches" aria-label="Product colors">
+      {colors.slice(0, 18).map((color) => (
+        <span
+          key={color}
+          className="product-color-swatch"
+          title={color}
+          style={{ backgroundColor: colorNameToSwatch(color) }}
+        />
+      ))}
+      {colors.length > 18 && (
+        <span className="product-color-more" title={colors.slice(18).join(", ")}>
+          +{colors.length - 18}
+        </span>
+      )}
+    </div>
+  );
+}
+
 function DetailList({ values, fallback = "Not specified" }) {
   if (!values?.length) return <span className="muted-detail">{fallback}</span>;
   return (
@@ -2069,7 +2142,7 @@ function App() {
                       <th>Category</th>
                       {hasSubcategoryData && <th>Sub category</th>}
                       {hasCollectionData && <th>Collection</th>}
-                      <th>Color</th>
+                      {!isLululemonView && <th>Color</th>}
                       {hasMaterialData && <th>Material</th>}
                       {hasInnovationData && <th>Innovation</th>}
                       {hasTechnicalFeatureData && <th>Technical features</th>}
@@ -2122,6 +2195,7 @@ function App() {
                                 No image
                               </span>
                             )}
+                            {isLululemonView && <ColorSwatches product={product} />}
                           </td>
                         )}
                         <td className="product-title-cell">
@@ -2220,21 +2294,23 @@ function App() {
                               : "No named collection"}
                           </td>
                         )}
-                        <td className="color-cell">
-                          <DetailList
-                            values={
-                              product.available_colors ||
-                              (product.color ? [product.color] : [])
-                            }
-                            fallback="No available colors"
-                          />
-                          {product.unavailable_colors?.length ? (
-                            <div className="unavailable-colors">
-                              <span>Unavailable:</span>{" "}
-                              {product.unavailable_colors.join(", ")}
-                            </div>
-                          ) : null}
-                        </td>
+                        {!isLululemonView && (
+                          <td className="color-cell">
+                            <DetailList
+                              values={
+                                product.available_colors ||
+                                (product.color ? [product.color] : [])
+                              }
+                              fallback="No available colors"
+                            />
+                            {product.unavailable_colors?.length ? (
+                              <div className="unavailable-colors">
+                                <span>Unavailable:</span>{" "}
+                                {product.unavailable_colors.join(", ")}
+                              </div>
+                            ) : null}
+                          </td>
+                        )}
                         {hasMaterialData && (
                           <td className="material-cell">
                             <DetailList values={getMaterialValues(product)} />
