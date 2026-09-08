@@ -51,6 +51,15 @@ const BRAND_LOGOS = {
   travismathew: { mark: "TM", wordmark: "TRAVISMATHEW", subline: "GOLF", src: "/brand-logos/travismathew.svg" },
 };
 
+const BRAND_BASE_URLS = {
+  strauss: "https://us.strauss.com",
+  rhone: "https://www.rhone.com",
+  arcteryx: "https://arcteryx.com/us/en",
+  lululemon: "https://shop.lululemon.com",
+  tommybahama: "https://www.tommybahama.com",
+  travismathew: "https://www.travismathew.com",
+};
+
 const ARCTERYX_PROFILE_STATS = [
   { value: "59.2%", label: "Male visitors" },
   { value: "40.8%", label: "Female visitors" },
@@ -607,6 +616,20 @@ function ColorSwatches({ product }) {
       )}
     </div>
   );
+}
+
+function resolveProductUrl(url, brand) {
+  const value = String(url || "").trim();
+  if (!value) return "#";
+  if (/^https?:\/\//i.test(value)) return value;
+  if (value.startsWith("//")) return `https:${value}`;
+
+  const baseUrl = BRAND_BASE_URLS[brand] || "https://shop.lululemon.com";
+  try {
+    return new URL(value.startsWith("/") ? value : `/${value}`, baseUrl).href;
+  } catch {
+    return value;
+  }
 }
 
 function DetailList({ values, fallback = "Not specified" }) {
@@ -2154,28 +2177,28 @@ function App() {
                     </tr>
                   </thead>
                   <tbody>
-                    {paginatedProducts.map((product, index) => (
-                      <tr key={product.id}>
-                        <td className="number-cell">
-                          {(currentProductPage - 1) * productsPerPage + index + 1}
-                        </td>
-                        {hasProductImageData && (
-                          <td className="product-image-cell">
-                            {product.color_variants?.length ? (
-                              <div className="product-image-gallery">
-                                {product.color_variants.map((variant) => (
-                                  <a
-                                    key={`${variant.color}-${variant.url}`}
-                                    href={variant.url || product.url}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    aria-label={`Open ${product.title} in ${variant.color}`}
-                                    title={`${variant.color}${
-                                      variant.available
-                                        ? " - Available"
-                                        : " - Unavailable"
-                                    }`}
-                                  >
+                    {paginatedProducts.map((product, index) => {
+                      const productUrl = resolveProductUrl(product.url, product.brand);
+                      return (
+                        <tr key={product.id}>
+                          <td className="number-cell">
+                            {(currentProductPage - 1) * productsPerPage + index + 1}
+                          </td>
+                          {hasProductImageData && (
+                            <td className="product-image-cell">
+                              {product.color_variants?.length ? (
+                                <div className="product-image-gallery">
+                                  {product.color_variants.map((variant) => (
+                                    <a
+                                      key={`${variant.color}-${variant.url}`}
+                                      href={productUrl}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      aria-label={`Open ${product.title} on brand website`}
+                                      title={`Open ${product.title}${
+                                        variant.color ? ` - ${variant.color}` : ""
+                                      }`}
+                                    >
                                     <img
                                       src={variant.image || product.image}
                                       alt={`${product.title} - ${variant.color}`}
@@ -2194,30 +2217,30 @@ function App() {
                                       />
                                       <strong>{variant.color}</strong>
                                     </span>
-                                  </a>
-                                ))}
-                              </div>
-                            ) : product.image ? (
-                              <a href={product.url} target="_blank" rel="noreferrer">
+                                    </a>
+                                  ))}
+                                </div>
+                              ) : product.image ? (
+                                <a href={productUrl} target="_blank" rel="noreferrer">
                                 <img src={product.image} alt={product.title} />
                                 <span className="product-image-popover" aria-hidden="true">
                                   <img src={product.image} alt="" />
                                   <strong>{product.title}</strong>
                                 </span>
-                              </a>
-                            ) : (
-                              <span className="product-image-placeholder">
-                                No image
-                              </span>
-                            )}
-                            {isLululemonView && <ColorSwatches product={product} />}
+                                </a>
+                              ) : (
+                                <span className="product-image-placeholder">
+                                  No image
+                                </span>
+                              )}
+                              {isLululemonView && <ColorSwatches product={product} />}
+                            </td>
+                          )}
+                          <td className="product-title-cell">
+                            <a href={productUrl} target="_blank" rel="noreferrer">
+                              {product.title}
+                            </a>
                           </td>
-                        )}
-                        <td className="product-title-cell">
-                          <a href={product.url} target="_blank" rel="noreferrer">
-                            {product.title}
-                          </a>
-                        </td>
                         {hasSeasonData && (
                           <td className="season-cell">
                             {product.season_range || (
@@ -2404,8 +2427,9 @@ function App() {
                             {product.available ? "Available" : "Unavailable"}
                           </button>
                         </td>
-                      </tr>
-                    ))}
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
