@@ -56,7 +56,7 @@ ENABLE_MANUAL_SCRAPE = os.environ.get("ENABLE_MANUAL_SCRAPE", "").lower() in {
     "1",
     "true",
     "yes",
-}
+} or not os.environ.get("SCRAPE_API_TOKEN", "")
 SCRAPE_API_TOKEN = os.environ.get("SCRAPE_API_TOKEN", "")
 
 
