@@ -5,6 +5,7 @@ from app.lululemon_scraper import (
     _apply_pdp_details,
     _apply_schema_details,
     _normalize,
+    _prices_from_html_text,
 )
 
 
@@ -149,6 +150,13 @@ class LululemonScraperTests(unittest.TestCase):
         self.assertEqual(product["price_min"], 58)
         self.assertEqual(product["price_max"], 58)
         self.assertTrue(product["price_known"])
+
+    def test_extracts_prices_from_html_text(self):
+        prices = _prices_from_html_text(
+            "<div>Sale Price&nbsp;$99&nbsp;USD&nbsp;Regular Price&nbsp;$148&nbsp;USD</div>"
+        )
+
+        self.assertEqual(prices, [99, 148])
 
     def test_applies_browser_detail_cache(self):
         product = _normalize(
