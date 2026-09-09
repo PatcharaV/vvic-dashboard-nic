@@ -439,6 +439,78 @@ def _schema_price(variant: dict[str, Any]) -> float | None:
     return None
 
 
+def _price_number(value: Any) -> float | None:
+    if isinstance(value, bool) or value is None:
+        return None
+    if isinstance(value, (int, float)):
+        price = float(value)
+    elif isinstance(value, str):
+        match = re.search(r"\d+(?:,\d{3})*(?:\.\d+)?", value)
+        if not match:
+            return None
+        price = float(match.group(0).replace(",", ""))
+    elif isinstance(value, dict):
+        for key in (
+            "amount",
+            "value",
+            "price",
+            "salePrice",
+            "currentPrice",
+            "listPrice",
+            "formattedPrice",
+        ):
+            price = _price_number(value.get(key))
+            if price is not None:
+                return price
+        return None
+    else:
+        return None
+    return price if 0 < price < 10000 else None
+
+
+PRICE_FIELD_NAMES = {
+    "price",
+    "salePrice",
+    "listPrice",
+    "currentPrice",
+    "priceMin",
+    "priceMax",
+    "minPrice",
+    "maxPrice",
+    "formattedPrice",
+    "formattedSalePrice",
+    "formattedListPrice",
+}
+
+
+def _collect_prices(value: Any) -> list[float]:
+    prices: list[float] = []
+
+    def visit(node: Any) -> None:
+        if isinstance(node, dict):
+            for key, child in node.items():
+                if key in PRICE_FIELD_NAMES:
+                    price = _price_number(child)
+                    if price is not None:
+                        prices.append(price)
+                visit(child)
+        elif isinstance(node, list):
+            for item in node:
+                visit(item)
+
+    visit(value)
+    return prices
+
+
+def _apply_prices(product: dict[str, Any], prices: list[float]) -> None:
+    cleaned = [price for price in prices if 0 < price < 10000]
+    if not cleaned:
+        return
+    product["price_min"] = min(cleaned)
+    product["price_max"] = max(cleaned)
+    product["price_known"] = True
+
+
 def _schema_style_number(image: str) -> str:
     match = re.search(r"/([^/?]+)_\d+_", image)
     return match.group(1) if match else ""
@@ -508,10 +580,7 @@ def _apply_schema_details(product: dict[str, Any], product_group: dict[str, Any]
         product["color"] = " / ".join(available_colors or all_colors)
         product["variant_count"] = max(1, len(color_variants))
         product["available"] = bool(available_colors)
-    if prices:
-        product["price_min"] = min(prices)
-        product["price_max"] = max(prices)
-        product["price_known"] = True
+    _apply_prices(product, prices)
 
 
 def _find_pdp_data(obj: Any) -> dict[str, Any] | None:
@@ -598,6 +667,7 @@ def _apply_pdp_details(product: dict[str, Any], pdp_data: dict[str, Any]) -> Non
     product["material_details"] = materials or product.get("material_details", [])
     product["material"] = " | ".join(product["material_details"])
     product["innovations"] = innovations
+    _apply_prices(product, _collect_prices(pdp_data))
 
 
 async def _enrich_product(client: httpx.AsyncClient, product: dict[str, Any]) -> dict[str, Any]:
@@ -613,6 +683,8 @@ async def _enrich_product(client: httpx.AsyncClient, product: dict[str, Any]) ->
     pdp_data = _find_pdp_data(next_data) if next_data else None
     if pdp_data:
         _apply_pdp_details(product, pdp_data)
+    elif next_data:
+        _apply_prices(product, _collect_prices(next_data))
     return product
 
 

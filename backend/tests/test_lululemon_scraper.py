@@ -86,6 +86,10 @@ class LululemonScraperTests(unittest.TestCase):
                     },
                 }
             ],
+            "price": {
+                "currentPrice": "$68.00",
+                "listPrice": "$78.00",
+            },
         }
 
         _apply_pdp_details(product, pdp_data)
@@ -98,6 +102,9 @@ class LululemonScraperTests(unittest.TestCase):
             product["innovations"],
             ["Four-Way Stretch"],
         )
+        self.assertEqual(product["price_min"], 68)
+        self.assertEqual(product["price_max"], 78)
+        self.assertTrue(product["price_known"])
 
     def test_applies_schema_details(self):
         product = _normalize(
