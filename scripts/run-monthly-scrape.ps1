@@ -61,7 +61,11 @@ try {
         exit 124
     }
 
+    $Process.Refresh()
     $ExitCode = $Process.ExitCode
+    if ($null -eq $ExitCode) {
+        $ExitCode = 0
+    }
     if (Test-Path $StdOutFile) {
         Get-Content $StdOutFile | Tee-Object -FilePath $LogFile -Append
     }
