@@ -763,8 +763,9 @@ async def scrape_lululemon_products() -> dict[str, Any]:
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
     }
-    timeout = httpx.Timeout(60.0, connect=20.0)
-    async with httpx.AsyncClient(headers=headers, timeout=timeout) as client:
+    sitemap_timeout = httpx.Timeout(60.0, connect=20.0)
+    detail_timeout = httpx.Timeout(8.0, connect=4.0)
+    async with httpx.AsyncClient(headers=headers, timeout=sitemap_timeout) as client:
         response = await client.get(PRODUCT_SITEMAP_URL)
         response.raise_for_status()
 
@@ -787,8 +788,8 @@ async def scrape_lululemon_products() -> dict[str, Any]:
         if len(products) % 500 == 0:
             await asyncio.sleep(0)
 
-    async with httpx.AsyncClient(headers=headers, timeout=timeout, follow_redirects=True) as client:
-        semaphore = asyncio.Semaphore(10)
+    async with httpx.AsyncClient(headers=headers, timeout=detail_timeout, follow_redirects=True) as client:
+        semaphore = asyncio.Semaphore(40)
 
         async def enrich_with_limit(product: dict[str, Any]) -> dict[str, Any]:
             async with semaphore:
