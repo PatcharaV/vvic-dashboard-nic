@@ -24,6 +24,7 @@ from .catalog import (
     load_latest_period_cache,
     load_period_cache,
     normalize_csv,
+    refresh_lululemon_products,
     scrape_products,
 )
 
@@ -46,6 +47,7 @@ store: dict[str, Any] = {}
 scrape_lock = asyncio.Lock()
 auto_scrape_task: asyncio.Task | None = None
 monthly_scrape_task: asyncio.Task | None = None
+lululemon_price_scrape_task: asyncio.Task | None = None
 LOCAL_TZ = ZoneInfo("Asia/Bangkok")
 AUTO_SCRAPE_RUNS_PATH = CACHE_PATH.parent / "auto_scrape_runs.json"
 MONTHLY_AUTO_STATUS_PATH = CACHE_PATH.parent / "monthly_auto_scrape_status.json"
@@ -234,6 +236,81 @@ async def run_monthly_auto_scrape(
     return status
 
 
+async def run_lululemon_price_scrape(triggered_by: str = "manual") -> dict[str, Any]:
+    period = current_scrape_period()
+    key = f"lululemon-prices-{period['year']}-{period['month']}"
+    started_at = datetime.now(timezone.utc).isoformat()
+    save_monthly_auto_status(
+        {
+            "key": key,
+            "status": "running",
+            "triggered_by": triggered_by,
+            "started_at": started_at,
+            "scrape_period": period,
+            "scope": "lululemon-prices",
+        }
+    )
+    try:
+        data = await refresh_lululemon_products(scrape_period=period)
+    except Exception as exc:
+        status = {
+            "key": key,
+            "status": "failed",
+            "triggered_by": triggered_by,
+            "started_at": started_at,
+            "completed_at": datetime.now(timezone.utc).isoformat(),
+            "scrape_period": period,
+            "scope": "lululemon-prices",
+            "error": str(exc),
+        }
+        save_monthly_auto_status(status)
+        raise
+
+    lululemon_products = [
+        product
+        for product in data.get("products", [])
+        if product.get("brand") == "lululemon"
+    ]
+    price_count = sum(
+        1
+        for product in lululemon_products
+        if product.get("price_known")
+        or float(product.get("price_min") or 0) > 0
+        or float(product.get("price_max") or 0) > 0
+    )
+    status = {
+        "key": key,
+        "status": "completed",
+        "triggered_by": triggered_by,
+        "started_at": started_at,
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "scrape_period": data.get("scrape_period", period),
+        "scope": "lululemon-prices",
+        "product_count": len(lululemon_products),
+        "price_count": price_count,
+        "quality_status": data.get("quality_audit", {}).get("status"),
+        "warnings": data.get("scrape_warnings", []),
+    }
+    save_monthly_auto_status(status)
+    return status
+
+
+def start_lululemon_price_scrape(triggered_by: str = "manual") -> dict[str, Any]:
+    global lululemon_price_scrape_task
+    latest = load_monthly_auto_status()
+    if lululemon_price_scrape_task and not lululemon_price_scrape_task.done():
+        return {"status": "already_running", "latest_run": latest}
+    lululemon_price_scrape_task = asyncio.create_task(
+        run_lululemon_price_scrape(triggered_by)
+    )
+    lululemon_price_scrape_task.add_done_callback(consume_task_exception)
+    return {
+        "status": "started",
+        "scrape_period": current_scrape_period(),
+        "latest_run": latest,
+    }
+
+
 def start_monthly_auto_scrape(
     triggered_by: str = "scheduler",
     force: bool = False,
@@ -416,6 +493,12 @@ async def auto_scrape_monthly_status() -> dict[str, Any]:
         "maintenance": maintenance_window(),
         "latest_run": load_monthly_auto_status(),
     }
+
+
+@app.post("/api/auto-scrape/lululemon-prices")
+async def auto_scrape_lululemon_prices(token: str | None = None) -> dict[str, Any]:
+    validate_scrape_access(token)
+    return start_lululemon_price_scrape("manual-price-refresh")
 
 
 @app.get("/api/audits/latest")

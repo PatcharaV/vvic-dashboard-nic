@@ -1531,6 +1531,98 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
     return payload
 
 
+async def refresh_lululemon_products(
+    scrape_period: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    cached = load_period_cache(scrape_period) or load_cache() or {}
+    cached_products = cached.get("products", [])
+    cached_lululemon = [
+        product for product in cached_products if product.get("brand") == "lululemon"
+    ]
+
+    result = await _scrape_brand_with_timeout(
+        "lululemon",
+        scrape_lululemon_products(),
+        SCRAPE_BRAND_TIMEOUT_SECONDS,
+    )
+    lululemon_products = _apply_season_classification(
+        _apply_lululemon_detail_cache(
+            _merge_cached_detail_fields(
+                _clothing_products(result.get("products", [])),
+                cached_lululemon,
+            )
+        ),
+        scrape_period,
+    )
+    lululemon_products = _filter_period_products(
+        lululemon_products,
+        "lululemon",
+        scrape_period,
+    )
+    result["products"] = lululemon_products
+    result["product_count"] = len(lululemon_products)
+
+    audit = validate_brand(
+        "lululemon",
+        "lululemon",
+        lululemon_products,
+        cached_lululemon,
+    )
+    products = [
+        product for product in cached_products if product.get("brand") != "lululemon"
+    ] + lululemon_products
+    products.sort(
+        key=lambda item: (
+            item.get("brand_label", "").lower(),
+            item.get("title", "").lower(),
+        )
+    )
+
+    cached_sources = [
+        source
+        for source in cached.get("sources", [])
+        if source.get("brand") != "lululemon"
+    ]
+    payload = {
+        "source": cached.get("source") or [],
+        "sources": [
+            *cached_sources,
+            {
+                "brand": "lululemon",
+                "label": "lululemon",
+                "url": result.get("source", "https://shop.lululemon.com"),
+                "product_count": len(lululemon_products),
+                "scraped_at": result.get("scraped_at"),
+                "collection_options": result.get("collection_options", []),
+            },
+        ],
+        "scrape_warnings": cached.get("scrape_warnings", []),
+        "quality_audit": {
+            "status": "published" if audit["decision"] == "publish" else "published_with_fallback",
+            "brands": [audit],
+        },
+        "scraped_at": datetime.now(timezone.utc).isoformat(),
+        "scrape_period": scrape_period or cached.get("scrape_period") or {},
+        "product_count": len(products),
+        "products": products,
+    }
+
+    stamp = utc_stamp()
+    write_json(_staging_path(scrape_period, stamp), payload)
+    backup_file(CACHE_PATH, BACKUP_DIR, stamp)
+    _write_payload(CACHE_PATH, payload)
+    if scrape_period:
+        backup_file(period_cache_path(scrape_period), BACKUP_DIR, stamp)
+        _write_payload(period_cache_path(scrape_period), payload)
+    write_brand_archives(payload, [audit])
+    write_json(_audit_path(scrape_period, stamp), build_audit_report(
+        scrape_period,
+        [audit],
+        products,
+    ))
+    return payload
+
+
 def load_cache() -> dict[str, Any] | None:
     if not CACHE_PATH.exists():
         return None
