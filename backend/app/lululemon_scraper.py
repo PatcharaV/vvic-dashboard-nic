@@ -1,6 +1,7 @@
 import asyncio
 import html
 import json
+import os
 import re
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -12,6 +13,7 @@ import httpx
 BASE_URL = "https://shop.lululemon.com"
 PRODUCT_SITEMAP_URL = f"{BASE_URL}/sitemap/Product_Sitemap_en_US.xml"
 SITEMAP_NS = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+DETAIL_REFRESH_LIMIT = int(os.environ.get("LULULEMON_DETAIL_REFRESH_LIMIT", "200"))
 
 EXCLUDED_SEGMENT_KEYWORDS = {
     "accessories",
@@ -719,19 +721,21 @@ async def enrich_lululemon_product_details(
         "Accept-Language": "en-US,en;q=0.9",
     }
     detail_timeout = httpx.Timeout(4.0, connect=2.0)
+    candidates = products[:DETAIL_REFRESH_LIMIT] if DETAIL_REFRESH_LIMIT > 0 else products
+    skipped = products[len(candidates):]
     async with httpx.AsyncClient(headers=headers, timeout=detail_timeout, follow_redirects=True) as client:
-        semaphore = asyncio.Semaphore(20)
+        semaphore = asyncio.Semaphore(5)
 
         async def enrich_with_limit(product: dict[str, Any]) -> dict[str, Any]:
             async with semaphore:
                 return await _enrich_product(client, {**product})
 
         enriched: list[dict[str, Any]] = []
-        for index in range(0, len(products), 50):
-            batch = products[index : index + 50]
+        for index in range(0, len(candidates), 10):
+            batch = candidates[index : index + 10]
             enriched.extend(await asyncio.gather(*(enrich_with_limit(item) for item in batch)))
             await asyncio.sleep(0)
-    return enriched
+    return [*enriched, *skipped]
 
 
 def _normalize(url: str, lastmod: str | None = None) -> dict[str, Any] | None:
