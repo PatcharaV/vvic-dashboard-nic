@@ -475,11 +475,37 @@ const formatMoney = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+function numericPrice(value) {
+  const price = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(price) && price > 0 ? price : null;
+}
+
+function productPrices(product) {
+  const prices = [
+    numericPrice(product.price_min),
+    numericPrice(product.price_max),
+    numericPrice(product.price),
+    numericPrice(product.compare_at_price),
+    ...(product.variants || []).flatMap((variant) => [
+      numericPrice(variant.price),
+      numericPrice(variant.compare_at_price),
+    ]),
+    ...(product.color_variants || []).flatMap((variant) => [
+      numericPrice(variant.price),
+      numericPrice(variant.compare_at_price),
+    ]),
+  ].filter((price) => price !== null);
+  return [...new Set(prices)];
+}
+
 function formatPrice(product) {
-  if (product.price_known === false) return "Not captured";
-  const minimum = formatMoney.format(product.price_min);
-  const maximum = formatMoney.format(product.price_max);
-  return product.price_min === product.price_max
+  const prices = productPrices(product);
+  if (!prices.length) return "Not captured";
+  const priceMin = Math.min(...prices);
+  const priceMax = Math.max(...prices);
+  const minimum = formatMoney.format(priceMin);
+  const maximum = formatMoney.format(priceMax);
+  return priceMin === priceMax
     ? minimum
     : `${minimum} - ${maximum}`;
 }

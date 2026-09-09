@@ -176,6 +176,17 @@ const EXTRACT_SCRIPT = String.raw`
     }
   }
 
+  function offerPrice(offer) {
+    if (!offer || typeof offer !== "object") return null;
+    const raw =
+      offer.price ??
+      offer.lowPrice ??
+      offer.highPrice ??
+      offer.priceSpecification?.price;
+    const value = Number(String(raw || "").replace(/[^0-9.]/g, ""));
+    return Number.isFinite(value) && value > 0 ? value : null;
+  }
+
   const nextData = JSON.parse(document.querySelector("#__NEXT_DATA__")?.textContent || "{}");
   const pdp = findPdp(nextData);
   const productGroup = [...document.querySelectorAll('script[type="application/ld+json"]')]
@@ -187,18 +198,35 @@ const EXTRACT_SCRIPT = String.raw`
 
   const variants = Array.isArray(productGroup.hasVariant) ? productGroup.hasVariant : [];
   const byColor = new Map();
+  const prices = [];
   for (const variant of variants) {
     const color = cleanText(variant.color);
     if (!color) continue;
     const offers = Array.isArray(variant.offers) ? variant.offers : [variant.offers];
     const available = offers.some((offer) => String(offer?.availability || "").includes("InStock"));
+    const variantPrices = [];
+    for (const offer of offers) {
+      const price = offerPrice(offer);
+      if (price !== null) {
+        prices.push(price);
+        variantPrices.push(price);
+      }
+    }
     const row = byColor.get(color) || {
       color,
       image: variant.image || "",
       available: false,
       sizes: [],
+      price_min: 0,
+      price_max: 0,
     };
     row.available = row.available || available;
+    if (variantPrices.length) {
+      const currentPrices = [row.price_min, row.price_max, ...variantPrices].filter((value) => value > 0);
+      row.price_min = Math.min(...currentPrices);
+      row.price_max = Math.max(...currentPrices);
+      row.price = row.price_min === row.price_max ? row.price_min : undefined;
+    }
     if (variant.size && !row.sizes.includes(variant.size)) row.sizes.push(cleanText(variant.size));
     if (!row.image && variant.image) row.image = variant.image;
     byColor.set(color, row);
@@ -239,6 +267,9 @@ const EXTRACT_SCRIPT = String.raw`
     available_colors: colors.filter((color) => color.available).map((color) => color.color),
     unavailable_colors: colors.filter((color) => !color.available).map((color) => color.color),
     color_variants: colors,
+    price_min: prices.length ? Math.min(...prices) : 0,
+    price_max: prices.length ? Math.max(...prices) : 0,
+    price_known: prices.length > 0,
     body_materials: bodyMaterials,
     innovations,
     pdp_color_attributes: pdp?.colorAttributes?.length || 0,

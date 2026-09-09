@@ -964,12 +964,18 @@ def load_lululemon_detail_cache(
                     ).strip(),
                     "available": bool(variant.get("available")),
                     "sizes": _dedupe_strings(variant.get("sizes") or []),
+                    "price": variant.get("price"),
+                    "price_min": variant.get("price_min"),
+                    "price_max": variant.get("price_max"),
                 }
             )
         detail = {
             "color_variants": cleaned_variants,
             "available_colors": _dedupe_strings(row.get("available_colors") or []),
             "unavailable_colors": _dedupe_strings(row.get("unavailable_colors") or []),
+            "price_min": row.get("price_min"),
+            "price_max": row.get("price_max"),
+            "price_known": row.get("price_known"),
             "material_details": _dedupe_strings(
                 row.get("body_materials") or row.get("material_details") or []
             ),
@@ -1027,6 +1033,16 @@ def _apply_lululemon_detail_cache(
         style_number = product.get("style_number") or _lululemon_style_number(
             color_variants
         )
+        price_min = product.get("price_min", 0)
+        price_max = product.get("price_max", 0)
+        price_known = product.get("price_known", True)
+        if detail.get("price_known") is True:
+            try:
+                price_min = float(detail.get("price_min") or 0)
+                price_max = float(detail.get("price_max") or price_min)
+                price_known = price_min > 0 or price_max > 0
+            except (TypeError, ValueError):
+                pass
         enriched.append(
             {
                 **product,
@@ -1045,6 +1061,9 @@ def _apply_lululemon_detail_cache(
                 "material_details": material_details,
                 "material": " | ".join(material_details),
                 "innovations": innovations,
+                "price_min": price_min,
+                "price_max": price_max,
+                "price_known": price_known,
             }
         )
     return enriched

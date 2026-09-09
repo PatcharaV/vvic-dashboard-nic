@@ -469,11 +469,23 @@ def _apply_schema_details(product: dict[str, Any], product_group: dict[str, Any]
                 "image": image,
                 "url": product.get("url", ""),
                 "available": False,
+                "price": None,
+                "price_min": None,
+                "price_max": None,
             },
         )
         if image and not row.get("image"):
             row["image"] = image
         row["available"] = bool(row.get("available")) or available
+        if price is not None:
+            row_prices = [
+                value
+                for value in (row.get("price_min"), row.get("price_max"), price)
+                if value is not None
+            ]
+            row["price_min"] = min(row_prices)
+            row["price_max"] = max(row_prices)
+            row["price"] = row["price_min"] if row["price_min"] == row["price_max"] else None
 
     color_variants = list(by_color.values())
     available_colors = [item["color"] for item in color_variants if item["available"]]

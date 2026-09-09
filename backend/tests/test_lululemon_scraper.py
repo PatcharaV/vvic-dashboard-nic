@@ -176,6 +176,9 @@ class LululemonScraperTests(unittest.TestCase):
                     "UV protective",
                     "UPF 40+ provides very good UV protection",
                 ],
+                "price_min": 68,
+                "price_max": 78,
+                "price_known": True,
             }
         }
 
@@ -192,6 +195,9 @@ class LululemonScraperTests(unittest.TestCase):
             enriched["innovations"],
             ["Four-Way Stretch", "Sweat-Wicking", "UPF 40+"],
         )
+        self.assertEqual(enriched["price_min"], 68)
+        self.assertEqual(enriched["price_max"], 78)
+        self.assertTrue(enriched["price_known"])
 
 
 if __name__ == "__main__":
