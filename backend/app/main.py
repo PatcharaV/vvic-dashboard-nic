@@ -184,11 +184,14 @@ def latest_audit_report() -> dict[str, Any] | None:
         return None
 
 
-async def run_monthly_auto_scrape(triggered_by: str = "scheduler") -> dict[str, Any]:
+async def run_monthly_auto_scrape(
+    triggered_by: str = "scheduler",
+    force: bool = False,
+) -> dict[str, Any]:
     period = current_scrape_period()
     key = monthly_scrape_key(period)
     latest = load_monthly_auto_status()
-    if latest.get("key") == key and latest.get("status") == "completed":
+    if not force and latest.get("key") == key and latest.get("status") == "completed":
         return latest
 
     started_at = datetime.now(timezone.utc).isoformat()
@@ -231,15 +234,22 @@ async def run_monthly_auto_scrape(triggered_by: str = "scheduler") -> dict[str, 
     return status
 
 
-def start_monthly_auto_scrape(triggered_by: str = "scheduler") -> dict[str, Any]:
+def start_monthly_auto_scrape(
+    triggered_by: str = "scheduler",
+    force: bool = False,
+) -> dict[str, Any]:
     global monthly_scrape_task
     period = current_scrape_period()
     latest = load_monthly_auto_status()
-    if latest.get("key") == monthly_scrape_key(period) and latest.get("status") == "completed":
+    if (
+        not force
+        and latest.get("key") == monthly_scrape_key(period)
+        and latest.get("status") == "completed"
+    ):
         return {"status": "already_completed", "latest_run": latest}
     if monthly_scrape_task and not monthly_scrape_task.done():
         return {"status": "already_running", "latest_run": latest}
-    monthly_scrape_task = asyncio.create_task(run_monthly_auto_scrape(triggered_by))
+    monthly_scrape_task = asyncio.create_task(run_monthly_auto_scrape(triggered_by, force))
     monthly_scrape_task.add_done_callback(consume_task_exception)
     return {
         "status": "started",
@@ -392,9 +402,12 @@ async def maintenance() -> dict[str, Any]:
 
 
 @app.post("/api/auto-scrape/monthly")
-async def auto_scrape_monthly(token: str | None = None) -> dict[str, Any]:
+async def auto_scrape_monthly(
+    token: str | None = None,
+    force: bool = Query(default=False),
+) -> dict[str, Any]:
     validate_scrape_access(token)
-    return start_monthly_auto_scrape("external-scheduler")
+    return start_monthly_auto_scrape("external-scheduler", force=force)
 
 
 @app.get("/api/auto-scrape/monthly/status")
