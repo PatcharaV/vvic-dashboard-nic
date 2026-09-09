@@ -765,8 +765,6 @@ async def scrape_lululemon_products() -> dict[str, Any]:
     }
     timeout = httpx.Timeout(60.0, connect=20.0)
     async with httpx.AsyncClient(headers=headers, timeout=timeout) as client:
-        robots = await client.get(f"{BASE_URL}/robots.txt")
-        robots.raise_for_status()
         response = await client.get(PRODUCT_SITEMAP_URL)
         response.raise_for_status()
 

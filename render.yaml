@@ -7,3 +7,6 @@ services:
     startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
     autoDeploy: true
+    envVars:
+      - key: ENABLE_MANUAL_SCRAPE
+        value: "true"
