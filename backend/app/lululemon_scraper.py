@@ -706,6 +706,34 @@ async def _enrich_product(client: httpx.AsyncClient, product: dict[str, Any]) ->
     return product
 
 
+async def enrich_lululemon_product_details(
+    products: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/126.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    detail_timeout = httpx.Timeout(4.0, connect=2.0)
+    async with httpx.AsyncClient(headers=headers, timeout=detail_timeout, follow_redirects=True) as client:
+        semaphore = asyncio.Semaphore(20)
+
+        async def enrich_with_limit(product: dict[str, Any]) -> dict[str, Any]:
+            async with semaphore:
+                return await _enrich_product(client, {**product})
+
+        enriched: list[dict[str, Any]] = []
+        for index in range(0, len(products), 50):
+            batch = products[index : index + 50]
+            enriched.extend(await asyncio.gather(*(enrich_with_limit(item) for item in batch)))
+            await asyncio.sleep(0)
+    return enriched
+
+
 def _normalize(url: str, lastmod: str | None = None) -> dict[str, Any] | None:
     parsed = _parse_product_url(url)
     if not parsed:
@@ -782,7 +810,6 @@ async def scrape_lululemon_products() -> dict[str, Any]:
         "Accept-Language": "en-US,en;q=0.9",
     }
     sitemap_timeout = httpx.Timeout(60.0, connect=20.0)
-    detail_timeout = httpx.Timeout(4.0, connect=2.0)
     async with httpx.AsyncClient(headers=headers, timeout=sitemap_timeout) as client:
         response = await client.get(PRODUCT_SITEMAP_URL)
         response.raise_for_status()
@@ -806,19 +833,7 @@ async def scrape_lululemon_products() -> dict[str, Any]:
         if len(products) % 500 == 0:
             await asyncio.sleep(0)
 
-    async with httpx.AsyncClient(headers=headers, timeout=detail_timeout, follow_redirects=True) as client:
-        semaphore = asyncio.Semaphore(20)
-
-        async def enrich_with_limit(product: dict[str, Any]) -> dict[str, Any]:
-            async with semaphore:
-                return await _enrich_product(client, product)
-
-        enriched: list[dict[str, Any]] = []
-        for index in range(0, len(products), 50):
-            batch = products[index : index + 50]
-            enriched.extend(await asyncio.gather(*(enrich_with_limit(item) for item in batch)))
-            await asyncio.sleep(0)
-        products = enriched
+    products = await enrich_lululemon_product_details(products)
 
     products.sort(key=lambda item: item["title"].lower())
     return {

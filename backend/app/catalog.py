@@ -7,7 +7,11 @@ from pathlib import Path
 from typing import Any
 
 from .arcteryx_scraper import scrape_arcteryx_products
-from .lululemon_scraper import clean_lululemon_innovations, scrape_lululemon_products
+from .lululemon_scraper import (
+    clean_lululemon_innovations,
+    enrich_lululemon_product_details,
+    scrape_lululemon_products,
+)
 from .quality import (
     backup_file,
     build_audit_report,
@@ -1540,11 +1544,21 @@ async def refresh_lululemon_products(
         product for product in cached_products if product.get("brand") == "lululemon"
     ]
 
-    result = await _scrape_brand_with_timeout(
-        "lululemon",
-        scrape_lululemon_products(),
-        SCRAPE_BRAND_TIMEOUT_SECONDS,
-    )
+    try:
+        result = await _scrape_brand_with_timeout(
+            "lululemon",
+            scrape_lululemon_products(),
+            SCRAPE_BRAND_TIMEOUT_SECONDS,
+        )
+    except Exception as exc:
+        result = {
+            "source": "https://shop.lululemon.com",
+            "scraped_at": datetime.now(timezone.utc).isoformat(),
+            "product_count": len(cached_lululemon),
+            "products": await enrich_lululemon_product_details(cached_lululemon),
+            "collection_options": [],
+            "scrape_error": str(exc),
+        }
     lululemon_products = _apply_season_classification(
         _apply_lululemon_detail_cache(
             _merge_cached_detail_fields(
@@ -1596,7 +1610,10 @@ async def refresh_lululemon_products(
                 "collection_options": result.get("collection_options", []),
             },
         ],
-        "scrape_warnings": cached.get("scrape_warnings", []),
+        "scrape_warnings": [
+            *cached.get("scrape_warnings", []),
+            *([f"lululemon used cached product URLs: {result['scrape_error']}"] if result.get("scrape_error") else []),
+        ],
         "quality_audit": {
             "status": "published" if audit["decision"] == "publish" else "published_with_fallback",
             "brands": [audit],
