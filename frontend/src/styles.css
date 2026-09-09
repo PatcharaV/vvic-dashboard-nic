@@ -1883,6 +1883,35 @@ td:first-child {
   margin-bottom: 0;
 }
 
+.innovation-cell {
+  min-width: 190px;
+}
+
+.innovation-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 220px;
+}
+
+.innovation-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 4px 8px;
+  color: #26313d;
+  background:
+    linear-gradient(135deg, rgba(239, 62, 66, 0.08), rgba(16, 24, 32, 0.04)),
+    #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
 .muted-detail {
   color: #96938d;
   font-weight: 650;
@@ -2183,6 +2212,15 @@ td a:hover {
 .particl-product-table .detail-cell {
   min-width: 220px;
   max-width: 320px;
+}
+
+.particl-product-table .innovation-cell {
+  min-width: 200px;
+  max-width: 240px;
+}
+
+.particl-product-table .innovation-chip-list {
+  max-width: 220px;
 }
 
 .particl-product-table .detail-list {

@@ -738,6 +738,19 @@ function DetailList({ values, fallback = "Not specified" }) {
   );
 }
 
+function InnovationChips({ values, fallback = "Not specified" }) {
+  if (!values?.length) return <span className="muted-detail">{fallback}</span>;
+  return (
+    <div className="innovation-chip-list">
+      {values.map((value) => (
+        <span key={value} className="innovation-chip">
+          {value}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 async function exportProductsToExcel(products) {
   const XLSX = await import("xlsx");
   const rows = products.map((product) => ({
@@ -2435,8 +2448,12 @@ function App() {
                           </td>
                         )}
                         {hasInnovationData && (
-                          <td className="detail-cell">
-                            <DetailList values={product.innovations} />
+                          <td className="detail-cell innovation-cell">
+                            {isLululemonView ? (
+                              <InnovationChips values={product.innovations} />
+                            ) : (
+                              <DetailList values={product.innovations} />
+                            )}
                           </td>
                         )}
                         {hasTechnicalFeatureData && (
