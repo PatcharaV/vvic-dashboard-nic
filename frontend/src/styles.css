@@ -1364,7 +1364,7 @@ h2 {
 }
 
 .lululemon-nytg-grid {
-  grid-template-columns: minmax(0, 1.25fr) minmax(420px, 0.95fr);
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .lululemon-overview-card {
@@ -1443,7 +1443,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 .lululemon-subtype-comparison {
   margin-top: 18px;
   display: grid;
-  gap: 7px;
+  gap: 14px;
 }
 
 .lululemon-subtype-legend {
@@ -1485,76 +1485,141 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   text-transform: uppercase;
 }
 
-.lululemon-subtype-comparison > button {
-  width: 100%;
-  padding: 8px 10px;
+.lululemon-subtype-chart-layout {
   display: grid;
-  gap: 6px;
+  grid-template-columns: minmax(420px, 1.5fr) minmax(360px, 0.9fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.lululemon-subtype-plot {
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+  background: #fbf8f9;
+  border: 1px solid #f0e2e5;
+  border-radius: 12px;
+}
+
+.lululemon-subtype-plot > button {
+  width: 100%;
+  min-height: 34px;
+  padding: 5px 7px;
+  display: grid;
+  grid-template-columns: 92px minmax(120px, 1fr) 52px;
+  align-items: center;
+  gap: 10px;
   color: #302d2e;
-  background: #fff;
+  background: transparent;
   border: 1px solid transparent;
-  border-radius: 9px;
+  border-radius: 8px;
   font: inherit;
   text-align: initial;
 }
 
-.lululemon-subtype-comparison > button:hover,
-.lululemon-subtype-comparison > button.selected {
-  background: #fff5f7;
-  border-color: rgba(211, 19, 52, 0.26);
+.lululemon-subtype-plot > button:hover,
+.lululemon-subtype-plot > button.selected {
+  background: #fff;
+  border-color: rgba(211, 19, 52, 0.24);
+  box-shadow: 0 3px 10px rgba(84, 20, 32, 0.05);
 }
 
-.lululemon-subtype-row-heading,
-.lululemon-subtype-values {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+.lululemon-subtype-plot strong {
+  color: #5f595b;
+  font-size: 10px;
+  text-align: right;
+  text-transform: uppercase;
 }
 
-.lululemon-subtype-row-heading strong {
-  font-size: 11px;
-}
-
-.lululemon-subtype-row-heading b {
+.lululemon-subtype-plot b {
   color: var(--lululemon-red);
-  font-size: 11px;
+  font-size: 10px;
+  text-align: right;
 }
 
-.lululemon-subtype-share-track {
-  position: relative;
-  height: 10px;
-  overflow: hidden;
-  background: #f4dfe3;
-  border-radius: 999px;
+.lululemon-subtype-scale {
+  height: 18px;
+  display: block;
+  background-image: linear-gradient(to right, rgba(150, 139, 142, 0.1) 1px, transparent 1px);
+  background-size: 25% 100%;
 }
 
-.lululemon-subtype-share-track::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  border: 1px solid rgba(153, 15, 41, 0.06);
-  border-radius: inherit;
-}
-
-.lululemon-subtype-share-track i {
-  position: relative;
-  z-index: 1;
+.lululemon-subtype-total {
   height: 100%;
-  min-width: 4px;
+  overflow: hidden;
+  display: block;
+  background: #eadde0;
+  border-radius: 3px;
+  transition: width 180ms ease;
+}
+
+.lululemon-subtype-total i {
+  height: 100%;
+  min-width: 3px;
   display: block;
   background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
-  border-radius: inherit;
 }
 
-.lululemon-subtype-values {
-  color: #81797b;
+.lululemon-subtype-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #ead9dd;
+  border-radius: 12px;
+}
+
+.lululemon-subtype-table {
+  width: 100%;
+  min-width: 360px;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.lululemon-subtype-table th,
+.lululemon-subtype-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #eee2e4;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.lululemon-subtype-table th {
+  color: #fff;
+  background: #242122;
   font-size: 9px;
+  text-transform: uppercase;
 }
 
-.lululemon-subtype-values span:last-child {
+.lululemon-subtype-table th:first-child,
+.lululemon-subtype-table td:first-child {
+  text-align: left;
+}
+
+.lululemon-subtype-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.lululemon-subtype-table tbody tr.selected td {
+  background: #fff0f3;
+}
+
+.lululemon-subtype-table td:nth-child(2),
+.lululemon-subtype-table td:last-child {
   color: var(--lululemon-red);
   font-weight: 800;
+}
+
+.lululemon-subtype-table button {
+  padding: 0;
+  color: #292627;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.lululemon-subtype-table button:hover {
+  color: var(--lululemon-red);
 }
 
 .lululemon-bars.compact .lululemon-bar-row {
@@ -3087,6 +3152,10 @@ footer a {
     grid-template-columns: 1fr;
   }
 
+  .lululemon-subtype-chart-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .lululemon-business-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3169,6 +3238,21 @@ footer a {
   main {
     width: min(100% - 16px, 1480px);
     margin-top: 8px;
+  }
+
+  .lululemon-subtype-plot {
+    padding: 8px;
+  }
+
+  .lululemon-subtype-plot > button {
+    grid-template-columns: 72px minmax(80px, 1fr) 46px;
+    gap: 6px;
+    padding-inline: 3px;
+  }
+
+  .lululemon-subtype-plot strong,
+  .lululemon-subtype-plot b {
+    font-size: 9px;
   }
 
   .topbar,

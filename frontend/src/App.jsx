@@ -588,7 +588,6 @@ function LululemonNygMetricGrid({ selectedKey }) {
 }
 
 function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
-  const rows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall");
   const isSales = metric === "sales";
   const isUnits = metric === "units";
   const lululemonField = isSales
@@ -601,47 +600,80 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
     : isUnits
       ? "nygUnits"
       : "nygProducts";
+  const rows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall")
+    .map((row) => ({
+      ...row,
+      comparisonBase: getLululemonComparisonBase(row[lululemonField], metric),
+      nygValue: row[nygField],
+      share: getNygShare(row[nygField], row[lululemonField], metric),
+    }))
+    .sort((a, b) => b.comparisonBase - a.comparisonBase);
+  const maxBase = Math.max(...rows.map((row) => row.comparisonBase), 1);
+  const baseLabel = isSales
+    ? "Lululemon est. FOB"
+    : `Lululemon ${isUnits ? "units" : "products"}`;
 
   return (
     <div className="lululemon-subtype-comparison">
       <div className="lululemon-subtype-legend">
         <span>
           <i className="lululemon-key" />
-          {isSales ? "Lululemon estimated FOB = 100%" : "Lululemon = 100%"}
+          {baseLabel}
         </span>
-        <span><i className="nyg-key" />NYG share</span>
+        <span><i className="nyg-key" />NYG</span>
         <strong>{metric === "sales" ? "Sales" : metric === "units" ? "Units" : "Products"}</strong>
       </div>
-      {rows.map((row) => {
-        const lululemonValue = row[lululemonField];
-        const nygValue = row[nygField];
-        const comparisonBase = getLululemonComparisonBase(lululemonValue, metric);
-        const share = getNygShare(nygValue, lululemonValue, metric);
-        return (
-          <button
-            className={selectedKey === row.key ? "selected" : undefined}
-            key={row.key}
-            type="button"
-            aria-pressed={selectedKey === row.key}
-            onClick={() => onSelect(row.key)}
-          >
-            <span className="lululemon-subtype-row-heading">
+      <div className="lululemon-subtype-chart-layout">
+        <div className="lululemon-subtype-plot">
+          {rows.map((row) => (
+            <button
+              className={selectedKey === row.key ? "selected" : undefined}
+              key={row.key}
+              type="button"
+              aria-pressed={selectedKey === row.key}
+              onClick={() => onSelect(row.key)}
+            >
               <strong>{row.label}</strong>
-              <b>{formatComparisonShare(share)}</b>
-            </span>
-            <span className="lululemon-subtype-share-track">
-              <i style={{ width: `${Math.max(Math.min(share, 100), 0.5)}%` }} />
-            </span>
-            <span className="lululemon-subtype-values">
-              <span>
-                Lululemon {isSales ? "FOB " : ""}
-                {formatComparisonValue(comparisonBase, metric)}
+              <span className="lululemon-subtype-scale">
+                <span
+                  className="lululemon-subtype-total"
+                  style={{ width: `${(row.comparisonBase / maxBase) * 100}%` }}
+                >
+                  <i style={{ width: `${Math.min(row.share, 100)}%` }} />
+                </span>
               </span>
-              <span>NYG {formatComparisonValue(nygValue, metric)}</span>
-            </span>
-          </button>
-        );
-      })}
+              <b>{formatComparisonShare(row.share)}</b>
+            </button>
+          ))}
+        </div>
+
+        <div className="lululemon-subtype-table-wrap">
+          <table className="lululemon-subtype-table">
+            <thead>
+              <tr>
+                <th>Sub-type</th>
+                <th>NYG</th>
+                <th>{baseLabel}</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr className={selectedKey === row.key ? "selected" : undefined} key={row.key}>
+                  <td>
+                    <button type="button" onClick={() => onSelect(row.key)}>
+                      {row.label}
+                    </button>
+                  </td>
+                  <td>{formatComparisonValue(row.nygValue, metric)}</td>
+                  <td>{formatComparisonValue(row.comparisonBase, metric)}</td>
+                  <td>{formatComparisonShare(row.share)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
@@ -886,8 +918,12 @@ function LululemonBrandOverview() {
 
         <div className="lululemon-nytg-grid">
           <article className="lululemon-overview-card lululemon-subtype-card">
-            <h3>Sub-type comparison</h3>
-            <p>Lululemon total vs NYG share - click a row to filter this section</p>
+            <h3>NYG vs. Lululemon sub-type size</h3>
+            <p>
+              {comparisonMetric === "sales"
+                ? "NYG sales compared with estimated Lululemon FOB cost - click a row to filter"
+                : "NYG compared with the full Lululemon sub-type - click a row to filter"}
+            </p>
             <LululemonSubtypeComparisonChart
               metric={comparisonMetric}
               selectedKey={comparisonSubtype}
