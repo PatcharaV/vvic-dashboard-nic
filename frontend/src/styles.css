@@ -1462,6 +1462,84 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   box-shadow: 0 0 0 2px rgba(211, 19, 52, 0.12);
 }
 
+.lululemon-subtype-comparison {
+  margin-top: 18px;
+  display: grid;
+  gap: 7px;
+}
+
+.lululemon-subtype-comparison > button {
+  width: 100%;
+  padding: 8px 10px;
+  display: grid;
+  gap: 6px;
+  color: #302d2e;
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font: inherit;
+  text-align: initial;
+}
+
+.lululemon-subtype-comparison > button:hover,
+.lululemon-subtype-comparison > button.selected {
+  background: #fff5f7;
+  border-color: rgba(211, 19, 52, 0.26);
+}
+
+.lululemon-subtype-row-heading,
+.lululemon-subtype-values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lululemon-subtype-row-heading strong {
+  font-size: 11px;
+}
+
+.lululemon-subtype-row-heading b {
+  color: var(--lululemon-red);
+  font-size: 11px;
+}
+
+.lululemon-subtype-share-track {
+  position: relative;
+  height: 10px;
+  overflow: hidden;
+  background: #f4dfe3;
+  border-radius: 999px;
+}
+
+.lululemon-subtype-share-track::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border: 1px solid rgba(153, 15, 41, 0.06);
+  border-radius: inherit;
+}
+
+.lululemon-subtype-share-track i {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-width: 4px;
+  display: block;
+  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
+  border-radius: inherit;
+}
+
+.lululemon-subtype-values {
+  color: #81797b;
+  font-size: 9px;
+}
+
+.lululemon-subtype-values span:last-child {
+  color: var(--lululemon-red);
+  font-weight: 800;
+}
+
 .lululemon-bars.compact .lululemon-bar-row {
   grid-template-columns: 110px minmax(80px, 1fr) 48px;
 }

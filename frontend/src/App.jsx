@@ -153,27 +153,6 @@ const LULULEMON_SALES_MIX = [
   { label: "Underwear", value: 5.5, muted: true },
 ];
 
-const LULULEMON_NYTG_METRICS = [
-  { icon: "$", label: "Total sales", value: "$51.6M" },
-  { icon: "PCS", label: "Total pcs", value: "4.37M" },
-  { icon: "FOB", label: "FOB / pcs", value: "$11.81" },
-  { icon: "%", label: "Launch styles", value: "13.3%" },
-];
-
-const LULULEMON_PRODUCT_SUBTYPES = [
-  { key: "jacket", label: "Jacket", value: 21.4 },
-  { key: "short", label: "Short", value: 20.7 },
-  { key: "pullover", label: "Pullover", value: 19.7 },
-  { key: "tee", label: "Tee", value: 15.0 },
-  { key: "tank-top", label: "Tank top", value: 8.4 },
-  { key: "boxer-brief", label: "Boxer brief", value: 6.5 },
-  { key: "polo", label: "Polo", value: 4.1 },
-  { key: "skirt", label: "Skirt", value: 2.5 },
-  { key: "pant", label: "Pant", value: 1.0 },
-  { key: "jogger", label: "Jogger", value: 0.8 },
-  { key: "button-down", label: "Button down", value: 0.1 },
-];
-
 const LULULEMON_GENDER_MIX = [
   { label: "Men", value: 56.4, color: "#cf1233" },
   { label: "Women", value: 43.6, color: "#f18498" },
@@ -546,6 +525,9 @@ function LululemonBarChart({
 }
 
 function formatComparisonValue(value, metric) {
+  if (metric === "products") {
+    return `${formatNumber.format(Math.round(value))} products`;
+  }
   const prefix = metric === "sales" ? "$" : "";
   const suffix = metric === "sales" ? "" : " units";
   if (value >= 1_000_000_000) {
@@ -566,15 +548,102 @@ function formatComparisonShare(value) {
   return `${value.toFixed(2)}%`;
 }
 
+function LululemonNygMetricGrid({ selectedKey }) {
+  const selected =
+    LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
+    LULULEMON_NYG_COMPARISON[0];
+  const fobPerPiece = selected.nygUnits
+    ? selected.nygSales / selected.nygUnits
+    : 0;
+  const metrics = [
+    {
+      icon: "$",
+      label: `${selected.label} NYG sales`,
+      value: formatComparisonValue(selected.nygSales, "sales"),
+    },
+    {
+      icon: "PCS",
+      label: `${selected.label} NYG pcs`,
+      value: formatComparisonValue(selected.nygUnits, "units").replace(" units", ""),
+    },
+    {
+      icon: "FOB",
+      label: "FOB / pcs",
+      value: `$${fobPerPiece.toFixed(2)}`,
+    },
+    {
+      icon: "#",
+      label: `${selected.label} NYG products`,
+      value: formatNumber.format(selected.nygProducts),
+    },
+  ];
+
+  return <LululemonMetricGrid metrics={metrics} compact />;
+}
+
+function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
+  const rows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall");
+  const isSales = metric === "sales";
+  const isUnits = metric === "units";
+  const lululemonField = isSales
+    ? "lululemonSales"
+    : isUnits
+      ? "lululemonUnits"
+      : "lululemonProducts";
+  const nygField = isSales
+    ? "nygSales"
+    : isUnits
+      ? "nygUnits"
+      : "nygProducts";
+
+  return (
+    <div className="lululemon-subtype-comparison">
+      {rows.map((row) => {
+        const lululemonValue = row[lululemonField];
+        const nygValue = row[nygField];
+        const share = lululemonValue ? (nygValue / lululemonValue) * 100 : 0;
+        return (
+          <button
+            className={selectedKey === row.key ? "selected" : undefined}
+            key={row.key}
+            type="button"
+            aria-pressed={selectedKey === row.key}
+            onClick={() => onSelect(row.key)}
+          >
+            <span className="lululemon-subtype-row-heading">
+              <strong>{row.label}</strong>
+              <b>{formatComparisonShare(share)}</b>
+            </span>
+            <span className="lululemon-subtype-share-track">
+              <i style={{ width: `${Math.max(Math.min(share, 100), 0.5)}%` }} />
+            </span>
+            <span className="lululemon-subtype-values">
+              <span>Lululemon {formatComparisonValue(lululemonValue, metric)}</span>
+              <span>NYG {formatComparisonValue(nygValue, metric)}</span>
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect }) {
   const selected =
     LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
     LULULEMON_NYG_COMPARISON[0];
   const isSales = metric === "sales";
+  const isUnits = metric === "units";
   const lululemonValue = isSales
     ? selected.lululemonSales
-    : selected.lululemonUnits;
-  const nygValue = isSales ? selected.nygSales : selected.nygUnits;
+    : isUnits
+      ? selected.lululemonUnits
+      : selected.lululemonProducts;
+  const nygValue = isSales
+    ? selected.nygSales
+    : isUnits
+      ? selected.nygUnits
+      : selected.nygProducts;
   const share = lululemonValue ? (nygValue / lululemonValue) * 100 : 0;
 
   return (
@@ -584,7 +653,7 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
           <p className="eyebrow">INTERACTIVE COMPARISON</p>
           <h3>NYG share of Lululemon</h3>
           <p>
-            Select Sales or Units, then choose a sub-type to compare the same
+            Select Sales, Units or Products, then choose a sub-type to compare the same
             scope across both Excel sheets.
           </p>
         </div>
@@ -592,6 +661,7 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
           {[
             { value: "sales", label: "Sales" },
             { value: "units", label: "Units" },
+            { value: "products", label: "Products" },
           ].map((option) => (
             <button
               className={metric === option.value ? "active" : undefined}
@@ -620,14 +690,22 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
 
       <div className="lululemon-comparison-stats">
         <div>
-          <span>Lululemon {isSales ? "sales" : "units"}</span>
+          <span>Lululemon {isSales ? "sales" : isUnits ? "units" : "products"}</span>
           <strong>{formatComparisonValue(lululemonValue, metric)}</strong>
-          <small>{formatNumber.format(selected.lululemonProducts)} product titles</small>
+          <small>
+            {metric === "products"
+              ? "Master Apparel USD & Units"
+              : `${formatNumber.format(selected.lululemonProducts)} product titles`}
+          </small>
         </div>
         <div>
-          <span>NYG {isSales ? "sales" : "pieces"}</span>
+          <span>NYG {isSales ? "sales" : isUnits ? "pieces" : "products"}</span>
           <strong>{formatComparisonValue(nygValue, metric)}</strong>
-          <small>{formatNumber.format(selected.nygProducts)} NYG products</small>
+          <small>
+            {metric === "products"
+              ? "Lululemon sheet"
+              : `${formatNumber.format(selected.nygProducts)} NYG products`}
+          </small>
         </div>
         <div className="share">
           <span>NYG share</span>
@@ -639,7 +717,7 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
       <div className="lululemon-share-visual">
         <div className="lululemon-share-labels">
           <strong>{selected.label}</strong>
-          <span>{isSales ? "USD sales" : "product units"}</span>
+          <span>{isSales ? "USD sales" : isUnits ? "product units" : "product titles"}</span>
         </div>
         <div className="lululemon-share-track" aria-label={`NYG share ${formatComparisonShare(share)}`}>
           <i style={{ width: `${Math.max(Math.min(share, 100), 0.5)}%` }} />
@@ -696,6 +774,10 @@ function LululemonMixCard({ title, rows, subtitle, featured = false }) {
 function LululemonBrandOverview() {
   const [comparisonMetric, setComparisonMetric] = useState("sales");
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
+  const selectedComparison =
+    LULULEMON_NYG_COMPARISON.find(
+      (row) => row.key === comparisonSubtype,
+    ) || LULULEMON_NYG_COMPARISON[0];
 
   return (
     <section className="lululemon-brand-overview">
@@ -749,13 +831,16 @@ function LululemonBrandOverview() {
       <article className="lululemon-overview-section nytg-section">
         <div className="lululemon-overview-heading">
           <div>
-            <p className="eyebrow">NYTG BUSINESS · FA25-SU26 · 59 PRODUCTS</p>
+            <p className="eyebrow">
+              NYTG BUSINESS · FA25-SU26 · {selectedComparison.label.toUpperCase()} ·{" "}
+              {selectedComparison.nygProducts} PRODUCTS
+            </p>
             <h2>NYTG x Lululemon</h2>
           </div>
           <strong className="lululemon-wordmark">LULULEMON</strong>
         </div>
 
-        <LululemonMetricGrid metrics={LULULEMON_NYTG_METRICS} compact />
+        <LululemonNygMetricGrid selectedKey={comparisonSubtype} />
 
         <LululemonNygComparison
           metric={comparisonMetric}
@@ -766,11 +851,10 @@ function LululemonBrandOverview() {
 
         <div className="lululemon-nytg-grid">
           <article className="lululemon-overview-card lululemon-subtype-card">
-            <h3>Product sub-type</h3>
-            <p>Share of NYTG sales</p>
-            <LululemonBarChart
-              rows={LULULEMON_PRODUCT_SUBTYPES}
-              compact
+            <h3>Sub-type comparison</h3>
+            <p>Lululemon total vs NYG share - click a row to filter this section</p>
+            <LululemonSubtypeComparisonChart
+              metric={comparisonMetric}
               selectedKey={comparisonSubtype}
               onSelect={setComparisonSubtype}
             />
