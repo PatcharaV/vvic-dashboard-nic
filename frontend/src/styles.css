@@ -1204,6 +1204,176 @@ h2 {
   line-height: 1;
 }
 
+.lululemon-comparison-card {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 244, 246, 0.96), rgba(255, 255, 255, 0.98));
+  border: 1px solid var(--lululemon-line);
+  border-radius: 16px;
+  box-shadow: 0 9px 24px rgba(112, 17, 36, 0.06);
+}
+
+.lululemon-comparison-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.lululemon-comparison-heading h3 {
+  margin: 0;
+  color: #202124;
+  font-size: clamp(24px, 2.6vw, 36px);
+  letter-spacing: -0.025em;
+}
+
+.lululemon-comparison-heading > div > p:last-child {
+  max-width: 620px;
+  margin-top: 7px;
+  color: #6b6668;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.lululemon-comparison-toggle {
+  padding: 3px;
+  display: flex;
+  gap: 3px;
+  background: #f4e9eb;
+  border: 1px solid #ead1d6;
+  border-radius: 10px;
+}
+
+.lululemon-comparison-toggle button,
+.lululemon-comparison-scopes button {
+  color: #6b4d53;
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.lululemon-comparison-toggle button {
+  min-width: 74px;
+  padding: 9px 13px;
+}
+
+.lululemon-comparison-toggle button:hover,
+.lululemon-comparison-toggle button.active,
+.lululemon-comparison-scopes button:hover,
+.lululemon-comparison-scopes button.active {
+  color: #fff;
+  background: var(--lululemon-red);
+}
+
+.lululemon-comparison-scopes {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lululemon-comparison-scopes button {
+  padding: 8px 11px;
+  background: #fff;
+  border: 1px solid #eadde0;
+}
+
+.lululemon-comparison-stats {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lululemon-comparison-stats > div {
+  min-height: 118px;
+  padding: 18px;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  background: #fff;
+  border: 1px solid #eadde0;
+  border-radius: 12px;
+}
+
+.lululemon-comparison-stats > div.share {
+  color: #fff;
+  background: linear-gradient(135deg, var(--lululemon-red), var(--lululemon-dark-red));
+  border-color: transparent;
+}
+
+.lululemon-comparison-stats span,
+.lululemon-comparison-stats small {
+  color: #716b6d;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.lululemon-comparison-stats span {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lululemon-comparison-stats strong {
+  color: var(--lululemon-red);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1;
+}
+
+.lululemon-comparison-stats .share span,
+.lululemon-comparison-stats .share strong,
+.lululemon-comparison-stats .share small {
+  color: #fff;
+}
+
+.lululemon-share-visual {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid #eadde0;
+  border-radius: 12px;
+}
+
+.lululemon-share-labels,
+.lululemon-share-scale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lululemon-share-labels strong {
+  color: #242428;
+  font-size: 12px;
+}
+
+.lululemon-share-labels span,
+.lululemon-share-scale {
+  color: #837b7e;
+  font-size: 9px;
+}
+
+.lululemon-share-track {
+  height: 13px;
+  margin: 10px 0 7px;
+  overflow: hidden;
+  background: #f5dfe3;
+  border-radius: 999px;
+}
+
+.lululemon-share-track i {
+  height: 100%;
+  min-width: 5px;
+  display: block;
+  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
+  border-radius: inherit;
+}
+
 .lululemon-business-grid,
 .lululemon-nytg-grid {
   margin-top: 18px;
@@ -1270,6 +1440,26 @@ h2 {
   grid-template-columns: 90px minmax(80px, 1fr) 52px;
   align-items: center;
   gap: 10px;
+}
+
+button.lululemon-bar-row {
+  width: 100%;
+  padding: 3px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  text-align: initial;
+}
+
+button.lululemon-bar-row:hover,
+button.lululemon-bar-row.selected {
+  background: #fff5f7;
+  border-color: rgba(211, 19, 52, 0.24);
+}
+
+button.lululemon-bar-row.selected .lululemon-bar-track {
+  box-shadow: 0 0 0 2px rgba(211, 19, 52, 0.12);
 }
 
 .lululemon-bars.compact .lululemon-bar-row {
@@ -2806,6 +2996,15 @@ footer a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .lululemon-comparison-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lululemon-comparison-toggle {
+    width: fit-content;
+  }
+
   .lululemon-sales-card {
     grid-column: 1 / -1;
   }
@@ -3019,6 +3218,22 @@ footer a {
 
   .lululemon-metric-card {
     min-height: 122px;
+  }
+
+  .lululemon-comparison-card {
+    padding: 18px;
+  }
+
+  .lululemon-comparison-toggle {
+    width: 100%;
+  }
+
+  .lululemon-comparison-toggle button {
+    flex: 1;
+  }
+
+  .lululemon-comparison-stats {
+    grid-template-columns: 1fr;
   }
 
   .lululemon-mix-content {
