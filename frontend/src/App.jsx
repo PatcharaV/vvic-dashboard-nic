@@ -8,6 +8,7 @@ import {
   Treemap,
 } from "recharts";
 import { demoDashboard, demoOptions } from "./demoData";
+import { LULULEMON_NYG_STYLES } from "./lululemonNygStyles";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -693,6 +694,124 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   );
 }
 
+function LululemonStyleShare({ subtypeKey, subtypeLabel }) {
+  const styles = useMemo(
+    () =>
+      LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).sort(
+        (a, b) => b.nygSales - a.nygSales,
+      ),
+    [subtypeKey],
+  );
+  const [selectedStyleKey, setSelectedStyleKey] = useState("");
+
+  useEffect(() => {
+    setSelectedStyleKey(styles[0]?.key || "");
+  }, [styles]);
+
+  if (subtypeKey === "overall" || styles.length === 0) return null;
+
+  const selectedStyle =
+    styles.find((style) => style.key === selectedStyleKey) || styles[0];
+  const estimatedFob = getLululemonComparisonBase(
+    selectedStyle.lululemonRevenue,
+    "sales",
+  );
+  const share = getNygShare(
+    selectedStyle.nygSales,
+    selectedStyle.lululemonRevenue,
+    "sales",
+  );
+  const chartShare = Math.min(Math.max(share, 0), 100);
+  const exceedsBase = share > 100;
+
+  return (
+    <article className="lululemon-overview-card lululemon-style-card">
+      <h3>{subtypeLabel} style share</h3>
+      <p>
+        NYG sales by style compared with Lululemon estimated FOB cost (revenue / {LULULEMON_FOB_MULTIPLIER})
+      </p>
+      <div className="lululemon-style-layout">
+        <div className="lululemon-style-list" aria-label={`${subtypeLabel} NYG styles`}>
+          {styles.map((style) => {
+            const styleShare = getNygShare(
+              style.nygSales,
+              style.lululemonRevenue,
+              "sales",
+            );
+            return (
+              <button
+                className={selectedStyle.key === style.key ? "selected" : undefined}
+                key={style.key}
+                type="button"
+                aria-pressed={selectedStyle.key === style.key}
+                onClick={() => setSelectedStyleKey(style.key)}
+              >
+                <span>
+                  <strong>{style.name}</strong>
+                  <small>{style.gender} · {style.season}</small>
+                </span>
+                <b>{formatComparisonShare(styleShare)}</b>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="lululemon-style-detail">
+          <div className="lululemon-style-detail-heading">
+            <div>
+              <span>Selected NYG style</span>
+              <h4>{selectedStyle.name}</h4>
+            </div>
+            <div className="lululemon-style-tags">
+              <span>{selectedStyle.gender}</span>
+              <span>{selectedStyle.season}</span>
+            </div>
+          </div>
+
+          <div className="lululemon-style-visual">
+            <div
+              className={`lululemon-style-donut ${exceedsBase ? "over-base" : ""}`}
+              style={{ "--style-share": `${chartShare}%` }}
+              role="img"
+              aria-label={`NYG share ${formatComparisonShare(share)}`}
+            >
+              <div>
+                <strong>{formatComparisonShare(share)}</strong>
+                <span>NYG share</span>
+              </div>
+            </div>
+
+            <div className="lululemon-style-metrics">
+              <div>
+                <span>NYG sales</span>
+                <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
+              </div>
+              <div>
+                <span>Lululemon revenue</span>
+                <strong>{formatComparisonValue(selectedStyle.lululemonRevenue, "sales")}</strong>
+              </div>
+              <div>
+                <span>Estimated FOB</span>
+                <strong>{formatComparisonValue(estimatedFob, "sales")}</strong>
+              </div>
+            </div>
+          </div>
+
+          {exceedsBase && (
+            <p className="lululemon-style-warning">
+              NYG sales exceed the estimated Lululemon FOB base by {formatComparisonShare(share - 100)}.
+              Source periods or market coverage may differ for this style.
+            </p>
+          )}
+          <small className="lululemon-style-source">
+            Matched to {formatNumber.format(selectedStyle.lululemonTitles)} Master Apparel {selectedStyle.lululemonTitles === 1 ? "title" : "titles"} by Base Style.
+          </small>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect }) {
   const selected =
     LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
@@ -945,6 +1064,10 @@ function LululemonBrandOverview() {
               onSelect={setComparisonSubtype}
             />
           </article>
+          <LululemonStyleShare
+            subtypeKey={comparisonSubtype}
+            subtypeLabel={selectedComparison.label}
+          />
           <LululemonMixCard
             title={`${selectedComparison.label} gender mix`}
             subtitle="Share of selected NYTG sales"
