@@ -1163,7 +1163,7 @@ h2 {
 }
 
 .lululemon-metric-grid.compact {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .lululemon-metric-card {
@@ -1202,6 +1202,12 @@ h2 {
   color: var(--lululemon-red);
   font-size: clamp(28px, 3vw, 40px);
   line-height: 1;
+}
+
+.lululemon-metric-card small {
+  color: #81797b;
+  font-size: 9px;
+  line-height: 1.35;
 }
 
 .lululemon-comparison-card {
@@ -1568,7 +1574,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-subtype-table {
   width: 100%;
-  min-width: 360px;
+  min-width: 470px;
   border-collapse: collapse;
   font-size: 10px;
 }
@@ -1604,6 +1610,11 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 .lululemon-subtype-table td:nth-child(2),
 .lululemon-subtype-table td:last-child {
   color: var(--lululemon-red);
+  font-weight: 800;
+}
+
+.lululemon-subtype-table td:nth-child(4) {
+  color: #6e3c4a;
   font-weight: 800;
 }
 
@@ -3144,6 +3155,10 @@ footer a {
   }
 
   .lululemon-metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lululemon-metric-grid.compact {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
