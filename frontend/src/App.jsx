@@ -697,7 +697,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   );
 }
 
-function LululemonStyleShare({ subtypeKey, subtypeLabel }) {
+function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   const styles = useMemo(
     () =>
       LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).sort(
@@ -708,19 +708,41 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel }) {
   const coverage = LULULEMON_STYLE_COVERAGE.find(
     (row) => row.key === subtypeKey,
   );
+  const [selectedStyleKey, setSelectedStyleKey] = useState("");
+
+  useEffect(() => {
+    setSelectedStyleKey(styles[0]?.key || "");
+  }, [styles]);
 
   if (subtypeKey === "overall" || styles.length === 0 || !coverage) return null;
 
-  const securedSlice = coverage.total
-    ? (coverage.secured / coverage.total) * 100
+  const selectedStyle =
+    styles.find((style) => style.key === selectedStyleKey) || styles[0];
+  const crossClassifiedRevenue = styles
+    .filter(
+      (style) => style.masterSubtype && style.masterSubtype !== subtypeKey,
+    )
+    .reduce((sum, style) => sum + style.lululemonRevenue, 0);
+  const portfolioSales = subtypeSales + crossClassifiedRevenue;
+  const styleSales = selectedStyle.lululemonRevenue;
+  const nygWithinStyle = Math.min(selectedStyle.nygSales, styleSales);
+  const restOfStyleSales = Math.max(styleSales - nygWithinStyle, 0);
+  const otherStylesSales = Math.max(portfolioSales - styleSales, 0);
+  const nygStyleShare = styleSales
+    ? (selectedStyle.nygSales / styleSales) * 100
     : 0;
+  const stylePortfolioShare = portfolioSales
+    ? (styleSales / portfolioSales) * 100
+    : 0;
+  const innerChartShare = Math.min(Math.max(nygStyleShare, 0), 100);
+  const outerChartShare = Math.min(Math.max(stylePortfolioShare, 0), 100);
   const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
 
   return (
     <article className="lululemon-overview-card lululemon-style-card">
-      <h3>{subtypeLabel} style coverage</h3>
+      <h3>{subtypeLabel} sales coverage by style</h3>
       <p>
-        Styles NYG already works on compared with the remaining Lululemon Base Style portfolio
+        NYG sales within the selected style, then that style within the full Lululemon {subtypeLabel} portfolio
       </p>
       <div className="lululemon-style-coverage-grid">
         <div className="lululemon-style-portfolio-list secured">
@@ -730,38 +752,72 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel }) {
           </div>
           <div className="lululemon-style-secured-list">
             {styles.map((style) => (
-              <div key={style.key}>
-                <strong>{style.name}</strong>
-                <small>{style.gender} · {style.season}</small>
-              </div>
+              <button
+                className={style.key === selectedStyle.key ? "selected" : undefined}
+                key={style.key}
+                type="button"
+                aria-pressed={style.key === selectedStyle.key}
+                onClick={() => setSelectedStyleKey(style.key)}
+              >
+                <span>
+                  <strong>{style.name}</strong>
+                  <small>{style.gender} · {style.season}</small>
+                </span>
+                <b>{formatComparisonValue(style.nygSales, "sales")}</b>
+              </button>
             ))}
           </div>
         </div>
 
         <div className="lululemon-style-coverage-summary">
+          <div className="lululemon-style-selected-name">
+            <span>Selected style</span>
+            <strong>{selectedStyle.name}</strong>
+          </div>
           <div
-            className="lululemon-style-donut"
-            style={{ "--style-share": `${securedSlice}%` }}
+            className="lululemon-portfolio-donut"
+            style={{ "--portfolio-style-share": `${outerChartShare}%` }}
             role="img"
-            aria-label={`${coverage.secured} NYG styles and ${coverage.remaining} remaining styles`}
+            aria-label={`${formatComparisonValue(selectedStyle.nygSales, "sales")} NYG sales within ${formatComparisonValue(styleSales, "sales")} style sales and ${formatComparisonValue(portfolioSales, "sales")} total portfolio sales`}
           >
-            <div>
-              <strong>{formatNumber.format(coverage.secured)}</strong>
-              <span>of {formatNumber.format(coverage.total)} styles</span>
+            <div
+              className="lululemon-portfolio-inner-ring"
+              style={{ "--nyg-style-share": `${innerChartShare}%` }}
+            >
+              <div>
+                <strong>{formatComparisonValue(styleSales, "sales")}</strong>
+                <span>Style total</span>
+              </div>
             </div>
           </div>
-          <div className="lululemon-style-coverage-legend">
+          <div className="lululemon-style-sales-legend">
             <div>
-              <i className="secured" />
-              <span>NYG secured</span>
-              <strong>{formatNumber.format(coverage.secured)}</strong>
+              <i className="nyg-sales" />
+              <span>NYG sales</span>
+              <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
+              <small>{formatComparisonShare(nygStyleShare)} of style</small>
             </div>
             <div>
-              <i className="remaining" />
-              <span>Remaining opportunity</span>
-              <strong>{formatNumber.format(coverage.remaining)}</strong>
+              <i className="style-sales" />
+              <span>Rest of selected style</span>
+              <strong>{formatComparisonValue(restOfStyleSales, "sales")}</strong>
+            </div>
+            <div>
+              <i className="other-styles" />
+              <span>Other {subtypeLabel} styles</span>
+              <strong>{formatComparisonValue(otherStylesSales, "sales")}</strong>
+            </div>
+            <div className="portfolio-total">
+              <span>Total {subtypeLabel} portfolio</span>
+              <strong>{formatComparisonValue(portfolioSales, "sales")}</strong>
+              <small>{selectedStyle.name} = {formatComparisonShare(stylePortfolioShare)} of portfolio</small>
             </div>
           </div>
+          {selectedStyle.nygSales > styleSales && (
+            <small className="lululemon-style-data-warning">
+              NYG sales exceed the matched style revenue in Master Apparel; source coverage may differ.
+            </small>
+          )}
         </div>
 
         <div className="lululemon-style-portfolio-list remaining">
@@ -1045,6 +1101,7 @@ function LululemonBrandOverview() {
           <LululemonStyleShare
             subtypeKey={comparisonSubtype}
             subtypeLabel={selectedComparison.label}
+            subtypeSales={selectedComparison.lululemonSales}
           />
           <LululemonMixCard
             title={`${selectedComparison.label} gender mix`}
