@@ -154,7 +154,7 @@ const LULULEMON_SALES_MIX = [
 ];
 
 const LULULEMON_NYG_COMPARISON = [
-  { key: "overall", label: "Overall", lululemonSales: 9645778874.95, nygSales: 51600116.95, lululemonUnits: 111603857.55, nygUnits: 4369847, lululemonProducts: 3568, nygProducts: 59, nykFabricYards: 134531, nykFabricProducts: 4, menSales: 29120568, womenSales: 22479548.95 },
+  { key: "overall", label: "All sub-types", lululemonSales: 9645778874.95, nygSales: 51600116.95, lululemonUnits: 111603857.55, nygUnits: 4369847, lululemonProducts: 3568, nygProducts: 59, nykFabricYards: 134531, nykFabricProducts: 4, menSales: 29120568, womenSales: 22479548.95 },
   { key: "jacket", label: "Jacket", lululemonSales: 1486881502.32, nygSales: 11063087.15, lululemonUnits: 10924783, nygUnits: 545064, lululemonProducts: 339, nygProducts: 1, nykFabricYards: 0, nykFabricProducts: 0, menSales: 0, womenSales: 11063087.15 },
   { key: "short", label: "Short", lululemonSales: 1296341465.94, nygSales: 10673007.11, lululemonUnits: 19377037, nygUnits: 930096, lululemonProducts: 261, nygProducts: 8, nykFabricYards: 0, nykFabricProducts: 0, menSales: 10077097.23, womenSales: 595909.88 },
   { key: "pullover", label: "Pullover", lululemonSales: 786340374.03, nygSales: 10190865.14, lululemonUnits: 7547337, nygUnits: 578288, lululemonProducts: 186, nygProducts: 15, nykFabricYards: 131572, nykFabricProducts: 3, menSales: 9063679.5, womenSales: 1127185.64 },
@@ -564,25 +564,26 @@ function LululemonNygMetricGrid({ selectedKey }) {
   const selected =
     LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
     LULULEMON_NYG_COMPARISON[0];
+  const scopeLabel = selected.key === "overall" ? "" : `${selected.label} `;
   const metrics = [
     {
       icon: "$",
-      label: `${selected.label} NYG sales`,
+      label: `${scopeLabel}NYG sales`,
       value: formatComparisonValue(selected.nygSales, "sales"),
     },
     {
       icon: "PCS",
-      label: `${selected.label} NYG pcs`,
+      label: `${scopeLabel}NYG pcs`,
       value: formatComparisonValue(selected.nygUnits, "units").replace(" units", ""),
     },
     {
       icon: "$",
-      label: `${selected.label} Lululemon sales`,
+      label: `${scopeLabel}Lululemon sales`,
       value: formatComparisonValue(selected.lululemonSales, "sales"),
     },
     {
       icon: "PCS",
-      label: `${selected.label} Lululemon units`,
+      label: `${scopeLabel}Lululemon units`,
       value: formatComparisonValue(selected.lululemonUnits, "units").replace(
         " units",
         "",
@@ -590,7 +591,7 @@ function LululemonNygMetricGrid({ selectedKey }) {
     },
     {
       icon: "YDS",
-      label: `${selected.label} NYK fabric used`,
+      label: `${scopeLabel}NYK fabric used`,
       value: formatFabricYards(selected.nykFabricYards, true),
       note: `${formatNumber.format(selected.nykFabricProducts)} NYG products with NYK fabric`,
     },
