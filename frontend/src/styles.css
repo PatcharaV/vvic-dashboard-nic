@@ -1216,6 +1216,10 @@ h2 {
   box-shadow: 0 9px 24px rgba(112, 17, 36, 0.06);
 }
 
+.nytg-section > .lululemon-metric-grid {
+  margin-top: 18px;
+}
+
 .lululemon-comparison-heading {
   display: flex;
   align-items: flex-start;
@@ -1238,6 +1242,39 @@ h2 {
   line-height: 1.5;
 }
 
+.lululemon-comparison-controls {
+  min-width: 420px;
+  display: grid;
+  grid-template-columns: auto minmax(150px, 1fr);
+  align-items: end;
+  gap: 10px;
+}
+
+.lululemon-comparison-controls > label {
+  display: grid;
+  gap: 6px;
+}
+
+.lululemon-comparison-controls > label > span {
+  color: #716b6d;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lululemon-comparison-controls select {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 34px 0 12px;
+  color: #342f31;
+  background-color: #fff;
+  border: 1px solid #ead1d6;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
 .lululemon-comparison-toggle {
   padding: 3px;
   display: flex;
@@ -1247,8 +1284,7 @@ h2 {
   border-radius: 10px;
 }
 
-.lululemon-comparison-toggle button,
-.lululemon-comparison-scopes button {
+.lululemon-comparison-toggle button {
   color: #6b4d53;
   background: transparent;
   border: 0;
@@ -1263,24 +1299,9 @@ h2 {
 }
 
 .lululemon-comparison-toggle button:hover,
-.lululemon-comparison-toggle button.active,
-.lululemon-comparison-scopes button:hover,
-.lululemon-comparison-scopes button.active {
+.lululemon-comparison-toggle button.active {
   color: #fff;
   background: var(--lululemon-red);
-}
-
-.lululemon-comparison-scopes {
-  margin-top: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.lululemon-comparison-scopes button {
-  padding: 8px 11px;
-  background: #fff;
-  border: 1px solid #eadde0;
 }
 
 .lululemon-comparison-stats {
@@ -1329,49 +1350,6 @@ h2 {
 .lululemon-comparison-stats .share strong,
 .lululemon-comparison-stats .share small {
   color: #fff;
-}
-
-.lululemon-share-visual {
-  margin-top: 14px;
-  padding: 14px 16px;
-  background: #fff;
-  border: 1px solid #eadde0;
-  border-radius: 12px;
-}
-
-.lululemon-share-labels,
-.lululemon-share-scale {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.lululemon-share-labels strong {
-  color: #242428;
-  font-size: 12px;
-}
-
-.lululemon-share-labels span,
-.lululemon-share-scale {
-  color: #837b7e;
-  font-size: 9px;
-}
-
-.lululemon-share-track {
-  height: 13px;
-  margin: 10px 0 7px;
-  overflow: hidden;
-  background: #f5dfe3;
-  border-radius: 999px;
-}
-
-.lululemon-share-track i {
-  height: 100%;
-  min-width: 5px;
-  display: block;
-  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
-  border-radius: inherit;
 }
 
 .lululemon-business-grid,
@@ -1466,6 +1444,45 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   margin-top: 18px;
   display: grid;
   gap: 7px;
+}
+
+.lululemon-subtype-legend {
+  margin-bottom: 3px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #746d6f;
+  font-size: 9px;
+}
+
+.lululemon-subtype-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lululemon-subtype-legend i {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.lululemon-subtype-legend .lululemon-key {
+  background: #f4dfe3;
+  border: 1px solid #e8c9cf;
+}
+
+.lululemon-subtype-legend .nyg-key {
+  background: var(--lululemon-red);
+}
+
+.lululemon-subtype-legend strong {
+  margin-left: auto;
+  color: #3d383a;
+  font-size: 9px;
+  text-transform: uppercase;
 }
 
 .lululemon-subtype-comparison > button {
@@ -3079,6 +3096,11 @@ footer a {
     flex-direction: column;
   }
 
+  .lululemon-comparison-controls {
+    width: 100%;
+    min-width: 0;
+  }
+
   .lululemon-comparison-toggle {
     width: fit-content;
   }
@@ -3306,12 +3328,26 @@ footer a {
     width: 100%;
   }
 
+  .lululemon-comparison-controls {
+    grid-template-columns: 1fr;
+  }
+
   .lululemon-comparison-toggle button {
     flex: 1;
   }
 
   .lululemon-comparison-stats {
     grid-template-columns: 1fr;
+  }
+
+  .lululemon-subtype-legend {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .lululemon-subtype-legend strong {
+    width: 100%;
+    margin-left: 0;
   }
 
   .lululemon-mix-content {

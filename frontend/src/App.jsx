@@ -153,24 +153,19 @@ const LULULEMON_SALES_MIX = [
   { label: "Underwear", value: 5.5, muted: true },
 ];
 
-const LULULEMON_GENDER_MIX = [
-  { label: "Men", value: 56.4, color: "#cf1233" },
-  { label: "Women", value: 43.6, color: "#f18498" },
-];
-
 const LULULEMON_NYG_COMPARISON = [
-  { key: "overall", label: "Overall", lululemonSales: 9645778874.95, nygSales: 51600116.95, lululemonUnits: 111603857.55, nygUnits: 4369847, lululemonProducts: 3568, nygProducts: 59 },
-  { key: "jacket", label: "Jacket", lululemonSales: 1486881502.32, nygSales: 11063087.15, lululemonUnits: 10924783, nygUnits: 545064, lululemonProducts: 339, nygProducts: 1 },
-  { key: "short", label: "Short", lululemonSales: 1296341465.94, nygSales: 10673007.11, lululemonUnits: 19377037, nygUnits: 930096, lululemonProducts: 261, nygProducts: 8 },
-  { key: "pullover", label: "Pullover", lululemonSales: 786340374.03, nygSales: 10190865.14, lululemonUnits: 7547337, nygUnits: 578288, lululemonProducts: 186, nygProducts: 15 },
-  { key: "tee", label: "Tee", lululemonSales: 1137027500.89, nygSales: 7714966.35, lululemonUnits: 17902919, nygUnits: 706716, lululemonProducts: 372, nygProducts: 17 },
-  { key: "tank-top", label: "Tank top", lululemonSales: 479041536.63, nygSales: 4334778.74, lululemonUnits: 8677413, nygUnits: 547403, lululemonProducts: 176, nygProducts: 8 },
-  { key: "boxer-brief", label: "Boxer brief", lululemonSales: 507213138.48, nygSales: 3332040.02, lululemonUnits: 10113767, nygUnits: 725736, lululemonProducts: 214, nygProducts: 3 },
-  { key: "polo", label: "Polo", lululemonSales: 187788924.37, nygSales: 2098998.08, lululemonUnits: 2192490, nygUnits: 200388, lululemonProducts: 50, nygProducts: 3 },
-  { key: "skirt", label: "Skirt", lululemonSales: 152152261.60, nygSales: 1276475.93, lululemonUnits: 2110741, nygUnits: 83690, lululemonProducts: 66, nygProducts: 1 },
-  { key: "pant", label: "Pant", lululemonSales: 2656876970.18, nygSales: 491347.08, lululemonUnits: 24242653, nygUnits: 25956, lululemonProducts: 549, nygProducts: 1 },
-  { key: "jogger", label: "Jogger", lululemonSales: 589974495.21, nygSales: 389584.81, lululemonUnits: 5311966, nygUnits: 23857, lululemonProducts: 115, nygProducts: 1 },
-  { key: "button-down", label: "Button down", lululemonSales: 39285474.28, nygSales: 34966.54, lululemonUnits: 371182, nygUnits: 2653, lululemonProducts: 17, nygProducts: 1 },
+  { key: "overall", label: "Overall", lululemonSales: 9645778874.95, nygSales: 51600116.95, lululemonUnits: 111603857.55, nygUnits: 4369847, lululemonProducts: 3568, nygProducts: 59, menSales: 29120568, womenSales: 22479548.95 },
+  { key: "jacket", label: "Jacket", lululemonSales: 1486881502.32, nygSales: 11063087.15, lululemonUnits: 10924783, nygUnits: 545064, lululemonProducts: 339, nygProducts: 1, menSales: 0, womenSales: 11063087.15 },
+  { key: "short", label: "Short", lululemonSales: 1296341465.94, nygSales: 10673007.11, lululemonUnits: 19377037, nygUnits: 930096, lululemonProducts: 261, nygProducts: 8, menSales: 10077097.23, womenSales: 595909.88 },
+  { key: "pullover", label: "Pullover", lululemonSales: 786340374.03, nygSales: 10190865.14, lululemonUnits: 7547337, nygUnits: 578288, lululemonProducts: 186, nygProducts: 15, menSales: 9063679.5, womenSales: 1127185.64 },
+  { key: "tee", label: "Tee", lululemonSales: 1137027500.89, nygSales: 7714966.35, lululemonUnits: 17902919, nygUnits: 706716, lululemonProducts: 372, nygProducts: 17, menSales: 3632854.74, womenSales: 4082111.61 },
+  { key: "tank-top", label: "Tank top", lululemonSales: 479041536.63, nygSales: 4334778.74, lululemonUnits: 8677413, nygUnits: 547403, lululemonProducts: 176, nygProducts: 8, menSales: 0, womenSales: 4334778.74 },
+  { key: "boxer-brief", label: "Boxer brief", lululemonSales: 507213138.48, nygSales: 3332040.02, lululemonUnits: 10113767, nygUnits: 725736, lululemonProducts: 214, nygProducts: 3, menSales: 3332040.02, womenSales: 0 },
+  { key: "polo", label: "Polo", lululemonSales: 187788924.37, nygSales: 2098998.08, lululemonUnits: 2192490, nygUnits: 200388, lululemonProducts: 50, nygProducts: 3, menSales: 2098998.08, womenSales: 0 },
+  { key: "skirt", label: "Skirt", lululemonSales: 152152261.6, nygSales: 1276475.93, lululemonUnits: 2110741, nygUnits: 83690, lululemonProducts: 66, nygProducts: 1, menSales: 0, womenSales: 1276475.93 },
+  { key: "pant", label: "Pant", lululemonSales: 2656876970.18, nygSales: 491347.08, lululemonUnits: 24242653, nygUnits: 25956, lululemonProducts: 549, nygProducts: 1, menSales: 491347.08, womenSales: 0 },
+  { key: "jogger", label: "Jogger", lululemonSales: 589974495.21, nygSales: 389584.81, lululemonUnits: 5311966, nygUnits: 23857, lululemonProducts: 115, nygProducts: 1, menSales: 389584.81, womenSales: 0 },
+  { key: "button-down", label: "Button down", lululemonSales: 39285474.28, nygSales: 34966.54, lululemonUnits: 371182, nygUnits: 2653, lululemonProducts: 17, nygProducts: 1, menSales: 34966.54, womenSales: 0 },
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
@@ -598,6 +593,11 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
 
   return (
     <div className="lululemon-subtype-comparison">
+      <div className="lululemon-subtype-legend">
+        <span><i className="lululemon-key" />Lululemon = 100%</span>
+        <span><i className="nyg-key" />NYG share</span>
+        <strong>{metric === "sales" ? "Sales" : metric === "units" ? "Units" : "Products"}</strong>
+      </div>
       {rows.map((row) => {
         const lululemonValue = row[lululemonField];
         const nygValue = row[nygField];
@@ -653,39 +653,43 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
           <p className="eyebrow">INTERACTIVE COMPARISON</p>
           <h3>NYG share of Lululemon</h3>
           <p>
-            Select Sales, Units or Products, then choose a sub-type to compare the same
-            scope across both Excel sheets.
+            Choose one metric and one scope. Every card and chart below updates together.
           </p>
         </div>
-        <div className="lululemon-comparison-toggle" aria-label="Comparison metric">
-          {[
-            { value: "sales", label: "Sales" },
-            { value: "units", label: "Units" },
-            { value: "products", label: "Products" },
-          ].map((option) => (
-            <button
-              className={metric === option.value ? "active" : undefined}
-              key={option.value}
-              type="button"
-              onClick={() => onMetricChange(option.value)}
+        <div className="lululemon-comparison-controls">
+          <label>
+            <span>1. View by</span>
+            <div className="lululemon-comparison-toggle" aria-label="Comparison metric">
+              {[
+                { value: "sales", label: "Sales" },
+                { value: "units", label: "Units" },
+                { value: "products", label: "Products" },
+              ].map((option) => (
+                <button
+                  className={metric === option.value ? "active" : undefined}
+                  key={option.value}
+                  type="button"
+                  onClick={() => onMetricChange(option.value)}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </label>
+          <label>
+            <span>2. Sub-type</span>
+            <select
+              value={selected.key}
+              onChange={(event) => onSelect(event.target.value)}
             >
-              {option.label}
-            </button>
-          ))}
+              {LULULEMON_NYG_COMPARISON.map((row) => (
+                <option key={row.key} value={row.key}>
+                  {row.label}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
-      </div>
-
-      <div className="lululemon-comparison-scopes" aria-label="Select product sub-type">
-        {LULULEMON_NYG_COMPARISON.map((row) => (
-          <button
-            className={selected.key === row.key ? "active" : undefined}
-            key={row.key}
-            type="button"
-            onClick={() => onSelect(row.key)}
-          >
-            {row.label}
-          </button>
-        ))}
       </div>
 
       <div className="lululemon-comparison-stats">
@@ -714,19 +718,6 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
         </div>
       </div>
 
-      <div className="lululemon-share-visual">
-        <div className="lululemon-share-labels">
-          <strong>{selected.label}</strong>
-          <span>{isSales ? "USD sales" : isUnits ? "product units" : "product titles"}</span>
-        </div>
-        <div className="lululemon-share-track" aria-label={`NYG share ${formatComparisonShare(share)}`}>
-          <i style={{ width: `${Math.max(Math.min(share, 100), 0.5)}%` }} />
-        </div>
-        <div className="lululemon-share-scale">
-          <span>NYG {formatComparisonShare(share)}</span>
-          <span>Lululemon 100%</span>
-        </div>
-      </div>
     </article>
   );
 }
@@ -778,6 +769,24 @@ function LululemonBrandOverview() {
     LULULEMON_NYG_COMPARISON.find(
       (row) => row.key === comparisonSubtype,
     ) || LULULEMON_NYG_COMPARISON[0];
+  const selectedGenderSales =
+    selectedComparison.menSales + selectedComparison.womenSales;
+  const selectedGenderMix = [
+    {
+      label: "Men",
+      value: selectedGenderSales
+        ? (selectedComparison.menSales / selectedGenderSales) * 100
+        : 0,
+      color: "#cf1233",
+    },
+    {
+      label: "Women",
+      value: selectedGenderSales
+        ? (selectedComparison.womenSales / selectedGenderSales) * 100
+        : 0,
+      color: "#f18498",
+    },
+  ];
 
   return (
     <section className="lululemon-brand-overview">
@@ -833,14 +842,13 @@ function LululemonBrandOverview() {
           <div>
             <p className="eyebrow">
               NYTG BUSINESS · FA25-SU26 · {selectedComparison.label.toUpperCase()} ·{" "}
-              {selectedComparison.nygProducts} PRODUCTS
+              {selectedComparison.nygProducts}{" "}
+              {selectedComparison.nygProducts === 1 ? "PRODUCT" : "PRODUCTS"}
             </p>
             <h2>NYTG x Lululemon</h2>
           </div>
           <strong className="lululemon-wordmark">LULULEMON</strong>
         </div>
-
-        <LululemonNygMetricGrid selectedKey={comparisonSubtype} />
 
         <LululemonNygComparison
           metric={comparisonMetric}
@@ -848,6 +856,8 @@ function LululemonBrandOverview() {
           selectedKey={comparisonSubtype}
           onSelect={setComparisonSubtype}
         />
+
+        <LululemonNygMetricGrid selectedKey={comparisonSubtype} />
 
         <div className="lululemon-nytg-grid">
           <article className="lululemon-overview-card lululemon-subtype-card">
@@ -860,9 +870,9 @@ function LululemonBrandOverview() {
             />
           </article>
           <LululemonMixCard
-            title="Gender sales mix"
-            subtitle="Share of NYTG sales"
-            rows={LULULEMON_GENDER_MIX}
+            title={`${selectedComparison.label} gender mix`}
+            subtitle="Share of selected NYTG sales"
+            rows={selectedGenderMix}
             featured
           />
         </div>
