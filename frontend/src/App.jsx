@@ -12,6 +12,7 @@ import {
   LULULEMON_NYG_STYLES,
   LULULEMON_STYLE_COVERAGE,
 } from "./lululemonNygStyles";
+import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -709,9 +710,11 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
     (row) => row.key === subtypeKey,
   );
   const [selectedStyleKey, setSelectedStyleKey] = useState("");
+  const [opportunityQuery, setOpportunityQuery] = useState("");
 
   useEffect(() => {
     setSelectedStyleKey(styles[0]?.key || "");
+    setOpportunityQuery("");
   }, [styles]);
 
   if (subtypeKey === "overall" || styles.length === 0 || !coverage) return null;
@@ -737,6 +740,17 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   const innerChartShare = Math.min(Math.max(nygStyleShare, 0), 100);
   const outerChartShare = Math.min(Math.max(stylePortfolioShare, 0), 100);
   const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
+  const opportunityUnit = coverage.rawRemaining ? "families" : "styles";
+  const opportunityStyles = subtypeKey === "pant"
+    ? LULULEMON_PANT_STYLE_FAMILIES
+    : coverage.topRemaining;
+  const normalizedOpportunityQuery = opportunityQuery.trim().toLowerCase();
+  const filteredOpportunityStyles = normalizedOpportunityQuery
+    ? opportunityStyles.filter((style) => {
+        const styleName = typeof style === "string" ? style : style.name;
+        return styleName.toLowerCase().includes(normalizedOpportunityQuery);
+      })
+    : opportunityStyles;
 
   return (
     <article className="lululemon-overview-card lululemon-style-card">
@@ -822,17 +836,42 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
 
         <div className="lululemon-style-portfolio-list remaining">
           <div className="lululemon-style-portfolio-heading">
-            <span>Top remaining opportunities</span>
-            <strong>{formatNumber.format(coverage.remaining)} styles</strong>
+            <span>{coverage.rawRemaining ? "Remaining style families" : "Top remaining opportunities"}</span>
+            <strong>{formatNumber.format(coverage.remaining)} {opportunityUnit}</strong>
           </div>
+          {coverage.rawRemaining && (
+            <p className="lululemon-style-family-note">
+              {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} families; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
+            </p>
+          )}
+          {coverage.rawRemaining && (
+            <input
+              className="lululemon-style-family-search"
+              type="search"
+              value={opportunityQuery}
+              placeholder="Search remaining style families..."
+              aria-label="Search remaining style families"
+              onChange={(event) => setOpportunityQuery(event.target.value)}
+            />
+          )}
           <ol>
-            {coverage.topRemaining.map((style) => (
-              <li key={style}>{style}</li>
-            ))}
+            {filteredOpportunityStyles.map((style) => {
+              const styleName = typeof style === "string" ? style : style.name;
+              const variants = typeof style === "string" ? 1 : style.variants;
+              return (
+                <li key={styleName}>
+                  <span>{styleName}</span>
+                  {variants > 1 && <b>{variants} length variants</b>}
+                </li>
+              );
+            })}
           </ol>
-          {coverage.remaining > coverage.topRemaining.length && (
+          {coverage.rawRemaining && filteredOpportunityStyles.length === 0 && (
+            <p className="lululemon-style-family-empty">No matching style families</p>
+          )}
+          {!coverage.rawRemaining && coverage.remaining > coverage.topRemaining.length && (
             <small>
-              + {formatNumber.format(coverage.remaining - coverage.topRemaining.length)} more styles
+              + {formatNumber.format(coverage.remaining - coverage.topRemaining.length)} more {opportunityUnit}
             </small>
           )}
         </div>

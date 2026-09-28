@@ -1887,23 +1887,69 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 }
 
 .lululemon-style-portfolio-list ol {
+  max-height: 380px;
   margin: 12px 0 0;
   padding: 0;
+  overflow-y: auto;
   list-style: none;
   counter-reset: style-opportunity;
   display: grid;
   gap: 6px;
 }
 
+.lululemon-style-family-note {
+  margin: 10px 4px 0;
+  color: #756d70;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.lululemon-style-family-search {
+  width: 100%;
+  min-height: 36px;
+  margin-top: 10px;
+  padding: 0 11px;
+  color: #332f30;
+  background: #fff;
+  border: 1px solid #e6d4d8;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 10px;
+}
+
+.lululemon-style-family-search:focus {
+  border-color: var(--lululemon-red);
+  box-shadow: 0 0 0 3px rgba(211, 19, 52, 0.09);
+  outline: none;
+}
+
+.lululemon-style-family-empty {
+  margin: 18px 8px 0;
+  color: #81797b;
+  font-size: 10px;
+  text-align: center;
+}
+
 .lululemon-style-portfolio-list li {
   padding: 7px 8px;
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
+  grid-template-columns: 22px minmax(0, 1fr) auto;
   align-items: center;
   gap: 7px;
   color: #3e393b;
   font-size: 10px;
   counter-increment: style-opportunity;
+}
+
+.lululemon-style-portfolio-list li > span {
+  min-width: 0;
+}
+
+.lululemon-style-portfolio-list li > b {
+  color: #925565;
+  font-size: 8px;
+  font-weight: 850;
+  white-space: nowrap;
 }
 
 .lululemon-style-portfolio-list li::before {
