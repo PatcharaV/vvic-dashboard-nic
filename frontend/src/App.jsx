@@ -8,7 +8,10 @@ import {
   Treemap,
 } from "recharts";
 import { demoDashboard, demoOptions } from "./demoData";
-import { LULULEMON_NYG_STYLES } from "./lululemonNygStyles";
+import {
+  LULULEMON_NYG_STYLES,
+  LULULEMON_STYLE_COVERAGE,
+} from "./lululemonNygStyles";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -702,112 +705,87 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel }) {
       ),
     [subtypeKey],
   );
-  const [selectedStyleKey, setSelectedStyleKey] = useState("");
-
-  useEffect(() => {
-    setSelectedStyleKey(styles[0]?.key || "");
-  }, [styles]);
-
-  if (subtypeKey === "overall" || styles.length === 0) return null;
-
-  const selectedStyle =
-    styles.find((style) => style.key === selectedStyleKey) || styles[0];
-  const estimatedFob = getLululemonComparisonBase(
-    selectedStyle.lululemonRevenue,
-    "sales",
+  const coverage = LULULEMON_STYLE_COVERAGE.find(
+    (row) => row.key === subtypeKey,
   );
-  const share = getNygShare(
-    selectedStyle.nygSales,
-    selectedStyle.lululemonRevenue,
-    "sales",
-  );
-  const chartShare = Math.min(Math.max(share, 0), 100);
-  const exceedsBase = share > 100;
+
+  if (subtypeKey === "overall" || styles.length === 0 || !coverage) return null;
+
+  const securedSlice = coverage.total
+    ? (coverage.secured / coverage.total) * 100
+    : 0;
+  const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
 
   return (
     <article className="lululemon-overview-card lululemon-style-card">
-      <h3>{subtypeLabel} style share</h3>
+      <h3>{subtypeLabel} style coverage</h3>
       <p>
-        NYG sales by style compared with Lululemon estimated FOB cost (revenue / {LULULEMON_FOB_MULTIPLIER})
+        Styles NYG already works on compared with the remaining Lululemon Base Style portfolio
       </p>
-      <div className="lululemon-style-layout">
-        <div className="lululemon-style-list" aria-label={`${subtypeLabel} NYG styles`}>
-          {styles.map((style) => {
-            const styleShare = getNygShare(
-              style.nygSales,
-              style.lululemonRevenue,
-              "sales",
-            );
-            return (
-              <button
-                className={selectedStyle.key === style.key ? "selected" : undefined}
-                key={style.key}
-                type="button"
-                aria-pressed={selectedStyle.key === style.key}
-                onClick={() => setSelectedStyleKey(style.key)}
-              >
-                <span>
-                  <strong>{style.name}</strong>
-                  <small>{style.gender} · {style.season}</small>
-                </span>
-                <b>{formatComparisonShare(styleShare)}</b>
-              </button>
-            );
-          })}
+      <div className="lululemon-style-coverage-grid">
+        <div className="lululemon-style-portfolio-list secured">
+          <div className="lululemon-style-portfolio-heading">
+            <span>NYG secured</span>
+            <strong>{formatNumber.format(coverage.secured)} styles</strong>
+          </div>
+          <div className="lululemon-style-secured-list">
+            {styles.map((style) => (
+              <div key={style.key}>
+                <strong>{style.name}</strong>
+                <small>{style.gender} · {style.season}</small>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="lululemon-style-detail">
-          <div className="lululemon-style-detail-heading">
+        <div className="lululemon-style-coverage-summary">
+          <div
+            className="lululemon-style-donut"
+            style={{ "--style-share": `${securedSlice}%` }}
+            role="img"
+            aria-label={`${coverage.secured} NYG styles and ${coverage.remaining} remaining styles`}
+          >
             <div>
-              <span>Selected NYG style</span>
-              <h4>{selectedStyle.name}</h4>
-            </div>
-            <div className="lululemon-style-tags">
-              <span>{selectedStyle.gender}</span>
-              <span>{selectedStyle.season}</span>
+              <strong>{formatNumber.format(coverage.secured)}</strong>
+              <span>of {formatNumber.format(coverage.total)} styles</span>
             </div>
           </div>
-
-          <div className="lululemon-style-visual">
-            <div
-              className={`lululemon-style-donut ${exceedsBase ? "over-base" : ""}`}
-              style={{ "--style-share": `${chartShare}%` }}
-              role="img"
-              aria-label={`NYG share ${formatComparisonShare(share)}`}
-            >
-              <div>
-                <strong>{formatComparisonShare(share)}</strong>
-                <span>NYG share</span>
-              </div>
+          <div className="lululemon-style-coverage-legend">
+            <div>
+              <i className="secured" />
+              <span>NYG secured</span>
+              <strong>{formatNumber.format(coverage.secured)}</strong>
             </div>
-
-            <div className="lululemon-style-metrics">
-              <div>
-                <span>NYG sales</span>
-                <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
-              </div>
-              <div>
-                <span>Lululemon revenue</span>
-                <strong>{formatComparisonValue(selectedStyle.lululemonRevenue, "sales")}</strong>
-              </div>
-              <div>
-                <span>Estimated FOB</span>
-                <strong>{formatComparisonValue(estimatedFob, "sales")}</strong>
-              </div>
+            <div>
+              <i className="remaining" />
+              <span>Remaining opportunity</span>
+              <strong>{formatNumber.format(coverage.remaining)}</strong>
             </div>
           </div>
+        </div>
 
-          {exceedsBase && (
-            <p className="lululemon-style-warning">
-              NYG sales exceed the estimated Lululemon FOB base by {formatComparisonShare(share - 100)}.
-              Source periods or market coverage may differ for this style.
-            </p>
+        <div className="lululemon-style-portfolio-list remaining">
+          <div className="lululemon-style-portfolio-heading">
+            <span>Top remaining opportunities</span>
+            <strong>{formatNumber.format(coverage.remaining)} styles</strong>
+          </div>
+          <ol>
+            {coverage.topRemaining.map((style) => (
+              <li key={style}>{style}</li>
+            ))}
+          </ol>
+          {coverage.remaining > coverage.topRemaining.length && (
+            <small>
+              + {formatNumber.format(coverage.remaining - coverage.topRemaining.length)} more styles
+            </small>
           )}
-          <small className="lululemon-style-source">
-            Matched to {formatNumber.format(selectedStyle.lululemonTitles)} Master Apparel {selectedStyle.lululemonTitles === 1 ? "title" : "titles"} by Base Style.
-          </small>
         </div>
       </div>
+      {taxonomyDifference > 0 && (
+        <p className="lululemon-style-taxonomy-note">
+          {formatNumber.format(taxonomyDifference)} NYG {taxonomyDifference === 1 ? "style is" : "styles are"} classified under a different Sub-Type in Master Apparel and included as secured in this overview.
+        </p>
+      )}
     </article>
   );
 }
