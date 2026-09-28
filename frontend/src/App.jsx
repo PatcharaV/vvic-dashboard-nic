@@ -40,6 +40,11 @@ const BRAND_WORKSPACE_PAGES = [
   { value: "product", label: "Product Dashboard" },
 ];
 
+const LULULEMON_WORKSPACE_PAGES = [
+  { value: "overview", label: "Brand Overview" },
+  { value: "product", label: "Product Dashboard" },
+];
+
 const PROFILE_WORKSPACE_BRANDS = new Set(["arcteryx", "travismathew"]);
 
 const BRAND_LOGOS = {
@@ -130,6 +135,59 @@ const TRAVISMATHEW_COMPETITORS = [
   { brand: "FootJoy (FJ)", price: "$78-$145", gender: "72% / 28%", satisfaction: "4/5", revenue: "$618M" },
   { brand: "TaylorMade", price: "$110-$188", gender: "72% / 28%", satisfaction: "4/5", revenue: "$1,100M" },
   { brand: "Rhoback", price: "$96-$98", gender: "53% / 47%", satisfaction: "5/5", revenue: "$17.6M" },
+];
+
+const LULULEMON_BUSINESS_METRICS = [
+  { icon: "$", label: "Total sales*", value: "$9.65B" },
+  { icon: "ON", label: "Online sales*", value: "$2.89B" },
+  { icon: "FOB", label: "FOB spend*", value: "$1.36B" },
+  { icon: "U", label: "Total units*", value: "111.6M" },
+  { icon: "%", label: "Avg. discount", value: "15.4%" },
+  { icon: "#", label: "Product titles", value: "3,568" },
+];
+
+const LULULEMON_SALES_MIX = [
+  { label: "Bottoms", value: 49.7 },
+  { label: "Outerwear", value: 23.5 },
+  { label: "Tops", value: 21.3 },
+  { label: "Underwear", value: 5.5, muted: true },
+];
+
+const LULULEMON_NYTG_METRICS = [
+  { icon: "$", label: "Total sales", value: "$51.6M" },
+  { icon: "PCS", label: "Total pcs", value: "4.37M" },
+  { icon: "FOB", label: "FOB / pcs", value: "$11.81" },
+  { icon: "%", label: "Launch styles", value: "13.3%" },
+];
+
+const LULULEMON_PRODUCT_SUBTYPES = [
+  { label: "Jacket", value: 21.4 },
+  { label: "Short", value: 20.7 },
+  { label: "Pullover", value: 19.7 },
+  { label: "Tee", value: 15.0 },
+  { label: "Tank top", value: 8.4 },
+  { label: "Boxer brief", value: 6.5 },
+  { label: "Polo", value: 4.1 },
+  { label: "Skirt", value: 2.5 },
+  { label: "Pant", value: 1.0 },
+  { label: "Jogger", value: 0.8 },
+  { label: "Button down", value: 0.1 },
+];
+
+const LULULEMON_COLLECTION_MIX = [
+  { label: "M SWEAT", value: 29.0, color: "#cf1233" },
+  { label: "W NO SWEAT", value: 26.1, color: "#f18498" },
+  { label: "M NO SWEAT", value: 11.7, color: "#990f29" },
+  { label: "W SWEAT", value: 9.8, color: "#f8cad2" },
+  { label: "OTHER", value: 23.5, color: "#b7a5a8" },
+];
+
+const LULULEMON_SUBCATEGORY_MIX = [
+  { label: "WOMENS 2ND LAYER", value: 24.5, color: "#cf1233" },
+  { label: "MENS SHORTS", value: 19.5, color: "#f18498" },
+  { label: "MENS 2ND LAYER", value: 16.7, color: "#990f29" },
+  { label: "MENS SS-LS TOPS", value: 11.5, color: "#f8cad2" },
+  { label: "OTHER", value: 27.7, color: "#b7a5a8" },
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
@@ -427,6 +485,168 @@ function TravisMathewBrandProfile() {
           Data noted in source deck: Similarweb 2025, Callaway Golf filings and
           practical-golf.com.
         </small>
+      </article>
+    </section>
+  );
+}
+
+function LululemonMetricGrid({ metrics, compact = false }) {
+  return (
+    <div className={`lululemon-metric-grid ${compact ? "compact" : ""}`}>
+      {metrics.map((metric) => (
+        <article className="lululemon-metric-card" key={metric.label}>
+          <span className="lululemon-metric-icon" aria-hidden="true">
+            {metric.icon}
+          </span>
+          <span className="lululemon-metric-label">{metric.label}</span>
+          <strong>{metric.value}</strong>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function LululemonBarChart({ rows, compact = false }) {
+  const maxValue = Math.max(...rows.map((row) => row.value), 1);
+  return (
+    <div className={`lululemon-bars ${compact ? "compact" : ""}`}>
+      {rows.map((row) => (
+        <div className="lululemon-bar-row" key={row.label}>
+          <span>{row.label}</span>
+          <div className="lululemon-bar-track">
+            <i
+              className={row.muted ? "muted" : undefined}
+              style={{ width: `${Math.max((row.value / maxValue) * 100, 0.7)}%` }}
+            />
+          </div>
+          <strong>{row.value.toFixed(1)}%</strong>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function donutGradient(rows) {
+  const total = rows.reduce((sum, row) => sum + row.value, 0) || 100;
+  let start = 0;
+  return `conic-gradient(${rows
+    .map((row) => {
+      const end = start + (row.value / total) * 100;
+      const segment = `${row.color} ${start}% ${end}%`;
+      start = end;
+      return segment;
+    })
+    .join(", ")})`;
+}
+
+function LululemonMixCard({ title, rows }) {
+  return (
+    <article className="lululemon-overview-card lululemon-mix-card">
+      <h3>{title}</h3>
+      <div className="lululemon-mix-content">
+        <div
+          className="lululemon-mini-donut"
+          style={{ background: donutGradient(rows) }}
+          aria-label={`${title} donut chart`}
+        />
+        <div className="lululemon-mix-legend">
+          {rows.map((row) => (
+            <div key={row.label}>
+              <i style={{ background: row.color }} />
+              <span>{row.label}</span>
+              <strong>{row.value.toFixed(1)}%</strong>
+            </div>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function LululemonBrandOverview() {
+  return (
+    <section className="lululemon-brand-overview">
+      <article className="lululemon-overview-section">
+        <div className="lululemon-overview-heading">
+          <div>
+            <p className="eyebrow">LULULEMON · APPAREL · SEP25-SEP26</p>
+            <h2>Business Overview</h2>
+          </div>
+          <strong className="lululemon-wordmark">LULULEMON</strong>
+        </div>
+
+        <LululemonMetricGrid metrics={LULULEMON_BUSINESS_METRICS} />
+
+        <div className="lululemon-business-grid">
+          <article className="lululemon-overview-card lululemon-sales-card">
+            <h3>Sales mix by product type</h3>
+            <p>US online apparel, Particl</p>
+            <LululemonBarChart rows={LULULEMON_SALES_MIX} />
+          </article>
+          <article className="lululemon-overview-card lululemon-ring-card">
+            <h3>Sales concentration</h3>
+            <div
+              className="lululemon-ring"
+              style={{ "--ring-value": "73.2%" }}
+            >
+              <strong>73.2%</strong>
+            </div>
+            <p>from Bottoms and Outerwear.</p>
+          </article>
+          <article className="lululemon-overview-card lululemon-ring-card">
+            <h3>Online contribution</h3>
+            <div
+              className="lululemon-ring"
+              style={{ "--ring-value": "30%" }}
+            >
+              <strong>30.0%</strong>
+            </div>
+            <p>of total sales (Offline 70%).</p>
+          </article>
+        </div>
+
+        <p className="lululemon-source-note">
+          * Estimates, apparel only (Women&apos;s + Men&apos;s), SEP25-SEP26. Sales
+          use net revenue TTM and an 87.0% apparel share. Online is estimated at
+          30% of sales; FOB spend uses a 7.11x average multiplier. Source:
+          LLL_1.xlsx, Master Apparel USD &amp; Units.
+        </p>
+      </article>
+
+      <article className="lululemon-overview-section nytg-section">
+        <div className="lululemon-overview-heading">
+          <div>
+            <p className="eyebrow">NYTG BUSINESS · FA25-SU26 · 59 PRODUCTS</p>
+            <h2>NYTG x Lululemon</h2>
+          </div>
+          <strong className="lululemon-wordmark">LULULEMON</strong>
+        </div>
+
+        <LululemonMetricGrid metrics={LULULEMON_NYTG_METRICS} compact />
+
+        <div className="lululemon-nytg-grid">
+          <article className="lululemon-overview-card lululemon-subtype-card">
+            <h3>Product sub-type</h3>
+            <p>Share of NYTG sales</p>
+            <LululemonBarChart rows={LULULEMON_PRODUCT_SUBTYPES} compact />
+          </article>
+          <div className="lululemon-mix-stack">
+            <LululemonMixCard
+              title="Collection sales mix"
+              rows={LULULEMON_COLLECTION_MIX}
+            />
+            <LululemonMixCard
+              title="Sub-category sales mix"
+              rows={LULULEMON_SUBCATEGORY_MIX}
+            />
+          </div>
+        </div>
+
+        <p className="lululemon-source-note">
+          Source: LLL_1.xlsx, Lululemon sheet. NYG Sale totals 59 products for
+          FA25-SU26; FOB / PCS is sales divided by pieces. Smaller collection
+          and sub-category groups are combined as OTHER.
+        </p>
       </article>
     </section>
   );
@@ -1182,7 +1402,9 @@ function App() {
   const [autoScrapeRuns, setAutoScrapeRuns] = useState({});
   const [maintenance, setMaintenance] = useState(null);
   const [filtersOpen, setFiltersOpen] = useState(true);
-  const [brandWorkspacePage, setBrandWorkspacePage] = useState("product");
+  const [brandWorkspacePage, setBrandWorkspacePage] = useState(
+    routeBrand === "lululemon" ? "overview" : "product",
+  );
   const [productPage, setProductPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(50);
   const loadRequestRef = useRef(0);
@@ -1227,8 +1449,13 @@ function App() {
   );
   const brandOptions = mergeBrandOptions(options.brands);
   const isProfileWorkspace = PROFILE_WORKSPACE_BRANDS.has(routeBrand);
+  const isLululemonWorkspace = routeBrand === "lululemon";
+  const usesWorkspacePages = isProfileWorkspace || isLululemonWorkspace;
+  const workspacePages = isLululemonWorkspace
+    ? LULULEMON_WORKSPACE_PAGES
+    : BRAND_WORKSPACE_PAGES;
   const brandWorkspacePageLabel =
-    BRAND_WORKSPACE_PAGES.find(
+    workspacePages.find(
       (page) => page.value === brandWorkspacePage,
     )?.label || "Product Dashboard";
   const productCategories = options.categories;
@@ -1374,7 +1601,7 @@ function App() {
       material: "all",
       season: "all",
     }));
-    setBrandWorkspacePage("product");
+    setBrandWorkspacePage(routeBrand === "lululemon" ? "overview" : "product");
   }, [routeBrand]);
 
   function navigateTo(path) {
@@ -1636,7 +1863,7 @@ function App() {
   }
 
   return (
-    <main>
+    <main className={isLululemonWorkspace ? "brand-theme-lululemon" : undefined}>
       <MaintenanceOverlay maintenance={maintenance} />
       <header className="topbar">
         <div className="brand-block">
@@ -1729,13 +1956,13 @@ function App() {
       <nav
         className="page-nav"
         aria-label={
-          isProfileWorkspace
+          usesWorkspacePages
             ? "Brand workspace pages"
             : "Page navigation"
         }
       >
-        {isProfileWorkspace ? (
-          BRAND_WORKSPACE_PAGES.map((page) => (
+        {usesWorkspacePages ? (
+          workspacePages.map((page) => (
             <button
               key={page.value}
               className={
@@ -1757,7 +1984,9 @@ function App() {
         )}
       </nav>
 
-      {isProfileWorkspace && brandWorkspacePage === "profile" ? (
+      {isLululemonWorkspace && brandWorkspacePage === "overview" ? (
+        <LululemonBrandOverview />
+      ) : isProfileWorkspace && brandWorkspacePage === "profile" ? (
         routeBrand === "travismathew" ? (
           <TravisMathewBrandProfile />
         ) : (
