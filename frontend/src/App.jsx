@@ -543,6 +543,17 @@ function formatComparisonShare(value) {
   return `${value.toFixed(2)}%`;
 }
 
+const LULULEMON_FOB_MULTIPLIER = 7.11;
+
+function getLululemonComparisonBase(value, metric) {
+  return metric === "sales" ? value / LULULEMON_FOB_MULTIPLIER : value;
+}
+
+function getNygShare(nygValue, lululemonValue, metric) {
+  const comparisonBase = getLululemonComparisonBase(lululemonValue, metric);
+  return comparisonBase ? (nygValue / comparisonBase) * 100 : 0;
+}
+
 function LululemonNygMetricGrid({ selectedKey }) {
   const selected =
     LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
@@ -594,14 +605,18 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   return (
     <div className="lululemon-subtype-comparison">
       <div className="lululemon-subtype-legend">
-        <span><i className="lululemon-key" />Lululemon = 100%</span>
+        <span>
+          <i className="lululemon-key" />
+          {isSales ? "Lululemon estimated FOB = 100%" : "Lululemon = 100%"}
+        </span>
         <span><i className="nyg-key" />NYG share</span>
         <strong>{metric === "sales" ? "Sales" : metric === "units" ? "Units" : "Products"}</strong>
       </div>
       {rows.map((row) => {
         const lululemonValue = row[lululemonField];
         const nygValue = row[nygField];
-        const share = lululemonValue ? (nygValue / lululemonValue) * 100 : 0;
+        const comparisonBase = getLululemonComparisonBase(lululemonValue, metric);
+        const share = getNygShare(nygValue, lululemonValue, metric);
         return (
           <button
             className={selectedKey === row.key ? "selected" : undefined}
@@ -618,7 +633,10 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
               <i style={{ width: `${Math.max(Math.min(share, 100), 0.5)}%` }} />
             </span>
             <span className="lululemon-subtype-values">
-              <span>Lululemon {formatComparisonValue(lululemonValue, metric)}</span>
+              <span>
+                Lululemon {isSales ? "FOB " : ""}
+                {formatComparisonValue(comparisonBase, metric)}
+              </span>
               <span>NYG {formatComparisonValue(nygValue, metric)}</span>
             </span>
           </button>
@@ -644,7 +662,8 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
     : isUnits
       ? selected.nygUnits
       : selected.nygProducts;
-  const share = lululemonValue ? (nygValue / lululemonValue) * 100 : 0;
+  const comparisonBase = getLululemonComparisonBase(lululemonValue, metric);
+  const share = getNygShare(nygValue, lululemonValue, metric);
 
   return (
     <article className="lululemon-comparison-card">
@@ -697,7 +716,9 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
           <span>Lululemon {isSales ? "sales" : isUnits ? "units" : "products"}</span>
           <strong>{formatComparisonValue(lululemonValue, metric)}</strong>
           <small>
-            {metric === "products"
+            {isSales
+              ? `Estimated FOB ${formatComparisonValue(comparisonBase, metric)} (sales / ${LULULEMON_FOB_MULTIPLIER})`
+              : metric === "products"
               ? "Master Apparel USD & Units"
               : `${formatNumber.format(selected.lululemonProducts)} product titles`}
           </small>
@@ -714,7 +735,11 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
         <div className="share">
           <span>NYG share</span>
           <strong>{formatComparisonShare(share)}</strong>
-          <small>of Lululemon {selected.label.toLowerCase()}</small>
+          <small>
+            {isSales
+              ? "NYG sales / estimated Lululemon FOB"
+              : `of Lululemon ${selected.label.toLowerCase()}`}
+          </small>
         </div>
       </div>
 
