@@ -547,9 +547,6 @@ function LululemonNygMetricGrid({ selectedKey }) {
   const selected =
     LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
     LULULEMON_NYG_COMPARISON[0];
-  const fobPerPiece = selected.nygUnits
-    ? selected.nygSales / selected.nygUnits
-    : 0;
   const metrics = [
     {
       icon: "$",
@@ -562,14 +559,17 @@ function LululemonNygMetricGrid({ selectedKey }) {
       value: formatComparisonValue(selected.nygUnits, "units").replace(" units", ""),
     },
     {
-      icon: "FOB",
-      label: "FOB / pcs",
-      value: `$${fobPerPiece.toFixed(2)}`,
+      icon: "$",
+      label: `${selected.label} Lululemon sales`,
+      value: formatComparisonValue(selected.lululemonSales, "sales"),
     },
     {
-      icon: "#",
-      label: `${selected.label} NYG products`,
-      value: formatNumber.format(selected.nygProducts),
+      icon: "PCS",
+      label: `${selected.label} Lululemon units`,
+      value: formatComparisonValue(selected.lululemonUnits, "units").replace(
+        " units",
+        "",
+      ),
     },
   ];
 
