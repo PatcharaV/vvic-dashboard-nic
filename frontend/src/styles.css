@@ -1652,6 +1652,34 @@ h2 {
   border-color: #ef3e42;
 }
 
+.filter-group.single-select .chip-list {
+  width: fit-content;
+  padding: 3px;
+  gap: 3px;
+  background: #f5f4f1;
+  border: 1px solid #deddd9;
+  border-radius: 10px;
+}
+
+.filter-group.single-select .filter-chip {
+  min-width: 70px;
+  background: transparent;
+  border-color: transparent;
+}
+
+.filter-group.single-select .filter-chip:hover,
+.filter-group.single-select .filter-chip.active {
+  color: #fff;
+  background: #ef3e42;
+  border-color: #ef3e42;
+}
+
+.brand-theme-lululemon .filter-group.single-select .filter-chip:hover,
+.brand-theme-lululemon .filter-group.single-select .filter-chip.active {
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
 .price-inputs {
   display: flex;
   align-items: center;

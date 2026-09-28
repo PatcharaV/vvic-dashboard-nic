@@ -1338,11 +1338,27 @@ function TreemapContent(props) {
   );
 }
 
-function FilterGroup({ title, options, selected, onChange }) {
+function FilterGroup({
+  title,
+  options,
+  selected,
+  onChange,
+  singleSelect = false,
+  showAll = false,
+}) {
   return (
-    <div className="filter-group">
+    <div className={`filter-group ${singleSelect ? "single-select" : ""}`}>
       <span className="filter-title">{title}</span>
       <div className="chip-list">
+        {showAll && (
+          <button
+            className={!selected.length ? "filter-chip active" : "filter-chip"}
+            type="button"
+            onClick={() => onChange([])}
+          >
+            All
+          </button>
+        )}
         {options.map((option) => {
           const value = typeof option === "string" ? option : option.value;
           const label = typeof option === "string" ? option : option.label;
@@ -1354,7 +1370,11 @@ function FilterGroup({ title, options, selected, onChange }) {
               type="button"
               onClick={() =>
                 onChange(
-                  active
+                  singleSelect
+                    ? active
+                      ? []
+                      : [value]
+                    : active
                     ? selected.filter((item) => item !== value)
                     : [...selected, value],
                 )
@@ -2049,10 +2069,19 @@ function App() {
 
             <section className="audience-filter">
               <FilterGroup
-                title="Audience"
-                options={options.audiences}
+                title={isLululemonView ? "Gender" : "Audience"}
+                options={
+                  isLululemonView
+                    ? [
+                        { value: "men", label: "Men" },
+                        { value: "women", label: "Women" },
+                      ]
+                    : options.audiences
+                }
                 selected={filters.audiences}
                 onChange={(audiences) => setFilters({ ...filters, audiences })}
+                singleSelect={isLululemonView}
+                showAll={isLululemonView}
               />
             </section>
           </div>
