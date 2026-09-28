@@ -174,20 +174,9 @@ const LULULEMON_PRODUCT_SUBTYPES = [
   { label: "Button down", value: 0.1 },
 ];
 
-const LULULEMON_COLLECTION_MIX = [
-  { label: "M SWEAT", value: 29.0, color: "#cf1233" },
-  { label: "W NO SWEAT", value: 26.1, color: "#f18498" },
-  { label: "M NO SWEAT", value: 11.7, color: "#990f29" },
-  { label: "W SWEAT", value: 9.8, color: "#f8cad2" },
-  { label: "OTHER", value: 23.5, color: "#b7a5a8" },
-];
-
-const LULULEMON_SUBCATEGORY_MIX = [
-  { label: "WOMENS 2ND LAYER", value: 24.5, color: "#cf1233" },
-  { label: "MENS SHORTS", value: 19.5, color: "#f18498" },
-  { label: "MENS 2ND LAYER", value: 16.7, color: "#990f29" },
-  { label: "MENS SS-LS TOPS", value: 11.5, color: "#f8cad2" },
-  { label: "OTHER", value: 27.7, color: "#b7a5a8" },
+const LULULEMON_GENDER_MIX = [
+  { label: "Men", value: 56.4, color: "#cf1233" },
+  { label: "Women", value: 43.6, color: "#f18498" },
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
@@ -539,10 +528,13 @@ function donutGradient(rows) {
     .join(", ")})`;
 }
 
-function LululemonMixCard({ title, rows }) {
+function LululemonMixCard({ title, rows, subtitle, featured = false }) {
   return (
-    <article className="lululemon-overview-card lululemon-mix-card">
+    <article
+      className={`lululemon-overview-card lululemon-mix-card ${featured ? "featured" : ""}`}
+    >
       <h3>{title}</h3>
+      {subtitle && <p>{subtitle}</p>}
       <div className="lululemon-mix-content">
         <div
           className="lululemon-mini-donut"
@@ -630,22 +622,18 @@ function LululemonBrandOverview() {
             <p>Share of NYTG sales</p>
             <LululemonBarChart rows={LULULEMON_PRODUCT_SUBTYPES} compact />
           </article>
-          <div className="lululemon-mix-stack">
-            <LululemonMixCard
-              title="Collection sales mix"
-              rows={LULULEMON_COLLECTION_MIX}
-            />
-            <LululemonMixCard
-              title="Sub-category sales mix"
-              rows={LULULEMON_SUBCATEGORY_MIX}
-            />
-          </div>
+          <LululemonMixCard
+            title="Gender sales mix"
+            subtitle="Share of NYTG sales"
+            rows={LULULEMON_GENDER_MIX}
+            featured
+          />
         </div>
 
         <p className="lululemon-source-note">
           Source: LLL_1.xlsx, Lululemon sheet. NYG Sale totals 59 products for
-          FA25-SU26; FOB / PCS is sales divided by pieces. Smaller collection
-          and sub-category groups are combined as OTHER.
+          FA25-SU26; FOB / PCS is sales divided by pieces. Gender mix is based
+          on the Gender and NYG Sale columns in the same sheet.
         </p>
       </article>
     </section>

@@ -1364,11 +1364,6 @@ h2 {
   line-height: 1.5;
 }
 
-.lululemon-mix-stack {
-  display: grid;
-  gap: 12px;
-}
-
 .lululemon-mix-card {
   padding: 18px;
 }
@@ -1412,6 +1407,42 @@ h2 {
 
 .lululemon-mix-legend strong {
   color: var(--lululemon-red);
+}
+
+.lululemon-mix-card.featured {
+  min-height: 100%;
+  display: grid;
+  align-content: start;
+}
+
+.lululemon-mix-card.featured .lululemon-mix-content {
+  margin: auto 0;
+  grid-template-columns: minmax(160px, 0.8fr) minmax(150px, 1fr);
+  justify-items: center;
+  gap: 26px;
+}
+
+.lululemon-mix-card.featured .lululemon-mini-donut {
+  width: 190px;
+  height: 190px;
+}
+
+.lululemon-mix-card.featured .lululemon-mini-donut::after {
+  inset: 40px;
+}
+
+.lululemon-mix-card.featured .lululemon-mix-legend {
+  width: 100%;
+  gap: 16px;
+}
+
+.lululemon-mix-card.featured .lululemon-mix-legend > div {
+  font-size: 14px;
+}
+
+.lululemon-mix-card.featured .lululemon-mix-legend i {
+  width: 12px;
+  height: 12px;
 }
 
 .control-panel {
@@ -3002,6 +3033,20 @@ footer a {
 
   .lululemon-mini-donut::after {
     inset: 18px;
+  }
+
+  .lululemon-mix-card.featured .lululemon-mix-content {
+    margin-top: 24px;
+    grid-template-columns: 1fr;
+  }
+
+  .lululemon-mix-card.featured .lululemon-mini-donut {
+    width: 160px;
+    height: 160px;
+  }
+
+  .lululemon-mix-card.featured .lululemon-mini-donut::after {
+    inset: 34px;
   }
 
   .lululemon-bar-row,
