@@ -522,14 +522,16 @@ function TravisMathewBrandProfile() {
   );
 }
 
-function LululemonMetricGrid({ metrics, compact = false }) {
+function LululemonMetricGrid({ metrics, compact = false, showIcons = true }) {
   return (
-    <div className={`lululemon-metric-grid ${compact ? "compact" : ""}`}>
+    <div className={`lululemon-metric-grid ${compact ? "compact" : ""} ${showIcons ? "" : "no-icons"}`}>
       {metrics.map((metric) => (
         <article className="lululemon-metric-card" key={metric.label}>
-          <span className="lululemon-metric-icon" aria-hidden="true">
-            {metric.icon}
-          </span>
+          {showIcons && (
+            <span className="lululemon-metric-icon" aria-hidden="true">
+              {metric.icon}
+            </span>
+          )}
           <span className="lululemon-metric-label">{metric.label}</span>
           <strong>{metric.value}</strong>
           {metric.note && <small>{metric.note}</small>}
@@ -1229,7 +1231,7 @@ function LululemonBrandOverview() {
           <LululemonOverviewLogo />
         </div>
 
-        <LululemonMetricGrid metrics={LULULEMON_BUSINESS_METRICS} />
+        <LululemonMetricGrid metrics={LULULEMON_BUSINESS_METRICS} showIcons={false} />
 
         <div className="lululemon-business-grid">
           <article className="lululemon-overview-card lululemon-sales-card">

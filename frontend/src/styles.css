@@ -1179,6 +1179,10 @@ h2 {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
+.lululemon-metric-grid.no-icons .lululemon-metric-card {
+  min-height: 130px;
+}
+
 .lululemon-metric-card {
   min-height: 150px;
   padding: 18px;
