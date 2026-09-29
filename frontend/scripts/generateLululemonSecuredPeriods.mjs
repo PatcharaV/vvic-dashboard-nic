@@ -47,6 +47,21 @@ function normalizeExactName(value = "") {
     .trim();
 }
 
+function findSheet(workbook, expectedName) {
+  const sheetName = workbook.SheetNames.find(
+    (name) => name.trim().toLowerCase() === expectedName.trim().toLowerCase(),
+  );
+  return sheetName ? workbook.Sheets[sheetName] : undefined;
+}
+
+function firstValue(row, keys) {
+  for (const key of keys) {
+    const value = row[key];
+    if (value !== undefined && value !== null && value !== "") return value;
+  }
+  return "";
+}
+
 function inferGender(styleCode) {
   const normalizedCode = String(styleCode || "").trim().toUpperCase();
   if (normalizedCode.startsWith("LM")) return "Men";
@@ -99,13 +114,17 @@ const workbook = XLSX.readFile(workbookPath);
 const rawSheet = workbook.Sheets["Raw Data"];
 if (!rawSheet) throw new Error('The workbook does not contain a "Raw Data" sheet.');
 
-const allProductRows = XLSX.utils.sheet_to_json(workbook.Sheets["All Product"], { defval: "" });
+const allProductSheet = findSheet(workbook, "All Product");
+if (!allProductSheet) throw new Error('The workbook does not contain an "All Product" sheet.');
+const allProductRows = XLSX.utils.sheet_to_json(allProductSheet, { defval: "" });
 const allProductByTitle = new Map();
 const allProductByBaseStyle = new Map();
 for (const row of allProductRows) {
-  const sales = Number(row["Total Revenue USD (all zones)"]) || 0;
+  const sales = Number(firstValue(row, ["Total Revenue USD (all zones)", "Total"])) || 0;
   const titleKey = normalizeExactName(row["Product Title (Particl)"]);
-  const baseStyleKey = normalizeExactName(row["Base Style (title before *)"]);
+  const baseStyleKey = normalizeExactName(
+    row["Base Style (title before *)"] || row["Product Title (Particl)"],
+  );
   if (titleKey) {
     const current = allProductByTitle.get(titleKey) || { sales: 0, titles: 0 };
     current.sales += sales;

@@ -1,4 +1,4 @@
-// Generated from Lululemon Wallet Size & Share (5).xlsx, Raw Data.
+// Generated from Lululemon_Wallet_Size__Share_7.xlsx, Raw Data.
 export const LULULEMON_NYG_FUTURE_STYLES = [
   {
     "key": "future-style-1",
@@ -19,7 +19,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 12726321.14,
     "nygUnits": 630869,
-    "lululemonRevenue": 294950994,
+    "lululemonRevenue": 687905624.766667,
     "lululemonTitles": 1
   },
   {
@@ -34,7 +34,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 4568509.38,
     "nygUnits": 370323,
-    "lululemonRevenue": 15116,
+    "lululemonRevenue": 81274095.3333333,
     "lululemonTitles": 1
   },
   {
@@ -51,7 +51,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3942939.85,
     "nygUnits": 865841,
-    "lululemonRevenue": 796279,
+    "lululemonRevenue": 38185696.9333333,
     "lululemonTitles": 1
   },
   {
@@ -67,7 +67,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3417460.94,
     "nygUnits": 274287,
-    "lululemonRevenue": 23366215,
+    "lululemonRevenue": 53741108,
     "lululemonTitles": 1
   },
   {
@@ -82,7 +82,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3333047.12,
     "nygUnits": 173565,
-    "lululemonRevenue": 14939562,
+    "lululemonRevenue": 33528627.3666667,
     "lululemonTitles": 1
   },
   {
@@ -97,7 +97,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3242000.89,
     "nygUnits": 216111,
-    "lululemonRevenue": 1698233,
+    "lululemonRevenue": 1440690.960529,
     "lululemonTitles": 1
   },
   {
@@ -112,7 +112,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 2769756,
     "nygUnits": 230813,
-    "lululemonRevenue": 305244,
+    "lululemonRevenue": 9418342,
     "lululemonTitles": 1
   },
   {
@@ -127,7 +127,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1785450.27,
     "nygUnits": 96807,
-    "lululemonRevenue": 53783903,
+    "lululemonRevenue": 121231907.866667,
     "lululemonTitles": 1
   },
   {
@@ -144,7 +144,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1736907.97,
     "nygUnits": 88296,
-    "lululemonRevenue": 2416873,
+    "lululemonRevenue": 5534885.7,
     "lululemonTitles": 1
   },
   {
@@ -160,7 +160,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1700722.69,
     "nygUnits": 138452,
-    "lululemonRevenue": 355092,
+    "lululemonRevenue": 14393020.7666667,
     "lululemonTitles": 1
   },
   {
@@ -175,7 +175,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1280549.45,
     "nygUnits": 70028,
-    "lululemonRevenue": 5792472,
+    "lululemonRevenue": 12977143.2333333,
     "lululemonTitles": 1
   },
   {
@@ -191,7 +191,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1255085.85,
     "nygUnits": 75217,
-    "lululemonRevenue": 8236222,
+    "lululemonRevenue": 24249210.0333333,
     "lululemonTitles": 1
   },
   {
@@ -209,7 +209,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1132162.69,
     "nygUnits": 75884,
-    "lululemonRevenue": 27391,
+    "lululemonRevenue": 6496185.26666667,
     "lululemonTitles": 1
   },
   {
@@ -228,7 +228,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1021685.95,
     "nygUnits": 58099,
-    "lululemonRevenue": 9113295,
+    "lululemonRevenue": 21007942.2,
     "lululemonTitles": 1
   },
   {
@@ -244,7 +244,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 919768.89,
     "nygUnits": 73028,
-    "lululemonRevenue": 1666672,
+    "lululemonRevenue": 7693299.7,
     "lululemonTitles": 1
   },
   {
@@ -260,7 +260,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 874525.14,
     "nygUnits": 55462,
-    "lululemonRevenue": 138286,
+    "lululemonRevenue": 116935.495633,
     "lululemonTitles": 1
   },
   {
@@ -275,7 +275,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 701448.54,
     "nygUnits": 95348,
-    "lululemonRevenue": 24307950,
+    "lululemonRevenue": 58564355.3666667,
     "lululemonTitles": 1
   },
   {
@@ -290,7 +290,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 616436.76,
     "nygUnits": 129615,
-    "lululemonRevenue": 1163646,
+    "lululemonRevenue": 3936575.7,
     "lululemonTitles": 1
   },
   {
@@ -305,7 +305,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 568904.74,
     "nygUnits": 27493,
-    "lululemonRevenue": 3663670,
+    "lululemonRevenue": 3107139.722921,
     "lululemonTitles": 1
   },
   {
@@ -320,7 +320,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 538520.5,
     "nygUnits": 30650,
-    "lululemonRevenue": 1626,
+    "lululemonRevenue": 1379.435814,
     "lululemonTitles": 1
   },
   {
@@ -336,7 +336,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 524860.6,
     "nygUnits": 55487,
-    "lululemonRevenue": 4238306,
+    "lululemonRevenue": 10215556.7,
     "lululemonTitles": 1
   },
   {
@@ -352,7 +352,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 517363.63,
     "nygUnits": 45907,
-    "lululemonRevenue": 125912521,
+    "lululemonRevenue": 288717374.2,
     "lululemonTitles": 1
   },
   {
@@ -370,7 +370,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 511213.52,
     "nygUnits": 31581,
-    "lululemonRevenue": 631105,
+    "lululemonRevenue": 7286312.8,
     "lululemonTitles": 1
   },
   {
@@ -387,7 +387,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 498365.56,
     "nygUnits": 32173,
-    "lululemonRevenue": 4337592,
+    "lululemonRevenue": 3669458.519093,
     "lululemonTitles": 1
   },
   {
@@ -403,7 +403,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 478988.48,
     "nygUnits": 29452,
-    "lululemonRevenue": 42753,
+    "lululemonRevenue": 1672210.23333333,
     "lululemonTitles": 1
   },
   {
@@ -418,7 +418,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 464763.51,
     "nygUnits": 47566,
-    "lululemonRevenue": 72477258,
+    "lululemonRevenue": 163744009.8,
     "lululemonTitles": 1
   },
   {
@@ -449,7 +449,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 396420.6,
     "nygUnits": 37016,
-    "lululemonRevenue": 483386,
+    "lululemonRevenue": 12840449.1333333,
     "lululemonTitles": 1
   },
   {
@@ -464,7 +464,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 381662.13,
     "nygUnits": 31746,
-    "lululemonRevenue": 4672196,
+    "lululemonRevenue": 11232209.0333333,
     "lululemonTitles": 1
   },
   {
@@ -479,7 +479,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 352493.39,
     "nygUnits": 20165,
-    "lululemonRevenue": 254337,
+    "lululemonRevenue": 569803.7,
     "lululemonTitles": 1
   },
   {
@@ -494,7 +494,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 342279.06,
     "nygUnits": 23087,
-    "lululemonRevenue": 104073,
+    "lululemonRevenue": 27836445.6,
     "lululemonTitles": 1
   },
   {
@@ -511,7 +511,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 333703.88,
     "nygUnits": 16993,
-    "lululemonRevenue": 870137,
+    "lululemonRevenue": 5646958.26666667,
     "lululemonTitles": 1
   },
   {
@@ -526,7 +526,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 313894.49,
     "nygUnits": 11995,
-    "lululemonRevenue": 81531,
+    "lululemonRevenue": 59062.335671,
     "lululemonTitles": 1
   },
   {
@@ -541,7 +541,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 261516.08,
     "nygUnits": 25816,
-    "lululemonRevenue": 177195,
+    "lululemonRevenue": 7979086.7,
     "lululemonTitles": 1
   },
   {
@@ -556,7 +556,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 230742.48,
     "nygUnits": 13632,
-    "lululemonRevenue": 98664,
+    "lululemonRevenue": 70407.399463,
     "lululemonTitles": 1
   },
   {
@@ -571,7 +571,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 214290,
     "nygUnits": 21429,
-    "lululemonRevenue": 5188,
+    "lululemonRevenue": 4400.465995,
     "lululemonTitles": 1
   },
   {
@@ -586,7 +586,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 197609.75,
     "nygUnits": 19279,
-    "lululemonRevenue": 27429,
+    "lululemonRevenue": 23239.28255,
     "lululemonTitles": 1
   },
   {
@@ -601,7 +601,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 164610,
     "nygUnits": 10620,
-    "lululemonRevenue": 15250510,
+    "lululemonRevenue": 12910266.721311,
     "lululemonTitles": 1
   },
   {
@@ -616,7 +616,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 162440.6,
     "nygUnits": 13480,
-    "lululemonRevenue": 1226068,
+    "lululemonRevenue": 4001441.16666667,
     "lululemonTitles": 1
   },
   {
@@ -631,7 +631,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 132904,
     "nygUnits": 9538,
-    "lululemonRevenue": 526335,
+    "lululemonRevenue": 1353038.7,
     "lululemonTitles": 1
   },
   {
@@ -648,8 +648,8 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 126796.78,
     "nygUnits": 11946,
-    "lululemonRevenue": 44396675,
-    "lululemonTitles": 2
+    "lululemonRevenue": 40627686.8666667,
+    "lululemonTitles": 1
   },
   {
     "key": "future-style-54",
@@ -663,7 +663,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 116980,
     "nygUnits": 11698,
-    "lululemonRevenue": 1805753,
+    "lululemonRevenue": 4435510.23333333,
     "lululemonTitles": 1
   },
   {
@@ -678,7 +678,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 114861.75,
     "nygUnits": 15843,
-    "lululemonRevenue": 5835890,
+    "lululemonRevenue": 13074413.6,
     "lululemonTitles": 1
   },
   {
@@ -693,7 +693,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 85680.54,
     "nygUnits": 7194,
-    "lululemonRevenue": 2360830,
+    "lululemonRevenue": 5368911.16666667,
     "lululemonTitles": 1
   },
   {
@@ -723,7 +723,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 76818.28,
     "nygUnits": 7546,
-    "lululemonRevenue": 17534,
+    "lululemonRevenue": 2094726.23333333,
     "lululemonTitles": 1
   },
   {
@@ -738,7 +738,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 75584.04,
     "nygUnits": 6636,
-    "lululemonRevenue": 94883,
+    "lululemonRevenue": 80493.767004,
     "lululemonTitles": 1
   },
   {
@@ -768,7 +768,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 70490,
     "nygUnits": 7420,
-    "lululemonRevenue": 126444,
+    "lululemonRevenue": 106267.118167,
     "lululemonTitles": 1
   },
   {
@@ -783,7 +783,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 65519.12,
     "nygUnits": 3644,
-    "lululemonRevenue": 98664,
+    "lululemonRevenue": 70407.399463,
     "lululemonTitles": 1
   },
   {
@@ -813,7 +813,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 49049,
     "nygUnits": 3773,
-    "lululemonRevenue": 542227,
+    "lululemonRevenue": 459996.694558,
     "lululemonTitles": 1
   },
   {
@@ -828,7 +828,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 48576,
     "nygUnits": 3036,
-    "lululemonRevenue": 10435,
+    "lululemonRevenue": 8852.448752,
     "lululemonTitles": 1
   },
   {
@@ -859,7 +859,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 36616,
     "nygUnits": 4577,
-    "lululemonRevenue": 717392,
+    "lululemonRevenue": 25001563.2,
     "lululemonTitles": 1
   },
   {
@@ -874,7 +874,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 34287.5,
     "nygUnits": 2743,
-    "lululemonRevenue": 5497,
+    "lululemonRevenue": 4662.624547,
     "lululemonTitles": 1
   },
   {
@@ -904,7 +904,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 30954.86,
     "nygUnits": 1658,
-    "lululemonRevenue": 3628893,
+    "lululemonRevenue": 3078560.587842,
     "lululemonTitles": 1
   },
   {
@@ -919,7 +919,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 16858.8,
     "nygUnits": 1260,
-    "lululemonRevenue": 2862,
+    "lululemonRevenue": 2039.544639,
     "lululemonTitles": 1
   },
   {
@@ -934,7 +934,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 16567.2,
     "nygUnits": 936,
-    "lululemonRevenue": 122444,
+    "lululemonRevenue": 1975101.76666667,
     "lululemonTitles": 1
   },
   {
@@ -949,7 +949,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 11115.5,
     "nygUnits": 550,
-    "lululemonRevenue": 33590437,
+    "lululemonRevenue": 28248262.264533,
     "lululemonTitles": 1
   },
   {
@@ -964,7 +964,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 10075,
     "nygUnits": 806,
-    "lululemonRevenue": 406477,
+    "lululemonRevenue": 314638.588212,
     "lululemonTitles": 1
   },
   {
@@ -1009,7 +1009,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 2569.59,
     "nygUnits": 279,
-    "lululemonRevenue": 152671,
+    "lululemonRevenue": 496957.166666667,
     "lululemonTitles": 1
   }
 ];

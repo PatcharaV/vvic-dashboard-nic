@@ -36,6 +36,45 @@ function number(value) {
   return Number(value) || 0;
 }
 
+function firstValue(row, keys) {
+  for (const key of keys) {
+    const value = row[key];
+    if (value !== undefined && value !== null && value !== "") return value;
+  }
+  return "";
+}
+
+function findSheet(workbook, expectedName) {
+  const sheetName = workbook.SheetNames.find(
+    (name) => name.trim().toLowerCase() === expectedName.trim().toLowerCase(),
+  );
+  return sheetName ? workbook.Sheets[sheetName] : undefined;
+}
+
+function allProductRevenue(row) {
+  return number(firstValue(row, ["Total Revenue USD (all zones)", "Total"]));
+}
+
+function allProductUnits(row) {
+  return number(firstValue(row, ["Total Units (all zones)", "Total Units (quantity, preserved)"]));
+}
+
+function allProductType(row) {
+  return String(firstValue(row, ["Product Type (US sheet)", "Product Type"])).trim();
+}
+
+function allProductSubtype(row) {
+  return String(firstValue(row, ["Sub-Type (US sheet)", "Sub-Type"])).trim().toUpperCase();
+}
+
+function allProductTitle(row) {
+  return String(row["Product Title (Particl)"] || "").trim();
+}
+
+function allProductBaseStyle(row) {
+  return String(row["Base Style (title before *)"] || allProductTitle(row)).trim();
+}
+
 function normalizeName(value = "") {
   return String(value)
     .toLowerCase()
@@ -47,8 +86,17 @@ function normalizeName(value = "") {
     .trim();
 }
 
+function displayFamilyName(value = "") {
+  return String(value)
+    .replace(/\s*\*.*$/, "")
+    .replace(/\s+\b(?:23|25|26|27|28|29|30|31|32|34|35|36|37)(?:L)?(?:\s*(?:in|inch(?:es)?)|")?(?=\s|$)/gi, "")
+    .replace(/\s+\b(?:Tall|Regular|Shorter)\b$/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function normalizeFamilyName(value = "") {
-  return normalizeName(value).replace(/\s*\*.*$/, "").trim();
+  return normalizeName(displayFamilyName(value));
 }
 
 function classifyNygSubtype(row) {
@@ -69,8 +117,8 @@ function compactNumber(value) {
 }
 
 const workbook = XLSX.readFile(workbookPath, { cellFormula: true });
-const allProductSheet = workbook.Sheets["All Product"];
-const lululemonSheet = workbook.Sheets.Lululemon;
+const allProductSheet = findSheet(workbook, "All Product");
+const lululemonSheet = findSheet(workbook, "Lululemon");
 if (!allProductSheet || !lululemonSheet) {
   throw new Error('The workbook must contain "All Product" and "Lululemon" sheets.');
 }
@@ -84,11 +132,11 @@ const walletRow = walletRows.find((row) => row.Brand === "Lululemon") || {};
 const fobMultiplier = number(walletRow["FOB Multiple (brand-specific)"]) || 7.11;
 
 const totalSales = allProducts.reduce(
-  (sum, row) => sum + number(row["Total Revenue USD (all zones)"]),
+  (sum, row) => sum + allProductRevenue(row),
   0,
 );
 const totalUnits = allProducts.reduce(
-  (sum, row) => sum + number(row["Total Units (all zones)"]),
+  (sum, row) => sum + allProductUnits(row),
   0,
 );
 const nygSales = nygRows.reduce((sum, row) => sum + number(row["NYG Sale"]), 0);
@@ -113,11 +161,11 @@ const businessMetrics = [
 
 const productTypeTotals = new Map();
 for (const row of allProducts) {
-  const productType = String(row["Product Type (US sheet)"] || "").trim();
+  const productType = allProductType(row);
   if (!productType) continue;
   productTypeTotals.set(
     productType,
-    (productTypeTotals.get(productType) || 0) + number(row["Total Revenue USD (all zones)"]),
+    (productTypeTotals.get(productType) || 0) + allProductRevenue(row),
   );
 }
 const recognizedProductSales = [...productTypeTotals.values()].reduce((sum, value) => sum + value, 0);
@@ -167,7 +215,7 @@ const comparisons = [
     const productRows = allProducts.filter(
       (row) =>
         isDashboardSubtype(
-          String(row["Sub-Type (US sheet)"]).trim().toUpperCase(),
+          allProductSubtype(row),
           worksheetSubtype,
         ),
     );
@@ -178,11 +226,11 @@ const comparisons = [
       key,
       label,
       lululemonSales: productRows.reduce(
-        (sum, row) => sum + number(row["Total Revenue USD (all zones)"]),
+        (sum, row) => sum + allProductRevenue(row),
         0,
       ),
       lululemonUnits: productRows.reduce(
-        (sum, row) => sum + number(row["Total Units (all zones)"]),
+        (sum, row) => sum + allProductUnits(row),
         0,
       ),
       lululemonProducts: productRows.length,
@@ -192,25 +240,36 @@ const comparisons = [
 ];
 
 function matchPortfolioRows(styleName, subtype) {
+  const literalStyleName = String(styleName || "").trim().toLowerCase();
+  const literalTitleRows = allProducts.filter(
+    (row) =>
+      allProductSubtype(row) === subtype &&
+      allProductTitle(row).toLowerCase() === literalStyleName,
+  );
+  if (literalTitleRows.length) return literalTitleRows;
+  const crossSubtypeLiteralRows = allProducts.filter(
+    (row) => allProductTitle(row).toLowerCase() === literalStyleName,
+  );
+  if (crossSubtypeLiteralRows.length) return crossSubtypeLiteralRows;
   const normalizedStyleName = normalizeName(styleName);
   const exactTitleRows = allProducts.filter(
     (row) =>
-      String(row["Sub-Type (US sheet)"]).trim().toUpperCase() === subtype &&
-      normalizeName(row["Product Title (Particl)"]) === normalizedStyleName,
+      allProductSubtype(row) === subtype &&
+      normalizeName(allProductTitle(row)) === normalizedStyleName,
   );
   if (exactTitleRows.length) return exactTitleRows;
   const crossSubtypeTitleRows = allProducts.filter(
-    (row) => normalizeName(row["Product Title (Particl)"]) === normalizedStyleName,
+    (row) => normalizeName(allProductTitle(row)) === normalizedStyleName,
   );
   if (crossSubtypeTitleRows.length) return crossSubtypeTitleRows;
   const exactBaseRows = allProducts.filter(
     (row) =>
-      String(row["Sub-Type (US sheet)"]).trim().toUpperCase() === subtype &&
-      normalizeName(row["Base Style (title before *)"]) === normalizedStyleName,
+      allProductSubtype(row) === subtype &&
+      normalizeName(allProductBaseStyle(row)) === normalizedStyleName,
   );
   if (exactBaseRows.length) return exactBaseRows;
   return allProducts.filter(
-    (row) => normalizeName(row["Base Style (title before *)"]) === normalizedStyleName,
+    (row) => normalizeName(allProductBaseStyle(row)) === normalizedStyleName,
   );
 }
 
@@ -219,7 +278,7 @@ const styles = nygRows.map((row, index) => {
   const subtype = subtypeByWorksheetValue.get(worksheetSubtype)?.key || "tee";
   const portfolioRows = matchPortfolioRows(row.Name, worksheetSubtype);
   const matchedWorksheetSubtype = String(
-    portfolioRows[0]?.["Sub-Type (US sheet)"] || worksheetSubtype,
+    (portfolioRows[0] ? allProductSubtype(portfolioRows[0]) : "") || worksheetSubtype,
   ).trim().toUpperCase();
   const masterSubtype = subtypeByWorksheetValue.get(matchedWorksheetSubtype)?.key;
   return {
@@ -236,7 +295,7 @@ const styles = nygRows.map((row, index) => {
     walletRevenue: number(row.Total),
     fobMultiplier: number(row["FOB Multiplier"]) || fobMultiplier,
     lululemonRevenue: portfolioRows.reduce(
-      (sum, product) => sum + number(product["Total Revenue USD (all zones)"]),
+      (sum, product) => sum + allProductRevenue(product),
       0,
     ),
     lululemonTitles: portfolioRows.length,
@@ -249,18 +308,25 @@ for (const [subtypeKey, , worksheetSubtype] of subtypeDefinitions) {
   const securedForSubtype = styles.filter((style) => style.subtype === subtypeKey);
   const securedNames = new Set(securedForSubtype.map((style) => normalizeFamilyName(style.name)));
   const groupedStyles = new Map();
+  let rawRemaining = 0;
   for (const row of allProducts) {
     if (
       !isDashboardSubtype(
-        String(row["Sub-Type (US sheet)"]).trim().toUpperCase(),
+        allProductSubtype(row),
         worksheetSubtype,
       )
     ) continue;
-    const name = row["Base Style (title before *)"] || row["Product Title (Particl)"];
+    const name = allProductBaseStyle(row) || allProductTitle(row);
     const normalizedName = normalizeFamilyName(name);
     if (!normalizedName || securedNames.has(normalizedName)) continue;
-    const current = groupedStyles.get(normalizedName) || { name, sales: 0 };
-    current.sales += number(row["Total Revenue USD (all zones)"]);
+    rawRemaining += 1;
+    const current = groupedStyles.get(normalizedName) || {
+      name: displayFamilyName(name),
+      sales: 0,
+      variants: 0,
+    };
+    current.sales += allProductRevenue(row);
+    current.variants += 1;
     groupedStyles.set(normalizedName, current);
   }
   opportunities[subtypeKey] = [...groupedStyles.values()].sort(
@@ -272,6 +338,12 @@ for (const [subtypeKey, , worksheetSubtype] of subtypeDefinitions) {
     matchedWithinSubtype: securedForSubtype.filter((style) => style.lululemonTitles > 0).length,
     remaining: opportunities[subtypeKey].length,
     total: securedForSubtype.length + opportunities[subtypeKey].length,
+    ...(rawRemaining > opportunities[subtypeKey].length
+      ? {
+          rawRemaining,
+          consolidatedVariants: rawRemaining - opportunities[subtypeKey].length,
+        }
+      : {}),
   });
 }
 

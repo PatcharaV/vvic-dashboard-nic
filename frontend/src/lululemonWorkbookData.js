@@ -1,4 +1,4 @@
-// Generated from Lululemon Wallet Size & Share (5).xlsx. Do not edit manually.
+// Generated from Lululemon_Wallet_Size__Share_7.xlsx. Do not edit manually.
 export const LULULEMON_FOB_MULTIPLIER = 6.97011496;
 export const LULULEMON_BUSINESS_METRICS = [
   {
@@ -36,19 +36,19 @@ export const LULULEMON_BUSINESS_METRICS = [
 export const LULULEMON_SALES_MIX = [
   {
     "label": "Bottoms",
-    "value": 50.384943158438645
+    "value": 46.893773672216746
   },
   {
     "label": "Outerwear",
-    "value": 23.65774368043695
+    "value": 26.428014329003403
   },
   {
     "label": "Tops",
-    "value": 20.497362221009173
+    "value": 21.58992559472986
   },
   {
     "label": "Underwear",
-    "value": 5.4599509401152355,
+    "value": 5.030643113828482,
     "muted": true
   }
 ];
@@ -56,7 +56,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "overall",
     "label": "All sub-types",
-    "lululemonSales": 9645778873,
+    "lululemonSales": 9645778875.11662,
     "lululemonUnits": 111603854,
     "lululemonProducts": 3568,
     "nygSales": 51600116.94999998,
@@ -72,9 +72,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "jacket",
     "label": "Jacket",
-    "lululemonSales": 1486881496,
-    "lululemonUnits": 10924780,
-    "lululemonProducts": 339,
+    "lululemonSales": 1732369190.9153562,
+    "lululemonUnits": 11177449,
+    "lululemonProducts": 476,
     "nygSales": 11063087.15,
     "nygUnits": 545064,
     "nygProducts": 1,
@@ -88,9 +88,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "short",
     "label": "Short",
-    "lululemonSales": 1296341472,
-    "lululemonUnits": 19377040,
-    "lululemonProducts": 261,
+    "lululemonSales": 1532950973.6842985,
+    "lululemonUnits": 19597169,
+    "lululemonProducts": 382,
     "nygSales": 10673007.110000001,
     "nygUnits": 930096,
     "nygProducts": 8,
@@ -104,9 +104,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "pullover",
     "label": "Pullover",
-    "lululemonSales": 786340368,
-    "lululemonUnits": 7547333,
-    "lululemonProducts": 186,
+    "lululemonSales": 879733315.3755144,
+    "lululemonUnits": 7692047,
+    "lululemonProducts": 266,
     "nygSales": 10190865.140000002,
     "nygUnits": 578288,
     "nygProducts": 15,
@@ -120,9 +120,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "tee",
     "label": "Tee",
-    "lululemonSales": 1137027498,
-    "lululemonUnits": 17902911,
-    "lululemonProducts": 372,
+    "lululemonSales": 1244968002.4773798,
+    "lululemonUnits": 18439086,
+    "lululemonProducts": 542,
     "nygSales": 7714966.35,
     "nygUnits": 706716,
     "nygProducts": 17,
@@ -136,9 +136,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "tank-top",
     "label": "Tank top",
-    "lululemonSales": 479041542,
-    "lululemonUnits": 8677416,
-    "lululemonProducts": 176,
+    "lululemonSales": 514915395.5308565,
+    "lululemonUnits": 9130448,
+    "lululemonProducts": 337,
     "nygSales": 4334778.74,
     "nygUnits": 547403,
     "nygProducts": 8,
@@ -152,9 +152,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "boxer-brief",
     "label": "Boxer brief",
-    "lululemonSales": 507213139,
-    "lululemonUnits": 10113771,
-    "lululemonProducts": 214,
+    "lululemonSales": 473203568.43550897,
+    "lululemonUnits": 10116564,
+    "lululemonProducts": 218,
     "nygSales": 3332040.02,
     "nygUnits": 725736,
     "nygProducts": 3,
@@ -168,9 +168,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "polo",
     "label": "Polo",
-    "lululemonSales": 187788928,
-    "lululemonUnits": 2192487,
-    "lululemonProducts": 50,
+    "lululemonSales": 232556882.50525737,
+    "lululemonUnits": 2230100,
+    "lululemonProducts": 70,
     "nygSales": 2098998.08,
     "nygUnits": 200388,
     "nygProducts": 3,
@@ -184,9 +184,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "skirt",
     "label": "Skirt",
-    "lululemonSales": 152152261,
-    "lululemonUnits": 2110741,
-    "lululemonProducts": 66,
+    "lululemonSales": 158579709.22564098,
+    "lululemonUnits": 2160677,
+    "lululemonProducts": 93,
     "nygSales": 1276475.93,
     "nygUnits": 83690,
     "nygProducts": 1,
@@ -200,9 +200,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "pant",
     "label": "Pant",
-    "lululemonSales": 2656876972,
-    "lululemonUnits": 24242656,
-    "lululemonProducts": 549,
+    "lululemonSales": 2289811356.996205,
+    "lululemonUnits": 24848108,
+    "lululemonProducts": 712,
     "nygSales": 0,
     "nygUnits": 0,
     "nygProducts": 0,
@@ -216,9 +216,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "jogger",
     "label": "Jogger",
-    "lululemonSales": 589974492,
-    "lululemonUnits": 5311968,
-    "lululemonProducts": 115,
+    "lululemonSales": 521760927.4872417,
+    "lululemonUnits": 5413849,
+    "lululemonProducts": 156,
     "nygSales": 880931.89,
     "nygUnits": 49813,
     "nygProducts": 2,
@@ -232,9 +232,9 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "button-down",
     "label": "Button down",
-    "lululemonSales": 39285474,
-    "lululemonUnits": 371182,
-    "lululemonProducts": 17,
+    "lululemonSales": 34073127.71172999,
+    "lululemonUnits": 384102,
+    "lululemonProducts": 24,
     "nygSales": 34966.54,
     "nygUnits": 2653,
     "nygProducts": 1,

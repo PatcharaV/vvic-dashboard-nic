@@ -1777,7 +1777,7 @@ function LululemonBrandOverview() {
           * Estimates, apparel only (Women&apos;s + Men&apos;s), SEP25-SEP26. Sales
           use net revenue TTM and an 87.0% apparel share. Online is estimated at
           30% of sales; FOB spend uses a {LULULEMON_FOB_MULTIPLIER.toFixed(4)}x
-          multiplier. Source: Lululemon Wallet Size &amp; Share (5).xlsx, All Product.
+          multiplier. Source: Lululemon_Wallet_Size__Share_7.xlsx, All product.
         </p>
       </article>
 
@@ -1830,8 +1830,8 @@ function LululemonBrandOverview() {
         </div>
 
         <p className="lululemon-source-note">
-          Source: Lululemon Wallet Size &amp; Share (5).xlsx. Lululemon totals use
-          Total Revenue USD and Total Units from All Product (SEP25-SEP26). NYG values use
+          Source: Lululemon_Wallet_Size__Share_7.xlsx. Lululemon totals use
+          Total and Total Units (quantity, preserved) from All product (SEP25-SEP26). NYG values use
           NYG Sale and NYG Sale (PCS) from the Lululemon sheet for 59 products,
           FA25-SU26. Style wallet share uses Brand Wallet Size and each style&apos;s
           FOB Multiplier. The second NYG Secured table uses Commercial Name, sales,

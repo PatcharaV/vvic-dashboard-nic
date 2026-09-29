@@ -1,4 +1,4 @@
-// Generated from Lululemon Wallet Size & Share (5).xlsx. Do not edit manually.
+// Generated from Lululemon_Wallet_Size__Share_7.xlsx. Do not edit manually.
 export const LULULEMON_NYG_STYLES = [
   {
     "key": "style-1",
@@ -12,7 +12,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1016,
     "walletRevenue": 687905624.75,
     "fobMultiplier": 6.3187,
-    "lululemonRevenue": 294950994,
+    "lululemonRevenue": 687905624.766667,
     "lululemonTitles": 1
   },
   {
@@ -27,7 +27,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.21,
     "walletRevenue": 76515985.8,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 34069812,
+    "lululemonRevenue": 76515985.7666667,
     "lululemonTitles": 1
   },
   {
@@ -42,7 +42,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2821,
     "walletRevenue": 81274095.33,
     "fobMultiplier": 6.3107,
-    "lululemonRevenue": 15116,
+    "lululemonRevenue": 81274095.3333333,
     "lululemonTitles": 1
   },
   {
@@ -57,7 +57,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0824,
     "walletRevenue": 288717374.19,
     "fobMultiplier": 6.0444,
-    "lululemonRevenue": 125912521,
+    "lululemonRevenue": 288717374.2,
     "lululemonTitles": 1
   },
   {
@@ -72,7 +72,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.3984,
     "walletRevenue": 58564355.37,
     "fobMultiplier": 7.8912,
-    "lululemonRevenue": 24307950,
+    "lululemonRevenue": 58564355.3666667,
     "lululemonTitles": 1
   },
   {
@@ -87,7 +87,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.4766,
     "walletRevenue": 21007942.18,
     "fobMultiplier": 5.0989,
-    "lululemonRevenue": 9113295,
+    "lululemonRevenue": 21007942.2,
     "lululemonTitles": 1
   },
   {
@@ -102,7 +102,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0711,
     "walletRevenue": 121231907.86,
     "fobMultiplier": 6.1259,
-    "lululemonRevenue": 53783903,
+    "lululemonRevenue": 121231907.866667,
     "lululemonTitles": 1
   },
   {
@@ -117,7 +117,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1539,
     "walletRevenue": 33528627.38,
     "fobMultiplier": 7.6249,
-    "lululemonRevenue": 14939562,
+    "lululemonRevenue": 33528627.3666667,
     "lululemonTitles": 1
   },
   {
@@ -132,8 +132,8 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2254,
     "walletRevenue": 64690824.4,
     "fobMultiplier": 7.9782,
-    "lululemonRevenue": 44396675,
-    "lululemonTitles": 2
+    "lululemonRevenue": 64690824.4,
+    "lululemonTitles": 1
   },
   {
     "key": "style-10",
@@ -147,7 +147,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.3243,
     "walletRevenue": 53741107.97,
     "fobMultiplier": 5.7701,
-    "lululemonRevenue": 23366215,
+    "lululemonRevenue": 53741108,
     "lululemonTitles": 1
   },
   {
@@ -162,7 +162,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2468,
     "walletRevenue": 27836445.6,
     "fobMultiplier": 5.383,
-    "lululemonRevenue": 104073,
+    "lululemonRevenue": 27836445.6,
     "lululemonTitles": 1
   },
   {
@@ -177,7 +177,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.5,
     "walletRevenue": 6644781.06,
     "fobMultiplier": 6.7618,
-    "lululemonRevenue": 1758207,
+    "lululemonRevenue": 6644781.06666667,
     "lululemonTitles": 1
   },
   {
@@ -192,7 +192,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.85,
     "walletRevenue": 38185696.92,
     "fobMultiplier": 12.343,
-    "lululemonRevenue": 796279,
+    "lululemonRevenue": 38185696.9333333,
     "lululemonTitles": 1
   },
   {
@@ -207,7 +207,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0308,
     "walletRevenue": 275897220.34,
     "fobMultiplier": 6.1706,
-    "lululemonRevenue": 121328816,
+    "lululemonRevenue": 275897220.333333,
     "lululemonTitles": 1
   },
   {
@@ -222,7 +222,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0593,
     "walletRevenue": 40705469.77,
     "fobMultiplier": 5.7701,
-    "lululemonRevenue": 17880124,
+    "lululemonRevenue": 40705469.8,
     "lululemonTitles": 1
   },
   {
@@ -237,7 +237,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2767,
     "walletRevenue": 12977143.23,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 5792472,
+    "lululemonRevenue": 12977143.2333333,
     "lululemonTitles": 1
   },
   {
@@ -252,7 +252,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.3319,
     "walletRevenue": 8449188.02,
     "fobMultiplier": 7.1978,
-    "lululemonRevenue": 2168,
+    "lululemonRevenue": 8449188.03333334,
     "lululemonTitles": 1
   },
   {
@@ -267,7 +267,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.6512,
     "walletRevenue": 5901667.11,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 362079,
+    "lululemonRevenue": 5901667.1,
     "lululemonTitles": 1
   },
   {
@@ -282,7 +282,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.112,
     "walletRevenue": 24249210.04,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 8236222,
+    "lululemonRevenue": 24249210.0333333,
     "lululemonTitles": 1
   },
   {
@@ -297,7 +297,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0136,
     "walletRevenue": 163744009.8,
     "fobMultiplier": 7.8788,
-    "lululemonRevenue": 72477258,
+    "lululemonRevenue": 163744009.8,
     "lululemonTitles": 1
   },
   {
@@ -312,7 +312,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.4624,
     "walletRevenue": 13074413.6,
     "fobMultiplier": 9,
-    "lululemonRevenue": 5835890,
+    "lululemonRevenue": 13074413.6,
     "lululemonTitles": 1
   },
   {
@@ -327,7 +327,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2968,
     "walletRevenue": 12840449.12,
     "fobMultiplier": 7.0554,
-    "lululemonRevenue": 483386,
+    "lululemonRevenue": 12840449.1333333,
     "lululemonTitles": 1
   },
   {
@@ -342,7 +342,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.4994,
     "walletRevenue": 7286312.83,
     "fobMultiplier": 6,
-    "lululemonRevenue": 631105,
+    "lululemonRevenue": 7286312.8,
     "lululemonTitles": 1
   },
   {
@@ -357,7 +357,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1682,
     "walletRevenue": 10634721.87,
     "fobMultiplier": 7.0554,
-    "lululemonRevenue": 4633781,
+    "lululemonRevenue": 10634721.8666667,
     "lululemonTitles": 1
   },
   {
@@ -372,7 +372,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2942,
     "walletRevenue": 11164185.41,
     "fobMultiplier": 7.0554,
-    "lululemonRevenue": 476850,
+    "lululemonRevenue": 11164185.4333333,
     "lululemonTitles": 1
   },
   {
@@ -387,7 +387,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.6131,
     "walletRevenue": 10215556.7,
     "fobMultiplier": 8.3333,
-    "lululemonRevenue": 4238306,
+    "lululemonRevenue": 10215556.7,
     "lululemonTitles": 1
   },
   {
@@ -402,7 +402,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.5,
     "walletRevenue": 7693299.69,
     "fobMultiplier": 5.5061,
-    "lululemonRevenue": 1666672,
+    "lululemonRevenue": 7693299.7,
     "lululemonTitles": 1
   },
   {
@@ -418,7 +418,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2968,
     "walletRevenue": 14393020.76,
     "fobMultiplier": 5.7725,
-    "lululemonRevenue": 355092,
+    "lululemonRevenue": 14393020.7666667,
     "lululemonTitles": 1
   },
   {
@@ -433,7 +433,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2942,
     "walletRevenue": 7979086.71,
     "fobMultiplier": 7.0554,
-    "lululemonRevenue": 177195,
+    "lululemonRevenue": 7979086.7,
     "lululemonTitles": 1
   },
   {
@@ -448,7 +448,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.3105,
     "walletRevenue": 6496185.27,
     "fobMultiplier": 6.99,
-    "lululemonRevenue": 27391,
+    "lululemonRevenue": 6496185.26666667,
     "lululemonTitles": 1
   },
   {
@@ -463,7 +463,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.7446,
     "walletRevenue": 4435510.23,
     "fobMultiplier": 7.2495,
-    "lululemonRevenue": 1805753,
+    "lululemonRevenue": 4435510.23333333,
     "lululemonTitles": 1
   },
   {
@@ -479,7 +479,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.5,
     "walletRevenue": 5646958.28,
     "fobMultiplier": 6.401,
-    "lululemonRevenue": 870137,
+    "lululemonRevenue": 5646958.26666667,
     "lululemonTitles": 1
   },
   {
@@ -494,7 +494,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1446,
     "walletRevenue": 7092832.1,
     "fobMultiplier": 5.7701,
-    "lululemonRevenue": 3162635,
+    "lululemonRevenue": 7092832.1,
     "lululemonTitles": 1
   },
   {
@@ -509,7 +509,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.8895,
     "walletRevenue": 3936575.71,
     "fobMultiplier": 12.343,
-    "lululemonRevenue": 1163646,
+    "lululemonRevenue": 3936575.7,
     "lululemonTitles": 1
   },
   {
@@ -524,7 +524,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.4032,
     "walletRevenue": 5534885.71,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 2416873,
+    "lululemonRevenue": 5534885.7,
     "lululemonTitles": 1
   },
   {
@@ -539,7 +539,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1542,
     "walletRevenue": 11232209.02,
     "fobMultiplier": 5.7191,
-    "lululemonRevenue": 4672196,
+    "lululemonRevenue": 11232209.0333333,
     "lululemonTitles": 1
   },
   {
@@ -554,7 +554,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1338,
     "walletRevenue": 25001563.19,
     "fobMultiplier": 8.2568,
-    "lululemonRevenue": 717392,
+    "lululemonRevenue": 25001563.2,
     "lululemonTitles": 1
   },
   {
@@ -569,7 +569,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1329,
     "walletRevenue": 9418342,
     "fobMultiplier": 8.2568,
-    "lululemonRevenue": 305244,
+    "lululemonRevenue": 9418342,
     "lululemonTitles": 1
   },
   {
@@ -584,7 +584,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.6125,
     "walletRevenue": 1975101.75,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 122444,
+    "lululemonRevenue": 1975101.76666667,
     "lululemonTitles": 1
   },
   {
@@ -599,7 +599,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.4745,
     "walletRevenue": 10890812,
     "fobMultiplier": 12.343,
-    "lululemonRevenue": 4796506,
+    "lululemonRevenue": 10890812,
     "lululemonTitles": 1
   },
   {
@@ -614,7 +614,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2509,
     "walletRevenue": 4001441.15,
     "fobMultiplier": 7.1429,
-    "lululemonRevenue": 1226068,
+    "lululemonRevenue": 4001441.16666667,
     "lululemonTitles": 1
   },
   {
@@ -630,7 +630,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.675,
     "walletRevenue": 1258504.71,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 82202,
+    "lululemonRevenue": 1258504.7,
     "lululemonTitles": 1
   },
   {
@@ -645,7 +645,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2614,
     "walletRevenue": 5368911.16,
     "fobMultiplier": 7.3887,
-    "lululemonRevenue": 2360830,
+    "lululemonRevenue": 5368911.16666667,
     "lululemonTitles": 1
   },
   {
@@ -660,7 +660,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.4654,
     "walletRevenue": 2031548.93,
     "fobMultiplier": 7.398,
-    "lululemonRevenue": 906801,
+    "lululemonRevenue": 2031548.93333333,
     "lululemonTitles": 1
   },
   {
@@ -675,7 +675,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.3153,
     "walletRevenue": 3276372.57,
     "fobMultiplier": 7.0554,
-    "lululemonRevenue": 1016338,
+    "lululemonRevenue": 3276372.56666667,
     "lululemonTitles": 1
   },
   {
@@ -691,7 +691,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.722,
     "walletRevenue": 1672210.23,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 42753,
+    "lululemonRevenue": 1672210.23333333,
     "lululemonTitles": 1
   },
   {
@@ -706,7 +706,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2955,
     "walletRevenue": 2142305.75,
     "fobMultiplier": 7.0554,
-    "lululemonRevenue": 956239,
+    "lululemonRevenue": 2142305.73333333,
     "lululemonTitles": 1
   },
   {
@@ -721,7 +721,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.3113,
     "walletRevenue": 2094726.23,
     "fobMultiplier": 7.0554,
-    "lululemonRevenue": 17534,
+    "lululemonRevenue": 2094726.23333333,
     "lululemonTitles": 1
   },
   {
@@ -737,7 +737,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1549,
     "walletRevenue": 8024692.62,
     "fobMultiplier": 9.6,
-    "lululemonRevenue": 250291,
+    "lululemonRevenue": 8024692.63333333,
     "lululemonTitles": 1
   },
   {
@@ -752,8 +752,8 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0129,
     "walletRevenue": 40627686.86,
     "fobMultiplier": 6.4093,
-    "lululemonRevenue": 44396675,
-    "lululemonTitles": 2
+    "lululemonRevenue": 40627686.8666667,
+    "lululemonTitles": 1
   },
   {
     "key": "style-51",
@@ -768,7 +768,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0864,
     "walletRevenue": 2845538.67,
     "fobMultiplier": 5.913,
-    "lululemonRevenue": 1263684,
+    "lululemonRevenue": 2845538.66666667,
     "lululemonTitles": 1
   },
   {
@@ -783,7 +783,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.5553,
     "walletRevenue": 569803.7,
     "fobMultiplier": 8.462,
-    "lululemonRevenue": 254337,
+    "lululemonRevenue": 569803.7,
     "lululemonTitles": 1
   },
   {
@@ -798,7 +798,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.2681,
     "walletRevenue": 835006.23,
     "fobMultiplier": 6.1053,
-    "lululemonRevenue": 9503,
+    "lululemonRevenue": 835006.233333333,
     "lululemonTitles": 1
   },
   {
@@ -813,7 +813,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.14,
     "walletRevenue": 2129972.46,
     "fobMultiplier": 8.2568,
-    "lululemonRevenue": 689,
+    "lululemonRevenue": 2129972.46666667,
     "lululemonTitles": 1
   },
   {
@@ -829,7 +829,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.3143,
     "walletRevenue": 800669.87,
     "fobMultiplier": 7.1978,
-    "lululemonRevenue": 27082,
+    "lululemonRevenue": 800669.866666667,
     "lululemonTitles": 1
   },
   {
@@ -844,7 +844,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.7899,
     "walletRevenue": 179764.54,
     "fobMultiplier": 6.3427,
-    "lululemonRevenue": 77416,
+    "lululemonRevenue": 179764.533333333,
     "lululemonTitles": 1
   },
   {
@@ -859,7 +859,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.1624,
     "walletRevenue": 1353038.71,
     "fobMultiplier": 6.1495,
-    "lululemonRevenue": 526335,
+    "lululemonRevenue": 1353038.7,
     "lululemonTitles": 1
   },
   {
@@ -874,7 +874,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.058,
     "walletRevenue": 496957.18,
     "fobMultiplier": 6.2975,
-    "lululemonRevenue": 152671,
+    "lululemonRevenue": 496957.166666667,
     "lululemonTitles": 1
   },
   {
@@ -889,7 +889,7 @@ export const LULULEMON_NYG_STYLES = [
     "walletShare": 0.0104,
     "walletRevenue": 5097894.31,
     "fobMultiplier": 8.2568,
-    "lululemonRevenue": 2236325,
+    "lululemonRevenue": 5097894.33333333,
     "lululemonTitles": 1
   }
 ];
@@ -898,77 +898,99 @@ export const LULULEMON_STYLE_COVERAGE = [
     "key": "jacket",
     "secured": 1,
     "matchedWithinSubtype": 1,
-    "remaining": 298,
-    "total": 299
+    "remaining": 410,
+    "total": 411,
+    "rawRemaining": 469,
+    "consolidatedVariants": 59
   },
   {
     "key": "short",
     "secured": 8,
     "matchedWithinSubtype": 8,
-    "remaining": 223,
-    "total": 231
+    "remaining": 321,
+    "total": 329,
+    "rawRemaining": 367,
+    "consolidatedVariants": 46
   },
   {
     "key": "pullover",
     "secured": 15,
     "matchedWithinSubtype": 15,
-    "remaining": 155,
-    "total": 170
+    "remaining": 219,
+    "total": 234,
+    "rawRemaining": 251,
+    "consolidatedVariants": 32
   },
   {
     "key": "tee",
     "secured": 17,
     "matchedWithinSubtype": 17,
-    "remaining": 288,
-    "total": 305
+    "remaining": 413,
+    "total": 430,
+    "rawRemaining": 523,
+    "consolidatedVariants": 110
   },
   {
     "key": "tank-top",
     "secured": 8,
     "matchedWithinSubtype": 8,
-    "remaining": 160,
-    "total": 168
+    "remaining": 289,
+    "total": 297,
+    "rawRemaining": 323,
+    "consolidatedVariants": 34
   },
   {
     "key": "boxer-brief",
     "secured": 3,
     "matchedWithinSubtype": 3,
     "remaining": 170,
-    "total": 173
+    "total": 173,
+    "rawRemaining": 214,
+    "consolidatedVariants": 44
   },
   {
     "key": "polo",
     "secured": 3,
     "matchedWithinSubtype": 3,
-    "remaining": 43,
-    "total": 46
+    "remaining": 56,
+    "total": 59,
+    "rawRemaining": 65,
+    "consolidatedVariants": 9
   },
   {
     "key": "skirt",
     "secured": 1,
     "matchedWithinSubtype": 1,
-    "remaining": 54,
-    "total": 55
+    "remaining": 80,
+    "total": 81,
+    "rawRemaining": 91,
+    "consolidatedVariants": 11
   },
   {
     "key": "pant",
     "secured": 0,
     "matchedWithinSubtype": 0,
-    "remaining": 412,
-    "total": 412
+    "remaining": 457,
+    "total": 457,
+    "rawRemaining": 712,
+    "consolidatedVariants": 255
   },
   {
     "key": "jogger",
     "secured": 2,
     "matchedWithinSubtype": 2,
-    "remaining": 68,
-    "total": 70
+    "remaining": 84,
+    "total": 86,
+    "rawRemaining": 152,
+    "consolidatedVariants": 68
   },
   {
     "key": "button-down",
     "secured": 1,
     "matchedWithinSubtype": 1,
-    "remaining": 17,
-    "total": 18
+    "remaining": 23,
+    "total": 24,
+    "rawRemaining": 24,
+    "consolidatedVariants": 1
   }
 ];
