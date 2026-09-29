@@ -980,6 +980,14 @@ function LululemonNygComparison({ metric, selectedKey, onSelect }) {
           </p>
         </div>
         <div className="lululemon-comparison-controls">
+          <button
+            className="lululemon-comparison-reset"
+            type="button"
+            onClick={() => onSelect("overall")}
+            disabled={selected.key === "overall"}
+          >
+            Reset
+          </button>
           <label>
             <span>Sub-type</span>
             <select

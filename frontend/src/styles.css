@@ -1266,12 +1266,38 @@ h2 {
 }
 
 .lululemon-comparison-controls {
-  width: min(100%, 240px);
-  min-width: 180px;
+  width: min(100%, 330px);
+  min-width: 260px;
   display: grid;
-  grid-template-columns: minmax(150px, 1fr);
+  grid-template-columns: auto minmax(150px, 1fr);
   align-items: end;
   gap: 10px;
+}
+
+.lululemon-comparison-reset {
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--lululemon-red);
+  background: #fff;
+  border: 1px solid rgba(211, 19, 52, 0.35);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.lululemon-comparison-reset:hover:not(:disabled) {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
+.lululemon-comparison-reset:disabled {
+  color: #b7abad;
+  background: #f7f1f2;
+  border-color: #eadde0;
+  cursor: default;
 }
 
 .lululemon-comparison-controls > label {
@@ -4221,7 +4247,7 @@ footer a {
   }
 
   .lululemon-comparison-controls {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   .lululemon-comparison-stats {
