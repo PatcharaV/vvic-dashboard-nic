@@ -21,18 +21,14 @@ const subtypeDefinitions = [
   ["polo", "Polo", "POLO"],
   ["skirt", "Skirt", "SKIRT"],
   ["pant", "Pant", "PANT"],
+  ["jogger", "Jogger", "JOGGER"],
   ["button-down", "Button down", "SHIRT BUTTON DOWN"],
 ];
 const subtypeByWorksheetValue = new Map(
   subtypeDefinitions.map(([key, label, worksheetValue]) => [worksheetValue, { key, label }]),
 );
-subtypeByWorksheetValue.set("JOGGER", { key: "pant", label: "Pant" });
-
 function isDashboardSubtype(worksheetSubtype, targetSubtype) {
-  return (
-    worksheetSubtype === targetSubtype ||
-    (targetSubtype === "PANT" && worksheetSubtype === "JOGGER")
-  );
+  return worksheetSubtype === targetSubtype;
 }
 
 function number(value) {
@@ -53,6 +49,11 @@ function normalizeName(value = "") {
 
 function normalizeFamilyName(value = "") {
   return normalizeName(value).replace(/\s*\*.*$/, "").trim();
+}
+
+function classifyNygSubtype(row) {
+  const worksheetSubtype = String(row["Sub-Type"] || "").trim().toUpperCase();
+  return /\bjogger\b/.test(normalizeName(row.Name)) ? "JOGGER" : worksheetSubtype;
 }
 
 function compactCurrency(value) {
@@ -171,11 +172,7 @@ const comparisons = [
         ),
     );
     const matchingNygRows = nygRows.filter(
-      (row) =>
-        isDashboardSubtype(
-          String(row["Sub-Type"]).trim().toUpperCase(),
-          worksheetSubtype,
-        ),
+      (row) => isDashboardSubtype(classifyNygSubtype(row), worksheetSubtype),
     );
     return {
       key,
@@ -218,7 +215,7 @@ function matchPortfolioRows(styleName, subtype) {
 }
 
 const styles = nygRows.map((row, index) => {
-  const worksheetSubtype = String(row["Sub-Type"] || "").trim().toUpperCase();
+  const worksheetSubtype = classifyNygSubtype(row);
   const subtype = subtypeByWorksheetValue.get(worksheetSubtype)?.key || "tee";
   const portfolioRows = matchPortfolioRows(row.Name, worksheetSubtype);
   const matchedWorksheetSubtype = String(

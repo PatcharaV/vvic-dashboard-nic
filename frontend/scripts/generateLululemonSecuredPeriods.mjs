@@ -22,6 +22,7 @@ const subtypeKeys = new Set([
   "polo",
   "skirt",
   "pant",
+  "jogger",
   "button-down",
 ]);
 
@@ -62,16 +63,17 @@ function inferSubtype(productType, name) {
     "tank-top": "tank-top",
     "boxer-brief": "boxer-brief",
     "shirt-button-down": "button-down",
-    jogger: "pant",
+    jogger: "jogger",
   };
+  const normalizedName = normalizeName(name);
+  if (/jogger/.test(normalizedName)) return "jogger";
+
   const directType = aliases[normalizedType] || normalizedType;
   if (subtypeKeys.has(directType)) return directType;
 
-  const normalizedName = normalizeName(name);
   if (/jacket|coat/.test(normalizedName)) return "jacket";
   if (/boxer|brief/.test(normalizedName)) return "boxer-brief";
   if (/button up|button down|overshirt/.test(normalizedName)) return "button-down";
-  if (/jogger/.test(normalizedName)) return "pant";
   if (/short/.test(normalizedName)) return "short";
   if (/pant|trouser|tight/.test(normalizedName)) return "pant";
   if (/skirt/.test(normalizedName)) return "skirt";
