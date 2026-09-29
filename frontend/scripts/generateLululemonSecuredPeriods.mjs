@@ -161,6 +161,8 @@ for (const row of rows) {
     styleCodes: new Set(),
     nygSales: 0,
     nygUnits: 0,
+    nygFabricYards: 0,
+    nykFabricYards: 0,
     workbookRevenue: 0,
   };
 
@@ -168,6 +170,10 @@ for (const row of rows) {
   if (row.Style) style.styleCodes.add(String(row.Style).trim());
   style.nygSales += Number(row.sales_revenue) || 0;
   style.nygUnits += Number(row.PCS) || 0;
+  style.nygFabricYards +=
+    Number(firstValue(row, ["Total Fabric Value NYG Used (YDS)", "NYG Fabric Used (YDS)"])) || 0;
+  style.nykFabricYards +=
+    Number(firstValue(row, ["Total NYK Fabric Value Used (YDS)", "NYK Fabric Used (YDS)"])) || 0;
   style.workbookRevenue = Math.max(style.workbookRevenue, Number(row.Revenue_Status) || 0);
   groupedStyles.set(groupKey, style);
 }
@@ -190,6 +196,12 @@ const generatedStyles = [...groupedStyles.values()]
       styleCodes: [...style.styleCodes].sort(),
       nygSales: Number(style.nygSales.toFixed(2)),
       nygUnits: Math.round(style.nygUnits),
+      ...(style.nygFabricYards > 0
+        ? { nygFabricYards: Math.round(style.nygFabricYards) }
+        : {}),
+      ...(style.nykFabricYards > 0
+        ? { nykFabricYards: Math.round(style.nykFabricYards) }
+        : {}),
       lululemonRevenue:
         existing?.lululemonRevenue || directProduct?.sales || opportunity?.sales || style.workbookRevenue || 0,
       lululemonTitles:

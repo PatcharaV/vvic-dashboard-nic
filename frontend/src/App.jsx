@@ -1192,6 +1192,20 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                             <span>
                               <strong>{style.name}</strong>
                               <small>{style.season}</small>
+                              {(style.nygFabricYards > 0 || style.nykFabricYards > 0) && (
+                                <span className="lululemon-secured-fabric">
+                                  {style.nygFabricYards > 0 && (
+                                    <span>
+                                      NYG fabric <b>{formatNumber.format(Math.round(style.nygFabricYards))} YDS</b>
+                                    </span>
+                                  )}
+                                  {style.nykFabricYards > 0 && (
+                                    <span className="nyk">
+                                      NYK fabric <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
+                                    </span>
+                                  )}
+                                </span>
+                              )}
                             </span>
                             <b>{formatComparisonValue(style.nygSales, "sales")}</b>
                           </div>

@@ -290,6 +290,8 @@ const styles = nygRows.map((row, index) => {
     season: String(row.Season || "").trim(),
     nygSales: number(row["NYG Sale"]),
     nygUnits: number(row["NYG Sale (PCS) - FA25,WT25,SP26,SU26 only"]),
+    nygFabricYards: number(row["Total Fabric Value NYG Used (YDS)"]),
+    nykFabricYards: number(row["Total NYK Fabric Value Used (YDS)"]),
     walletSize: number(row["Brand Wallet Size"]),
     walletShare: number(row["NYG Wallet Share %"]),
     walletRevenue: number(row.Total),
