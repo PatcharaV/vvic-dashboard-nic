@@ -910,6 +910,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
     return {
       name,
       variants: typeof style === "string" ? 1 : style.variants,
+      sales: typeof style === "string" ? null : style.sales ?? null,
       gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
     };
   });
@@ -1029,7 +1030,11 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
         <div className="lululemon-style-portfolio-list remaining">
           <div className="lululemon-style-portfolio-heading">
             <span>{coverage.rawRemaining ? "Remaining style families" : "Top remaining opportunities"}</span>
-            <strong>{formatNumber.format(coverage.remaining)} {opportunityUnit}</strong>
+            <strong>
+              {coverage.rawRemaining
+                ? `${formatNumber.format(coverage.remaining)} ${opportunityUnit}`
+                : `Top ${normalizedOpportunityStyles.length} / ${formatNumber.format(coverage.remaining)} ${opportunityUnit}`}
+            </strong>
           </div>
           {coverage.rawRemaining && (
             <p className="lululemon-style-family-note">
@@ -1057,7 +1062,12 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
                   {group.styles.map((style) => (
                     <li key={style.name}>
                       <span>{style.name}</span>
-                      {style.variants > 1 && <b>{style.variants} length variants</b>}
+                      <span className="lululemon-style-opportunity-value">
+                        {style.sales !== null && (
+                          <strong>{formatComparisonValue(style.sales, "sales")}</strong>
+                        )}
+                        {style.variants > 1 && <b>{style.variants} length variants</b>}
+                      </span>
                     </li>
                   ))}
                 </ol>
@@ -1070,9 +1080,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
           {coverage.rawRemaining && filteredOpportunityStyles.length === 0 && (
             <p className="lululemon-style-family-empty">No matching style families</p>
           )}
-          {!coverage.rawRemaining && coverage.remaining > coverage.topRemaining.length && (
+          {!coverage.rawRemaining && coverage.remaining > normalizedOpportunityStyles.length && (
             <small>
-              + {formatNumber.format(coverage.remaining - coverage.topRemaining.length)} more {opportunityUnit}
+              + {formatNumber.format(coverage.remaining - normalizedOpportunityStyles.length)} more {opportunityUnit}
             </small>
           )}
         </div>
