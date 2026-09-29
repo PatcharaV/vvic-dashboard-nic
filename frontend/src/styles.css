@@ -1713,14 +1713,15 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 }
 
 .lululemon-style-secured-list {
-  max-height: 300px;
   margin-top: 10px;
-  overflow-y: auto;
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+  align-items: start;
 }
 
 .lululemon-style-gender-group {
+  min-width: 0;
   display: grid;
   gap: 7px;
 }
@@ -1758,6 +1759,14 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 .lululemon-style-gender-items {
   display: grid;
   gap: 7px;
+}
+
+.lululemon-style-secured-list .lululemon-style-gender-items {
+  max-height: 260px;
+  padding-right: 3px;
+  overflow-y: auto;
+  align-content: start;
+  scrollbar-gutter: stable;
 }
 
 .lululemon-style-secured-list button {
@@ -4155,6 +4164,25 @@ footer a {
 
   .lululemon-portfolio-inner-ring {
     width: 144px;
+  }
+
+  .lululemon-style-secured-list {
+    gap: 8px;
+  }
+
+  .lululemon-style-secured-list button {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .lululemon-style-gender-heading {
+    padding-inline: 7px;
+  }
+
+  .lululemon-style-gender-heading span,
+  .lululemon-style-gender-heading b {
+    font-size: 8px;
   }
 
   .topbar,
