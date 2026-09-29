@@ -1438,6 +1438,94 @@ function LululemonMixCard({ title, rows, subtitle, featured = false, embedded = 
   );
 }
 
+const LULULEMON_TIMELINE_SEASONS = [
+  "SS25",
+  "SU25",
+  "FA25",
+  "WT25",
+  "SS26",
+  "SU26",
+  "FA26",
+  "WT26",
+  "SS27",
+  "SU27",
+  "FA27",
+  "WT27",
+];
+
+const LULULEMON_TIMELINE_ROWS = [
+  { label: "Revenue", start: 0, end: 5, tone: "revenue" },
+  { label: "Particl", start: 2, end: 5, tone: "particl" },
+  { label: "NYG", start: 0, end: 9, tone: "nyg" },
+  { label: "NYK", start: 0, end: 7, tone: "nyk" },
+];
+
+function LululemonTimeline() {
+  return (
+    <article className="lululemon-overview-section lululemon-timeline-section">
+      <div className="lululemon-overview-heading">
+        <div>
+          <p className="eyebrow">DATA COVERAGE · SS25-WT27</p>
+          <h2>Lululemon Timeline</h2>
+        </div>
+        <LululemonOverviewLogo />
+      </div>
+
+      <div className="lululemon-timeline-card">
+        <div className="lululemon-timeline-intro">
+          <div>
+            <span>Season coverage</span>
+            <strong>Revenue and sourcing data availability</strong>
+          </div>
+          <small>Scroll horizontally to view future seasons</small>
+        </div>
+
+        <div className="lululemon-timeline-scroll">
+          <div className="lululemon-timeline-matrix">
+            <div className="lululemon-timeline-season-row">
+              <strong>Source</strong>
+              <div className="lululemon-timeline-seasons">
+                {LULULEMON_TIMELINE_SEASONS.map((season) => (
+                  <span key={season}>{season}</span>
+                ))}
+              </div>
+            </div>
+
+            {LULULEMON_TIMELINE_ROWS.map((row) => {
+              const firstSeason = LULULEMON_TIMELINE_SEASONS[row.start];
+              const lastSeason = LULULEMON_TIMELINE_SEASONS[row.end];
+              return (
+                <div className="lululemon-timeline-data-row" key={row.label}>
+                  <div className="lululemon-timeline-label">
+                    <i className={row.tone} />
+                    <strong>{row.label}</strong>
+                    <small>{firstSeason}-{lastSeason}</small>
+                  </div>
+                  <div
+                    className="lululemon-timeline-track"
+                    role="img"
+                    aria-label={`${row.label} data covers ${firstSeason} through ${lastSeason}`}
+                  >
+                    {LULULEMON_TIMELINE_SEASONS.map((season) => (
+                      <i aria-hidden="true" key={season} />
+                    ))}
+                    <span
+                      className={`lululemon-timeline-bar ${row.tone}`}
+                      style={{ gridColumn: `${row.start + 1} / ${row.end + 2}` }}
+                    >
+                      {firstSeason} - {lastSeason}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function LululemonBrandOverview() {
   const comparisonMetric = "sales";
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
@@ -1574,6 +1662,8 @@ function LululemonBrandOverview() {
           Gender and NYG Sale columns.
         </p>
       </article>
+
+      <LululemonTimeline />
     </section>
   );
 }
