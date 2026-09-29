@@ -158,6 +158,41 @@ const LULULEMON_SALES_MIX = [
   { label: "Underwear", value: 5.5, muted: true },
 ];
 
+const LULULEMON_REVENUE_HISTORY = [
+  { year: 2021, value: 6.26, display: "$6.26B" },
+  { year: 2022, value: 8.11, display: "$8.11B" },
+  { year: 2023, value: 9.62, display: "$9.62B" },
+  { year: 2024, value: 10.59, display: "$10.59B" },
+  { year: 2025, value: 11.1, display: "$11.10B" },
+];
+
+const LULULEMON_REGIONAL_REVENUE = [
+  {
+    year: 2025,
+    rows: [
+      { label: "Americas", value: 70.7, color: "#cf0035" },
+      { label: "China Mainland", value: 15.8, color: "#242122" },
+      { label: "Rest of World", value: 13.5, color: "#aaa4a6" },
+    ],
+  },
+  {
+    year: 2024,
+    rows: [
+      { label: "Americas", value: 74.8, color: "#cf0035" },
+      { label: "China Mainland", value: 12.9, color: "#242122" },
+      { label: "Rest of World", value: 12.3, color: "#aaa4a6" },
+    ],
+  },
+  {
+    year: 2023,
+    rows: [
+      { label: "Americas", value: 79.4, color: "#cf0035" },
+      { label: "China Mainland", value: 10, color: "#242122" },
+      { label: "Rest of World", value: 10.6, color: "#aaa4a6" },
+    ],
+  },
+];
+
 const LULULEMON_NYG_COMPARISON = [
   { key: "overall", label: "All sub-types", lululemonSales: 9645778874.95, nygSales: 51600116.95, lululemonUnits: 111603857.55, nygUnits: 4369847, lululemonProducts: 3568, nygProducts: 59, nykFabricYards: 134531, nykFabricProducts: 4, menSales: 29120568, womenSales: 22479548.95 },
   { key: "jacket", label: "Jacket", lululemonSales: 1486881502.32, nygSales: 11063087.15, lululemonUnits: 10924783, nygUnits: 545064, lululemonProducts: 339, nygProducts: 1, nykFabricYards: 0, nykFabricProducts: 0, menSales: 0, womenSales: 11063087.15 },
@@ -1016,6 +1051,104 @@ function donutGradient(rows) {
     .join(", ")})`;
 }
 
+function LululemonRevenueHistory() {
+  const maxRevenue = Math.max(...LULULEMON_REVENUE_HISTORY.map((row) => row.value));
+
+  return (
+    <article className="lululemon-overview-section lululemon-revenue-history">
+      <div className="lululemon-overview-heading">
+        <div>
+          <p className="eyebrow">PUBLIC COMPANY PERFORMANCE · FY2021-FY2025</p>
+          <h2>Revenue Lululemon 2021-2025</h2>
+        </div>
+        <strong className="lululemon-wordmark">LULULEMON</strong>
+      </div>
+
+      <div className="lululemon-revenue-dashboard">
+        <section className="lululemon-history-card">
+          <div className="lululemon-history-card-heading">
+            <div>
+              <h3>Net revenue</h3>
+              <p>USD billions</p>
+            </div>
+            <strong>+77.3%</strong>
+            <span>growth since 2021</span>
+          </div>
+          <div className="lululemon-revenue-bars" aria-label="Lululemon annual net revenue">
+            {LULULEMON_REVENUE_HISTORY.map((row) => (
+              <div className="lululemon-revenue-column" key={row.year}>
+                <strong>{row.display}</strong>
+                <span className="lululemon-revenue-track">
+                  <i style={{ height: `${(row.value / maxRevenue) * 100}%` }} />
+                </span>
+                <b>{row.year}</b>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="lululemon-history-card regional">
+          <div className="lululemon-history-card-heading">
+            <div>
+              <h3>Regional revenue mix</h3>
+              <p>Share of annual net revenue</p>
+            </div>
+          </div>
+          <div className="lululemon-region-grid">
+            {LULULEMON_REGIONAL_REVENUE.map((period) => (
+              <article className="lululemon-region-card" key={period.year}>
+                <h4>{period.year}</h4>
+                <div
+                  className="lululemon-region-donut"
+                  style={{ background: donutGradient(period.rows) }}
+                  aria-label={`${period.year} regional revenue mix`}
+                >
+                  <strong>{period.rows[0].value.toFixed(1)}%</strong>
+                  <span>Americas</span>
+                </div>
+                <div className="lululemon-region-legend">
+                  {period.rows.map((row) => (
+                    <div key={row.label}>
+                      <i style={{ background: row.color }} />
+                      <span>{row.label}</span>
+                      <strong>{row.value.toFixed(1)}%</strong>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <div className="lululemon-history-insights">
+        <section>
+          <p className="eyebrow">BUSINESS HIGHLIGHTS</p>
+          <h3>Growth continues, with a changing regional mix.</h3>
+          <ul>
+            <li><strong>Revenue growth:</strong> FY2025 reached $11.10B, up 4.86% year over year.</li>
+            <li><strong>Regional shift:</strong> China Mainland increased from 10.0% in 2023 to 15.8% in 2025.</li>
+            <li><strong>Milestone:</strong> FY2024 was the first year annual revenue surpassed $10B.</li>
+          </ul>
+        </section>
+        <section>
+          <p className="eyebrow">STRATEGIC INITIATIVES</p>
+          <h3>International growth is offsetting softer Americas momentum.</h3>
+          <ul>
+            <li><strong>China and international expansion:</strong> Store growth remains concentrated outside the Americas.</li>
+            <li><strong>Americas reset:</strong> Product and marketing refreshes are intended to reignite growth.</li>
+            <li><strong>Market entry:</strong> New European markets and India broaden the next phase of expansion.</li>
+          </ul>
+        </section>
+      </div>
+
+      <p className="lululemon-source-note">
+        Source: Lululemon Athletica Inc. Form 10-K filings. Values are rounded for display.
+      </p>
+    </article>
+  );
+}
+
 function LululemonMixCard({ title, rows, subtitle, featured = false, embedded = false }) {
   const Card = embedded ? "div" : "article";
   return (
@@ -1072,6 +1205,7 @@ function LululemonBrandOverview() {
 
   return (
     <section className="lululemon-brand-overview">
+      <LululemonRevenueHistory />
       <article className="lululemon-overview-section">
         <div className="lululemon-overview-heading">
           <div>
