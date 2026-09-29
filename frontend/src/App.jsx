@@ -861,7 +861,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   );
 }
 
-function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
+function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect }) {
   const styles = useMemo(
     () => [
       ...LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).map(
@@ -889,7 +889,49 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
     setOtherStyleQuery("");
   }, [styles]);
 
-  if (subtypeKey === "overall" || styles.length === 0 || !coverage) return null;
+  const subtypeControls = (
+    <div className="lululemon-comparison-controls lululemon-style-controls">
+      <button
+        className="lululemon-comparison-reset"
+        type="button"
+        onClick={() => onSelect("overall")}
+        disabled={subtypeKey === "overall"}
+      >
+        Reset
+      </button>
+      <label>
+        <span>Sub-type</span>
+        <select
+          value={subtypeKey}
+          onChange={(event) => onSelect(event.target.value)}
+        >
+          {LULULEMON_NYG_COMPARISON.map((row) => (
+            <option key={row.key} value={row.key}>
+              {row.label}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
+  );
+
+  if (subtypeKey === "overall" || styles.length === 0 || !coverage) {
+    return (
+      <article className="lululemon-overview-card lululemon-style-card">
+        <div className="lululemon-style-card-heading">
+          <div>
+            <h3>Sales coverage by style</h3>
+            <p>Select a sub-type to compare Lululemon opportunities with NYG secured styles.</p>
+          </div>
+          {subtypeControls}
+        </div>
+        <div className="lululemon-style-empty-state">
+          <strong>Select a sub-type</strong>
+          <span>The opportunity list, comparison, and NYG secured styles will appear here.</span>
+        </div>
+      </article>
+    );
+  }
 
   const selectedStyle =
     styles.find((style) => style.key === selectedStyleKey) || styles[0];
@@ -977,10 +1019,15 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
 
   return (
     <article className="lululemon-overview-card lululemon-style-card">
-      <h3>{subtypeLabel} sales coverage by style</h3>
-      <p>
-        NYG sales within the selected style, then that style within the full Lululemon {subtypeLabel} portfolio
-      </p>
+      <div className="lululemon-style-card-heading">
+        <div>
+          <h3>{subtypeLabel} sales coverage by style</h3>
+          <p>
+            NYG sales within the selected style, then that style within the full Lululemon {subtypeLabel} portfolio
+          </p>
+        </div>
+        {subtypeControls}
+      </div>
       <div className="lululemon-style-coverage-grid">
         <div className="lululemon-style-portfolio-list secured">
           <div className="lululemon-style-portfolio-heading">
@@ -1251,7 +1298,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   );
 }
 
-function LululemonNygComparison({ metric, selectedKey, onSelect }) {
+function LululemonNygComparison({ metric, selectedKey }) {
   const selected =
     LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
     LULULEMON_NYG_COMPARISON[0];
@@ -1279,29 +1326,6 @@ function LululemonNygComparison({ metric, selectedKey, onSelect }) {
           <p>
             Choose a sub-type. Every card and chart below updates together.
           </p>
-        </div>
-        <div className="lululemon-comparison-controls">
-          <button
-            className="lululemon-comparison-reset"
-            type="button"
-            onClick={() => onSelect("overall")}
-            disabled={selected.key === "overall"}
-          >
-            Reset
-          </button>
-          <label>
-            <span>Sub-type</span>
-            <select
-              value={selected.key}
-              onChange={(event) => onSelect(event.target.value)}
-            >
-              {LULULEMON_NYG_COMPARISON.map((row) => (
-                <option key={row.key} value={row.key}>
-                  {row.label}
-                </option>
-              ))}
-            </select>
-          </label>
         </div>
       </div>
 
@@ -1572,7 +1596,6 @@ function LululemonBrandOverview() {
         <LululemonNygComparison
           metric={comparisonMetric}
           selectedKey={comparisonSubtype}
-          onSelect={setComparisonSubtype}
         />
 
         <LululemonNygMetricGrid selectedKey={comparisonSubtype} />
@@ -1601,6 +1624,7 @@ function LululemonBrandOverview() {
             subtypeKey={comparisonSubtype}
             subtypeLabel={selectedComparison.label}
             subtypeSales={selectedComparison.lululemonSales}
+            onSelect={setComparisonSubtype}
           />
         </div>
 

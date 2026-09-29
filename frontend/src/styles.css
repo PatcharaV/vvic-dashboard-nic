@@ -1682,6 +1682,48 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   align-items: stretch;
 }
 
+.lululemon-style-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.lululemon-style-card-heading > div:first-child {
+  min-width: 0;
+}
+
+.lululemon-style-card-heading p {
+  margin-top: 7px;
+}
+
+.lululemon-style-controls {
+  flex: 0 0 min(330px, 42%);
+}
+
+.lululemon-style-empty-state {
+  min-height: 190px;
+  margin-top: 18px;
+  padding: 24px;
+  display: grid;
+  place-content: center;
+  gap: 7px;
+  color: #81787a;
+  background: linear-gradient(145deg, #fff, #fff6f8);
+  border: 1px dashed #e3cbd0;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.lululemon-style-empty-state strong {
+  color: var(--lululemon-red);
+  font-size: 15px;
+}
+
+.lululemon-style-empty-state span {
+  font-size: 10px;
+}
+
 .lululemon-style-portfolio-list.remaining {
   order: 1;
 }
@@ -4435,6 +4477,16 @@ footer a {
 
   .lululemon-style-coverage-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lululemon-style-card-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lululemon-style-controls {
+    width: 100%;
+    flex-basis: auto;
   }
 
   .lululemon-business-grid {
