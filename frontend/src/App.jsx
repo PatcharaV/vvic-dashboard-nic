@@ -15,6 +15,12 @@ import {
 import { LULULEMON_NYG_FUTURE_STYLES } from "./lululemonNygFutureStyles";
 import { LULULEMON_REMAINING_OPPORTUNITIES } from "./lululemonOpportunities";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
+import {
+  LULULEMON_BUSINESS_METRICS,
+  LULULEMON_FOB_MULTIPLIER,
+  LULULEMON_NYG_COMPARISON,
+  LULULEMON_SALES_MIX,
+} from "./lululemonWorkbookData";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -144,27 +150,6 @@ const TRAVISMATHEW_COMPETITORS = [
   { brand: "Rhoback", price: "$96-$98", gender: "53% / 47%", satisfaction: "5/5", revenue: "$17.6M" },
 ];
 
-const LULULEMON_BUSINESS_METRICS = [
-  {
-    icon: "$",
-    label: "Total sales*",
-    value: "$9.65B",
-    note: "Apparel sales only; accessories excluded.",
-  },
-  { icon: "ON", label: "Online sales*", value: "$2.89B" },
-  { icon: "FOB", label: "FOB spend*", value: "$1.36B" },
-  { icon: "U", label: "Total units*", value: "111.6M" },
-  { icon: "%", label: "Avg. discount", value: "15.4%" },
-  { icon: "#", label: "Product titles", value: "3,568" },
-];
-
-const LULULEMON_SALES_MIX = [
-  { label: "Bottoms", value: 49.7 },
-  { label: "Outerwear", value: 23.5 },
-  { label: "Tops", value: 21.3 },
-  { label: "Underwear", value: 5.5, muted: true },
-];
-
 const LULULEMON_REVENUE_HISTORY = [
   { year: 2021, value: 6.26, display: "$6.26B" },
   { year: 2022, value: 8.11, display: "$8.11B" },
@@ -198,21 +183,6 @@ const LULULEMON_REGIONAL_REVENUE = [
       { label: "Rest of World", value: 10.6, color: "#aaa4a6" },
     ],
   },
-];
-
-const LULULEMON_NYG_COMPARISON = [
-  { key: "overall", label: "All sub-types", lululemonSales: 9645778874.95, nygSales: 51600116.95, lululemonUnits: 111603857.55, nygUnits: 4369847, lululemonProducts: 3568, nygProducts: 59, nygFabricYards: 3706134.4, nygFabricProducts: 55, nykFabricYards: 134531, nykFabricProducts: 4, menSales: 29120568, womenSales: 22479548.95 },
-  { key: "jacket", label: "Jacket", lululemonSales: 1486881502.32, nygSales: 11063087.15, lululemonUnits: 10924783, nygUnits: 545064, lululemonProducts: 339, nygProducts: 1, nygFabricYards: 697328, nygFabricProducts: 1, nykFabricYards: 0, nykFabricProducts: 0, menSales: 0, womenSales: 11063087.15 },
-  { key: "short", label: "Short", lululemonSales: 1296341465.94, nygSales: 10673007.11, lululemonUnits: 19377037, nygUnits: 930096, lululemonProducts: 261, nygProducts: 8, nygFabricYards: 1095919, nygFabricProducts: 8, nykFabricYards: 0, nykFabricProducts: 0, menSales: 10077097.23, womenSales: 595909.88 },
-  { key: "pullover", label: "Pullover", lululemonSales: 786340374.03, nygSales: 10190865.14, lululemonUnits: 7547337, nygUnits: 578288, lululemonProducts: 186, nygProducts: 15, nygFabricYards: 676560, nygFabricProducts: 13, nykFabricYards: 131572, nykFabricProducts: 3, menSales: 9063679.5, womenSales: 1127185.64 },
-  { key: "tee", label: "Tee", lululemonSales: 1137027500.89, nygSales: 7714966.35, lululemonUnits: 17902919, nygUnits: 706716, lululemonProducts: 372, nygProducts: 17, nygFabricYards: 490108.9, nygFabricProducts: 16, nykFabricYards: 0, nykFabricProducts: 0, menSales: 3632854.74, womenSales: 4082111.61 },
-  { key: "tank-top", label: "Tank top", lululemonSales: 479041536.63, nygSales: 4334778.74, lululemonUnits: 8677413, nygUnits: 547403, lululemonProducts: 176, nygProducts: 8, nygFabricYards: 101607.5, nygFabricProducts: 8, nykFabricYards: 0, nykFabricProducts: 0, menSales: 0, womenSales: 4334778.74 },
-  { key: "boxer-brief", label: "Boxer brief", lululemonSales: 507213138.48, nygSales: 3332040.02, lululemonUnits: 10113767, nygUnits: 725736, lululemonProducts: 214, nygProducts: 3, nygFabricYards: 284202, nygFabricProducts: 3, nykFabricYards: 0, nykFabricProducts: 0, menSales: 3332040.02, womenSales: 0 },
-  { key: "polo", label: "Polo", lululemonSales: 187788924.37, nygSales: 2098998.08, lululemonUnits: 2192490, nygUnits: 200388, lululemonProducts: 50, nygProducts: 3, nygFabricYards: 199338, nygFabricProducts: 3, nykFabricYards: 0, nykFabricProducts: 0, menSales: 2098998.08, womenSales: 0 },
-  { key: "skirt", label: "Skirt", lululemonSales: 152152261.6, nygSales: 1276475.93, lululemonUnits: 2110741, nygUnits: 83690, lululemonProducts: 66, nygProducts: 1, nygFabricYards: 88759, nygFabricProducts: 1, nykFabricYards: 0, nykFabricProducts: 0, menSales: 0, womenSales: 1276475.93 },
-  { key: "pant", label: "Pant", lululemonSales: 2656876970.18, nygSales: 491347.08, lululemonUnits: 24242653, nygUnits: 25956, lululemonProducts: 549, nygProducts: 1, nygFabricYards: 34986, nygFabricProducts: 1, nykFabricYards: 0, nykFabricProducts: 0, menSales: 491347.08, womenSales: 0 },
-  { key: "jogger", label: "Jogger", lululemonSales: 589974495.21, nygSales: 389584.81, lululemonUnits: 5311966, nygUnits: 23857, lululemonProducts: 115, nygProducts: 1, nygFabricYards: 37326, nygFabricProducts: 1, nykFabricYards: 0, nykFabricProducts: 0, menSales: 389584.81, womenSales: 0 },
-  { key: "button-down", label: "Button down", lululemonSales: 39285474.28, nygSales: 34966.54, lululemonUnits: 371182, nygUnits: 2653, lululemonProducts: 17, nygProducts: 1, nygFabricYards: 0, nygFabricProducts: 0, nykFabricYards: 2959, nykFabricProducts: 1, menSales: 34966.54, womenSales: 0 },
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
@@ -608,7 +578,6 @@ function formatFabricYards(value, compact = false) {
   return `${formatNumber.format(Math.round(value))} YDS`;
 }
 
-const LULULEMON_FOB_MULTIPLIER = 7.11;
 const LULULEMON_GENDERS = ["Men", "Women"];
 
 function normalizeLululemonStyleName(value = "") {
@@ -944,10 +913,14 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
     )
     .reduce((sum, style) => sum + style.lululemonRevenue, 0);
   const styleSales = selectedStyle.lululemonRevenue;
-  const nygWithinStyle = Math.min(selectedStyle.nygSales, styleSales);
-  const restOfStyleSales = Math.max(styleSales - nygWithinStyle, 0);
-  const nygStyleShare = styleSales
-    ? (selectedStyle.nygSales / styleSales) * 100
+  const styleFobMultiplier = selectedStyle.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
+  const styleRetailRevenue = selectedStyle.walletRevenue || styleSales;
+  const styleWalletSize =
+    selectedStyle.walletSize || (styleRetailRevenue ? styleRetailRevenue / styleFobMultiplier : 0);
+  const nygWithinStyle = Math.min(selectedStyle.nygSales, styleWalletSize);
+  const remainingStyleWallet = Math.max(styleWalletSize - nygWithinStyle, 0);
+  const nygStyleShare = styleWalletSize
+    ? (selectedStyle.nygSales / styleWalletSize) * 100
     : 0;
   const innerChartShare = Math.min(Math.max(nygStyleShare, 0), 100);
   const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
@@ -1145,7 +1118,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
                 <span>Step 1</span>
                 <div>
                   <strong>NYG Share of Selected Style</strong>
-                  <small>How much of this style is secured by NYG</small>
+                  <small>NYG sales compared with the style&apos;s estimated FOB wallet</small>
                 </div>
               </div>
               <div
@@ -1156,12 +1129,12 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
               >
                 <div className="lululemon-style-share-value">
                   <strong>{formatComparisonShare(innerChartShare)}</strong>
-                  <span>NYG / style total</span>
+                  <span>NYG / estimated FOB</span>
                 </div>
                 <div className="lululemon-style-share-track"><i /></div>
                 <p>
                   NYG secures <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
-                  {" "}out of <strong>{formatComparisonValue(styleSales, "sales")}</strong>
+                  {" "}out of an estimated FOB wallet of <strong>{formatComparisonValue(styleWalletSize, "sales")}</strong>
                 </p>
               </div>
               <div className="lululemon-style-share-breakdown">
@@ -1170,13 +1143,16 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
                   <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
                 </div>
                 <div>
-                  <span><i className="style-sales" />Rest of style</span>
-                  <strong>{formatComparisonValue(restOfStyleSales, "sales")}</strong>
+                  <span><i className="style-sales" />Remaining FOB opportunity</span>
+                  <strong>{formatComparisonValue(remainingStyleWallet, "sales")}</strong>
                 </div>
                 <div className="total">
-                  <span>Style total</span>
-                  <strong>{formatComparisonValue(styleSales, "sales")}</strong>
+                  <span>Estimated style FOB</span>
+                  <strong>{formatComparisonValue(styleWalletSize, "sales")}</strong>
                 </div>
+                <small className="lululemon-style-wallet-method">
+                  Retail revenue {formatComparisonValue(styleRetailRevenue, "sales")} / {styleFobMultiplier.toFixed(4)}x
+                </small>
               </div>
             </section>
 
@@ -1269,9 +1245,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
               </section>
             )}
           </div>
-          {selectedStyle.nygSales > styleSales && (
+          {selectedStyle.nygSales > styleWalletSize && (
             <small className="lululemon-style-data-warning">
-              NYG sales exceed the matched style revenue in Master Apparel; source coverage may differ.
+              NYG sales exceed the estimated style FOB wallet; source coverage may differ.
             </small>
           )}
         </div>
@@ -1343,7 +1319,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
       </div>
       {taxonomyDifference > 0 && (
         <p className="lululemon-style-taxonomy-note">
-          {formatNumber.format(taxonomyDifference)} NYG {taxonomyDifference === 1 ? "style is" : "styles are"} classified under a different Sub-Type in Master Apparel and included as secured in this overview.
+          {formatNumber.format(taxonomyDifference)} NYG {taxonomyDifference === 1 ? "style is" : "styles are"} classified under a different Sub-Type in All Product and included as secured in this overview.
         </p>
       )}
       <p className="lululemon-style-taxonomy-note">
@@ -1392,7 +1368,7 @@ function LululemonNygComparison({ metric, selectedKey }) {
             {isSales
               ? `Estimated FOB ${formatComparisonValue(comparisonBase, metric)} (sales / ${LULULEMON_FOB_MULTIPLIER})`
               : metric === "products"
-              ? "Master Apparel USD & Units"
+              ? "All Product"
               : `${formatNumber.format(selected.lululemonProducts)} product titles`}
           </small>
         </div>
@@ -1630,8 +1606,8 @@ function LululemonBrandOverview() {
         <p className="lululemon-source-note">
           * Estimates, apparel only (Women&apos;s + Men&apos;s), SEP25-SEP26. Sales
           use net revenue TTM and an 87.0% apparel share. Online is estimated at
-          30% of sales; FOB spend uses a 7.11x average multiplier. Source:
-          LLL_1.xlsx, Master Apparel USD &amp; Units.
+          30% of sales; FOB spend uses a {LULULEMON_FOB_MULTIPLIER.toFixed(4)}x
+          multiplier. Source: Lululemon Wallet Size &amp; Share (2).xlsx, All Product.
         </p>
       </article>
 
@@ -1684,11 +1660,12 @@ function LululemonBrandOverview() {
         </div>
 
         <p className="lululemon-source-note">
-          Source: LLL_1.xlsx. Lululemon totals use Total Revenue USD and Total
-          Units from Master Apparel USD &amp; Units (SEP25-SEP26). NYG values use
+          Source: Lululemon Wallet Size &amp; Share (2).xlsx. Lululemon totals use
+          Total Revenue USD and Total Units from All Product (SEP25-SEP26). NYG values use
           NYG Sale and NYG Sale (PCS) from the Lululemon sheet for 59 products,
-          FA25-SU26. The second NYG Secured table uses Commercial Name, sales,
-          units, and seasons FA26, WT26, SU27, and SP27 from the updated Raw Data
+          FA25-SU26. Style wallet share uses Brand Wallet Size and each style&apos;s
+          FOB Multiplier. The second NYG Secured table uses Commercial Name, sales,
+          units, and seasons FA26, WT26, SU27, and SP27 from the Raw Data
           sheet. Fabric usage uses Total Fabric Value NYG Used (YDS) and
           Total NYK Fabric Value Used (YDS); 55 products contain recorded NYG
           fabric use and 4 contain a non-zero NYK value. Gender mix uses the

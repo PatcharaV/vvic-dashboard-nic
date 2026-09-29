@@ -27,13 +27,23 @@ const subtypeKeys = new Set([
 ]);
 
 function normalizeName(value = "") {
-  return value
+  return String(value)
     .toLowerCase()
     .replace(/[®™]/g, "")
     .replace(/^lululemon\s+/, "")
     .replace(/\b(?:women'?s|men'?s)\b/g, "")
     .replace(/\b(?:23|25|26|27|28|29|30|31|32|34|35|36)(?:\s*(?:in|inch(?:es)?|"))?\b/g, "")
     .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function normalizeExactName(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/[®™]/g, "")
+    .replace(/^lululemon\s+/, "")
+    .replace(/[^a-z0-9*\"]+/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -87,6 +97,27 @@ const workbook = XLSX.readFile(workbookPath);
 const rawSheet = workbook.Sheets["Raw Data"];
 if (!rawSheet) throw new Error('The workbook does not contain a "Raw Data" sheet.');
 
+const allProductRows = XLSX.utils.sheet_to_json(workbook.Sheets["All Product"], { defval: "" });
+const allProductByTitle = new Map();
+const allProductByBaseStyle = new Map();
+for (const row of allProductRows) {
+  const sales = Number(row["Total Revenue USD (all zones)"]) || 0;
+  const titleKey = normalizeExactName(row["Product Title (Particl)"]);
+  const baseStyleKey = normalizeExactName(row["Base Style (title before *)"]);
+  if (titleKey) {
+    const current = allProductByTitle.get(titleKey) || { sales: 0, titles: 0 };
+    current.sales += sales;
+    current.titles += 1;
+    allProductByTitle.set(titleKey, current);
+  }
+  if (baseStyleKey) {
+    const current = allProductByBaseStyle.get(baseStyleKey) || { sales: 0, titles: 0 };
+    current.sales += sales;
+    current.titles += 1;
+    allProductByBaseStyle.set(baseStyleKey, current);
+  }
+}
+
 const rows = XLSX.utils.sheet_to_json(rawSheet, { defval: "" });
 const groupedStyles = new Map();
 
@@ -103,7 +134,7 @@ for (const row of rows) {
   const style = groupedStyles.get(groupKey) || {
     name,
     gender,
-    subtype: existing?.subtype || inferSubtype(row["Product Type"], name),
+    subtype: existing?.subtype || inferSubtype(row["Sub-Type"], name),
     masterSubtype: existing?.masterSubtype,
     seasons: new Set(),
     styleCodes: new Set(),
@@ -124,6 +155,9 @@ const generatedStyles = [...groupedStyles.values()]
   .map((style, index) => {
     const existing = existingByNameAndGender.get(`${normalizeName(style.name)}|${style.gender}`);
     const opportunity = opportunitiesByName.get(normalizeName(style.name));
+    const directProduct =
+      allProductByTitle.get(normalizeExactName(style.name)) ||
+      allProductByBaseStyle.get(normalizeExactName(style.name));
     return {
       key: `future-style-${index + 1}`,
       period: "future",
@@ -136,8 +170,9 @@ const generatedStyles = [...groupedStyles.values()]
       nygSales: Number(style.nygSales.toFixed(2)),
       nygUnits: Math.round(style.nygUnits),
       lululemonRevenue:
-        existing?.lululemonRevenue || opportunity?.sales || style.workbookRevenue || 0,
-      lululemonTitles: existing?.lululemonTitles || opportunity?.variants || 1,
+        existing?.lululemonRevenue || directProduct?.sales || opportunity?.sales || style.workbookRevenue || 0,
+      lululemonTitles:
+        existing?.lululemonTitles || directProduct?.titles || opportunity?.variants || 1,
     };
   })
   .sort((left, right) => right.nygSales - left.nygSales);

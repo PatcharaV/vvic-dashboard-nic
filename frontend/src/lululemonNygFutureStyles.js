@@ -1,4 +1,4 @@
-// Generated from Lululemon_Wallet_Size__Share_updated.xlsx, Raw Data.
+// Generated from Lululemon Wallet Size & Share (2).xlsx, Raw Data.
 export const LULULEMON_NYG_FUTURE_STYLES = [
   {
     "key": "future-style-1",
@@ -19,8 +19,8 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 12726321.14,
     "nygUnits": 630869,
-    "lululemonRevenue": 346708173.97,
-    "lululemonTitles": 7
+    "lululemonRevenue": 294950994,
+    "lululemonTitles": 1
   },
   {
     "key": "future-style-2",
@@ -34,7 +34,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 4568509.38,
     "nygUnits": 370323,
-    "lululemonRevenue": 15116.21,
+    "lululemonRevenue": 15116,
     "lululemonTitles": 1
   },
   {
@@ -51,8 +51,8 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3942939.85,
     "nygUnits": 865841,
-    "lululemonRevenue": 824807.71,
-    "lululemonTitles": 2
+    "lululemonRevenue": 796279,
+    "lululemonTitles": 1
   },
   {
     "key": "future-style-8",
@@ -67,7 +67,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3417460.94,
     "nygUnits": 274287,
-    "lululemonRevenue": 23366214.96,
+    "lululemonRevenue": 23366215,
     "lululemonTitles": 1
   },
   {
@@ -82,13 +82,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3333047.12,
     "nygUnits": 173565,
-    "lululemonRevenue": 14939561.51,
+    "lululemonRevenue": 14939562,
     "lululemonTitles": 1
   },
   {
     "key": "future-style-4",
     "period": "future",
-    "subtype": "pullover",
+    "subtype": "tee",
     "name": "Zeroed In Long-Sleeve Shirt *Graphic",
     "gender": "Men",
     "season": "FA26, WT26, SP27",
@@ -97,11 +97,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 3242000.89,
     "nygUnits": 216111,
-    "lululemonRevenue": 573300,
+    "lululemonRevenue": 1698233,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-45",
+    "key": "future-style-44",
     "period": "future",
     "subtype": "tank-top",
     "name": "Sculpt Cropped Tank Top",
@@ -112,41 +112,8 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 2769756,
     "nygUnits": 230813,
-    "lululemonRevenue": 453394.52,
-    "lululemonTitles": 5
-  },
-  {
-    "key": "future-style-22",
-    "period": "future",
-    "subtype": "short",
-    "name": "Pace Breaker Lined Short 5\"",
-    "gender": "Men",
-    "season": "FA26, WT26, SU27, SP27",
-    "styleCodes": [
-      "LM7B83S",
-      "LM7BC0S"
-    ],
-    "nygSales": 2082384.82,
-    "nygUnits": 170198,
-    "lululemonRevenue": 4776410.42,
-    "lululemonTitles": 2
-  },
-  {
-    "key": "future-style-14",
-    "period": "future",
-    "subtype": "pullover",
-    "name": "It's Rulu Cropped Half Zip *Updated",
-    "gender": "Women",
-    "season": "FA26, WT26, SU27, SP27",
-    "styleCodes": [
-      "LW3HYAS",
-      "LW3IJES",
-      "LW3KP3S"
-    ],
-    "nygSales": 2074641.58,
-    "nygUnits": 130918,
-    "lululemonRevenue": 10413002.42,
-    "lululemonTitles": 3
+    "lululemonRevenue": 305244,
+    "lululemonTitles": 1
   },
   {
     "key": "future-style-5",
@@ -160,7 +127,40 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1785450.27,
     "nygUnits": 96807,
-    "lululemonRevenue": 53783902.61,
+    "lululemonRevenue": 53783903,
+    "lululemonTitles": 1
+  },
+  {
+    "key": "future-style-6",
+    "period": "future",
+    "subtype": "pullover",
+    "name": "It's Rulu Ribbed Cropped Half Zip *Updated",
+    "gender": "Women",
+    "season": "FA26, WT26, SU27, SP27",
+    "styleCodes": [
+      "LW3HYAS",
+      "LW3JIAS",
+      "LW3KZDS"
+    ],
+    "nygSales": 1736907.97,
+    "nygUnits": 88296,
+    "lululemonRevenue": 2416873,
+    "lululemonTitles": 1
+  },
+  {
+    "key": "future-style-22",
+    "period": "future",
+    "subtype": "short",
+    "masterSubtype": "pant",
+    "name": "Pace Breaker Pant *Shorter",
+    "gender": "Men",
+    "season": "FA26, WT26, SU27, SP27",
+    "styleCodes": [
+      "LM7B83S"
+    ],
+    "nygSales": 1700722.69,
+    "nygUnits": 138452,
+    "lululemonRevenue": 355092,
     "lululemonTitles": 1
   },
   {
@@ -175,7 +175,41 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1280549.45,
     "nygUnits": 70028,
-    "lululemonRevenue": 5792472.3,
+    "lululemonRevenue": 5792472,
+    "lululemonTitles": 1
+  },
+  {
+    "key": "future-style-14",
+    "period": "future",
+    "subtype": "pullover",
+    "name": "It's Rulu Cropped Half Zip *Updated",
+    "gender": "Women",
+    "season": "FA26, WT26, SP27",
+    "styleCodes": [
+      "LW3IJES",
+      "LW3KP3S"
+    ],
+    "nygSales": 1255085.85,
+    "nygUnits": 75217,
+    "lululemonRevenue": 8236222,
+    "lululemonTitles": 1
+  },
+  {
+    "key": "future-style-17",
+    "period": "future",
+    "subtype": "tee",
+    "name": "It's Rulu Run Long Sleeve Shirt",
+    "gender": "Women",
+    "season": "FA26, WT26, SU27, SP27",
+    "styleCodes": [
+      "LW3HYBS",
+      "LW3IM1S",
+      "LW3KP5S",
+      "LW3KZCS"
+    ],
+    "nygSales": 1132162.69,
+    "nygUnits": 75884,
+    "lululemonRevenue": 27391,
     "lululemonTitles": 1
   },
   {
@@ -194,11 +228,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 1021685.95,
     "nygUnits": 58099,
-    "lululemonRevenue": 9113295.44,
+    "lululemonRevenue": 9113295,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-25",
+    "key": "future-style-26",
     "period": "future",
     "subtype": "short",
     "name": "Pace Breaker Lined Short 9\"",
@@ -210,54 +244,23 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 919768.89,
     "nygUnits": 73028,
-    "lululemonRevenue": 1666672.28,
-    "lululemonTitles": 1
-  },
-  {
-    "key": "future-style-6",
-    "period": "future",
-    "subtype": "pullover",
-    "name": "It's Rulu Ribbed Cropped Half Zip *Updated",
-    "gender": "Women",
-    "season": "WT26",
-    "styleCodes": [
-      "LW3JIAS",
-      "LW3KZDS"
-    ],
-    "nygSales": 917352.24,
-    "nygUnits": 32595,
-    "lululemonRevenue": 2422944.9,
-    "lululemonTitles": 2
-  },
-  {
-    "key": "future-style-17",
-    "period": "future",
-    "subtype": "tee",
-    "name": "It's Rulu Long-Sleeve Shirt *Updated",
-    "gender": "Women",
-    "season": "FA26, WT26, SU27, SP27",
-    "styleCodes": [
-      "LW3HYBS"
-    ],
-    "nygSales": 840966.48,
-    "nygUnits": 58172,
-    "lululemonRevenue": 1878144,
+    "lululemonRevenue": 1666672,
     "lululemonTitles": 1
   },
   {
     "key": "future-style-11",
     "period": "future",
     "subtype": "pullover",
-    "name": "BeCalm Oversized Sweatshirt",
+    "name": "Soft Jersey Relaxed Crewneck Pullover",
     "gender": "Women",
     "season": "FA26, SU27, SP27",
     "styleCodes": [
       "LW3KQQS",
-      "LW3MJYS"
+      "LW3KRUS"
     ],
-    "nygSales": 726798.42,
-    "nygUnits": 47187,
-    "lululemonRevenue": 5496.805159725413,
+    "nygSales": 874525.14,
+    "nygUnits": 55462,
+    "lululemonRevenue": 138286,
     "lululemonTitles": 1
   },
   {
@@ -272,8 +275,8 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 701448.54,
     "nygUnits": 95348,
-    "lululemonRevenue": 24386175.65,
-    "lululemonTitles": 4
+    "lululemonRevenue": 24307950,
+    "lululemonTitles": 1
   },
   {
     "key": "future-style-20",
@@ -287,7 +290,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 616436.76,
     "nygUnits": 129615,
-    "lululemonRevenue": 1163645.7,
+    "lululemonRevenue": 1163646,
     "lululemonTitles": 1
   },
   {
@@ -302,7 +305,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 568904.74,
     "nygUnits": 27493,
-    "lululemonRevenue": 3663670.207657156,
+    "lululemonRevenue": 3663670,
     "lululemonTitles": 1
   },
   {
@@ -317,11 +320,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 538520.5,
     "nygUnits": 30650,
-    "lululemonRevenue": 1626.173483308597,
+    "lululemonRevenue": 1626,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-43",
+    "key": "future-style-42",
     "period": "future",
     "subtype": "tee",
     "name": "Sculpt Short-Sleeve Shirt",
@@ -337,7 +340,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-47",
+    "key": "future-style-46",
     "period": "future",
     "subtype": "short",
     "name": "Pace Breaker Linerless Short 7\"",
@@ -349,8 +352,8 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 517363.63,
     "nygUnits": 45907,
-    "lululemonRevenue": 126360575.47,
-    "lululemonTitles": 6
+    "lululemonRevenue": 125912521,
+    "lululemonTitles": 1
   },
   {
     "key": "future-style-23",
@@ -367,7 +370,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 511213.52,
     "nygUnits": 31581,
-    "lululemonRevenue": 631104.65,
+    "lululemonRevenue": 631105,
     "lululemonTitles": 1
   },
   {
@@ -384,7 +387,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 498365.56,
     "nygUnits": 32173,
-    "lululemonRevenue": 1952512,
+    "lululemonRevenue": 4337592,
     "lululemonTitles": 1
   },
   {
@@ -400,7 +403,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 478988.48,
     "nygUnits": 29452,
-    "lululemonRevenue": 42752.69,
+    "lululemonRevenue": 42753,
     "lululemonTitles": 1
   },
   {
@@ -415,13 +418,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 464763.51,
     "nygUnits": 47566,
-    "lululemonRevenue": 72477258.25,
+    "lululemonRevenue": 72477258,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-46",
+    "key": "future-style-45",
     "period": "future",
-    "subtype": "tee",
+    "subtype": "pullover",
     "name": "LOUNGE BECLAM 2ND LAYER",
     "gender": "Women",
     "season": "SU27",
@@ -446,11 +449,26 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 396420.6,
     "nygUnits": 37016,
-    "lululemonRevenue": 2228790.14,
-    "lululemonTitles": 3
+    "lululemonRevenue": 483386,
+    "lululemonTitles": 1
   },
   {
-    "key": "future-style-26",
+    "key": "future-style-25",
+    "period": "future",
+    "subtype": "short",
+    "name": "Pace Breaker Lined Short 5\"",
+    "gender": "Men",
+    "season": "FA26, WT26, SP27",
+    "styleCodes": [
+      "LM7BC0S"
+    ],
+    "nygSales": 381662.13,
+    "nygUnits": 31746,
+    "lululemonRevenue": 4672196,
+    "lululemonTitles": 1
+  },
+  {
+    "key": "future-style-27",
     "period": "future",
     "subtype": "pullover",
     "name": "Ease The Day Half Zip",
@@ -461,14 +479,14 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 352493.39,
     "nygUnits": 20165,
-    "lululemonRevenue": 254337.34,
+    "lululemonRevenue": 254337,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-28",
+    "key": "future-style-29",
     "period": "future",
     "subtype": "skirt",
-    "name": "Pace Rival Mid-Rise Skirt *Long",
+    "name": "Pace Rival Mid-Rise Skirt",
     "gender": "Women",
     "season": "FA26, WT26, SP27",
     "styleCodes": [
@@ -476,13 +494,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 342279.06,
     "nygUnits": 23087,
-    "lululemonRevenue": 1180374,
+    "lululemonRevenue": 104073,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-27",
+    "key": "future-style-28",
     "period": "future",
-    "subtype": "pullover",
+    "subtype": "tee",
     "name": "It's Rulu Classic-Fit Long-Sleeve Shirt",
     "gender": "Women",
     "season": "FA26, WT26, SP27",
@@ -493,13 +511,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 333703.88,
     "nygUnits": 16993,
-    "lululemonRevenue": 870137.4696661719,
+    "lululemonRevenue": 870137,
     "lululemonTitles": 1
   },
   {
     "key": "future-style-24",
     "period": "future",
-    "subtype": "pullover",
+    "subtype": "tee",
     "name": "It's Rulu Ribbed Long-Sleeve Shirt *Updated",
     "gender": "Women",
     "season": "FA26, WT26",
@@ -508,24 +526,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 313894.49,
     "nygUnits": 11995,
-    "lululemonRevenue": 3344,
-    "lululemonTitles": 1
-  },
-  {
-    "key": "future-style-30",
-    "period": "future",
-    "subtype": "tee",
-    "name": "It's Rulu Run Long Sleeve Shirt",
-    "gender": "Women",
-    "season": "FA26, WT26, SP27",
-    "styleCodes": [
-      "LW3IM1S",
-      "LW3KP5S",
-      "LW3KZCS"
-    ],
-    "nygSales": 291196.21,
-    "nygUnits": 17712,
-    "lululemonRevenue": 27390.86,
+    "lululemonRevenue": 81531,
     "lululemonTitles": 1
   },
   {
@@ -540,11 +541,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 261516.08,
     "nygUnits": 25816,
-    "lululemonRevenue": 177195.32,
+    "lululemonRevenue": 177195,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-29",
+    "key": "future-style-30",
     "period": "future",
     "subtype": "pullover",
     "name": "It's Rulu Fleece Half Zip",
@@ -555,13 +556,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 230742.48,
     "nygUnits": 13632,
-    "lululemonRevenue": 98664.45089894751,
+    "lululemonRevenue": 98664,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-48",
+    "key": "future-style-47",
     "period": "future",
-    "subtype": "tank-top",
+    "subtype": "tee",
     "name": "Lightweight Tennis Tank Top",
     "gender": "Women",
     "season": "SU27",
@@ -570,13 +571,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 214290,
     "nygUnits": 21429,
-    "lululemonRevenue": 5187.6628048256025,
+    "lululemonRevenue": 5188,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-50",
+    "key": "future-style-49",
     "period": "future",
-    "subtype": "jacket",
+    "subtype": "tee",
     "name": "Lightweight Woven Long Jacket",
     "gender": "Women",
     "season": "SU27, SP27",
@@ -585,28 +586,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 197609.75,
     "nygUnits": 19279,
-    "lululemonRevenue": 27428.996884742304,
+    "lululemonRevenue": 27429,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-40",
+    "key": "future-style-48",
     "period": "future",
-    "subtype": "pullover",
-    "name": "Soft Jersey Relaxed Crewneck Pullover",
-    "gender": "Women",
-    "season": "FA26, SU27, SP27",
-    "styleCodes": [
-      "LW3KRUS"
-    ],
-    "nygSales": 182014.22,
-    "nygUnits": 11018,
-    "lululemonRevenue": 138286.28280848582,
-    "lululemonTitles": 1
-  },
-  {
-    "key": "future-style-49",
-    "period": "future",
-    "subtype": "short",
+    "subtype": "polo",
     "name": "Logo Sport Polo Short Sleeve",
     "gender": "Women",
     "season": "SU27",
@@ -615,7 +601,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 164610,
     "nygUnits": 10620,
-    "lululemonRevenue": 15839100.498659724,
+    "lululemonRevenue": 15250510,
     "lululemonTitles": 1
   },
   {
@@ -630,11 +616,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 162440.6,
     "nygUnits": 13480,
-    "lululemonRevenue": 1226068.37,
+    "lululemonRevenue": 1226068,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-53",
+    "key": "future-style-52",
     "period": "future",
     "subtype": "tee",
     "name": "BeCalm V-Neck Bell Sleeve Shirt",
@@ -645,7 +631,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 132904,
     "nygUnits": 9538,
-    "lululemonRevenue": 526335.12,
+    "lululemonRevenue": 526335,
     "lululemonTitles": 1
   },
   {
@@ -662,11 +648,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 126796.78,
     "nygUnits": 11946,
-    "lululemonRevenue": 15524551.3,
-    "lululemonTitles": 3
+    "lululemonRevenue": 44396675,
+    "lululemonTitles": 2
   },
   {
-    "key": "future-style-55",
+    "key": "future-style-54",
     "period": "future",
     "subtype": "tee",
     "name": "Sculpt Long-Sleeve Shirt",
@@ -677,11 +663,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 116980,
     "nygUnits": 11698,
-    "lululemonRevenue": 1805753.4,
+    "lululemonRevenue": 1805753,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-51",
+    "key": "future-style-50",
     "period": "future",
     "subtype": "tank-top",
     "name": "License to Train Tank Top",
@@ -692,7 +678,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 114861.75,
     "nygUnits": 15843,
-    "lululemonRevenue": 5835889.86,
+    "lululemonRevenue": 5835890,
     "lululemonTitles": 1
   },
   {
@@ -707,11 +693,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 85680.54,
     "nygUnits": 7194,
-    "lululemonRevenue": 2360829.82,
+    "lululemonRevenue": 2360830,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-52",
+    "key": "future-style-51",
     "period": "future",
     "subtype": "tank-top",
     "name": "Train Dotty Jacquard Tank SE",
@@ -737,13 +723,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 76818.28,
     "nygUnits": 7546,
-    "lululemonRevenue": 17534.3,
+    "lululemonRevenue": 17534,
     "lululemonTitles": 1
   },
   {
     "key": "future-style-34",
     "period": "future",
-    "subtype": "tee",
+    "subtype": "short",
     "name": "Twist-Back Soft Ribbed Short-Sleeve Top",
     "gender": "Women",
     "season": "WT26",
@@ -752,11 +738,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 75584.04,
     "nygUnits": 6636,
-    "lululemonRevenue": 94883.41140695513,
+    "lululemonRevenue": 94883,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-54",
+    "key": "future-style-53",
     "period": "future",
     "subtype": "pullover",
     "name": "LOUNGE TOWEL TERRY CREW",
@@ -771,7 +757,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-58",
+    "key": "future-style-57",
     "period": "future",
     "subtype": "tee",
     "name": "UV-Protective Striped Mesh Tennis Shirt",
@@ -782,7 +768,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 70490,
     "nygUnits": 7420,
-    "lululemonRevenue": 126444.38973100134,
+    "lululemonRevenue": 126444,
     "lululemonTitles": 1
   },
   {
@@ -797,7 +783,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 65519.12,
     "nygUnits": 3644,
-    "lululemonRevenue": 98664.45089894751,
+    "lululemonRevenue": 98664,
     "lululemonTitles": 1
   },
   {
@@ -816,9 +802,9 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-56",
+    "key": "future-style-55",
     "period": "future",
-    "subtype": "short",
+    "subtype": "tee",
     "name": "Striped Short-Sleeve Golf Polo",
     "gender": "Women",
     "season": "SU27",
@@ -827,13 +813,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 49049,
     "nygUnits": 3773,
-    "lululemonRevenue": 542227.2208407103,
+    "lululemonRevenue": 542227,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-57",
+    "key": "future-style-56",
     "period": "future",
-    "subtype": "pullover",
+    "subtype": "jacket",
     "name": "Long-Sleeve Crewneck Base Layer",
     "gender": "Women",
     "season": "SU27",
@@ -842,13 +828,13 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 48576,
     "nygUnits": 3036,
-    "lululemonRevenue": 10434.613184563499,
+    "lululemonRevenue": 10435,
     "lululemonTitles": 1
   },
   {
     "key": "future-style-61",
     "period": "future",
-    "subtype": "short",
+    "subtype": "tee",
     "name": "Balancer Short-Sleeve Shirt",
     "gender": "Women",
     "season": "SU27",
@@ -862,7 +848,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-59",
+    "key": "future-style-58",
     "period": "future",
     "subtype": "tank-top",
     "name": "BeCalm V-Neck Tank Top",
@@ -873,7 +859,22 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 36616,
     "nygUnits": 4577,
-    "lululemonRevenue": 717392.36,
+    "lululemonRevenue": 717392,
+    "lululemonTitles": 1
+  },
+  {
+    "key": "future-style-59",
+    "period": "future",
+    "subtype": "pullover",
+    "name": "BeCalm Oversized Sweatshirt",
+    "gender": "Women",
+    "season": "SP27",
+    "styleCodes": [
+      "LW3MJYS"
+    ],
+    "nygSales": 34287.5,
+    "nygUnits": 2743,
+    "lululemonRevenue": 5497,
     "lululemonTitles": 1
   },
   {
@@ -903,11 +904,11 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 30954.86,
     "nygUnits": 1658,
-    "lululemonRevenue": 1699369,
+    "lululemonRevenue": 3628893,
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-41",
+    "key": "future-style-40",
     "period": "future",
     "subtype": "tee",
     "name": "Twist-Back Relaxed-Fit Long-Sleeve Shirt",
@@ -922,7 +923,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-42",
+    "key": "future-style-41",
     "period": "future",
     "subtype": "pullover",
     "name": "It's Rulu Classic-Fit Half Zip",
@@ -933,7 +934,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 16567.2,
     "nygUnits": 936,
-    "lululemonRevenue": 122444.49,
+    "lululemonRevenue": 122444,
     "lululemonTitles": 1
   },
   {
@@ -948,7 +949,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 11115.5,
     "nygUnits": 550,
-    "lululemonRevenue": 14791552,
+    "lululemonRevenue": 33590437,
     "lululemonTitles": 1
   },
   {
@@ -963,7 +964,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 10075,
     "nygUnits": 806,
-    "lululemonRevenue": 406477.4016733515,
+    "lululemonRevenue": 406477,
     "lululemonTitles": 1
   },
   {
@@ -997,7 +998,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     "lululemonTitles": 1
   },
   {
-    "key": "future-style-44",
+    "key": "future-style-43",
     "period": "future",
     "subtype": "tank-top",
     "name": "Sculpt Cropped Cross-Vent Tank Top",
@@ -1008,7 +1009,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
     ],
     "nygSales": 2569.59,
     "nygUnits": 279,
-    "lululemonRevenue": 152671.09,
+    "lululemonRevenue": 152671,
     "lululemonTitles": 1
   }
 ];

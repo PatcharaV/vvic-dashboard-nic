@@ -2167,6 +2167,14 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   font-size: 9px;
 }
 
+.lululemon-style-share-breakdown .lululemon-style-wallet-method {
+  padding: 1px 4px 0;
+  color: #857d7f;
+  font-size: 7px;
+  line-height: 1.4;
+  text-align: right;
+}
+
 .lululemon-style-share-breakdown i {
   width: 7px;
   height: 7px;
