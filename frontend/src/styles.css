@@ -2009,6 +2009,37 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   gap: 14px;
 }
 
+.lululemon-style-opportunity-groups.ranked-list {
+  max-height: none;
+  overflow: visible;
+}
+
+.lululemon-style-opportunity-groups.ranked-list ol.expanded {
+  max-height: 360px;
+  padding-right: 3px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.lululemon-style-view-more {
+  min-height: 30px;
+  padding: 6px 10px;
+  color: var(--lululemon-red);
+  background: #fff;
+  border: 1px solid #edcbd2;
+  border-radius: 7px;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-view-more:hover {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
 .lululemon-style-gender-empty {
   padding: 10px 8px;
   display: block;
