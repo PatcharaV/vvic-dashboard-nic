@@ -1144,14 +1144,27 @@ h2 {
   letter-spacing: 0.28em;
 }
 
-.lululemon-wordmark {
+.lululemon-overview-logo {
   position: relative;
   z-index: 1;
-  padding: 14px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--lululemon-red);
-  font-size: clamp(17px, 2vw, 26px);
-  letter-spacing: 0.32em;
   white-space: nowrap;
+}
+
+.lululemon-overview-logo img {
+  width: clamp(34px, 3vw, 46px);
+  height: auto;
+}
+
+.lululemon-overview-logo > span {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
 }
 
 .lululemon-metric-grid {
@@ -2460,7 +2473,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-brand-overview .lululemon-overview-heading h2,
 .lululemon-brand-overview .lululemon-overview-heading .eyebrow,
-.lululemon-brand-overview .lululemon-overview-heading .lululemon-wordmark {
+.lululemon-brand-overview .lululemon-overview-heading .lululemon-overview-logo {
   color: #fff;
 }
 
@@ -2468,8 +2481,12 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   opacity: 0.82;
 }
 
-.lululemon-brand-overview .lululemon-wordmark {
+.lululemon-brand-overview .lululemon-overview-logo {
   text-shadow: 0 2px 10px rgba(77, 0, 18, 0.18);
+}
+
+.lululemon-brand-overview .lululemon-overview-logo img {
+  filter: brightness(0) invert(1);
 }
 
 .lululemon-brand-overview .lululemon-metric-card {
@@ -4201,10 +4218,16 @@ footer a {
     display: block;
   }
 
-  .lululemon-wordmark {
+  .lululemon-overview-logo {
     margin-top: 6px;
-    display: block;
-    font-size: 15px;
+  }
+
+  .lululemon-overview-logo img {
+    width: 30px;
+  }
+
+  .lululemon-overview-logo > span {
+    font-size: 25px;
   }
 
   .lululemon-metric-grid,

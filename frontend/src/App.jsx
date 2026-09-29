@@ -263,6 +263,15 @@ function BrandHeroLogo({ brand }) {
   );
 }
 
+function LululemonOverviewLogo() {
+  return (
+    <span className="lululemon-overview-logo" aria-label="Lululemon">
+      <img src="/brand-logos/lululemon.svg" alt="" aria-hidden="true" />
+      <span>lululemon</span>
+    </span>
+  );
+}
+
 function ArcteryxBrandProfile() {
   return (
     <section className="panel arcteryx-profile">
@@ -1061,7 +1070,7 @@ function LululemonRevenueHistory() {
           <p className="eyebrow">PUBLIC COMPANY PERFORMANCE · FY2021-FY2025</p>
           <h2>Revenue Lululemon 2021-2025</h2>
         </div>
-        <strong className="lululemon-wordmark">LULULEMON</strong>
+        <LululemonOverviewLogo />
       </div>
 
       <div className="lululemon-revenue-dashboard">
@@ -1212,7 +1221,7 @@ function LululemonBrandOverview() {
             <p className="eyebrow">LULULEMON · APPAREL · SEP25-SEP26</p>
             <h2>Business Overview</h2>
           </div>
-          <strong className="lululemon-wordmark">LULULEMON</strong>
+          <LululemonOverviewLogo />
         </div>
 
         <LululemonMetricGrid metrics={LULULEMON_BUSINESS_METRICS} />
@@ -1263,7 +1272,7 @@ function LululemonBrandOverview() {
             </p>
             <h2>NYTG x Lululemon</h2>
           </div>
-          <strong className="lululemon-wordmark">LULULEMON</strong>
+          <LululemonOverviewLogo />
         </div>
 
         <LululemonNygComparison
