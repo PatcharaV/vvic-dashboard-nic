@@ -156,6 +156,7 @@ const LULULEMON_REVENUE_HISTORY = [
   { year: 2023, value: 9.62, display: "$9.62B" },
   { year: 2024, value: 10.59, display: "$10.59B" },
   { year: 2025, value: 11.1, display: "$11.10B" },
+  { year: 2026, value: 11.087, display: "$11.09B", estimate: true },
 ];
 
 const LULULEMON_REGIONAL_REVENUE = [
@@ -1582,8 +1583,8 @@ function LululemonRevenueHistory() {
     <article className="lululemon-overview-section lululemon-revenue-history">
       <div className="lululemon-overview-heading">
         <div>
-          <p className="eyebrow">PUBLIC COMPANY PERFORMANCE · FY2021-FY2025</p>
-          <h2>Revenue Lululemon 2021-2025</h2>
+          <p className="eyebrow">PUBLIC COMPANY PERFORMANCE · FY2021-FY2025 + 2026 TTM</p>
+          <h2>Revenue Lululemon 2021-2026</h2>
         </div>
         <LululemonOverviewLogo />
       </div>
@@ -1600,12 +1601,15 @@ function LululemonRevenueHistory() {
           </div>
           <div className="lululemon-revenue-bars" aria-label="Lululemon annual net revenue">
             {LULULEMON_REVENUE_HISTORY.map((row) => (
-              <div className="lululemon-revenue-column" key={row.year}>
+              <div
+                className={`lululemon-revenue-column${row.estimate ? " estimate" : ""}`}
+                key={row.year}
+              >
                 <strong>{row.display}</strong>
                 <span className="lululemon-revenue-track">
                   <i style={{ height: `${(row.value / maxRevenue) * 100}%` }} />
                 </span>
-                <b>{row.year}</b>
+                <b>{row.year}{row.estimate ? "*" : ""}</b>
               </div>
             ))}
           </div>
@@ -1667,7 +1671,7 @@ function LululemonRevenueHistory() {
       </div>
 
       <p className="lululemon-source-note">
-        Source: Lululemon Athletica Inc. Form 10-K filings. Values are rounded for display.
+        Source: Lululemon Athletica Inc. Form 10-K filings. *2026 is an estimated SEP25-SEP26 TTM total company net revenue of $11.09B from the workbook source inputs; values are rounded for display.
       </p>
     </article>
   );

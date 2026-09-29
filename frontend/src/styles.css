@@ -2952,7 +2952,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   margin-top: 24px;
   padding: 12px 8px 0;
   display: grid;
-  grid-template-columns: repeat(5, minmax(44px, 1fr));
+  grid-template-columns: repeat(6, minmax(40px, 1fr));
   gap: 12px;
   border-bottom: 1px solid #dccdd1;
   background-image: repeating-linear-gradient(
@@ -2993,6 +2993,16 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   background: linear-gradient(180deg, #d40039, #b60030);
   border-radius: 7px 7px 2px 2px;
   box-shadow: 0 7px 14px rgba(198, 0, 50, 0.12);
+}
+
+.lululemon-revenue-column.estimate > strong,
+.lululemon-revenue-column.estimate > b {
+  color: #777174;
+}
+
+.lululemon-revenue-column.estimate .lululemon-revenue-track i {
+  background: linear-gradient(180deg, #b8b5b6, #858182);
+  box-shadow: 0 7px 14px rgba(90, 86, 87, 0.14);
 }
 
 .lululemon-region-grid {
