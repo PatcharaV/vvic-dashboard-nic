@@ -629,7 +629,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   const maxBase = Math.max(...rows.map((row) => row.comparisonBase), 1);
   const baseLabel = isSales
     ? "Lululemon est. FOB"
-    : `Lululemon ${isUnits ? "units" : "products"}`;
+    : `Lululemon ${isUnits ? "Total Units" : "Products"}`;
   const tableLabel = isSales ? "Lululemon Revenue" : baseLabel;
 
   return (
@@ -640,7 +640,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
           {baseLabel}
         </span>
         <span><i className="nyg-key" />NYG</span>
-        <strong>{metric === "sales" ? "Sales" : metric === "units" ? "Units" : "Products"}</strong>
+        <strong>{metric === "sales" ? "Revenue" : metric === "units" ? "Total Units" : "Products"}</strong>
       </div>
       <div className="lululemon-subtype-chart-layout">
         <div className="lululemon-subtype-plot">
@@ -916,8 +916,8 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
             <span>1. View by</span>
             <div className="lululemon-comparison-toggle" aria-label="Comparison metric">
               {[
-                { value: "sales", label: "Sales" },
-                { value: "units", label: "Units" },
+                { value: "sales", label: "Revenue" },
+                { value: "units", label: "Total Units" },
                 { value: "products", label: "Products" },
               ].map((option) => (
                 <button
