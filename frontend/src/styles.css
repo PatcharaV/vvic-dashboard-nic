@@ -1266,9 +1266,10 @@ h2 {
 }
 
 .lululemon-comparison-controls {
-  min-width: 420px;
+  width: min(100%, 240px);
+  min-width: 180px;
   display: grid;
-  grid-template-columns: auto minmax(150px, 1fr);
+  grid-template-columns: minmax(150px, 1fr);
   align-items: end;
   gap: 10px;
 }
@@ -1296,35 +1297,6 @@ h2 {
   border-radius: 10px;
   font-size: 11px;
   font-weight: 800;
-}
-
-.lululemon-comparison-toggle {
-  padding: 3px;
-  display: flex;
-  gap: 3px;
-  background: #f4e9eb;
-  border: 1px solid #ead1d6;
-  border-radius: 10px;
-}
-
-.lululemon-comparison-toggle button {
-  color: #6b4d53;
-  background: transparent;
-  border: 0;
-  border-radius: 7px;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.lululemon-comparison-toggle button {
-  min-width: 74px;
-  padding: 9px 13px;
-}
-
-.lululemon-comparison-toggle button:hover,
-.lululemon-comparison-toggle button.active {
-  color: #fff;
-  background: var(--lululemon-red);
 }
 
 .lululemon-comparison-stats {
@@ -3950,10 +3922,6 @@ footer a {
     min-width: 0;
   }
 
-  .lululemon-comparison-toggle {
-    width: fit-content;
-  }
-
   .lululemon-sales-card {
     grid-column: 1 / -1;
   }
@@ -4252,16 +4220,8 @@ footer a {
     padding: 18px;
   }
 
-  .lululemon-comparison-toggle {
-    width: 100%;
-  }
-
   .lululemon-comparison-controls {
     grid-template-columns: 1fr;
-  }
-
-  .lululemon-comparison-toggle button {
-    flex: 1;
   }
 
   .lululemon-comparison-stats {

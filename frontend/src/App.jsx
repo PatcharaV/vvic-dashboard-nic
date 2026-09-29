@@ -953,7 +953,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   );
 }
 
-function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect }) {
+function LululemonNygComparison({ metric, selectedKey, onSelect }) {
   const selected =
     LULULEMON_NYG_COMPARISON.find((row) => row.key === selectedKey) ||
     LULULEMON_NYG_COMPARISON[0];
@@ -979,31 +979,12 @@ function LululemonNygComparison({ metric, onMetricChange, selectedKey, onSelect 
           <p className="eyebrow">INTERACTIVE COMPARISON</p>
           <h3>NYG share of Lululemon</h3>
           <p>
-            Choose one metric and one scope. Every card and chart below updates together.
+            Choose a sub-type. Every card and chart below updates together.
           </p>
         </div>
         <div className="lululemon-comparison-controls">
           <label>
-            <span>1. View by</span>
-            <div className="lululemon-comparison-toggle" aria-label="Comparison metric">
-              {[
-                { value: "sales", label: "Revenue" },
-                { value: "units", label: "Total Units" },
-                { value: "products", label: "Products" },
-              ].map((option) => (
-                <button
-                  className={metric === option.value ? "active" : undefined}
-                  key={option.value}
-                  type="button"
-                  onClick={() => onMetricChange(option.value)}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </label>
-          <label>
-            <span>2. Sub-type</span>
+            <span>Sub-type</span>
             <select
               value={selected.key}
               onChange={(event) => onSelect(event.target.value)}
@@ -1194,7 +1175,7 @@ function LululemonMixCard({ title, rows, subtitle, featured = false, embedded = 
 }
 
 function LululemonBrandOverview() {
-  const [comparisonMetric, setComparisonMetric] = useState("sales");
+  const comparisonMetric = "sales";
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
   const selectedComparison =
     LULULEMON_NYG_COMPARISON.find(
@@ -1284,7 +1265,6 @@ function LululemonBrandOverview() {
 
         <LululemonNygComparison
           metric={comparisonMetric}
-          onMetricChange={setComparisonMetric}
           selectedKey={comparisonSubtype}
           onSelect={setComparisonSubtype}
         />
