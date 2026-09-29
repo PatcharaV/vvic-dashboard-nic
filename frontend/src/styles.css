@@ -1682,6 +1682,18 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   align-items: stretch;
 }
 
+.lululemon-style-portfolio-list.remaining {
+  order: 1;
+}
+
+.lululemon-style-coverage-summary {
+  order: 2;
+}
+
+.lululemon-style-portfolio-list.secured {
+  order: 3;
+}
+
 .lululemon-style-portfolio-list,
 .lululemon-style-coverage-summary {
   padding: 16px;
@@ -1898,28 +1910,48 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 .lululemon-style-share-charts {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
 }
 
 .lululemon-style-share-chart {
   min-width: 0;
-  padding: 12px 10px;
+  padding: 14px;
   display: grid;
-  justify-items: center;
   align-content: start;
-  gap: 12px;
+  gap: 11px;
   background: #fff;
   border: 1px solid #ecdde0;
   border-radius: 10px;
 }
 
 .lululemon-style-share-chart-heading {
-  min-height: 42px;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  text-align: left;
+}
+
+.lululemon-style-share-chart-heading > span {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  color: #fff;
+  background: var(--lululemon-red);
+  border-radius: 999px;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-share-chart.portfolio-share .lululemon-style-share-chart-heading > span {
+  background: #8d1730;
+}
+
+.lululemon-style-share-chart-heading > div {
+  min-width: 0;
   display: grid;
-  align-content: start;
-  gap: 4px;
-  text-align: center;
+  gap: 3px;
 }
 
 .lululemon-style-share-chart-heading strong {
@@ -1935,59 +1967,68 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   line-height: 1.35;
 }
 
-.lululemon-style-share-donut {
-  position: relative;
-  width: min(138px, 100%);
-  aspect-ratio: 1;
+.lululemon-style-share-progress {
   display: grid;
-  place-items: center;
-  background: conic-gradient(
-    var(--lululemon-red) 0 var(--style-share),
-    #f2dce1 var(--style-share) 100%
-  );
-  border-radius: 50%;
-  box-shadow: 0 8px 18px rgba(136, 17, 41, 0.1);
+  gap: 7px;
 }
 
-.lululemon-style-share-chart.portfolio-share .lululemon-style-share-donut {
-  background: conic-gradient(
-    #8d1730 0 var(--style-share),
-    #e9e4e5 var(--style-share) 100%
-  );
+.lululemon-style-share-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.lululemon-style-share-donut::after {
-  position: absolute;
-  inset: 25%;
-  content: "";
-  background: #fff;
-  border-radius: 50%;
-}
-
-.lululemon-style-share-donut > div {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  gap: 3px;
-  text-align: center;
-}
-
-.lululemon-style-share-donut strong {
+.lululemon-style-share-value strong {
   color: var(--lululemon-red);
-  font-size: 19px;
+  font-size: 24px;
   line-height: 1;
 }
 
-.lululemon-style-share-chart.portfolio-share .lululemon-style-share-donut strong {
+.lululemon-style-share-chart.portfolio-share .lululemon-style-share-value strong {
   color: #8d1730;
 }
 
-.lululemon-style-share-donut span {
+.lululemon-style-share-value span {
   color: #786f71;
   font-size: 7px;
   font-weight: 850;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+}
+
+.lululemon-style-share-track {
+  height: 12px;
+  overflow: hidden;
+  background: #f2dce1;
+  border-radius: 999px;
+}
+
+.lululemon-style-share-track i {
+  width: max(var(--style-share), 3px);
+  height: 100%;
+  display: block;
+  background: var(--lululemon-red);
+  border-radius: inherit;
+}
+
+.lululemon-style-share-chart.portfolio-share .lululemon-style-share-track {
+  background: #e9e4e5;
+}
+
+.lululemon-style-share-chart.portfolio-share .lululemon-style-share-track i {
+  background: #8d1730;
+}
+
+.lululemon-style-share-progress p {
+  color: #766e70;
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.lululemon-style-share-progress p strong {
+  color: #292527;
+  font-size: inherit;
 }
 
 .lululemon-style-share-breakdown {
@@ -4547,14 +4588,6 @@ footer a {
 
   .lululemon-portfolio-inner-ring {
     width: 144px;
-  }
-
-  .lululemon-style-share-charts {
-    grid-template-columns: 1fr;
-  }
-
-  .lululemon-style-share-donut {
-    width: 150px;
   }
 
   .lululemon-style-secured-list {

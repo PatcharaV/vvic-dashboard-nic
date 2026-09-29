@@ -1040,19 +1040,27 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
           <div className="lululemon-style-share-charts">
             <section className="lululemon-style-share-chart nyg-share">
               <div className="lululemon-style-share-chart-heading">
-                <strong>NYG Share of Style</strong>
-                <small>NYG sales within the selected style</small>
+                <span>Step 1</span>
+                <div>
+                  <strong>NYG Share of Selected Style</strong>
+                  <small>How much of this style is secured by NYG</small>
+                </div>
               </div>
               <div
-                className="lululemon-style-share-donut"
+                className="lululemon-style-share-progress"
                 style={{ "--style-share": `${innerChartShare}%` }}
                 role="img"
                 aria-label={`${formatComparisonShare(innerChartShare)} NYG share of ${selectedStyle.name}`}
               >
-                <div>
+                <div className="lululemon-style-share-value">
                   <strong>{formatComparisonShare(innerChartShare)}</strong>
-                  <span>of style</span>
+                  <span>NYG / style total</span>
                 </div>
+                <div className="lululemon-style-share-track"><i /></div>
+                <p>
+                  NYG secures <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
+                  {" "}out of <strong>{formatComparisonValue(styleSales, "sales")}</strong>
+                </p>
               </div>
               <div className="lululemon-style-share-breakdown">
                 <div>
@@ -1072,19 +1080,27 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
 
             <section className="lululemon-style-share-chart portfolio-share">
               <div className="lululemon-style-share-chart-heading">
-                <strong>Style Share of {subtypeLabel}</strong>
-                <small>Selected style within the product type</small>
+                <span>Step 2</span>
+                <div>
+                  <strong>Selected Style Share of {subtypeLabel}</strong>
+                  <small>How large this style is within the product type</small>
+                </div>
               </div>
               <div
-                className="lululemon-style-share-donut"
+                className="lululemon-style-share-progress"
                 style={{ "--style-share": `${outerChartShare}%` }}
                 role="img"
                 aria-label={`${formatComparisonShare(stylePortfolioShare)} ${selectedStyle.name} share of the ${subtypeLabel} portfolio`}
               >
-                <div>
+                <div className="lululemon-style-share-value">
                   <strong>{formatComparisonShare(stylePortfolioShare)}</strong>
-                  <span>of {subtypeLabel}</span>
+                  <span>style / total {subtypeLabel}</span>
                 </div>
+                <div className="lululemon-style-share-track"><i /></div>
+                <p>
+                  This style contributes <strong>{formatComparisonValue(styleSales, "sales")}</strong>
+                  {" "}out of <strong>{formatComparisonValue(portfolioSales, "sales")}</strong>
+                </p>
               </div>
               <div className="lululemon-style-share-breakdown">
                 <div>
@@ -1160,7 +1176,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
 
         <div className="lululemon-style-portfolio-list remaining">
           <div className="lululemon-style-portfolio-heading">
-            <span>Top remaining opportunities</span>
+            <span>Lululemon opportunities</span>
             <strong>
               Top 5 each / {formatNumber.format(normalizedOpportunityStyles.length)} {opportunityUnit}
             </strong>
