@@ -673,7 +673,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
         <div className="lululemon-subtype-table-wrap">
           <div className="lululemon-subtype-table-controls" aria-label="Table value">
             {[
-              { value: "sales", label: "Revenue" },
+              { value: "sales", label: "Sale" },
               { value: "units", label: "Units" },
             ].map((option) => (
               <button
