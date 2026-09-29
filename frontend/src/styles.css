@@ -1807,6 +1807,14 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   order: 2;
 }
 
+.lululemon-style-secured-column {
+  min-width: 0;
+  order: 2;
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
 .lululemon-style-portfolio-list,
 .lululemon-style-coverage-summary {
   padding: 16px;
@@ -1833,6 +1841,64 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   max-width: 240px;
   font-size: 10px;
   line-height: 1.5;
+}
+
+.lululemon-nyk-fabric-list {
+  margin-top: 12px;
+  display: grid;
+  gap: 7px;
+}
+
+.lululemon-nyk-fabric-list > div {
+  padding: 9px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #f7f7f8;
+  border-left: 3px solid #403a3c;
+  border-radius: 7px;
+}
+
+.lululemon-nyk-fabric-list > div > span {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-nyk-fabric-list strong {
+  color: #292527;
+  font-size: 9px;
+}
+
+.lululemon-nyk-fabric-list small {
+  color: #857d7f;
+  font-size: 8px;
+}
+
+.lululemon-nyk-fabric-list b {
+  flex: 0 0 auto;
+  color: var(--lululemon-dark-red);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.lululemon-nyk-empty {
+  min-height: 96px;
+  display: grid;
+  place-content: center;
+  gap: 5px;
+  color: #81787a;
+  text-align: center;
+}
+
+.lululemon-nyk-empty strong {
+  color: #3f3a3c;
+  font-size: 11px;
+}
+
+.lululemon-nyk-empty span {
+  font-size: 9px;
 }
 
 .lululemon-style-portfolio-heading {

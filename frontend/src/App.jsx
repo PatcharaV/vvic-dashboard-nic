@@ -1007,6 +1007,43 @@ function LululemonOpportunityList({
   );
 }
 
+function LululemonNykFabricPanel({ subtypeKey }) {
+  const nykStyles = LULULEMON_NYG_STYLES.filter(
+    (style) => style.subtype === subtypeKey && style.nykFabricYards > 0,
+  ).sort((left, right) => right.nykFabricYards - left.nykFabricYards);
+  const totalYards = nykStyles.reduce(
+    (sum, style) => sum + style.nykFabricYards,
+    0,
+  );
+
+  return (
+    <div className="lululemon-style-portfolio-list nyk-fabric">
+      <div className="lululemon-style-portfolio-heading">
+        <span>NYK fabric used</span>
+        <strong>{formatNumber.format(Math.round(totalYards))} YDS</strong>
+      </div>
+      {nykStyles.length > 0 ? (
+        <div className="lululemon-nyk-fabric-list">
+          {nykStyles.map((style) => (
+            <div key={style.key}>
+              <span>
+                <strong>{style.name}</strong>
+                <small>{style.season}</small>
+              </span>
+              <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="lululemon-nyk-empty">
+          <strong>No NYK fabric recorded</strong>
+          <span>No NYK fabric usage is available for this sub-type.</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const styles = useMemo(
     () => [
@@ -1118,15 +1155,18 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             expandedGenders={expandedOpportunityGenders}
             onToggleGender={toggleOpportunityGender}
           />
-          <div className="lululemon-style-portfolio-list secured empty">
-            <div className="lululemon-style-portfolio-heading">
-              <span>NYG secured</span>
-              <strong>0 style entries</strong>
+          <div className="lululemon-style-secured-column">
+            <div className="lululemon-style-portfolio-list secured empty">
+              <div className="lululemon-style-portfolio-heading">
+                <span>NYG secured</span>
+                <strong>0 style entries</strong>
+              </div>
+              <div className="lululemon-no-secured-styles">
+                <strong>No secured styles yet</strong>
+                <span>The programs on the left are the current opportunities for NYG.</span>
+              </div>
             </div>
-            <div className="lululemon-no-secured-styles">
-              <strong>No secured styles yet</strong>
-              <span>The programs on the left are the current opportunities for NYG.</span>
-            </div>
+            <LululemonNykFabricPanel subtypeKey={subtypeKey} />
           </div>
         </div>
         <p className="lululemon-style-taxonomy-note">
@@ -1167,59 +1207,62 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         {subtypeControls}
       </div>
       <div className="lululemon-style-coverage-grid">
-        <div className="lululemon-style-portfolio-list secured">
-          <div className="lululemon-style-portfolio-heading">
-            <span>NYG secured</span>
-            <strong>{formatNumber.format(styles.length)} style entries</strong>
+        <div className="lululemon-style-secured-column">
+          <div className="lululemon-style-portfolio-list secured">
+            <div className="lululemon-style-portfolio-heading">
+              <span>NYG secured</span>
+              <strong>{formatNumber.format(styles.length)} style entries</strong>
+            </div>
+            <div className="lululemon-secured-periods">
+              {securedPeriodGroups.map((period) => (
+                <section className="lululemon-secured-period" key={period.key}>
+                  <div className="lululemon-secured-period-heading">
+                    <span>{period.label}</span>
+                    <b>{period.styles.length} {period.styles.length === 1 ? "style" : "styles"}</b>
+                  </div>
+                  <div className="lululemon-style-secured-list">
+                    {period.genderGroups.map((group) => (
+                      <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
+                        <div className="lululemon-style-gender-heading">
+                          <span>{group.gender}</span>
+                          <b>{group.styles.length} {group.styles.length === 1 ? "style" : "styles"}</b>
+                        </div>
+                        <div className="lululemon-style-gender-items">
+                          {group.styles.map((style) => (
+                            <div className="lululemon-secured-style" key={style.key}>
+                              <span>
+                                <strong>{style.name}</strong>
+                                <small>{style.season}</small>
+                                {(style.nygFabricYards > 0 || style.nykFabricYards > 0) && (
+                                  <span className="lululemon-secured-fabric">
+                                    {style.nygFabricYards > 0 && (
+                                      <span>
+                                        NYG fabric <b>{formatNumber.format(Math.round(style.nygFabricYards))} YDS</b>
+                                      </span>
+                                    )}
+                                    {style.nykFabricYards > 0 && (
+                                      <span className="nyk">
+                                        NYK fabric <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
+                                      </span>
+                                    )}
+                                  </span>
+                                )}
+                              </span>
+                              <b>{formatComparisonValue(style.nygSales, "sales")}</b>
+                            </div>
+                          ))}
+                          {group.styles.length === 0 && (
+                            <small className="lululemon-style-gender-empty">No secured styles</small>
+                          )}
+                        </div>
+                      </section>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
           </div>
-          <div className="lululemon-secured-periods">
-            {securedPeriodGroups.map((period) => (
-              <section className="lululemon-secured-period" key={period.key}>
-                <div className="lululemon-secured-period-heading">
-                  <span>{period.label}</span>
-                  <b>{period.styles.length} {period.styles.length === 1 ? "style" : "styles"}</b>
-                </div>
-                <div className="lululemon-style-secured-list">
-                  {period.genderGroups.map((group) => (
-                    <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
-                      <div className="lululemon-style-gender-heading">
-                        <span>{group.gender}</span>
-                        <b>{group.styles.length} {group.styles.length === 1 ? "style" : "styles"}</b>
-                      </div>
-                      <div className="lululemon-style-gender-items">
-                        {group.styles.map((style) => (
-                          <div className="lululemon-secured-style" key={style.key}>
-                            <span>
-                              <strong>{style.name}</strong>
-                              <small>{style.season}</small>
-                              {(style.nygFabricYards > 0 || style.nykFabricYards > 0) && (
-                                <span className="lululemon-secured-fabric">
-                                  {style.nygFabricYards > 0 && (
-                                    <span>
-                                      NYG fabric <b>{formatNumber.format(Math.round(style.nygFabricYards))} YDS</b>
-                                    </span>
-                                  )}
-                                  {style.nykFabricYards > 0 && (
-                                    <span className="nyk">
-                                      NYK fabric <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
-                                    </span>
-                                  )}
-                                </span>
-                              )}
-                            </span>
-                            <b>{formatComparisonValue(style.nygSales, "sales")}</b>
-                          </div>
-                        ))}
-                        {group.styles.length === 0 && (
-                          <small className="lululemon-style-gender-empty">No secured styles</small>
-                        )}
-                      </div>
-                    </section>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
+          <LululemonNykFabricPanel subtypeKey={subtypeKey} />
         </div>
 
         <LululemonOpportunityList
