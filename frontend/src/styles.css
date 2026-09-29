@@ -2440,6 +2440,107 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   height: 12px;
 }
 
+/* Keep red as the dominant visual anchor across the Lululemon overview. */
+.lululemon-brand-overview .lululemon-overview-section {
+  background:
+    radial-gradient(circle at 96% 0, rgba(211, 19, 52, 0.13), transparent 25rem),
+    linear-gradient(145deg, #fff8f9 0%, #fff 48%, #fff3f5 100%);
+  border-color: rgba(211, 19, 52, 0.24);
+  box-shadow: 0 12px 34px rgba(122, 10, 33, 0.09);
+}
+
+.lululemon-brand-overview .lululemon-overview-heading {
+  padding: clamp(18px, 2.4vw, 26px);
+  overflow: hidden;
+  align-items: center;
+  background: linear-gradient(125deg, var(--lululemon-dark-red), var(--lululemon-red) 64%, #e42a4a);
+  border-radius: 14px;
+  box-shadow: 0 12px 24px rgba(153, 15, 41, 0.2);
+}
+
+.lululemon-brand-overview .lululemon-overview-heading h2,
+.lululemon-brand-overview .lululemon-overview-heading .eyebrow,
+.lululemon-brand-overview .lululemon-overview-heading .lululemon-wordmark {
+  color: #fff;
+}
+
+.lululemon-brand-overview .lululemon-overview-heading .eyebrow {
+  opacity: 0.82;
+}
+
+.lululemon-brand-overview .lululemon-wordmark {
+  text-shadow: 0 2px 10px rgba(77, 0, 18, 0.18);
+}
+
+.lululemon-brand-overview .lululemon-metric-card {
+  background: linear-gradient(150deg, #fff, #fff0f3);
+  border-color: rgba(211, 19, 52, 0.25);
+  border-top: 4px solid var(--lululemon-red);
+  box-shadow: 0 9px 20px rgba(153, 15, 41, 0.08);
+}
+
+.lululemon-brand-overview .lululemon-metric-icon {
+  color: #fff;
+  background: linear-gradient(135deg, var(--lululemon-red), var(--lululemon-dark-red));
+  box-shadow: 0 6px 14px rgba(153, 15, 41, 0.18);
+}
+
+.lululemon-brand-overview .lululemon-history-card,
+.lululemon-brand-overview .lululemon-history-insights > section,
+.lululemon-brand-overview .lululemon-overview-card {
+  background: linear-gradient(145deg, #fff, #fff6f7);
+  border-color: rgba(211, 19, 52, 0.2);
+  border-top: 3px solid var(--lululemon-red);
+  box-shadow: 0 8px 20px rgba(120, 15, 35, 0.07);
+}
+
+.lululemon-brand-overview .lululemon-history-card-heading h3,
+.lululemon-brand-overview .lululemon-history-insights h3,
+.lululemon-brand-overview .lululemon-overview-card h3 {
+  color: var(--lululemon-dark-red);
+}
+
+.lululemon-brand-overview .lululemon-region-card,
+.lululemon-brand-overview .lululemon-subtype-plot,
+.lululemon-brand-overview .lululemon-style-portfolio-list,
+.lululemon-brand-overview .lululemon-style-coverage-summary,
+.lululemon-brand-overview .lululemon-mix-card.embedded {
+  background: #fff7f8;
+  border-color: rgba(211, 19, 52, 0.18);
+}
+
+.lululemon-brand-overview .lululemon-comparison-card {
+  background:
+    linear-gradient(135deg, rgba(255, 237, 241, 0.98), rgba(255, 255, 255, 0.98));
+  border-color: rgba(211, 19, 52, 0.26);
+  box-shadow: 0 10px 26px rgba(153, 15, 41, 0.1);
+}
+
+.lululemon-brand-overview .lululemon-comparison-stats > div:not(.share) {
+  border-top: 3px solid var(--lululemon-red);
+}
+
+.lululemon-brand-overview .lululemon-subtype-table th {
+  background: linear-gradient(110deg, var(--lululemon-dark-red), var(--lululemon-red));
+}
+
+.lululemon-brand-overview .lululemon-subtype-table-controls {
+  background: #fff0f3;
+  border-color: rgba(211, 19, 52, 0.18);
+}
+
+.lululemon-brand-overview .lululemon-bar-track {
+  background: #f9dce2;
+}
+
+.lululemon-brand-overview .lululemon-source-note {
+  padding: 10px 12px;
+  color: #6b3d47;
+  background: rgba(255, 236, 240, 0.72);
+  border-left: 3px solid var(--lululemon-red);
+  border-radius: 0 8px 8px 0;
+}
+
 .control-panel {
   margin-top: 0;
   padding: 24px 28px;
