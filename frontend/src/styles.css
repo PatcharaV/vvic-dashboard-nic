@@ -1748,7 +1748,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 .lululemon-style-coverage-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: minmax(250px, 0.9fr) minmax(320px, 1fr) minmax(280px, 1fr);
+  grid-template-columns: minmax(420px, 1.7fr) minmax(300px, 0.8fr);
   gap: 16px;
   align-items: stretch;
 }
@@ -1803,12 +1803,8 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   order: 1;
 }
 
-.lululemon-style-coverage-summary {
-  order: 2;
-}
-
 .lululemon-style-portfolio-list.secured {
-  order: 3;
+  order: 2;
 }
 
 .lululemon-style-portfolio-list,
@@ -1955,7 +1951,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   scrollbar-gutter: stable;
 }
 
-.lululemon-style-secured-list button {
+.lululemon-secured-style {
   width: 100%;
   padding: 9px 10px;
   display: flex;
@@ -1971,13 +1967,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   text-align: left;
 }
 
-.lululemon-style-secured-list button:hover,
-.lululemon-style-secured-list button.selected {
-  background: #fff0f3;
-  border-color: rgba(211, 19, 52, 0.28);
-}
-
-.lululemon-style-secured-list button > span {
+.lululemon-secured-style > span {
   min-width: 0;
   display: grid;
   gap: 4px;
@@ -4894,7 +4884,7 @@ footer a {
     gap: 8px;
   }
 
-  .lululemon-style-secured-list button {
+  .lululemon-secured-style {
     align-items: flex-start;
     flex-direction: column;
     gap: 5px;
