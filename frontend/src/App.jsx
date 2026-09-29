@@ -964,33 +964,39 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
       gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
     };
   });
-  const genderPortfolioStyleMap = new Map(
-    normalizedOpportunityStyles.map((style) => [
-      normalizeLululemonStyleName(style.name),
-      style,
-    ]),
-  );
-  for (const style of selectedPeriodStyles) {
-    const normalizedName = normalizeLululemonStyleName(style.name);
-    if (!genderPortfolioStyleMap.has(normalizedName)) {
-      genderPortfolioStyleMap.set(normalizedName, {
-        name: style.name,
-        gender: style.gender,
-        sales: style.lululemonRevenue,
-        variants: 1,
-      });
-    }
-  }
-  const genderPortfolioSales = Object.fromEntries(
+  const genderPortfolioStyles = [
+    ...normalizedOpportunityStyles,
+    ...selectedPeriodStyles.map((style) => ({
+      name: style.name,
+      gender: style.gender,
+      sales: style.lululemonRevenue,
+      variants: 1,
+    })),
+  ];
+  const rawGenderPortfolioSales = Object.fromEntries(
     LULULEMON_GENDERS.map((gender) => [
       gender,
-      [...genderPortfolioStyleMap.values()]
+      genderPortfolioStyles
         .filter((style) => style.gender === gender)
         .reduce((sum, style) => sum + (style.sales || 0), 0),
     ]),
   );
+  const authoritativePortfolioSales = subtypeSales + crossClassifiedRevenue;
+  const rawGenderPortfolioTotal = LULULEMON_GENDERS.reduce(
+    (sum, gender) => sum + rawGenderPortfolioSales[gender],
+    0,
+  );
+  const genderPortfolioScale = rawGenderPortfolioTotal
+    ? authoritativePortfolioSales / rawGenderPortfolioTotal
+    : 0;
+  const genderPortfolioSales = Object.fromEntries(
+    LULULEMON_GENDERS.map((gender) => [
+      gender,
+      rawGenderPortfolioSales[gender] * genderPortfolioScale,
+    ]),
+  );
   const portfolioSales =
-    genderPortfolioSales[selectedStyle.gender] || subtypeSales + crossClassifiedRevenue;
+    genderPortfolioSales[selectedStyle.gender] || authoritativePortfolioSales;
   const otherStylesSales = Math.max(portfolioSales - styleSales, 0);
   const stylePortfolioShare = portfolioSales
     ? (styleSales / portfolioSales) * 100
@@ -1018,9 +1024,18 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
     gender,
     styles: normalizedOpportunityStyles.filter((style) => style.gender === gender),
   }));
-  const otherPortfolioStyleMap = new Map(
-    normalizedOpportunityStyles.map((style) => [normalizeLululemonStyleName(style.name), style]),
-  );
+  const otherPortfolioStyleMap = new Map();
+  for (const style of normalizedOpportunityStyles) {
+    const normalizedName = normalizeLululemonStyleName(style.name);
+    const existingStyle = otherPortfolioStyleMap.get(normalizedName);
+    if (existingStyle) {
+      existingStyle.sales = (existingStyle.sales || 0) + (style.sales || 0);
+      existingStyle.variants = (existingStyle.variants || 1) + (style.variants || 1);
+    } else {
+      otherPortfolioStyleMap.set(normalizedName, { ...style });
+    }
+  }
+  otherPortfolioStyleMap.delete(normalizeLululemonStyleName(selectedStyle.name));
   for (const style of selectedPeriodStyles) {
     if (style.key === selectedStyle.key) continue;
     const normalizedName = normalizeLululemonStyleName(style.name);
@@ -1121,6 +1136,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
               </div>
             ))}
           </div>
+          <small className="lululemon-style-gender-method">
+            Gender totals use style-level Lululemon sales, classified by product audience and naming, then reconciled to the full {subtypeLabel} total.
+          </small>
           <div className="lululemon-style-share-charts">
             <section className="lululemon-style-share-chart nyg-share">
               <div className="lululemon-style-share-chart-heading">

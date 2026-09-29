@@ -1996,6 +1996,14 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   color: var(--lululemon-red);
 }
 
+.lululemon-style-gender-method {
+  margin-top: -9px;
+  color: #857d7f;
+  font-size: 7px;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .lululemon-style-share-charts {
   width: 100%;
   display: grid;
