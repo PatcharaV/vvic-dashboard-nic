@@ -872,12 +872,10 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
     (row) => row.key === subtypeKey,
   );
   const [selectedStyleKey, setSelectedStyleKey] = useState("");
-  const [opportunityQuery, setOpportunityQuery] = useState("");
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
 
   useEffect(() => {
     setSelectedStyleKey(styles[0]?.key || "");
-    setOpportunityQuery("");
     setExpandedOpportunityGenders({});
   }, [styles]);
 
@@ -905,9 +903,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   const outerChartShare = Math.min(Math.max(stylePortfolioShare, 0), 100);
   const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
   const opportunityUnit = coverage.rawRemaining ? "families" : "styles";
-  const opportunityStyles = subtypeKey === "pant"
-    ? LULULEMON_PANT_STYLE_FAMILIES
-    : LULULEMON_REMAINING_OPPORTUNITIES[subtypeKey] || coverage.topRemaining;
+  const opportunityStyles =
+    LULULEMON_REMAINING_OPPORTUNITIES[subtypeKey] ||
+    (subtypeKey === "pant" ? LULULEMON_PANT_STYLE_FAMILIES : coverage.topRemaining);
   const normalizedOpportunityStyles = opportunityStyles.map((style) => {
     const name = typeof style === "string" ? style : style.name;
     return {
@@ -917,19 +915,13 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
       gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
     };
   });
-  const normalizedOpportunityQuery = opportunityQuery.trim().toLowerCase();
-  const filteredOpportunityStyles = normalizedOpportunityQuery
-    ? normalizedOpportunityStyles.filter((style) =>
-        style.name.toLowerCase().includes(normalizedOpportunityQuery),
-      )
-    : normalizedOpportunityStyles;
   const securedGenderGroups = LULULEMON_GENDERS.map((gender) => ({
     gender,
     styles: styles.filter((style) => style.gender === gender),
   }));
   const opportunityGenderGroups = LULULEMON_GENDERS.map((gender) => ({
     gender,
-    styles: filteredOpportunityStyles.filter((style) => style.gender === gender),
+    styles: normalizedOpportunityStyles.filter((style) => style.gender === gender),
   }));
 
   return (
@@ -1032,11 +1024,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
 
         <div className="lululemon-style-portfolio-list remaining">
           <div className="lululemon-style-portfolio-heading">
-            <span>{coverage.rawRemaining ? "Remaining style families" : "Top remaining opportunities"}</span>
+            <span>Top remaining opportunities</span>
             <strong>
-              {coverage.rawRemaining
-                ? `${formatNumber.format(coverage.remaining)} ${opportunityUnit}`
-                : `Top 5 each / ${formatNumber.format(normalizedOpportunityStyles.length)} ${opportunityUnit}`}
+              Top 5 each / {formatNumber.format(normalizedOpportunityStyles.length)} {opportunityUnit}
             </strong>
           </div>
           {coverage.rawRemaining && (
@@ -1044,33 +1034,21 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
               {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} families; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
             </p>
           )}
-          {coverage.rawRemaining && (
-            <input
-              className="lululemon-style-family-search"
-              type="search"
-              value={opportunityQuery}
-              placeholder="Search remaining style families..."
-              aria-label="Search remaining style families"
-              onChange={(event) => setOpportunityQuery(event.target.value)}
-            />
-          )}
-          <div className={`lululemon-style-opportunity-groups ${coverage.rawRemaining ? "family-list" : "ranked-list"}`}>
+          <div className="lululemon-style-opportunity-groups ranked-list">
             {opportunityGenderGroups.map((group) => {
-              const isExpanded = coverage.rawRemaining || expandedOpportunityGenders[group.gender];
+              const isExpanded = expandedOpportunityGenders[group.gender];
               const displayedStyles = isExpanded ? group.styles : group.styles.slice(0, 5);
               return (
                 <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
                   <div className="lululemon-style-gender-heading">
                     <span>{group.gender}</span>
                     <b>
-                      {coverage.rawRemaining
-                        ? `${group.styles.length} families`
-                        : isExpanded
-                          ? `All ${group.styles.length}`
-                          : `Top ${Math.min(5, group.styles.length)}`}
+                      {isExpanded
+                        ? `All ${group.styles.length}`
+                        : `Top ${Math.min(5, group.styles.length)}`}
                     </b>
                   </div>
-                  <ol className={isExpanded && !coverage.rawRemaining ? "expanded" : undefined}>
+                  <ol className={isExpanded ? "expanded" : undefined}>
                     {displayedStyles.map((style) => (
                       <li key={style.name}>
                         <span>{style.name}</span>
@@ -1083,7 +1061,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
                       </li>
                     ))}
                   </ol>
-                  {!coverage.rawRemaining && group.styles.length > 5 && (
+                  {group.styles.length > 5 && (
                     <button
                       className="lululemon-style-view-more"
                       type="button"
@@ -1107,9 +1085,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
               );
             })}
           </div>
-          {coverage.rawRemaining && filteredOpportunityStyles.length === 0 && (
-            <p className="lululemon-style-family-empty">No matching style families</p>
-          )}
         </div>
       </div>
       {taxonomyDifference > 0 && (

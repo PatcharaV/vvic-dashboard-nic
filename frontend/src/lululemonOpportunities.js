@@ -5911,5 +5911,1582 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "name": "Knit Relaxed-Fit Overshirt",
       "sales": 3214.2335256021493
     }
+  ],
+  "pant": [
+    {
+      "name": "Align High-Rise Pant",
+      "variants": 3,
+      "sales": 278663839.34196633
+    },
+    {
+      "name": "Align No Line High-Rise Pant",
+      "variants": 2,
+      "sales": 208015874.2125866
+    },
+    {
+      "name": "ABC Slim-Fit Trouser",
+      "variants": 9,
+      "sales": 176895282.82648563
+    },
+    {
+      "name": "Align High-Rise Pant With Pockets",
+      "variants": 3,
+      "sales": 167890946.86498716
+    },
+    {
+      "name": "Wunder Train High-Rise Tight",
+      "variants": 4,
+      "sales": 147410516.20260692
+    },
+    {
+      "name": "ABC Classic-Fit Trouser",
+      "variants": 8,
+      "sales": 135606506.01611793
+    },
+    {
+      "name": "Fast and Free High-Rise Tight",
+      "variants": 2,
+      "sales": 111878496.99633433
+    },
+    {
+      "name": "Wunder Train No Line High-Rise Tight",
+      "variants": 2,
+      "sales": 93383548.03464265
+    },
+    {
+      "name": "Groove Nulu High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 91965852.12563531
+    },
+    {
+      "name": "Dance Studio Mid-Rise Pant",
+      "variants": 1,
+      "sales": 87218549.66701701
+    },
+    {
+      "name": "Align High-Rise Crop",
+      "variants": 3,
+      "sales": 73036251.46110633
+    },
+    {
+      "name": "Abc Slim-Fit Pant",
+      "variants": 5,
+      "sales": 67681329.78823686
+    },
+    {
+      "name": "Daydrift High-Rise Trouser",
+      "variants": 1,
+      "sales": 63756274.23546395
+    },
+    {
+      "name": "Groove High-Rise Nulu Flared Pant",
+      "variants": 1,
+      "sales": 61998465.396542944
+    },
+    {
+      "name": "Zeroed In Slim-Fit Pant",
+      "variants": 1,
+      "sales": 56574574.2337826
+    },
+    {
+      "name": "Wunder Train High-Rise Tight With Pockets",
+      "variants": 2,
+      "sales": 55973540.3368272
+    },
+    {
+      "name": "Glow Up Super-High-Rise Tight",
+      "variants": 2,
+      "sales": 43722384.72442228
+    },
+    {
+      "name": "Abc Classic-Fit Pant",
+      "variants": 5,
+      "sales": 39913898.79446208
+    },
+    {
+      "name": "Daydrift High-Rise Straight-Leg Trouser",
+      "variants": 1,
+      "sales": 36362412.75173228
+    },
+    {
+      "name": "Align Palazzo Pant",
+      "variants": 1,
+      "sales": 32643337.38083719
+    },
+    {
+      "name": "Scuba Mid-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 29436722.948647115
+    },
+    {
+      "name": "Define High-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 20964511.700483147
+    },
+    {
+      "name": "Daydrift High-Rise Wide-Leg Trouser",
+      "variants": 2,
+      "sales": 19707065.997857004
+    },
+    {
+      "name": "Men's Daydrift Classic-Fit Trouser",
+      "variants": 3,
+      "sales": 18552816.351622544
+    },
+    {
+      "name": "EasyFive Classic-Straight Pant",
+      "variants": 3,
+      "sales": 17589310.205905817
+    },
+    {
+      "name": "ABC Slim-Fit Golf Trouser",
+      "variants": 4,
+      "sales": 17105628.783869244
+    },
+    {
+      "name": "Groove Wide-Leg High-Rise Pant",
+      "variants": 1,
+      "sales": 16424081.152502947
+    },
+    {
+      "name": "Men's Daydrift Relaxed-Fit Pleated Trouser",
+      "variants": 1,
+      "sales": 16327978.706720414
+    },
+    {
+      "name": "Wunder Under SmoothCover High-Rise Tight",
+      "variants": 2,
+      "sales": 15743933.397675509
+    },
+    {
+      "name": "Groove Nulu Super-High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 15267992.949362395
+    },
+    {
+      "name": "Softstreme Pintuck Mid-Rise Pant",
+      "variants": 1,
+      "sales": 14892895.87558491
+    },
+    {
+      "name": "Smooth Spacer Pintuck Pant",
+      "variants": 1,
+      "sales": 13193024.346180703
+    },
+    {
+      "name": "Daydrift High-Rise Tapered Trouser",
+      "variants": 1,
+      "sales": 12723296.385251665
+    },
+    {
+      "name": "Wunder Train High-Rise Crop",
+      "variants": 3,
+      "sales": 11941826.912797034
+    },
+    {
+      "name": "Soft Jersey Classic-Fit Pant",
+      "variants": 1,
+      "sales": 11623446.62260097
+    },
+    {
+      "name": "EasyFive Loose-Straight Pant",
+      "variants": 3,
+      "sales": 10818980.14547138
+    },
+    {
+      "name": "Pace Breaker Pant",
+      "variants": 1,
+      "sales": 10444297.258877646
+    },
+    {
+      "name": "Steady State Classic-Fit Pant",
+      "variants": 1,
+      "sales": 10400866.763840716
+    },
+    {
+      "name": "Swift Mid-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 9879136.040004002
+    },
+    {
+      "name": "Align No Line High-Rise Twist Tight",
+      "variants": 1,
+      "sales": 9552131.28005917
+    },
+    {
+      "name": "Softstreme Pintuck High-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 9424909.787779529
+    },
+    {
+      "name": "Women's Steady State Oversized Track Pant",
+      "variants": 1,
+      "sales": 8638633.941535477
+    },
+    {
+      "name": "Fast and Free High-Rise Crop",
+      "variants": 2,
+      "sales": 8489059.753381738
+    },
+    {
+      "name": "EasyFive Low-Rise Classic Wide-Leg Pant",
+      "variants": 1,
+      "sales": 8468974.870317543
+    },
+    {
+      "name": "Groove Nulu Foldover-Waist Flared Pant",
+      "variants": 1,
+      "sales": 8450869.95838194
+    },
+    {
+      "name": "Softstreme High-Rise Pant",
+      "variants": 1,
+      "sales": 7747122.249307525
+    },
+    {
+      "name": "Define Mid-Rise Track Pant",
+      "variants": 1,
+      "sales": 7656627.510843105
+    },
+    {
+      "name": "Dance Studio Mid-Rise Crop",
+      "variants": 2,
+      "sales": 7434384.5128474375
+    },
+    {
+      "name": "Get Low High-Rise Training Tight",
+      "variants": 1,
+      "sales": 6729566.400651859
+    },
+    {
+      "name": "Pace Breaker Luxtreme Track Pant",
+      "variants": 1,
+      "sales": 6680566.38964914
+    },
+    {
+      "name": "Groove High-Rise Flared Pant with Pockets",
+      "variants": 1,
+      "sales": 6634050.487632509
+    },
+    {
+      "name": "Paisley Lace Overlay Tight",
+      "variants": 1,
+      "sales": 6445357.497567516
+    },
+    {
+      "name": "Court Rival Wide-Leg Track Pant",
+      "variants": 3,
+      "sales": 6430695.37939474
+    },
+    {
+      "name": "French Terry Mid-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 6289492.740783105
+    },
+    {
+      "name": "Plush Velour Mid-Rise Pant",
+      "variants": 1,
+      "sales": 6127308.927796868
+    },
+    {
+      "name": "Breezily Mid-Rise Pant",
+      "variants": 1,
+      "sales": 6097827.021785892
+    },
+    {
+      "name": "Swift Speed High-Rise Tight",
+      "variants": 2,
+      "sales": 6070758.755080756
+    },
+    {
+      "name": "BeCalm Oversized Mid-Rise Pant",
+      "variants": 1,
+      "sales": 5481426.157804651
+    },
+    {
+      "name": "EasyFive Mid-Rise Relaxed-Straight Pant",
+      "variants": 1,
+      "sales": 5385218.592826143
+    },
+    {
+      "name": "Brushed Softstreme Mid-Rise Flared Pant",
+      "variants": 1,
+      "sales": 5320243.249230219
+    },
+    {
+      "name": "EasyFive Slim-Straight Pant",
+      "variants": 3,
+      "sales": 5249429.707149014
+    },
+    {
+      "name": "Loungeful Classic-Fit High-Rise Sweatpant",
+      "variants": 1,
+      "sales": 5162059.042117051
+    },
+    {
+      "name": "Align Super-High-Rise Pant",
+      "variants": 1,
+      "sales": 5063295.307725828
+    },
+    {
+      "name": "Align High-Rise Mini-Flare Pant",
+      "variants": 1,
+      "sales": 4733136.79440829
+    },
+    {
+      "name": "Softstreme High-Rise Straight-Leg Pant",
+      "variants": 1,
+      "sales": 4674182.304817668
+    },
+    {
+      "name": "Fast and Free High-Rise Thermal Tight",
+      "variants": 3,
+      "sales": 4471879.678082714
+    },
+    {
+      "name": "Groove High-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 4434846.117896428
+    },
+    {
+      "name": "BeCalm Mid-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 4335388.349644732
+    },
+    {
+      "name": "ABC Classic-Fit 5 Pocket Pant",
+      "variants": 4,
+      "sales": 4075023.045513946
+    },
+    {
+      "name": "Groove No Line High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 3686531.77164607
+    },
+    {
+      "name": "Stretch Woven Ruffle-Waist Wide-Leg Cropped Pant",
+      "variants": 1,
+      "sales": 3605313.179747513
+    },
+    {
+      "name": "Satin Shine Panelled High-Rise Tight",
+      "variants": 1,
+      "sales": 3458065.744783797
+    },
+    {
+      "name": "Dance Studio Relaxed-Fit Mid-Rise Cropped Pant",
+      "variants": 1,
+      "sales": 3344882.1665749447
+    },
+    {
+      "name": "Matte Satin Relaxed-Fit Mid-Rise Cargo Pant",
+      "variants": 1,
+      "sales": 3278490.669740125
+    },
+    {
+      "name": "Groove No Line High-Rise Tight",
+      "variants": 1,
+      "sales": 3186022.5414790343
+    },
+    {
+      "name": "ABC Slim-Fit 5 Pocket Pant",
+      "variants": 4,
+      "sales": 3124754.851415154
+    },
+    {
+      "name": "Fast and Free Half Tight",
+      "variants": 1,
+      "sales": 3014002.8411928164
+    },
+    {
+      "name": "Stretch Twill Golf Pant",
+      "variants": 2,
+      "sales": 2986773.244280862
+    },
+    {
+      "name": "Softy Suedey Split-Hem High-Rise Mini-Flare Pant",
+      "variants": 1,
+      "sales": 2925502.049967162
+    },
+    {
+      "name": "Wunder Train No-Line Piped High-Rise Tight",
+      "variants": 1,
+      "sales": 2921934.3042989876
+    },
+    {
+      "name": "Softstreme High-Rise Wide-Leg Pique Pant",
+      "variants": 1,
+      "sales": 2905199.3133131596
+    },
+    {
+      "name": "Groove High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 2868269.351855024
+    },
+    {
+      "name": "Align No Line High-Rise Crop",
+      "variants": 2,
+      "sales": 2861214.1304404614
+    },
+    {
+      "name": "Dance Studio Relaxed-Fit Mid-Rise Cargo Pant",
+      "variants": 1,
+      "sales": 2659287.4669519276
+    },
+    {
+      "name": "Soft Jersey Tapered Pant",
+      "variants": 1,
+      "sales": 2608699.8792354483
+    },
+    {
+      "name": "Pique Relaxed-Fit Track Pant",
+      "variants": 1,
+      "sales": 2532034.6926336847
+    },
+    {
+      "name": "ABC Relaxed-Fit Trouser",
+      "variants": 1,
+      "sales": 2523848.7724690093
+    },
+    {
+      "name": "Softy Suedey Cross-Waist Tight",
+      "variants": 1,
+      "sales": 2466927.1206048955
+    },
+    {
+      "name": "Pace Breaker Track Pant",
+      "variants": 1,
+      "sales": 2287564.9219230963
+    },
+    {
+      "name": "EasyFive High-Rise Subtle-Flare Pant",
+      "variants": 1,
+      "sales": 2282664.6162557164
+    },
+    {
+      "name": "Groove High-Rise Notched-Hem Crop",
+      "variants": 1,
+      "sales": 2281681.5125872022
+    },
+    {
+      "name": "Women's Big Cozy Ultra-Oversized Wide-Leg Pant",
+      "variants": 1,
+      "sales": 2180789.431699788
+    },
+    {
+      "name": "Men's Daydrift Classic-Fit Pintuck Trouser",
+      "variants": 1,
+      "sales": 2156348.3871349944
+    },
+    {
+      "name": "Breezily Mid-Rise Cropped Pant",
+      "variants": 1,
+      "sales": 2145193.8533979245
+    },
+    {
+      "name": "All it Takes Ruched-Waist Tight",
+      "variants": 1,
+      "sales": 2007142.7352146509
+    },
+    {
+      "name": "Align High-Rise Ribbed Pant",
+      "variants": 2,
+      "sales": 1983988.9684706596
+    },
+    {
+      "name": "ABC Skinny-Fit 5 Pocket Pant",
+      "variants": 3,
+      "sales": 1939082.4603761407
+    },
+    {
+      "name": "Zero Tucks Ripstop Relaxed-Fit Pant",
+      "variants": 1,
+      "sales": 1934840.1814459604
+    },
+    {
+      "name": "Unrestricted Power High-Rise Tight",
+      "variants": 2,
+      "sales": 1883405.3315459169
+    },
+    {
+      "name": "Wunder Under SmoothCover High-Rise Bootcut Pant",
+      "variants": 1,
+      "sales": 1855423.8452329754
+    },
+    {
+      "name": "Groove High-Rise Ribbed Wide-Flare Pant",
+      "variants": 1,
+      "sales": 1837496.7296016046
+    },
+    {
+      "name": "Paisley Sheer Lace Jacquard Panelled High-Rise Tight",
+      "variants": 1,
+      "sales": 1761882.718116986
+    },
+    {
+      "name": "Commission Slim-Fit Pant",
+      "variants": 7,
+      "sales": 1638073.3465588503
+    },
+    {
+      "name": "Groove High-Rise Tight",
+      "variants": 1,
+      "sales": 1619440.1087292724
+    },
+    {
+      "name": "Stretch Twill Relaxed-Fit Golf Pant",
+      "variants": 1,
+      "sales": 1303740.2861644493
+    },
+    {
+      "name": "Align High-Rise Ribbed Crop",
+      "variants": 1,
+      "sales": 1301419.1407573568
+    },
+    {
+      "name": "Commission Classic-Fit Pant",
+      "variants": 7,
+      "sales": 1299452.3624472907
+    },
+    {
+      "name": "Wunder Under SenseKnit High-Rise Tight",
+      "variants": 1,
+      "sales": 1218807.9272749303
+    },
+    {
+      "name": "Wunder Train Contour Fit High-Rise Tight",
+      "variants": 2,
+      "sales": 1153070.182087598
+    },
+    {
+      "name": "Dance Studio Slim-Fit High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 1151094.7326595746
+    },
+    {
+      "name": "Ripstop Pull-On Pant",
+      "variants": 1,
+      "sales": 1141984.9126235438
+    },
+    {
+      "name": "LuluLinen Mid-Rise Cargo Pant",
+      "variants": 1,
+      "sales": 1138321.4383160179
+    },
+    {
+      "name": "Utilitech Twill Relaxed Pleated Trouser",
+      "variants": 1,
+      "sales": 1058043.9444713842
+    },
+    {
+      "name": "ABC Warpstreme Slim-Fit Pull-On Pant",
+      "variants": 1,
+      "sales": 1044256.9109392555
+    },
+    {
+      "name": "Align High-Rise Crop With Pockets",
+      "variants": 1,
+      "sales": 1026799.1680684094
+    },
+    {
+      "name": "Swift High-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 1013280.4251886117
+    },
+    {
+      "name": "Satin Shine High-Rise Tight",
+      "variants": 2,
+      "sales": 1010389.8551021488
+    },
+    {
+      "name": "Scuba Evolve Straight-Leg Pant",
+      "variants": 1,
+      "sales": 997420.2817101751
+    },
+    {
+      "name": "Softstreme High-Rise Straight Leg Cropped Pants",
+      "variants": 1,
+      "sales": 916192.0692535548
+    },
+    {
+      "name": "Wunder Train Mesh Panel High-Rise Tight",
+      "variants": 2,
+      "sales": 780170.7560224206
+    },
+    {
+      "name": "License to Train High-Rise Tight",
+      "variants": 1,
+      "sales": 768647.662969853
+    },
+    {
+      "name": "Paisley Lace Jacquard High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 763136.2530832167
+    },
+    {
+      "name": "Softy Suedey High-Rise Tight",
+      "variants": 2,
+      "sales": 759228.5419088542
+    },
+    {
+      "name": "Align No-Line High-Rise Pant",
+      "variants": 1,
+      "sales": 752791.277968497
+    },
+    {
+      "name": "New Venture Slim-Fit Pique Trouser",
+      "variants": 1,
+      "sales": 710868.9471966953
+    },
+    {
+      "name": "Mesh Soft Jersey Pant",
+      "variants": 1,
+      "sales": 688091.5944320679
+    },
+    {
+      "name": "Slacker Classic-Straight Trouser",
+      "variants": 3,
+      "sales": 686891.9406104109
+    },
+    {
+      "name": "Nulu Cinch-Hem Drapey Pant",
+      "variants": 1,
+      "sales": 675788.1968172666
+    },
+    {
+      "name": "Slacker Loose-Straight Trouser",
+      "variants": 1,
+      "sales": 667806.7741585049
+    },
+    {
+      "name": "Base Pace High-Rise Tight",
+      "variants": 2,
+      "sales": 653503.0582739458
+    },
+    {
+      "name": "Nulu Sporty Trim Mid-Rise Flared Pant",
+      "variants": 1,
+      "sales": 640579.3677749567
+    },
+    {
+      "name": "Sleek Spacer Barrel-Leg Pant",
+      "variants": 1,
+      "sales": 636602.7780241978
+    },
+    {
+      "name": "Glow Up Super-High-Rise Crop",
+      "variants": 1,
+      "sales": 613143.2495916835
+    },
+    {
+      "name": "Ribbed Softstreme Flared Pant",
+      "variants": 1,
+      "sales": 612680.4473222968
+    },
+    {
+      "name": "Fast and Free Tight",
+      "variants": 1,
+      "sales": 587145.548250771
+    },
+    {
+      "name": "Nulu High-Rise Mesh-Panel Tight",
+      "variants": 1,
+      "sales": 583314.4560427073
+    },
+    {
+      "name": "Thermal High-Rise Running Tight",
+      "variants": 1,
+      "sales": 557256.6210809766
+    },
+    {
+      "name": "Crinkle Nylon Mid-Rise Track Pant",
+      "variants": 1,
+      "sales": 549832.596725932
+    },
+    {
+      "name": "Slacker Slim-Straight Trouser",
+      "variants": 3,
+      "sales": 543396.0330318384
+    },
+    {
+      "name": "Stretch Spacer High-Rise Pant",
+      "variants": 1,
+      "sales": 524205.6878104588
+    },
+    {
+      "name": "Stretch Knit Straight-Leg Pull-On Pant",
+      "variants": 1,
+      "sales": 479128.5328500072
+    },
+    {
+      "name": "Wunder Train High-Rise Crop With Pockets",
+      "variants": 1,
+      "sales": 473046.5243419026
+    },
+    {
+      "name": "Unshaken Relaxed-Fit Pant",
+      "variants": 1,
+      "sales": 464001.50057071965
+    },
+    {
+      "name": "Wunder Train V-Back Tight",
+      "variants": 1,
+      "sales": 460801.1309632919
+    },
+    {
+      "name": "Drapey Softstreme Flared Pant",
+      "variants": 1,
+      "sales": 459989.3408175576
+    },
+    {
+      "name": "Heavyweight Fleece Sweatshort",
+      "variants": 1,
+      "sales": 455353.7709859596
+    },
+    {
+      "name": "Striped Slim-Fit Mid-Rise Track Pant",
+      "variants": 1,
+      "sales": 454808.8511528846
+    },
+    {
+      "name": "Court Rival Tennis Track Pant",
+      "variants": 1,
+      "sales": 451231.3804172898
+    },
+    {
+      "name": "Engineered Knit Mesh Tennis Track Pant",
+      "variants": 1,
+      "sales": 446478.5946869326
+    },
+    {
+      "name": "Heavyweight Fleece Sweatpant",
+      "variants": 1,
+      "sales": 432367.24910978397
+    },
+    {
+      "name": "Ribbed Softstreme Zip-Leg High-Rise Cropped Pant",
+      "variants": 1,
+      "sales": 414283.0655360448
+    },
+    {
+      "name": "Woven Mid-Rise Barrel-Leg Pant",
+      "variants": 1,
+      "sales": 410151.4432432402
+    },
+    {
+      "name": "Groove Low-Rise Relaxed Cinch Pant",
+      "variants": 1,
+      "sales": 405459.2551716102
+    },
+    {
+      "name": "Align High-Rise Mini Flare Pant",
+      "variants": 1,
+      "sales": 383831.99480896175
+    },
+    {
+      "name": "Smooth Spacer Colourblock Pant",
+      "variants": 1,
+      "sales": 383573.67037541536
+    },
+    {
+      "name": "Balancer Woven Relaxed-Fit Pant",
+      "variants": 1,
+      "sales": 381674.86247564974
+    },
+    {
+      "name": "Groove Super-High-Rise Flared Pant Nulu",
+      "variants": 1,
+      "sales": 354294.07802230166
+    },
+    {
+      "name": "Flat Mate",
+      "variants": 1,
+      "sales": 345832.89411696163
+    },
+    {
+      "name": "Perforated Running Pant",
+      "variants": 1,
+      "sales": 344912.4314948053
+    },
+    {
+      "name": "Utilitech Carpenter Pant",
+      "variants": 1,
+      "sales": 340386.9068785896
+    },
+    {
+      "name": "Pleat-Front High-Rise Trouser",
+      "variants": 1,
+      "sales": 334300.21886949585
+    },
+    {
+      "name": "Cotton Twill Pintuck Pull-On Pant",
+      "variants": 1,
+      "sales": 323244.32807537814
+    },
+    {
+      "name": "Stretch-Ripstop Relaxed Cargo Pant",
+      "variants": 1,
+      "sales": 317137.707859412
+    },
+    {
+      "name": "Oversized Utilitech Twill Pant",
+      "variants": 1,
+      "sales": 307535.23813701037
+    },
+    {
+      "name": "Textured Spacer Relaxed Straight Pant",
+      "variants": 1,
+      "sales": 304106.70057102886
+    },
+    {
+      "name": "BeCalm Mid-Rise Flared Pant",
+      "variants": 1,
+      "sales": 291682.16408814123
+    },
+    {
+      "name": "Zero Tucks Relaxed-Fit Pant",
+      "variants": 1,
+      "sales": 289707.3469666172
+    },
+    {
+      "name": "Smooth Fit Pull-On High-Rise Pant",
+      "variants": 1,
+      "sales": 285444.1580699318
+    },
+    {
+      "name": "Align Ribbed High-Rise Pant",
+      "variants": 2,
+      "sales": 269843.1623865203
+    },
+    {
+      "name": "SenseKnit Running High-Rise Tight",
+      "variants": 1,
+      "sales": 269742.2979601625
+    },
+    {
+      "name": "Waterproof Golf Pant",
+      "variants": 1,
+      "sales": 267380.58318286523
+    },
+    {
+      "name": "Fleece High-Rise Running Tight",
+      "variants": 2,
+      "sales": 263289.00817072624
+    },
+    {
+      "name": "Go Further Super-High-Rise Race Tight",
+      "variants": 1,
+      "sales": 257980.5679439552
+    },
+    {
+      "name": "Satin Stripe Pant",
+      "variants": 1,
+      "sales": 257308.0751193499
+    },
+    {
+      "name": "Smooth Fit Pull-On High-Rise Cropped Pant",
+      "variants": 1,
+      "sales": 256589.72463703135
+    },
+    {
+      "name": "Commission Classic-Tapered Golf Pant",
+      "variants": 1,
+      "sales": 253644.94995512613
+    },
+    {
+      "name": "Lightweight Mid-Rise Barrel-Leg Cropped Pant",
+      "variants": 1,
+      "sales": 252755.6363314417
+    },
+    {
+      "name": "Waffle-Knit High-Rise Base Layer Tight",
+      "variants": 1,
+      "sales": 248455.01369442322
+    },
+    {
+      "name": "Ultralu Contour-Seam High-Rise Tight",
+      "variants": 1,
+      "sales": 243149.07682674838
+    },
+    {
+      "name": "Engineered Warmth Cable-Knit Pant",
+      "variants": 1,
+      "sales": 242299.1252525151
+    },
+    {
+      "name": "In Mind Pant",
+      "variants": 1,
+      "sales": 237294.28375967167
+    },
+    {
+      "name": "Cut-Out Waist High-Rise Train Tight",
+      "variants": 1,
+      "sales": 231756.72931622446
+    },
+    {
+      "name": "Ultralu Corset-Stitch Tight",
+      "variants": 1,
+      "sales": 221920.25998165333
+    },
+    {
+      "name": "Seersucker WovenAir High-Rise Pleated Pant",
+      "variants": 1,
+      "sales": 215217.79477553308
+    },
+    {
+      "name": "ABC Relaxed-Fit 5 Pocket Pant",
+      "variants": 3,
+      "sales": 210007.177406289
+    },
+    {
+      "name": "Lunar New Year lululemon Align High-Rise Pant",
+      "variants": 1,
+      "sales": 209741.95819363717
+    },
+    {
+      "name": "Mile Maker Cold-Weather Pant",
+      "variants": 1,
+      "sales": 206084.04170073883
+    },
+    {
+      "name": "Zeroed In Double-Knit Mesh Slim-Fit Pant",
+      "variants": 1,
+      "sales": 205893.89933322594
+    },
+    {
+      "name": "Relaxed-Tapered Smooth Twill Trouser",
+      "variants": 1,
+      "sales": 190820.15232709335
+    },
+    {
+      "name": "The Norm Pleated Trouser",
+      "variants": 1,
+      "sales": 177998.2391938202
+    },
+    {
+      "name": "Breezily High-Rise Cargo Pant",
+      "variants": 1,
+      "sales": 175228.93569157005
+    },
+    {
+      "name": "Stretch Cotton VersaTwill Relaxed-Fit Cargo Pant",
+      "variants": 1,
+      "sales": 171643.70897245157
+    },
+    {
+      "name": "Align Ruched Petal-Hem Tight",
+      "variants": 1,
+      "sales": 158435.83601959856
+    },
+    {
+      "name": "Disney x lululemon",
+      "variants": 1,
+      "sales": 156980.79388741247
+    },
+    {
+      "name": "Everlux Slim-Fit High-Rise Track Pant",
+      "variants": 1,
+      "sales": 146035.144619876
+    },
+    {
+      "name": "Loungeful Barrel-Leg High-Rise Cropped Pant",
+      "variants": 1,
+      "sales": 138119.36887432542
+    },
+    {
+      "name": "Zeroed In Slim-Fit Fleece Pant",
+      "variants": 1,
+      "sales": 137316.09534960534
+    },
+    {
+      "name": "Textured Spacer Classic-Tapered Pant",
+      "variants": 1,
+      "sales": 135491.16539509612
+    },
+    {
+      "name": "Seamless Base Layer Tight",
+      "variants": 1,
+      "sales": 134968.1642878341
+    },
+    {
+      "name": "Fast and Free High-Rise Crop 23 Pockets",
+      "variants": 1,
+      "sales": 127510.6343292236
+    },
+    {
+      "name": "Scuba Mid-Rise Tapered Pant",
+      "variants": 1,
+      "sales": 123678.11609382181
+    },
+    {
+      "name": "Cotton Twill Pleat-Front Trouser",
+      "variants": 1,
+      "sales": 120245.78898907802
+    },
+    {
+      "name": "RevealKnit Eyelet High-Rise Tight",
+      "variants": 1,
+      "sales": 115090.08001084885
+    },
+    {
+      "name": "Ponte Wide-Leg Pintuck Pant",
+      "variants": 1,
+      "sales": 114602.8593031044
+    },
+    {
+      "name": "ABC Classic-Fit Golf Trouser",
+      "variants": 1,
+      "sales": 113458.86660987817
+    },
+    {
+      "name": "Cotton Fleece Mid-Rise Straight-Leg Pant",
+      "variants": 1,
+      "sales": 111043.5103973343
+    },
+    {
+      "name": "All-Sport Workout Tight",
+      "variants": 1,
+      "sales": 109630.64382529526
+    },
+    {
+      "name": "Mesh-Panelled Nulu High-Rise Yoga Crops",
+      "variants": 1,
+      "sales": 109561.32102452702
+    },
+    {
+      "name": "Ventilated Tennis Tight",
+      "variants": 1,
+      "sales": 106866.93053047755
+    },
+    {
+      "name": "Wunder Under SmoothCover High-Rise Crop",
+      "variants": 1,
+      "sales": 106732.14577075471
+    },
+    {
+      "name": "High-Rise Golf Pull-On Cropped Pant",
+      "variants": 1,
+      "sales": 106116.28943944485
+    },
+    {
+      "name": "Santa Monica High-Rise Tight",
+      "variants": 1,
+      "sales": 104098.49417623474
+    },
+    {
+      "name": "ABC WovenAir Slim Pull-On Pant",
+      "variants": 1,
+      "sales": 102450.5281697562
+    },
+    {
+      "name": "Stretch Knit High-Rise Pull-On Pant",
+      "variants": 1,
+      "sales": 101541.84843701267
+    },
+    {
+      "name": "Nylon Track Pant",
+      "variants": 1,
+      "sales": 100909.73967519069
+    },
+    {
+      "name": "Packable Lightweight Hiking Pant",
+      "variants": 1,
+      "sales": 98917.51644654745
+    },
+    {
+      "name": "Gridliner Pull-On Trouser",
+      "variants": 1,
+      "sales": 98243.7464564483
+    },
+    {
+      "name": "3D Jacquard Paisley Train High-Rise Tight",
+      "variants": 1,
+      "sales": 97085.48615002958
+    },
+    {
+      "name": "RevealKnit Interlace Mid-Rise Tight",
+      "variants": 1,
+      "sales": 96109.39375960575
+    },
+    {
+      "name": "Nulux Side-Stripe High-Rise Tight",
+      "variants": 1,
+      "sales": 95131.14877355294
+    },
+    {
+      "name": "Grand Standard Pant",
+      "variants": 1,
+      "sales": 86883.76374697074
+    },
+    {
+      "name": "Wunder Under SmoothCover High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 79953.52959600602
+    },
+    {
+      "name": "Balancer Relaxed-Fit Pant",
+      "variants": 1,
+      "sales": 78830.23352560215
+    },
+    {
+      "name": "Velour Pant",
+      "variants": 1,
+      "sales": 75409.56046165674
+    },
+    {
+      "name": "Align Ribbed High-Rise Crop",
+      "variants": 1,
+      "sales": 70459.04795648031
+    },
+    {
+      "name": "Lightweight Adjustable Mid-Rise Cargo Pant",
+      "variants": 1,
+      "sales": 69885.71108029371
+    },
+    {
+      "name": "Brentwood High-Rise Track Pant",
+      "variants": 1,
+      "sales": 69546.59236572668
+    },
+    {
+      "name": "lab Jacquard Relaxed-Tapered Pant",
+      "variants": 1,
+      "sales": 69544.32537211922
+    },
+    {
+      "name": "Team Canada Cold Weather Flared Pant",
+      "variants": 2,
+      "sales": 69010.73719790859
+    },
+    {
+      "name": "Daydrift Low-Rise Capri Pant",
+      "variants": 1,
+      "sales": 66944.14172953725
+    },
+    {
+      "name": "Everlux High-Rise Tight",
+      "variants": 1,
+      "sales": 66219.98635025139
+    },
+    {
+      "name": "Relaxed-Fit Back Pocket Pant",
+      "variants": 1,
+      "sales": 62887.17767482465
+    },
+    {
+      "name": "Faded French Terry Barrel-Leg Pant",
+      "variants": 1,
+      "sales": 57686.680145800216
+    },
+    {
+      "name": "Lunar New Year Wunder Train High-Rise Tight",
+      "variants": 1,
+      "sales": 57479.30387746768
+    },
+    {
+      "name": "Mesh-Panelled High-Rise Tight",
+      "variants": 1,
+      "sales": 57018.65747504388
+    },
+    {
+      "name": "Swift Shine Mid-Rise Zip-Leg Pant",
+      "variants": 1,
+      "sales": 56702.2131634387
+    },
+    {
+      "name": "Zeroed In Classic-Fit Pant",
+      "variants": 1,
+      "sales": 56646.429541981524
+    },
+    {
+      "name": "Nulux Running Half Tight",
+      "variants": 1,
+      "sales": 56107.43084315882
+    },
+    {
+      "name": "Fast and Free Cold Weather Tight",
+      "variants": 1,
+      "sales": 53215.94635113348
+    },
+    {
+      "name": "RevealKnit Floral High-Rise 7/8 Tight",
+      "variants": 1,
+      "sales": 51896.449679226025
+    },
+    {
+      "name": "Wunder Under SmoothCover Tight",
+      "variants": 1,
+      "sales": 50843.33031407036
+    },
+    {
+      "name": "Slim-Tapered Smooth Twill Trouser",
+      "variants": 1,
+      "sales": 49344.20163414524
+    },
+    {
+      "name": "Ripstop Mid-Rise Utility Pant",
+      "variants": 1,
+      "sales": 48232
+    },
+    {
+      "name": "Satin Shine High-Rise Train Tight",
+      "variants": 1,
+      "sales": 48005.1217299783
+    },
+    {
+      "name": "Crinkle Nylon Mid-Rise Barrel-Leg Pant",
+      "variants": 1,
+      "sales": 45532.857532640715
+    },
+    {
+      "name": "Cold Weather Straight-Leg Pant",
+      "variants": 1,
+      "sales": 45177.132083166965
+    },
+    {
+      "name": "Stitch Trim High-Rise Tight",
+      "variants": 1,
+      "sales": 43977.66450644653
+    },
+    {
+      "name": "Fast and Free Running Pant",
+      "variants": 1,
+      "sales": 43872.80543509652
+    },
+    {
+      "name": "Soft Jersey Straight-Leg Mid-Rise Pant",
+      "variants": 1,
+      "sales": 43180.259768289536
+    },
+    {
+      "name": "Water-Repellent Classic-Fit Golf Pant",
+      "variants": 1,
+      "sales": 42932.67389005874
+    },
+    {
+      "name": "Salutations High-Rise Yoga Tight",
+      "variants": 1,
+      "sales": 42778.10271260884
+    },
+    {
+      "name": "Abc Skinny-Fit Pant",
+      "variants": 2,
+      "sales": 42356.73744805362
+    },
+    {
+      "name": "Women's Steady State SuperLoft Pant",
+      "variants": 1,
+      "sales": 42123.82197518389
+    },
+    {
+      "name": "WeHo Wide-Leg Pant",
+      "variants": 1,
+      "sales": 41505.53726538427
+    },
+    {
+      "name": "Base Pace High-Rise Running Tight",
+      "variants": 1,
+      "sales": 40048.75685325365
+    },
+    {
+      "name": "Relaxed-Fit Workout Track Pant",
+      "variants": 1,
+      "sales": 38147.74355349649
+    },
+    {
+      "name": "Align Ruched-Leg Pant",
+      "variants": 1,
+      "sales": 30641.08916270665
+    },
+    {
+      "name": "Nulu High-Rise Flared Pant",
+      "variants": 1,
+      "sales": 29700.957617668868
+    },
+    {
+      "name": "Woven Pintuck Pant",
+      "variants": 1,
+      "sales": 29346.93684244875
+    },
+    {
+      "name": "Cold Weather High-Rise Running Tight",
+      "variants": 1,
+      "sales": 28508.853879253842
+    },
+    {
+      "name": "Cashmere Straight Leg Pant",
+      "variants": 1,
+      "sales": 27937.152264028162
+    },
+    {
+      "name": "Groove High-Rise Ribbed Panel Tight",
+      "variants": 2,
+      "sales": 27517.405707733444
+    },
+    {
+      "name": "Malibu Pant",
+      "variants": 1,
+      "sales": 27095.120872861306
+    },
+    {
+      "name": "License To Train Tight",
+      "variants": 1,
+      "sales": 26213.57776479223
+    },
+    {
+      "name": "Women's Heavyweight French Terry Pant",
+      "variants": 1,
+      "sales": 24310.737172682504
+    },
+    {
+      "name": "Men's Heavyweight French Terry Pant",
+      "variants": 1,
+      "sales": 22823.032041755505
+    },
+    {
+      "name": "Utilitech Twill Mid-Rise Carpenter Pant",
+      "variants": 1,
+      "sales": 21044.65252047971
+    },
+    {
+      "name": "Fast And Free Reflective High-Rise Crop",
+      "variants": 1,
+      "sales": 19946.03413120701
+    },
+    {
+      "name": "Everlux Mid-Rise Tight",
+      "variants": 1,
+      "sales": 15905.74629353665
+    },
+    {
+      "name": "Seamless High-Rise Training Tight",
+      "variants": 1,
+      "sales": 15452.88291821112
+    },
+    {
+      "name": "Dance Studio Evolve Low-Rise Oversized Pant",
+      "variants": 1,
+      "sales": 15448.64809143167
+    },
+    {
+      "name": "Pleated Pull-On Pant",
+      "variants": 1,
+      "sales": 15065.396267891496
+    },
+    {
+      "name": "Align High-Rise Wide-Leg Pant",
+      "variants": 1,
+      "sales": 14658.852897064347
+    },
+    {
+      "name": "Power Thru High-Rise Tight",
+      "variants": 1,
+      "sales": 14171.847817427655
+    },
+    {
+      "name": "Team Canada Womens Big Cozy Oversized Sweatpant",
+      "variants": 1,
+      "sales": 13780.12634032858
+    },
+    {
+      "name": "Nylon Mid-Rise Track Pant",
+      "variants": 1,
+      "sales": 12440.213469813461
+    },
+    {
+      "name": "Utilitech Twill Mid-Rise Barrel-Leg Pant",
+      "variants": 1,
+      "sales": 11738.939832633936
+    },
+    {
+      "name": "Mesh Panelled High-Rise Tight",
+      "variants": 1,
+      "sales": 11249.60719158009
+    },
+    {
+      "name": "Wunder Under SmoothCover Ruched Pant",
+      "variants": 1,
+      "sales": 11049.754820031882
+    },
+    {
+      "name": "Fast and Free Waterproof Rain Pant",
+      "variants": 1,
+      "sales": 10817.196279137443
+    },
+    {
+      "name": "Groove Nulu Foldover-Waist Tight",
+      "variants": 1,
+      "sales": 10595.536602182578
+    },
+    {
+      "name": "Team Canada Steady State Pant",
+      "variants": 1,
+      "sales": 9106.994989206089
+    },
+    {
+      "name": "Stretch High-Rise Pant",
+      "variants": 1,
+      "sales": 8713.247463334916
+    },
+    {
+      "name": "Swift Speed High-Rise Crop",
+      "variants": 1,
+      "sales": 8347.583814005373
+    },
+    {
+      "name": "Scuba Straight-Leg Pant",
+      "variants": 1,
+      "sales": 8196.507231624451
+    },
+    {
+      "name": "Go Further High-Rise Race Tight",
+      "variants": 1,
+      "sales": 7859.838502658219
+    },
+    {
+      "name": "Ribbed Merino Wool-Blend Pant",
+      "variants": 1,
+      "sales": 7300.841367770889
+    },
+    {
+      "name": "lab Stretch Cupro Pants",
+      "variants": 1,
+      "sales": 7055.2214145628195
+    },
+    {
+      "name": "Smooth Spacer Classic-Fit Cargo Pant",
+      "variants": 1,
+      "sales": 5939.344558177883
+    },
+    {
+      "name": "Invigorate High-Rise Tight",
+      "variants": 1,
+      "sales": 5706.429085308163
+    },
+    {
+      "name": "New Venture Trouser",
+      "variants": 1,
+      "sales": 5030.974213985972
+    },
+    {
+      "name": "ABC Warpsteme Cargo Pant",
+      "variants": 1,
+      "sales": 4715.4796189169865
+    },
+    {
+      "name": "InStill High-Rise Tight",
+      "variants": 1,
+      "sales": 3895.7320930458136
+    },
+    {
+      "name": "Pleated Stretch High-Rise Wide-Leg Cropped Pant",
+      "variants": 1,
+      "sales": 3431.017453434087
+    },
+    {
+      "name": "SenseKnit Running High-Rise Crop",
+      "variants": 1,
+      "sales": 3353.982809323981
+    },
+    {
+      "name": "Wunder Train Contour Fit High-Rise Crop",
+      "variants": 1,
+      "sales": 2922.030477820135
+    },
+    {
+      "name": "Everlux Relaxed Train Pant",
+      "variants": 1,
+      "sales": 2151.989190137971
+    },
+    {
+      "name": "Wunder Under Everlux High-Rise Tight",
+      "variants": 1,
+      "sales": 1981.7225843610859
+    },
+    {
+      "name": "Fast and Free 6-Pocket High-Rise Crop",
+      "variants": 1,
+      "sales": 1897.2023971933634
+    },
+    {
+      "name": "Align Mini-Flare Pant",
+      "variants": 1,
+      "sales": 1676.9914046619906
+    },
+    {
+      "name": "Team Canada Women's Insulated Seated-Fit Pant",
+      "variants": 1,
+      "sales": 1346.674915864932
+    },
+    {
+      "name": "Fast and Free Reflective High-Rise Tight",
+      "variants": 1,
+      "sales": 1130.6987501130088
+    },
+    {
+      "name": "Wunder Under High-Rise Tight",
+      "variants": 1,
+      "sales": 1037.5325609651206
+    },
+    {
+      "name": "City Sleek 5 Pocket Wide-Leg Pant",
+      "variants": 1,
+      "sales": 753.7991667420059
+    },
+    {
+      "name": "Utilitech Relaxed-Fit Mid-Rise Trouser",
+      "variants": 1,
+      "sales": 669.1026311530165
+    },
+    {
+      "name": "Softstreme High-Rise Straight Leg Crop",
+      "variants": 1,
+      "sales": 499.7095599750377
+    },
+    {
+      "name": "RevealKnit Pointelle High-Rise 7/8 Tight",
+      "variants": 1,
+      "sales": 376.89958337100296
+    },
+    {
+      "name": "Base Pace High-Rise Crop",
+      "variants": 1,
+      "sales": 306
+    },
+    {
+      "name": "Tear-Away Mid-Rise Track Pant",
+      "variants": 1,
+      "sales": 249.85477998751884
+    },
+    {
+      "name": "Team Canada Women's Insulated Relaxed-Fit Pant",
+      "variants": 1,
+      "sales": 0
+    },
+    {
+      "name": "Men's Daydrift Relaxed Pleated Trouser",
+      "variants": 1,
+      "sales": 0
+    },
+    {
+      "name": "Team Canada ABC Seated-Fit Relaxed 5 Pocket Pant",
+      "variants": 1,
+      "sales": 0
+    },
+    {
+      "name": "BeCalm Mid-Rise Straight-Leg Pant",
+      "variants": 1,
+      "sales": 0
+    },
+    {
+      "name": "Utilitech Twill Utility Pant",
+      "variants": 1,
+      "sales": 0
+    },
+    {
+      "name": "The Norm Pleated Smooth Twill Trouser",
+      "variants": 1,
+      "sales": 0
+    }
   ]
 };
