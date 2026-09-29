@@ -851,6 +851,77 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   );
 }
 
+function LululemonOpportunityList({
+  coverage,
+  groups,
+  opportunityUnit,
+  total,
+  expandedGenders,
+  onToggleGender,
+}) {
+  return (
+    <div className="lululemon-style-portfolio-list remaining">
+      <div className="lululemon-style-portfolio-heading">
+        <span>Lululemon opportunities</span>
+        <strong>
+          Top 5 each / {formatNumber.format(total)} {opportunityUnit}
+        </strong>
+      </div>
+      {coverage.rawRemaining && (
+        <p className="lululemon-style-family-note">
+          {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} families; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
+        </p>
+      )}
+      <div className="lululemon-style-opportunity-groups ranked-list">
+        {groups.map((group) => {
+          const isExpanded = expandedGenders[group.gender];
+          const displayedStyles = isExpanded ? group.styles : group.styles.slice(0, 5);
+          return (
+            <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
+              <div className="lululemon-style-gender-heading">
+                <span>{group.gender}</span>
+                <b>
+                  {isExpanded
+                    ? `All ${group.styles.length}`
+                    : `Top ${Math.min(5, group.styles.length)}`}
+                </b>
+              </div>
+              <ol className={isExpanded ? "expanded" : undefined}>
+                {displayedStyles.map((style) => (
+                  <li key={style.name}>
+                    <span>{style.name}</span>
+                    <span className="lululemon-style-opportunity-value">
+                      {style.sales !== null && (
+                        <strong>{formatComparisonValue(style.sales, "sales")}</strong>
+                      )}
+                      {style.variants > 1 && <b>{style.variants} length variants</b>}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              {group.styles.length > 5 && (
+                <button
+                  className="lululemon-style-view-more"
+                  type="button"
+                  aria-expanded={Boolean(isExpanded)}
+                  onClick={() => onToggleGender(group.gender)}
+                >
+                  {isExpanded
+                    ? "Show top 5"
+                    : `View more (${formatNumber.format(group.styles.length - 5)})`}
+                </button>
+              )}
+              {group.styles.length === 0 && (
+                <small className="lululemon-style-gender-empty">No matching styles</small>
+              )}
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect }) {
   const styles = useMemo(
     () => [
@@ -905,7 +976,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
     </div>
   );
 
-  if (subtypeKey === "overall" || styles.length === 0 || !coverage) {
+  if (subtypeKey === "overall" || !coverage) {
     return (
       <article className="lululemon-overview-card lululemon-style-card">
         <div className="lululemon-style-card-heading">
@@ -919,6 +990,67 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
           <strong>Select a sub-type</strong>
           <span>The opportunity list, comparison, and NYG secured styles will appear here.</span>
         </div>
+      </article>
+    );
+  }
+
+  const opportunityUnit = coverage.rawRemaining ? "families" : "styles";
+  const opportunityStyles =
+    LULULEMON_REMAINING_OPPORTUNITIES[subtypeKey] ||
+    (subtypeKey === "pant" ? LULULEMON_PANT_STYLE_FAMILIES : coverage.topRemaining);
+  const normalizedOpportunityStyles = opportunityStyles.map((style) => {
+    const name = typeof style === "string" ? style : style.name;
+    return {
+      name,
+      variants: typeof style === "string" ? 1 : style.variants,
+      sales: typeof style === "string" ? null : style.sales ?? null,
+      gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
+    };
+  });
+  const opportunityGenderGroups = LULULEMON_GENDERS.map((gender) => ({
+    gender,
+    styles: normalizedOpportunityStyles.filter((style) => style.gender === gender),
+  }));
+  const toggleOpportunityGender = (gender) => {
+    setExpandedOpportunityGenders((current) => ({
+      ...current,
+      [gender]: !current[gender],
+    }));
+  };
+
+  if (styles.length === 0) {
+    return (
+      <article className="lululemon-overview-card lululemon-style-card">
+        <div className="lululemon-style-card-heading">
+          <div>
+            <h3>{subtypeLabel} sales opportunities by style</h3>
+            <p>Top Lululemon programs available for NYG to pursue, ranked by sales.</p>
+          </div>
+          {subtypeControls}
+        </div>
+        <div className="lululemon-style-coverage-grid opportunity-only">
+          <LululemonOpportunityList
+            coverage={coverage}
+            groups={opportunityGenderGroups}
+            opportunityUnit={opportunityUnit}
+            total={normalizedOpportunityStyles.length}
+            expandedGenders={expandedOpportunityGenders}
+            onToggleGender={toggleOpportunityGender}
+          />
+          <div className="lululemon-style-portfolio-list secured empty">
+            <div className="lululemon-style-portfolio-heading">
+              <span>NYG secured</span>
+              <strong>0 style entries</strong>
+            </div>
+            <div className="lululemon-no-secured-styles">
+              <strong>No secured styles yet</strong>
+              <span>The programs on the left are the current opportunities for NYG.</span>
+            </div>
+          </div>
+        </div>
+        <p className="lululemon-style-taxonomy-note">
+          Opportunity gender is grouped from scraped product audience data and Lululemon style naming taxonomy.
+        </p>
       </article>
     );
   }
@@ -945,19 +1077,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
     : 0;
   const innerChartShare = Math.min(Math.max(nygStyleShare, 0), 100);
   const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
-  const opportunityUnit = coverage.rawRemaining ? "families" : "styles";
-  const opportunityStyles =
-    LULULEMON_REMAINING_OPPORTUNITIES[subtypeKey] ||
-    (subtypeKey === "pant" ? LULULEMON_PANT_STYLE_FAMILIES : coverage.topRemaining);
-  const normalizedOpportunityStyles = opportunityStyles.map((style) => {
-    const name = typeof style === "string" ? style : style.name;
-    return {
-      name,
-      variants: typeof style === "string" ? 1 : style.variants,
-      sales: typeof style === "string" ? null : style.sales ?? null,
-      gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
-    };
-  });
   const genderPortfolioStyles = [
     ...normalizedOpportunityStyles,
     ...selectedPeriodStyles.map((style) => ({
@@ -1013,10 +1132,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
       gender,
       styles: period.styles.filter((style) => style.gender === gender),
     })),
-  }));
-  const opportunityGenderGroups = LULULEMON_GENDERS.map((gender) => ({
-    gender,
-    styles: normalizedOpportunityStyles.filter((style) => style.gender === gender),
   }));
   const otherPortfolioStyleMap = new Map();
   for (const style of normalizedOpportunityStyles) {
@@ -1273,70 +1388,14 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
           )}
         </div>
 
-        <div className="lululemon-style-portfolio-list remaining">
-          <div className="lululemon-style-portfolio-heading">
-            <span>Lululemon opportunities</span>
-            <strong>
-              Top 5 each / {formatNumber.format(normalizedOpportunityStyles.length)} {opportunityUnit}
-            </strong>
-          </div>
-          {coverage.rawRemaining && (
-            <p className="lululemon-style-family-note">
-              {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} families; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
-            </p>
-          )}
-          <div className="lululemon-style-opportunity-groups ranked-list">
-            {opportunityGenderGroups.map((group) => {
-              const isExpanded = expandedOpportunityGenders[group.gender];
-              const displayedStyles = isExpanded ? group.styles : group.styles.slice(0, 5);
-              return (
-                <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
-                  <div className="lululemon-style-gender-heading">
-                    <span>{group.gender}</span>
-                    <b>
-                      {isExpanded
-                        ? `All ${group.styles.length}`
-                        : `Top ${Math.min(5, group.styles.length)}`}
-                    </b>
-                  </div>
-                  <ol className={isExpanded ? "expanded" : undefined}>
-                    {displayedStyles.map((style) => (
-                      <li key={style.name}>
-                        <span>{style.name}</span>
-                        <span className="lululemon-style-opportunity-value">
-                          {style.sales !== null && (
-                            <strong>{formatComparisonValue(style.sales, "sales")}</strong>
-                          )}
-                          {style.variants > 1 && <b>{style.variants} length variants</b>}
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                  {group.styles.length > 5 && (
-                    <button
-                      className="lululemon-style-view-more"
-                      type="button"
-                      aria-expanded={Boolean(isExpanded)}
-                      onClick={() =>
-                        setExpandedOpportunityGenders((current) => ({
-                          ...current,
-                          [group.gender]: !current[group.gender],
-                        }))
-                      }
-                    >
-                      {isExpanded
-                        ? "Show top 5"
-                        : `View more (${formatNumber.format(group.styles.length - 5)})`}
-                    </button>
-                  )}
-                  {group.styles.length === 0 && (
-                    <small className="lululemon-style-gender-empty">No matching styles</small>
-                  )}
-                </section>
-              );
-            })}
-          </div>
-        </div>
+        <LululemonOpportunityList
+          coverage={coverage}
+          groups={opportunityGenderGroups}
+          opportunityUnit={opportunityUnit}
+          total={normalizedOpportunityStyles.length}
+          expandedGenders={expandedOpportunityGenders}
+          onToggleGender={toggleOpportunityGender}
+        />
       </div>
       {taxonomyDifference > 0 && (
         <p className="lululemon-style-taxonomy-note">
