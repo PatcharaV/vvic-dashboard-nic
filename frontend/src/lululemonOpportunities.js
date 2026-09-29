@@ -1,4 +1,4 @@
-// Generated from Lululemon Wallet Size & Share (2).xlsx. Do not edit manually.
+// Generated from Lululemon Wallet Size & Share (5).xlsx. Do not edit manually.
 export const LULULEMON_REMAINING_OPPORTUNITIES = {
   "jacket": [
     {

@@ -1,4 +1,4 @@
-// Generated from Lululemon Wallet Size & Share (2).xlsx, Raw Data.
+// Generated from Lululemon Wallet Size & Share (5).xlsx, Raw Data.
 export const LULULEMON_NYG_FUTURE_STYLES = [
   {
     "key": "future-style-1",

@@ -1,4 +1,4 @@
-// Generated from Lululemon Wallet Size & Share (2).xlsx. Do not edit manually.
+// Generated from Lululemon Wallet Size & Share (5).xlsx. Do not edit manually.
 export const LULULEMON_FOB_MULTIPLIER = 6.97011496;
 export const LULULEMON_BUSINESS_METRICS = [
   {
@@ -62,7 +62,7 @@ export const LULULEMON_NYG_COMPARISON = [
     "nygSales": 51600116.94999998,
     "nygUnits": 4369847,
     "nygProducts": 59,
-    "nygFabricYards": 3706134.4000000004,
+    "nygFabricYards": 3706135,
     "nygFabricProducts": 55,
     "nykFabricYards": 134531,
     "nykFabricProducts": 4,
@@ -126,7 +126,7 @@ export const LULULEMON_NYG_COMPARISON = [
     "nygSales": 7714966.35,
     "nygUnits": 706716,
     "nygProducts": 17,
-    "nygFabricYards": 490108.9,
+    "nygFabricYards": 490109,
     "nygFabricProducts": 16,
     "nykFabricYards": 0,
     "nykFabricProducts": 0,
@@ -142,7 +142,7 @@ export const LULULEMON_NYG_COMPARISON = [
     "nygSales": 4334778.74,
     "nygUnits": 547403,
     "nygProducts": 8,
-    "nygFabricYards": 101607.5,
+    "nygFabricYards": 101608,
     "nygFabricProducts": 8,
     "nykFabricYards": 0,
     "nykFabricProducts": 0,
