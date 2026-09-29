@@ -168,7 +168,6 @@ export const LULULEMON_NYG_STYLES = [
   {
     "key": "style-12",
     "subtype": "pant",
-    "masterSubtype": "jogger",
     "name": "Rulu Fleece Jogger *Regular",
     "gender": "Men",
     "season": "WT25",
@@ -243,7 +242,7 @@ export const LULULEMON_NYG_STYLES = [
   },
   {
     "key": "style-17",
-    "subtype": "jogger",
+    "subtype": "pant",
     "name": "Textured Double-Knit Cotton Jogger *Tall",
     "gender": "Men",
     "season": "FA25",
@@ -953,17 +952,10 @@ export const LULULEMON_STYLE_COVERAGE = [
   },
   {
     "key": "pant",
-    "secured": 1,
-    "matchedWithinSubtype": 1,
-    "remaining": 412,
-    "total": 413
-  },
-  {
-    "key": "jogger",
-    "secured": 1,
-    "matchedWithinSubtype": 1,
-    "remaining": 69,
-    "total": 70
+    "secured": 2,
+    "matchedWithinSubtype": 2,
+    "remaining": 480,
+    "total": 482
   },
   {
     "key": "button-down",

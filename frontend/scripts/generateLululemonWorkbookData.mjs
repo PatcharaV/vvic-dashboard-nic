@@ -21,12 +21,19 @@ const subtypeDefinitions = [
   ["polo", "Polo", "POLO"],
   ["skirt", "Skirt", "SKIRT"],
   ["pant", "Pant", "PANT"],
-  ["jogger", "Jogger", "JOGGER"],
   ["button-down", "Button down", "SHIRT BUTTON DOWN"],
 ];
 const subtypeByWorksheetValue = new Map(
   subtypeDefinitions.map(([key, label, worksheetValue]) => [worksheetValue, { key, label }]),
 );
+subtypeByWorksheetValue.set("JOGGER", { key: "pant", label: "Pant" });
+
+function isDashboardSubtype(worksheetSubtype, targetSubtype) {
+  return (
+    worksheetSubtype === targetSubtype ||
+    (targetSubtype === "PANT" && worksheetSubtype === "JOGGER")
+  );
+}
 
 function number(value) {
   if (value === "-" || value === null || value === undefined || value === "") return 0;
@@ -157,10 +164,18 @@ const comparisons = [
   },
   ...subtypeDefinitions.map(([key, label, worksheetSubtype]) => {
     const productRows = allProducts.filter(
-      (row) => String(row["Sub-Type (US sheet)"]).trim().toUpperCase() === worksheetSubtype,
+      (row) =>
+        isDashboardSubtype(
+          String(row["Sub-Type (US sheet)"]).trim().toUpperCase(),
+          worksheetSubtype,
+        ),
     );
     const matchingNygRows = nygRows.filter(
-      (row) => String(row["Sub-Type"]).trim().toUpperCase() === worksheetSubtype,
+      (row) =>
+        isDashboardSubtype(
+          String(row["Sub-Type"]).trim().toUpperCase(),
+          worksheetSubtype,
+        ),
     );
     return {
       key,
@@ -238,7 +253,12 @@ for (const [subtypeKey, , worksheetSubtype] of subtypeDefinitions) {
   const securedNames = new Set(securedForSubtype.map((style) => normalizeFamilyName(style.name)));
   const groupedStyles = new Map();
   for (const row of allProducts) {
-    if (String(row["Sub-Type (US sheet)"]).trim().toUpperCase() !== worksheetSubtype) continue;
+    if (
+      !isDashboardSubtype(
+        String(row["Sub-Type (US sheet)"]).trim().toUpperCase(),
+        worksheetSubtype,
+      )
+    ) continue;
     const name = row["Base Style (title before *)"] || row["Product Title (Particl)"];
     const normalizedName = normalizeFamilyName(name);
     if (!normalizedName || securedNames.has(normalizedName)) continue;

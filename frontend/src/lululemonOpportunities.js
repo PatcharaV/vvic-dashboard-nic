@@ -5606,6 +5606,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 87218550
     },
     {
+      "name": "Pace Breaker Jogger",
+      "sales": 86609825
+    },
+    {
       "name": "ABC Slim-Fit Trouser 32L",
       "sales": 86395278
     },
@@ -5646,12 +5650,28 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 59047492
     },
     {
+      "name": "Smooth Spacer Jogger",
+      "sales": 56813519
+    },
+    {
       "name": "Zeroed In Slim-Fit Pant",
       "sales": 56574574
     },
     {
+      "name": "Adapted State High-Rise Jogger",
+      "sales": 56251213
+    },
+    {
       "name": "Lululemon Align™ High-Rise Crop 23\"",
       "sales": 52568157
+    },
+    {
+      "name": "Scuba Mid-Rise Oversized Jogger",
+      "sales": 46741802
+    },
+    {
+      "name": "Dance Studio Mid-Rise Jogger",
+      "sales": 45206536
     },
     {
       "name": "Wunder Train High-Rise Tight With Pockets 25\"",
@@ -5682,6 +5702,14 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 31788621
     },
     {
+      "name": "Zeroed In Classic-Fit Cargo Jogger",
+      "sales": 31040486
+    },
+    {
+      "name": "License to Train Textured Jogger",
+      "sales": 30380289
+    },
+    {
       "name": "ABC Classic-Fit Trouser 34L",
       "sales": 29442804
     },
@@ -5706,12 +5734,32 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 27315181
     },
     {
+      "name": "Abc Jogger",
+      "sales": 26167899
+    },
+    {
+      "name": "Adapted State High-Rise Fleece Jogger",
+      "sales": 22674770
+    },
+    {
+      "name": "Sojourn Jogger",
+      "sales": 21251994
+    },
+    {
       "name": "Define High-Rise Wide-Leg Pant",
       "sales": 20964512
     },
     {
+      "name": "Steady State Classic-Fit Jogger",
+      "sales": 20948975
+    },
+    {
       "name": "Abc Classic-Fit Pant 32\"",
       "sales": 20594840
+    },
+    {
+      "name": "lululemon Align™ High-Rise Jogger",
+      "sales": 19497616
     },
     {
       "name": "Men's Daydrift Classic-Fit Trouser",
@@ -5742,6 +5790,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 15267993
     },
     {
+      "name": "Rulu Drapey Oversized High-Rise Yoga Jogger",
+      "sales": 15055000
+    },
+    {
       "name": "Softstreme Pintuck Mid-Rise Pant",
       "sales": 14892896
     },
@@ -5766,12 +5818,24 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 12723296
     },
     {
+      "name": "Women's Steady State SuperLoft Jogger",
+      "sales": 11979973
+    },
+    {
       "name": "Soft Jersey Classic-Fit Pant",
       "sales": 11623446
     },
     {
+      "name": "Soft Jersey Jogger",
+      "sales": 11333673
+    },
+    {
       "name": "EasyFive Classic-Straight Pant 32L",
       "sales": 11283383
+    },
+    {
+      "name": "Dance Studio Mid-Rise Jogger 7/8 Length",
+      "sales": 11086505
     },
     {
       "name": "Pace Breaker Pant",
@@ -5870,6 +5934,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 6097827
     },
     {
+      "name": "Smooth Spacer Jogger Regular",
+      "sales": 6093147
+    },
+    {
       "name": "Swift Speed High-Rise Tight 25\"",
       "sales": 5891936
     },
@@ -5910,12 +5978,28 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 4674182
     },
     {
+      "name": "Knit Warm-Up Jogger",
+      "sales": 4634990
+    },
+    {
       "name": "Groove High-Rise Wide-Leg Pant",
       "sales": 4434846
     },
     {
+      "name": "Ease The Day Jogger",
+      "sales": 4373190
+    },
+    {
       "name": "BeCalm Mid-Rise Wide-Leg Pant",
       "sales": 4335388
+    },
+    {
+      "name": "License to Train Woven Mid-Rise Jogger",
+      "sales": 4027341
+    },
+    {
+      "name": "License to Train Jogger",
+      "sales": 4023218
     },
     {
       "name": "Groove No Line High-Rise Flared Pant",
@@ -5930,8 +6014,16 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 3605313
     },
     {
+      "name": "Surge Jogger",
+      "sales": 3509585
+    },
+    {
       "name": "Satin Shine Panelled High-Rise Tight 25\"",
       "sales": 3458066
+    },
+    {
+      "name": "Adapted State Perforated High-Rise Jogger",
+      "sales": 3363436
     },
     {
       "name": "Dance Studio Relaxed-Fit Mid-Rise Cropped Pant",
@@ -5940,6 +6032,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Matte Satin Relaxed-Fit Mid-Rise Cargo Pant",
       "sales": 3278491
+    },
+    {
+      "name": "Adapted State Mid-Rise Jogger",
+      "sales": 3257750
     },
     {
       "name": "Groove No Line High-Rise Tight 25\"",
@@ -5956,6 +6052,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "EasyFive Slim-Straight Pant 32L",
       "sales": 2953002
+    },
+    {
+      "name": "ABC Slim-Fit Fixed-Waist Jogger",
+      "sales": 2934151
     },
     {
       "name": "Softy Suedey Split-Hem High-Rise Mini-Flare Pant",
@@ -5986,6 +6086,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 2705699
     },
     {
+      "name": "Knit-Warm-Up-Jogger-Regular",
+      "sales": 2698906
+    },
+    {
       "name": "Dance Studio Relaxed-Fit Mid-Rise Cargo Pant",
       "sales": 2659287
     },
@@ -5996,6 +6100,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Soft Jersey Tapered Pant",
       "sales": 2608700
+    },
+    {
+      "name": "Adapted State High-Rise Jogger Regular",
+      "sales": 2571061
     },
     {
       "name": "Pique Relaxed-Fit Track Pant",
@@ -6012,6 +6120,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "ABC Slim-Fit 5 Pocket Pant 30L",
       "sales": 2481936
+    },
+    {
+      "name": "lululemon Alignâx84¢ Foldover Relaxed Jogger",
+      "sales": 2473952
     },
     {
       "name": "Softy Suedey Cross-Waist Tight 25\"",
@@ -6046,8 +6158,16 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 2145194
     },
     {
+      "name": "Mile Maker Jogger",
+      "sales": 2105267
+    },
+    {
       "name": "Stretch Twill Golf Pant",
       "sales": 2095553
+    },
+    {
+      "name": "Daydrift High-Rise Jogger",
+      "sales": 2064685
     },
     {
       "name": "Fast and Free High-Rise Thermal Tight 25”",
@@ -6068,6 +6188,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "EasyFive Slim-Straight Pant 30L",
       "sales": 1995586
+    },
+    {
+      "name": "Women's Steady State Jogger",
+      "sales": 1990377
     },
     {
       "name": "Zero Tucks Ripstop Relaxed-Fit Pant",
@@ -6098,6 +6222,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 1761883
     },
     {
+      "name": "Heavyweight Soft Jersey Relaxed-Fit Jogger",
+      "sales": 1727110
+    },
+    {
       "name": "Dance Studio Mid-Rise Crop 25\"",
       "sales": 1693886
     },
@@ -6120,6 +6248,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "ABC Classic-Fit Trouser 37L",
       "sales": 1391471
+    },
+    {
+      "name": "Men's Steady State SuperLoft Jogger",
+      "sales": 1344227
     },
     {
       "name": "ABC Classic-Fit 5 Pocket Pant 32L",
@@ -6158,6 +6290,14 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 1138321
     },
     {
+      "name": "lululemon Align™ Ribbed-Waist Jogger",
+      "sales": 1108723
+    },
+    {
+      "name": "Merino Wool Joggers",
+      "sales": 1061087
+    },
+    {
       "name": "Utilitech Twill Relaxed Pleated Trouser",
       "sales": 1058044
     },
@@ -6176,6 +6316,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Lululemon Align™ High-Rise Crop With Pockets 23\"",
       "sales": 1026799
+    },
+    {
+      "name": "Abc Jogger Tall",
+      "sales": 1024510
     },
     {
       "name": "Swift High-Rise Wide-Leg Pant",
@@ -6206,12 +6350,24 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 879862
     },
     {
+      "name": "Abc Jogger Shorter Length",
+      "sales": 878657
+    },
+    {
       "name": "Fast and Free High-Rise Crop 23\"",
       "sales": 849960
     },
     {
       "name": "Wunder Train High-Rise Tight 31\"",
       "sales": 836872
+    },
+    {
+      "name": "Adapted State Thermal High-Rise Jogger",
+      "sales": 796871
+    },
+    {
+      "name": "License to Train Mid-Rise Lightweight Jogger",
+      "sales": 772063
     },
     {
       "name": "Wunder Train Contour Fit High-Rise Tight 25\"",
@@ -6222,8 +6378,16 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 768648
     },
     {
+      "name": "Men's Big Cozy Jogger",
+      "sales": 765249
+    },
+    {
       "name": "Paisley Lace Jacquard High-Rise Flared Pant",
       "sales": 763136
+    },
+    {
+      "name": "Engineered Warmth Jogger",
+      "sales": 761002
     },
     {
       "name": "New Venture Slim-Fit Pique Trouser",
@@ -6252,6 +6416,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Nulu Sporty Trim Mid-Rise Flared Pant",
       "sales": 640579
+    },
+    {
+      "name": "lululemon Alignâx84¢ High-Rise Jogger",
+      "sales": 637130
     },
     {
       "name": "Sleek Spacer Barrel-Leg Pant",
@@ -6310,6 +6478,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 524206
     },
     {
+      "name": "Cold Weather High-Rise Running Jogger",
+      "sales": 511101
+    },
+    {
       "name": "ABC Slim-Fit Golf Trouser 30L",
       "sales": 503284
     },
@@ -6318,8 +6490,16 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 494513
     },
     {
+      "name": "Dance Studio Relaxed-Fit Mid-Rise Cargo Jogger",
+      "sales": 493579
+    },
+    {
       "name": "Abc Slim-Fit Pant 37\"",
       "sales": 492841
+    },
+    {
+      "name": "Lunar New Year Men's Steady State Relaxed-Fit Jogger",
+      "sales": 491418
     },
     {
       "name": "Stretch Knit Straight-Leg Pull-On Pant",
@@ -6418,6 +6598,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 340387
     },
     {
+      "name": "ABC Skinny-Fit Jogger",
+      "sales": 337241
+    },
+    {
       "name": "Pleat-Front High-Rise Trouser",
       "sales": 334300
     },
@@ -6452,6 +6636,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "EasyFive Slim-Straight Pant 34L",
       "sales": 300842
+    },
+    {
+      "name": "ABC Regular Jogger",
+      "sales": 296612
     },
     {
       "name": "ABC Slim-Fit 5 Pocket Pant 37L",
@@ -6518,6 +6706,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 242299
     },
     {
+      "name": "City Sweat Jogger",
+      "sales": 242185
+    },
+    {
       "name": "In Mind Pant 27L",
       "sales": 237294
     },
@@ -6532,6 +6724,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "ABC Slim-Fit Golf Trouser 34L",
       "sales": 224207
+    },
+    {
+      "name": "Define High-Rise Swift Jogger",
+      "sales": 224119
     },
     {
       "name": "Slacker Slim-Straight Trouser 32L",
@@ -6622,6 +6818,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 171644
     },
     {
+      "name": "French Terry Jogger",
+      "sales": 170370
+    },
+    {
       "name": "lululemon Align™ Ruched Petal-Hem Tight 25\"",
       "sales": 158436
     },
@@ -6632,6 +6832,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Commission Classic-Fit Pant 30L",
       "sales": 150190
+    },
+    {
+      "name": "Cotton Fleece Jogger",
+      "sales": 147085
     },
     {
       "name": "Everlux Slim-Fit High-Rise Track Pant",
@@ -6680,6 +6884,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Fast and Free High-Rise Crop 23 Pockets",
       "sales": 127511
+    },
+    {
+      "name": "ABC Jogger Shorter",
+      "sales": 125885
     },
     {
       "name": "Scuba Mid-Rise Tapered Pant 7/8 Length",
@@ -6790,12 +6998,24 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 94327
     },
     {
+      "name": "Calabasas Jogger",
+      "sales": 87793
+    },
+    {
       "name": "Court Rival Wide-Leg Track Pant Tall",
       "sales": 86994
     },
     {
       "name": "Grand Standard Pant",
       "sales": 86884
+    },
+    {
+      "name": "Lunar New Year Scuba Mid-Rise Oversized Jogger",
+      "sales": 86155
+    },
+    {
+      "name": "Adapted State High-Rise Jogger Crop",
+      "sales": 83805
     },
     {
       "name": "Wunder Under SmoothCover High-Rise Flared Pant",
@@ -6808,6 +7028,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Velour Pant",
       "sales": 75410
+    },
+    {
+      "name": "Steady State Jogger",
+      "sales": 71158
     },
     {
       "name": "Lululemon Align™ Ribbed High-Rise Crop 23\"",
@@ -6840,6 +7064,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Relaxed-Fit Back Pocket Pant 30”L",
       "sales": 62887
+    },
+    {
+      "name": "Smooth Spacer Mid-Rise Jogger",
+      "sales": 58275
     },
     {
       "name": "Faded French Terry Barrel-Leg Pant",
@@ -6922,12 +7150,20 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 42778
     },
     {
+      "name": "Adapted State High-Rise Cropped Jogger 23\"",
+      "sales": 42725
+    },
+    {
       "name": "Women's Steady State SuperLoft Pant",
       "sales": 42124
     },
     {
       "name": "WeHo Wide-Leg Pant",
       "sales": 41506
+    },
+    {
+      "name": "Adapted State High-Rise Jogger: Colourblock",
+      "sales": 40648
     },
     {
       "name": "Team Canada Cold Weather Flared Pant Regular",
@@ -6944,6 +7180,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Abc Skinny-Fit Pant 32\"",
       "sales": 35136
+    },
+    {
+      "name": "lululemon lab Double-Knit Jacquard Jogger",
+      "sales": 34518
     },
     {
       "name": "lululemon Align™ Ruched-Leg Pant",
@@ -6964,6 +7204,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Team Canada Cold Weather Flared Pant Short",
       "sales": 28458
+    },
+    {
+      "name": "Heavyweight Fleece Jogger",
+      "sales": 28314
     },
     {
       "name": "Cashmere Straight Leg Pant",
@@ -7038,6 +7282,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 13780
     },
     {
+      "name": "Brushed Softstreme High-Rise Jogger",
+      "sales": 13475
+    },
+    {
       "name": "Nylon Mid-Rise Track Pant",
       "sales": 12440
     },
@@ -7082,6 +7330,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 7860
     },
     {
+      "name": "Scuba Mid-Rise Oversized Cargo Jogger",
+      "sales": 7760
+    },
+    {
       "name": "Ribbed Merino Wool-Blend Pant",
       "sales": 7301
     },
@@ -7110,12 +7362,20 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 5706
     },
     {
+      "name": "Mesh Soft Jersey Jogger",
+      "sales": 5603
+    },
+    {
       "name": "ABC Slim-Fit Golf Trouser 30\"L",
       "sales": 5037
     },
     {
       "name": "New Venture Trouser",
       "sales": 5031
+    },
+    {
+      "name": "Scuba High-Rise Relaxed Jogger",
+      "sales": 4997
     },
     {
       "name": "ABC Warpsteme Cargo Pant",
@@ -7128,6 +7388,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "InStill High-Rise Tight 25\"",
       "sales": 3896
+    },
+    {
+      "name": "Waffle-Knit Mid-Rise Jogger",
+      "sales": 3705
     },
     {
       "name": "ABC Relaxed-Fit 5 Pocket Pant 30L",
@@ -7148,6 +7412,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     {
       "name": "Base Pace High-Rise Tight 25\"",
       "sales": 2288
+    },
+    {
+      "name": "Steady State Relaxed-Fit Jogger",
+      "sales": 2261
     },
     {
       "name": "Everlux Relaxed Train Pant",
@@ -7210,6 +7478,10 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
       "sales": 0
     },
     {
+      "name": "Evergreen Jogger",
+      "sales": 0
+    },
+    {
       "name": "Team Canada ABC Seated-Fit Relaxed 5 Pocket Pant 32L",
       "sales": 0
     },
@@ -7227,284 +7499,6 @@ export const LULULEMON_REMAINING_OPPORTUNITIES = {
     },
     {
       "name": "Team Canada Women's Insulated Relaxed-Fit Pant",
-      "sales": 0
-    }
-  ],
-  "jogger": [
-    {
-      "name": "Pace Breaker Jogger",
-      "sales": 86609825
-    },
-    {
-      "name": "Smooth Spacer Jogger",
-      "sales": 56813519
-    },
-    {
-      "name": "Adapted State High-Rise Jogger",
-      "sales": 56251213
-    },
-    {
-      "name": "Scuba Mid-Rise Oversized Jogger",
-      "sales": 46741802
-    },
-    {
-      "name": "Dance Studio Mid-Rise Jogger",
-      "sales": 45206536
-    },
-    {
-      "name": "Zeroed In Classic-Fit Cargo Jogger",
-      "sales": 31040486
-    },
-    {
-      "name": "License to Train Textured Jogger",
-      "sales": 30380289
-    },
-    {
-      "name": "Abc Jogger",
-      "sales": 26167899
-    },
-    {
-      "name": "Adapted State High-Rise Fleece Jogger",
-      "sales": 22674770
-    },
-    {
-      "name": "Sojourn Jogger",
-      "sales": 21251994
-    },
-    {
-      "name": "Steady State Classic-Fit Jogger",
-      "sales": 20948975
-    },
-    {
-      "name": "lululemon Align™ High-Rise Jogger",
-      "sales": 19497616
-    },
-    {
-      "name": "Rulu Drapey Oversized High-Rise Yoga Jogger",
-      "sales": 15055000
-    },
-    {
-      "name": "Women's Steady State SuperLoft Jogger",
-      "sales": 11979973
-    },
-    {
-      "name": "Soft Jersey Jogger",
-      "sales": 11333673
-    },
-    {
-      "name": "Dance Studio Mid-Rise Jogger 7/8 Length",
-      "sales": 11086505
-    },
-    {
-      "name": "Smooth Spacer Jogger Regular",
-      "sales": 6093147
-    },
-    {
-      "name": "Knit Warm-Up Jogger",
-      "sales": 4634990
-    },
-    {
-      "name": "Ease The Day Jogger",
-      "sales": 4373190
-    },
-    {
-      "name": "License to Train Woven Mid-Rise Jogger",
-      "sales": 4027341
-    },
-    {
-      "name": "License to Train Jogger",
-      "sales": 4023218
-    },
-    {
-      "name": "Surge Jogger",
-      "sales": 3509585
-    },
-    {
-      "name": "Adapted State Perforated High-Rise Jogger",
-      "sales": 3363436
-    },
-    {
-      "name": "Adapted State Mid-Rise Jogger",
-      "sales": 3257750
-    },
-    {
-      "name": "ABC Slim-Fit Fixed-Waist Jogger",
-      "sales": 2934151
-    },
-    {
-      "name": "Knit-Warm-Up-Jogger-Regular",
-      "sales": 2698906
-    },
-    {
-      "name": "Adapted State High-Rise Jogger Regular",
-      "sales": 2571061
-    },
-    {
-      "name": "lululemon Alignâx84¢ Foldover Relaxed Jogger",
-      "sales": 2473952
-    },
-    {
-      "name": "Mile Maker Jogger",
-      "sales": 2105267
-    },
-    {
-      "name": "Daydrift High-Rise Jogger",
-      "sales": 2064685
-    },
-    {
-      "name": "Women's Steady State Jogger",
-      "sales": 1990377
-    },
-    {
-      "name": "Rulu Fleece Jogger",
-      "sales": 1758207
-    },
-    {
-      "name": "Heavyweight Soft Jersey Relaxed-Fit Jogger",
-      "sales": 1727110
-    },
-    {
-      "name": "Men's Steady State SuperLoft Jogger",
-      "sales": 1344227
-    },
-    {
-      "name": "lululemon Align™ Ribbed-Waist Jogger",
-      "sales": 1108723
-    },
-    {
-      "name": "Merino Wool Joggers",
-      "sales": 1061087
-    },
-    {
-      "name": "Abc Jogger Tall",
-      "sales": 1024510
-    },
-    {
-      "name": "Abc Jogger Shorter Length",
-      "sales": 878657
-    },
-    {
-      "name": "Adapted State Thermal High-Rise Jogger",
-      "sales": 796871
-    },
-    {
-      "name": "License to Train Mid-Rise Lightweight Jogger",
-      "sales": 772063
-    },
-    {
-      "name": "Men's Big Cozy Jogger",
-      "sales": 765249
-    },
-    {
-      "name": "Engineered Warmth Jogger",
-      "sales": 761002
-    },
-    {
-      "name": "lululemon Alignâx84¢ High-Rise Jogger",
-      "sales": 637130
-    },
-    {
-      "name": "Cold Weather High-Rise Running Jogger",
-      "sales": 511101
-    },
-    {
-      "name": "Dance Studio Relaxed-Fit Mid-Rise Cargo Jogger",
-      "sales": 493579
-    },
-    {
-      "name": "Lunar New Year Men's Steady State Relaxed-Fit Jogger",
-      "sales": 491418
-    },
-    {
-      "name": "ABC Skinny-Fit Jogger",
-      "sales": 337241
-    },
-    {
-      "name": "ABC Regular Jogger",
-      "sales": 296612
-    },
-    {
-      "name": "City Sweat Jogger",
-      "sales": 242185
-    },
-    {
-      "name": "Define High-Rise Swift Jogger",
-      "sales": 224119
-    },
-    {
-      "name": "French Terry Jogger",
-      "sales": 170370
-    },
-    {
-      "name": "Cotton Fleece Jogger",
-      "sales": 147085
-    },
-    {
-      "name": "ABC Jogger Shorter",
-      "sales": 125885
-    },
-    {
-      "name": "Calabasas Jogger",
-      "sales": 87793
-    },
-    {
-      "name": "Lunar New Year Scuba Mid-Rise Oversized Jogger",
-      "sales": 86155
-    },
-    {
-      "name": "Adapted State High-Rise Jogger Crop",
-      "sales": 83805
-    },
-    {
-      "name": "Steady State Jogger",
-      "sales": 71158
-    },
-    {
-      "name": "Smooth Spacer Mid-Rise Jogger",
-      "sales": 58275
-    },
-    {
-      "name": "Adapted State High-Rise Cropped Jogger 23\"",
-      "sales": 42725
-    },
-    {
-      "name": "Adapted State High-Rise Jogger: Colourblock",
-      "sales": 40648
-    },
-    {
-      "name": "lululemon lab Double-Knit Jacquard Jogger",
-      "sales": 34518
-    },
-    {
-      "name": "Heavyweight Fleece Jogger",
-      "sales": 28314
-    },
-    {
-      "name": "Brushed Softstreme High-Rise Jogger",
-      "sales": 13475
-    },
-    {
-      "name": "Scuba Mid-Rise Oversized Cargo Jogger",
-      "sales": 7760
-    },
-    {
-      "name": "Mesh Soft Jersey Jogger",
-      "sales": 5603
-    },
-    {
-      "name": "Scuba High-Rise Relaxed Jogger",
-      "sales": 4997
-    },
-    {
-      "name": "Waffle-Knit Mid-Rise Jogger",
-      "sales": 3705
-    },
-    {
-      "name": "Steady State Relaxed-Fit Jogger",
-      "sales": 2261
-    },
-    {
-      "name": "Evergreen Jogger",
       "sales": 0
     }
   ],

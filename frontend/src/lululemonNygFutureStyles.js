@@ -376,7 +376,7 @@ export const LULULEMON_NYG_FUTURE_STYLES = [
   {
     "key": "future-style-16",
     "period": "future",
-    "subtype": "jogger",
+    "subtype": "pant",
     "name": "Ease The Day Jogger *Regular",
     "gender": "Men",
     "season": "FA26",
