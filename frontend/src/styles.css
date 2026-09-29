@@ -1574,7 +1574,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-subtype-table {
   width: 100%;
-  min-width: 470px;
+  min-width: 320px;
   border-collapse: collapse;
   font-size: 10px;
 }
@@ -1607,14 +1607,8 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   background: #fff0f3;
 }
 
-.lululemon-subtype-table td:nth-child(2),
-.lululemon-subtype-table td:last-child {
+.lululemon-subtype-table td:nth-child(2) {
   color: var(--lululemon-red);
-  font-weight: 800;
-}
-
-.lululemon-subtype-table td:nth-child(4) {
-  color: #6e3c4a;
   font-weight: 800;
 }
 

@@ -672,8 +672,6 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                 <th>Sub-type</th>
                 <th>NYG</th>
                 <th>{baseLabel}</th>
-                <th>NYK fabric</th>
-                <th>Share</th>
               </tr>
             </thead>
             <tbody>
@@ -686,8 +684,6 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                   </td>
                   <td>{formatComparisonValue(row.nygValue, metric)}</td>
                   <td>{formatComparisonValue(row.comparisonBase, metric)}</td>
-                  <td>{formatFabricYards(row.nykFabricYards)}</td>
-                  <td>{formatComparisonShare(row.share)}</td>
                 </tr>
               ))}
             </tbody>
