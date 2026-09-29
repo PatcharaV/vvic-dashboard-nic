@@ -2072,6 +2072,41 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   padding: 18px;
 }
 
+.lululemon-mix-card.embedded {
+  margin-top: 18px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(280px, 0.8fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 24px;
+  background: #fbf8f9;
+  border-color: #f0e2e5;
+  box-shadow: none;
+}
+
+.lululemon-mix-card.embedded > p {
+  align-self: start;
+}
+
+.lululemon-mix-card.embedded .lululemon-mix-content {
+  width: 100%;
+  margin-top: 0;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.lululemon-mix-card.embedded .lululemon-mini-donut {
+  width: 84px;
+  height: 84px;
+}
+
+.lululemon-mix-card.embedded .lululemon-mini-donut::after {
+  inset: 18px;
+}
+
 .lululemon-mix-content {
   margin-top: 14px;
   display: grid;
@@ -3808,6 +3843,16 @@ footer a {
   .lululemon-mix-content {
     grid-template-columns: 92px minmax(0, 1fr);
     gap: 12px;
+  }
+
+  .lululemon-mix-card.embedded {
+    grid-template-columns: 1fr;
+  }
+
+  .lululemon-mix-card.embedded .lululemon-mix-content {
+    margin-top: 16px;
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .lululemon-mini-donut {

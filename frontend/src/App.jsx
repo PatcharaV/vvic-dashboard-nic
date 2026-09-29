@@ -996,10 +996,11 @@ function donutGradient(rows) {
     .join(", ")})`;
 }
 
-function LululemonMixCard({ title, rows, subtitle, featured = false }) {
+function LululemonMixCard({ title, rows, subtitle, featured = false, embedded = false }) {
+  const Card = embedded ? "div" : "article";
   return (
-    <article
-      className={`lululemon-overview-card lululemon-mix-card ${featured ? "featured" : ""}`}
+    <Card
+      className={`lululemon-overview-card lululemon-mix-card ${featured ? "featured" : ""} ${embedded ? "embedded" : ""}`}
     >
       <h3>{title}</h3>
       {subtitle && <p>{subtitle}</p>}
@@ -1019,7 +1020,7 @@ function LululemonMixCard({ title, rows, subtitle, featured = false }) {
           ))}
         </div>
       </div>
-    </article>
+    </Card>
   );
 }
 
@@ -1133,17 +1134,17 @@ function LululemonBrandOverview() {
               selectedKey={comparisonSubtype}
               onSelect={setComparisonSubtype}
             />
+            <LululemonMixCard
+              title={`${selectedComparison.label} gender mix`}
+              subtitle="Share of selected NYTG sales"
+              rows={selectedGenderMix}
+              embedded
+            />
           </article>
           <LululemonStyleShare
             subtypeKey={comparisonSubtype}
             subtypeLabel={selectedComparison.label}
             subtypeSales={selectedComparison.lululemonSales}
-          />
-          <LululemonMixCard
-            title={`${selectedComparison.label} gender mix`}
-            subtitle="Share of selected NYTG sales"
-            rows={selectedGenderMix}
-            featured
           />
         </div>
 
