@@ -630,6 +630,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   const baseLabel = isSales
     ? "Lululemon est. FOB"
     : `Lululemon ${isUnits ? "units" : "products"}`;
+  const tableLabel = isSales ? "Lululemon Revenue" : baseLabel;
 
   return (
     <div className="lululemon-subtype-comparison">
@@ -671,7 +672,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
               <tr>
                 <th>Sub-type</th>
                 <th>NYG</th>
-                <th>{baseLabel}</th>
+                <th>{tableLabel}</th>
               </tr>
             </thead>
             <tbody>
@@ -683,7 +684,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                     </button>
                   </td>
                   <td>{formatComparisonValue(row.nygValue, metric)}</td>
-                  <td>{formatComparisonValue(row.comparisonBase, metric)}</td>
+                  <td>{formatComparisonValue(row[lululemonField], metric)}</td>
                 </tr>
               ))}
             </tbody>
