@@ -873,10 +873,14 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   );
   const [selectedStyleKey, setSelectedStyleKey] = useState("");
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
+  const [showOtherPortfolioStyles, setShowOtherPortfolioStyles] = useState(false);
+  const [otherStyleQuery, setOtherStyleQuery] = useState("");
 
   useEffect(() => {
     setSelectedStyleKey(styles[0]?.key || "");
     setExpandedOpportunityGenders({});
+    setShowOtherPortfolioStyles(false);
+    setOtherStyleQuery("");
   }, [styles]);
 
   if (subtypeKey === "overall" || styles.length === 0 || !coverage) return null;
@@ -923,6 +927,30 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
     gender,
     styles: normalizedOpportunityStyles.filter((style) => style.gender === gender),
   }));
+  const otherPortfolioStyleMap = new Map(
+    normalizedOpportunityStyles.map((style) => [normalizeLululemonStyleName(style.name), style]),
+  );
+  for (const style of styles) {
+    if (style.key === selectedStyle.key) continue;
+    const normalizedName = normalizeLululemonStyleName(style.name);
+    if (!otherPortfolioStyleMap.has(normalizedName)) {
+      otherPortfolioStyleMap.set(normalizedName, {
+        name: style.name,
+        gender: style.gender,
+        sales: style.lululemonRevenue,
+        variants: 1,
+      });
+    }
+  }
+  const otherPortfolioStyles = [...otherPortfolioStyleMap.values()].sort(
+    (left, right) => (right.sales || 0) - (left.sales || 0),
+  );
+  const normalizedOtherStyleQuery = otherStyleQuery.trim().toLowerCase();
+  const filteredOtherPortfolioStyles = normalizedOtherStyleQuery
+    ? otherPortfolioStyles.filter((style) =>
+        style.name.toLowerCase().includes(normalizedOtherStyleQuery),
+      )
+    : otherPortfolioStyles;
 
   return (
     <article className="lululemon-overview-card lululemon-style-card">
@@ -1039,7 +1067,56 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
                   <strong>{formatComparisonValue(portfolioSales, "sales")}</strong>
                 </div>
               </div>
+              <button
+                className="lululemon-other-styles-toggle"
+                type="button"
+                aria-expanded={showOtherPortfolioStyles}
+                onClick={() => setShowOtherPortfolioStyles((current) => !current)}
+              >
+                {showOtherPortfolioStyles
+                  ? "Hide other styles"
+                  : `View other styles (${formatNumber.format(otherPortfolioStyles.length)})`}
+              </button>
             </section>
+            {showOtherPortfolioStyles && (
+              <section className="lululemon-other-styles-panel">
+                <div className="lululemon-other-styles-heading">
+                  <div>
+                    <strong>Other {subtypeLabel} Styles</strong>
+                    <small>Ranked by total sales within this product type</small>
+                  </div>
+                  <b>{formatNumber.format(filteredOtherPortfolioStyles.length)} styles</b>
+                </div>
+                <input
+                  type="search"
+                  value={otherStyleQuery}
+                  placeholder={`Search other ${subtypeLabel} styles...`}
+                  aria-label={`Search other ${subtypeLabel} styles`}
+                  onChange={(event) => setOtherStyleQuery(event.target.value)}
+                />
+                <ol>
+                  {filteredOtherPortfolioStyles.map((style) => (
+                    <li key={style.name}>
+                      <span>
+                        <strong>{style.name}</strong>
+                        <small>{style.gender}</small>
+                      </span>
+                      <span>
+                        <strong>{formatComparisonValue(style.sales || 0, "sales")}</strong>
+                        <small>
+                          {formatComparisonShare(
+                            portfolioSales ? ((style.sales || 0) / portfolioSales) * 100 : 0,
+                          )}
+                        </small>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+                {filteredOtherPortfolioStyles.length === 0 && (
+                  <p>No matching styles</p>
+                )}
+              </section>
+            )}
           </div>
           {selectedStyle.nygSales > styleSales && (
             <small className="lululemon-style-data-warning">
