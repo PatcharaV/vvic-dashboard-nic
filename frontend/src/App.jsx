@@ -1454,7 +1454,7 @@ const LULULEMON_TIMELINE_SEASONS = [
 ];
 
 const LULULEMON_TIMELINE_ROWS = [
-  { label: "Revenue", start: 0, end: 5, tone: "revenue" },
+  { label: "Revenue", start: 0, end: 3, tone: "revenue" },
   { label: "Particl", start: 2, end: 5, tone: "particl" },
   { label: "NYG", start: 0, end: 9, tone: "nyg" },
   { label: "NYK", start: 0, end: 7, tone: "nyk" },
