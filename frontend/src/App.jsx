@@ -607,6 +607,102 @@ function formatFabricYards(value, compact = false) {
 }
 
 const LULULEMON_FOB_MULTIPLIER = 7.11;
+const LULULEMON_GENDERS = ["Men", "Women"];
+
+function normalizeLululemonStyleName(value = "") {
+  return value
+    .toLowerCase()
+    .replace(/[®™]/g, "")
+    .replace(/^lululemon\s+/, "")
+    .replace(/\b(?:women'?s|men'?s)\b/g, "")
+    .replace(/\b(?:23|25|26|27|28|29|30|31|32|34|35|36)(?:\s*(?:in|inch(?:es)?|\"))?\b/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+const LULULEMON_SCRAPED_STYLE_AUDIENCES = (
+  snapshotData.brands?.lululemon?.dashboard?.products || []
+).map((product) => ({
+  name: normalizeLululemonStyleName(product.title),
+  genders: (product.audience_labels || []).filter((gender) =>
+    LULULEMON_GENDERS.includes(gender),
+  ),
+}));
+
+const LULULEMON_WOMEN_STYLE_TERMS = [
+  "high rise",
+  "mid rise",
+  "super high rise",
+  "low rise",
+  "align",
+  "wunder",
+  "groove",
+  "dance studio",
+  "softstreme",
+  "swift speed",
+  "fast and free",
+  "tight",
+  "legging",
+  "flare",
+  "flared",
+  "palazzo",
+  "wide leg",
+  "barrel leg",
+  "city sleek",
+  "adapted state",
+  "ready to rulu",
+  "nulu",
+  "skirt",
+  "bra",
+];
+
+const LULULEMON_MEN_STYLE_TERMS = [
+  "abc",
+  "slim fit",
+  "classic fit",
+  "relaxed fit",
+  "zeroed in",
+  "commission",
+  "utilitech",
+  "golf",
+  "jogger",
+  "trouser",
+  "license to train",
+  "pace breaker",
+  "steady state",
+  "smooth spacer",
+  "balancer",
+  "surge",
+  "bowline",
+  "boxer",
+  "polo",
+];
+
+function inferLululemonStyleGender(styleName, subtypeKey) {
+  const normalizedName = normalizeLululemonStyleName(styleName);
+  const matchedGenders = new Set();
+
+  for (const product of LULULEMON_SCRAPED_STYLE_AUDIENCES) {
+    if (
+      product.name === normalizedName ||
+      product.name.startsWith(`${normalizedName} `) ||
+      normalizedName.startsWith(`${product.name} `)
+    ) {
+      product.genders.forEach((gender) => matchedGenders.add(gender));
+    }
+  }
+
+  if (matchedGenders.size === 1) return [...matchedGenders][0];
+  if (LULULEMON_WOMEN_STYLE_TERMS.some((term) => normalizedName.includes(term))) {
+    return "Women";
+  }
+  if (LULULEMON_MEN_STYLE_TERMS.some((term) => normalizedName.includes(term))) {
+    return "Men";
+  }
+  if (subtypeKey === "skirt" || subtypeKey === "tank-top") return "Women";
+  if (subtypeKey === "boxer-brief") return "Men";
+  return "Women";
+}
 
 function getLululemonComparisonBase(value, metric) {
   return metric === "sales" ? value / LULULEMON_FOB_MULTIPLIER : value;
@@ -809,13 +905,28 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   const opportunityStyles = subtypeKey === "pant"
     ? LULULEMON_PANT_STYLE_FAMILIES
     : coverage.topRemaining;
+  const normalizedOpportunityStyles = opportunityStyles.map((style) => {
+    const name = typeof style === "string" ? style : style.name;
+    return {
+      name,
+      variants: typeof style === "string" ? 1 : style.variants,
+      gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
+    };
+  });
   const normalizedOpportunityQuery = opportunityQuery.trim().toLowerCase();
   const filteredOpportunityStyles = normalizedOpportunityQuery
-    ? opportunityStyles.filter((style) => {
-        const styleName = typeof style === "string" ? style : style.name;
-        return styleName.toLowerCase().includes(normalizedOpportunityQuery);
-      })
-    : opportunityStyles;
+    ? normalizedOpportunityStyles.filter((style) =>
+        style.name.toLowerCase().includes(normalizedOpportunityQuery),
+      )
+    : normalizedOpportunityStyles;
+  const securedGenderGroups = LULULEMON_GENDERS.map((gender) => ({
+    gender,
+    styles: styles.filter((style) => style.gender === gender),
+  }));
+  const opportunityGenderGroups = LULULEMON_GENDERS.map((gender) => ({
+    gender,
+    styles: filteredOpportunityStyles.filter((style) => style.gender === gender),
+  }));
 
   return (
     <article className="lululemon-overview-card lululemon-style-card">
@@ -830,20 +941,33 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
             <strong>{formatNumber.format(coverage.secured)} styles</strong>
           </div>
           <div className="lululemon-style-secured-list">
-            {styles.map((style) => (
-              <button
-                className={style.key === selectedStyle.key ? "selected" : undefined}
-                key={style.key}
-                type="button"
-                aria-pressed={style.key === selectedStyle.key}
-                onClick={() => setSelectedStyleKey(style.key)}
-              >
-                <span>
-                  <strong>{style.name}</strong>
-                  <small>{style.gender} · {style.season}</small>
-                </span>
-                <b>{formatComparisonValue(style.nygSales, "sales")}</b>
-              </button>
+            {securedGenderGroups.map((group) => (
+              <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
+                <div className="lululemon-style-gender-heading">
+                  <span>{group.gender}</span>
+                  <b>{group.styles.length} {group.styles.length === 1 ? "style" : "styles"}</b>
+                </div>
+                <div className="lululemon-style-gender-items">
+                  {group.styles.map((style) => (
+                    <button
+                      className={style.key === selectedStyle.key ? "selected" : undefined}
+                      key={style.key}
+                      type="button"
+                      aria-pressed={style.key === selectedStyle.key}
+                      onClick={() => setSelectedStyleKey(style.key)}
+                    >
+                      <span>
+                        <strong>{style.name}</strong>
+                        <small>{style.season}</small>
+                      </span>
+                      <b>{formatComparisonValue(style.nygSales, "sales")}</b>
+                    </button>
+                  ))}
+                  {group.styles.length === 0 && (
+                    <small className="lululemon-style-gender-empty">No secured styles</small>
+                  )}
+                </div>
+              </section>
             ))}
           </div>
         </div>
@@ -852,6 +976,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
           <div className="lululemon-style-selected-name">
             <span>Selected style</span>
             <strong>{selectedStyle.name}</strong>
+            <small className={`lululemon-style-gender-badge ${selectedStyle.gender.toLowerCase()}`}>
+              {selectedStyle.gender}
+            </small>
           </div>
           <div
             className="lululemon-portfolio-donut"
@@ -919,18 +1046,27 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
               onChange={(event) => setOpportunityQuery(event.target.value)}
             />
           )}
-          <ol>
-            {filteredOpportunityStyles.map((style) => {
-              const styleName = typeof style === "string" ? style : style.name;
-              const variants = typeof style === "string" ? 1 : style.variants;
-              return (
-                <li key={styleName}>
-                  <span>{styleName}</span>
-                  {variants > 1 && <b>{variants} length variants</b>}
-                </li>
-              );
-            })}
-          </ol>
+          <div className="lululemon-style-opportunity-groups">
+            {opportunityGenderGroups.map((group) => (
+              <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
+                <div className="lululemon-style-gender-heading">
+                  <span>{group.gender}</span>
+                  <b>{group.styles.length} {coverage.rawRemaining ? "families" : "shown"}</b>
+                </div>
+                <ol>
+                  {group.styles.map((style) => (
+                    <li key={style.name}>
+                      <span>{style.name}</span>
+                      {style.variants > 1 && <b>{style.variants} length variants</b>}
+                    </li>
+                  ))}
+                </ol>
+                {group.styles.length === 0 && (
+                  <small className="lululemon-style-gender-empty">No matching styles</small>
+                )}
+              </section>
+            ))}
+          </div>
           {coverage.rawRemaining && filteredOpportunityStyles.length === 0 && (
             <p className="lululemon-style-family-empty">No matching style families</p>
           )}
@@ -946,6 +1082,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
           {formatNumber.format(taxonomyDifference)} NYG {taxonomyDifference === 1 ? "style is" : "styles are"} classified under a different Sub-Type in Master Apparel and included as secured in this overview.
         </p>
       )}
+      <p className="lululemon-style-taxonomy-note">
+        Opportunity gender is grouped from scraped product audience data and Lululemon style naming taxonomy; NYG secured gender comes directly from the Lululemon sheet.
+      </p>
     </article>
   );
 }
