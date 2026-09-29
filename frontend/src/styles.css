@@ -1572,6 +1572,38 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   border-radius: 12px;
 }
 
+.lululemon-subtype-table-controls {
+  padding: 8px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  background: #fbf8f9;
+  border-bottom: 1px solid #ead9dd;
+}
+
+.lululemon-subtype-table-controls button {
+  padding: 6px 10px;
+  color: #655d5f;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-size: 9px;
+  font-weight: 850;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.lululemon-subtype-table-controls button:hover {
+  color: var(--lululemon-red);
+  background: #fff;
+}
+
+.lululemon-subtype-table-controls button.active {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
 .lululemon-subtype-table {
   width: 100%;
   min-width: 320px;

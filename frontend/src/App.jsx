@@ -606,6 +606,7 @@ function LululemonNygMetricGrid({ selectedKey }) {
 }
 
 function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
+  const [tableMetric, setTableMetric] = useState("sales");
   const isSales = metric === "sales";
   const isUnits = metric === "units";
   const lululemonField = isSales
@@ -630,7 +631,10 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   const baseLabel = isSales
     ? "Lululemon est. FOB"
     : `Lululemon ${isUnits ? "Total Units" : "Products"}`;
-  const tableLabel = isSales ? "Lululemon Revenue" : baseLabel;
+  const tableIsSales = tableMetric === "sales";
+  const tableNygField = tableIsSales ? "nygSales" : "nygUnits";
+  const tableLululemonField = tableIsSales ? "lululemonSales" : "lululemonUnits";
+  const tableLabel = tableIsSales ? "Lululemon Revenue" : "Lululemon Units";
 
   return (
     <div className="lululemon-subtype-comparison">
@@ -640,7 +644,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
           {baseLabel}
         </span>
         <span><i className="nyg-key" />NYG</span>
-        <strong>{metric === "sales" ? "Revenue" : metric === "units" ? "Total Units" : "Products"}</strong>
+        <strong>Chart: {metric === "sales" ? "Revenue" : metric === "units" ? "Total Units" : "Products"}</strong>
       </div>
       <div className="lululemon-subtype-chart-layout">
         <div className="lululemon-subtype-plot">
@@ -667,6 +671,22 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
         </div>
 
         <div className="lululemon-subtype-table-wrap">
+          <div className="lululemon-subtype-table-controls" aria-label="Table value">
+            {[
+              { value: "sales", label: "Revenue" },
+              { value: "units", label: "Units" },
+            ].map((option) => (
+              <button
+                className={tableMetric === option.value ? "active" : undefined}
+                key={option.value}
+                type="button"
+                aria-pressed={tableMetric === option.value}
+                onClick={() => setTableMetric(option.value)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
           <table className="lululemon-subtype-table">
             <thead>
               <tr>
@@ -683,8 +703,8 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                       {row.label}
                     </button>
                   </td>
-                  <td>{formatComparisonValue(row.nygValue, metric)}</td>
-                  <td>{formatComparisonValue(row[lululemonField], metric)}</td>
+                  <td>{formatComparisonValue(row[tableNygField], tableMetric)}</td>
+                  <td>{formatComparisonValue(row[tableLululemonField], tableMetric)}</td>
                 </tr>
               ))}
             </tbody>
