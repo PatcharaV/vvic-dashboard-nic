@@ -976,44 +976,70 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
               {selectedStyle.gender}
             </small>
           </div>
-          <div
-            className="lululemon-portfolio-donut"
-            style={{ "--portfolio-style-share": `${outerChartShare}%` }}
-            role="img"
-            aria-label={`${formatComparisonValue(selectedStyle.nygSales, "sales")} NYG sales within ${formatComparisonValue(styleSales, "sales")} style sales and ${formatComparisonValue(portfolioSales, "sales")} total portfolio sales`}
-          >
-            <div
-              className="lululemon-portfolio-inner-ring"
-              style={{ "--nyg-style-share": `${innerChartShare}%` }}
-            >
-              <div>
-                <strong>{formatComparisonValue(styleSales, "sales")}</strong>
-                <span>Style total</span>
+          <div className="lululemon-style-share-charts">
+            <section className="lululemon-style-share-chart nyg-share">
+              <div className="lululemon-style-share-chart-heading">
+                <strong>NYG Share of Style</strong>
+                <small>NYG sales within the selected style</small>
               </div>
-            </div>
-          </div>
-          <div className="lululemon-style-sales-legend">
-            <div>
-              <i className="nyg-sales" />
-              <span>NYG sales</span>
-              <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
-              <small>{formatComparisonShare(nygStyleShare)} of style</small>
-            </div>
-            <div>
-              <i className="style-sales" />
-              <span>Rest of selected style</span>
-              <strong>{formatComparisonValue(restOfStyleSales, "sales")}</strong>
-            </div>
-            <div>
-              <i className="other-styles" />
-              <span>Other {subtypeLabel} styles</span>
-              <strong>{formatComparisonValue(otherStylesSales, "sales")}</strong>
-            </div>
-            <div className="portfolio-total">
-              <span>Total {subtypeLabel} portfolio</span>
-              <strong>{formatComparisonValue(portfolioSales, "sales")}</strong>
-              <small>{selectedStyle.name} = {formatComparisonShare(stylePortfolioShare)} of portfolio</small>
-            </div>
+              <div
+                className="lululemon-style-share-donut"
+                style={{ "--style-share": `${innerChartShare}%` }}
+                role="img"
+                aria-label={`${formatComparisonShare(innerChartShare)} NYG share of ${selectedStyle.name}`}
+              >
+                <div>
+                  <strong>{formatComparisonShare(innerChartShare)}</strong>
+                  <span>of style</span>
+                </div>
+              </div>
+              <div className="lululemon-style-share-breakdown">
+                <div>
+                  <span><i className="nyg-sales" />NYG sales</span>
+                  <strong>{formatComparisonValue(selectedStyle.nygSales, "sales")}</strong>
+                </div>
+                <div>
+                  <span><i className="style-sales" />Rest of style</span>
+                  <strong>{formatComparisonValue(restOfStyleSales, "sales")}</strong>
+                </div>
+                <div className="total">
+                  <span>Style total</span>
+                  <strong>{formatComparisonValue(styleSales, "sales")}</strong>
+                </div>
+              </div>
+            </section>
+
+            <section className="lululemon-style-share-chart portfolio-share">
+              <div className="lululemon-style-share-chart-heading">
+                <strong>Style Share of {subtypeLabel}</strong>
+                <small>Selected style within the product type</small>
+              </div>
+              <div
+                className="lululemon-style-share-donut"
+                style={{ "--style-share": `${outerChartShare}%` }}
+                role="img"
+                aria-label={`${formatComparisonShare(stylePortfolioShare)} ${selectedStyle.name} share of the ${subtypeLabel} portfolio`}
+              >
+                <div>
+                  <strong>{formatComparisonShare(stylePortfolioShare)}</strong>
+                  <span>of {subtypeLabel}</span>
+                </div>
+              </div>
+              <div className="lululemon-style-share-breakdown">
+                <div>
+                  <span><i className="selected-style" />Selected style</span>
+                  <strong>{formatComparisonValue(styleSales, "sales")}</strong>
+                </div>
+                <div>
+                  <span><i className="other-styles" />Other {subtypeLabel} styles</span>
+                  <strong>{formatComparisonValue(otherStylesSales, "sales")}</strong>
+                </div>
+                <div className="total">
+                  <span>Total {subtypeLabel}</span>
+                  <strong>{formatComparisonValue(portfolioSales, "sales")}</strong>
+                </div>
+              </div>
+            </section>
           </div>
           {selectedStyle.nygSales > styleSales && (
             <small className="lululemon-style-data-warning">

@@ -1815,14 +1815,15 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-style-coverage-summary {
   display: grid;
-  place-items: center;
-  align-content: center;
+  place-items: stretch;
+  align-content: start;
   gap: 18px;
   background: linear-gradient(145deg, #fff, #fff6f8);
 }
 
 .lululemon-style-selected-name {
   max-width: 280px;
+  margin-inline: auto;
   display: grid;
   gap: 4px;
   text-align: center;
@@ -1855,6 +1856,160 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-style-gender-badge.women {
   background: #df7b8d;
+}
+
+.lululemon-style-share-charts {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lululemon-style-share-chart {
+  min-width: 0;
+  padding: 12px 10px;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #ecdde0;
+  border-radius: 10px;
+}
+
+.lululemon-style-share-chart-heading {
+  min-height: 42px;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  text-align: center;
+}
+
+.lululemon-style-share-chart-heading strong {
+  color: #332d2f;
+  font-size: 10px;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.lululemon-style-share-chart-heading small {
+  color: #81787a;
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+.lululemon-style-share-donut {
+  position: relative;
+  width: min(138px, 100%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(
+    var(--lululemon-red) 0 var(--style-share),
+    #f2dce1 var(--style-share) 100%
+  );
+  border-radius: 50%;
+  box-shadow: 0 8px 18px rgba(136, 17, 41, 0.1);
+}
+
+.lululemon-style-share-chart.portfolio-share .lululemon-style-share-donut {
+  background: conic-gradient(
+    #8d1730 0 var(--style-share),
+    #e9e4e5 var(--style-share) 100%
+  );
+}
+
+.lululemon-style-share-donut::after {
+  position: absolute;
+  inset: 25%;
+  content: "";
+  background: #fff;
+  border-radius: 50%;
+}
+
+.lululemon-style-share-donut > div {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 3px;
+  text-align: center;
+}
+
+.lululemon-style-share-donut strong {
+  color: var(--lululemon-red);
+  font-size: 19px;
+  line-height: 1;
+}
+
+.lululemon-style-share-chart.portfolio-share .lululemon-style-share-donut strong {
+  color: #8d1730;
+}
+
+.lululemon-style-share-donut span {
+  color: #786f71;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-share-breakdown {
+  width: 100%;
+  display: grid;
+  gap: 6px;
+}
+
+.lululemon-style-share-breakdown > div {
+  padding: 7px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  background: #fcf9fa;
+  border-radius: 6px;
+}
+
+.lululemon-style-share-breakdown > div.total {
+  background: #fff0f3;
+  border-top: 1px solid #eacdd3;
+}
+
+.lululemon-style-share-breakdown span {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #736b6d;
+  font-size: 7px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.lululemon-style-share-breakdown strong {
+  flex: 0 0 auto;
+  color: var(--lululemon-red);
+  font-size: 9px;
+}
+
+.lululemon-style-share-breakdown i {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  background: #e9e4e5;
+  border-radius: 2px;
+}
+
+.lululemon-style-share-breakdown i.nyg-sales {
+  background: var(--lululemon-red);
+}
+
+.lululemon-style-share-breakdown i.style-sales {
+  background: #f2dce1;
+}
+
+.lululemon-style-share-breakdown i.selected-style {
+  background: #8d1730;
 }
 
 .lululemon-portfolio-donut {
@@ -4208,6 +4363,14 @@ footer a {
 
   .lululemon-portfolio-inner-ring {
     width: 144px;
+  }
+
+  .lululemon-style-share-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .lululemon-style-share-donut {
+    width: 150px;
   }
 
   .lululemon-style-secured-list {
