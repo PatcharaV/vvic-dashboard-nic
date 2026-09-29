@@ -634,7 +634,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   const tableIsSales = tableMetric === "sales";
   const tableNygField = tableIsSales ? "nygSales" : "nygUnits";
   const tableLululemonField = tableIsSales ? "lululemonSales" : "lululemonUnits";
-  const tableLabel = tableIsSales ? "Lululemon Revenue" : "Lululemon Units";
+  const tableLabel = tableIsSales ? "Total Sale" : "Total Unit";
 
   return (
     <div className="lululemon-subtype-comparison">
