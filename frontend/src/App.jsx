@@ -580,25 +580,83 @@ function formatFabricYards(value, compact = false) {
 
 const LULULEMON_GENDERS = ["Men", "Women"];
 
-function normalizeLululemonStyleName(value = "") {
+function normalizeLululemonProductName(value = "") {
   return value
     .toLowerCase()
     .replace(/[®™]/g, "")
     .replace(/^lululemon\s+/, "")
     .replace(/\b(?:women'?s|men'?s)\b/g, "")
-    .replace(/\b(?:23|25|26|27|28|29|30|31|32|34|35|36)(?:\s*(?:in|inch(?:es)?|\"))?\b/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 }
 
-const LULULEMON_SCRAPED_STYLE_AUDIENCES = (
+function normalizeLululemonStyleName(value = "") {
+  return normalizeLululemonProductName(value)
+    .replace(/\b(?:23|25|26|27|28|29|30|31|32|34|35|36)l?\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const LULULEMON_SCRAPED_PRODUCTS = (
   snapshotData.brands?.lululemon?.dashboard?.products || []
 ).map((product) => ({
+  ...product,
+  exactName: normalizeLululemonProductName(product.title),
   name: normalizeLululemonStyleName(product.title),
+}));
+
+const LULULEMON_SCRAPED_STYLE_AUDIENCES = LULULEMON_SCRAPED_PRODUCTS.map((product) => ({
+  name: product.name,
   genders: (product.audience_labels || []).filter((gender) =>
     LULULEMON_GENDERS.includes(gender),
   ),
 }));
+
+const LULULEMON_OPPORTUNITY_PRODUCT_CACHE = new Map();
+
+function findLululemonOpportunityProduct(styleName) {
+  if (LULULEMON_OPPORTUNITY_PRODUCT_CACHE.has(styleName)) {
+    return LULULEMON_OPPORTUNITY_PRODUCT_CACHE.get(styleName);
+  }
+  const exactName = normalizeLululemonProductName(styleName);
+  const normalizedName = normalizeLululemonStyleName(styleName);
+  const candidates = LULULEMON_SCRAPED_PRODUCTS.map((product) => {
+    let score = Number.POSITIVE_INFINITY;
+    if (product.exactName === exactName) score = 0;
+    else if (product.exactName.startsWith(`${exactName} `)) score = 1;
+    else if (exactName.startsWith(`${product.exactName} `)) score = 2;
+    else if (product.name === normalizedName) score = 3;
+    else if (product.name.startsWith(`${normalizedName} `)) score = 4;
+    else if (normalizedName.startsWith(`${product.name} `)) score = 5;
+    return { product, score };
+  })
+    .filter((candidate) => Number.isFinite(candidate.score))
+    .sort((left, right) =>
+      left.score - right.score ||
+      Number(Boolean(right.product.available)) - Number(Boolean(left.product.available)) ||
+      Number(Boolean(right.product.image)) - Number(Boolean(left.product.image)) ||
+      left.product.title.length - right.product.title.length,
+    );
+  const product = candidates[0]?.product;
+  const imageProduct = candidates.find(({ product: candidate }) =>
+    candidate.image || (candidate.color_variants || []).some((variant) => variant.image),
+  )?.product || product;
+  const images = imageProduct
+    ? [...new Set([
+        imageProduct.image,
+        ...(imageProduct.color_variants || []).map((variant) => variant.image),
+      ].filter(Boolean))].slice(0, 2)
+    : [];
+  const match = {
+    url:
+      product?.url ||
+      `https://shop.lululemon.com/search?Ntt=${encodeURIComponent(styleName)}`,
+    images,
+    productTitle: product?.title || styleName,
+  };
+  LULULEMON_OPPORTUNITY_PRODUCT_CACHE.set(styleName, match);
+  return match;
+}
 
 const LULULEMON_WOMEN_STYLE_TERMS = [
   "high rise",
@@ -889,7 +947,33 @@ function LululemonOpportunityList({
               <ol className={isExpanded ? "expanded" : undefined}>
                 {displayedStyles.map((style) => (
                   <li key={style.name}>
-                    <span>{style.name}</span>
+                    <a
+                      className="lululemon-opportunity-product-link"
+                      href={style.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Open ${style.productTitle} on Lululemon`}
+                    >
+                      <span className="lululemon-opportunity-images" aria-hidden="true">
+                        {style.images.length > 0 ? (
+                          style.images.map((imageUrl, imageIndex) => (
+                            <img
+                              alt=""
+                              key={imageUrl}
+                              loading="lazy"
+                              src={imageUrl}
+                              style={{ "--image-index": imageIndex }}
+                            />
+                          ))
+                        ) : (
+                          <span className="lululemon-opportunity-image-placeholder">L</span>
+                        )}
+                      </span>
+                      <span className="lululemon-opportunity-product-name">
+                        <strong>{style.name}</strong>
+                        <small>View on Lululemon</small>
+                      </span>
+                    </a>
                     <span className="lululemon-style-opportunity-value">
                       {style.sales !== null && (
                         <strong>{formatComparisonValue(style.sales, "sales")}</strong>
@@ -1000,11 +1084,13 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales, onSelect 
     (subtypeKey === "pant" ? LULULEMON_PANT_STYLE_FAMILIES : coverage.topRemaining);
   const normalizedOpportunityStyles = opportunityStyles.map((style) => {
     const name = typeof style === "string" ? style : style.name;
+    const product = findLululemonOpportunityProduct(name);
     return {
       name,
       variants: typeof style === "string" ? 1 : style.variants,
       sales: typeof style === "string" ? null : style.sales ?? null,
       gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
+      ...product,
     };
   });
   const opportunityGenderGroups = LULULEMON_GENDERS.map((gender) => ({

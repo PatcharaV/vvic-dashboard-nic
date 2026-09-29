@@ -2662,7 +2662,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 }
 
 .lululemon-style-portfolio-list li {
-  padding: 7px 8px;
+  padding: 6px 8px;
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr) auto;
   align-items: center;
@@ -2674,6 +2674,82 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-style-portfolio-list li > span {
   min-width: 0;
+}
+
+.lululemon-opportunity-product-link {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lululemon-opportunity-images {
+  position: relative;
+  width: 58px;
+  height: 48px;
+  display: block;
+}
+
+.lululemon-opportunity-images img,
+.lululemon-opportunity-image-placeholder {
+  position: absolute;
+  top: 0;
+  left: calc(var(--image-index, 0) * 15px);
+  width: 40px;
+  height: 48px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid #ded4d7;
+  border-radius: 7px;
+  box-shadow: 0 2px 6px rgba(84, 20, 32, 0.08);
+}
+
+.lululemon-opportunity-images img:only-child {
+  left: 8px;
+}
+
+.lululemon-opportunity-image-placeholder {
+  left: 8px;
+  display: grid;
+  place-items: center;
+  color: transparent;
+  background: #fff url("/brand-logos/lululemon.svg") center / 34px auto no-repeat;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.lululemon-opportunity-product-name {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-opportunity-product-name strong {
+  color: #3e393b;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.lululemon-opportunity-product-name small {
+  color: #9a6470;
+  font-size: 8px;
+  font-weight: 750;
+}
+
+.lululemon-opportunity-product-link:hover .lululemon-opportunity-product-name strong,
+.lululemon-opportunity-product-link:focus-visible .lululemon-opportunity-product-name strong {
+  color: var(--lululemon-red);
+  text-decoration: underline;
+}
+
+.lululemon-opportunity-product-link:focus-visible {
+  border-radius: 6px;
+  outline: 2px solid rgba(211, 19, 52, 0.35);
+  outline-offset: 3px;
 }
 
 .lululemon-style-opportunity-value {
