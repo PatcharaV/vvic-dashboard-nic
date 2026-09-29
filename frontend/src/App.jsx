@@ -143,7 +143,12 @@ const TRAVISMATHEW_COMPETITORS = [
 ];
 
 const LULULEMON_BUSINESS_METRICS = [
-  { icon: "$", label: "Total sales*", value: "$9.65B" },
+  {
+    icon: "$",
+    label: "Total sales*",
+    value: "$9.65B",
+    note: "Apparel sales only; accessories excluded.",
+  },
   { icon: "ON", label: "Online sales*", value: "$2.89B" },
   { icon: "FOB", label: "FOB spend*", value: "$1.36B" },
   { icon: "U", label: "Total units*", value: "111.6M" },
