@@ -1713,11 +1713,48 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 }
 
 .lululemon-style-secured-list {
-  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   align-items: start;
+}
+
+.lululemon-secured-periods {
+  margin-top: 12px;
+  display: grid;
+  gap: 14px;
+}
+
+.lululemon-secured-period {
+  min-width: 0;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #eadde0;
+  border-radius: 9px;
+}
+
+.lululemon-secured-period-heading {
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid #f1e5e8;
+}
+
+.lululemon-secured-period-heading span {
+  color: #292527;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.lululemon-secured-period-heading b {
+  color: var(--lululemon-red);
+  font-size: 9px;
+  white-space: nowrap;
 }
 
 .lululemon-style-gender-group {
@@ -1762,7 +1799,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 }
 
 .lululemon-style-secured-list .lululemon-style-gender-items {
-  max-height: 260px;
+  max-height: 190px;
   padding-right: 3px;
   overflow-y: auto;
   align-content: start;

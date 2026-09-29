@@ -12,6 +12,7 @@ import {
   LULULEMON_NYG_STYLES,
   LULULEMON_STYLE_COVERAGE,
 } from "./lululemonNygStyles";
+import { LULULEMON_NYG_FUTURE_STYLES } from "./lululemonNygFutureStyles";
 import { LULULEMON_REMAINING_OPPORTUNITIES } from "./lululemonOpportunities";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
 import snapshotData from "./snapshotData.json";
@@ -862,10 +863,15 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
 
 function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   const styles = useMemo(
-    () =>
-      LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).sort(
-        (a, b) => b.nygSales - a.nygSales,
+    () => [
+      ...LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).map(
+        (style) => ({ ...style, period: "current" }),
       ),
+      ...LULULEMON_NYG_FUTURE_STYLES.filter((style) => style.subtype === subtypeKey),
+    ].sort((a, b) => {
+      if (a.period !== b.period) return a.period === "current" ? -1 : 1;
+      return b.nygSales - a.nygSales;
+    }),
     [subtypeKey],
   );
   const coverage = LULULEMON_STYLE_COVERAGE.find(
@@ -887,7 +893,10 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
 
   const selectedStyle =
     styles.find((style) => style.key === selectedStyleKey) || styles[0];
-  const crossClassifiedRevenue = styles
+  const selectedPeriodStyles = styles.filter(
+    (style) => style.period === selectedStyle.period,
+  );
+  const crossClassifiedRevenue = selectedPeriodStyles
     .filter(
       (style) => style.masterSubtype && style.masterSubtype !== subtypeKey,
     )
@@ -919,9 +928,23 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
       gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
     };
   });
-  const securedGenderGroups = LULULEMON_GENDERS.map((gender) => ({
-    gender,
-    styles: styles.filter((style) => style.gender === gender),
+  const securedPeriodGroups = [
+    {
+      key: "current",
+      label: "FA25 / WT25 / SP26 / SU26",
+      styles: styles.filter((style) => style.period === "current"),
+    },
+    {
+      key: "future",
+      label: "FA26 / WT26 / SU27 / SP27",
+      styles: styles.filter((style) => style.period === "future"),
+    },
+  ].map((period) => ({
+    ...period,
+    genderGroups: LULULEMON_GENDERS.map((gender) => ({
+      gender,
+      styles: period.styles.filter((style) => style.gender === gender),
+    })),
   }));
   const opportunityGenderGroups = LULULEMON_GENDERS.map((gender) => ({
     gender,
@@ -930,7 +953,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
   const otherPortfolioStyleMap = new Map(
     normalizedOpportunityStyles.map((style) => [normalizeLululemonStyleName(style.name), style]),
   );
-  for (const style of styles) {
+  for (const style of selectedPeriodStyles) {
     if (style.key === selectedStyle.key) continue;
     const normalizedName = normalizeLululemonStyleName(style.name);
     if (!otherPortfolioStyleMap.has(normalizedName)) {
@@ -962,34 +985,44 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, subtypeSales }) {
         <div className="lululemon-style-portfolio-list secured">
           <div className="lululemon-style-portfolio-heading">
             <span>NYG secured</span>
-            <strong>{formatNumber.format(coverage.secured)} styles</strong>
+            <strong>{formatNumber.format(styles.length)} style entries</strong>
           </div>
-          <div className="lululemon-style-secured-list">
-            {securedGenderGroups.map((group) => (
-              <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
-                <div className="lululemon-style-gender-heading">
-                  <span>{group.gender}</span>
-                  <b>{group.styles.length} {group.styles.length === 1 ? "style" : "styles"}</b>
+          <div className="lululemon-secured-periods">
+            {securedPeriodGroups.map((period) => (
+              <section className="lululemon-secured-period" key={period.key}>
+                <div className="lululemon-secured-period-heading">
+                  <span>{period.label}</span>
+                  <b>{period.styles.length} {period.styles.length === 1 ? "style" : "styles"}</b>
                 </div>
-                <div className="lululemon-style-gender-items">
-                  {group.styles.map((style) => (
-                    <button
-                      className={style.key === selectedStyle.key ? "selected" : undefined}
-                      key={style.key}
-                      type="button"
-                      aria-pressed={style.key === selectedStyle.key}
-                      onClick={() => setSelectedStyleKey(style.key)}
-                    >
-                      <span>
-                        <strong>{style.name}</strong>
-                        <small>{style.season}</small>
-                      </span>
-                      <b>{formatComparisonValue(style.nygSales, "sales")}</b>
-                    </button>
+                <div className="lululemon-style-secured-list">
+                  {period.genderGroups.map((group) => (
+                    <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
+                      <div className="lululemon-style-gender-heading">
+                        <span>{group.gender}</span>
+                        <b>{group.styles.length} {group.styles.length === 1 ? "style" : "styles"}</b>
+                      </div>
+                      <div className="lululemon-style-gender-items">
+                        {group.styles.map((style) => (
+                          <button
+                            className={style.key === selectedStyle.key ? "selected" : undefined}
+                            key={style.key}
+                            type="button"
+                            aria-pressed={style.key === selectedStyle.key}
+                            onClick={() => setSelectedStyleKey(style.key)}
+                          >
+                            <span>
+                              <strong>{style.name}</strong>
+                              <small>{style.season}</small>
+                            </span>
+                            <b>{formatComparisonValue(style.nygSales, "sales")}</b>
+                          </button>
+                        ))}
+                        {group.styles.length === 0 && (
+                          <small className="lululemon-style-gender-empty">No secured styles</small>
+                        )}
+                      </div>
+                    </section>
                   ))}
-                  {group.styles.length === 0 && (
-                    <small className="lululemon-style-gender-empty">No secured styles</small>
-                  )}
                 </div>
               </section>
             ))}
@@ -1559,7 +1592,9 @@ function LululemonBrandOverview() {
           Source: LLL_1.xlsx. Lululemon totals use Total Revenue USD and Total
           Units from Master Apparel USD &amp; Units (SEP25-SEP26). NYG values use
           NYG Sale and NYG Sale (PCS) from the Lululemon sheet for 59 products,
-          FA25-SU26. Fabric usage uses Total Fabric Value NYG Used (YDS) and
+          FA25-SU26. The second NYG Secured table uses Commercial Name, sales,
+          units, and seasons FA26, WT26, SU27, and SP27 from the updated Raw Data
+          sheet. Fabric usage uses Total Fabric Value NYG Used (YDS) and
           Total NYK Fabric Value Used (YDS); 55 products contain recorded NYG
           fabric use and 4 contain a non-zero NYK value. Gender mix uses the
           Gender and NYG Sale columns.
