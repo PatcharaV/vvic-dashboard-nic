@@ -1949,6 +1949,53 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   background: #df7b8d;
 }
 
+.lululemon-style-gender-totals {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.lululemon-style-gender-totals > div {
+  min-width: 0;
+  padding: 9px 10px;
+  display: grid;
+  gap: 4px;
+  background: #f5f1f2;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.lululemon-style-gender-totals > div.selected {
+  background: #fff0f3;
+  border-color: rgba(211, 19, 52, 0.28);
+}
+
+.lululemon-style-gender-totals > div.selected.men {
+  background: #f4edef;
+  border-color: rgba(113, 21, 42, 0.28);
+}
+
+.lululemon-style-gender-totals span {
+  color: #766e70;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-gender-totals strong {
+  overflow: hidden;
+  color: #292527;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lululemon-style-gender-totals > div.selected strong {
+  color: var(--lululemon-red);
+}
+
 .lululemon-style-share-charts {
   width: 100%;
   display: grid;
