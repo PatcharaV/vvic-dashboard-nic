@@ -750,6 +750,11 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   const tableNygField = tableIsSales ? "nygSales" : "nygUnits";
   const tableLululemonField = tableIsSales ? "lululemonSales" : "lululemonUnits";
   const tableLabel = tableIsSales ? "Total Sale" : "Total Unit";
+  const tooltipMetricLabel = isSales
+    ? "Sales"
+    : isUnits
+      ? "Units"
+      : "Products";
 
   return (
     <div className="lululemon-subtype-comparison">
@@ -763,26 +768,42 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
       </div>
       <div className="lululemon-subtype-chart-layout">
         <div className="lululemon-subtype-plot">
-          {rows.map((row) => (
-            <button
-              className={selectedKey === row.key ? "selected" : undefined}
-              key={row.key}
-              type="button"
-              aria-pressed={selectedKey === row.key}
-              onClick={() => onSelect(row.key)}
-            >
-              <strong>{row.label}</strong>
-              <span className="lululemon-subtype-scale">
-                <span
-                  className="lululemon-subtype-total"
-                  style={{ width: `${(row.comparisonBase / maxBase) * 100}%` }}
-                >
-                  <i style={{ width: `${Math.min(row.share, 100)}%` }} />
+          {rows.map((row) => {
+            const tooltipId = `lululemon-subtype-tooltip-${row.key}`;
+            return (
+              <button
+                className={selectedKey === row.key ? "selected" : undefined}
+                key={row.key}
+                type="button"
+                aria-describedby={tooltipId}
+                aria-pressed={selectedKey === row.key}
+                onClick={() => onSelect(row.key)}
+              >
+                <strong>{row.label}</strong>
+                <span className="lululemon-subtype-scale">
+                  <span
+                    className="lululemon-subtype-total"
+                    style={{ width: `${(row.comparisonBase / maxBase) * 100}%` }}
+                  >
+                    <i style={{ width: `${Math.min(row.share, 100)}%` }} />
+                  </span>
                 </span>
-              </span>
-              <b>{formatComparisonShare(row.share)}</b>
-            </button>
-          ))}
+                <b>{formatComparisonShare(row.share)}</b>
+                <span className="lululemon-subtype-tooltip" id={tooltipId} role="tooltip">
+                  <span>
+                    <i className="nyg-key" />
+                    NYG {tooltipMetricLabel}
+                    <b>{formatComparisonValue(row[nygField], metric)}</b>
+                  </span>
+                  <span>
+                    <i className="lululemon-key" />
+                    Lululemon {tooltipMetricLabel}
+                    <b>{formatComparisonValue(row[lululemonField], metric)}</b>
+                  </span>
+                </span>
+              </button>
+            );
+          })}
         </div>
 
         <div className="lululemon-subtype-table-wrap">
