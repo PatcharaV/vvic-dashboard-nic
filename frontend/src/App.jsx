@@ -14,6 +14,7 @@ import {
 } from "./lululemonNygStyles";
 import { LULULEMON_NYG_FUTURE_STYLES } from "./lululemonNygFutureStyles";
 import { LULULEMON_REMAINING_OPPORTUNITIES } from "./lululemonOpportunities";
+import { LULULEMON_OPPORTUNITY_MEDIA } from "./lululemonOpportunityMedia";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
 import {
   LULULEMON_BUSINESS_METRICS,
@@ -648,11 +649,13 @@ function findLululemonOpportunityProduct(styleName) {
         ...(imageProduct.color_variants || []).map((variant) => variant.image),
       ].filter(Boolean))].slice(0, 2)
     : [];
+  const media = LULULEMON_OPPORTUNITY_MEDIA[styleName];
   const match = {
     url:
+      media?.url ||
       product?.url ||
       `https://shop.lululemon.com/search?Ntt=${encodeURIComponent(styleName)}`,
-    images,
+    images: media?.images?.length ? media.images : images,
     productTitle: product?.title || styleName,
   };
   LULULEMON_OPPORTUNITY_PRODUCT_CACHE.set(styleName, match);
