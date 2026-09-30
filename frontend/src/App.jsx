@@ -157,10 +157,18 @@ const LULULEMON_REVENUE_HISTORY = [
   { year: 2023, value: 9.62, display: "$9.62B" },
   { year: 2024, value: 10.59, display: "$10.59B" },
   { year: 2025, value: 11.1, display: "$11.10B" },
-  { year: 2026, value: 11.087, display: "$11.09B", estimate: true },
+  { year: 2026, value: 10.425, display: "$10.43B*", estimate: true },
 ];
 
 const LULULEMON_REGIONAL_REVENUE = [
+  {
+    year: "2026 H1",
+    rows: [
+      { label: "Americas", value: 66.0, color: "#cf0035" },
+      { label: "China Mainland", value: 18.3, color: "#242122" },
+      { label: "Rest of World", value: 15.7, color: "#aaa4a6" },
+    ],
+  },
   {
     year: 2025,
     rows: [
@@ -1376,8 +1384,8 @@ function LululemonRevenueHistory() {
     <article className="lululemon-overview-section lululemon-revenue-history">
       <div className="lululemon-overview-heading">
         <div>
-          <p className="eyebrow">PUBLIC COMPANY PERFORMANCE · FY2021-FY2025 + 2026 TTM</p>
-          <h2>Revenue Lululemon 2021-2026</h2>
+          <p className="eyebrow">PUBLIC COMPANY PERFORMANCE · FY2021-FY2026E</p>
+          <h2>Revenue Lululemon 2021-2026E</h2>
         </div>
         <LululemonOverviewLogo />
       </div>
@@ -1389,8 +1397,11 @@ function LululemonRevenueHistory() {
               <h3>Net revenue</h3>
               <p>USD billions</p>
             </div>
-            <strong>+77.3%</strong>
-            <span>growth since 2021</span>
+            <div className="lululemon-revenue-kpis">
+              <strong>+66.6%</strong>
+              <span>growth since 2021</span>
+              <em>▼ 6.0% YoY 2025→2026E</em>
+            </div>
           </div>
           <div className="lululemon-revenue-bars" aria-label="Lululemon annual net revenue">
             {LULULEMON_REVENUE_HISTORY.map((row) => (
@@ -1402,10 +1413,13 @@ function LululemonRevenueHistory() {
                 <span className="lululemon-revenue-track">
                   <i style={{ height: `${(row.value / maxRevenue) * 100}%` }} />
                 </span>
-                <b>{row.year}{row.estimate ? "*" : ""}</b>
+                <b>{row.year}</b>
               </div>
             ))}
           </div>
+          <p className="lululemon-guidance-note">
+            * FY2026 is company guidance of $10.35-$10.50B, not closed actuals.
+          </p>
         </section>
 
         <section className="lululemon-history-card regional">
@@ -1445,26 +1459,26 @@ function LululemonRevenueHistory() {
       <div className="lululemon-history-insights">
         <section>
           <p className="eyebrow">BUSINESS HIGHLIGHTS</p>
-          <h3>Growth continues, with a changing regional mix.</h3>
+          <h3>Growth reverses in 2026.</h3>
           <ul>
-            <li><strong>Revenue growth:</strong> FY2025 reached $11.10B, up 4.86% year over year.</li>
-            <li><strong>Regional shift:</strong> China Mainland increased from 10.0% in 2023 to 15.8% in 2025.</li>
+            <li><strong>Revenue reversal:</strong> FY2025 grew 4.9% to $11.10B, but FY2026 guidance points to $10.35-$10.50B, a decline of 5-7%.</li>
+            <li><strong>Regional shift accelerating:</strong> Americas&apos; share fell to approximately 66% in H1 FY2026 from 70.7% in FY2025.</li>
             <li><strong>Milestone:</strong> FY2024 was the first year annual revenue surpassed $10B.</li>
           </ul>
         </section>
         <section>
-          <p className="eyebrow">STRATEGIC INITIATIVES</p>
-          <h3>International growth is offsetting softer Americas momentum.</h3>
+          <p className="eyebrow">STRATEGIC CONTEXT</p>
+          <h3>No region is fully offsetting Americas.</h3>
           <ul>
-            <li><strong>China and international expansion:</strong> Store growth remains concentrated outside the Americas.</li>
-            <li><strong>Americas reset:</strong> Product and marketing refreshes are intended to reignite growth.</li>
-            <li><strong>Market entry:</strong> New European markets and India broaden the next phase of expansion.</li>
+            <li><strong>Americas reset:</strong> Revenue fell 8% and comparable sales fell 12% in Q2 FY2026, worse than Q1&apos;s 3% revenue decline.</li>
+            <li><strong>China deceleration:</strong> Growth slowed from 30% in Q1 to 4% in Q2 after a social-media sentiment incident and the timing of Tmall&apos;s 618 shopping festival.</li>
+            <li><strong>Rest of World:</strong> The steadiest performer, but growth also slowed from 13% to 5% quarter over quarter.</li>
           </ul>
         </section>
       </div>
 
       <p className="lululemon-source-note">
-        Source: Lululemon Athletica Inc. Form 10-K filings. *2026 is an estimated 1 SEP 25 - 31 AUG 26 TTM total company net revenue of $11.09B from the workbook source inputs; values are rounded for display.
+        Source: Lululemon Athletica Inc. Form 10-K filings (FY2021-FY2025). *FY2026 net revenue is the midpoint of company guidance issued with Q2 FY2026 results (SEC Form 8-K, Sep 3, 2026); FY2026 regional mix is actual H1 FY2026 revenue (Q1+Q2). Values are rounded for display.
       </p>
     </article>
   );

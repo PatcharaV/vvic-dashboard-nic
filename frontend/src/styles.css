@@ -3023,17 +3023,39 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   text-transform: uppercase;
 }
 
-.lululemon-history-card-heading > strong {
+.lululemon-revenue-kpis {
+  min-width: 138px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: end;
+  align-items: center;
+  gap: 2px 8px;
+  text-align: right;
+}
+
+.lululemon-revenue-kpis strong {
   color: var(--lululemon-red);
   font-size: 22px;
 }
 
-.lululemon-history-card-heading > span {
+.lululemon-revenue-kpis span {
   max-width: 55px;
   color: #777174;
-  font-size: 9px;
-  line-height: 1.25;
+  font-size: 8px;
+  line-height: 1.2;
   text-transform: uppercase;
+}
+
+.lululemon-revenue-kpis em {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+  padding: 5px 8px;
+  color: #b60030;
+  background: #fff0f3;
+  border-radius: 6px;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 750;
 }
 
 .lululemon-revenue-bars {
@@ -3086,24 +3108,32 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-revenue-column.estimate > strong,
 .lululemon-revenue-column.estimate > b {
-  color: #777174;
+  color: var(--lululemon-red);
 }
 
 .lululemon-revenue-column.estimate .lululemon-revenue-track i {
-  background: linear-gradient(180deg, #b8b5b6, #858182);
-  box-shadow: 0 7px 14px rgba(90, 86, 87, 0.14);
+  background: linear-gradient(180deg, #f3cbd3, #e8b6c1);
+  border: 2px dashed #d40039;
+  box-shadow: none;
+}
+
+.lululemon-guidance-note {
+  margin: 10px 0 0;
+  color: #777174;
+  font-size: 9px;
+  font-style: italic;
 }
 
 .lululemon-region-grid {
   margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(150px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(112px, 1fr));
+  gap: 10px;
 }
 
 .lululemon-region-card {
-  padding: 14px;
-  background: #fbf8f9;
+  padding: 12px;
+  background: #fff;
   border: 1px solid #f0e2e5;
   border-radius: 12px;
 }
@@ -3116,8 +3146,8 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-region-donut {
   position: relative;
-  width: 118px;
-  height: 118px;
+  width: 96px;
+  height: 96px;
   margin: 0 auto 16px;
   display: grid;
   place-content: center;
@@ -3126,7 +3156,7 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-region-donut::after {
   position: absolute;
-  inset: 27px;
+  inset: 22px;
   content: "";
   background: #fff;
   border-radius: 50%;
@@ -3182,8 +3212,14 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   gap: 16px;
 }
 
+.lululemon-history-insights > section {
+  border-left: 5px solid var(--lululemon-red);
+  border-radius: 4px 15px 15px 4px;
+}
+
 .lululemon-history-insights h3 {
   margin-top: 7px;
+  font-size: 18px;
 }
 
 .lululemon-history-insights ul {
