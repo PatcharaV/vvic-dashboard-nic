@@ -3270,6 +3270,61 @@ button.lululemon-bar-row.selected > strong {
   outline: none;
 }
 
+.lululemon-opportunity-search {
+  position: relative;
+  margin-top: 12px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 6px 8px;
+  background: #f7f5f5;
+  border: 1px solid #ece4e6;
+  border-radius: 9px;
+}
+
+.lululemon-opportunity-search label {
+  display: grid;
+  gap: 5px;
+}
+
+.lululemon-opportunity-search label > span {
+  color: #665f61;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lululemon-opportunity-search .lululemon-style-family-search {
+  margin-top: 0;
+}
+
+.lululemon-opportunity-search button {
+  min-height: 36px;
+  padding: 0 11px;
+  color: var(--lululemon-red);
+  background: #fff;
+  border: 1px solid #e6c5cb;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.lululemon-opportunity-search button:hover {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
+.lululemon-opportunity-search > small {
+  grid-column: 1 / -1;
+  color: #81797b;
+  font-size: 8px;
+}
+
 .lululemon-style-family-empty {
   margin: 18px 8px 0;
   color: #81797b;

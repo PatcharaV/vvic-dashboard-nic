@@ -946,12 +946,36 @@ function LululemonOpportunityList({
   expandedGenders,
   onToggleGender,
 }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const normalizedQuery = normalizeLululemonProductName(searchQuery);
+  const isSearching = normalizedQuery.length > 0;
+  const filteredGroups = groups.map((group) => ({
+    ...group,
+    styles: isSearching
+      ? group.styles.filter((style) =>
+          normalizeLululemonProductName(
+            `${style.name} ${style.productTitle || ""}`,
+          ).includes(normalizedQuery),
+        )
+      : group.styles,
+  }));
+  const filteredTotal = filteredGroups.reduce(
+    (sum, group) => sum + group.styles.length,
+    0,
+  );
+
+  useEffect(() => {
+    setSearchQuery("");
+  }, [coverage.key]);
+
   return (
     <div className="lululemon-style-portfolio-list remaining">
       <div className="lululemon-style-portfolio-heading">
         <span>Lululemon opportunities</span>
         <strong>
-          Top 5 each / {formatNumber.format(total)}
+          {isSearching
+            ? `${formatNumber.format(filteredTotal)} found / ${formatNumber.format(total)}`
+            : `Top 5 each / ${formatNumber.format(total)}`}
         </strong>
       </div>
       {coverage.rawRemaining && (
@@ -959,21 +983,48 @@ function LululemonOpportunityList({
           {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} grouped styles; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
         </p>
       )}
+      <div className="lululemon-opportunity-search">
+        <label htmlFor={`lululemon-style-search-${coverage.key}`}>
+          <span>Find a Lululemon style</span>
+          <input
+            className="lululemon-style-family-search"
+            id={`lululemon-style-search-${coverage.key}`}
+            type="search"
+            value={searchQuery}
+            placeholder="Search style name to compare with NYG..."
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
+        </label>
+        {isSearching && (
+          <button type="button" onClick={() => setSearchQuery("")}>
+            Clear
+          </button>
+        )}
+        <small>
+          {isSearching
+            ? `${formatNumber.format(filteredTotal)} matching styles, ranked by sales.`
+            : "Search results keep the current sales ranking."}
+        </small>
+      </div>
       <div className="lululemon-style-opportunity-groups ranked-list">
-        {groups.map((group) => {
+        {filteredGroups.map((group) => {
           const isExpanded = expandedGenders[group.gender];
-          const displayedStyles = isExpanded ? group.styles : group.styles.slice(0, 5);
+          const displayedStyles = isSearching || isExpanded
+            ? group.styles
+            : group.styles.slice(0, 5);
           return (
             <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
               <div className="lululemon-style-gender-heading">
                 <span>{group.gender}</span>
                 <b>
-                  {isExpanded
+                  {isSearching
+                    ? `${group.styles.length} ${group.styles.length === 1 ? "match" : "matches"}`
+                    : isExpanded
                     ? `All ${group.styles.length}`
                     : `Top ${Math.min(5, group.styles.length)}`}
                 </b>
               </div>
-              <ol className={isExpanded ? "expanded" : undefined}>
+              <ol className={isSearching || isExpanded ? "expanded" : undefined}>
                 {displayedStyles.map((style) => (
                   <li key={style.name}>
                     <a
@@ -1015,7 +1066,7 @@ function LululemonOpportunityList({
                   </li>
                 ))}
               </ol>
-              {group.styles.length > 5 && (
+              {!isSearching && group.styles.length > 5 && (
                 <button
                   className="lululemon-style-view-more"
                   type="button"
