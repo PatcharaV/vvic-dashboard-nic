@@ -1652,7 +1652,6 @@ function LululemonBrandOverview() {
         <div className="lululemon-business-grid">
           <article className="lululemon-overview-card lululemon-sales-card">
             <h3>Sales mix by product type</h3>
-            <p>US online apparel, Particl · click a product type</p>
             <LululemonBarChart
               rows={LULULEMON_SALES_MIX}
               selectedKey={selectedProductType}
