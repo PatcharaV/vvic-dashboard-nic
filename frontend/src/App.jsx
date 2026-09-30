@@ -1718,12 +1718,39 @@ function LululemonBrandOverview() {
 
         <div className="lululemon-nytg-grid">
           <article className="lululemon-overview-card lululemon-subtype-card">
-            <h3>NYG vs. Lululemon sub-type size</h3>
-            <p>
-              {comparisonMetric === "sales"
-                ? "NYG sales compared with estimated Lululemon FOB cost - click a row to filter"
-                : "NYG compared with the full Lululemon sub-type - click a row to filter"}
-            </p>
+            <div className="lululemon-subtype-card-heading">
+              <div>
+                <h3>NYG vs. Lululemon sub-type size</h3>
+                <p>
+                  {comparisonMetric === "sales"
+                    ? "NYG sales compared with estimated Lululemon FOB cost - click a row to filter"
+                    : "NYG compared with the full Lululemon sub-type - click a row to filter"}
+                </p>
+              </div>
+              <div className="lululemon-comparison-controls lululemon-style-controls lululemon-chart-controls">
+                <button
+                  className="lululemon-comparison-reset"
+                  type="button"
+                  onClick={() => setComparisonSubtype("overall")}
+                  disabled={comparisonSubtype === "overall"}
+                >
+                  Reset
+                </button>
+                <label>
+                  <span>Sub-type</span>
+                  <select
+                    value={comparisonSubtype}
+                    onChange={(event) => setComparisonSubtype(event.target.value)}
+                  >
+                    {LULULEMON_NYG_COMPARISON.map((row) => (
+                      <option key={row.key} value={row.key}>
+                        {row.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            </div>
             <LululemonSubtypeComparisonChart
               metric={comparisonMetric}
               selectedKey={comparisonSubtype}

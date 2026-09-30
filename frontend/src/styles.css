@@ -1474,6 +1474,27 @@ button.lululemon-bar-row.selected > strong {
   gap: 14px;
 }
 
+.lululemon-subtype-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.lululemon-subtype-card-heading > div:first-child {
+  min-width: 0;
+}
+
+.lululemon-subtype-card-heading p {
+  margin: 8px 0 0 19px;
+  color: #66666a;
+  font-size: 11px;
+}
+
+.lululemon-chart-controls {
+  flex: 0 0 min(330px, 42%);
+}
+
 .lululemon-subtype-legend {
   margin-bottom: 3px;
   padding: 0 10px;
@@ -5116,6 +5137,11 @@ footer a {
   }
 
   .lululemon-style-card-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lululemon-subtype-card-heading {
     align-items: stretch;
     flex-direction: column;
   }
