@@ -1700,9 +1700,7 @@ function DashboardAiAssistant({ context }) {
       if (!response.ok) {
         const unavailable = response.status === 503;
         throw new Error(
-          unavailable
-            ? languageCopy.unavailable
-            : payload.detail || languageCopy.error,
+          payload.detail || (unavailable ? languageCopy.unavailable : languageCopy.error),
         );
       }
       setMessages((current) => [

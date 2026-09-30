@@ -146,6 +146,41 @@ def parse_openai_response(payload: dict[str, Any]) -> tuple[str, list[dict[str, 
     return "\n\n".join(text_parts).strip(), sources[:8], used_web
 
 
+def ai_error_detail(language: str, error_key: str) -> str:
+    messages = {
+        "invalid_key": {
+            "th": "OpenAI API key ไม่ถูกต้องหรือถูกยกเลิก กรุณาสร้าง key ใหม่และอัปเดตใน Render",
+            "en": "The OpenAI API key is invalid or revoked. Create a new key and update it in Render.",
+        },
+        "billing": {
+            "th": "บัญชี OpenAI API ไม่มีเครดิตหรือถึงขีดจำกัดการใช้งาน กรุณาเปิด Billing หรือเพิ่มเครดิตใน OpenAI Platform",
+            "en": "The OpenAI API account has no available credit or has reached its usage limit. Enable billing or add credit in OpenAI Platform.",
+        },
+        "access": {
+            "th": "OpenAI project นี้ไม่มีสิทธิ์ใช้โมเดลหรือเครื่องมือที่ตั้งไว้ กรุณาตรวจสิทธิ์ของ Project และ API key",
+            "en": "This OpenAI project cannot access the configured model or tool. Check the project and API key permissions.",
+        },
+        "model": {
+            "th": f"OpenAI project นี้ไม่สามารถใช้โมเดล {OPENAI_MODEL} ได้ กรุณาเปลี่ยน OPENAI_MODEL ใน Render",
+            "en": f"This OpenAI project cannot use {OPENAI_MODEL}. Change OPENAI_MODEL in Render.",
+        },
+        "rate_limit": {
+            "th": "OpenAI API ถูกเรียกใช้งานถี่เกินไป กรุณารอสักครู่แล้วลองใหม่",
+            "en": "The OpenAI API rate limit was reached. Wait briefly and try again.",
+        },
+        "request": {
+            "th": "OpenAI ไม่สามารถประมวลผลรูปแบบคำขอนี้ได้ กรุณาตรวจการตั้งค่าโมเดล",
+            "en": "OpenAI could not process this request format. Check the configured model.",
+        },
+        "service": {
+            "th": "บริการ OpenAI ไม่สามารถดำเนินการได้ในขณะนี้ กรุณาลองใหม่ภายหลัง",
+            "en": "The OpenAI service could not complete the request. Please try again later.",
+        },
+    }
+    selected_language = "th" if language == "th" else "en"
+    return messages[error_key][selected_language]
+
+
 def make_scrape_period(month: str | None, year: int | None) -> dict[str, Any] | None:
     if not month or not year:
         return None
@@ -574,6 +609,11 @@ async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
             detail="AI is not configured yet. Set OPENAI_API_KEY on the server to enable it.",
         )
     enforce_ai_rate_limit(request)
+    response_language = body.language
+    if response_language == "auto":
+        response_language = (
+            "th" if any("\u0e00" <= character <= "\u0e7f" for character in body.message) else "en"
+        )
 
     context_json = json.dumps(body.context, ensure_ascii=False, separators=(",", ":"))
     if len(context_json) > 30_000:
@@ -641,9 +681,31 @@ async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
             detail="The AI response took too long. Please try again.",
         ) from exc
     except httpx.HTTPStatusError as exc:
+        upstream_status = exc.response.status_code
+        try:
+            upstream_error = exc.response.json().get("error") or {}
+        except (ValueError, AttributeError):
+            upstream_error = {}
+        error_code = str(upstream_error.get("code") or "").lower()
+        error_type = str(upstream_error.get("type") or "").lower()
+
+        if upstream_status == 401 or error_code == "invalid_api_key":
+            status_code, error_key = 503, "invalid_key"
+        elif "quota" in error_code or "quota" in error_type:
+            status_code, error_key = 402, "billing"
+        elif upstream_status == 403:
+            status_code, error_key = 403, "access"
+        elif upstream_status == 404 or error_code == "model_not_found":
+            status_code, error_key = 502, "model"
+        elif upstream_status == 429:
+            status_code, error_key = 429, "rate_limit"
+        elif upstream_status == 400:
+            status_code, error_key = 502, "request"
+        else:
+            status_code, error_key = 502, "service"
         raise HTTPException(
-            status_code=502,
-            detail="The AI service could not complete this request.",
+            status_code=status_code,
+            detail=ai_error_detail(response_language, error_key),
         ) from exc
     except httpx.HTTPError as exc:
         raise HTTPException(
