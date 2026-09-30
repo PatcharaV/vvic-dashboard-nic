@@ -1326,7 +1326,10 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                                   </span>
                                 )}
                               </span>
-                              <b>{formatComparisonValue(style.nygSales, "sales")}</b>
+                              <span className="lululemon-secured-value">
+                                <b>{formatComparisonValue(style.nygSales, "sales")}</b>
+                                <small>{formatComparisonValue(style.nygUnits, "units")}</small>
+                              </span>
                             </div>
                           ))}
                           {group.styles.length === 0 && (

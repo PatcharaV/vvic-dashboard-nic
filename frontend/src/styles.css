@@ -2517,6 +2517,20 @@ button.lululemon-bar-row.selected > strong {
   font-size: 10px;
 }
 
+.lululemon-secured-value {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.lululemon-style-secured-list .lululemon-secured-value small {
+  color: #5f595b;
+  font-size: 8px;
+  font-weight: 800;
+}
+
 .lululemon-style-coverage-summary {
   display: grid;
   place-items: stretch;
