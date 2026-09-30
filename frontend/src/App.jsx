@@ -834,7 +834,6 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
           {baseLabel}
         </span>
         <span><i className="nyg-key" />NYG</span>
-        <strong>Chart: {metric === "sales" ? "Revenue" : metric === "units" ? "Total Units" : "Products"}</strong>
       </div>
       <div className="lululemon-subtype-chart-layout">
         <div className="lululemon-subtype-plot">
