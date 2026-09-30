@@ -1603,6 +1603,15 @@ function LululemonTimeline() {
 function LululemonBrandOverview() {
   const comparisonMetric = "sales";
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
+  const [selectedProductType, setSelectedProductType] = useState("");
+  const selectedProductMix = LULULEMON_SALES_MIX.find(
+    (row) => row.label === selectedProductType,
+  );
+  const totalApparelSales = 9_650_000_000;
+  const selectedSalesShare = selectedProductMix ? selectedProductMix.value / 100 : 1;
+  const selectedTotalSales = totalApparelSales * selectedSalesShare;
+  const selectedOnlineSales = 2_890_000_000 * selectedSalesShare;
+  const selectedOfflineSales = 6_760_000_000 * selectedSalesShare;
   const selectedComparison =
     LULULEMON_NYG_COMPARISON.find(
       (row) => row.key === comparisonSubtype,
@@ -1643,32 +1652,45 @@ function LululemonBrandOverview() {
         <div className="lululemon-business-grid">
           <article className="lululemon-overview-card lululemon-sales-card">
             <h3>Sales mix by product type</h3>
-            <p>US online apparel, Particl</p>
-            <LululemonBarChart rows={LULULEMON_SALES_MIX} />
+            <p>US online apparel, Particl · click a product type</p>
+            <LululemonBarChart
+              rows={LULULEMON_SALES_MIX}
+              selectedKey={selectedProductType}
+              onSelect={(productType) =>
+                setSelectedProductType((current) =>
+                  current === productType ? "" : productType,
+                )
+              }
+            />
           </article>
           <article className="lululemon-overview-card lululemon-ring-card">
             <h3>Total Sales contribution</h3>
+            <p className="lululemon-contribution-context">
+              {selectedProductMix
+                ? `${selectedProductMix.label} · ${selectedProductMix.value.toFixed(1)}% of total sales`
+                : "All product types · click a row to filter"}
+            </p>
             <div
               className="lululemon-ring lululemon-contribution-ring"
               style={{
                 background: "conic-gradient(#d40039 0 30%, #e7dfe1 30% 100%)",
               }}
             >
-              <strong>$9.65B</strong>
-              <span>Total sales</span>
+              <strong>{formatComparisonValue(selectedTotalSales, "sales")}</strong>
+              <span>{selectedProductMix ? selectedProductMix.label : "Total sales"}</span>
             </div>
             <div className="lululemon-contribution-legend">
               <div>
                 <i className="online" />
                 <span>Online</span>
                 <strong>30.0%</strong>
-                <b>$2.89B</b>
+                <b>{formatComparisonValue(selectedOnlineSales, "sales")}</b>
               </div>
               <div>
                 <i className="offline" />
                 <span>Offline</span>
                 <strong>70.0%</strong>
-                <b>$6.76B</b>
+                <b>{formatComparisonValue(selectedOfflineSales, "sales")}</b>
               </div>
             </div>
           </article>
@@ -1678,7 +1700,8 @@ function LululemonBrandOverview() {
           * Estimates, apparel only (Women&apos;s + Men&apos;s), 1 SEP 25 - 31 AUG 26. Sales
           use net revenue TTM and an 87.0% apparel share. Online is estimated at
           30% of sales; FOB spend uses a {LULULEMON_FOB_MULTIPLIER.toFixed(4)}x
-          multiplier. Source: Lululemon_Wallet_Size__Share_7.xlsx, All product.
+          multiplier. Selected product-type totals apply the Particl sales-mix share
+          to total apparel sales. Source: Lululemon_Wallet_Size__Share_7.xlsx, All product.
         </p>
       </article>
 

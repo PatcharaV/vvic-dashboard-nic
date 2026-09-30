@@ -1449,6 +1449,7 @@ button.lululemon-bar-row {
   border-radius: 8px;
   font: inherit;
   text-align: initial;
+  cursor: pointer;
 }
 
 button.lululemon-bar-row:hover,
@@ -1459,6 +1460,12 @@ button.lululemon-bar-row.selected {
 
 button.lululemon-bar-row.selected .lululemon-bar-track {
   box-shadow: 0 0 0 2px rgba(211, 19, 52, 0.12);
+}
+
+button.lululemon-bar-row.selected > span:first-child,
+button.lululemon-bar-row.selected > strong {
+  color: var(--lululemon-red);
+  font-weight: 850;
 }
 
 .lululemon-subtype-comparison {
@@ -2976,6 +2983,14 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
 
 .lululemon-contribution-ring {
   margin-top: 24px;
+}
+
+.lululemon-ring-card > .lululemon-contribution-context {
+  min-height: 15px;
+  margin: 9px 0 0;
+  color: #777174;
+  font-size: 9px;
+  text-align: center;
 }
 
 .lululemon-contribution-ring strong,
