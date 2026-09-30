@@ -79,6 +79,7 @@ class AiChatRequest(BaseModel):
     messages: list[AiChatMessage] = Field(default_factory=list, max_length=10)
     context: dict[str, Any] = Field(default_factory=dict)
     allow_web: bool = True
+    language: Literal["auto", "th", "en"] = "auto"
 
 
 def enforce_ai_rate_limit(request: Request) -> None:
@@ -589,9 +590,14 @@ async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
         "CURRENT QUESTION:\n"
         f"{body.message}"
     )
+    language_instruction = {
+        "auto": "Detect the language of the latest question and answer in that language.",
+        "th": "Answer in Thai. Keep product, fabric, style, and commercial terms in English when clearer.",
+        "en": "Answer in English.",
+    }[body.language]
     instructions = (
         "You are NIC AI Assistant for Lululemon Sales and Business Development. "
-        "Answer in the same language as the user's latest question. Be concise, commercial, "
+        f"{language_instruction} Be concise, commercial, "
         "and useful in a customer meeting. Use the supplied dashboard context as the primary "
         "source and never invent numbers. Clearly label dashboard findings and external-market "
         "findings when both are used. For fabric recommendations, connect each recommendation "

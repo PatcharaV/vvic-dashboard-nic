@@ -1592,26 +1592,77 @@ function LululemonTimeline() {
   );
 }
 
-const LULULEMON_AI_SUGGESTIONS = [
-  "จากข้อมูลทั้งหมด ควรนำเสนอผ้าอะไรเพิ่มอีกไหม",
-  "สรุปโอกาสสำคัญ 5 อันดับสำหรับทีม Sales และ BD",
-  "Sub-type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
-];
+const LULULEMON_AI_SUGGESTIONS = {
+  auto: [
+    "จากข้อมูลทั้งหมด ควรนำเสนอผ้าอะไรเพิ่มอีกไหม",
+    "What are the top five opportunities for Sales and BD?",
+    "Sub-type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
+  ],
+  th: [
+    "จากข้อมูลทั้งหมด ควรนำเสนอผ้าอะไรเพิ่มอีกไหม",
+    "สรุปโอกาสสำคัญ 5 อันดับสำหรับทีม Sales และ BD",
+    "Sub-type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
+  ],
+  en: [
+    "Based on all available data, which fabrics should we propose next?",
+    "Summarize the top five opportunities for Sales and BD.",
+    "Which sub-type has the largest opportunity gap between Lululemon and NYG?",
+  ],
+};
+
+const AI_LANGUAGE_COPY = {
+  auto: {
+    greeting:
+      "สวัสดีครับ ผมตอบได้ทั้งภาษาไทยและ English โดยจะใช้ภาษาตามคำถามของคุณ / I can answer in Thai or English and will follow the language of your question.",
+    loading: "กำลังวิเคราะห์ Dashboard และค้นข้อมูลที่เกี่ยวข้อง... / Analyzing dashboard and market data...",
+    placeholder: "ถามเป็นภาษาไทยหรือ English เกี่ยวกับโอกาส ผ้า สินค้า หรือเทรนด์ตลาด...",
+    unavailable: "AI กำลังรอการเปิดใช้งานจากผู้ดูแลระบบ / AI is waiting for administrator setup.",
+    error: "ไม่สามารถเชื่อมต่อ AI ได้ กรุณาลองอีกครั้ง / Unable to reach AI. Please try again.",
+  },
+  th: {
+    greeting: "สวัสดีครับ ผมช่วยวิเคราะห์ Dashboard และค้นข้อมูลตลาดสำหรับทีม Sales/BD ได้",
+    loading: "กำลังวิเคราะห์ Dashboard และค้นข้อมูลที่เกี่ยวข้อง...",
+    placeholder: "ถามเกี่ยวกับโอกาส ผ้า สินค้า หรือเทรนด์ตลาด...",
+    unavailable: "AI กำลังรอการเปิดใช้งานจากผู้ดูแลระบบ",
+    error: "ไม่สามารถเชื่อมต่อ AI ได้ กรุณาลองอีกครั้ง",
+  },
+  en: {
+    greeting: "Hello. I can analyze the dashboard and research market information for Sales and BD.",
+    loading: "Analyzing the dashboard and relevant market information...",
+    placeholder: "Ask about opportunities, fabrics, products, or market trends...",
+    unavailable: "AI is waiting for administrator setup.",
+    error: "Unable to reach AI. Please try again.",
+  },
+};
 
 function DashboardAiAssistant({ context }) {
   const [open, setOpen] = useState(false);
   const [allowWeb, setAllowWeb] = useState(true);
+  const [language, setLanguage] = useState("auto");
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content:
-        "สวัสดีครับ ผมช่วยวิเคราะห์ข้อมูลใน Dashboard และค้นข้อมูลตลาดภายนอกเพื่อเตรียมคำตอบสำหรับ Sales/BD ได้",
+      content: AI_LANGUAGE_COPY.auto.greeting,
       sources: [],
     },
   ]);
   const messageListRef = useRef(null);
+  const languageCopy = AI_LANGUAGE_COPY[language];
+
+  function changeLanguage(nextLanguage) {
+    setLanguage(nextLanguage);
+    if (messages.length === 1) {
+      setMessages([
+        {
+          role: "assistant",
+          content: AI_LANGUAGE_COPY[nextLanguage].greeting,
+          sources: [],
+        },
+      ]);
+    }
+  }
 
   useEffect(() => {
     if (!open || !messageListRef.current) return;
@@ -1642,6 +1693,7 @@ function DashboardAiAssistant({ context }) {
           messages: conversation,
           context,
           allow_web: allowWeb,
+          language,
         }),
       });
       const payload = await response.json().catch(() => ({}));
@@ -1649,8 +1701,8 @@ function DashboardAiAssistant({ context }) {
         const unavailable = response.status === 503;
         throw new Error(
           unavailable
-            ? "AI กำลังรอการเปิดใช้งานจากผู้ดูแลระบบ กรุณาตั้งค่า OPENAI_API_KEY บนเซิร์ฟเวอร์"
-            : payload.detail || "ไม่สามารถรับคำตอบจาก AI ได้ในขณะนี้",
+            ? languageCopy.unavailable
+            : payload.detail || languageCopy.error,
         );
       }
       setMessages((current) => [
@@ -1667,7 +1719,7 @@ function DashboardAiAssistant({ context }) {
         ...current,
         {
           role: "assistant",
-          content: error.message || "ไม่สามารถเชื่อมต่อ AI ได้ กรุณาลองอีกครั้ง",
+          content: error.message || languageCopy.error,
           sources: [],
           error: true,
         },
@@ -1714,8 +1766,18 @@ function DashboardAiAssistant({ context }) {
             </header>
 
             <div className="dashboard-ai-toolbar">
-              <span>Uses the current Lululemon view</span>
-              <label>
+              <label className="dashboard-ai-language">
+                <span>Language</span>
+                <select
+                  value={language}
+                  onChange={(event) => changeLanguage(event.target.value)}
+                >
+                  <option value="auto">Auto</option>
+                  <option value="th">ไทย</option>
+                  <option value="en">English</option>
+                </select>
+              </label>
+              <label className="dashboard-ai-web-toggle">
                 <input
                   type="checkbox"
                   checked={allowWeb}
@@ -1754,14 +1816,14 @@ function DashboardAiAssistant({ context }) {
               {loading && (
                 <div className="dashboard-ai-message assistant loading">
                   <span>NIC AI</span>
-                  <p>กำลังวิเคราะห์ Dashboard และค้นข้อมูลที่เกี่ยวข้อง...</p>
+                  <p>{languageCopy.loading}</p>
                 </div>
               )}
             </div>
 
             {messages.length === 1 && (
               <div className="dashboard-ai-suggestions">
-                {LULULEMON_AI_SUGGESTIONS.map((suggestion) => (
+                {LULULEMON_AI_SUGGESTIONS[language].map((suggestion) => (
                   <button type="button" onClick={() => askAi(suggestion)} key={suggestion}>
                     {suggestion}
                   </button>
@@ -1779,7 +1841,7 @@ function DashboardAiAssistant({ context }) {
                     askAi(input);
                   }
                 }}
-                placeholder="Ask about opportunities, fabrics, products, or market trends..."
+                placeholder={languageCopy.placeholder}
                 rows="3"
                 maxLength="4000"
               />

@@ -139,6 +139,34 @@
   white-space: nowrap;
 }
 
+.dashboard-ai-toolbar .dashboard-ai-language {
+  gap: 8px;
+  color: #6e5d62;
+}
+
+.dashboard-ai-language span {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dashboard-ai-language select {
+  min-width: 92px;
+  padding: 6px 24px 6px 9px;
+  border: 1px solid #dccdd1;
+  border-radius: 7px;
+  color: #860027;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  outline: none;
+}
+
+.dashboard-ai-language select:focus {
+  border-color: #c90037;
+}
+
 .dashboard-ai-toolbar input {
   accent-color: #d5003b;
 }
