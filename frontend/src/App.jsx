@@ -1347,11 +1347,9 @@ function LululemonNygComparison({ metric, selectedKey }) {
         <div className="share">
           <span>NYG share</span>
           <strong>{formatComparisonShare(share)}</strong>
-          <small>
-            {isSales
-              ? "NYG sales / estimated Lululemon FOB"
-              : `of Lululemon ${selected.label.toLowerCase()}`}
-          </small>
+          {!isSales && (
+            <small>{`of Lululemon ${selected.label.toLowerCase()}`}</small>
+          )}
         </div>
       </div>
 
