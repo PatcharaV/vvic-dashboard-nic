@@ -1952,6 +1952,16 @@ button.lululemon-bar-row.selected > strong {
   background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
 }
 
+.lululemon-subtype-total i.empty {
+  min-width: 0;
+  background: transparent;
+}
+
+.lululemon-subtype-plot b.empty,
+.lululemon-mix-legend strong.empty {
+  color: #8a8385;
+}
+
 .lululemon-subtype-tooltip {
   position: absolute;
   z-index: 8;
@@ -3797,6 +3807,10 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-mini-donut::after {
   inset: 23px;
+}
+
+.lululemon-mini-donut.empty {
+  border: 1px solid #e9e7e8;
 }
 
 .lululemon-mix-legend {

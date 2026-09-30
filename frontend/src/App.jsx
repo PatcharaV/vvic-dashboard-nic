@@ -867,10 +867,15 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                     className="lululemon-subtype-total"
                     style={{ width: `${(row.comparisonBase / maxBase) * 100}%` }}
                   >
-                    <i style={{ width: `${Math.min(row.share, 100)}%` }} />
+                    <i
+                      className={row.share <= 0 ? "empty" : undefined}
+                      style={{ width: `${Math.min(row.share, 100)}%` }}
+                    />
                   </span>
                 </span>
-                <b>{formatComparisonShare(row.share)}</b>
+                <b className={row.share <= 0 ? "empty" : undefined}>
+                  {formatComparisonShare(row.share)}
+                </b>
                 <span className="lululemon-subtype-tooltip" id={tooltipId} role="tooltip">
                   <span>
                     <i className="nyg-key" />
@@ -1416,7 +1421,8 @@ function LululemonNygComparison({ metric, selectedKey }) {
 }
 
 function donutGradient(rows) {
-  const total = rows.reduce((sum, row) => sum + row.value, 0) || 100;
+  const total = rows.reduce((sum, row) => sum + row.value, 0);
+  if (total <= 0) return "transparent";
   let start = 0;
   return `conic-gradient(${rows
     .map((row) => {
@@ -1545,16 +1551,18 @@ function LululemonMixCard({ title, rows, subtitle, featured = false, embedded = 
       {subtitle && <p>{subtitle}</p>}
       <div className="lululemon-mix-content">
         <div
-          className="lululemon-mini-donut"
+          className={`lululemon-mini-donut ${rows.some((row) => row.value > 0) ? "" : "empty"}`}
           style={{ background: donutGradient(rows) }}
           aria-label={`${title} donut chart`}
         />
         <div className="lululemon-mix-legend">
           {rows.map((row) => (
             <div key={row.label}>
-              <i style={{ background: row.color }} />
+              <i style={{ background: row.value > 0 ? row.color : "transparent" }} />
               <span>{row.label}</span>
-              <strong>{row.value.toFixed(1)}%</strong>
+              <strong className={row.value <= 0 ? "empty" : undefined}>
+                {row.value.toFixed(1)}%
+              </strong>
             </div>
           ))}
         </div>
