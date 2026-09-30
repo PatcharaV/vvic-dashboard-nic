@@ -924,7 +924,6 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
 function LululemonOpportunityList({
   coverage,
   groups,
-  opportunityUnit,
   total,
   expandedGenders,
   onToggleGender,
@@ -934,12 +933,12 @@ function LululemonOpportunityList({
       <div className="lululemon-style-portfolio-heading">
         <span>Lululemon opportunities</span>
         <strong>
-          Top 5 each / {formatNumber.format(total)} {opportunityUnit}
+          Top 5 each / {formatNumber.format(total)}
         </strong>
       </div>
       {coverage.rawRemaining && (
         <p className="lululemon-style-family-note">
-          {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} families; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
+          {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} grouped styles; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
         </p>
       )}
       <div className="lululemon-style-opportunity-groups ranked-list">
@@ -1121,7 +1120,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     );
   }
 
-  const opportunityUnit = coverage.rawRemaining ? "families" : "styles";
   const opportunityStyles =
     LULULEMON_REMAINING_OPPORTUNITIES[subtypeKey] ||
     (subtypeKey === "pant" ? LULULEMON_PANT_STYLE_FAMILIES : coverage.topRemaining);
@@ -1161,7 +1159,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           <LululemonOpportunityList
             coverage={coverage}
             groups={opportunityGenderGroups}
-            opportunityUnit={opportunityUnit}
             total={normalizedOpportunityStyles.length}
             expandedGenders={expandedOpportunityGenders}
             onToggleGender={toggleOpportunityGender}
@@ -1279,7 +1276,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         <LululemonOpportunityList
           coverage={coverage}
           groups={opportunityGenderGroups}
-          opportunityUnit={opportunityUnit}
           total={normalizedOpportunityStyles.length}
           expandedGenders={expandedOpportunityGenders}
           onToggleGender={toggleOpportunityGender}
