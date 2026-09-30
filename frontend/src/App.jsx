@@ -1592,6 +1592,211 @@ function LululemonTimeline() {
   );
 }
 
+const LULULEMON_AI_SUGGESTIONS = [
+  "จากข้อมูลทั้งหมด ควรนำเสนอผ้าอะไรเพิ่มอีกไหม",
+  "สรุปโอกาสสำคัญ 5 อันดับสำหรับทีม Sales และ BD",
+  "Sub-type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
+];
+
+function DashboardAiAssistant({ context }) {
+  const [open, setOpen] = useState(false);
+  const [allowWeb, setAllowWeb] = useState(true);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      role: "assistant",
+      content:
+        "สวัสดีครับ ผมช่วยวิเคราะห์ข้อมูลใน Dashboard และค้นข้อมูลตลาดภายนอกเพื่อเตรียมคำตอบสำหรับ Sales/BD ได้",
+      sources: [],
+    },
+  ]);
+  const messageListRef = useRef(null);
+
+  useEffect(() => {
+    if (!open || !messageListRef.current) return;
+    messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+  }, [messages, loading, open]);
+
+  async function askAi(question) {
+    const cleanQuestion = String(question || "").trim();
+    if (!cleanQuestion || loading) return;
+
+    const conversation = messages
+      .slice(-8)
+      .filter((message) => !message.error)
+      .map(({ role, content }) => ({ role, content }));
+    setMessages((current) => [
+      ...current,
+      { role: "user", content: cleanQuestion, sources: [] },
+    ]);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: cleanQuestion,
+          messages: conversation,
+          context,
+          allow_web: allowWeb,
+        }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const unavailable = response.status === 503;
+        throw new Error(
+          unavailable
+            ? "AI กำลังรอการเปิดใช้งานจากผู้ดูแลระบบ กรุณาตั้งค่า OPENAI_API_KEY บนเซิร์ฟเวอร์"
+            : payload.detail || "ไม่สามารถรับคำตอบจาก AI ได้ในขณะนี้",
+        );
+      }
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content: payload.answer,
+          sources: payload.sources || [],
+          usedWeb: Boolean(payload.used_web),
+        },
+      ]);
+    } catch (error) {
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content: error.message || "ไม่สามารถเชื่อมต่อ AI ได้ กรุณาลองอีกครั้ง",
+          sources: [],
+          error: true,
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    askAi(input);
+  }
+
+  return (
+    <>
+      <button
+        className="dashboard-ai-launcher"
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label="Open NIC AI Assistant"
+      >
+        <span>AI</span>
+        Ask AI
+      </button>
+      {open && (
+        <div className="dashboard-ai-layer">
+          <button
+            className="dashboard-ai-backdrop"
+            type="button"
+            aria-label="Close AI Assistant"
+            onClick={() => setOpen(false)}
+          />
+          <aside className="dashboard-ai-panel" aria-label="NIC AI Assistant">
+            <header className="dashboard-ai-header">
+              <div>
+                <p>NIC AI ASSISTANT</p>
+                <h2>Sales &amp; BD Copilot</h2>
+                <span>Dashboard context + live web</span>
+              </div>
+              <button type="button" onClick={() => setOpen(false)} aria-label="Close">
+                X
+              </button>
+            </header>
+
+            <div className="dashboard-ai-toolbar">
+              <span>Uses the current Lululemon view</span>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={allowWeb}
+                  onChange={(event) => setAllowWeb(event.target.checked)}
+                />
+                Search web
+              </label>
+            </div>
+
+            <div className="dashboard-ai-messages" ref={messageListRef}>
+              {messages.map((message, index) => (
+                <div
+                  className={`dashboard-ai-message ${message.role}${message.error ? " error" : ""}`}
+                  key={`${message.role}-${index}`}
+                >
+                  <span>{message.role === "user" ? "You" : "NIC AI"}</span>
+                  <p>{message.content}</p>
+                  {message.usedWeb && <small>Live web sources used</small>}
+                  {message.sources?.length > 0 && (
+                    <div className="dashboard-ai-sources">
+                      <strong>Sources</strong>
+                      {message.sources.map((source) => (
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          key={source.url}
+                        >
+                          {source.title}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+              {loading && (
+                <div className="dashboard-ai-message assistant loading">
+                  <span>NIC AI</span>
+                  <p>กำลังวิเคราะห์ Dashboard และค้นข้อมูลที่เกี่ยวข้อง...</p>
+                </div>
+              )}
+            </div>
+
+            {messages.length === 1 && (
+              <div className="dashboard-ai-suggestions">
+                {LULULEMON_AI_SUGGESTIONS.map((suggestion) => (
+                  <button type="button" onClick={() => askAi(suggestion)} key={suggestion}>
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <form className="dashboard-ai-compose" onSubmit={handleSubmit}>
+              <textarea
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    askAi(input);
+                  }
+                }}
+                placeholder="Ask about opportunities, fabrics, products, or market trends..."
+                rows="3"
+                maxLength="4000"
+              />
+              <div>
+                <small>AI may make mistakes. Verify commercial decisions.</small>
+                <button type="submit" disabled={loading || !input.trim()}>
+                  Send
+                </button>
+              </div>
+            </form>
+          </aside>
+        </div>
+      )}
+    </>
+  );
+}
+
 function LululemonBrandOverview() {
   const comparisonMetric = "sales";
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
@@ -1626,6 +1831,69 @@ function LululemonBrandOverview() {
       color: "#f18498",
     },
   ];
+  const aiContext = useMemo(() => {
+    const currentStyles = LULULEMON_NYG_STYLES
+      .filter(
+        (style) => comparisonSubtype === "overall" || style.subtype === comparisonSubtype,
+      )
+      .sort((left, right) => right.nygSales - left.nygSales)
+      .slice(0, 20)
+      .map(({ name, subtype, gender, season, nygSales, nygUnits, nygFabricYards, nykFabricYards }) => ({
+        name,
+        subtype,
+        gender,
+        season,
+        nygSales,
+        nygUnits,
+        nygFabricYards,
+        nykFabricYards,
+      }));
+    const futureStyles = LULULEMON_NYG_FUTURE_STYLES
+      .filter(
+        (style) => comparisonSubtype === "overall" || style.subtype === comparisonSubtype,
+      )
+      .sort((left, right) => right.nygSales - left.nygSales)
+      .slice(0, 15)
+      .map(({ name, subtype, gender, season, nygSales, nygUnits }) => ({
+        name,
+        subtype,
+        gender,
+        season,
+        nygSales,
+        nygUnits,
+      }));
+    const opportunities = comparisonSubtype === "overall"
+      ? Object.fromEntries(
+          Object.entries(LULULEMON_REMAINING_OPPORTUNITIES).map(([subtype, styles]) => [
+            subtype,
+            styles.slice(0, 3),
+          ]),
+        )
+      : {
+          [comparisonSubtype]: (
+            LULULEMON_REMAINING_OPPORTUNITIES[comparisonSubtype] || []
+          ).slice(0, 10),
+        };
+
+    return {
+      dashboard: "Lululemon Business Overview",
+      reportingPeriod: "1 SEP 25 - 31 AUG 26",
+      selectedProductType: selectedProductMix?.label || "All product types",
+      selectedSubtype: selectedComparison,
+      businessMetrics: LULULEMON_BUSINESS_METRICS,
+      salesMixByProductType: LULULEMON_SALES_MIX,
+      fobMultiplier: LULULEMON_FOB_MULTIPLIER,
+      subtypeComparison: LULULEMON_NYG_COMPARISON,
+      topLululemonOpportunities: opportunities,
+      nygSecuredStyles: currentStyles,
+      nygFutureSecuredStyles: futureStyles,
+      notes: [
+        "Lululemon values are estimates from the workbook and dashboard methodology.",
+        "NYG and NYK fabric fields are recorded usage in yards, not confirmed fiber compositions.",
+        "External material recommendations must be identified as recommendations unless a source confirms the BOM.",
+      ],
+    };
+  }, [comparisonSubtype, selectedComparison, selectedProductMix]);
 
   return (
     <section className="lululemon-brand-overview">
@@ -1785,6 +2053,7 @@ function LululemonBrandOverview() {
       </article>
 
       <LululemonTimeline />
+      <DashboardAiAssistant context={aiContext} />
     </section>
   );
 }
