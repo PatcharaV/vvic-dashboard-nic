@@ -814,7 +814,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
     .sort((a, b) => b.comparisonBase - a.comparisonBase);
   const maxBase = Math.max(...rows.map((row) => row.comparisonBase), 1);
   const baseLabel = isSales
-    ? "Lululemon est. FOB"
+    ? "Lululemon"
     : `Lululemon ${isUnits ? "Total Units" : "Products"}`;
   const tableIsSales = tableMetric === "sales";
   const tableNygField = tableIsSales ? "nygSales" : "nygUnits";
