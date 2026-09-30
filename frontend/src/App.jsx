@@ -1309,7 +1309,6 @@ function LululemonNygComparison({ metric, selectedKey }) {
     : isUnits
       ? selected.nygUnits
       : selected.nygProducts;
-  const comparisonBase = getLululemonComparisonBase(lululemonValue, metric);
   const share = getNygShare(nygValue, lululemonValue, metric);
 
   return (
@@ -1330,7 +1329,7 @@ function LululemonNygComparison({ metric, selectedKey }) {
           <strong>{formatComparisonValue(lululemonValue, metric)}</strong>
           <small>
             {isSales
-              ? `Estimated FOB ${formatComparisonValue(comparisonBase, metric)} (sales / ${LULULEMON_FOB_MULTIPLIER})`
+              ? `FOB Multiplier: ${LULULEMON_FOB_MULTIPLIER.toFixed(4)}x`
               : metric === "products"
               ? "All Product"
               : `${formatNumber.format(selected.lululemonProducts)} product titles`}
