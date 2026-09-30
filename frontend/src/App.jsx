@@ -1647,24 +1647,30 @@ function LululemonBrandOverview() {
             <LululemonBarChart rows={LULULEMON_SALES_MIX} />
           </article>
           <article className="lululemon-overview-card lululemon-ring-card">
-            <h3>Sales concentration</h3>
+            <h3>Total Sales contribution</h3>
             <div
-              className="lululemon-ring"
-              style={{ "--ring-value": "73.2%" }}
+              className="lululemon-ring lululemon-contribution-ring"
+              style={{
+                background: "conic-gradient(#d40039 0 30%, #e7dfe1 30% 100%)",
+              }}
             >
-              <strong>73.2%</strong>
+              <strong>$9.65B</strong>
+              <span>Total sales</span>
             </div>
-            <p>from Bottoms and Outerwear.</p>
-          </article>
-          <article className="lululemon-overview-card lululemon-ring-card">
-            <h3>Online contribution</h3>
-            <div
-              className="lululemon-ring"
-              style={{ "--ring-value": "30%" }}
-            >
-              <strong>30.0%</strong>
+            <div className="lululemon-contribution-legend">
+              <div>
+                <i className="online" />
+                <span>Online</span>
+                <strong>30.0%</strong>
+                <b>$2.89B</b>
+              </div>
+              <div>
+                <i className="offline" />
+                <span>Offline</span>
+                <strong>70.0%</strong>
+                <b>$6.76B</b>
+              </div>
             </div>
-            <p>of total sales (Offline 70%).</p>
           </article>
         </div>
 

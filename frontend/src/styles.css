@@ -1381,7 +1381,7 @@ h2 {
 }
 
 .lululemon-business-grid {
-  grid-template-columns: minmax(0, 1.7fr) repeat(2, minmax(220px, 0.6fr));
+  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.8fr);
 }
 
 .lululemon-nytg-grid {
@@ -2972,6 +2972,73 @@ button.lululemon-bar-row.selected .lululemon-bar-track {
   z-index: 1;
   color: var(--lululemon-red);
   font-size: 24px;
+}
+
+.lululemon-contribution-ring {
+  margin-top: 24px;
+}
+
+.lululemon-contribution-ring strong,
+.lululemon-contribution-ring span {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.lululemon-contribution-ring strong {
+  font-size: 20px;
+}
+
+.lululemon-contribution-ring span {
+  margin-top: 3px;
+  color: #777174;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lululemon-contribution-legend {
+  margin-top: 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.lululemon-contribution-legend > div {
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  background: #fbf8f9;
+  border: 1px solid #f0e2e5;
+  border-radius: 8px;
+  color: #4b4648;
+  font-size: 9px;
+}
+
+.lululemon-contribution-legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.lululemon-contribution-legend i.online {
+  background: #d40039;
+}
+
+.lululemon-contribution-legend i.offline {
+  background: #e7dfe1;
+}
+
+.lululemon-contribution-legend strong {
+  color: var(--lululemon-red);
+}
+
+.lululemon-contribution-legend b {
+  min-width: 42px;
+  color: #292627;
+  text-align: right;
 }
 
 .lululemon-source-note {
