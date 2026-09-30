@@ -17,6 +17,14 @@ import { LULULEMON_REMAINING_OPPORTUNITIES } from "./lululemonOpportunities";
 import { LULULEMON_OPPORTUNITY_MEDIA } from "./lululemonOpportunityMedia";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
 import {
+  LULULEMON_FORECAST_FABRICS,
+  LULULEMON_FORECAST_FLAGSHIPS,
+  LULULEMON_FORECAST_NEXT_STEPS,
+  LULULEMON_FORECAST_PROGRAMS,
+  LULULEMON_FORECAST_QUICK_WINS,
+  LULULEMON_FORECAST_SUMMARY,
+} from "./lululemonSeasonForecast";
+import {
   LULULEMON_BUSINESS_METRICS,
   LULULEMON_FOB_MULTIPLIER,
   LULULEMON_NYG_COMPARISON,
@@ -56,6 +64,7 @@ const BRAND_WORKSPACE_PAGES = [
 
 const LULULEMON_WORKSPACE_PAGES = [
   { value: "overview", label: "Brand Overview" },
+  { value: "forecast", label: "Season Forecast" },
   { value: "product", label: "Product Dashboard" },
 ];
 
@@ -1856,6 +1865,239 @@ function DashboardAiAssistant({ context }) {
   );
 }
 
+function LululemonSeasonForecast() {
+  const [season, setSeason] = useState("All");
+  const [gender, setGender] = useState("All");
+  const filteredPrograms = LULULEMON_FORECAST_PROGRAMS.filter(
+    (program) =>
+      (season === "All" || program.season === season) &&
+      (gender === "All" || program.gender === gender),
+  );
+  const quickWins = LULULEMON_FORECAST_QUICK_WINS.filter(
+    (program) =>
+      (season === "All" || program.season === season) &&
+      (gender === "All" || program.gender === gender),
+  );
+  const flagshipTargets = LULULEMON_FORECAST_FLAGSHIPS.filter(
+    (program) => gender === "All" || program.gender === gender,
+  );
+  const relevantFabricNames = new Set(
+    filteredPrograms.map((program) => program.fabric),
+  );
+  const fabricDirections = LULULEMON_FORECAST_FABRICS.filter(
+    (fabric) =>
+      (season === "All" && gender === "All") || relevantFabricNames.has(fabric.name),
+  );
+  const forecastAiContext = useMemo(
+    () => ({
+      dashboard: "Lululemon FW27 & SS28 Season Forecast",
+      selectedSeason: season,
+      selectedGender: gender,
+      summary: LULULEMON_FORECAST_SUMMARY,
+      visiblePrograms: filteredPrograms,
+      quickWins,
+      flagshipTargets,
+      fabricDirections,
+      nextSteps: LULULEMON_FORECAST_NEXT_STEPS,
+      caveat:
+        "This is a directional forecast. The actual FW27/SS28 Lululemon line-list is not available yet.",
+    }),
+    [season, gender, filteredPrograms, quickWins, flagshipTargets, fabricDirections],
+  );
+
+  return (
+    <section className="lululemon-forecast-page">
+      <article className="lululemon-forecast-hero">
+        <div className="lululemon-forecast-hero-copy">
+          <p className="eyebrow">NAN YANG TEXTILE GROUP x LULULEMON</p>
+          <h2>{LULULEMON_FORECAST_SUMMARY.title}</h2>
+          <p>{LULULEMON_FORECAST_SUMMARY.thesis}</p>
+          <span>Directional forecast · September 2026 · Confidential</span>
+        </div>
+        <div className="lululemon-forecast-hero-metrics">
+          <div>
+            <strong>{LULULEMON_FORECAST_SUMMARY.suppliedPrograms}</strong>
+            <span>Programs NYG supplies today</span>
+          </div>
+          <div>
+            <strong>{LULULEMON_FORECAST_SUMMARY.securelyWonPrograms}</strong>
+            <span>Programs securely won</span>
+          </div>
+          <div>
+            <strong>{LULULEMON_FORECAST_PROGRAMS.length}</strong>
+            <span>Seasonal win plays</span>
+          </div>
+          <div>
+            <strong>{LULULEMON_FORECAST_FABRICS.length}</strong>
+            <span>NYK fabric directions</span>
+          </div>
+        </div>
+      </article>
+
+      <article className="lululemon-forecast-method">
+        <div>
+          <span>FORECAST BASIS</span>
+          <p>{LULULEMON_FORECAST_SUMMARY.methodology}</p>
+        </div>
+        <div className="lululemon-forecast-controls">
+          <fieldset>
+            <legend>Season</legend>
+            {["All", "FW27", "SS28"].map((value) => (
+              <button
+                className={season === value ? "active" : undefined}
+                type="button"
+                onClick={() => setSeason(value)}
+                key={value}
+              >
+                {value}
+              </button>
+            ))}
+          </fieldset>
+          <fieldset>
+            <legend>Gender</legend>
+            {["All", "Men", "Women"].map((value) => (
+              <button
+                className={gender === value ? "active" : undefined}
+                type="button"
+                onClick={() => setGender(value)}
+                key={value}
+              >
+                {value}
+              </button>
+            ))}
+          </fieldset>
+        </div>
+      </article>
+
+      {quickWins.length > 0 && (
+        <article className="lululemon-forecast-section quick-wins">
+          <div className="lululemon-forecast-section-heading">
+            <div>
+              <p className="eyebrow">START HERE</p>
+              <h3>The fastest realistic first wins</h3>
+            </div>
+            <span>Existing relationships create the easiest door to open.</span>
+          </div>
+          <div className="lululemon-forecast-quick-grid">
+            {quickWins.map((program) => (
+              <div className="lululemon-forecast-quick-card" key={program.id}>
+                <div>
+                  <span>{program.gender} · {program.season}</span>
+                  <strong>{program.program}</strong>
+                </div>
+                <p>{program.reason}</p>
+                <footer>
+                  <span>NYK should bring</span>
+                  <strong>{program.fabric}</strong>
+                </footer>
+              </div>
+            ))}
+          </div>
+        </article>
+      )}
+
+      <article className="lululemon-forecast-section">
+        <div className="lululemon-forecast-section-heading">
+          <div>
+            <p className="eyebrow">WIN PIPELINE</p>
+            <h3>Programs to pursue by season</h3>
+          </div>
+          <span>{filteredPrograms.length} priority plays shown</span>
+        </div>
+        <div className="lululemon-forecast-programs">
+          {filteredPrograms.map((program) => (
+            <article className="lululemon-forecast-program" key={program.id}>
+              <div className="lululemon-forecast-program-rank">
+                <strong>{program.rank}</strong>
+                <span>{program.season}</span>
+              </div>
+              <div className="lululemon-forecast-program-name">
+                <span>{program.gender} · {program.subtype}</span>
+                <h4>{program.program}</h4>
+                <b className={program.tier === "Start here" ? "start" : undefined}>
+                  {program.tier}
+                </b>
+              </div>
+              <div className="lululemon-forecast-program-pitch">
+                <span>NYG should present</span>
+                <p>{program.pitch}</p>
+              </div>
+              <div className="lululemon-forecast-program-fabric">
+                <span>NYK should bring</span>
+                <strong>{program.fabric}</strong>
+                <p>{program.fabricDetail}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </article>
+
+      <div className="lululemon-forecast-split">
+        <article className="lululemon-forecast-section flagship">
+          <div className="lululemon-forecast-section-heading">
+            <div>
+              <p className="eyebrow">FLAGSHIP TARGETS</p>
+              <h3>The two biggest whitespace bets</h3>
+            </div>
+          </div>
+          <div className="lululemon-forecast-flagships">
+            {flagshipTargets.map((target) => (
+              <div key={target.program}>
+                <span>{target.gender}</span>
+                <h4>{target.program}</h4>
+                <strong>{target.claim}</strong>
+                <p>{target.rationale}</p>
+                <b>{target.fabric}</b>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="lululemon-forecast-section next-steps">
+          <div className="lululemon-forecast-section-heading">
+            <div>
+              <p className="eyebrow">ACTION PLAN</p>
+              <h3>What Sales and BD do next</h3>
+            </div>
+          </div>
+          <ol>
+            {LULULEMON_FORECAST_NEXT_STEPS.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+        </article>
+      </div>
+
+      <article className="lululemon-forecast-section fabric-glossary">
+        <div className="lululemon-forecast-section-heading">
+          <div>
+            <p className="eyebrow">NYK FABRIC PLAYBOOK</p>
+            <h3>Fabric directions matched to the selected opportunities</h3>
+          </div>
+          <span>{fabricDirections.length} directions</span>
+        </div>
+        <div className="lululemon-forecast-fabrics">
+          {fabricDirections.map((fabric, index) => (
+            <div key={fabric.name}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{fabric.name}</strong>
+              <p>{fabric.description}</p>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <p className="lululemon-forecast-source">
+        Source: NYG_NYK_FW27_SS28_Forecast (1).pptx. Forecast targets are directional,
+        based on NYG production records versus the Lululemon catalog. Fabric directions
+        reflect general performance-fabric trend knowledge and are not a live WGSN or
+        ISPO subscription pull. Refresh when the actual FW27 line-list is available.
+      </p>
+      <DashboardAiAssistant context={forecastAiContext} />
+    </section>
+  );
+}
+
 function LululemonBrandOverview() {
   const comparisonMetric = "sales";
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
@@ -3471,6 +3713,8 @@ function App() {
 
       {isLululemonWorkspace && brandWorkspacePage === "overview" ? (
         <LululemonBrandOverview />
+      ) : isLululemonWorkspace && brandWorkspacePage === "forecast" ? (
+        <LululemonSeasonForecast />
       ) : isProfileWorkspace && brandWorkspacePage === "profile" ? (
         routeBrand === "travismathew" ? (
           <TravisMathewBrandProfile />
