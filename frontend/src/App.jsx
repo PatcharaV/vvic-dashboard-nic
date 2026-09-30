@@ -18,6 +18,7 @@ import {
   LULULEMON_NYG_FUTURE_STYLES_WITH_NYK,
 } from "./lululemonFutureNykFabrics";
 import { LULULEMON_REMAINING_OPPORTUNITIES } from "./lululemonOpportunities";
+import { LULULEMON_OPPORTUNITY_UNITS } from "./lululemonOpportunityUnits";
 import { LULULEMON_OPPORTUNITY_MEDIA } from "./lululemonOpportunityMedia";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
 import {
@@ -1006,6 +1007,9 @@ function LululemonOpportunityList({
                       {style.sales !== null && (
                         <strong>{formatComparisonValue(style.sales, "sales")}</strong>
                       )}
+                      {style.units > 0 && (
+                        <small>{formatComparisonValue(style.units, "units")}</small>
+                      )}
                       {style.variants > 1 && <b>{style.variants} length variants</b>}
                     </span>
                   </li>
@@ -1186,6 +1190,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       name,
       variants: typeof style === "string" ? 1 : style.variants,
       sales: typeof style === "string" ? null : style.sales ?? null,
+      units: typeof style === "string"
+        ? null
+        : LULULEMON_OPPORTUNITY_UNITS[subtypeKey]?.[name] ?? null,
       gender: style.gender || inferLululemonStyleGender(name, subtypeKey),
       ...product,
     };

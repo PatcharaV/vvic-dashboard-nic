@@ -3283,6 +3283,12 @@ button.lululemon-bar-row.selected > strong {
   font-weight: 900;
 }
 
+.lululemon-style-opportunity-value small {
+  color: #4f494b;
+  font-size: 8px;
+  font-weight: 800;
+}
+
 .lululemon-style-opportunity-value b {
   color: #925565;
   font-size: 8px;
