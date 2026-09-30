@@ -1757,7 +1757,6 @@ function DashboardAiAssistant({ context }) {
             <header className="dashboard-ai-header">
               <div>
                 <p>NIC AI ASSISTANT</p>
-                <h2>Sales &amp; BD Copilot</h2>
                 <span>Dashboard context + live web</span>
               </div>
               <button type="button" onClick={() => setOpen(false)} aria-label="Close">

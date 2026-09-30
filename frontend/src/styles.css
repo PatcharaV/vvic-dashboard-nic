@@ -84,7 +84,6 @@
 }
 
 .dashboard-ai-header p,
-.dashboard-ai-header h2,
 .dashboard-ai-header span {
   margin: 0;
 }
@@ -94,11 +93,6 @@
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.18em;
-}
-
-.dashboard-ai-header h2 {
-  font-size: 22px;
-  line-height: 1.15;
 }
 
 .dashboard-ai-header span {
