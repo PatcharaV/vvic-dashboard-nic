@@ -64,6 +64,9 @@ ENABLE_MANUAL_SCRAPE = os.environ.get("ENABLE_MANUAL_SCRAPE", "").lower() in {
 SCRAPE_API_TOKEN = os.environ.get("SCRAPE_API_TOKEN", "")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "").strip()
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5-mini").strip() or "gpt-5-mini"
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip() or "gemini-2.5-flash"
+AI_PROVIDER = os.environ.get("AI_PROVIDER", "auto").strip().lower() or "auto"
 AI_RATE_LIMIT = 12
 AI_RATE_WINDOW_SECONDS = 60
 ai_request_times: dict[str, list[float]] = {}
@@ -146,6 +149,47 @@ def parse_openai_response(payload: dict[str, Any]) -> tuple[str, list[dict[str, 
     return "\n\n".join(text_parts).strip(), sources[:8], used_web
 
 
+def parse_gemini_response(payload: dict[str, Any]) -> tuple[str, list[dict[str, str]], bool]:
+    candidates = payload.get("candidates") or []
+    if not candidates:
+        return "", [], False
+
+    candidate = candidates[0]
+    text = "\n".join(
+        str(part.get("text") or "").strip()
+        for part in (candidate.get("content") or {}).get("parts") or []
+        if str(part.get("text") or "").strip()
+    )
+    grounding = candidate.get("groundingMetadata") or {}
+    sources: list[dict[str, str]] = []
+    seen_urls: set[str] = set()
+    for chunk in grounding.get("groundingChunks") or []:
+        web_source = chunk.get("web") or {}
+        url = str(web_source.get("uri") or "").strip()
+        if not url.startswith(("https://", "http://")) or url in seen_urls:
+            continue
+        seen_urls.add(url)
+        sources.append(
+            {
+                "title": str(web_source.get("title") or url).strip(),
+                "url": url,
+            }
+        )
+    return text.strip(), sources[:8], bool(sources)
+
+
+def active_ai_provider() -> str | None:
+    if AI_PROVIDER == "gemini":
+        return "gemini" if GEMINI_API_KEY else None
+    if AI_PROVIDER == "openai":
+        return "openai" if OPENAI_API_KEY else None
+    if GEMINI_API_KEY:
+        return "gemini"
+    if OPENAI_API_KEY:
+        return "openai"
+    return None
+
+
 def ai_error_detail(language: str, error_key: str) -> str:
     messages = {
         "invalid_key": {
@@ -175,6 +219,29 @@ def ai_error_detail(language: str, error_key: str) -> str:
         "service": {
             "th": "บริการ OpenAI ไม่สามารถดำเนินการได้ในขณะนี้ กรุณาลองใหม่ภายหลัง",
             "en": "The OpenAI service could not complete the request. Please try again later.",
+        },
+    }
+    selected_language = "th" if language == "th" else "en"
+    return messages[error_key][selected_language]
+
+
+def gemini_error_detail(language: str, error_key: str) -> str:
+    messages = {
+        "invalid_key": {
+            "th": "Gemini API key ไม่ถูกต้องหรือยังไม่ได้เปิดใช้งาน กรุณาสร้าง key จาก Google AI Studio และอัปเดตใน Render",
+            "en": "The Gemini API key is invalid or inactive. Create a key in Google AI Studio and update it in Render.",
+        },
+        "quota": {
+            "th": "Gemini Free Tier ถึงโควตาหรือขีดจำกัดการเรียกใช้แล้ว กรุณารอให้โควตารีเซ็ตแล้วลองใหม่",
+            "en": "The Gemini Free Tier quota or rate limit was reached. Wait for the quota to reset and try again.",
+        },
+        "model": {
+            "th": f"Gemini API key นี้ไม่สามารถใช้โมเดล {GEMINI_MODEL} ได้ กรุณาตรวจสิทธิ์หรือเปลี่ยน GEMINI_MODEL ใน Render",
+            "en": f"This Gemini API key cannot use {GEMINI_MODEL}. Check access or change GEMINI_MODEL in Render.",
+        },
+        "service": {
+            "th": "บริการ Gemini ไม่สามารถดำเนินการได้ในขณะนี้ กรุณาลองใหม่ภายหลัง",
+            "en": "Gemini could not complete the request. Please try again later.",
         },
     }
     selected_language = "th" if language == "th" else "en"
@@ -594,19 +661,24 @@ async def health() -> dict[str, Any]:
 
 @app.get("/api/ai/status")
 async def ai_status() -> dict[str, Any]:
+    provider = active_ai_provider()
     return {
-        "available": bool(OPENAI_API_KEY),
+        "available": provider is not None,
+        "provider": provider,
         "web_search": True,
-        "model": OPENAI_MODEL if OPENAI_API_KEY else None,
+        "model": (
+            GEMINI_MODEL if provider == "gemini" else OPENAI_MODEL if provider == "openai" else None
+        ),
     }
 
 
 @app.post("/api/ai/chat")
 async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
-    if not OPENAI_API_KEY:
+    provider = active_ai_provider()
+    if not provider:
         raise HTTPException(
             status_code=503,
-            detail="AI is not configured yet. Set OPENAI_API_KEY on the server to enable it.",
+            detail="AI is not configured yet. Set GEMINI_API_KEY or OPENAI_API_KEY on the server to enable it.",
         )
     enforce_ai_rate_limit(request)
     response_language = body.language
@@ -663,17 +735,34 @@ async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
                 "include": ["web_search_call.action.sources"],
             }
         )
+    gemini_payload: dict[str, Any] = {
+        "systemInstruction": {"parts": [{"text": instructions}]},
+        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.2},
+    }
+    if body.allow_web:
+        gemini_payload["tools"] = [{"google_search": {}}]
 
     try:
         async with httpx.AsyncClient(timeout=90) as client:
-            response = await client.post(
-                "https://api.openai.com/v1/responses",
-                headers={
-                    "Authorization": f"Bearer {OPENAI_API_KEY}",
-                    "Content-Type": "application/json",
-                },
-                json=api_payload,
-            )
+            if provider == "gemini":
+                response = await client.post(
+                    f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent",
+                    headers={
+                        "x-goog-api-key": GEMINI_API_KEY,
+                        "Content-Type": "application/json",
+                    },
+                    json=gemini_payload,
+                )
+            else:
+                response = await client.post(
+                    "https://api.openai.com/v1/responses",
+                    headers={
+                        "Authorization": f"Bearer {OPENAI_API_KEY}",
+                        "Content-Type": "application/json",
+                    },
+                    json=api_payload,
+                )
             response.raise_for_status()
     except httpx.TimeoutException as exc:
         raise HTTPException(
@@ -689,7 +778,17 @@ async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
         error_code = str(upstream_error.get("code") or "").lower()
         error_type = str(upstream_error.get("type") or "").lower()
 
-        if upstream_status == 401 or error_code == "invalid_api_key":
+        if provider == "gemini":
+            if upstream_status in {401, 403} or "api_key" in error_code:
+                status_code, error_key = 503, "invalid_key"
+            elif upstream_status == 429:
+                status_code, error_key = 429, "quota"
+            elif upstream_status in {400, 404}:
+                status_code, error_key = 502, "model"
+            else:
+                status_code, error_key = 502, "service"
+            detail = gemini_error_detail(response_language, error_key)
+        elif upstream_status == 401 or error_code == "invalid_api_key":
             status_code, error_key = 503, "invalid_key"
         elif "quota" in error_code or "quota" in error_type:
             status_code, error_key = 402, "billing"
@@ -703,9 +802,11 @@ async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
             status_code, error_key = 502, "request"
         else:
             status_code, error_key = 502, "service"
+        if provider != "gemini":
+            detail = ai_error_detail(response_language, error_key)
         raise HTTPException(
             status_code=status_code,
-            detail=ai_error_detail(response_language, error_key),
+            detail=detail,
         ) from exc
     except httpx.HTTPError as exc:
         raise HTTPException(
@@ -713,7 +814,10 @@ async def ai_chat(body: AiChatRequest, request: Request) -> dict[str, Any]:
             detail="The AI service is temporarily unavailable.",
         ) from exc
 
-    answer, sources, used_web = parse_openai_response(response.json())
+    if provider == "gemini":
+        answer, sources, used_web = parse_gemini_response(response.json())
+    else:
+        answer, sources, used_web = parse_openai_response(response.json())
     if not answer:
         raise HTTPException(status_code=502, detail="The AI returned an empty response.")
     return {"answer": answer, "sources": sources, "used_web": used_web}
