@@ -1464,7 +1464,7 @@ function LululemonRevenueHistory() {
       </div>
 
       <p className="lululemon-source-note">
-        Source: Lululemon Athletica Inc. Form 10-K filings. *2026 is an estimated SEP25-SEP26 TTM total company net revenue of $11.09B from the workbook source inputs; values are rounded for display.
+        Source: Lululemon Athletica Inc. Form 10-K filings. *2026 is an estimated 1 SEP 25 - 31 AUG 26 TTM total company net revenue of $11.09B from the workbook source inputs; values are rounded for display.
       </p>
     </article>
   );
@@ -1618,7 +1618,7 @@ function LululemonBrandOverview() {
       <article className="lululemon-overview-section">
         <div className="lululemon-overview-heading">
           <div>
-            <p className="eyebrow">LULULEMON · APPAREL · SEP25-SEP26</p>
+            <p className="eyebrow">LULULEMON · APPAREL · 1 SEP 25 - 31 AUG 26</p>
             <h2>Business Overview</h2>
           </div>
           <LululemonOverviewLogo />
@@ -1655,7 +1655,7 @@ function LululemonBrandOverview() {
         </div>
 
         <p className="lululemon-source-note">
-          * Estimates, apparel only (Women&apos;s + Men&apos;s), SEP25-SEP26. Sales
+          * Estimates, apparel only (Women&apos;s + Men&apos;s), 1 SEP 25 - 31 AUG 26. Sales
           use net revenue TTM and an 87.0% apparel share. Online is estimated at
           30% of sales; FOB spend uses a {LULULEMON_FOB_MULTIPLIER.toFixed(4)}x
           multiplier. Source: Lululemon_Wallet_Size__Share_7.xlsx, All product.
@@ -1711,7 +1711,7 @@ function LululemonBrandOverview() {
 
         <p className="lululemon-source-note">
           Source: Lululemon_Wallet_Size__Share_7.xlsx. Lululemon totals use
-          Total and Total Units (quantity, preserved) from All product (SEP25-SEP26). NYG values use
+          Total and Total Units (quantity, preserved) from All product (1 SEP 25 - 31 AUG 26). NYG values use
           NYG Sale and NYG Sale (PCS) from the Lululemon sheet for 59 products,
           FA25-SU26. Style wallet share uses Brand Wallet Size and each style&apos;s
           FOB Multiplier. The second NYG Secured table uses Commercial Name, sales,
