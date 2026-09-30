@@ -13,6 +13,10 @@ import {
   LULULEMON_STYLE_COVERAGE,
 } from "./lululemonNygStyles";
 import { LULULEMON_NYG_FUTURE_STYLES } from "./lululemonNygFutureStyles";
+import {
+  enrichFutureStyleWithNykFabric,
+  LULULEMON_NYG_FUTURE_STYLES_WITH_NYK,
+} from "./lululemonFutureNykFabrics";
 import { LULULEMON_REMAINING_OPPORTUNITIES } from "./lululemonOpportunities";
 import { LULULEMON_OPPORTUNITY_MEDIA } from "./lululemonOpportunityMedia";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
@@ -1026,38 +1030,76 @@ function LululemonOpportunityList({
 }
 
 function LululemonNykFabricPanel({ subtypeKey }) {
-  const nykStyles = LULULEMON_NYG_STYLES.filter(
+  const recordedStyles = LULULEMON_NYG_STYLES.filter(
     (style) => style.subtype === subtypeKey && style.nykFabricYards > 0,
   ).sort((left, right) => right.nykFabricYards - left.nykFabricYards);
-  const totalYards = nykStyles.reduce(
+  const recordedYards = recordedStyles.reduce(
     (sum, style) => sum + style.nykFabricYards,
     0,
+  );
+  const futureStyles = LULULEMON_NYG_FUTURE_STYLES_WITH_NYK(
+    LULULEMON_NYG_FUTURE_STYLES.filter((style) => style.subtype === subtypeKey),
+  )
+    .filter((style) => style.nykFabricYards > 0)
+    .sort((left, right) => right.nykFabricYards - left.nykFabricYards);
+  const futureYards = futureStyles.reduce(
+    (sum, style) => sum + style.nykFabricYards,
+    0,
+  );
+
+  const renderStyles = (styles, emptyMessage, ordered = false) => (
+    styles.length > 0 ? (
+      <div className="lululemon-nyk-fabric-list">
+        {styles.map((style) => (
+          <div key={style.key}>
+            <span>
+              <strong>{style.name}</strong>
+              <small>
+                {ordered
+                  ? style.nykFabricSeasons
+                    .map(({ season, yards }) => `${season} ${formatNumber.format(Math.round(yards))}`)
+                    .join(" | ")
+                  : style.season}
+              </small>
+              {ordered && (
+                <small className="lululemon-nyk-materials">
+                  {style.nykFabrics
+                    .map(({ itemCode, construction }) => `${itemCode} ${construction}`)
+                    .join(" + ")}
+                </small>
+              )}
+            </span>
+            <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div className="lululemon-nyk-empty compact">
+        <span>{emptyMessage}</span>
+      </div>
+    )
   );
 
   return (
     <div className="lululemon-style-portfolio-list nyk-fabric">
       <div className="lululemon-style-portfolio-heading">
-        <span>NYK fabric used</span>
-        <strong>{formatNumber.format(Math.round(totalYards))} YDS</strong>
+        <span>NYK fabric</span>
+        <strong>{futureStyles.length} future {futureStyles.length === 1 ? "match" : "matches"}</strong>
       </div>
-      {nykStyles.length > 0 ? (
-        <div className="lululemon-nyk-fabric-list">
-          {nykStyles.map((style) => (
-            <div key={style.key}>
-              <span>
-                <strong>{style.name}</strong>
-                <small>{style.season}</small>
-              </span>
-              <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
-            </div>
-          ))}
+      <div className="lululemon-nyk-period">
+        <div className="lululemon-nyk-period-heading">
+          <span>FA25-SU26 recorded usage</span>
+          <b>{formatNumber.format(Math.round(recordedYards))} YDS</b>
         </div>
-      ) : (
-        <div className="lululemon-nyk-empty">
-          <strong>No NYK fabric recorded</strong>
-          <span>No NYK fabric usage is available for this sub-type.</span>
+        {renderStyles(recordedStyles, "No recorded NYK usage for this sub-type.")}
+      </div>
+      <div className="lululemon-nyk-period future">
+        <div className="lululemon-nyk-period-heading">
+          <span>FA26-SP27 ordered fabric</span>
+          <b>{formatNumber.format(Math.round(futureYards))} YDS</b>
         </div>
-      )}
+        {renderStyles(futureStyles, "No matched NYK fabric PO for this sub-type.", true)}
+      </div>
     </div>
   );
 }
@@ -1068,7 +1110,8 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       ...LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).map(
         (style) => ({ ...style, period: "current" }),
       ),
-      ...LULULEMON_NYG_FUTURE_STYLES.filter((style) => style.subtype === subtypeKey),
+      ...LULULEMON_NYG_FUTURE_STYLES.filter((style) => style.subtype === subtypeKey)
+        .map(enrichFutureStyleWithNykFabric),
     ].sort((a, b) => {
       if (a.period !== b.period) return a.period === "current" ? -1 : 1;
       return b.nygSales - a.nygSales;
@@ -1258,7 +1301,14 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                                     )}
                                     {style.nykFabricYards > 0 && (
                                       <span className="nyk">
-                                        NYK fabric <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
+                                        NYK {style.period === "future" ? "ordered fabric" : "fabric"} <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
+                                      </span>
+                                    )}
+                                    {style.period === "future" && style.nykFabricSeasons?.length > 0 && (
+                                      <span className="nyk-detail">
+                                        {style.nykFabricSeasons
+                                          .map(({ season, yards }) => `${season} ${formatNumber.format(Math.round(yards))}`)
+                                          .join(" | ")}
                                       </span>
                                     )}
                                   </span>
@@ -2149,19 +2199,22 @@ function LululemonBrandOverview() {
         nygFabricYards,
         nykFabricYards,
       }));
-    const futureStyles = LULULEMON_NYG_FUTURE_STYLES
+    const futureStyles = LULULEMON_NYG_FUTURE_STYLES_WITH_NYK(LULULEMON_NYG_FUTURE_STYLES)
       .filter(
         (style) => comparisonSubtype === "overall" || style.subtype === comparisonSubtype,
       )
       .sort((left, right) => right.nygSales - left.nygSales)
       .slice(0, 15)
-      .map(({ name, subtype, gender, season, nygSales, nygUnits }) => ({
+      .map(({ name, subtype, gender, season, nygSales, nygUnits, nykFabricYards, nykFabricSeasons, nykFabrics }) => ({
         name,
         subtype,
         gender,
         season,
         nygSales,
         nygUnits,
+        nykFabricYards,
+        nykFabricSeasons,
+        nykFabrics,
       }));
     const opportunities = comparisonSubtype === "overall"
       ? Object.fromEntries(
@@ -2348,8 +2401,10 @@ function LululemonBrandOverview() {
           units, and seasons FA26, WT26, SU27, and SP27 from the Raw Data
           sheet. Fabric usage uses Total Fabric Value NYG Used (YDS) and
           Total NYK Fabric Value Used (YDS); 55 products contain recorded NYG
-          fabric use and 4 contain a non-zero NYK value. Gender mix uses the
-          Gender and NYG Sale columns.
+          fabric use and 4 contain a non-zero NYK value. Future NYK fabric is
+          matched by Style, NYK supplier, and season from the NYK sheet in
+          Lululemon Wallet Size &amp; Share (1).xlsx; ordered yards use PO_QTY for
+          FA26, WT26, SU27, and SP27. Gender mix uses the Gender and NYG Sale columns.
         </p>
       </article>
 

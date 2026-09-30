@@ -2219,6 +2219,37 @@ button.lululemon-bar-row.selected > strong {
   gap: 7px;
 }
 
+.lululemon-nyk-period {
+  margin-top: 13px;
+  padding-top: 12px;
+  border-top: 1px solid #eadde0;
+}
+
+.lululemon-style-portfolio-heading + .lululemon-nyk-period {
+  border-top: 0;
+}
+
+.lululemon-nyk-period-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #645d5f;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lululemon-nyk-period-heading b {
+  color: #3f3a3c;
+  white-space: nowrap;
+}
+
+.lululemon-nyk-period.future .lululemon-nyk-period-heading b {
+  color: var(--lululemon-red);
+}
+
 .lululemon-nyk-fabric-list > div {
   padding: 9px 10px;
   display: flex;
@@ -2246,6 +2277,11 @@ button.lululemon-bar-row.selected > strong {
   font-size: 8px;
 }
 
+.lululemon-nyk-fabric-list small.lululemon-nyk-materials {
+  color: #5f575a;
+  line-height: 1.45;
+}
+
 .lululemon-nyk-fabric-list b {
   flex: 0 0 auto;
   color: var(--lululemon-dark-red);
@@ -2269,6 +2305,15 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-nyk-empty span {
   font-size: 9px;
+}
+
+.lululemon-nyk-empty.compact {
+  min-height: 54px;
+}
+
+.lululemon-secured-fabric .nyk-detail {
+  color: #777073;
+  font-size: 7px;
 }
 
 .lululemon-style-portfolio-heading {
