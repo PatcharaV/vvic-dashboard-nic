@@ -1131,6 +1131,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     (row) => row.key === subtypeKey,
   );
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
+  const [partnerView, setPartnerView] = useState("nyg");
 
   useEffect(() => {
     setExpandedOpportunityGenders({});
@@ -1138,6 +1139,25 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
 
   const subtypeControls = (
     <div className="lululemon-comparison-controls lululemon-style-controls">
+      <div className="lululemon-partner-filter">
+        <span>Partner view</span>
+        <div role="group" aria-label="Partner view">
+          {[
+            { key: "nyg", label: "NYG" },
+            { key: "nyk", label: "NYK" },
+          ].map((option) => (
+            <button
+              className={partnerView === option.key ? "active" : undefined}
+              key={option.key}
+              type="button"
+              aria-pressed={partnerView === option.key}
+              onClick={() => setPartnerView(option.key)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
       <button
         className="lululemon-comparison-reset"
         type="button"
@@ -1214,7 +1234,11 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         <div className="lululemon-style-card-heading">
           <div>
             <h3>{subtypeLabel} sales opportunities by style</h3>
-            <p>Top Lululemon programs available for NYG to pursue, ranked by sales.</p>
+            <p>
+              {partnerView === "nyg"
+                ? "Top Lululemon programs and NYG secured style matches."
+                : "Top Lululemon programs and available NYK fabric coverage."}
+            </p>
           </div>
           {subtypeControls}
         </div>
@@ -1227,17 +1251,20 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             onToggleGender={toggleOpportunityGender}
           />
           <div className="lululemon-style-secured-column">
-            <div className="lululemon-style-portfolio-list secured empty">
-              <div className="lululemon-style-portfolio-heading">
-                <span>NYG secured</span>
-                <strong>0 style entries</strong>
+            {partnerView === "nyg" ? (
+              <div className="lululemon-style-portfolio-list secured empty">
+                <div className="lululemon-style-portfolio-heading">
+                  <span>NYG secured</span>
+                  <strong>0 style entries</strong>
+                </div>
+                <div className="lululemon-no-secured-styles">
+                  <strong>No secured styles yet</strong>
+                  <span>The programs on the left are the current opportunities for NYG.</span>
+                </div>
               </div>
-              <div className="lululemon-no-secured-styles">
-                <strong>No secured styles yet</strong>
-                <span>The programs on the left are the current opportunities for NYG.</span>
-              </div>
-            </div>
-            <LululemonNykFabricPanel subtypeKey={subtypeKey} />
+            ) : (
+              <LululemonNykFabricPanel subtypeKey={subtypeKey} />
+            )}
           </div>
         </div>
         <p className="lululemon-style-taxonomy-note">
@@ -1270,16 +1297,21 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     <article className="lululemon-overview-card lululemon-style-card">
       <div className="lululemon-style-card-heading">
         <div>
-          <h3>{subtypeLabel} sales coverage by style</h3>
+          <h3>
+            {subtypeLabel} {partnerView === "nyg" ? "NYG style matches" : "NYK fabric coverage"}
+          </h3>
           <p>
-            Lululemon opportunities and NYG secured styles, grouped by gender and period
+            {partnerView === "nyg"
+              ? "See which Lululemon product matches each NYG secured style, grouped by gender and period."
+              : "Review recorded NYK fabric usage and future NYK fabric orders by matched style."}
           </p>
         </div>
         {subtypeControls}
       </div>
       <div className="lululemon-style-coverage-grid">
         <div className="lululemon-style-secured-column">
-          <div className="lululemon-style-portfolio-list secured">
+          {partnerView === "nyg" ? (
+            <div className="lululemon-style-portfolio-list secured">
             <div className="lululemon-style-portfolio-heading">
               <span>NYG secured</span>
               <strong>{formatNumber.format(styles.length)} style entries</strong>
@@ -1304,6 +1336,15 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                               <span>
                                 <strong>{style.name}</strong>
                                 <small>{style.season}</small>
+                                {style.lululemonTitles > 0 && (
+                                  <span className="lululemon-secured-match">
+                                    <span>Matched Lululemon product</span>
+                                    <strong>{style.name}</strong>
+                                    <small>
+                                      {formatComparisonValue(style.lululemonRevenue, "sales")} Lululemon sales
+                                    </small>
+                                  </span>
+                                )}
                                 {(style.nygFabricYards > 0 || style.nykFabricYards > 0) && (
                                   <span className="lululemon-secured-fabric">
                                     {style.nygFabricYards > 0 && (
@@ -1342,8 +1383,10 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                 </section>
               ))}
             </div>
-          </div>
-          <LululemonNykFabricPanel subtypeKey={subtypeKey} />
+            </div>
+          ) : (
+            <LululemonNykFabricPanel subtypeKey={subtypeKey} />
+          )}
         </div>
 
         <LululemonOpportunityList
