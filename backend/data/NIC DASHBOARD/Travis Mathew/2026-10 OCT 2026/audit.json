@@ -1,0 +1,66 @@
+{
+  "brand": "travismathew",
+  "label": "TravisMathew",
+  "decision": "publish",
+  "warnings": [],
+  "old": {
+    "product_count": 1603,
+    "available_count": 1274,
+    "category_counts": {
+      "Button-Ups": 93,
+      "Dresses": 34,
+      "Hoodies & Pullovers": 110,
+      "Joggers": 7,
+      "Leggings": 3,
+      "Outerwear": 67,
+      "Pants": 41,
+      "Polos": 510,
+      "Quarter Zips": 153,
+      "Shorts": 76,
+      "Skorts & Skirts": 25,
+      "Tanks": 29,
+      "Tees": 455
+    },
+    "audience_counts": {
+      "kids": 56,
+      "men": 1494,
+      "women": 53
+    },
+    "missing": {
+      "image": 9,
+      "color": 0,
+      "material": 853,
+      "price": 0
+    }
+  },
+  "new": {
+    "product_count": 1771,
+    "available_count": 1355,
+    "category_counts": {
+      "Button-Ups": 107,
+      "Dresses": 41,
+      "Hoodies & Pullovers": 128,
+      "Joggers": 8,
+      "Leggings": 5,
+      "Outerwear": 93,
+      "Pants": 55,
+      "Polos": 538,
+      "Quarter Zips": 159,
+      "Shorts": 83,
+      "Skorts & Skirts": 27,
+      "Tanks": 34,
+      "Tees": 493
+    },
+    "audience_counts": {
+      "kids": 71,
+      "men": 1638,
+      "women": 62
+    },
+    "missing": {
+      "image": 7,
+      "color": 0,
+      "material": 875,
+      "price": 0
+    }
+  }
+}
