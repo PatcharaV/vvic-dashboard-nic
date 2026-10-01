@@ -6311,6 +6311,70 @@ footer a {
   text-transform: uppercase;
 }
 
+.nyg-map-season-filter {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  background: #f8f5f6;
+  border: 1px solid #e8dfe2;
+  border-radius: 10px;
+}
+
+.nyg-map-season-filter > div:first-child {
+  min-width: 96px;
+  display: grid;
+  gap: 3px;
+}
+
+.nyg-map-season-filter > div:first-child span {
+  color: #8c7d81;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nyg-map-season-filter > div:first-child strong {
+  color: #39121c;
+  font-size: 10px;
+}
+
+.nyg-map-season-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nyg-map-season-options button {
+  min-height: 30px;
+  padding: 0 11px;
+  color: #6f6266;
+  background: #fff;
+  border: 1px solid #dfd4d7;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.nyg-map-season-options button:hover {
+  color: var(--lululemon-red);
+  border-color: #dba8b4;
+}
+
+.nyg-map-season-options button.active {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+  box-shadow: 0 4px 10px rgba(208, 0, 55, 0.16);
+}
+
 .nyg-map-toolbar {
   display: flex;
   align-items: flex-end;
@@ -6966,6 +7030,7 @@ footer a {
 @media (max-width: 700px) {
   .nyg-map-summary-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nyg-map-summary-metrics > div { min-width: 0; }
+  .nyg-map-season-filter { grid-template-columns: 1fr; gap: 10px; }
   .nyg-map-hero { padding: 24px 20px; }
   .nyg-map-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nyg-map-workspace { padding: 14px; }

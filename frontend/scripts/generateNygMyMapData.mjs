@@ -32,26 +32,45 @@ const fields = [
 ];
 
 const aggregatedRows = new Map();
+const availableSeasons = new Set();
 for (const sourceRow of sheetRows.slice(2)) {
   const row = Object.fromEntries(
     fields.map(([field, columnIndex]) => [field, String(sourceRow[columnIndex] || "").trim()]),
   );
-  if (Object.values(row).some((value) => !value)) continue;
+  const season = String(sourceRow[1] || "").trim();
+  if (!season || Object.values(row).some((value) => !value)) continue;
 
   const key = fields.map(([field]) => row[field]).join("\u001f");
   const current = aggregatedRows.get(key) || {
     ...row,
-    salesRevenue: 0,
-    units: 0,
+    seasonMetrics: {},
   };
-  current.salesRevenue += Number(sourceRow[7]) || 0;
-  current.units += Number(sourceRow[8]) || 0;
+  const metrics = current.seasonMetrics[season] || { salesRevenue: 0, units: 0 };
+  metrics.salesRevenue += Number(sourceRow[7]) || 0;
+  metrics.units += Number(sourceRow[8]) || 0;
+  current.seasonMetrics[season] = metrics;
+  availableSeasons.add(season);
   aggregatedRows.set(key, current);
 }
 
+const seasonOrder = { SP: 0, SU: 1, FA: 2, WT: 3 };
+const sortSeasons = (a, b) => {
+  const [, prefixA = "", yearA = "0"] = a.match(/^([A-Z]+)(\d{2})$/) || [];
+  const [, prefixB = "", yearB = "0"] = b.match(/^([A-Z]+)(\d{2})$/) || [];
+  return Number(yearA) - Number(yearB)
+    || (seasonOrder[prefixA] ?? 9) - (seasonOrder[prefixB] ?? 9)
+    || a.localeCompare(b);
+};
+const seasons = [...availableSeasons].sort(sortSeasons);
 const rows = [...aggregatedRows.values()].map((row) => ({
-  ...row,
-  fobPrice: row.units > 0 ? row.salesRevenue / row.units : 0,
+  ...Object.fromEntries(fields.map(([field]) => [field, row[field]])),
+  seasonMetrics: Object.entries(row.seasonMetrics)
+    .sort(([a], [b]) => sortSeasons(a, b))
+    .map(([season, metrics]) => ({
+      season,
+      ...metrics,
+      fobPrice: metrics.units > 0 ? metrics.salesRevenue / metrics.units : 0,
+    })),
 }));
 const outputPath = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -60,6 +79,7 @@ const outputPath = path.resolve(
 fs.writeFileSync(
   outputPath,
   `// Generated from ${path.basename(workbookPath)}, NYG sheet. Do not edit manually.\n` +
+    `export const NYG_MY_MAP_SEASONS = ${JSON.stringify(seasons, null, 2)};\n` +
     `export const NYG_MY_MAP_ROWS = ${JSON.stringify(rows, null, 2)};\n`,
   "utf8",
 );

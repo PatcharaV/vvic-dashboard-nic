@@ -35,7 +35,7 @@ import {
   LULULEMON_NYG_COMPARISON,
   LULULEMON_SALES_MIX,
 } from "./lululemonWorkbookData";
-import { NYG_MY_MAP_ROWS } from "./nygMyMapData";
+import { NYG_MY_MAP_ROWS, NYG_MY_MAP_SEASONS } from "./nygMyMapData";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -2081,11 +2081,26 @@ function formatNygMapFob(value) {
 
 function NygMyMap({ subtypeKey }) {
   const [selectedPath, setSelectedPath] = useState([]);
+  const [selectedSeasons, setSelectedSeasons] = useState([]);
   const mapCanvasRef = useRef(null);
   const selectedProductType = NYG_MAP_PRODUCT_TYPES[subtypeKey];
-  const mapRows = selectedProductType
-    ? NYG_MY_MAP_ROWS.filter((row) => row.productType === selectedProductType)
-    : NYG_MY_MAP_ROWS;
+  const mapRows = useMemo(() => NYG_MY_MAP_ROWS
+    .filter((row) => !selectedProductType || row.productType === selectedProductType)
+    .map((row) => {
+      const seasonMetrics = selectedSeasons.length === 0
+        ? row.seasonMetrics
+        : row.seasonMetrics.filter((metric) => selectedSeasons.includes(metric.season));
+      const salesRevenue = seasonMetrics.reduce((sum, metric) => sum + metric.salesRevenue, 0);
+      const units = seasonMetrics.reduce((sum, metric) => sum + metric.units, 0);
+      return {
+        ...row,
+        salesRevenue,
+        units,
+        fobPrice: units > 0 ? salesRevenue / units : 0,
+        seasonMetrics,
+      };
+    })
+    .filter((row) => row.seasonMetrics.length > 0), [selectedProductType, selectedSeasons]);
   const visibleLevelCount = Math.min(selectedPath.length + 1, NYG_MAP_LEVELS.length);
   const uniqueStyleNumbers = new Set(mapRows.map((row) => row.styleNo)).size;
   const totalSales = mapRows.reduce((sum, row) => sum + row.salesRevenue, 0);
@@ -2106,6 +2121,14 @@ function NygMyMap({ subtypeKey }) {
     ));
   };
 
+  const toggleSeason = (season) => {
+    setSelectedSeasons((current) => (
+      current.includes(season)
+        ? current.filter((item) => item !== season)
+        : NYG_MY_MAP_SEASONS.filter((item) => [...current, season].includes(item))
+    ));
+  };
+
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       mapCanvasRef.current?.scrollTo({
@@ -2118,7 +2141,7 @@ function NygMyMap({ subtypeKey }) {
 
   useEffect(() => {
     setSelectedPath([]);
-  }, [subtypeKey]);
+  }, [subtypeKey, selectedSeasons]);
 
   return (
     <section className="nyg-map-workspace embedded">
@@ -2136,6 +2159,38 @@ function NygMyMap({ subtypeKey }) {
           <div><strong>{formatComparisonValue(totalSales, "sales")}</strong><span>Sales</span></div>
           <div><strong>{formatNygMapUnits(totalUnits)}</strong><span>Units</span></div>
           <div><strong>${averageFob.toFixed(2)}</strong><span>Average FOB</span></div>
+        </div>
+      </div>
+
+      <div className="nyg-map-season-filter">
+        <div>
+          <span>Season filter</span>
+          <strong>
+            {selectedSeasons.length === 0
+              ? `All ${NYG_MY_MAP_SEASONS.length} seasons`
+              : `${selectedSeasons.length} selected`}
+          </strong>
+        </div>
+        <div className="nyg-map-season-options" role="group" aria-label="Filter NYG map by season">
+          <button
+            className={selectedSeasons.length === 0 ? "active" : undefined}
+            type="button"
+            aria-pressed={selectedSeasons.length === 0}
+            onClick={() => setSelectedSeasons([])}
+          >
+            All seasons
+          </button>
+          {NYG_MY_MAP_SEASONS.map((season) => (
+            <button
+              className={selectedSeasons.includes(season) ? "active" : undefined}
+              type="button"
+              key={season}
+              aria-pressed={selectedSeasons.includes(season)}
+              onClick={() => toggleSeason(season)}
+            >
+              {season}
+            </button>
+          ))}
         </div>
       </div>
 
