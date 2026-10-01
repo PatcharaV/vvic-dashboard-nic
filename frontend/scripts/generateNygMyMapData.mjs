@@ -31,16 +31,28 @@ const fields = [
   ["styleName", 4],
 ];
 
-const uniqueRows = new Map();
+const aggregatedRows = new Map();
 for (const sourceRow of sheetRows.slice(2)) {
   const row = Object.fromEntries(
     fields.map(([field, columnIndex]) => [field, String(sourceRow[columnIndex] || "").trim()]),
   );
   if (Object.values(row).some((value) => !value)) continue;
-  uniqueRows.set(fields.map(([field]) => row[field]).join("\u001f"), row);
+
+  const key = fields.map(([field]) => row[field]).join("\u001f");
+  const current = aggregatedRows.get(key) || {
+    ...row,
+    salesRevenue: 0,
+    units: 0,
+  };
+  current.salesRevenue += Number(sourceRow[7]) || 0;
+  current.units += Number(sourceRow[8]) || 0;
+  aggregatedRows.set(key, current);
 }
 
-const rows = [...uniqueRows.values()];
+const rows = [...aggregatedRows.values()].map((row) => ({
+  ...row,
+  fobPrice: row.units > 0 ? row.salesRevenue / row.units : 0,
+}));
 const outputPath = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../src/nygMyMapData.js",

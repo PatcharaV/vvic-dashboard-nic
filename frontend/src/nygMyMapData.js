@@ -7,7 +7,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW4CFOS",
-    "styleName": "Define Jacket Nulu 2023 BR EC"
+    "styleName": "Define Jacket Nulu 2023 BR EC",
+    "salesRevenue": 11599329.000000002,
+    "units": 569022,
+    "fobPrice": 20.384675812183012
   },
   {
     "group": "TOP",
@@ -16,7 +19,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3EOZS",
-    "styleName": "Textured Double-Knit cotton Hoodie - HEATHER - BLACK backer"
+    "styleName": "Textured Double-Knit cotton Hoodie - HEATHER - BLACK backer",
+    "salesRevenue": 2533874.24,
+    "units": 130832,
+    "fobPrice": 19.367389017977256
   },
   {
     "group": "TOP",
@@ -25,7 +31,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LM3EJUS",
-    "styleName": "DrySense Short Sleeve Lift - SOLID"
+    "styleName": "DrySense Short Sleeve Lift - SOLID",
+    "salesRevenue": 8014310.739999999,
+    "units": 667262,
+    "fobPrice": 12.010740518716785
   },
   {
     "group": "BOTTOM",
@@ -34,7 +43,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7B80S",
-    "styleName": "Pace Breaker Short 7 LL - Solid"
+    "styleName": "Pace Breaker Short 7 LL - Solid",
+    "salesRevenue": 3320902.05,
+    "units": 300195,
+    "fobPrice": 11.06248288612402
   },
   {
     "group": "TOP",
@@ -43,7 +55,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW4CD5S",
-    "styleName": "Define Jacket Nulu EC 2023"
+    "styleName": "Define Jacket Nulu EC 2023",
+    "salesRevenue": 11108535.57,
+    "units": 572422,
+    "fobPrice": 19.406199569548342
   },
   {
     "group": "TOP",
@@ -52,7 +67,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FM4S",
-    "styleName": "Sculpt Tank FT"
+    "styleName": "Sculpt Tank FT",
+    "salesRevenue": 3645378.47,
+    "units": 480156,
+    "fobPrice": 7.5920710560734435
   },
   {
     "group": "BOTTOM",
@@ -61,7 +79,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7BC6S",
-    "styleName": "Pace Breaker Short 7 LL"
+    "styleName": "Pace Breaker Short 7 LL",
+    "salesRevenue": 1577744.51,
+    "units": 143497,
+    "fobPrice": 10.994965121222046
   },
   {
     "group": "TOP",
@@ -70,7 +91,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW4CAFS",
-    "styleName": "Define Jacket Nulu"
+    "styleName": "Define Jacket Nulu",
+    "salesRevenue": 2979308.6300000004,
+    "units": 147509,
+    "fobPrice": 20.1974701882597
   },
   {
     "group": "TOP",
@@ -79,7 +103,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3FTWS",
-    "styleName": "Brushed Rulu 1_2 Zip LS"
+    "styleName": "Brushed Rulu 1_2 Zip LS",
+    "salesRevenue": 1602158.49,
+    "units": 80386,
+    "fobPrice": 19.930814942900504
   },
   {
     "group": "TOP",
@@ -88,7 +115,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3EJSS",
-    "styleName": "License to Train Hoodie - SOLID"
+    "styleName": "License to Train Hoodie - SOLID",
+    "salesRevenue": 3193206.84,
+    "units": 177977,
+    "fobPrice": 17.94168257696219
   },
   {
     "group": "TOP",
@@ -97,7 +127,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3GF3S",
-    "styleName": "Ease The Day Hoodie"
+    "styleName": "Ease The Day Hoodie",
+    "salesRevenue": 4009586,
+    "units": 208637,
+    "fobPrice": 19.218000642263835
   },
   {
     "group": "TOP",
@@ -106,7 +139,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3EN0S",
-    "styleName": "Evolution Polo - No Silver - Solid"
+    "styleName": "Evolution Polo - No Silver - Solid",
+    "salesRevenue": 1410279.1800000002,
+    "units": 140280,
+    "fobPrice": 10.053316082121473
   },
   {
     "group": "BOTTOM",
@@ -115,7 +151,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7BC2S",
-    "styleName": "Pace Breaker Short 7 Lined"
+    "styleName": "Pace Breaker Short 7 Lined",
+    "salesRevenue": 618821.02,
+    "units": 58588,
+    "fobPrice": 10.562248583327644
   },
   {
     "group": "BOTTOM",
@@ -124,7 +163,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SKIRT",
     "styleNo": "LW8A79T",
-    "styleName": "Pace Rival Skirt TALL ES - EV"
+    "styleName": "Pace Rival Skirt TALL ES - EV",
+    "salesRevenue": 1550511.58,
+    "units": 102021,
+    "fobPrice": 15.19796492878917
   },
   {
     "group": "BOTTOM",
@@ -133,7 +175,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7B24S",
-    "styleName": "Q123 PACE BREAKER 7 LINED"
+    "styleName": "Q123 PACE BREAKER 7 LINED",
+    "salesRevenue": 4557025.87,
+    "units": 366146,
+    "fobPrice": 12.4459255870609
   },
   {
     "group": "BOTTOM",
@@ -142,7 +187,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS PANTS",
     "productType": "PANT",
     "styleNo": "LM5BIBS",
-    "styleName": "Rulu Fleece Brushed Back Pant Slim Tapered"
+    "styleName": "Rulu Fleece Brushed Back Pant Slim Tapered",
+    "salesRevenue": 491347.08,
+    "units": 25956,
+    "fobPrice": 18.93
   },
   {
     "group": "BOTTOM",
@@ -151,7 +199,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AMTS",
-    "styleName": "AIM Boxer 3 Pack"
+    "styleName": "AIM Boxer 3 Pack",
+    "salesRevenue": 791907.06,
+    "units": 169830,
+    "fobPrice": 4.662939763292705
   },
   {
     "group": "BOTTOM",
@@ -160,7 +211,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7BCBS",
-    "styleName": "Pace Breaker Short 7 Lined - Solid"
+    "styleName": "Pace Breaker Short 7 Lined - Solid",
+    "salesRevenue": 1452559.07,
+    "units": 116363,
+    "fobPrice": 12.482997774206579
   },
   {
     "group": "BOTTOM",
@@ -169,7 +223,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7B86S",
-    "styleName": "SP23 Pace Breaker Short 5 Linerless - Solid"
+    "styleName": "SP23 Pace Breaker Short 5 Linerless - Solid",
+    "salesRevenue": 1378909.95,
+    "units": 127798,
+    "fobPrice": 10.789761576863487
   },
   {
     "group": "BOTTOM",
@@ -178,7 +235,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LW7DH3S",
-    "styleName": "TEXTURE PLEAT FEMININE SHORT HR 3\""
+    "styleName": "TEXTURE PLEAT FEMININE SHORT HR 3\"",
+    "salesRevenue": 418185.08,
+    "units": 39526,
+    "fobPrice": 10.58
   },
   {
     "group": "TOP",
@@ -187,7 +247,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3FTDS",
-    "styleName": "Waffle Hoodie"
+    "styleName": "Waffle Hoodie",
+    "salesRevenue": 566220.5,
+    "units": 37843,
+    "fobPrice": 14.962357635494016
   },
   {
     "group": "BOTTOM",
@@ -196,7 +259,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS PANTS",
     "productType": "JOGGER",
     "styleNo": "LM5AMHS",
-    "styleName": "Textured Double-Knit Cotton Jogger - Htr"
+    "styleName": "Textured Double-Knit Cotton Jogger - Htr",
+    "salesRevenue": 389584.81,
+    "units": 23857,
+    "fobPrice": 16.33
   },
   {
     "group": "TOP",
@@ -205,7 +271,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3FTES",
-    "styleName": "Waffle Crew"
+    "styleName": "Waffle Crew",
+    "salesRevenue": 605933.78,
+    "units": 47654,
+    "fobPrice": 12.715276367146515
   },
   {
     "group": "TOP",
@@ -214,7 +283,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW3KJOS",
-    "styleName": "DEFINE JACKET *NULU™"
+    "styleName": "DEFINE JACKET *NULU™",
+    "salesRevenue": 1901549.58,
+    "units": 89249,
+    "fobPrice": 21.30611637105178
   },
   {
     "group": "TOP",
@@ -223,7 +295,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3G99S",
-    "styleName": "Brushed Rulu 1_2 Zip LS_BRIGHT LYCRA"
+    "styleName": "Brushed Rulu 1_2 Zip LS_BRIGHT LYCRA",
+    "salesRevenue": 645546.1,
+    "units": 36626,
+    "fobPrice": 17.62535084366297
   },
   {
     "group": "BOTTOM",
@@ -232,7 +307,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AY8S",
-    "styleName": "AIM BOXER 3 MICRO MODAL- 3 PACK"
+    "styleName": "AIM BOXER 3 MICRO MODAL- 3 PACK",
+    "salesRevenue": 3481647.1100000003,
+    "units": 751223,
+    "fobPrice": 4.63463859599613
   },
   {
     "group": "TOP",
@@ -241,7 +319,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW3ID8S",
-    "styleName": "DEFINE JACKET *NULU™"
+    "styleName": "DEFINE JACKET *NULU™",
+    "salesRevenue": 720393.6799999999,
+    "units": 36734,
+    "fobPrice": 19.61108727609299
   },
   {
     "group": "TOP",
@@ -250,7 +331,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3IYZS",
-    "styleName": "It's Rulu 1/2 Cropped Zip Texture"
+    "styleName": "It's Rulu 1/2 Cropped Zip Texture",
+    "salesRevenue": 295897.85,
+    "units": 18835,
+    "fobPrice": 15.709999999999999
   },
   {
     "group": "TOP",
@@ -259,7 +343,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KGES",
-    "styleName": "LICENSE TO TRAIN DRYSENSE SS"
+    "styleName": "LICENSE TO TRAIN DRYSENSE SS",
+    "salesRevenue": 790043.51,
+    "units": 80662,
+    "fobPrice": 9.794494433562273
   },
   {
     "group": "TOP",
@@ -268,7 +355,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FZGS",
-    "styleName": "LICENSE TO TRAIN DRYSENSE TANK"
+    "styleName": "LICENSE TO TRAIN DRYSENSE TANK",
+    "salesRevenue": 389504.54,
+    "units": 47890,
+    "fobPrice": 8.1333167675924
   },
   {
     "group": "TOP",
@@ -277,7 +367,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LM1279S",
-    "styleName": "License to Train Tank - SOLID"
+    "styleName": "License to Train Tank - SOLID",
+    "salesRevenue": 369985.51,
+    "units": 32789,
+    "fobPrice": 11.283830247949007
   },
   {
     "group": "TOP",
@@ -286,7 +379,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KLNS",
-    "styleName": "Love Long-Sleeve Shirt BeCalm"
+    "styleName": "Love Long-Sleeve Shirt BeCalm",
+    "salesRevenue": 267974.4,
+    "units": 24630,
+    "fobPrice": 10.88
   },
   {
     "group": "BOTTOM",
@@ -295,7 +391,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AYFS",
-    "styleName": "AIM BOXER 3 MICRO MODAL- 5 PACK"
+    "styleName": "AIM BOXER 3 MICRO MODAL- 5 PACK",
+    "salesRevenue": 3137126.82,
+    "units": 691430,
+    "fobPrice": 4.537157514137367
   },
   {
     "group": "TOP",
@@ -304,7 +403,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3FTVS",
-    "styleName": "Brushed Rulu LS Crew"
+    "styleName": "Brushed Rulu LS Crew",
+    "salesRevenue": 742707.33,
+    "units": 41620,
+    "fobPrice": 17.84496227775108
   },
   {
     "group": "TOP",
@@ -313,7 +415,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3HT9S",
-    "styleName": "FA24 Tennis Core Relaxed LS UVP FA24 GRAPHIC"
+    "styleName": "FA24 Tennis Core Relaxed LS UVP FA24 GRAPHIC",
+    "salesRevenue": 253476.35,
+    "units": 12505,
+    "fobPrice": 20.27
   },
   {
     "group": "TOP",
@@ -322,7 +427,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "TEE",
     "styleNo": "LW3KHNS",
-    "styleName": "BECALM WRAP_FRONT LS HTR"
+    "styleName": "BECALM WRAP_FRONT LS HTR",
+    "salesRevenue": 259716.25999999998,
+    "units": 20338,
+    "fobPrice": 12.77
   },
   {
     "group": "TOP",
@@ -331,7 +439,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KD3S",
-    "styleName": "LOUNGE BECALM LS V NECK"
+    "styleName": "LOUNGE BECALM LS V NECK",
+    "salesRevenue": 242639.81,
+    "units": 18067,
+    "fobPrice": 13.43
   },
   {
     "group": "TOP",
@@ -340,7 +451,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3JFUS",
-    "styleName": "Sculpt SS FT"
+    "styleName": "Sculpt SS FT",
+    "salesRevenue": 730703.3999999999,
+    "units": 93494,
+    "fobPrice": 7.815511155796093
   },
   {
     "group": "BOTTOM",
@@ -349,7 +463,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7B87S",
-    "styleName": "SP23 Pace Breaker Short 9 Lined - Solid"
+    "styleName": "SP23 Pace Breaker Short 9 Lined - Solid",
+    "salesRevenue": 1495876.1600000001,
+    "units": 118398,
+    "fobPrice": 12.63430260646295
   },
   {
     "group": "BOTTOM",
@@ -358,7 +475,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7B83S",
-    "styleName": "Pace Breaker Shorts"
+    "styleName": "Pace Breaker Shorts",
+    "salesRevenue": 2440761.6,
+    "units": 198967,
+    "fobPrice": 12.267167922318777
   },
   {
     "group": "TOP",
@@ -367,7 +487,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3GEHS",
-    "styleName": "Love Modal Fleece Long Sleeve"
+    "styleName": "Love Modal Fleece Long Sleeve",
+    "salesRevenue": 594197.91,
+    "units": 59264,
+    "fobPrice": 10.026287628239741
   },
   {
     "group": "TOP",
@@ -376,7 +499,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3HYBS",
-    "styleName": "It's Rulu Run Long Sleeve Mindful Lift"
+    "styleName": "It's Rulu Run Long Sleeve Mindful Lift",
+    "salesRevenue": 2053997.13,
+    "units": 135003,
+    "fobPrice": 15.214455456545409
   },
   {
     "group": "TOP",
@@ -385,7 +511,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3JFTS",
-    "styleName": "Sculpt LS FT"
+    "styleName": "Sculpt LS FT",
+    "salesRevenue": 409683.74999999994,
+    "units": 44192,
+    "fobPrice": 9.270541048153511
   },
   {
     "group": "TOP",
@@ -394,7 +523,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LM3EJVS",
-    "styleName": "DrySense Short Sleeve Lift - HEATHERED"
+    "styleName": "DrySense Short Sleeve Lift - HEATHERED",
+    "salesRevenue": 187053.38,
+    "units": 17747,
+    "fobPrice": 10.540000000000001
   },
   {
     "group": "TOP",
@@ -403,7 +535,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KLWS",
-    "styleName": "RULU CLASSIC FIT LS CREW NECK"
+    "styleName": "RULU CLASSIC FIT LS CREW NECK",
+    "salesRevenue": 605932.0299999999,
+    "units": 36880,
+    "fobPrice": 16.429827277657264
   },
   {
     "group": "BOTTOM",
@@ -412,7 +547,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LW7DP3S",
-    "styleName": "TEXTURE PLEAT FEMININE SHORT"
+    "styleName": "TEXTURE PLEAT FEMININE SHORT",
+    "salesRevenue": 177724.8,
+    "units": 10098,
+    "fobPrice": 17.599999999999998
   },
   {
     "group": "BOTTOM",
@@ -421,7 +559,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9BA2S",
-    "styleName": "AIM Boxer 3 Micro Modal - 3 Pack"
+    "styleName": "AIM Boxer 3 Micro Modal - 3 Pack",
+    "salesRevenue": 996375.52,
+    "units": 227664,
+    "fobPrice": 4.376517675170427
   },
   {
     "group": "BOTTOM",
@@ -430,7 +571,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AOLS",
-    "styleName": "AIM Boxer 7 Pack"
+    "styleName": "AIM Boxer 7 Pack",
+    "salesRevenue": 215773.74,
+    "units": 50120,
+    "fobPrice": 4.305142458100558
   },
   {
     "group": "TOP",
@@ -439,7 +583,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3JIAS",
-    "styleName": "It's Rulu Run Cropped 1/2 Zip Mindful Rulu"
+    "styleName": "It's Rulu Run Cropped 1/2 Zip Mindful Rulu",
+    "salesRevenue": 572156.56,
+    "units": 33038,
+    "fobPrice": 17.318135480355956
   },
   {
     "group": "BOTTOM",
@@ -448,7 +595,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AY9S",
-    "styleName": "AIM BOXER 3 MICRO MODAL- 3 PACK"
+    "styleName": "AIM BOXER 3 MICRO MODAL- 3 PACK",
+    "salesRevenue": 253430.40000000002,
+    "units": 54279,
+    "fobPrice": 4.6690322224064555
   },
   {
     "group": "TOP",
@@ -457,7 +607,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3HYAS",
-    "styleName": "It's Rulu Run Cropped 1/2 Zip Mindful Lift"
+    "styleName": "It's Rulu Run Cropped 1/2 Zip Mindful Lift",
+    "salesRevenue": 2089282.63,
+    "units": 137270,
+    "fobPrice": 15.22024207765717
   },
   {
     "group": "BOTTOM",
@@ -466,7 +619,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7BC0S",
-    "styleName": "Pace Breaker Short 5 LINED"
+    "styleName": "Pace Breaker Short 5 LINED",
+    "salesRevenue": 684432.56,
+    "units": 57059,
+    "fobPrice": 11.995172715960674
   },
   {
     "group": "TOP",
@@ -475,7 +631,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GB9S",
-    "styleName": "LOUNGE BECALM V NECK TANK HTR"
+    "styleName": "LOUNGE BECALM V NECK TANK HTR",
+    "salesRevenue": 207940.90000000002,
+    "units": 26288,
+    "fobPrice": 7.910107273280585
   },
   {
     "group": "TOP",
@@ -484,7 +643,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "TEE",
     "styleNo": "LW3KD0S",
-    "styleName": "BECALM WRAP_FRONT LS"
+    "styleName": "BECALM WRAP_FRONT LS",
+    "salesRevenue": 152595.18,
+    "units": 12653,
+    "fobPrice": 12.059999999999999
   },
   {
     "group": "TOP",
@@ -493,7 +655,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3EN3S",
-    "styleName": "Evolution Polo - No Silver - Heather"
+    "styleName": "Evolution Polo - No Silver - Heather",
+    "salesRevenue": 325462.97000000003,
+    "units": 30418,
+    "fobPrice": 10.699683411138142
   },
   {
     "group": "TOP",
@@ -502,7 +667,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FGVS",
-    "styleName": "SCULPT TANK SE RACE"
+    "styleName": "SCULPT TANK SE RACE",
+    "salesRevenue": 148605.57,
+    "units": 18979,
+    "fobPrice": 7.83
   },
   {
     "group": "TOP",
@@ -511,7 +679,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KBKS",
-    "styleName": "Rulu Classic Fit Half zip"
+    "styleName": "Rulu Classic Fit Half zip",
+    "salesRevenue": 187720.63000000003,
+    "units": 10089,
+    "fobPrice": 18.606465457428886
   },
   {
     "group": "BOTTOM",
@@ -520,7 +691,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AN1S",
-    "styleName": "AIM Boxer 5 Pack"
+    "styleName": "AIM Boxer 5 Pack",
+    "salesRevenue": 276498.55000000005,
+    "units": 57835,
+    "fobPrice": 4.780816979337772
   },
   {
     "group": "TOP",
@@ -529,7 +703,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KGDS",
-    "styleName": "LICENSE TO TRAIN DRYSENSE LS"
+    "styleName": "LICENSE TO TRAIN DRYSENSE LS",
+    "salesRevenue": 437655.60000000003,
+    "units": 36520,
+    "fobPrice": 11.983997809419497
   },
   {
     "group": "TOP",
@@ -538,7 +715,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3JKZS",
-    "styleName": "Golf UVP Full-Zip 2nd Layer"
+    "styleName": "Golf UVP Full-Zip 2nd Layer",
+    "salesRevenue": 133923.96,
+    "units": 4709,
+    "fobPrice": 28.439999999999998
   },
   {
     "group": "TOP",
@@ -547,7 +727,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3EQIS",
-    "styleName": "EVOLUTION POLO LS - SOLID"
+    "styleName": "EVOLUTION POLO LS - SOLID",
+    "salesRevenue": 218070.69,
+    "units": 18199,
+    "fobPrice": 11.982564426616847
   },
   {
     "group": "TOP",
@@ -556,7 +739,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3JWHS",
-    "styleName": "Run Core SS"
+    "styleName": "Run Core SS",
+    "salesRevenue": 127792.36,
+    "units": 16532,
+    "fobPrice": 7.73
   },
   {
     "group": "TOP",
@@ -565,7 +751,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3HIXS",
-    "styleName": "FA23 LTT Drysense SS Tight fit -heather"
+    "styleName": "FA23 LTT Drysense SS Tight fit -heather",
+    "salesRevenue": 122354.75,
+    "units": 17605,
+    "fobPrice": 6.95
   },
   {
     "group": "TOP",
@@ -574,7 +763,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KLVS",
-    "styleName": "RULU CLASSIC FIT LS CREW NECK"
+    "styleName": "RULU CLASSIC FIT LS CREW NECK",
+    "salesRevenue": 187187.68000000002,
+    "units": 11603,
+    "fobPrice": 16.13269671636646
   },
   {
     "group": "TOP",
@@ -583,7 +775,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GO2S",
-    "styleName": "LOUNGE BECALM V NECK TANK V2"
+    "styleName": "LOUNGE BECALM V NECK TANK V2",
+    "salesRevenue": 108324.24,
+    "units": 14424,
+    "fobPrice": 7.510000000000001
   },
   {
     "group": "TOP",
@@ -592,7 +787,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3FTFS",
-    "styleName": "Waffle Henley"
+    "styleName": "Waffle Henley",
+    "salesRevenue": 190360.34,
+    "units": 13843,
+    "fobPrice": 13.751379036336054
   },
   {
     "group": "BOTTOM",
@@ -601,7 +799,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AYES",
-    "styleName": "AIM BOXER 3 MICRO MODAL- 5 PACK"
+    "styleName": "AIM BOXER 3 MICRO MODAL- 5 PACK",
+    "salesRevenue": 171701.64,
+    "units": 40500,
+    "fobPrice": 4.239546666666667
   },
   {
     "group": "TOP",
@@ -610,7 +811,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3JQTS",
-    "styleName": "It's Rulu 1/2 Cropped Zip Texture"
+    "styleName": "It's Rulu 1/2 Cropped Zip Texture",
+    "salesRevenue": 105242.62,
+    "units": 6742,
+    "fobPrice": 15.61
   },
   {
     "group": "TOP",
@@ -619,7 +823,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "TEE",
     "styleNo": "LW3JLHS",
-    "styleName": "TENNIS AUS OPEN SS SE"
+    "styleName": "TENNIS AUS OPEN SS SE",
+    "salesRevenue": 89732.5,
+    "units": 7150,
+    "fobPrice": 12.55
   },
   {
     "group": "TOP",
@@ -628,7 +835,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3GA0S",
-    "styleName": "Brushed Rulu LS Crew_BRIGHT LYCRA"
+    "styleName": "Brushed Rulu LS Crew_BRIGHT LYCRA",
+    "salesRevenue": 173780.57,
+    "units": 11040,
+    "fobPrice": 15.74099365942029
   },
   {
     "group": "TOP",
@@ -637,7 +847,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FX5S",
-    "styleName": "LOUNGE BECALM V NECK TANK"
+    "styleName": "LOUNGE BECALM V NECK TANK",
+    "salesRevenue": 88731.84,
+    "units": 10874,
+    "fobPrice": 8.16
   },
   {
     "group": "TOP",
@@ -646,7 +859,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3IZ2S",
-    "styleName": "It's Rulu LS Texture"
+    "styleName": "It's Rulu LS Texture",
+    "salesRevenue": 86617.12,
+    "units": 5581,
+    "fobPrice": 15.52
   },
   {
     "group": "BOTTOM",
@@ -655,7 +871,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LM7BCCS",
-    "styleName": "Pace Breaker Short 9 Lined - Solid"
+    "styleName": "Pace Breaker Short 9 Lined - Solid",
+    "salesRevenue": 278860.72,
+    "units": 22652,
+    "fobPrice": 12.310644534698922
   },
   {
     "group": "TOP",
@@ -664,7 +883,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3GO5S",
-    "styleName": "WI22 LS SLOT 92.2 *Heathered"
+    "styleName": "WI22 LS SLOT 92.2 *Heathered",
+    "salesRevenue": 169243.26,
+    "units": 16220,
+    "fobPrice": 10.434233045622689
   },
   {
     "group": "BOTTOM",
@@ -673,7 +895,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AMRS",
-    "styleName": "AIM Boxer-Tab Update-Solid"
+    "styleName": "AIM Boxer-Tab Update-Solid",
+    "salesRevenue": 142210.88,
+    "units": 26958,
+    "fobPrice": 5.275275613917946
   },
   {
     "group": "TOP",
@@ -682,7 +907,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GGQS",
-    "styleName": "LIGHTWEIGHT RUNNING TANK WAIST LENGTH"
+    "styleName": "LIGHTWEIGHT RUNNING TANK WAIST LENGTH",
+    "salesRevenue": 129455.94,
+    "units": 19765,
+    "fobPrice": 6.549756640526183
   },
   {
     "group": "TOP",
@@ -691,7 +919,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3GLRS",
-    "styleName": "NFL EVOLUTION SHORT SLEEVE POLO HTR"
+    "styleName": "NFL EVOLUTION SHORT SLEEVE POLO HTR",
+    "salesRevenue": 64944.71,
+    "units": 6287,
+    "fobPrice": 10.33
   },
   {
     "group": "TOP",
@@ -700,7 +931,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3CY5S",
-    "styleName": "Evolution Polo Lift"
+    "styleName": "Evolution Polo Lift",
+    "salesRevenue": 96251.87,
+    "units": 7746,
+    "fobPrice": 12.42600955331784
   },
   {
     "group": "TOP",
@@ -709,7 +943,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3GA6S",
-    "styleName": "Golf Polo LS_RELAXED"
+    "styleName": "Golf Polo LS_RELAXED",
+    "salesRevenue": 57550.47,
+    "units": 2911,
+    "fobPrice": 19.77
   },
   {
     "group": "TOP",
@@ -718,7 +955,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "TEE",
     "styleNo": "LW3LJFS",
-    "styleName": "LOUNGE BECALM WRAP FRONT LONG SLEEVE V2"
+    "styleName": "LOUNGE BECALM WRAP FRONT LONG SLEEVE V2",
+    "salesRevenue": 53296.11,
+    "units": 4401,
+    "fobPrice": 12.11
   },
   {
     "group": "BOTTOM",
@@ -727,7 +967,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AZOS",
-    "styleName": "AIM Boxer 7 Micro Modal - 3 Pack"
+    "styleName": "AIM Boxer 7 Micro Modal - 3 Pack",
+    "salesRevenue": 952057.71,
+    "units": 199215,
+    "fobPrice": 4.779046306754009
   },
   {
     "group": "BOTTOM",
@@ -736,7 +979,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AYHS",
-    "styleName": "AIM BOXER 3 MICRO MODAL- 5 PACK"
+    "styleName": "AIM BOXER 3 MICRO MODAL- 5 PACK",
+    "salesRevenue": 93241.8,
+    "units": 18670,
+    "fobPrice": 4.9942046063203005
   },
   {
     "group": "TOP",
@@ -745,7 +991,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3JBJS",
-    "styleName": "SCULPT LS SE REG"
+    "styleName": "SCULPT LS SE REG",
+    "salesRevenue": 45915.18,
+    "units": 4197,
+    "fobPrice": 10.94
   },
   {
     "group": "TOP",
@@ -754,7 +1003,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KI9S",
-    "styleName": "TENNIS GRAPHIC PACK SSNL KIT 1 LS RELAXED FIT"
+    "styleName": "TENNIS GRAPHIC PACK SSNL KIT 1 LS RELAXED FIT",
+    "salesRevenue": 41589.96,
+    "units": 2729,
+    "fobPrice": 15.24
   },
   {
     "group": "TOP",
@@ -763,7 +1015,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3GF4S",
-    "styleName": "Ease The Day Half Zip"
+    "styleName": "Ease The Day Half Zip",
+    "salesRevenue": 389883.02999999997,
+    "units": 22287,
+    "fobPrice": 17.493742091802396
   },
   {
     "group": "TOP",
@@ -772,7 +1027,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LDUS",
-    "styleName": "BACK VENT T-SHIRT"
+    "styleName": "BACK VENT T-SHIRT",
+    "salesRevenue": 36665.82,
+    "units": 2718,
+    "fobPrice": 13.49
   },
   {
     "group": "TOP",
@@ -781,7 +1039,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1EN0S",
-    "styleName": "FA23 LTT Drysense Tank Tight Fit- heather"
+    "styleName": "FA23 LTT Drysense Tank Tight Fit- heather",
+    "salesRevenue": 36106.3,
+    "units": 5389,
+    "fobPrice": 6.7
   },
   {
     "group": "BOTTOM",
@@ -790,7 +1051,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SKIRT",
     "styleNo": "LW8AOPT",
-    "styleName": "Pace Rival Skirt TALL ES - EV"
+    "styleName": "Pace Rival Skirt TALL ES - EV",
+    "salesRevenue": 68243.41,
+    "units": 4756,
+    "fobPrice": 14.34890874684609
   },
   {
     "group": "TOP",
@@ -799,7 +1063,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "SHIRT BUTTON DOWN",
     "styleNo": "LM3GGNS",
-    "styleName": "Waffle Relaxed SS"
+    "styleName": "Waffle Relaxed SS",
+    "salesRevenue": 34966.54,
+    "units": 2653,
+    "fobPrice": 13.18
   },
   {
     "group": "TOP",
@@ -808,7 +1075,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW3KYXS",
-    "styleName": "Define Jacket Nulu"
+    "styleName": "Define Jacket Nulu",
+    "salesRevenue": 52382.82,
+    "units": 2457,
+    "fobPrice": 21.31982905982906
   },
   {
     "group": "TOP",
@@ -817,7 +1087,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3JBKS",
-    "styleName": "SCULPT SS SE REG"
+    "styleName": "SCULPT SS SE REG",
+    "salesRevenue": 30472.95,
+    "units": 3345,
+    "fobPrice": 9.11
   },
   {
     "group": "BOTTOM",
@@ -826,7 +1099,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS UNDERWEAR",
     "productType": "BOXER BRIEF",
     "styleNo": "LM9AYGS",
-    "styleName": "AIM BOXER 3 MICRO MODAL"
+    "styleName": "AIM BOXER 3 MICRO MODAL",
+    "salesRevenue": 29876.4,
+    "units": 5790,
+    "fobPrice": 5.16
   },
   {
     "group": "TOP",
@@ -835,7 +1111,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KNJS",
-    "styleName": "Love Long-Sleeve Shirt BeCalm"
+    "styleName": "Love Long-Sleeve Shirt BeCalm",
+    "salesRevenue": 29482.18,
+    "units": 2522,
+    "fobPrice": 11.69
   },
   {
     "group": "TOP",
@@ -844,7 +1123,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3IJES",
-    "styleName": "IT'S RULU CROPPED HALF ZIP"
+    "styleName": "IT'S RULU CROPPED HALF ZIP",
+    "salesRevenue": 740934.02,
+    "units": 52095,
+    "fobPrice": 14.222747288607353
   },
   {
     "group": "TOP",
@@ -853,7 +1135,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3GXYS",
-    "styleName": "NFL EVOLUTION SHORT SLEEVE POLO | SOLID"
+    "styleName": "NFL EVOLUTION SHORT SLEEVE POLO | SOLID",
+    "salesRevenue": 26741.18,
+    "units": 2806,
+    "fobPrice": 9.53
   },
   {
     "group": "TOP",
@@ -862,7 +1147,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3IZ0S",
-    "styleName": "It's Rulu 1/2 Zip Texture"
+    "styleName": "It's Rulu 1/2 Zip Texture",
+    "salesRevenue": 22386.44,
+    "units": 1228,
+    "fobPrice": 18.23
   },
   {
     "group": "TOP",
@@ -871,7 +1159,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KIVS",
-    "styleName": "LOUNGE BECALM LS V NECK HTR"
+    "styleName": "LOUNGE BECALM LS V NECK HTR",
+    "salesRevenue": 27323.47,
+    "units": 1949,
+    "fobPrice": 14.019225243714725
   },
   {
     "group": "TOP",
@@ -880,7 +1171,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GBKS",
-    "styleName": "SCULPT TANK *SW"
+    "styleName": "SCULPT TANK *SW",
+    "salesRevenue": 13028.43,
+    "units": 659,
+    "fobPrice": 19.77
   },
   {
     "group": "TOP",
@@ -889,7 +1183,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3IH2S",
-    "styleName": "LICENSE TO TRAIN CLASSIC FIT TEE"
+    "styleName": "LICENSE TO TRAIN CLASSIC FIT TEE",
+    "salesRevenue": 12309.3,
+    "units": 1269,
+    "fobPrice": 9.7
   },
   {
     "group": "TOP",
@@ -898,7 +1195,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KFQS",
-    "styleName": "IT'S RULU CLASSIC-FIT HALF ZIP *SW"
+    "styleName": "IT'S RULU CLASSIC-FIT HALF ZIP *SW",
+    "salesRevenue": 11861.04,
+    "units": 584,
+    "fobPrice": 20.310000000000002
   },
   {
     "group": "TOP",
@@ -907,7 +1207,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3HINS",
-    "styleName": "FA23 LTT Drysense SS Classic fit H"
+    "styleName": "FA23 LTT Drysense SS Classic fit H",
+    "salesRevenue": 11737.06,
+    "units": 1273,
+    "fobPrice": 9.219999999999999
   },
   {
     "group": "TOP",
@@ -916,7 +1219,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TEE",
     "styleNo": "LW3LOAS",
-    "styleName": "BECALM V-NECK BELL SLEEVE SHIRT"
+    "styleName": "BECALM V-NECK BELL SLEEVE SHIRT",
+    "salesRevenue": 8406.84,
+    "units": 663,
+    "fobPrice": 12.68
   },
   {
     "group": "TOP",
@@ -925,7 +1231,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FU0S",
-    "styleName": "Run Novelty Tank Fem"
+    "styleName": "Run Novelty Tank Fem",
+    "salesRevenue": 8140.16,
+    "units": 1288,
+    "fobPrice": 6.32
   },
   {
     "group": "TOP",
@@ -934,7 +1243,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KZ1S",
-    "styleName": "IT'S RULU CLASSIC-FIT HALF ZIP *SW"
+    "styleName": "IT'S RULU CLASSIC-FIT HALF ZIP *SW",
+    "salesRevenue": 7707.42,
+    "units": 378,
+    "fobPrice": 20.39
   },
   {
     "group": "TOP",
@@ -943,7 +1255,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FYOS",
-    "styleName": "SCULPT GRAPHIC CROSS-VENT CROP TANK *SW"
+    "styleName": "SCULPT GRAPHIC CROSS-VENT CROP TANK *SW",
+    "salesRevenue": 7145.71,
+    "units": 770,
+    "fobPrice": 9.280142857142858
   },
   {
     "group": "TOP",
@@ -952,7 +1267,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FICS",
-    "styleName": "TCA W License to Train Drysense Classic Fit Tank"
+    "styleName": "TCA W License to Train Drysense Classic Fit Tank",
+    "salesRevenue": 3807.32,
+    "units": 374,
+    "fobPrice": 10.18
   },
   {
     "group": "TOP",
@@ -961,7 +1279,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GE2S",
-    "styleName": "SCULPT GRAPHIC TANK *SW"
+    "styleName": "SCULPT GRAPHIC TANK *SW",
+    "salesRevenue": 3026.26,
+    "units": 337,
+    "fobPrice": 8.98
   },
   {
     "group": "TOP",
@@ -970,7 +1291,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FJAS",
-    "styleName": "TCPA W License to Train Drysense Classic Fit Tank"
+    "styleName": "TCPA W License to Train Drysense Classic Fit Tank",
+    "salesRevenue": 1391.25,
+    "units": 125,
+    "fobPrice": 11.13
   },
   {
     "group": "TOP",
@@ -979,7 +1303,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1FZ1S",
-    "styleName": "TCA W LLT Classic Fit Tank"
+    "styleName": "TCA W LLT Classic Fit Tank",
+    "salesRevenue": 1226.34,
+    "units": 54,
+    "fobPrice": 22.709999999999997
   },
   {
     "group": "TOP",
@@ -988,7 +1315,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LM3HF7S",
-    "styleName": "FT Textured Waffle LS Crew in LY Fabric"
+    "styleName": "FT Textured Waffle LS Crew in LY Fabric",
+    "salesRevenue": 3242000.89,
+    "units": 216111,
+    "fobPrice": 15.001554247585732
   },
   {
     "group": "TOP",
@@ -997,7 +1327,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3KZDS",
-    "styleName": "WI26 Run It's Rulu 1/2 Zip Cropped MDot Ref"
+    "styleName": "WI26 Run It's Rulu 1/2 Zip Cropped MDot Ref",
+    "salesRevenue": 818380.38,
+    "units": 26797,
+    "fobPrice": 30.54
   },
   {
     "group": "TOP",
@@ -1006,7 +1339,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HFOS",
-    "styleName": "COTTON BLEND WAFFLE KNIT HOODIE"
+    "styleName": "COTTON BLEND WAFFLE KNIT HOODIE",
+    "salesRevenue": 1280549.45,
+    "units": 70028,
+    "fobPrice": 18.28624907179985
   },
   {
     "group": "TOP",
@@ -1015,7 +1351,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HKYS",
-    "styleName": "FT Waffle-Knit Pullover Hoodie"
+    "styleName": "FT Waffle-Knit Pullover Hoodie",
+    "salesRevenue": 568904.74,
+    "units": 27493,
+    "fobPrice": 20.69271232677409
   },
   {
     "group": "TOP",
@@ -1024,7 +1363,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3KQQS",
-    "styleName": "Lounge BeCalm Relaxed Pullover Crew"
+    "styleName": "Lounge BeCalm Relaxed Pullover Crew",
+    "salesRevenue": 692510.92,
+    "units": 44444,
+    "fobPrice": 15.581651516515166
   },
   {
     "group": "TOP",
@@ -1033,7 +1375,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3KQPS",
-    "styleName": "Lounge BeCalm Relaxed Pullover Hoodie"
+    "styleName": "Lounge BeCalm Relaxed Pullover Hoodie",
+    "salesRevenue": 538520.5,
+    "units": 30650,
+    "fobPrice": 17.57
   },
   {
     "group": "TOP",
@@ -1042,7 +1387,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HELS",
-    "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra"
+    "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra",
+    "salesRevenue": 1042159.6,
+    "units": 60475,
+    "fobPrice": 17.23289954526664
   },
   {
     "group": "BOTTOM",
@@ -1051,7 +1399,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "ACTIVE",
     "productType": "JOGGER",
     "styleNo": "LM5BMTS",
-    "styleName": "Ease The Day Jogger Regular"
+    "styleName": "Ease The Day Jogger Regular",
+    "salesRevenue": 428059.06,
+    "units": 27742,
+    "fobPrice": 15.43
   },
   {
     "group": "TOP",
@@ -1060,7 +1411,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LM3HLJS",
-    "styleName": "FT Textured Waffle LS Henley Tee"
+    "styleName": "FT Textured Waffle LS Henley Tee",
+    "salesRevenue": 478988.48,
+    "units": 29452,
+    "fobPrice": 16.263360043460544
   },
   {
     "group": "TOP",
@@ -1069,7 +1423,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LP9S",
-    "styleName": "Love Long-Sleeve Shirt BeCalm V2"
+    "styleName": "Love Long-Sleeve Shirt BeCalm V2",
+    "salesRevenue": 374408.1,
+    "units": 35255,
+    "fobPrice": 10.62
   },
   {
     "group": "TOP",
@@ -1078,7 +1435,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3KP3S",
-    "styleName": "Run It's Rulu 1/2 Zip Crop Waffle Texture"
+    "styleName": "Run It's Rulu 1/2 Zip Crop Waffle Texture",
+    "salesRevenue": 541329.11,
+    "units": 24929,
+    "fobPrice": 21.714834530065385
   },
   {
     "group": "TOP",
@@ -1087,7 +1447,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KP6S",
-    "styleName": "Run It's Rulu Hooded Reg LS Waffle Texture"
+    "styleName": "Run It's Rulu Hooded Reg LS Waffle Texture",
+    "salesRevenue": 313894.49,
+    "units": 11995,
+    "fobPrice": 26.16877782409337
   },
   {
     "group": "TOP",
@@ -1096,7 +1459,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HEMS",
-    "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra"
+    "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra",
+    "salesRevenue": 390778.99,
+    "units": 23462,
+    "fobPrice": 16.65582601653738
   },
   {
     "group": "TOP",
@@ -1105,7 +1471,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KPXS",
-    "styleName": "Run It's Rulu LS CLASSIC FIT Waffle Texture"
+    "styleName": "Run It's Rulu LS CLASSIC FIT Waffle Texture",
+    "salesRevenue": 207945.89,
+    "units": 9086,
+    "fobPrice": 22.886406559542156
   },
   {
     "group": "TOP",
@@ -1114,7 +1483,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HEJS",
-    "styleName": "Rulu Fleece Crewneck Long Sleeve - Black Lycra"
+    "styleName": "Rulu Fleece Crewneck Long Sleeve - Black Lycra",
+    "salesRevenue": 443854.3,
+    "units": 25581,
+    "fobPrice": 17.350936241741916
   },
   {
     "group": "TOP",
@@ -1123,7 +1495,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3GR7S",
-    "styleName": "Rulu Run Fleece Hoodie"
+    "styleName": "Rulu Run Fleece Hoodie",
+    "salesRevenue": 411730.48,
+    "units": 24335,
+    "fobPrice": 16.919271830696527
   },
   {
     "group": "TOP",
@@ -1132,7 +1507,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3IM1S",
-    "styleName": "Its Rulu Run Long Sleeve BR"
+    "styleName": "Its Rulu Run Long Sleeve BR",
+    "salesRevenue": 173096.8,
+    "units": 12344,
+    "fobPrice": 14.022747893713545
   },
   {
     "group": "TOP",
@@ -1141,7 +1519,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3H84S",
-    "styleName": "ECO EVOLUTION SHORT-SLEEVE POLO"
+    "styleName": "ECO EVOLUTION SHORT-SLEEVE POLO",
+    "salesRevenue": 81179.08,
+    "units": 7702,
+    "fobPrice": 10.540000000000001
   },
   {
     "group": "TOP",
@@ -1150,7 +1531,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3KIAS",
-    "styleName": "Tennis Blank Graphic Slot SS Relaxed Fit"
+    "styleName": "Tennis Blank Graphic Slot SS Relaxed Fit",
+    "salesRevenue": 75584.04,
+    "units": 6636,
+    "fobPrice": 11.389999999999999
   },
   {
     "group": "TOP",
@@ -1159,7 +1543,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HEKS",
-    "styleName": "Rulu Fleece Crewneck Long Sleeve - Black Lycra"
+    "styleName": "Rulu Fleece Crewneck Long Sleeve - Black Lycra",
+    "salesRevenue": 138570.91999999998,
+    "units": 9404,
+    "fobPrice": 14.735316886431304
   },
   {
     "group": "TOP",
@@ -1168,7 +1555,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KP5S",
-    "styleName": "Run It's Rulu Hooded Reg LS"
+    "styleName": "Run It's Rulu Hooded Reg LS",
+    "salesRevenue": 69816.36,
+    "units": 3853,
+    "fobPrice": 18.12
   },
   {
     "group": "TOP",
@@ -1177,7 +1567,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3KWUS",
-    "styleName": "It's Rulu Hooded Half Zip"
+    "styleName": "It's Rulu Hooded Half Zip",
+    "salesRevenue": 65519.12,
+    "units": 3644,
+    "fobPrice": 17.98
   },
   {
     "group": "TOP",
@@ -1186,7 +1579,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW3LOPS",
-    "styleName": "Define Jacket Nulu"
+    "styleName": "Define Jacket Nulu",
+    "salesRevenue": 69355.9,
+    "units": 3290,
+    "fobPrice": 21.080820668693008
   },
   {
     "group": "TOP",
@@ -1195,7 +1591,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HIBS",
-    "styleName": "Rulu Run Fleece Hoodie - Bright Lycra"
+    "styleName": "Rulu Run Fleece Hoodie - Bright Lycra",
+    "salesRevenue": 49558.2,
+    "units": 3020,
+    "fobPrice": 16.41
   },
   {
     "group": "TOP",
@@ -1204,7 +1603,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3KZCS",
-    "styleName": "WI26 Run It's Rulu LS Reg MDot Ref"
+    "styleName": "WI26 Run It's Rulu LS Reg MDot Ref",
+    "salesRevenue": 48283.05,
+    "units": 1515,
+    "fobPrice": 31.87
   },
   {
     "group": "BOTTOM",
@@ -1213,7 +1615,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "ACTIVE",
     "productType": "JOGGER",
     "styleNo": "LM5BMUS",
-    "styleName": "Ease The Day Jogger Regular"
+    "styleName": "Ease The Day Jogger Regular",
+    "salesRevenue": 38791.02,
+    "units": 2514,
+    "fobPrice": 15.429999999999998
   },
   {
     "group": "TOP",
@@ -1222,7 +1627,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW3LOOS",
-    "styleName": "Define Jacket Nulu"
+    "styleName": "Define Jacket Nulu",
+    "salesRevenue": 93277.11,
+    "units": 4446,
+    "fobPrice": 20.980006747638328
   },
   {
     "group": "BOTTOM",
@@ -1231,7 +1639,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "ACTIVE",
     "productType": "JOGGER",
     "styleNo": "LM5BMVS",
-    "styleName": "Ease The Day Jogger Regular"
+    "styleName": "Ease The Day Jogger Regular",
+    "salesRevenue": 31515.48,
+    "units": 1917,
+    "fobPrice": 16.44
   },
   {
     "group": "TOP",
@@ -1240,7 +1651,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LM3H92S",
-    "styleName": "ECO EVOLUTION SHORT-SLEEVE POLO"
+    "styleName": "ECO EVOLUTION SHORT-SLEEVE POLO",
+    "salesRevenue": 30995.25,
+    "units": 3179,
+    "fobPrice": 9.75
   },
   {
     "group": "TOP",
@@ -1249,7 +1663,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3KRWS",
-    "styleName": "Lounge BeCalm Relaxed Pullover Hoodie HTHR"
+    "styleName": "Lounge BeCalm Relaxed Pullover Hoodie HTHR",
+    "salesRevenue": 30954.86,
+    "units": 1658,
+    "fobPrice": 18.67
   },
   {
     "group": "TOP",
@@ -1258,7 +1675,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3KRUS",
-    "styleName": "Lounge BeCalm Relaxed Pullover Crew HTHR"
+    "styleName": "Lounge BeCalm Relaxed Pullover Crew HTHR",
+    "salesRevenue": 182014.22,
+    "units": 11018,
+    "fobPrice": 16.519715011798876
   },
   {
     "group": "TOP",
@@ -1267,7 +1687,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3JYBS",
-    "styleName": "TENNIS BLANK GRAPHIC PACK LS RELAXED FIT"
+    "styleName": "TENNIS BLANK GRAPHIC PACK LS RELAXED FIT",
+    "salesRevenue": 16858.8,
+    "units": 1260,
+    "fobPrice": 13.379999999999999
   },
   {
     "group": "TOP",
@@ -1276,7 +1699,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GPFS",
-    "styleName": "Sculpt Tank Evolve"
+    "styleName": "Sculpt Tank Evolve",
+    "salesRevenue": 4185348,
+    "units": 348779,
+    "fobPrice": 12
   },
   {
     "group": "TOP",
@@ -1285,7 +1711,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3LX2S",
-    "styleName": "LOUNGE BECLAM 2ND LAYER"
+    "styleName": "LOUNGE BECLAM 2ND LAYER",
+    "salesRevenue": 445335,
+    "units": 26990,
+    "fobPrice": 16.5
   },
   {
     "group": "TOP",
@@ -1294,7 +1723,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LM6S",
-    "styleName": "Sculpt SS Evolve"
+    "styleName": "Sculpt SS Evolve",
+    "salesRevenue": 718391,
+    "units": 75620,
+    "fobPrice": 9.500013224014811
   },
   {
     "group": "TOP",
@@ -1303,7 +1735,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TEE",
     "styleNo": "LW1GVPS",
-    "styleName": "Tennis AFB UVP Lightweight TANK"
+    "styleName": "Tennis AFB UVP Lightweight TANK",
+    "salesRevenue": 435720,
+    "units": 43572,
+    "fobPrice": 10
   },
   {
     "group": "TOP",
@@ -1312,7 +1747,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "POLO",
     "styleNo": "LW3LWHS",
-    "styleName": "LOUNGE TOWEL TERRY POLO SS"
+    "styleName": "LOUNGE TOWEL TERRY POLO SS",
+    "salesRevenue": 164610,
+    "units": 10620,
+    "fobPrice": 15.5
   },
   {
     "group": "TOP",
@@ -1321,7 +1759,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LNAS",
-    "styleName": "Tennis AFB UVP Lightweight LS"
+    "styleName": "Tennis AFB UVP Lightweight LS",
+    "salesRevenue": 431894.75,
+    "units": 42136,
+    "fobPrice": 10.25001779950636
   },
   {
     "group": "TOP",
@@ -1330,7 +1771,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GQRS",
-    "styleName": "Train Dotty Jacquard Tank SE"
+    "styleName": "Train Dotty Jacquard Tank SE",
+    "salesRevenue": 82500,
+    "units": 6875,
+    "fobPrice": 12
   },
   {
     "group": "TOP",
@@ -1339,7 +1783,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3LC1S",
-    "styleName": "WI26 Lounge BeCalm SS"
+    "styleName": "WI26 Lounge BeCalm SS",
+    "salesRevenue": 132904,
+    "units": 9538,
+    "fobPrice": 13.934158104424407
   },
   {
     "group": "TOP",
@@ -1348,7 +1795,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3LW9S",
-    "styleName": "LOUNGE TOWEL TERRY CREW"
+    "styleName": "LOUNGE TOWEL TERRY CREW",
+    "salesRevenue": 72152,
+    "units": 4976,
+    "fobPrice": 14.5
   },
   {
     "group": "TOP",
@@ -1357,7 +1807,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LM7S",
-    "styleName": "Sculpt LS Evolve"
+    "styleName": "Sculpt LS Evolve",
+    "salesRevenue": 479870,
+    "units": 47987,
+    "fobPrice": 10
   },
   {
     "group": "TOP",
@@ -1366,7 +1819,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LLPS",
-    "styleName": "Lounge BeCalm SS Stripe"
+    "styleName": "Lounge BeCalm SS Stripe",
+    "salesRevenue": 49049,
+    "units": 3773,
+    "fobPrice": 13
   },
   {
     "group": "TOP",
@@ -1375,7 +1831,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW3LLLS",
-    "styleName": "Lounge BeCalm 2nd Layer Crew Stripe"
+    "styleName": "Lounge BeCalm 2nd Layer Crew Stripe",
+    "salesRevenue": 48576,
+    "units": 3036,
+    "fobPrice": 16
   },
   {
     "group": "TOP",
@@ -1384,7 +1843,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LNSS",
-    "styleName": "UV Protective SS Tennis Shirt Graphic"
+    "styleName": "UV Protective SS Tennis Shirt Graphic",
+    "salesRevenue": 70490,
+    "units": 7420,
+    "fobPrice": 9.5
   },
   {
     "group": "TOP",
@@ -1393,7 +1855,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GKTS",
-    "styleName": "WI26 Lounge BeCalm Tank"
+    "styleName": "WI26 Lounge BeCalm Tank",
+    "salesRevenue": 36616,
+    "units": 4577,
+    "fobPrice": 8
   },
   {
     "group": "TOP",
@@ -1402,7 +1867,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LW3MJYS",
-    "styleName": "BeCalm Cropped T-Shirt HTHR"
+    "styleName": "BeCalm Cropped T-Shirt HTHR",
+    "salesRevenue": 34287.5,
+    "units": 2743,
+    "fobPrice": 12.5
   },
   {
     "group": "BOTTOM",
@@ -1411,7 +1879,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LW7EH1S",
-    "styleName": "LOUNGE TOWEL TERRY SHORT"
+    "styleName": "LOUNGE TOWEL TERRY SHORT",
+    "salesRevenue": 31437.5,
+    "units": 2515,
+    "fobPrice": 12.5
   },
   {
     "group": "TOP",
@@ -1420,7 +1891,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LWGS",
-    "styleName": "LOUNGE NATURAL COOL AFB SS"
+    "styleName": "LOUNGE NATURAL COOL AFB SS",
+    "salesRevenue": 26570,
+    "units": 2657,
+    "fobPrice": 10
   },
   {
     "group": "TOP",
@@ -1429,7 +1903,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LWFS",
-    "styleName": "LOUNGE BECLAM LS"
+    "styleName": "LOUNGE BECLAM LS",
+    "salesRevenue": 22012.5,
+    "units": 1761,
+    "fobPrice": 12.5
   },
   {
     "group": "TOP",
@@ -1438,7 +1915,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LX7S",
-    "styleName": "LOUNGE NATURAL COOL AFB SS"
+    "styleName": "LOUNGE NATURAL COOL AFB SS",
+    "salesRevenue": 114290,
+    "units": 11429,
+    "fobPrice": 10
   },
   {
     "group": "TOP",
@@ -1447,7 +1927,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "JACKET",
     "styleNo": "LW3MNVS",
-    "styleName": "IW UNIFORMS Define Jacket"
+    "styleName": "IW UNIFORMS Define Jacket",
+    "salesRevenue": 11115.5,
+    "units": 550,
+    "fobPrice": 20.21
   },
   {
     "group": "BOTTOM",
@@ -1456,7 +1939,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LW7EH9S",
-    "styleName": "LOUNGE BECALM FLOUSE SHORT"
+    "styleName": "LOUNGE BECALM FLOUSE SHORT",
+    "salesRevenue": 10075,
+    "units": 806,
+    "fobPrice": 12.5
   },
   {
     "group": "TOP",
@@ -1465,7 +1951,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HPGS",
-    "styleName": "IW UNIFORMS Rulu Fleece Half-Zip Long Sleeve"
+    "styleName": "IW UNIFORMS Rulu Fleece Half-Zip Long Sleeve",
+    "salesRevenue": 9750,
+    "units": 500,
+    "fobPrice": 19.5
   },
   {
     "group": "TOP",
@@ -1474,7 +1963,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GW1S",
-    "styleName": "TRAIN DOTTY JACQUARD TANKS"
+    "styleName": "TRAIN DOTTY JACQUARD TANKS",
+    "salesRevenue": 5400,
+    "units": 450,
+    "fobPrice": 12
   },
   {
     "group": "TOP",
@@ -1483,7 +1975,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1GW2S",
-    "styleName": "Train Dotty Jacquard Tank-PRINT"
+    "styleName": "Train Dotty Jacquard Tank-PRINT",
+    "salesRevenue": 5400,
+    "units": 450,
+    "fobPrice": 12
   },
   {
     "group": "TOP",
@@ -1492,7 +1987,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HPKS",
-    "styleName": "Heatwave Ease The Day Hoodie"
+    "styleName": "Heatwave Ease The Day Hoodie",
+    "salesRevenue": 2897332,
+    "units": 199816,
+    "fobPrice": 14.5
   },
   {
     "group": "BOTTOM",
@@ -1501,7 +1999,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS PANTS",
     "productType": "JOGGER",
     "styleNo": "LM5C00S",
-    "styleName": "Heatwave Ease The Day Jogger"
+    "styleName": "Heatwave Ease The Day Jogger",
+    "salesRevenue": 1825322,
+    "units": 98666,
+    "fobPrice": 18.500010135203617
   },
   {
     "group": "TOP",
@@ -1510,7 +2011,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MPRS",
-    "styleName": "Lounge The Classic Tee V Neck 5 Year"
+    "styleName": "Lounge The Classic Tee V Neck 5 Year",
+    "salesRevenue": 1031745,
+    "units": 125060,
+    "fobPrice": 8.25
   },
   {
     "group": "TOP",
@@ -1519,7 +2023,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LM3HXZS",
-    "styleName": "Natural High CWR Texture Dbl Knit LS Crew"
+    "styleName": "Natural High CWR Texture Dbl Knit LS Crew",
+    "salesRevenue": 769090,
+    "units": 76909,
+    "fobPrice": 10
   },
   {
     "group": "BOTTOM",
@@ -1528,7 +2035,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS PANTS",
     "productType": "SHORT",
     "styleNo": "LM7CD4S",
-    "styleName": "Heatwave Ease The Day Short"
+    "styleName": "Heatwave Ease The Day Short",
+    "salesRevenue": 999802,
+    "units": 60594,
+    "fobPrice": 16.500016503284154
   },
   {
     "group": "TOP",
@@ -1537,7 +2047,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MQ7S",
-    "styleName": "Lounge Little Tee LS Waist Length 5 Year Rib"
+    "styleName": "Lounge Little Tee LS Waist Length 5 Year Rib",
+    "salesRevenue": 470469,
+    "units": 49523,
+    "fobPrice": 9.500010096318881
   },
   {
     "group": "TOP",
@@ -1546,7 +2059,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MSGS",
-    "styleName": "Lounge Little Tee 5 year Long Sleeve"
+    "styleName": "Lounge Little Tee 5 year Long Sleeve",
+    "salesRevenue": 420946,
+    "units": 49523,
+    "fobPrice": 8.500010096318881
   },
   {
     "group": "TOP",
@@ -1555,7 +2071,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MPWS",
-    "styleName": "Lounge Forever Favourite Long Sleeve 5 Year"
+    "styleName": "Lounge Forever Favourite Long Sleeve 5 Year",
+    "salesRevenue": 646272,
+    "units": 76032,
+    "fobPrice": 8.5
   },
   {
     "group": "TOP",
@@ -1564,7 +2083,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "PULLOVER",
     "styleNo": "LM3HXYS",
-    "styleName": "Natural High CWR Texture Dbl Knit Pullover Hoodie"
+    "styleName": "Natural High CWR Texture Dbl Knit Pullover Hoodie",
+    "salesRevenue": 358904,
+    "units": 25636,
+    "fobPrice": 14
   },
   {
     "group": "TOP",
@@ -1573,7 +2095,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MQWS",
-    "styleName": "Lounge Colour Block OS V Neck Long Sleeve"
+    "styleName": "Lounge Colour Block OS V Neck Long Sleeve",
+    "salesRevenue": 246696,
+    "units": 29023,
+    "fobPrice": 8.500017227715949
   },
   {
     "group": "TOP",
@@ -1582,7 +2107,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MPTS",
-    "styleName": "Lounge Forever Favourite Tee 5 Year"
+    "styleName": "Lounge Forever Favourite Tee 5 Year",
+    "salesRevenue": 347872,
+    "units": 43484,
+    "fobPrice": 8
   },
   {
     "group": "TOP",
@@ -1591,7 +2119,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3MO1S",
-    "styleName": "RUN READY TO RULU SE HALF-ZIP TEXTURE"
+    "styleName": "RUN READY TO RULU SE HALF-ZIP TEXTURE",
+    "salesRevenue": 304010,
+    "units": 17372,
+    "fobPrice": 17.5
   },
   {
     "group": "BOTTOM",
@@ -1600,7 +2131,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SKIRT",
     "styleNo": "LW8B00T",
-    "styleName": "Golf Core Pace Rival Skirt Long"
+    "styleName": "Golf Core Pace Rival Skirt Long",
+    "salesRevenue": 232500,
+    "units": 15000,
+    "fobPrice": 15.5
   },
   {
     "group": "TOP",
@@ -1609,7 +2143,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HSMS",
-    "styleName": "Heatwave Ease The Day Half Zip - Solid"
+    "styleName": "Heatwave Ease The Day Half Zip - Solid",
+    "salesRevenue": 160000,
+    "units": 10000,
+    "fobPrice": 16
   },
   {
     "group": "TOP",
@@ -1618,7 +2155,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MPVS",
-    "styleName": "Lounge Forever Favourite Tee 5 Year Wordmark"
+    "styleName": "Lounge Forever Favourite Tee 5 Year Wordmark",
+    "salesRevenue": 158792,
+    "units": 19849,
+    "fobPrice": 8
   },
   {
     "group": "TOP",
@@ -1627,7 +2167,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MPNS",
-    "styleName": "Lounge Little Tee SS Waist length 5 Year Rib"
+    "styleName": "Lounge Little Tee SS Waist length 5 Year Rib",
+    "salesRevenue": 135063,
+    "units": 15007,
+    "fobPrice": 9
   },
   {
     "group": "TOP",
@@ -1636,7 +2179,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LM3HXXS",
-    "styleName": "Natural High CWR Texture Dbl Knit SS"
+    "styleName": "Natural High CWR Texture Dbl Knit SS",
+    "salesRevenue": 132839,
+    "units": 13983,
+    "fobPrice": 9.500035757705785
   },
   {
     "group": "TOP",
@@ -1645,7 +2191,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LW3MO2S",
-    "styleName": "RUN READY TO RULU SE LS TEXTURE"
+    "styleName": "RUN READY TO RULU SE LS TEXTURE",
+    "salesRevenue": 191463,
+    "units": 15317,
+    "fobPrice": 12.500032643468042
   },
   {
     "group": "TOP",
@@ -1654,7 +2203,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MSFS",
-    "styleName": "Lounge Little Tee 5 year Short Sleeve"
+    "styleName": "Lounge Little Tee 5 year Short Sleeve",
+    "salesRevenue": 120056,
+    "units": 15007,
+    "fobPrice": 8
   },
   {
     "group": "BOTTOM",
@@ -1663,7 +2215,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS PANTS",
     "productType": "JOGGER",
     "styleNo": "LM5C30S",
-    "styleName": "Heatwave Ease The Day Jogger"
+    "styleName": "Heatwave Ease The Day Jogger",
+    "salesRevenue": 118925,
+    "units": 6700,
+    "fobPrice": 17.75
   },
   {
     "group": "TOP",
@@ -1672,7 +2227,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HSLS",
-    "styleName": "Heatwave Ease The Day Hoodie - Solid"
+    "styleName": "Heatwave Ease The Day Hoodie - Solid",
+    "salesRevenue": 87514,
+    "units": 6251,
+    "fobPrice": 14
   },
   {
     "group": "TOP",
@@ -1681,7 +2239,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MPLS",
-    "styleName": "Lounge The Classic Tee 5 Year"
+    "styleName": "Lounge The Classic Tee 5 Year",
+    "salesRevenue": 77208,
+    "units": 9651,
+    "fobPrice": 8
   },
   {
     "group": "TOP",
@@ -1690,7 +2251,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS 2ND LAYER",
     "productType": "PULLOVER",
     "styleNo": "LM3HPNS",
-    "styleName": "Heatwave Ease The Day Half Zip"
+    "styleName": "Heatwave Ease The Day Half Zip",
+    "salesRevenue": 118174,
+    "units": 7162,
+    "fobPrice": 16.50013962580285
   },
   {
     "group": "TOP",
@@ -1699,7 +2263,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MQ6S",
-    "styleName": "Lounge Forever Favourite Tee 5 Year US Open"
+    "styleName": "Lounge Forever Favourite Tee 5 Year US Open",
+    "salesRevenue": 58040,
+    "units": 7255,
+    "fobPrice": 8
   },
   {
     "group": "TOP",
@@ -1708,7 +2275,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3MPOS",
-    "styleName": "Lounge The Classic Long Sleeve 5 Year"
+    "styleName": "Lounge The Classic Long Sleeve 5 Year",
+    "salesRevenue": 45237,
+    "units": 5322,
+    "fobPrice": 8.5
   },
   {
     "group": "BOTTOM",
@@ -1717,7 +2287,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "MENS PANTS",
     "productType": "SHORT",
     "styleNo": "LM7CE5S",
-    "styleName": "Heatwave Ease The Day Short"
+    "styleName": "Heatwave Ease The Day Short",
+    "salesRevenue": 33737,
+    "units": 2142,
+    "fobPrice": 15.750233426704016
   },
   {
     "group": "TOP",
@@ -1726,7 +2299,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3NAAS",
-    "styleName": "RUN MESH PIQUE SS"
+    "styleName": "RUN MESH PIQUE SS",
+    "salesRevenue": 33495,
+    "units": 4466,
+    "fobPrice": 7.5
   },
   {
     "group": "TOP",
@@ -1735,7 +2311,10 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
     "styleNo": "LW1HHBS",
-    "styleName": "RUN MESH PIQUE TANK"
+    "styleName": "RUN MESH PIQUE TANK",
+    "salesRevenue": 25506,
+    "units": 3924,
+    "fobPrice": 6.5
   },
   {
     "group": "BOTTOM",
@@ -1744,6 +2323,9 @@ export const NYG_MY_MAP_ROWS = [
     "productGroup": "WOMENS SHORTS",
     "productType": "SHORT",
     "styleNo": "LW7DHHS",
-    "styleName": "Pace Rival High Rise Short 3 inch"
+    "styleName": "Pace Rival High Rise Short 3 inch",
+    "salesRevenue": 7172,
+    "units": 683,
+    "fobPrice": 10.500732064421669
   }
 ];

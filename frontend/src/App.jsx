@@ -2050,8 +2050,7 @@ const NYG_MAP_LEVELS = [
   { key: "productCategory", label: "Product Category" },
   { key: "productGroup", label: "Product Group" },
   { key: "productType", label: "Product Type" },
-  { key: "styleNo", label: "Style No." },
-  { key: "styleName", label: "Style Name" },
+  { key: "styleNo", label: "Style" },
 ];
 
 const NYG_MAP_PRODUCT_TYPES = {
@@ -2072,6 +2071,14 @@ function uniqueMapValues(rows, key) {
   return [...new Set(rows.map((row) => row[key]))];
 }
 
+function formatNygMapUnits(value) {
+  return formatComparisonValue(value, "units").replace(" units", " pcs");
+}
+
+function formatNygMapFob(value) {
+  return `FOB $${value.toFixed(2)}`;
+}
+
 function NygMyMap({ subtypeKey }) {
   const [selectedPath, setSelectedPath] = useState([]);
   const mapCanvasRef = useRef(null);
@@ -2081,7 +2088,9 @@ function NygMyMap({ subtypeKey }) {
     : NYG_MY_MAP_ROWS;
   const visibleLevelCount = Math.min(selectedPath.length + 1, NYG_MAP_LEVELS.length);
   const uniqueStyleNumbers = new Set(mapRows.map((row) => row.styleNo)).size;
-  const uniqueStyleNames = new Set(mapRows.map((row) => row.styleName)).size;
+  const totalSales = mapRows.reduce((sum, row) => sum + row.salesRevenue, 0);
+  const totalUnits = mapRows.reduce((sum, row) => sum + row.units, 0);
+  const averageFob = totalUnits > 0 ? totalSales / totalUnits : 0;
 
   const rowsAtLevel = (levelIndex) => mapRows.filter((row) =>
     selectedPath.slice(0, levelIndex).every(
@@ -2123,9 +2132,10 @@ function NygMyMap({ subtypeKey }) {
           </p>
         </div>
         <div className="nyg-map-summary-metrics">
-          <div><strong>{uniqueStyleNumbers}</strong><span>Style numbers</span></div>
-          <div><strong>{uniqueStyleNames}</strong><span>Style names</span></div>
-          <div><strong>{mapRows.length}</strong><span>Unique paths</span></div>
+          <div><strong>{uniqueStyleNumbers}</strong><span>Styles</span></div>
+          <div><strong>{formatComparisonValue(totalSales, "sales")}</strong><span>Sales</span></div>
+          <div><strong>{formatNygMapUnits(totalUnits)}</strong><span>Units</span></div>
+          <div><strong>${averageFob.toFixed(2)}</strong><span>Average FOB</span></div>
         </div>
       </div>
 
@@ -2175,7 +2185,12 @@ function NygMyMap({ subtypeKey }) {
           <div className="nyg-map-columns">
             {NYG_MAP_LEVELS.slice(0, visibleLevelCount).map((level, levelIndex) => {
               const scopedRows = rowsAtLevel(levelIndex);
-              const values = uniqueMapValues(scopedRows, level.key);
+              const values = uniqueMapValues(scopedRows, level.key).sort((a, b) => {
+                const salesFor = (value) => scopedRows
+                  .filter((row) => row[level.key] === value)
+                  .reduce((sum, row) => sum + row.salesRevenue, 0);
+                return salesFor(b) - salesFor(a) || a.localeCompare(b);
+              });
               const nextLevel = NYG_MAP_LEVELS[levelIndex + 1];
               return (
                 <section className="nyg-map-column" key={level.key}>
@@ -2188,23 +2203,31 @@ function NygMyMap({ subtypeKey }) {
                     {values.map((value) => {
                       const nodeRows = scopedRows.filter((row) => row[level.key] === value);
                       const styleCount = new Set(nodeRows.map((row) => row.styleNo)).size;
+                      const nodeSales = nodeRows.reduce((sum, row) => sum + row.salesRevenue, 0);
+                      const nodeUnits = nodeRows.reduce((sum, row) => sum + row.units, 0);
+                      const nodeFob = nodeUnits > 0 ? nodeSales / nodeUnits : 0;
                       const childCount = nextLevel
                         ? new Set(nodeRows.map((row) => row[nextLevel.key])).size
                         : 0;
                       const isSelected = selectedPath[levelIndex] === value;
+                      const isStyle = level.key === "styleNo";
                       return (
                         <button
-                          className={isSelected ? "selected" : undefined}
+                          className={`${isSelected ? "selected" : ""} ${isStyle ? "style-node" : ""}`.trim() || undefined}
                           type="button"
                           key={value}
                           aria-pressed={isSelected}
                           onClick={() => handleNodeClick(levelIndex, value)}
                         >
-                          <span>{level.label}</span>
-                          <strong>{value}</strong>
-                          <small>
-                            {styleCount} {styleCount === 1 ? "style" : "styles"}
-                            {nextLevel && ` · ${childCount} ${nextLevel.label}`}
+                          <span>{isStyle ? value : level.label}</span>
+                          <strong>{isStyle ? nodeRows[0].styleName : value}</strong>
+                          <small className="nyg-map-node-metrics">
+                            {!isStyle && (
+                              <b>{styleCount} {styleCount === 1 ? "style" : "styles"}</b>
+                            )}
+                            <b>{formatComparisonValue(nodeSales, "sales")}</b>
+                            <b>{formatNygMapUnits(nodeUnits)}</b>
+                            {isStyle && <b>{formatNygMapFob(nodeFob)}</b>}
                           </small>
                           {nextLevel && <i aria-hidden="true">{isSelected ? "−" : "+"}</i>}
                         </button>
@@ -2220,7 +2243,7 @@ function NygMyMap({ subtypeKey }) {
         {selectedPath.length === NYG_MAP_LEVELS.length && (
           <div className="nyg-map-selection">
             <span>Selected NYG style</span>
-            <strong>{selectedPath[6]}</strong>
+            <strong>{rowsAtLevel(NYG_MAP_LEVELS.length)[0]?.styleName}</strong>
             <small>{selectedPath[5]} · {selectedPath.slice(0, 5).join(" / ")}</small>
           </div>
         )}
@@ -2228,7 +2251,8 @@ function NygMyMap({ subtypeKey }) {
         <p className="lululemon-source-note nyg-map-source">
           Source: Lululemon Wallet Size &amp; Share (3).xlsx, NYG sheet. This map uses only
           Group, Business Segment, Product Category, Product Group, Product Type,
-          Style No., and Style Name. Duplicate paths across other source rows are consolidated.
+          Style No., Style Name, sales revenue, units, and FOB. Duplicate style paths across
+          seasons are consolidated and their sales and units are summed.
         </p>
     </section>
   );

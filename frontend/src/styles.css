@@ -6284,7 +6284,7 @@ footer a {
 
 .nyg-map-summary-metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(90px, 1fr));
+  grid-template-columns: repeat(4, minmax(86px, 1fr));
   gap: 7px;
 }
 
@@ -6563,6 +6563,37 @@ footer a {
   color: #7c7476;
   font-size: 8px;
   line-height: 1.35;
+}
+
+.nyg-map-node-metrics {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px 9px;
+}
+
+.nyg-map-node-metrics b {
+  color: inherit;
+  font-size: 8px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.nyg-map-nodes button.style-node {
+  min-height: 92px;
+  padding-right: 11px;
+  border-left-color: var(--lululemon-red);
+}
+
+.nyg-map-nodes button.style-node > span {
+  color: #6f6470;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.nyg-map-nodes button.style-node > strong {
+  font-size: 12px;
 }
 
 .nyg-map-nodes button.selected > span,
@@ -6933,7 +6964,7 @@ footer a {
 }
 
 @media (max-width: 700px) {
-  .nyg-map-summary-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .nyg-map-summary-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nyg-map-summary-metrics > div { min-width: 0; }
   .nyg-map-hero { padding: 24px 20px; }
   .nyg-map-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
