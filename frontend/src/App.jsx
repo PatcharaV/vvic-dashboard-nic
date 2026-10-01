@@ -35,6 +35,7 @@ import {
   LULULEMON_NYG_COMPARISON,
   LULULEMON_SALES_MIX,
 } from "./lululemonWorkbookData";
+import { NYG_MY_MAP_ROWS } from "./nygMyMapData";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -69,6 +70,7 @@ const BRAND_WORKSPACE_PAGES = [
 
 const LULULEMON_WORKSPACE_PAGES = [
   { value: "overview", label: "Brand Overview" },
+  { value: "nyg-map", label: "NYG My Map" },
   { value: "forecast", label: "Season Forecast" },
   { value: "product", label: "Product Dashboard" },
 ];
@@ -2027,6 +2029,177 @@ function DashboardAiAssistant({ context }) {
   );
 }
 
+const NYG_MAP_LEVELS = [
+  { key: "group", label: "Group" },
+  { key: "businessSegment", label: "Business Segment" },
+  { key: "productCategory", label: "Product Category" },
+  { key: "productGroup", label: "Product Group" },
+  { key: "productType", label: "Product Type" },
+  { key: "styleNo", label: "Style No." },
+  { key: "styleName", label: "Style Name" },
+];
+
+function uniqueMapValues(rows, key) {
+  return [...new Set(rows.map((row) => row[key]))];
+}
+
+function NygMyMap() {
+  const [selectedPath, setSelectedPath] = useState([]);
+  const mapCanvasRef = useRef(null);
+  const visibleLevelCount = Math.min(selectedPath.length + 1, NYG_MAP_LEVELS.length);
+  const uniqueStyleNumbers = new Set(NYG_MY_MAP_ROWS.map((row) => row.styleNo)).size;
+  const uniqueStyleNames = new Set(NYG_MY_MAP_ROWS.map((row) => row.styleName)).size;
+
+  const rowsAtLevel = (levelIndex) => NYG_MY_MAP_ROWS.filter((row) =>
+    selectedPath.slice(0, levelIndex).every(
+      (value, pathIndex) => row[NYG_MAP_LEVELS[pathIndex].key] === value,
+    ),
+  );
+
+  const handleNodeClick = (levelIndex, value) => {
+    setSelectedPath((current) => (
+      current[levelIndex] === value
+        ? current.slice(0, levelIndex)
+        : [...current.slice(0, levelIndex), value]
+    ));
+  };
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      mapCanvasRef.current?.scrollTo({
+        left: mapCanvasRef.current.scrollWidth,
+        behavior: "smooth",
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [selectedPath]);
+
+  return (
+    <section className="nyg-map-page">
+      <article className="nyg-map-hero">
+        <div>
+          <p className="eyebrow">NYG PRODUCT ARCHITECTURE · LULULEMON</p>
+          <h2>NYG My Map</h2>
+          <p>
+            Explore the NYG hierarchy one level at a time. Select a card to reveal
+            its child nodes, from Group through Style Name.
+          </p>
+        </div>
+        <div className="nyg-map-metrics">
+          <div><strong>{uniqueStyleNumbers}</strong><span>Style numbers</span></div>
+          <div><strong>{uniqueStyleNames}</strong><span>Style names</span></div>
+          <div><strong>{NYG_MY_MAP_ROWS.length}</strong><span>Unique paths</span></div>
+          <div><strong>{NYG_MAP_LEVELS.length}</strong><span>Map levels</span></div>
+        </div>
+      </article>
+
+      <article className="nyg-map-workspace">
+        <div className="nyg-map-toolbar">
+          <div>
+            <span>Navigation path</span>
+            <div className="nyg-map-breadcrumbs">
+              <button type="button" onClick={() => setSelectedPath([])}>All NYG</button>
+              {selectedPath.map((value, index) => (
+                <button
+                  type="button"
+                  key={`${NYG_MAP_LEVELS[index].key}-${value}`}
+                  onClick={() => setSelectedPath((current) => current.slice(0, index + 1))}
+                >
+                  <small>{NYG_MAP_LEVELS[index].label}</small>
+                  {value}
+                </button>
+              ))}
+            </div>
+          </div>
+          <button
+            className="nyg-map-reset"
+            type="button"
+            disabled={selectedPath.length === 0}
+            onClick={() => setSelectedPath([])}
+          >
+            Collapse all
+          </button>
+        </div>
+
+        <div className="nyg-map-progress" aria-label="Map hierarchy">
+          {NYG_MAP_LEVELS.map((level, index) => (
+            <span
+              className={`${index < selectedPath.length ? "complete" : ""} ${index === selectedPath.length ? "current" : ""}`}
+              key={level.key}
+            >
+              <b>{index + 1}</b>{level.label}
+            </span>
+          ))}
+        </div>
+
+        <p className="nyg-map-guidance">
+          Click a card to open the next level. Click the selected card again to fold the map back.
+        </p>
+
+        <div className="nyg-map-canvas" ref={mapCanvasRef} tabIndex="0">
+          <div className="nyg-map-columns">
+            {NYG_MAP_LEVELS.slice(0, visibleLevelCount).map((level, levelIndex) => {
+              const scopedRows = rowsAtLevel(levelIndex);
+              const values = uniqueMapValues(scopedRows, level.key);
+              const nextLevel = NYG_MAP_LEVELS[levelIndex + 1];
+              return (
+                <section className="nyg-map-column" key={level.key}>
+                  <div className="nyg-map-column-heading">
+                    <span>Level {levelIndex + 1}</span>
+                    <strong>{level.label}</strong>
+                    <small>{values.length} {values.length === 1 ? "option" : "options"}</small>
+                  </div>
+                  <div className="nyg-map-nodes">
+                    {values.map((value) => {
+                      const nodeRows = scopedRows.filter((row) => row[level.key] === value);
+                      const styleCount = new Set(nodeRows.map((row) => row.styleNo)).size;
+                      const childCount = nextLevel
+                        ? new Set(nodeRows.map((row) => row[nextLevel.key])).size
+                        : 0;
+                      const isSelected = selectedPath[levelIndex] === value;
+                      return (
+                        <button
+                          className={isSelected ? "selected" : undefined}
+                          type="button"
+                          key={value}
+                          aria-pressed={isSelected}
+                          onClick={() => handleNodeClick(levelIndex, value)}
+                        >
+                          <span>{level.label}</span>
+                          <strong>{value}</strong>
+                          <small>
+                            {styleCount} {styleCount === 1 ? "style" : "styles"}
+                            {nextLevel && ` · ${childCount} ${nextLevel.label}`}
+                          </small>
+                          {nextLevel && <i aria-hidden="true">{isSelected ? "−" : "+"}</i>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        </div>
+
+        {selectedPath.length === NYG_MAP_LEVELS.length && (
+          <div className="nyg-map-selection">
+            <span>Selected NYG style</span>
+            <strong>{selectedPath[6]}</strong>
+            <small>{selectedPath[5]} · {selectedPath.slice(0, 5).join(" / ")}</small>
+          </div>
+        )}
+
+        <p className="lululemon-source-note nyg-map-source">
+          Source: Lululemon Wallet Size &amp; Share (2).xlsx, NYG sheet. This map uses only
+          Group, Business Segment, Product Category, Product Group, Product Type,
+          Style No., and Style Name. Duplicate paths across other source rows are consolidated.
+        </p>
+      </article>
+    </section>
+  );
+}
+
 function LululemonSeasonForecast() {
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
@@ -3880,6 +4053,8 @@ function App() {
 
       {isLululemonWorkspace && brandWorkspacePage === "overview" ? (
         <LululemonBrandOverview />
+      ) : isLululemonWorkspace && brandWorkspacePage === "nyg-map" ? (
+        <NygMyMap />
       ) : isLululemonWorkspace && brandWorkspacePage === "forecast" ? (
         <LululemonSeasonForecast />
       ) : isProfileWorkspace && brandWorkspacePage === "profile" ? (
