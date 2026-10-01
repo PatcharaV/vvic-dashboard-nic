@@ -70,7 +70,6 @@ const BRAND_WORKSPACE_PAGES = [
 
 const LULULEMON_WORKSPACE_PAGES = [
   { value: "overview", label: "Brand Overview" },
-  { value: "nyg-map", label: "NYG My Map" },
   { value: "forecast", label: "Season Forecast" },
   { value: "product", label: "Product Dashboard" },
 ];
@@ -1198,6 +1197,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           {[
             { key: "nyg", label: "NYG" },
             { key: "nyk", label: "NYK" },
+            { key: "map", label: "MY MAP" },
           ].map((option) => (
             <button
               className={partnerView === option.key ? "active" : undefined}
@@ -1234,6 +1234,21 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       </label>
     </div>
   );
+
+  if (partnerView === "map") {
+    return (
+      <article className="lululemon-overview-card lululemon-style-card">
+        <div className="lululemon-style-card-heading">
+          <div>
+            <h3>{subtypeLabel} NYG My Map</h3>
+            <p>Explore the NYG product hierarchy from Group through Style Name.</p>
+          </div>
+          {subtypeControls}
+        </div>
+        <NygMyMap subtypeKey={subtypeKey} />
+      </article>
+    );
+  }
 
   if (subtypeKey === "overall" || !coverage) {
     return (
@@ -2039,18 +2054,36 @@ const NYG_MAP_LEVELS = [
   { key: "styleName", label: "Style Name" },
 ];
 
+const NYG_MAP_PRODUCT_TYPES = {
+  jacket: "JACKET",
+  short: "SHORT",
+  pullover: "PULLOVER",
+  tee: "TEE",
+  "tank-top": "TANK TOP",
+  "boxer-brief": "BOXER BRIEF",
+  polo: "POLO",
+  skirt: "SKIRT",
+  pant: "PANT",
+  jogger: "JOGGER",
+  "button-down": "SHIRT BUTTON DOWN",
+};
+
 function uniqueMapValues(rows, key) {
   return [...new Set(rows.map((row) => row[key]))];
 }
 
-function NygMyMap() {
+function NygMyMap({ subtypeKey }) {
   const [selectedPath, setSelectedPath] = useState([]);
   const mapCanvasRef = useRef(null);
+  const selectedProductType = NYG_MAP_PRODUCT_TYPES[subtypeKey];
+  const mapRows = selectedProductType
+    ? NYG_MY_MAP_ROWS.filter((row) => row.productType === selectedProductType)
+    : NYG_MY_MAP_ROWS;
   const visibleLevelCount = Math.min(selectedPath.length + 1, NYG_MAP_LEVELS.length);
-  const uniqueStyleNumbers = new Set(NYG_MY_MAP_ROWS.map((row) => row.styleNo)).size;
-  const uniqueStyleNames = new Set(NYG_MY_MAP_ROWS.map((row) => row.styleName)).size;
+  const uniqueStyleNumbers = new Set(mapRows.map((row) => row.styleNo)).size;
+  const uniqueStyleNames = new Set(mapRows.map((row) => row.styleName)).size;
 
-  const rowsAtLevel = (levelIndex) => NYG_MY_MAP_ROWS.filter((row) =>
+  const rowsAtLevel = (levelIndex) => mapRows.filter((row) =>
     selectedPath.slice(0, levelIndex).every(
       (value, pathIndex) => row[NYG_MAP_LEVELS[pathIndex].key] === value,
     ),
@@ -2074,26 +2107,28 @@ function NygMyMap() {
     return () => window.cancelAnimationFrame(frame);
   }, [selectedPath]);
 
+  useEffect(() => {
+    setSelectedPath([]);
+  }, [subtypeKey]);
+
   return (
-    <section className="nyg-map-page">
-      <article className="nyg-map-hero">
+    <section className="nyg-map-workspace embedded">
+      <div className="nyg-map-summary">
         <div>
-          <p className="eyebrow">NYG PRODUCT ARCHITECTURE · LULULEMON</p>
-          <h2>NYG My Map</h2>
+          <span>NYG product architecture</span>
+          <strong>{selectedProductType || "All product types"}</strong>
           <p>
-            Explore the NYG hierarchy one level at a time. Select a card to reveal
-            its child nodes, from Group through Style Name.
+            Select a card to reveal the next level. The Sub-type control above filters
+            this map and remains synchronized with the other partner views.
           </p>
         </div>
-        <div className="nyg-map-metrics">
+        <div className="nyg-map-summary-metrics">
           <div><strong>{uniqueStyleNumbers}</strong><span>Style numbers</span></div>
           <div><strong>{uniqueStyleNames}</strong><span>Style names</span></div>
-          <div><strong>{NYG_MY_MAP_ROWS.length}</strong><span>Unique paths</span></div>
-          <div><strong>{NYG_MAP_LEVELS.length}</strong><span>Map levels</span></div>
+          <div><strong>{mapRows.length}</strong><span>Unique paths</span></div>
         </div>
-      </article>
+      </div>
 
-      <article className="nyg-map-workspace">
         <div className="nyg-map-toolbar">
           <div>
             <span>Navigation path</span>
@@ -2191,11 +2226,10 @@ function NygMyMap() {
         )}
 
         <p className="lululemon-source-note nyg-map-source">
-          Source: Lululemon Wallet Size &amp; Share (2).xlsx, NYG sheet. This map uses only
+          Source: Lululemon Wallet Size &amp; Share (3).xlsx, NYG sheet. This map uses only
           Group, Business Segment, Product Category, Product Group, Product Type,
           Style No., and Style Name. Duplicate paths across other source rows are consolidated.
         </p>
-      </article>
     </section>
   );
 }
@@ -4053,8 +4087,6 @@ function App() {
 
       {isLululemonWorkspace && brandWorkspacePage === "overview" ? (
         <LululemonBrandOverview />
-      ) : isLululemonWorkspace && brandWorkspacePage === "nyg-map" ? (
-        <NygMyMap />
       ) : isLululemonWorkspace && brandWorkspacePage === "forecast" ? (
         <LululemonSeasonForecast />
       ) : isProfileWorkspace && brandWorkspacePage === "profile" ? (

@@ -1,4 +1,4 @@
-// Generated from Lululemon Wallet Size & Share (2).xlsx, NYG sheet. Do not edit manually.
+// Generated from Lululemon Wallet Size & Share (3).xlsx, NYG sheet. Do not edit manually.
 export const NYG_MY_MAP_ROWS = [
   {
     "group": "TOP",
@@ -982,661 +982,292 @@ export const NYG_MY_MAP_ROWS = [
     "styleName": "TCA W LLT Classic Fit Tank"
   },
   {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
-    "styleNo": "LW4CD5S",
-    "styleName": "Define Jacket Nulu EC 2023"
-  },
-  {
-    "group": "DRYSENSE",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M SWEAT",
-    "productType": "CREW",
-    "styleNo": "LM3EJUS",
-    "styleName": "DrySense Short Sleeve Lift - SOLID"
-  },
-  {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
-    "styleNo": "LW4CFOS",
-    "styleName": "Define Jacket Nulu 2023 BR EC"
-  },
-  {
-    "group": "AT EASE",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "HOODED",
-    "styleNo": "LM3GF3S",
-    "styleName": "Ease The Day Hoodie"
-  },
-  {
-    "group": "CASUAL",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M NO SWEAT",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "CASUAL",
+    "productGroup": "MENS SS-LS TOPS",
+    "productType": "PULLOVER",
     "styleNo": "LM3HF7S",
     "styleName": "FT Textured Waffle LS Crew in LY Fabric"
   },
   {
-    "group": "LICENSE TO TRAIN",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "HOODED",
-    "styleNo": "LM3EJSS",
-    "styleName": "License to Train Hoodie - SOLID"
-  },
-  {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
-    "styleNo": "LW3KJOS",
-    "styleName": "DEFINE JACKET *NULU™"
-  },
-  {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
-    "styleNo": "LW4CAFS",
-    "styleName": "Define Jacket Nulu"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W SWEAT",
-    "productType": "1/2 ZIP",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LW3KZDS",
     "styleName": "WI26 Run It's Rulu 1/2 Zip Cropped MDot Ref"
   },
   {
-    "group": "CASUAL",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M NO SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "CASUAL",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3HFOS",
     "styleName": "COTTON BLEND WAFFLE KNIT HOODIE"
   },
   {
-    "group": "PACE BREAKER",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SHORTS",
-    "productGroup": "M SWEAT",
-    "productType": "2 POCKET",
-    "styleNo": "LM7B24S",
-    "styleName": "Q123 PACE BREAKER 7 LINED"
-  },
-  {
-    "group": "AIM",
-    "businessSegment": "MEN",
-    "productCategory": "MENS UNDERWEAR",
-    "productGroup": "OTC",
-    "productType": "4\" | IN",
-    "styleNo": "LM9AYFS",
-    "styleName": "AIM BOXER 3 MICRO MODAL- 5 PACK"
-  },
-  {
-    "group": "AIM",
-    "businessSegment": "MEN",
-    "productCategory": "MENS UNDERWEAR",
-    "productGroup": "OTC",
-    "productType": "4\" | IN",
-    "styleNo": "LM9AY8S",
-    "styleName": "AIM BOXER 3 MICRO MODAL- 3 PACK"
-  },
-  {
-    "group": "CASUAL",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M NO SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "CASUAL",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3HKYS",
     "styleName": "FT Waffle-Knit Pullover Hoodie"
   },
   {
-    "group": "LOUNGE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LW3KQQS",
     "styleName": "Lounge BeCalm Relaxed Pullover Crew"
   },
   {
-    "group": "LOUNGE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LW3KQPS",
     "styleName": "Lounge BeCalm Relaxed Pullover Hoodie"
   },
   {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "F&F",
-    "productType": "1/2 ZIP - MOCK NECK",
+    "group": "TOP",
+    "businessSegment": "F&F",
+    "productCategory": "RULU",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3HELS",
     "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
-    "styleNo": "LW3IJES",
-    "styleName": "IT'S RULU CROPPED HALF ZIP"
-  },
-  {
-    "group": "SCULPT",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS TANKS",
-    "productGroup": "FAST TURN",
-    "productType": "DROP NECK",
-    "styleNo": "LW1FM4S",
-    "styleName": "Sculpt Tank FT"
-  },
-  {
-    "group": "CASUAL",
-    "businessSegment": "MEN",
-    "productCategory": "ACTIVE",
-    "productGroup": "M NO SWEAT",
-    "productType": "5 POCKET",
+    "group": "BOTTOM",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "CASUAL",
+    "productGroup": "ACTIVE",
+    "productType": "JOGGER",
     "styleNo": "LM5BMTS",
     "styleName": "Ease The Day Jogger Regular"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3HYBS",
-    "styleName": "It's Rulu Run Long Sleeve Mindful Lift"
-  },
-  {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
-    "styleNo": "LW3ID8S",
-    "styleName": "DEFINE JACKET *NULU™"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
-    "styleNo": "LW3HYAS",
-    "styleName": "It's Rulu Run Cropped 1/2 Zip Mindful Lift"
-  },
-  {
-    "group": "CASUAL",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M NO SWEAT",
-    "productType": "HENLEY PLACKET",
+    "group": "TOP",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "CASUAL",
+    "productGroup": "MENS SS-LS TOPS",
+    "productType": "PULLOVER",
     "styleNo": "LM3HLJS",
     "styleName": "FT Textured Waffle LS Henley Tee"
   },
   {
-    "group": "LOVE-LONG",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W NO SWEAT",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOVE-LONG",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
     "styleNo": "LW3LP9S",
     "styleName": "Love Long-Sleeve Shirt BeCalm V2"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LW3KP3S",
     "styleName": "Run It's Rulu 1/2 Zip Crop Waffle Texture"
   },
   {
-    "group": "AIM",
-    "businessSegment": "MEN",
-    "productCategory": "MENS UNDERWEAR",
-    "productGroup": "OTC",
-    "productType": "4\" | IN",
-    "styleNo": "LM9AZOS",
-    "styleName": "AIM Boxer 7 Micro Modal - 3 Pack"
-  },
-  {
-    "group": "PACE BREAKER",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SHORTS",
-    "productGroup": "F&F",
-    "productType": "NO POCKET",
-    "styleNo": "LM7BCBS",
-    "styleName": "Pace Breaker Short 7 Lined - Solid"
-  },
-  {
-    "group": "LOVE-LONG",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W NO SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3GEHS",
-    "styleName": "Love Modal Fleece Long Sleeve"
-  },
-  {
-    "group": "PACE BREAKER",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SHORTS",
-    "productGroup": "M SWEAT",
-    "productType": "NO POCKET",
-    "styleNo": "LM7B83S",
-    "styleName": "Pace Breaker Shorts"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "CREW",
-    "styleNo": "LM3FTVS",
-    "styleName": "Brushed Rulu LS Crew"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
-    "styleNo": "LM3FTWS",
-    "styleName": "Brushed Rulu 1_2 Zip LS"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "PULLOVER",
     "styleNo": "LW3KP6S",
     "styleName": "Run It's Rulu Hooded Reg LS Waffle Texture"
   },
   {
-    "group": "PACE BREAKER",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SHORTS",
-    "productGroup": "F&F",
-    "productType": "NO POCKET",
-    "styleNo": "LM7BC0S",
-    "styleName": "Pace Breaker Short 5 LINED"
-  },
-  {
-    "group": "PACE BREAKER",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SHORTS",
-    "productGroup": "F&F",
-    "productType": "2 POCKET",
-    "styleNo": "LM7B87S",
-    "styleName": "SP23 Pace Breaker Short 9 Lined - Solid"
-  },
-  {
-    "group": "AT EASE",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "1/2 ZIP - HOODED",
-    "styleNo": "LM3GF4S",
-    "styleName": "Ease The Day Half Zip"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "F&F",
-    "productType": "1/2 ZIP - MOCK NECK",
+    "group": "TOP",
+    "businessSegment": "F&F",
+    "productCategory": "RULU",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3HEMS",
     "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra"
   },
   {
-    "group": "AIM",
-    "businessSegment": "MEN",
-    "productCategory": "MENS UNDERWEAR",
-    "productGroup": "OTC",
-    "productType": "4\" | IN",
-    "styleNo": "LM9BA2S",
-    "styleName": "AIM Boxer 3 Micro Modal - 3 Pack"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "PULLOVER",
     "styleNo": "LW3KPXS",
     "styleName": "Run It's Rulu LS CLASSIC FIT Waffle Texture"
   },
   {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "F&F",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "F&F",
+    "productCategory": "RULU",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3HEJS",
     "styleName": "Rulu Fleece Crewneck Long Sleeve - Black Lycra"
   },
   {
-    "group": "PACE RIVAL",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SHORTS",
-    "productGroup": "W SWEAT",
-    "productType": "NO POCKET",
-    "styleNo": "LW8A79T",
-    "styleName": "Pace Rival Skirt TALL ES - EV"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "F&F",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "F&F",
+    "productCategory": "RULU",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3GR7S",
     "styleName": "Rulu Run Fleece Hoodie"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
     "styleNo": "LW3IM1S",
     "styleName": "Its Rulu Run Long Sleeve BR"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
-    "styleNo": "LW3JIAS",
-    "styleName": "It's Rulu Run Cropped 1/2 Zip Mindful Rulu"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
-    "styleNo": "LM3G99S",
-    "styleName": "Brushed Rulu 1_2 Zip LS_BRIGHT LYCRA"
-  },
-  {
-    "group": "EVOLUTION",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M NO SWEAT",
-    "productType": "SELF COLLAR",
-    "styleNo": "LM3EQIS",
-    "styleName": "EVOLUTION POLO LS - SOLID"
-  },
-  {
-    "group": "EVOLUTION",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M NO SWEAT",
-    "productType": "SELF COLLAR",
+    "group": "TOP",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "EVOLUTION",
+    "productGroup": "MENS SS-LS TOPS",
+    "productType": "POLO",
     "styleNo": "LM3H84S",
     "styleName": "ECO EVOLUTION SHORT-SLEEVE POLO"
   },
   {
-    "group": "CASUAL",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W NO SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3GO5S",
-    "styleName": "WI22 LS SLOT 92.2 *Heathered"
-  },
-  {
-    "group": "PACE BREAKER",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SHORTS",
-    "productGroup": "F&F",
-    "productType": "NO POCKET",
-    "styleNo": "LM7BCCS",
-    "styleName": "Pace Breaker Short 9 Lined - Solid"
-  },
-  {
-    "group": "TENNIS",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "DROP NECK",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "TENNIS",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
     "styleNo": "LW3KIAS",
     "styleName": "Tennis Blank Graphic Slot SS Relaxed Fit"
   },
   {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "F&F",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "F&F",
+    "productCategory": "RULU",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3HEKS",
     "styleName": "Rulu Fleece Crewneck Long Sleeve - Black Lycra"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "PULLOVER",
     "styleNo": "LW3KP5S",
     "styleName": "Run It's Rulu Hooded Reg LS"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "1/2 ZIP - HOODED",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "PULLOVER",
     "styleNo": "LW3KWUS",
     "styleName": "It's Rulu Hooded Half Zip"
   },
   {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "DEFINE",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "JACKET",
     "styleNo": "LW3LOPS",
     "styleName": "Define Jacket Nulu"
   },
   {
-    "group": "LICENSE TO TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3KGES",
-    "styleName": "LICENSE TO TRAIN DRYSENSE SS"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "M SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LM3HIBS",
     "styleName": "Rulu Run Fleece Hoodie - Bright Lycra"
   },
   {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "M SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LW3KZCS",
     "styleName": "WI26 Run It's Rulu LS Reg MDot Ref"
   },
   {
-    "group": "LICENSE TO TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3KGDS",
-    "styleName": "LICENSE TO TRAIN DRYSENSE LS"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M SWEAT",
-    "productType": "CREW",
-    "styleNo": "LM3GA0S",
-    "styleName": "Brushed Rulu LS Crew_BRIGHT LYCRA"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3KLWS",
-    "styleName": "RULU CLASSIC FIT LS CREW NECK"
-  },
-  {
-    "group": "CASUAL",
-    "businessSegment": "MEN",
-    "productCategory": "ACTIVE",
-    "productGroup": "M NO SWEAT",
-    "productType": "5 POCKET",
+    "group": "BOTTOM",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "CASUAL",
+    "productGroup": "ACTIVE",
+    "productType": "JOGGER",
     "styleNo": "LM5BMUS",
     "styleName": "Ease The Day Jogger Regular"
   },
   {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "DEFINE",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "JACKET",
     "styleNo": "LW3LOOS",
     "styleName": "Define Jacket Nulu"
   },
   {
-    "group": "CASUAL",
-    "businessSegment": "MEN",
-    "productCategory": "ACTIVE",
-    "productGroup": "M NO SWEAT",
-    "productType": "5 POCKET",
+    "group": "BOTTOM",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "CASUAL",
+    "productGroup": "ACTIVE",
+    "productType": "JOGGER",
     "styleNo": "LM5BMVS",
     "styleName": "Ease The Day Jogger Regular"
   },
   {
-    "group": "EVOLUTION",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M NO SWEAT",
-    "productType": "SELF COLLAR",
+    "group": "TOP",
+    "businessSegment": "M NO SWEAT",
+    "productCategory": "EVOLUTION",
+    "productGroup": "MENS SS-LS TOPS",
+    "productType": "POLO",
     "styleNo": "LM3H92S",
     "styleName": "ECO EVOLUTION SHORT-SLEEVE POLO"
   },
   {
-    "group": "LOUNGE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "HOODED",
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LW3KRWS",
     "styleName": "Lounge BeCalm Relaxed Pullover Hoodie HTHR"
   },
   {
-    "group": "LOUNGE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
     "styleNo": "LW3KRUS",
     "styleName": "Lounge BeCalm Relaxed Pullover Crew HTHR"
   },
   {
-    "group": "DEFINE",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "-FULL ZIP- MOCH NECK",
-    "styleNo": "LW3KYXS",
-    "styleName": "Define Jacket Nulu"
-  },
-  {
-    "group": "TENNIS",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "TENNIS",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
     "styleNo": "LW3JYBS",
     "styleName": "TENNIS BLANK GRAPHIC PACK LS RELAXED FIT"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
-    "styleNo": "LW3KBKS",
-    "styleName": "Rulu Classic Fit Half zip"
-  },
-  {
-    "group": "EVOLUTION",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M NO SWEAT",
-    "productType": "SELF COLLAR",
-    "styleNo": "LM3CY5S",
-    "styleName": "Evolution Polo Lift"
-  },
-  {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3KLVS",
-    "styleName": "RULU CLASSIC FIT LS CREW NECK"
-  },
-  {
-    "group": "SCULPT",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "FAST TURN",
-    "productType": "CREW",
-    "styleNo": "LW3JFUS",
-    "styleName": "Sculpt SS FT"
-  },
-  {
-    "group": "SCULPT",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS TANKS",
-    "productGroup": "W SWEAT",
-    "productType": "DROP NECK",
-    "styleNo": "LW1FYOS",
-    "styleName": "SCULPT GRAPHIC CROSS-VENT CROP TANK *SW"
   },
   {
     "group": "TOP",
@@ -1646,15 +1277,6 @@ export const NYG_MY_MAP_ROWS = [
     "productType": "TANK TOP",
     "styleNo": "LW1GPFS",
     "styleName": "Sculpt Tank Evolve"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "M NO SWEAT",
-    "productCategory": "CASUAL",
-    "productGroup": "MENS SS-LS TOPS",
-    "productType": "PULLOVER",
-    "styleNo": "LM3HF7S",
-    "styleName": "FT Textured Waffle LS Crew in LY Fabric"
   },
   {
     "group": "TOP",
@@ -1676,15 +1298,6 @@ export const NYG_MY_MAP_ROWS = [
   },
   {
     "group": "TOP",
-    "businessSegment": "M NO SWEAT",
-    "productCategory": "CASUAL",
-    "productGroup": "MENS 2ND LAYER",
-    "productType": "PULLOVER",
-    "styleNo": "LM3HFOS",
-    "styleName": "COTTON BLEND WAFFLE KNIT HOODIE"
-  },
-  {
-    "group": "TOP",
     "businessSegment": "W SWEAT",
     "productCategory": "TENNIS",
     "productGroup": "WOMENS TANKS",
@@ -1703,39 +1316,12 @@ export const NYG_MY_MAP_ROWS = [
   },
   {
     "group": "TOP",
-    "businessSegment": "W NO SWEAT",
-    "productCategory": "LOUNGE",
-    "productGroup": "WOMENS 2ND LAYER",
-    "productType": "PULLOVER",
-    "styleNo": "LW3KRUS",
-    "styleName": "Lounge BeCalm Relaxed Pullover Crew HTHR"
-  },
-  {
-    "group": "TOP",
     "businessSegment": "W SWEAT",
     "productCategory": "TENNIS",
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
     "styleNo": "LW3LNAS",
     "styleName": "Tennis AFB UVP Lightweight LS"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "W NO SWEAT",
-    "productCategory": "LOUNGE",
-    "productGroup": "WOMENS 2ND LAYER",
-    "productType": "PULLOVER",
-    "styleNo": "LW3KQQS",
-    "styleName": "Lounge BeCalm Relaxed Pullover Crew"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "M NO SWEAT",
-    "productCategory": "CASUAL",
-    "productGroup": "MENS SS-LS TOPS",
-    "productType": "PULLOVER",
-    "styleNo": "LM3HLJS",
-    "styleName": "FT Textured Waffle LS Henley Tee"
   },
   {
     "group": "TOP",
@@ -1772,24 +1358,6 @@ export const NYG_MY_MAP_ROWS = [
     "productType": "TEE",
     "styleNo": "LW3LM7S",
     "styleName": "Sculpt LS Evolve"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "W NO SWEAT",
-    "productCategory": "DEFINE",
-    "productGroup": "WOMENS 2ND LAYER",
-    "productType": "JACKET",
-    "styleNo": "LW3LOOS",
-    "styleName": "Define Jacket Nulu"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "F&F",
-    "productCategory": "RULU",
-    "productGroup": "MENS 2ND LAYER",
-    "productType": "PULLOVER",
-    "styleNo": "LM3HELS",
-    "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra"
   },
   {
     "group": "TOP",
@@ -1847,24 +1415,6 @@ export const NYG_MY_MAP_ROWS = [
   },
   {
     "group": "TOP",
-    "businessSegment": "M NO SWEAT",
-    "productCategory": "CASUAL",
-    "productGroup": "MENS 2ND LAYER",
-    "productType": "PULLOVER",
-    "styleNo": "LM3HKYS",
-    "styleName": "FT Waffle-Knit Pullover Hoodie"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "F&F",
-    "productCategory": "RULU",
-    "productGroup": "MENS 2ND LAYER",
-    "productType": "PULLOVER",
-    "styleNo": "LM3HEJS",
-    "styleName": "Rulu Fleece Crewneck Long Sleeve - Black Lycra"
-  },
-  {
-    "group": "TOP",
     "businessSegment": "W NO SWEAT",
     "productCategory": "LOUNGE",
     "productGroup": "WOMENS SS-LS TOPS",
@@ -1889,15 +1439,6 @@ export const NYG_MY_MAP_ROWS = [
     "productType": "TEE",
     "styleNo": "LW3LX7S",
     "styleName": "LOUNGE NATURAL COOL AFB SS"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "F&F",
-    "productCategory": "RULU",
-    "productGroup": "MENS 2ND LAYER",
-    "productType": "PULLOVER",
-    "styleNo": "LM3HEMS",
-    "styleName": "Rulu Fleece Half-Zip Long Sleeve - Black Lycra"
   },
   {
     "group": "TOP",
@@ -1929,15 +1470,6 @@ export const NYG_MY_MAP_ROWS = [
   {
     "group": "TOP",
     "businessSegment": "W NO SWEAT",
-    "productCategory": "DEFINE",
-    "productGroup": "WOMENS 2ND LAYER",
-    "productType": "JACKET",
-    "styleNo": "LW3LOPS",
-    "styleName": "Define Jacket Nulu"
-  },
-  {
-    "group": "TOP",
-    "businessSegment": "W NO SWEAT",
     "productCategory": "TENNIS",
     "productGroup": "WOMENS TANKS",
     "productType": "TANK TOP",
@@ -1955,119 +1487,263 @@ export const NYG_MY_MAP_ROWS = [
   },
   {
     "group": "TOP",
-    "businessSegment": "W SWEAT",
-    "productCategory": "RULU",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
+    "styleNo": "LM3HPKS",
+    "styleName": "Heatwave Ease The Day Hoodie"
+  },
+  {
+    "group": "BOTTOM",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS PANTS",
+    "productType": "JOGGER",
+    "styleNo": "LM5C00S",
+    "styleName": "Heatwave Ease The Day Jogger"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
     "productGroup": "WOMENS SS-LS TOPS",
     "productType": "TEE",
-    "styleNo": "LW3IM1S",
-    "styleName": "Its Rulu Run Long Sleeve BR"
+    "styleNo": "LW3MPRS",
+    "styleName": "Lounge The Classic Tee V Neck 5 Year"
   },
   {
-    "group": "TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3HM3S",
-    "styleName": "SU24 TENNIS CORE RELAXED LS UVP SLOT 8"
+    "group": "TOP",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LM3HXZS",
+    "styleName": "Natural High CWR Texture Dbl Knit LS Crew"
   },
   {
-    "group": "LICENSE TO TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3IH2S",
-    "styleName": "LICENSE TO TRAIN CLASSIC FIT TEE"
+    "group": "BOTTOM",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS PANTS",
+    "productType": "SHORT",
+    "styleNo": "LM7CD4S",
+    "styleName": "Heatwave Ease The Day Short"
   },
   {
-    "group": "RULU",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS 2ND LAYER",
-    "productGroup": "W NO SWEAT",
-    "productType": "1/2 ZIP - MOCK NECK",
-    "styleNo": "LW3JR2S",
-    "styleName": "It's Rulu 1/2 Zip Texture"
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MQ7S",
+    "styleName": "Lounge Little Tee LS Waist Length 5 Year Rib"
   },
   {
-    "group": "TRAIN",
-    "businessSegment": "MEN",
-    "productCategory": "MENS PANTS",
-    "productGroup": "M SWEAT",
-    "productType": "2 POCKET",
-    "styleNo": "LM5B97T",
-    "styleName": "HONEYCOMB JOGGER TALL"
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MSGS",
+    "styleName": "Lounge Little Tee 5 year Long Sleeve"
   },
   {
-    "group": "RULU",
-    "businessSegment": "MEN",
-    "productCategory": "MENS PANTS",
-    "productGroup": "M SWEAT",
-    "productType": "2 POCKET",
-    "styleNo": "LM5BIBS",
-    "styleName": "Rulu Fleece Brushed Back Pant Slim Tapered"
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MPWS",
+    "styleName": "Lounge Forever Favourite Long Sleeve 5 Year"
   },
   {
-    "group": "TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3IXES",
-    "styleName": "TCA W Ultralight Waist Length SS"
+    "group": "TOP",
+    "businessSegment": "OTC",
+    "productCategory": "NATURAL HIGH",
+    "productGroup": "MENS SS-LS TOPS",
+    "productType": "PULLOVER",
+    "styleNo": "LM3HXYS",
+    "styleName": "Natural High CWR Texture Dbl Knit Pullover Hoodie"
   },
   {
-    "group": "LICENSE TO TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS TANKS",
-    "productGroup": "W SWEAT",
-    "productType": "DROP NECK",
-    "styleNo": "LW1FICS",
-    "styleName": "TCA W License to Train Drysense Classic Fit Tank"
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MQWS",
+    "styleName": "Lounge Colour Block OS V Neck Long Sleeve"
   },
   {
-    "group": "TRAIN",
-    "businessSegment": "MEN",
-    "productCategory": "MENS SS-LS TOPS",
-    "productGroup": "M SWEAT",
-    "productType": "CREW",
-    "styleNo": "LM3F94S",
-    "styleName": "Fa24 All Activity LS"
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MPTS",
+    "styleName": "Lounge Forever Favourite Tee 5 Year"
   },
   {
-    "group": "GOLF",
-    "businessSegment": "MEN",
-    "productCategory": "MENS 2ND LAYER",
-    "productGroup": "M NO SWEAT",
-    "productType": "1/4 ZIP- MOCK NECK",
-    "styleNo": "LM3FTIS",
-    "styleName": "Golf 1_4 Zip Mock Neck"
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
+    "styleNo": "LW3MO1S",
+    "styleName": "RUN READY TO RULU SE HALF-ZIP TEXTURE"
   },
   {
-    "group": "TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS SS-LS TOPS",
-    "productGroup": "W SWEAT",
-    "productType": "CREW",
-    "styleNo": "LW3IY5S",
-    "styleName": "TCPA W Ultralight Waist Length SS"
+    "group": "BOTTOM",
+    "businessSegment": "W SWEAT",
+    "productCategory": "PACE RIVAL",
+    "productGroup": "WOMENS SHORTS",
+    "productType": "SKIRT",
+    "styleNo": "LW8B00T",
+    "styleName": "Golf Core Pace Rival Skirt Long"
   },
   {
-    "group": "LICENSE TO TRAIN",
-    "businessSegment": "WOMEN",
-    "productCategory": "WOMENS TANKS",
-    "productGroup": "W SWEAT",
-    "productType": "DROP NECK",
-    "styleNo": "LW1FJAS",
-    "styleName": "TCPA W License to Train Drysense Classic Fit Tank"
+    "group": "TOP",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
+    "styleNo": "LM3HSMS",
+    "styleName": "Heatwave Ease The Day Half Zip - Solid"
   },
   {
-    "group": "LICENSE TO TRAIN",
-    "businessSegment": "MEN",
-    "productCategory": "MENS TANKS",
-    "productGroup": "M SWEAT",
-    "productType": "DROP NECK",
-    "styleNo": "LM1280S",
-    "styleName": "License to Train Tank - HEATHERED"
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MPVS",
+    "styleName": "Lounge Forever Favourite Tee 5 Year Wordmark"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MPNS",
+    "styleName": "Lounge Little Tee SS Waist length 5 Year Rib"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "OTC",
+    "productCategory": "NATURAL HIGH",
+    "productGroup": "MENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LM3HXXS",
+    "styleName": "Natural High CWR Texture Dbl Knit SS"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RULU",
+    "productGroup": "WOMENS 2ND LAYER",
+    "productType": "PULLOVER",
+    "styleNo": "LW3MO2S",
+    "styleName": "RUN READY TO RULU SE LS TEXTURE"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MSFS",
+    "styleName": "Lounge Little Tee 5 year Short Sleeve"
+  },
+  {
+    "group": "BOTTOM",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS PANTS",
+    "productType": "JOGGER",
+    "styleNo": "LM5C30S",
+    "styleName": "Heatwave Ease The Day Jogger"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
+    "styleNo": "LM3HSLS",
+    "styleName": "Heatwave Ease The Day Hoodie - Solid"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MPLS",
+    "styleName": "Lounge The Classic Tee 5 Year"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS 2ND LAYER",
+    "productType": "PULLOVER",
+    "styleNo": "LM3HPNS",
+    "styleName": "Heatwave Ease The Day Half Zip"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MQ6S",
+    "styleName": "Lounge Forever Favourite Tee 5 Year US Open"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W NO SWEAT",
+    "productCategory": "LOUNGE",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3MPOS",
+    "styleName": "Lounge The Classic Long Sleeve 5 Year"
+  },
+  {
+    "group": "BOTTOM",
+    "businessSegment": "OTC",
+    "productCategory": "HEATWAVE",
+    "productGroup": "MENS PANTS",
+    "productType": "SHORT",
+    "styleNo": "LM7CE5S",
+    "styleName": "Heatwave Ease The Day Short"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RUN",
+    "productGroup": "WOMENS SS-LS TOPS",
+    "productType": "TEE",
+    "styleNo": "LW3NAAS",
+    "styleName": "RUN MESH PIQUE SS"
+  },
+  {
+    "group": "TOP",
+    "businessSegment": "W SWEAT",
+    "productCategory": "RUN",
+    "productGroup": "WOMENS TANKS",
+    "productType": "TANK TOP",
+    "styleNo": "LW1HHBS",
+    "styleName": "RUN MESH PIQUE TANK"
+  },
+  {
+    "group": "BOTTOM",
+    "businessSegment": "W SWEAT",
+    "productCategory": "PACE RIVAL",
+    "productGroup": "WOMENS SHORTS",
+    "productType": "SHORT",
+    "styleNo": "LW7DHHS",
+    "styleName": "Pace Rival High Rise Short 3 inch"
   }
 ];
