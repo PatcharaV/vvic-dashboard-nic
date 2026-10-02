@@ -1286,6 +1286,8 @@ function LululemonNygStyleComparison({ style, onClear }) {
   );
 }
 
+const LULULEMON_DEFAULT_STYLE_SEASONS = ["FA25", "WT25", "SP26", "SU26"];
+
 function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const allStyles = useMemo(
     () => [
@@ -1309,7 +1311,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
   const [partnerView, setPartnerView] = useState("nyg");
   const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
-  const [selectedSeasons, setSelectedSeasons] = useState([]);
+  const [selectedSeasons, setSelectedSeasons] = useState(LULULEMON_DEFAULT_STYLE_SEASONS);
   const styles = useMemo(() => (
     selectedSeasons.length === 0 || partnerView !== "nyg"
       ? allStyles
@@ -1326,8 +1328,10 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   }, [styles]);
 
   useEffect(() => {
-    setSelectedSeasons([]);
-  }, [subtypeKey]);
+    setSelectedSeasons(
+      LULULEMON_DEFAULT_STYLE_SEASONS.filter((season) => availableSeasons.includes(season)),
+    );
+  }, [subtypeKey, availableSeasons]);
 
   const toggleSeason = (season) => {
     setSelectedSeasons((current) => (
