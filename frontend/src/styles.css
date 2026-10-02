@@ -2244,6 +2244,10 @@ button.lululemon-bar-row.selected > strong {
   order: 2;
 }
 
+.lululemon-style-secured-column > .lululemon-style-linked-comparison {
+  margin: 0;
+}
+
 .lululemon-style-portfolio-list,
 .lululemon-style-coverage-summary {
   padding: 16px;
@@ -3392,6 +3396,13 @@ button.lululemon-bar-row.selected > strong {
   scrollbar-gutter: stable;
 }
 
+.lululemon-style-opportunity-groups.ranked-list li.selected {
+  background: #fff2f5;
+  border: 1px solid #d31334;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(122, 10, 37, 0.08);
+}
+
 .lululemon-style-view-more {
   min-height: 30px;
   padding: 6px 10px;
@@ -3635,6 +3646,15 @@ button.lululemon-bar-row.selected > strong {
   border-radius: 50%;
   font-size: 8px;
   font-weight: 900;
+}
+
+.lululemon-style-opportunity-groups.ranked-list li::before {
+  content: attr(data-rank);
+}
+
+.lululemon-style-opportunity-groups.ranked-list li.selected::before {
+  color: #fff;
+  background: var(--lululemon-red);
 }
 
 .lululemon-style-portfolio-list > small {

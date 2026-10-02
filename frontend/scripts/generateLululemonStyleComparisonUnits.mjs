@@ -88,7 +88,10 @@ function matchProducts(style) {
 const styles = [...LULULEMON_NYG_STYLES, ...LULULEMON_NYG_FUTURE_STYLES];
 const comparisons = Object.fromEntries(styles.map((style) => {
   const matches = matchProducts(style);
+  const matchedProductNames = [...new Set(matches.map((row) => row.title))];
   return [style.key, {
+    matchedProductName: matchedProductNames.length === 1 ? matchedProductNames[0] : style.name,
+    lululemonSales: matches.reduce((sum, row) => sum + row.sales, 0),
     lululemonUnits: matches.reduce((sum, row) => sum + row.units, 0),
     matchedTitles: matches.length,
   }];
