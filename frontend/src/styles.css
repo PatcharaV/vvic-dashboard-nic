@@ -1715,6 +1715,56 @@ h2 {
   color: #fff;
 }
 
+.lululemon-comparison-sticky-summary {
+  position: sticky;
+  top: 64px;
+  z-index: 16;
+  padding: 13px 16px;
+  display: grid;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 2.2fr);
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 12px 28px rgba(66, 19, 30, 0.12);
+}
+
+.nytg-section {
+  overflow: visible;
+}
+
+.nytg-section::after {
+  display: none;
+}
+
+.lululemon-comparison-sticky-summary .lululemon-comparison-heading h3 {
+  font-size: clamp(20px, 2vw, 28px);
+}
+
+.lululemon-comparison-sticky-summary .lululemon-comparison-heading > div > p:last-child {
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+.lululemon-comparison-sticky-summary .lululemon-comparison-stats {
+  margin-top: 0;
+  gap: 8px;
+}
+
+.lululemon-comparison-sticky-summary .lululemon-comparison-stats > div {
+  min-height: 78px;
+  padding: 10px 13px;
+  gap: 4px;
+  border-radius: 10px;
+}
+
+.lululemon-comparison-sticky-summary .lululemon-comparison-stats strong {
+  font-size: clamp(22px, 2.3vw, 30px);
+}
+
+.lululemon-comparison-sticky-summary .lululemon-comparison-stats span,
+.lululemon-comparison-sticky-summary .lululemon-comparison-stats small {
+  font-size: 9px;
+}
+
 .lululemon-business-grid,
 .lululemon-nytg-grid {
   margin-top: 18px;
@@ -6219,6 +6269,17 @@ footer a {
   .lululemon-comparison-heading {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .lululemon-comparison-sticky-summary {
+    position: relative;
+    top: auto;
+    z-index: 1;
+    display: block;
+  }
+
+  .lululemon-comparison-sticky-summary .lululemon-comparison-stats {
+    margin-top: 12px;
   }
 
   .lululemon-comparison-controls {

@@ -1832,7 +1832,7 @@ function LululemonNygComparison({ metric, selectedKey }) {
   const share = getNygShare(nygValue, lululemonValue, metric);
 
   return (
-    <article className="lululemon-comparison-card">
+    <article className="lululemon-comparison-card lululemon-comparison-sticky-summary">
       <div className="lululemon-comparison-heading">
         <div>
           <p className="eyebrow">INTERACTIVE COMPARISON</p>
