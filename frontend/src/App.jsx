@@ -1287,7 +1287,7 @@ function LululemonNygStyleComparison({ style, onClear }) {
 }
 
 function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
-  const styles = useMemo(
+  const allStyles = useMemo(
     () => [
       ...LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).map(
         (style) => ({ ...style, period: "current" }),
@@ -1300,18 +1300,42 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     }),
     [subtypeKey],
   );
+  const availableSeasons = useMemo(() => NYG_MY_MAP_SEASONS.filter((season) =>
+    allStyles.some((style) => style.season.split(",").map((value) => value.trim()).includes(season)),
+  ), [allStyles]);
   const coverage = LULULEMON_STYLE_COVERAGE.find(
     (row) => row.key === subtypeKey,
   );
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
   const [partnerView, setPartnerView] = useState("nyg");
   const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
+  const [selectedSeasons, setSelectedSeasons] = useState([]);
+  const styles = useMemo(() => (
+    selectedSeasons.length === 0 || partnerView !== "nyg"
+      ? allStyles
+      : allStyles.filter((style) => style.season
+        .split(",")
+        .map((value) => value.trim())
+        .some((season) => selectedSeasons.includes(season)))
+  ), [allStyles, partnerView, selectedSeasons]);
   const selectedNygStyle = styles.find((style) => style.key === selectedNygStyleKey);
 
   useEffect(() => {
     setExpandedOpportunityGenders({});
     setSelectedNygStyleKey(null);
   }, [styles]);
+
+  useEffect(() => {
+    setSelectedSeasons([]);
+  }, [subtypeKey]);
+
+  const toggleSeason = (season) => {
+    setSelectedSeasons((current) => (
+      current.includes(season)
+        ? current.filter((item) => item !== season)
+        : availableSeasons.filter((item) => [...current, season].includes(item))
+    ));
+  };
 
   const subtypeControls = (
     <div className="lululemon-comparison-controls lululemon-style-controls">
@@ -1356,6 +1380,42 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           ))}
         </select>
       </label>
+    </div>
+  );
+  const seasonFilter = partnerView === "nyg" && subtypeKey !== "overall" && (
+    <div className="lululemon-style-season-filter">
+      <div className="lululemon-style-season-summary">
+        <span>Season filter</span>
+        <strong>
+          {selectedSeasons.length === 0
+            ? `All ${availableSeasons.length} seasons`
+            : `${selectedSeasons.length} seasons selected`}
+        </strong>
+      </div>
+      <div className="lululemon-style-season-options" role="group" aria-label="Filter NYG secured styles by season">
+        <button
+          className={selectedSeasons.length === 0 ? "active" : undefined}
+          type="button"
+          aria-pressed={selectedSeasons.length === 0}
+          onClick={() => setSelectedSeasons([])}
+        >
+          All seasons
+        </button>
+        {availableSeasons.map((season) => (
+          <button
+            className={selectedSeasons.includes(season) ? "active" : undefined}
+            type="button"
+            key={season}
+            aria-pressed={selectedSeasons.includes(season)}
+            onClick={() => toggleSeason(season)}
+          >
+            {season}
+          </button>
+        ))}
+      </div>
+      <p className="lululemon-revenue-period-note">
+        <strong>Lululemon revenue period:</strong> 1 SEP 25 - 31 AUG 26
+      </p>
     </div>
   );
 
@@ -1475,6 +1535,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           </div>
           {subtypeControls}
         </div>
+        {seasonFilter}
         <div className="lululemon-style-coverage-grid opportunity-only">
           <LululemonOpportunityList
             coverage={coverage}
@@ -1508,22 +1569,19 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   }
 
   const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
-  const securedPeriodGroups = [
-    {
-      key: "current",
-      label: "FA25 / WT25 / SP26 / SU26",
-      styles: styles.filter((style) => style.period === "current"),
-    },
-    {
-      key: "future",
-      label: "FA26 / WT26 / SU27 / SP27",
-      styles: styles.filter((style) => style.period === "future"),
-    },
-  ].map((period) => ({
-    ...period,
+  const visibleSeasons = selectedSeasons.length === 0 ? availableSeasons : selectedSeasons;
+  const securedSeasonGroups = visibleSeasons.map((season) => ({
+    key: season,
+    label: season,
+    styles: styles.filter((style) => style.season
+      .split(",")
+      .map((value) => value.trim())
+      .includes(season)),
+  })).filter((season) => season.styles.length > 0).map((season) => ({
+    ...season,
     genderGroups: LULULEMON_GENDERS.map((gender) => ({
       gender,
-      styles: period.styles.filter((style) => style.gender === gender),
+      styles: season.styles.filter((style) => style.gender === gender),
     })),
   }));
   return (
@@ -1541,6 +1599,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         </div>
         {subtypeControls}
       </div>
+      {seasonFilter}
       <div className="lululemon-style-coverage-grid">
         <div className="lululemon-style-secured-column">
           {partnerView === "nyg" ? (
@@ -1550,14 +1609,14 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
               <strong>{formatNumber.format(styles.length)} style entries</strong>
             </div>
             <div className="lululemon-secured-periods">
-              {securedPeriodGroups.map((period) => (
-                <section className="lululemon-secured-period" key={period.key}>
+              {securedSeasonGroups.map((season) => (
+                <section className="lululemon-secured-period" key={season.key}>
                   <div className="lululemon-secured-period-heading">
-                    <span>{period.label}</span>
-                    <b>{period.styles.length} {period.styles.length === 1 ? "style" : "styles"}</b>
+                    <span>{season.label}</span>
+                    <b>{season.styles.length} {season.styles.length === 1 ? "style" : "styles"}</b>
                   </div>
                   <div className="lululemon-style-secured-list">
-                    {period.genderGroups.map((group) => (
+                    {season.genderGroups.map((group) => (
                       <section className={`lululemon-style-gender-group ${group.gender.toLowerCase()}`} key={group.gender}>
                         <div className="lululemon-style-gender-heading">
                           <span>{group.gender}</span>

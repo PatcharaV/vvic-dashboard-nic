@@ -2246,6 +2246,87 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-style-secured-column > .lululemon-style-linked-comparison {
   margin: 0;
+  order: 2;
+}
+
+.lululemon-style-season-filter {
+  margin-top: 14px;
+  padding: 11px 13px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  background: #f8f5f6;
+  border: 1px solid #eadde0;
+  border-radius: 10px;
+}
+
+.lululemon-style-season-summary {
+  min-width: 104px;
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-style-season-summary span {
+  color: #8c7d81;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-season-summary strong {
+  color: #39121c;
+  font-size: 10px;
+}
+
+.lululemon-style-season-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lululemon-style-season-options button {
+  min-height: 30px;
+  padding: 0 11px;
+  color: #6f6266;
+  background: #fff;
+  border: 1px solid #dfd4d7;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.lululemon-style-season-options button:hover {
+  color: var(--lululemon-red);
+  border-color: #dba8b4;
+}
+
+.lululemon-style-season-options button.active {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+  box-shadow: 0 4px 10px rgba(208, 0, 55, 0.16);
+}
+
+.lululemon-revenue-period-note {
+  margin: 0;
+  padding: 7px 10px;
+  color: #6d6265;
+  background: #fff;
+  border-left: 3px solid var(--lululemon-red);
+  border-radius: 5px;
+  font-size: 8px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.lululemon-revenue-period-note strong {
+  color: #3e3034;
 }
 
 .lululemon-style-portfolio-list,
@@ -5915,6 +5996,15 @@ footer a {
     flex-basis: auto;
   }
 
+  .lululemon-style-season-filter {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .lululemon-revenue-period-note {
+    grid-column: 1 / -1;
+    white-space: normal;
+  }
+
   .lululemon-business-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -6006,6 +6096,15 @@ footer a {
 
   .lululemon-style-linked-bars > div {
     grid-template-columns: 84px minmax(50px, 1fr) auto;
+  }
+
+  .lululemon-style-season-filter {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .lululemon-revenue-period-note {
+    grid-column: auto;
   }
 
   .lululemon-timeline-card {
