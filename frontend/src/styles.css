@@ -2862,6 +2862,17 @@ button.lululemon-bar-row.selected > strong {
   font-size: 8px;
 }
 
+.lululemon-style-linked-context {
+  margin: 9px 0 0;
+  padding: 7px 9px;
+  color: #746a6d;
+  background: #fff;
+  border-left: 3px solid var(--lululemon-red);
+  border-radius: 5px;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
 .lululemon-style-linked-heading button {
   min-height: 32px;
   padding: 0 12px;

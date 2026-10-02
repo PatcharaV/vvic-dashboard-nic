@@ -1212,7 +1212,7 @@ function LululemonNygStyleComparison({ style, onClear }) {
   const comparisons = [
     {
       key: "sales",
-      label: "Sales comparison",
+      label: "Overall sales comparison",
       lululemonLabel: "Lululemon est. FOB",
       lululemonValue: lululemonFob,
       nygValue: style.nygSales,
@@ -1224,7 +1224,7 @@ function LululemonNygStyleComparison({ style, onClear }) {
     },
     {
       key: "units",
-      label: "Units comparison",
+      label: "Overall units comparison",
       lululemonLabel: "Lululemon units",
       lululemonValue: lululemonUnits,
       nygValue: style.nygUnits,
@@ -1242,12 +1242,15 @@ function LululemonNygStyleComparison({ style, onClear }) {
     <section className="lululemon-style-linked-comparison" aria-live="polite">
       <div className="lululemon-style-linked-heading">
         <div>
-          <span>Selected NYG style</span>
+          <span>Selected NYG style · Overall comparison</span>
           <h4>{style.name}</h4>
-          <p>{style.season} · {style.gender} · {style.period === "future" ? "Future" : "Current"}</p>
+          <p>{style.season} · {style.gender} · Total across all listed seasons</p>
         </div>
         <button type="button" onClick={onClear}>Clear selection</button>
       </div>
+      <p className="lululemon-style-linked-context">
+        NYG uses the style total across the seasons above. Lululemon revenue is one combined period and is not split by season.
+      </p>
       <div className="lululemon-style-linked-grid">
         {comparisons.map((comparison) => (
           <article className={`lululemon-style-linked-metric ${comparison.key}`} key={comparison.key}>
@@ -1335,17 +1338,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         .some((season) => selectedSeasons.includes(season)))
   ), [allStyles, partnerView, selectedSeasons]);
   const selectedNygBaseStyle = styles.find((style) => style.key === selectedNygStyleKey);
-  const selectedNygSeasonMetric = selectedNygBaseStyle?.seasonMetrics.find(
-    (metric) => metric.season === selectedNygSeason,
-  );
-  const selectedNygStyle = selectedNygBaseStyle && selectedNygSeasonMetric
-    ? {
-      ...selectedNygBaseStyle,
-      season: selectedNygSeasonMetric.season,
-      nygSales: selectedNygSeasonMetric.nygSales,
-      nygUnits: selectedNygSeasonMetric.nygUnits,
-    }
-    : selectedNygBaseStyle;
+  const selectedNygStyle = selectedNygBaseStyle;
 
   useEffect(() => {
     setExpandedOpportunityGenders({});
@@ -1710,7 +1703,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           </h3>
           <p>
             {partnerView === "nyg"
-              ? "Click an NYG secured style to update the linked Sales and Units comparison."
+              ? "Click an NYG secured style to view its overall Sales and Units comparison."
               : "Review recorded NYK fabric usage and future NYK fabric orders by matched style."}
           </p>
         </div>
