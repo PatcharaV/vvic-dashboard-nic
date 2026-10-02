@@ -2329,6 +2329,108 @@ button.lululemon-bar-row.selected > strong {
   color: #3e3034;
 }
 
+.lululemon-style-overview-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lululemon-style-overview-item {
+  min-width: 0;
+  padding: 13px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  color: inherit;
+  background: #fff;
+  border: 1px solid #eadde0;
+  border-radius: 10px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.lululemon-style-overview-item:hover,
+.lululemon-style-overview-item:focus-visible {
+  border-color: #d78a9b;
+  box-shadow: 0 7px 18px rgba(113, 21, 42, 0.1);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.lululemon-style-overview-heading {
+  grid-column: 1 / -1;
+  padding-bottom: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid #f0e4e7;
+}
+
+.lululemon-style-overview-heading strong {
+  color: #36131d;
+  font-size: 13px;
+}
+
+.lululemon-style-overview-heading small {
+  color: var(--lululemon-red);
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-overview-market,
+.lululemon-style-overview-partner,
+.lululemon-style-overview-opportunity {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+
+.lululemon-style-overview-market small,
+.lululemon-style-overview-partner small,
+.lululemon-style-overview-opportunity small {
+  color: #8a7f82;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-overview-market strong,
+.lululemon-style-overview-partner strong {
+  color: var(--lululemon-red);
+  font-size: 14px;
+}
+
+.lululemon-style-overview-market b,
+.lululemon-style-overview-partner b,
+.lululemon-style-overview-opportunity b {
+  color: #7b7073;
+  font-size: 8px;
+  font-weight: 750;
+}
+
+.lululemon-style-overview-opportunity {
+  grid-column: 1 / -1;
+  padding: 9px 10px;
+  background: #f8f5f6;
+  border-radius: 7px;
+}
+
+.lululemon-style-overview-opportunity strong {
+  overflow: hidden;
+  color: #3e3538;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .lululemon-style-portfolio-list,
 .lululemon-style-coverage-summary {
   padding: 16px;
@@ -6000,6 +6102,10 @@ footer a {
     grid-template-columns: auto minmax(0, 1fr);
   }
 
+  .lululemon-style-overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .lululemon-revenue-period-note {
     grid-column: 1 / -1;
     white-space: normal;
@@ -6101,6 +6207,10 @@ footer a {
   .lululemon-style-season-filter {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .lululemon-style-overview-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .lululemon-revenue-period-note {

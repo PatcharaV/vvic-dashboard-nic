@@ -1292,14 +1292,18 @@ const LULULEMON_DEFAULT_STYLE_SEASONS = ["FA25", "WT25", "SP26", "SU26"];
 function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const allStyles = useMemo(
     () => [
-      ...LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).map(
+      ...LULULEMON_NYG_STYLES.filter(
+        (style) => subtypeKey === "overall" || style.subtype === subtypeKey,
+      ).map(
         (style) => ({
           ...style,
           period: "current",
           seasonMetrics: LULULEMON_NYG_SEASON_METRICS[style.key] || [],
         }),
       ),
-      ...LULULEMON_NYG_FUTURE_STYLES.filter((style) => style.subtype === subtypeKey)
+      ...LULULEMON_NYG_FUTURE_STYLES.filter(
+        (style) => subtypeKey === "overall" || style.subtype === subtypeKey,
+      )
         .map(enrichFutureStyleWithNykFabric)
         .map((style) => ({
           ...style,
@@ -1408,7 +1412,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       </label>
     </div>
   );
-  const seasonFilter = partnerView === "nyg" && subtypeKey !== "overall" && (
+  const seasonFilter = partnerView === "nyg" && (
     <div className="lululemon-style-season-filter">
       <div className="lululemon-style-season-summary">
         <span>Season filter</span>
@@ -1460,19 +1464,100 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     );
   }
 
-  if (subtypeKey === "overall" || !coverage) {
+  if (subtypeKey === "overall") {
+    const overviewRows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall")
+      .map((row) => {
+        const rowCoverage = LULULEMON_STYLE_COVERAGE.find((item) => item.key === row.key);
+        const rowStyles = styles.filter((style) => style.subtype === row.key);
+        const partnerMetrics = rowStyles.reduce((summary, style) => {
+          const seasonMetrics = selectedSeasons.length === 0
+            ? style.seasonMetrics
+            : style.seasonMetrics.filter((metric) => selectedSeasons.includes(metric.season));
+          summary.sales += seasonMetrics.reduce((sum, metric) => sum + metric.nygSales, 0);
+          summary.units += seasonMetrics.reduce((sum, metric) => sum + metric.nygUnits, 0);
+          summary.nykFabricYards += style.nykFabricYards || 0;
+          if ((style.nykFabricYards || 0) > 0) summary.nykMatchedStyles += 1;
+          return summary;
+        }, {
+          sales: 0,
+          units: 0,
+          nykFabricYards: 0,
+          nykMatchedStyles: 0,
+        });
+        const topOpportunity = LULULEMON_REMAINING_OPPORTUNITIES[row.key]?.[0];
+        return {
+          ...row,
+          opportunityCount: rowCoverage?.remaining || 0,
+          securedStyles: rowStyles.length,
+          topOpportunity,
+          ...partnerMetrics,
+        };
+      });
+
+    return (
+      <article className="lululemon-overview-card lululemon-style-card">
+        <div className="lululemon-style-card-heading">
+          <div>
+            <h3>All sub-types style overview</h3>
+            <p>Compare opportunity size and partner coverage, then select a sub-type for style-level detail.</p>
+          </div>
+          {subtypeControls}
+        </div>
+        {seasonFilter}
+        <div className="lululemon-style-overview-grid">
+          {overviewRows.map((row) => (
+            <button
+              className="lululemon-style-overview-item"
+              type="button"
+              key={row.key}
+              onClick={() => onSelect(row.key)}
+            >
+              <span className="lululemon-style-overview-heading">
+                <strong>{row.label}</strong>
+                <small>View detail</small>
+              </span>
+              <span className="lululemon-style-overview-market">
+                <small>Lululemon sales</small>
+                <strong>{formatComparisonValue(row.lululemonSales, "sales")}</strong>
+                <b>{formatNumber.format(row.opportunityCount)} opportunities</b>
+              </span>
+              <span className="lululemon-style-overview-partner">
+                <small>{partnerView === "nyg" ? "NYG secured" : "NYK fabric coverage"}</small>
+                {partnerView === "nyg" ? (
+                  <>
+                    <strong>{formatComparisonValue(row.sales, "sales")}</strong>
+                    <b>{formatComparisonValue(row.units, "units")} · {row.securedStyles} styles</b>
+                  </>
+                ) : (
+                  <>
+                    <strong>{formatNumber.format(Math.round(row.nykFabricYards))} YDS</strong>
+                    <b>{row.nykMatchedStyles} matched styles</b>
+                  </>
+                )}
+              </span>
+              <span className="lululemon-style-overview-opportunity">
+                <small>Top opportunity</small>
+                <strong>{row.topOpportunity?.name || "No opportunity data"}</strong>
+                {row.topOpportunity?.sales > 0 && (
+                  <b>{formatComparisonValue(row.topOpportunity.sales, "sales")}</b>
+                )}
+              </span>
+            </button>
+          ))}
+        </div>
+      </article>
+    );
+  }
+
+  if (!coverage) {
     return (
       <article className="lululemon-overview-card lululemon-style-card">
         <div className="lululemon-style-card-heading">
           <div>
             <h3>Sales coverage by style</h3>
-            <p>Select a sub-type to compare Lululemon opportunities with NYG secured styles.</p>
+            <p>No style coverage is available for this sub-type.</p>
           </div>
           {subtypeControls}
-        </div>
-        <div className="lululemon-style-empty-state">
-          <strong>Select a sub-type</strong>
-          <span>The opportunity list and NYG secured styles will appear here.</span>
         </div>
       </article>
     );
