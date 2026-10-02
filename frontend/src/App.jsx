@@ -21,6 +21,7 @@ import { LULULEMON_REMAINING_OPPORTUNITIES } from "./lululemonOpportunities";
 import { LULULEMON_OPPORTUNITY_UNITS } from "./lululemonOpportunityUnits";
 import { LULULEMON_OPPORTUNITY_MEDIA } from "./lululemonOpportunityMedia";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
+import { LULULEMON_STYLE_COMPARISON_UNITS } from "./lululemonStyleComparisonUnits";
 import {
   LULULEMON_FORECAST_FABRICS,
   LULULEMON_FORECAST_FLAGSHIPS,
@@ -1165,6 +1166,95 @@ function LululemonNykFabricPanel({ subtypeKey }) {
   );
 }
 
+function LululemonNygStyleComparison({ style, onClear }) {
+  const unitMatch = LULULEMON_STYLE_COMPARISON_UNITS[style.key];
+  const lululemonUnits = unitMatch?.lululemonUnits || 0;
+  const multiplier = style.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
+  const lululemonFob = style.lululemonRevenue / multiplier;
+  const salesGap = lululemonFob - style.nygSales;
+  const unitsGap = lululemonUnits - style.nygUnits;
+  const salesMax = Math.max(lululemonFob, style.nygSales, 1);
+  const unitsMax = Math.max(lululemonUnits, style.nygUnits, 1);
+  const salesCoverage = lululemonFob ? (style.nygSales / lululemonFob) * 100 : 0;
+  const unitsCoverage = lululemonUnits ? (style.nygUnits / lululemonUnits) * 100 : 0;
+  const comparisons = [
+    {
+      key: "sales",
+      label: "Sales comparison",
+      lululemonLabel: "Lululemon est. FOB",
+      lululemonValue: lululemonFob,
+      nygValue: style.nygSales,
+      max: salesMax,
+      gap: salesGap,
+      coverage: salesCoverage,
+      format: (value) => formatComparisonValue(value, "sales"),
+      note: `${formatComparisonValue(style.lululemonRevenue, "sales")} Lululemon retail sales / ${multiplier.toFixed(4)}x`,
+    },
+    {
+      key: "units",
+      label: "Units comparison",
+      lululemonLabel: "Lululemon units",
+      lululemonValue: lululemonUnits,
+      nygValue: style.nygUnits,
+      max: unitsMax,
+      gap: unitsGap,
+      coverage: unitsCoverage,
+      format: (value) => formatComparisonValue(value, "units").replace(" units", " pcs"),
+      note: lululemonUnits > 0
+        ? `${formatNumber.format(unitMatch.matchedTitles)} matched Lululemon ${unitMatch.matchedTitles === 1 ? "title" : "titles"}`
+        : "No matched Lululemon unit data",
+    },
+  ];
+
+  return (
+    <section className="lululemon-style-linked-comparison" aria-live="polite">
+      <div className="lululemon-style-linked-heading">
+        <div>
+          <span>Selected NYG style</span>
+          <h4>{style.name}</h4>
+          <p>{style.season} · {style.gender} · {style.period === "future" ? "Future" : "Current"}</p>
+        </div>
+        <button type="button" onClick={onClear}>Clear selection</button>
+      </div>
+      <div className="lululemon-style-linked-grid">
+        {comparisons.map((comparison) => (
+          <article className={`lululemon-style-linked-metric ${comparison.key}`} key={comparison.key}>
+            <div className="lululemon-style-linked-title">
+              <span>{comparison.label}</span>
+              <strong>{formatComparisonShare(comparison.coverage)} NYG coverage</strong>
+            </div>
+            <div className="lululemon-style-linked-bars">
+              <div>
+                <span>{comparison.lululemonLabel}</span>
+                <i><b style={{ width: `${(comparison.lululemonValue / comparison.max) * 100}%` }} /></i>
+                <strong>{comparison.lululemonValue > 0 ? comparison.format(comparison.lululemonValue) : "N/A"}</strong>
+              </div>
+              <div className="nyg">
+                <span>NYG</span>
+                <i><b style={{ width: `${(comparison.nygValue / comparison.max) * 100}%` }} /></i>
+                <strong>{comparison.format(comparison.nygValue)}</strong>
+              </div>
+            </div>
+            <div className="lululemon-style-linked-gap">
+              <span>
+                {comparison.lululemonValue > 0
+                  ? `NYG ${comparison.gap >= 0 ? "below" : "above"} by`
+                  : "Gap"}
+              </span>
+              <strong>
+                {comparison.lululemonValue > 0
+                  ? comparison.format(Math.abs(comparison.gap))
+                  : "N/A"}
+              </strong>
+              <small>{comparison.note}</small>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const styles = useMemo(
     () => [
@@ -1184,9 +1274,12 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   );
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
   const [partnerView, setPartnerView] = useState("nyg");
+  const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
+  const selectedNygStyle = styles.find((style) => style.key === selectedNygStyleKey);
 
   useEffect(() => {
     setExpandedOpportunityGenders({});
+    setSelectedNygStyleKey(null);
   }, [styles]);
 
   const subtypeControls = (
@@ -1370,12 +1463,18 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           </h3>
           <p>
             {partnerView === "nyg"
-              ? "See which Lululemon product matches each NYG secured style, grouped by gender and period."
+              ? "Click an NYG secured style to update the linked Sales and Units comparison."
               : "Review recorded NYK fabric usage and future NYK fabric orders by matched style."}
           </p>
         </div>
         {subtypeControls}
       </div>
+      {partnerView === "nyg" && selectedNygStyle && (
+        <LululemonNygStyleComparison
+          style={selectedNygStyle}
+          onClear={() => setSelectedNygStyleKey(null)}
+        />
+      )}
       <div className="lululemon-style-coverage-grid">
         <div className="lululemon-style-secured-column">
           {partnerView === "nyg" ? (
@@ -1400,7 +1499,15 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                         </div>
                         <div className="lululemon-style-gender-items">
                           {group.styles.map((style) => (
-                            <div className="lululemon-secured-style" key={style.key}>
+                            <button
+                              className={`lululemon-secured-style ${selectedNygStyleKey === style.key ? "selected" : ""}`.trim()}
+                              type="button"
+                              key={style.key}
+                              aria-pressed={selectedNygStyleKey === style.key}
+                              onClick={() => setSelectedNygStyleKey((current) => (
+                                current === style.key ? null : style.key
+                              ))}
+                            >
                               <span>
                                 <strong>{style.name}</strong>
                                 <small>{style.season}</small>
@@ -1439,7 +1546,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                                 <b>{formatComparisonValue(style.nygSales, "sales")}</b>
                                 <small>{formatComparisonValue(style.nygUnits, "units")}</small>
                               </span>
-                            </div>
+                            </button>
                           ))}
                           {group.styles.length === 0 && (
                             <small className="lululemon-style-gender-empty">No secured styles</small>

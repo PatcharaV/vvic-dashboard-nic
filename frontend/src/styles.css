@@ -2505,6 +2505,22 @@ button.lululemon-bar-row.selected > strong {
   border-radius: 7px;
   font: inherit;
   text-align: left;
+  cursor: pointer;
+  transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+
+.lululemon-secured-style:hover,
+.lululemon-secured-style:focus-visible {
+  border-color: #dcacb7;
+  box-shadow: 0 5px 14px rgba(112, 12, 37, 0.09);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.lululemon-secured-style.selected {
+  background: #fff5f7;
+  border-color: var(--lululemon-red);
+  box-shadow: 0 0 0 2px rgba(211, 19, 52, 0.08);
 }
 
 .lululemon-secured-style > span {
@@ -2613,6 +2629,165 @@ button.lululemon-bar-row.selected > strong {
   color: #5f595b;
   font-size: 8px;
   font-weight: 800;
+}
+
+.lululemon-style-linked-comparison {
+  margin: 16px 0;
+  padding: 15px;
+  display: grid;
+  gap: 14px;
+  background: linear-gradient(145deg, #fff, #fff7f9);
+  border: 1px solid #e8ccd2;
+  border-left: 4px solid var(--lululemon-red);
+  border-radius: 11px;
+  box-shadow: 0 8px 20px rgba(88, 15, 33, 0.055);
+}
+
+.lululemon-style-linked-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lululemon-style-linked-heading > div {
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-style-linked-heading span {
+  color: var(--lululemon-red);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-linked-heading h4 {
+  margin: 0;
+  color: #211d1f;
+  font-size: 15px;
+}
+
+.lululemon-style-linked-heading p {
+  margin: 0;
+  color: #7c7376;
+  font-size: 8px;
+}
+
+.lululemon-style-linked-heading button {
+  min-height: 32px;
+  padding: 0 12px;
+  color: var(--lululemon-red);
+  background: #fff;
+  border: 1px solid #e5b8c1;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.lululemon-style-linked-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lululemon-style-linked-metric {
+  padding: 13px;
+  display: grid;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #eadfe2;
+  border-radius: 9px;
+}
+
+.lululemon-style-linked-title,
+.lululemon-style-linked-gap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lululemon-style-linked-title span,
+.lululemon-style-linked-gap span {
+  color: #776f71;
+  font-size: 8px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.lululemon-style-linked-title strong {
+  color: var(--lululemon-red);
+  font-size: 10px;
+}
+
+.lululemon-style-linked-bars {
+  display: grid;
+  gap: 8px;
+}
+
+.lululemon-style-linked-bars > div {
+  display: grid;
+  grid-template-columns: 105px minmax(70px, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.lululemon-style-linked-bars span {
+  color: #5f575a;
+  font-size: 8px;
+  font-weight: 750;
+}
+
+.lululemon-style-linked-bars i {
+  height: 9px;
+  overflow: hidden;
+  background: #e9e4e5;
+  border-radius: 999px;
+}
+
+.lululemon-style-linked-bars b {
+  height: 100%;
+  display: block;
+  background: #b9b1b3;
+  border-radius: inherit;
+}
+
+.lululemon-style-linked-bars .nyg b {
+  background: var(--lululemon-red);
+}
+
+.lululemon-style-linked-bars strong {
+  min-width: 66px;
+  color: #2e292b;
+  font-size: 9px;
+  text-align: right;
+}
+
+.lululemon-style-linked-bars .nyg strong {
+  color: var(--lululemon-red);
+}
+
+.lululemon-style-linked-gap {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding-top: 9px;
+  border-top: 1px solid #eee7e9;
+}
+
+.lululemon-style-linked-gap strong {
+  margin-left: auto;
+  color: #211d1f;
+  font-size: 11px;
+}
+
+.lululemon-style-linked-gap small {
+  grid-column: 1 / -1;
+  color: #8a8083;
+  font-size: 7px;
 }
 
 .lululemon-style-coverage-summary {
@@ -5696,6 +5871,10 @@ footer a {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .lululemon-style-linked-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .lululemon-style-coverage-grid.opportunity-only {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -5794,6 +5973,19 @@ footer a {
   main {
     width: min(100% - 16px, 1480px);
     margin-top: 8px;
+  }
+
+  .lululemon-style-linked-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lululemon-style-linked-heading button {
+    align-self: flex-start;
+  }
+
+  .lululemon-style-linked-bars > div {
+    grid-template-columns: 84px minmax(50px, 1fr) auto;
   }
 
   .lululemon-timeline-card {
