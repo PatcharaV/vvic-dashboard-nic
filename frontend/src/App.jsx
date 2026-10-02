@@ -22,6 +22,7 @@ import { LULULEMON_OPPORTUNITY_UNITS } from "./lululemonOpportunityUnits";
 import { LULULEMON_OPPORTUNITY_MEDIA } from "./lululemonOpportunityMedia";
 import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
 import { LULULEMON_STYLE_COMPARISON_UNITS } from "./lululemonStyleComparisonUnits";
+import { LULULEMON_NYG_SEASON_METRICS } from "./lululemonNygSeasonMetrics";
 import {
   LULULEMON_FORECAST_FABRICS,
   LULULEMON_FORECAST_FLAGSHIPS,
@@ -1292,10 +1293,18 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const allStyles = useMemo(
     () => [
       ...LULULEMON_NYG_STYLES.filter((style) => style.subtype === subtypeKey).map(
-        (style) => ({ ...style, period: "current" }),
+        (style) => ({
+          ...style,
+          period: "current",
+          seasonMetrics: LULULEMON_NYG_SEASON_METRICS[style.key] || [],
+        }),
       ),
       ...LULULEMON_NYG_FUTURE_STYLES.filter((style) => style.subtype === subtypeKey)
-        .map(enrichFutureStyleWithNykFabric),
+        .map(enrichFutureStyleWithNykFabric)
+        .map((style) => ({
+          ...style,
+          seasonMetrics: LULULEMON_NYG_SEASON_METRICS[style.key] || [],
+        })),
     ].sort((a, b) => {
       if (a.period !== b.period) return a.period === "current" ? -1 : 1;
       return b.nygSales - a.nygSales;
@@ -1311,6 +1320,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
   const [partnerView, setPartnerView] = useState("nyg");
   const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
+  const [selectedNygSeason, setSelectedNygSeason] = useState(null);
   const [selectedSeasons, setSelectedSeasons] = useState(LULULEMON_DEFAULT_STYLE_SEASONS);
   const styles = useMemo(() => (
     selectedSeasons.length === 0 || partnerView !== "nyg"
@@ -1320,11 +1330,23 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         .map((value) => value.trim())
         .some((season) => selectedSeasons.includes(season)))
   ), [allStyles, partnerView, selectedSeasons]);
-  const selectedNygStyle = styles.find((style) => style.key === selectedNygStyleKey);
+  const selectedNygBaseStyle = styles.find((style) => style.key === selectedNygStyleKey);
+  const selectedNygSeasonMetric = selectedNygBaseStyle?.seasonMetrics.find(
+    (metric) => metric.season === selectedNygSeason,
+  );
+  const selectedNygStyle = selectedNygBaseStyle && selectedNygSeasonMetric
+    ? {
+      ...selectedNygBaseStyle,
+      season: selectedNygSeasonMetric.season,
+      nygSales: selectedNygSeasonMetric.nygSales,
+      nygUnits: selectedNygSeasonMetric.nygUnits,
+    }
+    : selectedNygBaseStyle;
 
   useEffect(() => {
     setExpandedOpportunityGenders({});
     setSelectedNygStyleKey(null);
+    setSelectedNygSeason(null);
   }, [styles]);
 
   useEffect(() => {
@@ -1580,7 +1602,13 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     styles: styles.filter((style) => style.season
       .split(",")
       .map((value) => value.trim())
-      .includes(season)),
+      .includes(season))
+      .map((style) => {
+        const metric = style.seasonMetrics.find((row) => row.season === season);
+        return metric
+          ? { ...style, season, nygSales: metric.nygSales, nygUnits: metric.nygUnits }
+          : { ...style, season };
+      }),
   })).filter((season) => season.styles.length > 0).map((season) => ({
     ...season,
     genderGroups: LULULEMON_GENDERS.map((gender) => ({
@@ -1629,13 +1657,20 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                         <div className="lululemon-style-gender-items">
                           {group.styles.map((style) => (
                             <button
-                              className={`lululemon-secured-style ${selectedNygStyleKey === style.key ? "selected" : ""}`.trim()}
+                              className={`lululemon-secured-style ${
+                                selectedNygStyleKey === style.key && selectedNygSeason === style.season
+                                  ? "selected"
+                                  : ""
+                              }`.trim()}
                               type="button"
                               key={style.key}
-                              aria-pressed={selectedNygStyleKey === style.key}
-                              onClick={() => setSelectedNygStyleKey((current) => (
-                                current === style.key ? null : style.key
-                              ))}
+                              aria-pressed={selectedNygStyleKey === style.key && selectedNygSeason === style.season}
+                              onClick={() => {
+                                const isSelected = selectedNygStyleKey === style.key
+                                  && selectedNygSeason === style.season;
+                                setSelectedNygStyleKey(isSelected ? null : style.key);
+                                setSelectedNygSeason(isSelected ? null : style.season);
+                              }}
                             >
                               <span>
                                 <strong>{style.name}</strong>
@@ -1653,7 +1688,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                                   <span className="lululemon-secured-fabric">
                                     {style.nygFabricYards > 0 && (
                                       <span>
-                                        NYG fabric <b>{formatNumber.format(Math.round(style.nygFabricYards))} YDS</b>
+                                        NYG fabric total <b>{formatNumber.format(Math.round(style.nygFabricYards))} YDS</b>
                                       </span>
                                     )}
                                     {style.nykFabricYards > 0 && (
@@ -1694,7 +1729,10 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           {partnerView === "nyg" && selectedNygStyle && (
             <LululemonNygStyleComparison
               style={selectedNygStyle}
-              onClear={() => setSelectedNygStyleKey(null)}
+              onClear={() => {
+                setSelectedNygStyleKey(null);
+                setSelectedNygSeason(null);
+              }}
             />
           )}
         </div>
@@ -1705,7 +1743,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           total={linkedOpportunityStyles.length}
           expandedGenders={expandedOpportunityGenders}
           onToggleGender={toggleOpportunityGender}
-          selectionKey={partnerView === "nyg" ? selectedNygStyle?.key : ""}
+          selectionKey={partnerView === "nyg" && selectedNygStyle
+            ? `${selectedNygStyle.key}|${selectedNygStyle.season}`
+            : ""}
         />
       </div>
       {taxonomyDifference > 0 && (
