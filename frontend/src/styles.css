@@ -2244,11 +2244,6 @@ button.lululemon-bar-row.selected > strong {
   order: 2;
 }
 
-.lululemon-style-secured-column > .lululemon-style-linked-comparison {
-  margin: 0;
-  order: 2;
-}
-
 .lululemon-style-season-filter {
   margin-top: 14px;
   padding: 11px 13px;
@@ -2819,7 +2814,7 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-linked-comparison {
-  margin: 16px 0;
+  margin: 14px 0 16px;
   padding: 15px;
   display: grid;
   gap: 14px;
@@ -2886,10 +2881,82 @@ button.lululemon-bar-row.selected > strong {
   cursor: pointer;
 }
 
-.lululemon-style-linked-grid {
+.lululemon-style-partner-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lululemon-style-partner-summary {
+  min-width: 0;
+  padding: 13px;
+  display: grid;
+  gap: 11px;
+  background: #fff;
+  border: 1px solid #eadfe2;
+  border-top: 3px solid #bbb3b5;
+  border-radius: 9px;
+}
+
+.lululemon-style-partner-summary.nyg {
+  border-top-color: var(--lululemon-red);
+}
+
+.lululemon-style-partner-summary.nyk {
+  border-top-color: #362d30;
+}
+
+.lululemon-style-partner-name {
+  color: #40393b;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-partner-values {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+}
+
+.lululemon-style-partner-values > span {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-style-partner-values small {
+  color: #8a8083;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-partner-values strong {
+  overflow: hidden;
+  color: #211d1f;
+  font-size: clamp(14px, 1.5vw, 20px);
+  line-height: 1;
+  text-overflow: ellipsis;
+}
+
+.lululemon-style-partner-summary.nyg .lululemon-style-partner-values strong {
+  color: var(--lululemon-red);
+}
+
+.lululemon-style-partner-summary p {
+  margin: 0;
+  color: #756c6f;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.lululemon-style-partner-source {
+  color: #8a8083;
+  font-size: 7px;
+  line-height: 1.45;
 }
 
 .lululemon-style-linked-metric {
@@ -6085,7 +6152,7 @@ footer a {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .lululemon-style-linked-grid {
+  .lululemon-style-partner-summary-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
