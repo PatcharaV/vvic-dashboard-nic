@@ -4108,26 +4108,26 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-style-card input,
 .lululemon-style-card b,
 .lululemon-style-card strong {
-  font-size: 12px !important;
+  font-size: 11px !important;
 }
 
 .lululemon-style-card-heading h3,
 .lululemon-style-linked-heading h4,
 .lululemon-style-empty-state strong,
 .lululemon-no-secured-styles strong {
-  font-size: 16px !important;
+  font-size: 15px !important;
 }
 
 .lululemon-style-partner-values strong {
-  font-size: 20px !important;
-}
-
-.lululemon-style-mirror-axis strong {
   font-size: 18px !important;
 }
 
+.lululemon-style-mirror-axis strong {
+  font-size: 16px !important;
+}
+
 .lululemon-style-mirror-value strong {
-  font-size: 14px !important;
+  font-size: 13px !important;
 }
 
 .lululemon-style-opportunity-value b {

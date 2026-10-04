@@ -1197,9 +1197,9 @@ function LululemonNykFabricPanel({ subtypeKey }) {
   );
 }
 
-function LululemonNygStyleComparison({ style, onClear }) {
+function LululemonNygStyleComparison({ style, onClear, overview = false }) {
   const unitMatch = LULULEMON_STYLE_COMPARISON_UNITS[style.key];
-  const lululemonUnits = unitMatch?.lululemonUnits || 0;
+  const lululemonUnits = unitMatch?.lululemonUnits ?? style.lululemonUnits ?? 0;
   const lululemonRetailSales = unitMatch?.lululemonSales ?? style.lululemonRevenue;
   const multiplier = style.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
   const lululemonFob = lululemonRetailSales / multiplier;
@@ -1259,11 +1259,13 @@ function LululemonNygStyleComparison({ style, onClear }) {
     <section className="lululemon-style-linked-comparison" aria-live="polite">
       <div className="lululemon-style-linked-heading">
         <div>
-          <span>Selected NYG style · Overall comparison</span>
+          <span>{overview ? "All sub-types · Overall comparison" : "Selected NYG style · Overall comparison"}</span>
           <h4>{style.name}</h4>
-          <p>{style.season} · {style.gender} · Total across all listed seasons</p>
+          <p>
+            {style.season} · {style.gender} · {overview ? "Current season selection" : "Total across all listed seasons"}
+          </p>
         </div>
-        <button type="button" onClick={onClear}>Clear selection</button>
+        {onClear && <button type="button" onClick={onClear}>Clear selection</button>}
       </div>
       <div className="lululemon-style-comparison-body">
         <div className="lululemon-style-partner-summary-grid">
@@ -1496,6 +1498,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   }
 
   if (subtypeKey === "overall") {
+    const overallComparison = LULULEMON_NYG_COMPARISON.find((row) => row.key === "overall");
     const overviewRows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall")
       .map((row) => {
         const rowCoverage = LULULEMON_STYLE_COVERAGE.find((item) => item.key === row.key);
@@ -1524,6 +1527,25 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           ...partnerMetrics,
         };
       });
+    const overviewTotals = overviewRows.reduce((summary, row) => ({
+      sales: summary.sales + row.sales,
+      units: summary.units + row.units,
+      nykFabricYards: summary.nykFabricYards + row.nykFabricYards,
+    }), { sales: 0, units: 0, nykFabricYards: 0 });
+    const overviewSummary = {
+      key: "all-subtypes-summary",
+      name: "All sub-types",
+      season: selectedSeasons.length === 0
+        ? `All ${availableSeasons.length} seasons`
+        : selectedSeasons.join(", "),
+      gender: "All genders",
+      lululemonRevenue: overallComparison?.lululemonSales || 0,
+      lululemonUnits: overallComparison?.lululemonUnits || 0,
+      nygSales: overviewTotals.sales,
+      nygUnits: overviewTotals.units,
+      nykFabricYards: overviewTotals.nykFabricYards,
+      fobMultiplier: LULULEMON_FOB_MULTIPLIER,
+    };
 
     return (
       <article className="lululemon-overview-card lululemon-style-card">
@@ -1535,6 +1557,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           {subtypeControls}
         </div>
         {seasonFilter}
+        {partnerView === "nyg" && (
+          <LululemonNygStyleComparison style={overviewSummary} overview />
+        )}
         <div className="lululemon-style-overview-grid">
           {overviewRows.map((row) => (
             <button
