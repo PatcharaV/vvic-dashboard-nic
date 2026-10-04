@@ -2108,7 +2108,7 @@ export const NYG_MY_MAP_ROWS = [
   },
   {
     "group": "TOP",
-    "gender": "MEN",
+    "gender": "WOMEN",
     "businessSegment": "W SWEAT",
     "productCategory": "RULU",
     "productGroup": "WOMENS SS-LS TOPS",
@@ -2885,7 +2885,7 @@ export const NYG_MY_MAP_ROWS = [
   },
   {
     "group": "TOP",
-    "gender": "MEN",
+    "gender": "WOMEN",
     "businessSegment": "W SWEAT",
     "productCategory": "RULU",
     "productGroup": "WOMENS SS-LS TOPS",

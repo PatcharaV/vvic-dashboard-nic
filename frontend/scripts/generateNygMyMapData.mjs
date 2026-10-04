@@ -32,12 +32,24 @@ const fields = [
   ["styleName", 4],
 ];
 
+function normalizeGender(value, businessSegment) {
+  const segment = String(businessSegment || "").trim().toUpperCase();
+  if (/^M(?:\s|$)/.test(segment)) return "MEN";
+  if (/^W(?:\s|$)/.test(segment)) return "WOMEN";
+
+  const gender = String(value || "").trim().toUpperCase();
+  if (gender === "M" || gender === "MEN") return "MEN";
+  if (gender === "W" || gender === "WOMEN") return "WOMEN";
+  return gender;
+}
+
 const aggregatedRows = new Map();
 const availableSeasons = new Set();
 for (const sourceRow of sheetRows.slice(2)) {
   const row = Object.fromEntries(
     fields.map(([field, columnIndex]) => [field, String(sourceRow[columnIndex] || "").trim()]),
   );
+  row.gender = normalizeGender(row.gender, row.businessSegment);
   const season = String(sourceRow[1] || "").trim();
   const status = String(sourceRow[6] || "").trim().toUpperCase();
   if (!season || Object.values(row).some((value) => !value)) continue;
