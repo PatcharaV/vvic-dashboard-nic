@@ -2893,6 +2893,48 @@ button.lululemon-bar-row.selected > strong {
   gap: 3px;
 }
 
+.lululemon-style-linked-actions {
+  display: flex !important;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.lululemon-style-summary-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.lululemon-style-summary-filters label {
+  min-width: 105px;
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-style-summary-filters label:last-child {
+  min-width: 145px;
+}
+
+.lululemon-style-summary-filters label > span {
+  color: #7a7073;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-summary-filters select {
+  min-height: 30px;
+  padding: 0 28px 0 9px;
+  color: #342f31;
+  background: #fff;
+  border: 1px solid #dfcbd0;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+}
+
 .lululemon-style-linked-heading span {
   color: var(--lululemon-red);
   font-size: 8px;
@@ -6611,6 +6653,19 @@ footer a {
   .lululemon-style-linked-heading {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .lululemon-style-linked-actions,
+  .lululemon-style-summary-filters {
+    width: 100%;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .lululemon-style-summary-filters label,
+  .lululemon-style-summary-filters label:last-child {
+    min-width: 130px;
+    flex: 1;
   }
 
   .lululemon-style-linked-heading button {

@@ -1197,7 +1197,7 @@ function LululemonNykFabricPanel({ subtypeKey }) {
   );
 }
 
-function LululemonNygStyleComparison({ style, onClear, overview = false }) {
+function LululemonNygStyleComparison({ style, onClear, overview = false, filters = null }) {
   const unitMatch = LULULEMON_STYLE_COMPARISON_UNITS[style.key];
   const lululemonUnits = unitMatch?.lululemonUnits ?? style.lululemonUnits ?? 0;
   const lululemonRetailSales = unitMatch?.lululemonSales ?? style.lululemonRevenue;
@@ -1256,7 +1256,12 @@ function LululemonNygStyleComparison({ style, onClear, overview = false }) {
             {style.season} · {style.gender} · {overview ? "Current season selection" : "Total across all listed seasons"}
           </p>
         </div>
-        {onClear && <button type="button" onClick={onClear}>Clear selection</button>}
+        {(filters || onClear) && (
+          <div className="lululemon-style-linked-actions">
+            {filters}
+            {onClear && <button type="button" onClick={onClear}>Clear selection</button>}
+          </div>
+        )}
       </div>
       <div className="lululemon-style-comparison-body">
         <div className="lululemon-style-partner-summary-grid">
@@ -1318,7 +1323,7 @@ function LululemonNygStyleComparison({ style, onClear, overview = false }) {
   );
 }
 
-function LululemonNykComparison({ summary, overview = false }) {
+function LululemonNykComparison({ summary, overview = false, filters = null }) {
   const recordedYards = summary.nykRecordedYards || 0;
   const futureYards = summary.nykFutureYards || 0;
   const maxYards = Math.max(recordedYards, futureYards, 1);
@@ -1335,6 +1340,7 @@ function LululemonNykComparison({ summary, overview = false }) {
           <h4>{summary.name}</h4>
           <p>{summary.season} · NYK fabric coverage</p>
         </div>
+        {filters && <div className="lululemon-style-linked-actions">{filters}</div>}
       </div>
       <div className="lululemon-style-comparison-body">
         <div className="lululemon-style-partner-summary-grid">
@@ -1527,6 +1533,25 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       </p>
     </div>
   );
+  const summaryFilters = (
+    <div className="lululemon-style-summary-filters" aria-label="Comparison summary filters">
+      <label>
+        <span>Partner</span>
+        <select value={partnerView} onChange={(event) => setPartnerView(event.target.value)}>
+          <option value="nyg">NYG</option>
+          <option value="nyk">NYK</option>
+        </select>
+      </label>
+      <label>
+        <span>Sub-type</span>
+        <select value={subtypeKey} onChange={(event) => onSelect(event.target.value)}>
+          {LULULEMON_NYG_COMPARISON.map((row) => (
+            <option key={row.key} value={row.key}>{row.label}</option>
+          ))}
+        </select>
+      </label>
+    </div>
+  );
 
   if (partnerView === "map") {
     return (
@@ -1625,8 +1650,12 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           {subtypeControls}
         </div>
         {seasonFilter}
-        {partnerView === "nyg" && <LululemonNygStyleComparison style={overviewSummary} overview />}
-        {partnerView === "nyk" && <LululemonNykComparison summary={overviewSummary} overview />}
+        {partnerView === "nyg" && (
+          <LululemonNygStyleComparison style={overviewSummary} overview filters={summaryFilters} />
+        )}
+        {partnerView === "nyk" && (
+          <LululemonNykComparison summary={overviewSummary} overview filters={summaryFilters} />
+        )}
         <div className="lululemon-style-overview-grid">
           {overviewRows.map((row) => (
             <button
@@ -1859,13 +1888,16 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       {partnerView === "nyg" && selectedNygStyle && (
         <LululemonNygStyleComparison
           style={selectedNygStyle}
+          filters={summaryFilters}
           onClear={() => {
             setSelectedNygStyleKey(null);
             setSelectedNygSeason(null);
           }}
         />
       )}
-      {partnerView === "nyk" && <LululemonNykComparison summary={subtypeNykSummary} />}
+      {partnerView === "nyk" && (
+        <LululemonNykComparison summary={subtypeNykSummary} filters={summaryFilters} />
+      )}
       <div className="lululemon-style-coverage-grid">
         <div className="lululemon-style-secured-column">
           {partnerView === "nyg" ? (
