@@ -1222,15 +1222,6 @@ function LululemonNygStyleComparison({ style, onClear, overview = false }) {
       units: formatComparisonValue(style.nygUnits, "units").replace(" units", " pcs"),
       detail: `${formatComparisonShare(salesCoverage)} of Lululemon est. FOB · ${formatComparisonShare(unitsCoverage)} unit coverage`,
     },
-    {
-      key: "nyk",
-      label: "NYK",
-      sales: "N/A",
-      units: "N/A",
-      detail: style.nykFabricYards > 0
-        ? `${formatNumber.format(Math.round(style.nykFabricYards))} YDS matched fabric`
-        : "No matched NYK fabric for this style",
-    },
   ];
   const coverageMetrics = [
     {
@@ -1323,8 +1314,63 @@ function LululemonNygStyleComparison({ style, onClear, overview = false }) {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+function LululemonNykComparison({ summary, overview = false }) {
+  const recordedYards = summary.nykRecordedYards || 0;
+  const futureYards = summary.nykFutureYards || 0;
+  const maxYards = Math.max(recordedYards, futureYards, 1);
+  const fabricRows = [
+    { key: "recorded", label: "Recorded usage", value: recordedYards },
+    { key: "future", label: "Future orders", value: futureYards },
+  ];
+
+  return (
+    <section className="lululemon-style-linked-comparison lululemon-nyk-linked-comparison" aria-live="polite">
+      <div className="lululemon-style-linked-heading">
+        <div>
+          <span>{overview ? "All sub-types · NYK fabric summary" : `${summary.name} · NYK fabric summary`}</span>
+          <h4>{summary.name}</h4>
+          <p>{summary.season} · NYK fabric coverage</p>
+        </div>
+      </div>
+      <div className="lululemon-style-comparison-body">
+        <div className="lululemon-style-partner-summary-grid">
+          <article className="lululemon-style-partner-summary lululemon">
+            <span className="lululemon-style-partner-name">Lululemon</span>
+            <div className="lululemon-style-partner-values">
+              <span><small>Sales</small><strong>{formatComparisonValue(summary.lululemonRevenue, "sales")}</strong></span>
+              <span><small>Units</small><strong>{formatComparisonValue(summary.lululemonUnits, "units").replace(" units", " pcs")}</strong></span>
+            </div>
+          </article>
+          <article className="lululemon-style-partner-summary nyk">
+            <span className="lululemon-style-partner-name">NYK</span>
+            <div className="lululemon-style-partner-values">
+              <span><small>Fabric</small><strong>{formatFabricYards(summary.nykFabricYards || 0, true)}</strong></span>
+              <span><small>Matched styles</small><strong>{formatNumber.format(summary.nykMatchedStyles || 0)}</strong></span>
+            </div>
+          </article>
+        </div>
+        <div className="lululemon-style-coverage-chart lululemon-nyk-fabric-chart">
+          <div className="lululemon-style-coverage-chart-heading">
+            <span>{summary.name} · NYK fabric by period</span>
+            <small>Total {formatFabricYards(summary.nykFabricYards || 0, true)}</small>
+          </div>
+          <div className="lululemon-nyk-fabric-chart-grid">
+            {fabricRows.map((row) => (
+              <div key={row.key}>
+                <span>{row.label}</span>
+                <i><b style={{ width: `${(row.value / maxYards) * 100}%` }} /></i>
+                <strong>{formatFabricYards(row.value, true)}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
       <small className="lululemon-style-partner-source">
-        NYK source contains fabric usage and purchase orders only; sales and garment units are not available.
+        NYK source contains fabric usage and purchase orders; sales and garment units are not available.
       </small>
     </section>
   );
@@ -1510,13 +1556,22 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           summary.sales += seasonMetrics.reduce((sum, metric) => sum + metric.nygSales, 0);
           summary.units += seasonMetrics.reduce((sum, metric) => sum + metric.nygUnits, 0);
           summary.nykFabricYards += style.nykFabricYards || 0;
-          if ((style.nykFabricYards || 0) > 0) summary.nykMatchedStyles += 1;
+          if ((style.nykFabricYards || 0) > 0) {
+            summary.nykMatchedStyles += 1;
+            if (style.period === "future") {
+              summary.nykFutureYards += style.nykFabricYards;
+            } else {
+              summary.nykRecordedYards += style.nykFabricYards;
+            }
+          }
           return summary;
         }, {
           sales: 0,
           units: 0,
           nykFabricYards: 0,
           nykMatchedStyles: 0,
+          nykRecordedYards: 0,
+          nykFutureYards: 0,
         });
         const topOpportunity = LULULEMON_REMAINING_OPPORTUNITIES[row.key]?.[0];
         return {
@@ -1531,7 +1586,17 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       sales: summary.sales + row.sales,
       units: summary.units + row.units,
       nykFabricYards: summary.nykFabricYards + row.nykFabricYards,
-    }), { sales: 0, units: 0, nykFabricYards: 0 });
+      nykMatchedStyles: summary.nykMatchedStyles + row.nykMatchedStyles,
+      nykRecordedYards: summary.nykRecordedYards + row.nykRecordedYards,
+      nykFutureYards: summary.nykFutureYards + row.nykFutureYards,
+    }), {
+      sales: 0,
+      units: 0,
+      nykFabricYards: 0,
+      nykMatchedStyles: 0,
+      nykRecordedYards: 0,
+      nykFutureYards: 0,
+    });
     const overviewSummary = {
       key: "all-subtypes-summary",
       name: "All sub-types",
@@ -1544,6 +1609,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       nygSales: overviewTotals.sales,
       nygUnits: overviewTotals.units,
       nykFabricYards: overviewTotals.nykFabricYards,
+      nykMatchedStyles: overviewTotals.nykMatchedStyles,
+      nykRecordedYards: overviewTotals.nykRecordedYards,
+      nykFutureYards: overviewTotals.nykFutureYards,
       fobMultiplier: LULULEMON_FOB_MULTIPLIER,
     };
 
@@ -1557,9 +1625,8 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           {subtypeControls}
         </div>
         {seasonFilter}
-        {partnerView === "nyg" && (
-          <LululemonNygStyleComparison style={overviewSummary} overview />
-        )}
+        {partnerView === "nyg" && <LululemonNygStyleComparison style={overviewSummary} overview />}
+        {partnerView === "nyk" && <LululemonNykComparison summary={overviewSummary} overview />}
         <div className="lululemon-style-overview-grid">
           {overviewRows.map((row) => (
             <button
@@ -1757,6 +1824,22 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       styles: season.styles.filter((style) => style.gender === gender),
     })),
   }));
+  const subtypeComparison = LULULEMON_NYG_COMPARISON.find((row) => row.key === subtypeKey);
+  const subtypeNykStyles = allStyles.filter((style) => (style.nykFabricYards || 0) > 0);
+  const subtypeNykSummary = {
+    name: subtypeLabel,
+    season: "All available seasons",
+    lululemonRevenue: subtypeComparison?.lululemonSales || 0,
+    lululemonUnits: subtypeComparison?.lululemonUnits || 0,
+    nykFabricYards: subtypeNykStyles.reduce((sum, style) => sum + style.nykFabricYards, 0),
+    nykMatchedStyles: subtypeNykStyles.length,
+    nykRecordedYards: subtypeNykStyles
+      .filter((style) => style.period !== "future")
+      .reduce((sum, style) => sum + style.nykFabricYards, 0),
+    nykFutureYards: subtypeNykStyles
+      .filter((style) => style.period === "future")
+      .reduce((sum, style) => sum + style.nykFabricYards, 0),
+  };
   return (
     <article className="lululemon-overview-card lululemon-style-card">
       <div className="lululemon-style-card-heading">
@@ -1782,6 +1865,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           }}
         />
       )}
+      {partnerView === "nyk" && <LululemonNykComparison summary={subtypeNykSummary} />}
       <div className="lululemon-style-coverage-grid">
         <div className="lululemon-style-secured-column">
           {partnerView === "nyg" ? (
@@ -1834,25 +1918,11 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                                     </small>
                                   </span>
                                 )}
-                                {(style.nygFabricYards > 0 || style.nykFabricYards > 0) && (
+                                {style.nygFabricYards > 0 && (
                                   <span className="lululemon-secured-fabric">
-                                    {style.nygFabricYards > 0 && (
-                                      <span>
-                                        NYG fabric total <b>{formatNumber.format(Math.round(style.nygFabricYards))} YDS</b>
-                                      </span>
-                                    )}
-                                    {style.nykFabricYards > 0 && (
-                                      <span className="nyk">
-                                        NYK {style.period === "future" ? "ordered fabric" : "fabric"} <b>{formatNumber.format(Math.round(style.nykFabricYards))} YDS</b>
-                                      </span>
-                                    )}
-                                    {style.period === "future" && style.nykFabricSeasons?.length > 0 && (
-                                      <span className="nyk-detail">
-                                        {style.nykFabricSeasons
-                                          .map(({ season, yards }) => `${season} ${formatNumber.format(Math.round(yards))}`)
-                                          .join(" | ")}
-                                      </span>
-                                    )}
+                                    <span>
+                                      NYG fabric total <b>{formatNumber.format(Math.round(style.nygFabricYards))} YDS</b>
+                                    </span>
                                   </span>
                                 )}
                               </span>

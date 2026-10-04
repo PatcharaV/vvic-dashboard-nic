@@ -3050,6 +3050,53 @@ button.lululemon-bar-row.selected > strong {
   font-size: 8px;
 }
 
+.lululemon-nyk-fabric-chart-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.lululemon-nyk-fabric-chart-grid > div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) 92px;
+  align-items: center;
+  gap: 10px;
+}
+
+.lululemon-nyk-fabric-chart-grid span {
+  color: #625a5c;
+  font-size: 9px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.lululemon-nyk-fabric-chart-grid i {
+  height: 18px;
+  overflow: hidden;
+  background: #efebec;
+  border-radius: 5px;
+}
+
+.lululemon-nyk-fabric-chart-grid i b {
+  width: 0;
+  height: 100%;
+  display: block;
+  background: linear-gradient(90deg, #4a4245, #766d70);
+  border-radius: inherit;
+  transition: width 220ms ease;
+}
+
+.lululemon-nyk-fabric-chart-grid > div:last-child i b {
+  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
+}
+
+.lululemon-nyk-fabric-chart-grid strong {
+  color: #302a2c;
+  font-size: 13px;
+  text-align: right;
+  white-space: nowrap;
+}
+
 .lululemon-style-coverage-chart-grid {
   display: grid;
   gap: 5px;
@@ -4127,6 +4174,10 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-mirror-value strong {
+  font-size: 13px !important;
+}
+
+.lululemon-nyk-fabric-chart-grid strong {
   font-size: 13px !important;
 }
 
@@ -6550,6 +6601,11 @@ footer a {
 
   .lululemon-style-mirror-track {
     height: 18px;
+  }
+
+  .lululemon-nyk-fabric-chart-grid > div {
+    grid-template-columns: 96px minmax(0, 1fr) 76px;
+    gap: 6px;
   }
 
   .lululemon-style-linked-heading {
