@@ -1197,7 +1197,13 @@ function LululemonNykFabricPanel({ subtypeKey }) {
   );
 }
 
-function LululemonNygStyleComparison({ style, onClear, overview = false, filters = null }) {
+function LululemonNygStyleComparison({
+  style,
+  onClear,
+  overview = false,
+  aggregate = false,
+  filters = null,
+}) {
   const unitMatch = LULULEMON_STYLE_COMPARISON_UNITS[style.key];
   const lululemonUnits = unitMatch?.lululemonUnits ?? style.lululemonUnits ?? 0;
   const lululemonRetailSales = unitMatch?.lululemonSales ?? style.lululemonRevenue;
@@ -1250,10 +1256,18 @@ function LululemonNygStyleComparison({ style, onClear, overview = false, filters
     <section className="lululemon-style-linked-comparison" aria-live="polite">
       <div className="lululemon-style-linked-heading">
         <div>
-          <span>{overview ? "All sub-types · Overall comparison" : "Selected NYG style · Overall comparison"}</span>
+          <span>
+            {overview
+              ? "All sub-types · Overall comparison"
+              : aggregate
+                ? `${style.name} sub-type · Overall comparison`
+                : "Selected NYG style · Overall comparison"}
+          </span>
           <h4>{style.name}</h4>
           <p>
-            {style.season} · {style.gender} · {overview ? "Current season selection" : "Total across all listed seasons"}
+            {style.season} · {style.gender} · {overview || aggregate
+              ? "Current season selection"
+              : "Total across all listed seasons"}
           </p>
         </div>
         {(filters || onClear) && (
@@ -1783,6 +1797,53 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       [gender]: !current[gender],
     }));
   };
+  const subtypeComparison = LULULEMON_NYG_COMPARISON.find((row) => row.key === subtypeKey);
+  const subtypeNygTotals = allStyles.reduce((summary, style) => {
+    const metrics = style.seasonMetrics || [];
+    const selectedMetrics = selectedSeasons.length === 0
+      ? metrics
+      : metrics.filter((metric) => selectedSeasons.includes(metric.season));
+    if (metrics.length > 0) {
+      summary.sales += selectedMetrics.reduce((sum, metric) => sum + metric.nygSales, 0);
+      summary.units += selectedMetrics.reduce((sum, metric) => sum + metric.nygUnits, 0);
+    } else if (
+      selectedSeasons.length === 0
+      || style.season.split(",").map((season) => season.trim()).some((season) => selectedSeasons.includes(season))
+    ) {
+      summary.sales += style.nygSales || 0;
+      summary.units += style.nygUnits || 0;
+    }
+    return summary;
+  }, { sales: 0, units: 0 });
+  const selectedSeasonLabel = selectedSeasons.length === 0
+    ? `All ${availableSeasons.length} seasons`
+    : selectedSeasons.join(", ");
+  const subtypeNygSummary = {
+    key: `${subtypeKey}-summary`,
+    name: subtypeLabel,
+    season: selectedSeasonLabel,
+    gender: "All genders",
+    lululemonRevenue: subtypeComparison?.lululemonSales || 0,
+    lululemonUnits: subtypeComparison?.lululemonUnits || 0,
+    nygSales: subtypeNygTotals.sales,
+    nygUnits: subtypeNygTotals.units,
+    fobMultiplier: LULULEMON_FOB_MULTIPLIER,
+  };
+  const subtypeNykStyles = allStyles.filter((style) => (style.nykFabricYards || 0) > 0);
+  const subtypeNykSummary = {
+    name: subtypeLabel,
+    season: "All available seasons",
+    lululemonRevenue: subtypeComparison?.lululemonSales || 0,
+    lululemonUnits: subtypeComparison?.lululemonUnits || 0,
+    nykFabricYards: subtypeNykStyles.reduce((sum, style) => sum + style.nykFabricYards, 0),
+    nykMatchedStyles: subtypeNykStyles.length,
+    nykRecordedYards: subtypeNykStyles
+      .filter((style) => style.period !== "future")
+      .reduce((sum, style) => sum + style.nykFabricYards, 0),
+    nykFutureYards: subtypeNykStyles
+      .filter((style) => style.period === "future")
+      .reduce((sum, style) => sum + style.nykFabricYards, 0),
+  };
 
   if (styles.length === 0) {
     return (
@@ -1799,6 +1860,16 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           {subtypeControls}
         </div>
         {seasonFilter}
+        {partnerView === "nyg" && (
+          <LululemonNygStyleComparison
+            style={subtypeNygSummary}
+            aggregate
+            filters={summaryFilters}
+          />
+        )}
+        {partnerView === "nyk" && (
+          <LululemonNykComparison summary={subtypeNykSummary} filters={summaryFilters} />
+        )}
         <div className="lululemon-style-coverage-grid opportunity-only">
           <LululemonOpportunityList
             coverage={coverage}
@@ -1853,22 +1924,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       styles: season.styles.filter((style) => style.gender === gender),
     })),
   }));
-  const subtypeComparison = LULULEMON_NYG_COMPARISON.find((row) => row.key === subtypeKey);
-  const subtypeNykStyles = allStyles.filter((style) => (style.nykFabricYards || 0) > 0);
-  const subtypeNykSummary = {
-    name: subtypeLabel,
-    season: "All available seasons",
-    lululemonRevenue: subtypeComparison?.lululemonSales || 0,
-    lululemonUnits: subtypeComparison?.lululemonUnits || 0,
-    nykFabricYards: subtypeNykStyles.reduce((sum, style) => sum + style.nykFabricYards, 0),
-    nykMatchedStyles: subtypeNykStyles.length,
-    nykRecordedYards: subtypeNykStyles
-      .filter((style) => style.period !== "future")
-      .reduce((sum, style) => sum + style.nykFabricYards, 0),
-    nykFutureYards: subtypeNykStyles
-      .filter((style) => style.period === "future")
-      .reduce((sum, style) => sum + style.nykFabricYards, 0),
-  };
   return (
     <article className="lululemon-overview-card lululemon-style-card">
       <div className="lululemon-style-card-heading">
@@ -1885,14 +1940,17 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         {subtypeControls}
       </div>
       {seasonFilter}
-      {partnerView === "nyg" && selectedNygStyle && (
+      {partnerView === "nyg" && (
         <LululemonNygStyleComparison
-          style={selectedNygStyle}
+          style={selectedNygStyle || subtypeNygSummary}
+          aggregate={!selectedNygStyle}
           filters={summaryFilters}
-          onClear={() => {
-            setSelectedNygStyleKey(null);
-            setSelectedNygSeason(null);
-          }}
+          onClear={selectedNygStyle
+            ? () => {
+              setSelectedNygStyleKey(null);
+              setSelectedNygSeason(null);
+            }
+            : null}
         />
       )}
       {partnerView === "nyk" && (
