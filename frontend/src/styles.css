@@ -2706,6 +2706,7 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-style-secured-list .lululemon-style-gender-items {
   max-height: 190px;
   padding-right: 3px;
+  overflow-x: hidden;
   overflow-y: auto;
   align-content: start;
   scrollbar-gutter: stable;
@@ -2714,9 +2715,9 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-secured-style {
   width: 100%;
   padding: 9px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
   gap: 10px;
   color: inherit;
   background: #fff;
@@ -2759,7 +2760,7 @@ button.lululemon-bar-row.selected > strong {
   margin-top: 2px;
   padding: 7px 8px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 7px;
   color: #5f595b;
@@ -2789,9 +2790,10 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-secured-list .lululemon-secured-match > small {
+  grid-column: 2;
   color: #7d7476;
   font-size: 7px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .lululemon-secured-fabric > span {
@@ -2804,7 +2806,7 @@ button.lululemon-bar-row.selected > strong {
   border-radius: 4px;
   font-size: 7px;
   font-weight: 750;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .lululemon-secured-fabric > span.nyk {
@@ -2843,6 +2845,27 @@ button.lululemon-bar-row.selected > strong {
   justify-items: end;
   gap: 3px;
   white-space: nowrap;
+}
+
+.lululemon-secured-style > .lululemon-secured-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  justify-items: start;
+  gap: 8px;
+}
+
+.lululemon-style-secured-list .lululemon-secured-style > span > strong {
+  font-size: 11px !important;
+}
+
+.lululemon-style-secured-list .lululemon-secured-match > span,
+.lululemon-style-secured-list .lululemon-secured-match > strong,
+.lululemon-style-secured-list .lululemon-secured-match > small,
+.lululemon-style-secured-list .lululemon-secured-fabric > span,
+.lululemon-style-secured-list .lululemon-secured-fabric b,
+.lululemon-style-secured-list .lululemon-secured-value small {
+  font-size: 10px !important;
 }
 
 .lululemon-style-secured-list .lululemon-secured-value small {

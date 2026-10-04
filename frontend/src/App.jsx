@@ -1207,9 +1207,7 @@ function LululemonNygStyleComparison({
   const unitMatch = LULULEMON_STYLE_COMPARISON_UNITS[style.key];
   const lululemonUnits = unitMatch?.lululemonUnits ?? style.lululemonUnits ?? 0;
   const lululemonRetailSales = unitMatch?.lululemonSales ?? style.lululemonRevenue;
-  const multiplier = style.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
-  const lululemonFob = lululemonRetailSales / multiplier;
-  const salesCoverage = lululemonFob ? (style.nygSales / lululemonFob) * 100 : 0;
+  const salesCoverage = lululemonRetailSales ? (style.nygSales / lululemonRetailSales) * 100 : 0;
   const unitsCoverage = lululemonUnits ? (style.nygUnits / lululemonUnits) * 100 : 0;
   const partnerSummaries = [
     {
@@ -1219,14 +1217,14 @@ function LululemonNygStyleComparison({
       units: lululemonUnits > 0
         ? formatComparisonValue(lululemonUnits, "units").replace(" units", " pcs")
         : "N/A",
-      detail: `Est. FOB ${formatComparisonValue(lululemonFob, "sales")} · Revenue period 1 SEP 25 - 31 AUG 26`,
+      detail: "Revenue period 1 SEP 25 - 31 AUG 26",
     },
     {
       key: "nyg",
       label: "NYG",
       sales: formatComparisonValue(style.nygSales, "sales"),
       units: formatComparisonValue(style.nygUnits, "units").replace(" units", " pcs"),
-      detail: `${formatComparisonShare(salesCoverage)} of Lululemon est. FOB · ${formatComparisonShare(unitsCoverage)} unit coverage`,
+      detail: `${formatComparisonShare(salesCoverage)} of Lululemon sales · ${formatComparisonShare(unitsCoverage)} unit coverage`,
     },
   ];
   const coverageMetrics = [
@@ -1235,9 +1233,9 @@ function LululemonNygStyleComparison({
       label: "Sales coverage",
       share: salesCoverage,
       nygValue: formatComparisonValue(style.nygSales, "sales"),
-      lululemonValue: formatComparisonValue(lululemonFob, "sales"),
-      lululemonLabel: "Lululemon est. FOB",
-      hasBenchmark: lululemonFob > 0,
+      lululemonValue: formatComparisonValue(lululemonRetailSales, "sales"),
+      lululemonLabel: "Lululemon Sale Total",
+      hasBenchmark: lululemonRetailSales > 0,
     },
     {
       key: "units",
@@ -1443,8 +1441,27 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         .map((value) => value.trim())
         .some((season) => selectedSeasons.includes(season)))
   ), [allStyles, partnerView, selectedSeasons]);
+  const activeSelectedSeasons = selectedSeasons.length === 0 ? availableSeasons : selectedSeasons;
+  const aggregateStyleForSelectedSeasons = (style) => {
+    const styleSeasons = style.season.split(",").map((season) => season.trim());
+    const matchedSeasons = activeSelectedSeasons.filter((season) => styleSeasons.includes(season));
+    const matchedMetrics = (style.seasonMetrics || [])
+      .filter((metric) => matchedSeasons.includes(metric.season));
+    return {
+      ...style,
+      season: matchedSeasons.join(", ") || style.season,
+      nygSales: matchedMetrics.length > 0
+        ? matchedMetrics.reduce((sum, metric) => sum + metric.nygSales, 0)
+        : style.nygSales,
+      nygUnits: matchedMetrics.length > 0
+        ? matchedMetrics.reduce((sum, metric) => sum + metric.nygUnits, 0)
+        : style.nygUnits,
+    };
+  };
   const selectedNygBaseStyle = styles.find((style) => style.key === selectedNygStyleKey);
-  const selectedNygStyle = selectedNygBaseStyle;
+  const selectedNygStyle = selectedNygBaseStyle
+    ? aggregateStyleForSelectedSeasons(selectedNygBaseStyle)
+    : null;
 
   useEffect(() => {
     setExpandedOpportunityGenders({});
@@ -1903,27 +1920,17 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   }
 
   const taxonomyDifference = coverage.secured - coverage.matchedWithinSubtype;
-  const visibleSeasons = selectedSeasons.length === 0 ? availableSeasons : selectedSeasons;
-  const securedSeasonGroups = visibleSeasons.map((season) => ({
-    key: season,
-    label: season,
-    styles: styles.filter((style) => style.season
-      .split(",")
-      .map((value) => value.trim())
-      .includes(season))
-      .map((style) => {
-        const metric = style.seasonMetrics.find((row) => row.season === season);
-        return metric
-          ? { ...style, season, nygSales: metric.nygSales, nygUnits: metric.nygUnits }
-          : { ...style, season };
-      }),
-  })).filter((season) => season.styles.length > 0).map((season) => ({
-    ...season,
+  const visibleSeasons = activeSelectedSeasons;
+  const securedStyles = styles.map(aggregateStyleForSelectedSeasons);
+  const securedSeasonGroups = [{
+    key: visibleSeasons.join("|"),
+    label: visibleSeasons.join(" / "),
+    styles: securedStyles,
     genderGroups: LULULEMON_GENDERS.map((gender) => ({
       gender,
-      styles: season.styles.filter((style) => style.gender === gender),
+      styles: securedStyles.filter((style) => style.gender === gender),
     })),
-  }));
+  }].filter((season) => season.styles.length > 0);
   return (
     <article className="lululemon-overview-card lululemon-style-card">
       <div className="lululemon-style-card-heading">
