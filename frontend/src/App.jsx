@@ -1265,61 +1265,60 @@ function LululemonNygStyleComparison({ style, onClear }) {
         </div>
         <button type="button" onClick={onClear}>Clear selection</button>
       </div>
-      <p className="lululemon-style-linked-context">
-        Overall totals for the selected style. Lululemon revenue is one combined period and is not split by season.
-      </p>
-      <div className="lululemon-style-partner-summary-grid">
-        {partnerSummaries.map((partner) => (
-          <article className={`lululemon-style-partner-summary ${partner.key}`} key={partner.key}>
-            <span className="lululemon-style-partner-name">{partner.label}</span>
-            <div className="lululemon-style-partner-values">
-              <span><small>Sales</small><strong>{partner.sales}</strong></span>
-              <span><small>Units</small><strong>{partner.units}</strong></span>
-            </div>
-            <p>{partner.detail}</p>
-          </article>
-        ))}
-      </div>
-      <div className="lululemon-style-coverage-chart">
-        <div className="lululemon-style-coverage-chart-heading">
-          <span>{style.name} · NYG coverage of Lululemon</span>
-          <small>Overall comparison across all listed seasons</small>
-        </div>
-        <div className="lululemon-style-mirror-heading" aria-hidden="true">
-          <span>Lululemon</span>
-          <span>Comparison</span>
-          <span>NYG</span>
-        </div>
-        <div className="lululemon-style-coverage-chart-grid">
-          {coverageMetrics.map((metric) => (
-            <article className="lululemon-style-mirror-row" key={metric.key}>
-              <div className="lululemon-style-mirror-side lululemon">
-                <div className="lululemon-style-mirror-value">
-                  <small>{metric.lululemonLabel}</small>
-                  <strong>{metric.lululemonValue}</strong>
-                </div>
-                <div className="lululemon-style-mirror-track">
-                  <i style={{ width: metric.hasBenchmark ? "100%" : "0%" }} />
-                </div>
+      <div className="lululemon-style-comparison-body">
+        <div className="lululemon-style-partner-summary-grid">
+          {partnerSummaries.map((partner) => (
+            <article className={`lululemon-style-partner-summary ${partner.key}`} key={partner.key}>
+              <span className="lululemon-style-partner-name">{partner.label}</span>
+              <div className="lululemon-style-partner-values">
+                <span><small>Sales</small><strong>{partner.sales}</strong></span>
+                <span><small>Units</small><strong>{partner.units}</strong></span>
               </div>
-              <div className="lululemon-style-mirror-axis">
-                <span>{metric.label}</span>
-                <strong>{formatComparisonShare(metric.share)}</strong>
-              </div>
-              <div className="lululemon-style-mirror-side nyg">
-                <div className="lululemon-style-mirror-value">
-                  <small>NYG</small>
-                  <strong>{metric.nygValue}</strong>
-                </div>
-                <div
-                  className="lululemon-style-mirror-track"
-                  aria-label={`${metric.label}: ${formatComparisonShare(metric.share)}`}
-                >
-                  <i style={{ width: `${Math.max(0, Math.min(metric.share, 100))}%` }} />
-                </div>
-              </div>
+              <p>{partner.detail}</p>
             </article>
           ))}
+        </div>
+        <div className="lululemon-style-coverage-chart">
+          <div className="lululemon-style-coverage-chart-heading">
+            <span>{style.name} · NYG coverage of Lululemon</span>
+            <small>Overall comparison</small>
+          </div>
+          <div className="lululemon-style-mirror-heading" aria-hidden="true">
+            <span>Lululemon</span>
+            <span>Comparison</span>
+            <span>NYG</span>
+          </div>
+          <div className="lululemon-style-coverage-chart-grid">
+            {coverageMetrics.map((metric) => (
+              <article className="lululemon-style-mirror-row" key={metric.key}>
+                <div className="lululemon-style-mirror-side lululemon">
+                  <div className="lululemon-style-mirror-value">
+                    <small>{metric.lululemonLabel}</small>
+                    <strong>{metric.lululemonValue}</strong>
+                  </div>
+                  <div className="lululemon-style-mirror-track">
+                    <i style={{ width: metric.hasBenchmark ? "100%" : "0%" }} />
+                  </div>
+                </div>
+                <div className="lululemon-style-mirror-axis">
+                  <span>{metric.label}</span>
+                  <strong>{formatComparisonShare(metric.share)}</strong>
+                </div>
+                <div className="lululemon-style-mirror-side nyg">
+                  <div className="lululemon-style-mirror-value">
+                    <small>NYG</small>
+                    <strong>{metric.nygValue}</strong>
+                  </div>
+                  <div
+                    className="lululemon-style-mirror-track"
+                    aria-label={`${metric.label}: ${formatComparisonShare(metric.share)}`}
+                  >
+                    <i style={{ width: `${Math.max(0, Math.min(metric.share, 100))}%` }} />
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
       <small className="lululemon-style-partner-source">

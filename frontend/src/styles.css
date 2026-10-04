@@ -2855,15 +2855,22 @@ button.lululemon-bar-row.selected > strong {
   position: sticky;
   top: 64px;
   z-index: 16;
-  margin: 14px 0 16px;
-  padding: 15px;
+  margin: 10px 0 14px;
+  padding: 10px;
   display: grid;
-  gap: 14px;
+  gap: 9px;
   background: linear-gradient(145deg, #fff, #fff7f9);
   border: 1px solid #e8ccd2;
   border-left: 4px solid var(--lululemon-red);
   border-radius: 11px;
   box-shadow: 0 8px 20px rgba(88, 15, 33, 0.055);
+}
+
+.lululemon-style-comparison-body {
+  display: grid;
+  grid-template-columns: minmax(330px, 0.72fr) minmax(0, 1.65fr);
+  align-items: stretch;
+  gap: 10px;
 }
 
 .nytg-section {
@@ -2932,19 +2939,25 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-style-partner-summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
 }
 
 .lululemon-style-partner-summary {
   min-width: 0;
-  padding: 13px;
+  padding: 7px 9px;
   display: grid;
-  gap: 11px;
+  grid-template-columns: 68px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 9px;
   background: #fff;
   border: 1px solid #eadfe2;
   border-top: 3px solid #bbb3b5;
   border-radius: 9px;
+}
+
+.lululemon-style-partner-summary p {
+  display: none;
 }
 
 .lululemon-style-partner-summary.nyg {
@@ -3009,9 +3022,9 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-coverage-chart {
-  padding: 12px 13px;
+  padding: 8px 10px;
   display: grid;
-  gap: 10px;
+  gap: 6px;
   background: #fff;
   border: 1px solid #eadfe2;
   border-radius: 9px;
@@ -3039,7 +3052,7 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-style-coverage-chart-grid {
   display: grid;
-  gap: 10px;
+  gap: 5px;
 }
 
 .lululemon-style-mirror-heading,
@@ -3050,7 +3063,7 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-mirror-heading {
-  padding: 0 0 7px;
+  padding: 0 0 4px;
   color: #746b6e;
   border-bottom: 1px solid #eee5e7;
   font-size: 9px;
@@ -3110,7 +3123,7 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-mirror-track {
-  height: 22px;
+  height: 16px;
   overflow: hidden;
   background: #f0edef;
   border-radius: 5px;
@@ -3135,7 +3148,7 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-mirror-axis {
-  min-height: 56px;
+  min-height: 45px;
   display: grid;
   place-content: center;
   gap: 3px;
@@ -6381,6 +6394,10 @@ footer a {
   }
 
   .lululemon-style-partner-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lululemon-style-comparison-body {
     grid-template-columns: minmax(0, 1fr);
   }
 
