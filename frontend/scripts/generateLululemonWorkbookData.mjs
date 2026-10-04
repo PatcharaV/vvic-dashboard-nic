@@ -202,6 +202,15 @@ function aggregateNygRows(rows) {
   };
 }
 
+function averageFobMultiplier(rows) {
+  const multipliers = rows
+    .map((row) => number(row["FOB Multiplier"]))
+    .filter((value) => value > 0);
+  return multipliers.length > 0
+    ? multipliers.reduce((sum, value) => sum + value, 0) / multipliers.length
+    : fobMultiplier;
+}
+
 const comparisons = [
   {
     key: "overall",
@@ -209,6 +218,7 @@ const comparisons = [
     lululemonSales: totalSales,
     lululemonUnits: totalUnits,
     lululemonProducts: allProducts.length,
+    fobMultiplier,
     ...aggregateNygRows(nygRows),
   },
   ...subtypeDefinitions.map(([key, label, worksheetSubtype]) => {
@@ -234,6 +244,7 @@ const comparisons = [
         0,
       ),
       lululemonProducts: productRows.length,
+      fobMultiplier: averageFobMultiplier(matchingNygRows),
       ...aggregateNygRows(matchingNygRows),
     };
   }),

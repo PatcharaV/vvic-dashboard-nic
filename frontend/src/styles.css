@@ -2896,6 +2896,10 @@ button.lululemon-bar-row.selected > strong {
   gap: 10px;
 }
 
+.lululemon-nyg-linked-comparison .lululemon-style-comparison-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .nytg-section {
   overflow: visible;
 }
@@ -3228,6 +3232,14 @@ button.lululemon-bar-row.selected > strong {
   color: #393335;
   font-size: 13px;
   white-space: nowrap;
+}
+
+.lululemon-style-mirror-formula {
+  display: block;
+  color: #81787b;
+  font-size: 8px;
+  line-height: 1.3;
+  text-align: right;
 }
 
 .lululemon-style-mirror-side.nyg .lululemon-style-mirror-value strong {

@@ -762,13 +762,37 @@ function inferLululemonStyleGender(styleName, subtypeKey) {
   return "Women";
 }
 
-function getLululemonComparisonBase(value) {
-  return value;
+function getLululemonComparisonBase(value, metric, fobMultiplier = LULULEMON_FOB_MULTIPLIER) {
+  return metric === "sales" && fobMultiplier > 0 ? value / fobMultiplier : value;
 }
 
-function getNygShare(nygValue, lululemonValue, metric) {
-  const comparisonBase = getLululemonComparisonBase(lululemonValue, metric);
+function getNygShare(nygValue, lululemonValue, metric, fobMultiplier) {
+  const comparisonBase = getLululemonComparisonBase(lululemonValue, metric, fobMultiplier);
   return comparisonBase ? (nygValue / comparisonBase) * 100 : 0;
+}
+
+function getProductFobMultiplier(style) {
+  if (Number.isFinite(style?.fobMultiplier) && style.fobMultiplier > 0) {
+    return style.fobMultiplier;
+  }
+  const normalizedName = normalizeLululemonProductName(style?.name);
+  return LULULEMON_NYG_STYLES.find(
+    (candidate) => normalizeLululemonProductName(candidate.name) === normalizedName,
+  )?.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
+}
+
+function getAverageFobMultiplier(styles, fallback = LULULEMON_FOB_MULTIPLIER) {
+  const uniqueProducts = new Map();
+  styles.forEach((style) => {
+    const multiplier = getProductFobMultiplier(style);
+    if (Number.isFinite(multiplier) && multiplier > 0) {
+      uniqueProducts.set(normalizeLululemonProductName(style.name), multiplier);
+    }
+  });
+  const multipliers = [...uniqueProducts.values()];
+  return multipliers.length > 0
+    ? multipliers.reduce((sum, value) => sum + value, 0) / multipliers.length
+    : fallback;
 }
 
 function LululemonNygMetricGrid({ selectedKey }) {
@@ -822,16 +846,29 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
       ? "nygUnits"
       : "nygProducts";
   const rows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall")
-    .map((row) => ({
-      ...row,
-      comparisonBase: getLululemonComparisonBase(row[lululemonField], metric),
-      nygValue: row[nygField],
-      share: getNygShare(row[nygField], row[lululemonField], metric),
-    }))
+    .map((row) => {
+      const fobMultiplier = row.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
+      return {
+        ...row,
+        fobMultiplier,
+        comparisonBase: getLululemonComparisonBase(
+          row[lululemonField],
+          metric,
+          fobMultiplier,
+        ),
+        nygValue: row[nygField],
+        share: getNygShare(
+          row[nygField],
+          row[lululemonField],
+          metric,
+          fobMultiplier,
+        ),
+      };
+    })
     .sort((a, b) => b.comparisonBase - a.comparisonBase);
   const maxBase = Math.max(...rows.map((row) => row.comparisonBase), 1);
   const baseLabel = isSales
-    ? "Lululemon"
+    ? "Lululemon FOB Spend"
     : `Lululemon ${isUnits ? "Total Units" : "Products"}`;
   const tableIsSales = tableMetric === "sales";
   const tableNygField = tableIsSales ? "nygSales" : "nygUnits";
@@ -888,8 +925,9 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                   </span>
                   <span>
                     <i className="lululemon-key" />
-                    Lululemon {tooltipMetricLabel}
-                    <b>{formatComparisonValue(row[lululemonField], metric)}</b>
+                    Lululemon {isSales ? "FOB Spend" : tooltipMetricLabel}
+                    <b>{formatComparisonValue(row.comparisonBase, metric)}</b>
+                    {isSales && <small>AVG FOB {row.fobMultiplier.toFixed(4)}x</small>}
                   </span>
                 </span>
               </button>
@@ -1207,35 +1245,24 @@ function LululemonNygStyleComparison({
   const unitMatch = LULULEMON_STYLE_COMPARISON_UNITS[style.key];
   const lululemonUnits = unitMatch?.lululemonUnits ?? style.lululemonUnits ?? 0;
   const lululemonRetailSales = unitMatch?.lululemonSales ?? style.lululemonRevenue;
-  const salesCoverage = lululemonRetailSales ? (style.nygSales / lululemonRetailSales) * 100 : 0;
+  const averageFobMultiplier = getProductFobMultiplier(style);
+  const lululemonFobSpend = getLululemonComparisonBase(
+    lululemonRetailSales,
+    "sales",
+    averageFobMultiplier,
+  );
+  const salesCoverage = lululemonFobSpend ? (style.nygSales / lululemonFobSpend) * 100 : 0;
   const unitsCoverage = lululemonUnits ? (style.nygUnits / lululemonUnits) * 100 : 0;
-  const partnerSummaries = [
-    {
-      key: "lululemon",
-      label: "Lululemon",
-      sales: formatComparisonValue(lululemonRetailSales, "sales"),
-      units: lululemonUnits > 0
-        ? formatComparisonValue(lululemonUnits, "units").replace(" units", " pcs")
-        : "N/A",
-      detail: "Revenue period 1 SEP 25 - 31 AUG 26",
-    },
-    {
-      key: "nyg",
-      label: "NYG",
-      sales: formatComparisonValue(style.nygSales, "sales"),
-      units: formatComparisonValue(style.nygUnits, "units").replace(" units", " pcs"),
-      detail: `${formatComparisonShare(salesCoverage)} of Lululemon sales · ${formatComparisonShare(unitsCoverage)} unit coverage`,
-    },
-  ];
   const coverageMetrics = [
     {
       key: "sales",
       label: "Sales coverage",
       share: salesCoverage,
       nygValue: formatComparisonValue(style.nygSales, "sales"),
-      lululemonValue: formatComparisonValue(lululemonRetailSales, "sales"),
-      lululemonLabel: "Lululemon Sale Total",
-      hasBenchmark: lululemonRetailSales > 0,
+      lululemonValue: formatComparisonValue(lululemonFobSpend, "sales"),
+      lululemonLabel: "Lululemon FOB Spend",
+      detail: `Sale Total ${formatComparisonValue(lululemonRetailSales, "sales")} ÷ AVG FOB ${averageFobMultiplier.toFixed(4)}x`,
+      hasBenchmark: lululemonFobSpend > 0,
     },
     {
       key: "units",
@@ -1251,7 +1278,7 @@ function LululemonNygStyleComparison({
   ];
 
   return (
-    <section className="lululemon-style-linked-comparison" aria-live="polite">
+    <section className="lululemon-style-linked-comparison lululemon-nyg-linked-comparison" aria-live="polite">
       <div className="lululemon-style-linked-heading">
         <div>
           <span>
@@ -1276,18 +1303,6 @@ function LululemonNygStyleComparison({
         )}
       </div>
       <div className="lululemon-style-comparison-body">
-        <div className="lululemon-style-partner-summary-grid">
-          {partnerSummaries.map((partner) => (
-            <article className={`lululemon-style-partner-summary ${partner.key}`} key={partner.key}>
-              <span className="lululemon-style-partner-name">{partner.label}</span>
-              <div className="lululemon-style-partner-values">
-                <span><small>Sales</small><strong>{partner.sales}</strong></span>
-                <span><small>Units</small><strong>{partner.units}</strong></span>
-              </div>
-              <p>{partner.detail}</p>
-            </article>
-          ))}
-        </div>
         <div className="lululemon-style-coverage-chart">
           <div className="lululemon-style-coverage-chart-heading">
             <span>{style.name} · NYG coverage of Lululemon</span>
@@ -1306,6 +1321,9 @@ function LululemonNygStyleComparison({
                     <small>{metric.lululemonLabel}</small>
                     <strong>{metric.lululemonValue}</strong>
                   </div>
+                  {metric.detail && (
+                    <small className="lululemon-style-mirror-formula">{metric.detail}</small>
+                  )}
                   <div className="lululemon-style-mirror-track">
                     <i style={{ width: metric.hasBenchmark ? "100%" : "0%" }} />
                   </div>
@@ -1635,6 +1653,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           opportunityCount: rowCoverage?.remaining || 0,
           securedStyles: rowStyles.length,
           topOpportunity,
+          fobMultiplier: getAverageFobMultiplier(rowStyles),
           ...partnerMetrics,
         };
       });
@@ -1844,7 +1863,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     lululemonUnits: subtypeComparison?.lululemonUnits || 0,
     nygSales: subtypeNygTotals.sales,
     nygUnits: subtypeNygTotals.units,
-    fobMultiplier: LULULEMON_FOB_MULTIPLIER,
+    fobMultiplier: getAverageFobMultiplier(styles),
   };
   const subtypeNykStyles = allStyles.filter((style) => (style.nykFabricYards || 0) > 0);
   const subtypeNykSummary = {
@@ -2084,7 +2103,13 @@ function LululemonNygComparison({ metric, selectedKey }) {
     : isUnits
       ? selected.nygUnits
       : selected.nygProducts;
-  const share = getNygShare(nygValue, lululemonValue, metric);
+  const fobMultiplier = selected.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
+  const comparisonValue = getLululemonComparisonBase(
+    lululemonValue,
+    metric,
+    fobMultiplier,
+  );
+  const share = getNygShare(nygValue, lululemonValue, metric, fobMultiplier);
 
   return (
     <article className="lululemon-comparison-card lululemon-comparison-compact-summary">
@@ -2100,11 +2125,11 @@ function LululemonNygComparison({ metric, selectedKey }) {
 
       <div className="lululemon-comparison-stats">
         <div>
-          <span>Lululemon {isSales ? "sales" : isUnits ? "units" : "products"}</span>
-          <strong>{formatComparisonValue(lululemonValue, metric)}</strong>
+          <span>Lululemon {isSales ? "FOB spend" : isUnits ? "units" : "products"}</span>
+          <strong>{formatComparisonValue(comparisonValue, metric)}</strong>
           <small>
             {isSales
-              ? "Revenue period: 1 SEP 25 - 31 AUG 26"
+              ? `Sale Total ${formatComparisonValue(lululemonValue, "sales")} ÷ AVG FOB ${fobMultiplier.toFixed(4)}x`
               : metric === "products"
               ? "All Product"
               : `${formatNumber.format(selected.lululemonProducts)} product titles`}
@@ -3334,7 +3359,7 @@ function LululemonBrandOverview() {
                 <h3>NYG vs. Lululemon sub-type size</h3>
                 <p>
                   {comparisonMetric === "sales"
-                    ? "NYG sales compared with Lululemon Sale Total - click a row to filter"
+                    ? "NYG sales compared with Lululemon FOB Spend (Sale Total ÷ AVG FOB) - click a row to filter"
                     : "NYG compared with the full Lululemon sub-type - click a row to filter"}
                 </p>
               </div>

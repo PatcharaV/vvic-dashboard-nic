@@ -56,6 +56,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "overall",
     "label": "All sub-types",
+    "fobMultiplier": 6.97011496,
     "lululemonSales": 9645778875.11662,
     "lululemonUnits": 111603854,
     "lululemonProducts": 3568,
@@ -72,6 +73,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "jacket",
     "label": "Jacket",
+    "fobMultiplier": 6.3187,
     "lululemonSales": 1732369190.9153562,
     "lululemonUnits": 11177449,
     "lululemonProducts": 476,
@@ -88,6 +90,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "short",
     "label": "Short",
+    "fobMultiplier": 5.8153749999999995,
     "lululemonSales": 1532950973.6842985,
     "lululemonUnits": 19597169,
     "lululemonProducts": 382,
@@ -104,6 +107,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "pullover",
     "label": "Pullover",
+    "fobMultiplier": 6.453133333333332,
     "lululemonSales": 879733315.3755144,
     "lululemonUnits": 7692047,
     "lululemonProducts": 266,
@@ -120,6 +124,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "tee",
     "label": "Tee",
+    "fobMultiplier": 6.99169411764706,
     "lululemonSales": 1244968002.4773798,
     "lululemonUnits": 18439086,
     "lululemonProducts": 542,
@@ -136,6 +141,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "tank-top",
     "label": "Tank top",
+    "fobMultiplier": 8.2269875,
     "lululemonSales": 514915395.5308565,
     "lululemonUnits": 9130448,
     "lululemonProducts": 337,
@@ -152,6 +158,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "boxer-brief",
     "label": "Boxer brief",
+    "fobMultiplier": 12.342999999999998,
     "lululemonSales": 473203568.43550897,
     "lululemonUnits": 10116564,
     "lululemonProducts": 218,
@@ -168,6 +175,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "polo",
     "label": "Polo",
+    "fobMultiplier": 7.258733333333335,
     "lululemonSales": 232556882.50525737,
     "lululemonUnits": 2230100,
     "lululemonProducts": 70,
@@ -184,6 +192,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "skirt",
     "label": "Skirt",
+    "fobMultiplier": 5.383,
     "lululemonSales": 158579709.22564098,
     "lululemonUnits": 2160677,
     "lululemonProducts": 93,
@@ -200,6 +209,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "pant",
     "label": "Pant",
+    "fobMultiplier": 6.97011496,
     "lululemonSales": 2289811356.996205,
     "lululemonUnits": 24848108,
     "lululemonProducts": 712,
@@ -216,6 +226,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "jogger",
     "label": "Jogger",
+    "fobMultiplier": 6.9798,
     "lululemonSales": 521760927.4872417,
     "lululemonUnits": 5413849,
     "lululemonProducts": 156,
@@ -232,6 +243,7 @@ export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "button-down",
     "label": "Button down",
+    "fobMultiplier": 7.1978,
     "lululemonSales": 34073127.71172999,
     "lululemonUnits": 384102,
     "lululemonProducts": 24,
