@@ -762,8 +762,8 @@ function inferLululemonStyleGender(styleName, subtypeKey) {
   return "Women";
 }
 
-function getLululemonComparisonBase(value, metric) {
-  return metric === "sales" ? value / LULULEMON_FOB_MULTIPLIER : value;
+function getLululemonComparisonBase(value) {
+  return value;
 }
 
 function getNygShare(nygValue, lululemonValue, metric) {
@@ -2104,7 +2104,7 @@ function LululemonNygComparison({ metric, selectedKey }) {
           <strong>{formatComparisonValue(lululemonValue, metric)}</strong>
           <small>
             {isSales
-              ? `FOB Multiplier: ${LULULEMON_FOB_MULTIPLIER.toFixed(4)}x`
+              ? "Revenue period: 1 SEP 25 - 31 AUG 26"
               : metric === "products"
               ? "All Product"
               : `${formatNumber.format(selected.lululemonProducts)} product titles`}
@@ -3334,7 +3334,7 @@ function LululemonBrandOverview() {
                 <h3>NYG vs. Lululemon sub-type size</h3>
                 <p>
                   {comparisonMetric === "sales"
-                    ? "NYG sales compared with estimated Lululemon FOB cost - click a row to filter"
+                    ? "NYG sales compared with Lululemon Sale Total - click a row to filter"
                     : "NYG compared with the full Lululemon sub-type - click a row to filter"}
                 </p>
               </div>
