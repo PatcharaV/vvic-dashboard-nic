@@ -2666,6 +2666,7 @@ function DashboardAiAssistant({ context }) {
 
 const NYG_MAP_LEVELS = [
   { key: "group", label: "Group" },
+  { key: "gender", label: "Gender" },
   { key: "businessSegment", label: "Business Segment" },
   { key: "productCategory", label: "Product Category" },
   { key: "productGroup", label: "Product Group" },
@@ -2712,11 +2713,14 @@ function NygMyMap({ subtypeKey }) {
         : row.seasonMetrics.filter((metric) => selectedSeasons.includes(metric.season));
       const salesRevenue = seasonMetrics.reduce((sum, metric) => sum + metric.salesRevenue, 0);
       const units = seasonMetrics.reduce((sum, metric) => sum + metric.units, 0);
+      const statuses = [...new Set(seasonMetrics.flatMap((metric) => metric.statuses || []))]
+        .sort((a, b) => a.localeCompare(b));
       return {
         ...row,
         salesRevenue,
         units,
         fobPrice: units > 0 ? salesRevenue / units : 0,
+        statuses,
         seasonMetrics,
       };
     })
@@ -2895,6 +2899,18 @@ function NygMyMap({ subtypeKey }) {
                           onClick={() => handleNodeClick(levelIndex, value)}
                         >
                           <span>{isStyle ? value : level.label}</span>
+                          {isStyle && (
+                            <span className="nyg-map-style-statuses">
+                              {nodeRows[0].statuses.map((status) => (
+                                <b
+                                  className={status === "NEW" ? "new" : "carryover"}
+                                  key={status}
+                                >
+                                  {status}
+                                </b>
+                              ))}
+                            </span>
+                          )}
                           <strong>{isStyle ? nodeRows[0].styleName : value}</strong>
                           <small className="nyg-map-node-metrics">
                             {!isStyle && (
@@ -2919,14 +2935,14 @@ function NygMyMap({ subtypeKey }) {
           <div className="nyg-map-selection">
             <span>Selected NYG style</span>
             <strong>{rowsAtLevel(NYG_MAP_LEVELS.length)[0]?.styleName}</strong>
-            <small>{selectedPath[5]} · {selectedPath.slice(0, 5).join(" / ")}</small>
+            <small>{selectedPath.at(-1)} · {selectedPath.slice(0, -1).join(" / ")}</small>
           </div>
         )}
 
         <p className="lululemon-source-note nyg-map-source">
           Source: Lululemon Wallet Size &amp; Share (3).xlsx, NYG sheet. This map uses only
-          Group, Business Segment, Product Category, Product Group, Product Type,
-          Style No., Style Name, sales revenue, units, and FOB. Duplicate style paths across
+          Group, Gender, Business Segment, Product Category, Product Group, Product Type,
+          Style No., Style Name, Status, sales revenue, units, and FOB. Duplicate style paths across
           seasons are consolidated and their sales and units are summed.
         </p>
     </section>

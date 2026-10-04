@@ -7584,6 +7584,40 @@ footer a {
   letter-spacing: 0.03em;
 }
 
+.nyg-map-nodes button.style-node > .nyg-map-style-statuses {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  font-family: inherit;
+  letter-spacing: normal;
+}
+
+.nyg-map-style-statuses b {
+  padding: 3px 6px;
+  color: #8a5b00;
+  background: #fff1c9;
+  border-radius: 4px;
+  font-size: 7px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.nyg-map-style-statuses b.new {
+  color: #0b6b50;
+  background: #dff3eb;
+}
+
+.nyg-map-nodes button.style-node > span:first-child {
+  padding-right: 68px;
+}
+
+.nyg-map-nodes button.selected .nyg-map-style-statuses b {
+  color: #7b1029;
+  background: rgba(255, 255, 255, 0.88);
+}
+
 .nyg-map-nodes button.style-node > strong {
   font-size: 12px;
 }

@@ -23,6 +23,7 @@ const sheetRows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
 });
 const fields = [
   ["group", 16],
+  ["gender", 20],
   ["businessSegment", 19],
   ["productCategory", 17],
   ["productGroup", 18],
@@ -38,6 +39,7 @@ for (const sourceRow of sheetRows.slice(2)) {
     fields.map(([field, columnIndex]) => [field, String(sourceRow[columnIndex] || "").trim()]),
   );
   const season = String(sourceRow[1] || "").trim();
+  const status = String(sourceRow[6] || "").trim().toUpperCase();
   if (!season || Object.values(row).some((value) => !value)) continue;
 
   const key = fields.map(([field]) => row[field]).join("\u001f");
@@ -45,9 +47,10 @@ for (const sourceRow of sheetRows.slice(2)) {
     ...row,
     seasonMetrics: {},
   };
-  const metrics = current.seasonMetrics[season] || { salesRevenue: 0, units: 0 };
+  const metrics = current.seasonMetrics[season] || { salesRevenue: 0, units: 0, statuses: new Set() };
   metrics.salesRevenue += Number(sourceRow[7]) || 0;
   metrics.units += Number(sourceRow[8]) || 0;
+  if (status) metrics.statuses.add(status);
   current.seasonMetrics[season] = metrics;
   availableSeasons.add(season);
   aggregatedRows.set(key, current);
@@ -68,8 +71,10 @@ const rows = [...aggregatedRows.values()].map((row) => ({
     .sort(([a], [b]) => sortSeasons(a, b))
     .map(([season, metrics]) => ({
       season,
-      ...metrics,
+      salesRevenue: metrics.salesRevenue,
+      units: metrics.units,
       fobPrice: metrics.units > 0 ? metrics.salesRevenue / metrics.units : 0,
+      statuses: [...metrics.statuses].sort((a, b) => a.localeCompare(b)),
     })),
 }));
 const outputPath = path.resolve(
