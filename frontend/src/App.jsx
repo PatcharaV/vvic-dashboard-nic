@@ -2376,8 +2376,12 @@ function LululemonTimeline() {
                     role="img"
                     aria-label={`${row.label} data covers ${firstSeason} through ${lastSeason}`}
                   >
-                    {LULULEMON_TIMELINE_SEASONS.map((season) => (
-                      <i aria-hidden="true" key={season} />
+                    {LULULEMON_TIMELINE_SEASONS.map((season, index) => (
+                      <i
+                        aria-hidden="true"
+                        key={season}
+                        style={{ gridColumn: index + 1 }}
+                      />
                     ))}
                     <span
                       className={`lululemon-timeline-bar ${row.tone}`}
