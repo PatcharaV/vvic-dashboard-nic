@@ -2326,7 +2326,7 @@ const LULULEMON_TIMELINE_SEASONS = [
 const LULULEMON_TIMELINE_ROWS = [
   { label: "Revenue", start: 0, end: 3, tone: "revenue" },
   { label: "Particl", start: 2, end: 5, tone: "particl" },
-  { label: "NYG", start: 0, end: 9, tone: "nyg" },
+  { label: "NYG", start: 0, end: 11, tone: "nyg" },
   { label: "NYK", start: 0, end: 7, tone: "nyk" },
 ];
 
@@ -2335,8 +2335,8 @@ function LululemonTimeline() {
     <article className="lululemon-overview-section lululemon-timeline-section">
       <div className="lululemon-overview-heading">
         <div>
-          <p className="eyebrow">DATA COVERAGE · SS25-WT27</p>
-          <h2>Lululemon Timeline</h2>
+          <p className="eyebrow">NYG DATA COVERAGE · SS25-WT27</p>
+          <h2>NYG Timeline</h2>
         </div>
         <LululemonOverviewLogo />
       </div>
@@ -2345,7 +2345,7 @@ function LululemonTimeline() {
         <div className="lululemon-timeline-intro">
           <div>
             <span>Season coverage</span>
-            <strong>Revenue and sourcing data availability</strong>
+            <strong>Revenue and sourcing data availability by season</strong>
           </div>
           <small>Scroll horizontally to view future seasons</small>
         </div>

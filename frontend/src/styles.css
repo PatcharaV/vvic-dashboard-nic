@@ -5020,15 +5020,15 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-timeline-matrix {
-  min-width: 900px;
+  min-width: 1100px;
   display: grid;
-  gap: 8px;
+  gap: 9px;
 }
 
 .lululemon-timeline-season-row,
 .lululemon-timeline-data-row {
   display: grid;
-  grid-template-columns: 150px minmax(720px, 1fr);
+  grid-template-columns: 140px minmax(960px, 1fr);
   align-items: center;
 }
 
@@ -5043,11 +5043,16 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-timeline-seasons,
 .lululemon-timeline-track {
   display: grid;
-  grid-template-columns: repeat(12, minmax(54px, 1fr));
+  grid-template-columns: repeat(12, minmax(80px, 1fr));
+  overflow: hidden;
+  border: 1px solid #e6e2e3;
+  border-radius: 8px;
 }
 
 .lululemon-timeline-seasons span {
+  min-width: 0;
   padding: 9px 4px;
+  box-sizing: border-box;
   color: #403b3d;
   background: #f7f7f8;
   border-right: 1px solid #e6e2e3;
@@ -5056,13 +5061,8 @@ button.lululemon-bar-row.selected > strong {
   text-align: center;
 }
 
-.lululemon-timeline-seasons span:first-child {
-  border-radius: 7px 0 0 7px;
-}
-
 .lululemon-timeline-seasons span:last-child {
   border-right: 0;
-  border-radius: 0 7px 7px 0;
 }
 
 .lululemon-timeline-label {
@@ -5101,7 +5101,7 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-timeline-track {
-  min-height: 40px;
+  min-height: 42px;
   position: relative;
 }
 
@@ -5109,17 +5109,17 @@ button.lululemon-bar-row.selected > strong {
   grid-row: 1;
   background: #fbfbfc;
   border-right: 1px solid #e9e5e6;
-  border-bottom: 1px solid #efeced;
+  box-sizing: border-box;
 }
 
-.lululemon-timeline-track > i:first-of-type {
-  border-left: 1px solid #efeced;
+.lululemon-timeline-track > i:last-of-type {
+  border-right: 0;
 }
 
 .lululemon-timeline-bar {
   z-index: 1;
   min-width: 0;
-  margin: 6px 4px;
+  margin: 6px;
   padding: 0 12px;
   grid-row: 1;
   display: flex;
