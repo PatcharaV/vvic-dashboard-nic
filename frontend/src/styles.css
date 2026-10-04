@@ -2852,6 +2852,9 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-linked-comparison {
+  position: sticky;
+  top: 64px;
+  z-index: 16;
   margin: 14px 0 16px;
   padding: 15px;
   display: grid;
@@ -2861,6 +2864,14 @@ button.lululemon-bar-row.selected > strong {
   border-left: 4px solid var(--lululemon-red);
   border-radius: 11px;
   box-shadow: 0 8px 20px rgba(88, 15, 33, 0.055);
+}
+
+.nytg-section {
+  overflow: visible;
+}
+
+.nytg-section::after {
+  display: none;
 }
 
 .lululemon-style-linked-heading {
@@ -2995,6 +3006,95 @@ button.lululemon-bar-row.selected > strong {
   color: #8a8083;
   font-size: 7px;
   line-height: 1.45;
+}
+
+.lululemon-style-coverage-chart {
+  padding: 12px 13px;
+  display: grid;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #eadfe2;
+  border-radius: 9px;
+}
+
+.lululemon-style-coverage-chart-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lululemon-style-coverage-chart-heading span {
+  color: #3f3639;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-coverage-chart-heading small {
+  color: #8a8083;
+  font-size: 8px;
+}
+
+.lululemon-style-coverage-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lululemon-style-coverage-chart-grid > article {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.lululemon-style-coverage-chart-title,
+.lululemon-style-coverage-chart-values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lululemon-style-coverage-chart-title span {
+  color: #625a5c;
+  font-size: 8px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.lululemon-style-coverage-chart-title strong {
+  color: var(--lululemon-red);
+  font-size: 16px;
+}
+
+.lululemon-style-coverage-track {
+  height: 10px;
+  overflow: hidden;
+  background: #e8e3e4;
+  border-radius: 999px;
+}
+
+.lululemon-style-coverage-track i {
+  width: 0;
+  height: 100%;
+  display: block;
+  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
+  border-radius: inherit;
+  transition: width 220ms ease;
+}
+
+.lululemon-style-coverage-chart-values span {
+  min-width: 0;
+  color: #7d7476;
+  font-size: 8px;
+}
+
+.lululemon-style-coverage-chart-values b {
+  color: #302a2c;
+  font-size: 9px;
+  white-space: nowrap;
 }
 
 .lululemon-style-linked-metric {
@@ -3948,6 +4048,10 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-style-partner-values strong {
   font-size: 20px !important;
+}
+
+.lululemon-style-coverage-chart-title strong {
+  font-size: 18px !important;
 }
 
 .lululemon-style-opportunity-value b {
@@ -6214,6 +6318,16 @@ footer a {
   }
 
   .lululemon-style-partner-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lululemon-style-linked-comparison {
+    position: relative;
+    top: auto;
+    z-index: 1;
+  }
+
+  .lululemon-style-coverage-chart-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 

@@ -1232,6 +1232,26 @@ function LululemonNygStyleComparison({ style, onClear }) {
         : "No matched NYK fabric for this style",
     },
   ];
+  const coverageMetrics = [
+    {
+      key: "sales",
+      label: "Sales coverage",
+      share: salesCoverage,
+      nygValue: formatComparisonValue(style.nygSales, "sales"),
+      lululemonValue: formatComparisonValue(lululemonFob, "sales"),
+      lululemonLabel: "Lululemon est. FOB",
+    },
+    {
+      key: "units",
+      label: "Units coverage",
+      share: unitsCoverage,
+      nygValue: formatComparisonValue(style.nygUnits, "units").replace(" units", " pcs"),
+      lululemonValue: lululemonUnits > 0
+        ? formatComparisonValue(lululemonUnits, "units").replace(" units", " pcs")
+        : "N/A",
+      lululemonLabel: "Lululemon units",
+    },
+  ];
 
   return (
     <section className="lululemon-style-linked-comparison" aria-live="polite">
@@ -1257,6 +1277,32 @@ function LululemonNygStyleComparison({ style, onClear }) {
             <p>{partner.detail}</p>
           </article>
         ))}
+      </div>
+      <div className="lululemon-style-coverage-chart">
+        <div className="lululemon-style-coverage-chart-heading">
+          <span>{style.name} · NYG coverage of Lululemon</span>
+          <small>Overall comparison across all listed seasons</small>
+        </div>
+        <div className="lululemon-style-coverage-chart-grid">
+          {coverageMetrics.map((metric) => (
+            <article key={metric.key}>
+              <div className="lululemon-style-coverage-chart-title">
+                <span>{metric.label}</span>
+                <strong>{formatComparisonShare(metric.share)}</strong>
+              </div>
+              <div
+                className="lululemon-style-coverage-track"
+                aria-label={`${metric.label}: ${formatComparisonShare(metric.share)}`}
+              >
+                <i style={{ width: `${Math.min(metric.share, 100)}%` }} />
+              </div>
+              <div className="lululemon-style-coverage-chart-values">
+                <span>NYG <b>{metric.nygValue}</b></span>
+                <span>{metric.lululemonLabel} <b>{metric.lululemonValue}</b></span>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
       <small className="lululemon-style-partner-source">
         NYK source contains fabric usage and purchase orders only; sales and garment units are not available.
