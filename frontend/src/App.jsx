@@ -924,17 +924,38 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                   {formatComparisonShare(row.share)}
                 </b>
                 <span className="lululemon-subtype-tooltip" id={tooltipId} role="tooltip">
-                  <span>
-                    <i className="nyg-key" />
-                    NYG {tooltipMetricLabel}
-                    <b>{formatComparisonValue(row[nygField], metric)}</b>
-                  </span>
-                  <span>
-                    <i className="lululemon-key" />
-                    Lululemon {isSales ? "FOB Spend" : tooltipMetricLabel}
-                    <b>{formatComparisonValue(row.comparisonBase, metric)}</b>
-                    {isSales && <small>AVG FOB {row.fobMultiplier.toFixed(4)}x</small>}
-                  </span>
+                  {isSales ? (
+                    <>
+                      <span>
+                        <i className="nyg-key" />
+                        NYG
+                        <b>{formatComparisonValue(row.nygSales, "sales")}</b>
+                      </span>
+                      <span>
+                        <i className="total-sale-key" />
+                        Lululemon Total Sale
+                        <b>{formatComparisonValue(row.lululemonSales, "sales")}</b>
+                      </span>
+                      <span>
+                        <i className="lululemon-key" />
+                        Lululemon FOB Spend
+                        <b>{formatComparisonValue(row.comparisonBase, "sales")}</b>
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span>
+                        <i className="nyg-key" />
+                        NYG {tooltipMetricLabel}
+                        <b>{formatComparisonValue(row[nygField], metric)}</b>
+                      </span>
+                      <span>
+                        <i className="lululemon-key" />
+                        Lululemon {tooltipMetricLabel}
+                        <b>{formatComparisonValue(row.comparisonBase, metric)}</b>
+                      </span>
+                    </>
+                  )}
                 </span>
               </button>
             );
