@@ -24,13 +24,13 @@ import { LULULEMON_PANT_STYLE_FAMILIES } from "./lululemonPantFamilies";
 import { LULULEMON_STYLE_COMPARISON_UNITS } from "./lululemonStyleComparisonUnits";
 import { LULULEMON_NYG_SEASON_METRICS } from "./lululemonNygSeasonMetrics";
 import {
-  LULULEMON_FORECAST_FABRICS,
-  LULULEMON_FORECAST_FLAGSHIPS,
+  LULULEMON_FORECAST_ACTIONS,
+  LULULEMON_FORECAST_KEEP_EXTEND,
+  LULULEMON_FORECAST_MARKETS,
   LULULEMON_FORECAST_MILESTONES,
-  LULULEMON_FORECAST_NEXT_STEPS,
-  LULULEMON_FORECAST_PROGRAMS,
-  LULULEMON_FORECAST_QUICK_WINS,
+  LULULEMON_FORECAST_NYG_PROGRAMS,
   LULULEMON_FORECAST_SUMMARY,
+  LULULEMON_FORECAST_WHITESPACE,
   LULULEMON_NYK_FABRIC_BRIEFS,
   LULULEMON_NYK_FORECAST_GROUPS,
   LULULEMON_NYK_FORECAST_SUMMARY,
@@ -3223,25 +3223,22 @@ function LululemonSeasonForecast() {
   const [partner, setPartner] = useState("NYG");
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
-  const filteredPrograms = LULULEMON_FORECAST_PROGRAMS.filter(
+  const filteredPrograms = LULULEMON_FORECAST_NYG_PROGRAMS.filter(
     (program) =>
       (season === "All" || program.season === season) &&
       (gender === "All" || program.gender === gender),
   );
-  const quickWins = LULULEMON_FORECAST_QUICK_WINS.filter(
-    (program) =>
-      (season === "All" || program.season === season) &&
-      (gender === "All" || program.gender === gender),
+  const visibleMarkets = LULULEMON_FORECAST_MARKETS.filter(
+    (group) => gender === "All" || group.gender === gender,
   );
-  const flagshipTargets = LULULEMON_FORECAST_FLAGSHIPS.filter(
-    (program) => gender === "All" || program.gender === gender,
+  const keepExtendGroups = LULULEMON_FORECAST_KEEP_EXTEND.filter(
+    (group) => gender === "All" || group.gender === gender,
   );
-  const relevantFabricNames = new Set(
-    filteredPrograms.map((program) => program.fabric),
+  const whitespaceGroups = LULULEMON_FORECAST_WHITESPACE.filter(
+    (group) => gender === "All" || group.gender === gender,
   );
-  const fabricDirections = LULULEMON_FORECAST_FABRICS.filter(
-    (fabric) =>
-      (season === "All" && gender === "All") || relevantFabricNames.has(fabric.name),
+  const forecastActions = LULULEMON_FORECAST_ACTIONS.filter(
+    (action) => gender === "All" || action.gender === gender,
   );
   const programGroups = ["SS28", "FW28"]
     .filter((seasonKey) => season === "All" || season === seasonKey)
@@ -3284,11 +3281,12 @@ function LululemonSeasonForecast() {
       selectedGender: isNykForecast ? "Program level (no gender split in source)" : gender,
       summary: isNykForecast ? LULULEMON_NYK_FORECAST_SUMMARY : LULULEMON_FORECAST_SUMMARY,
       visiblePrograms: isNykForecast ? filteredNykGroups : filteredPrograms,
-      quickWins: isNykForecast ? [] : quickWins,
-      flagshipTargets: isNykForecast ? [] : flagshipTargets,
-      fabricDirections: isNykForecast ? filteredNykBriefs : fabricDirections,
+      marketSize: isNykForecast ? [] : visibleMarkets,
+      keepAndExtend: isNykForecast ? [] : keepExtendGroups,
+      whitespace: isNykForecast ? [] : whitespaceGroups,
+      fabricDirections: isNykForecast ? filteredNykBriefs : [],
       trends: isNykForecast ? LULULEMON_NYK_TRENDS : [],
-      nextSteps: isNykForecast ? LULULEMON_NYK_NEXT_STEPS : LULULEMON_FORECAST_NEXT_STEPS,
+      nextSteps: isNykForecast ? LULULEMON_NYK_NEXT_STEPS : forecastActions,
       caveat:
         "This is a directional forecast. The actual SS28/FW28 Lululemon line-list is not available yet.",
     }),
@@ -3299,10 +3297,11 @@ function LululemonSeasonForecast() {
       isNykForecast,
       filteredNykGroups,
       filteredPrograms,
-      quickWins,
-      flagshipTargets,
+      visibleMarkets,
+      keepExtendGroups,
+      whitespaceGroups,
+      forecastActions,
       filteredNykBriefs,
-      fabricDirections,
     ],
   );
 
@@ -3333,10 +3332,10 @@ function LululemonSeasonForecast() {
             </>
           ) : (
             <>
-              <div><strong>{LULULEMON_FORECAST_SUMMARY.suppliedPrograms}</strong><span>Programs NYG supplies today</span></div>
-              <div><strong>{LULULEMON_FORECAST_SUMMARY.securelyWonPrograms}</strong><span>Programs securely won</span></div>
-              <div><strong>{LULULEMON_FORECAST_PROGRAMS.length}</strong><span>Seasonal win plays</span></div>
-              <div><strong>{LULULEMON_FORECAST_FABRICS.length}</strong><span>NYK directions paired</span></div>
+              <div><strong>$8.3B</strong><span>Assigned Men + Women market</span></div>
+              <div><strong>$134.8M</strong><span>NYG sales · FA25-WT27</span></div>
+              <div><strong>{LULULEMON_FORECAST_NYG_PROGRAMS.length}</strong><span>Ranked SS28/FW28 programs</span></div>
+              <div><strong>6</strong><span>Whitespace franchises</span></div>
             </>
           )}
         </div>
@@ -3409,7 +3408,7 @@ function LululemonSeasonForecast() {
         <article className="lululemon-forecast-section milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">MILESTONES</p>
+              <p className="eyebrow">01 · MILESTONES</p>
               <h3>Product development milestones</h3>
             </div>
             <span>The three stages this forecast is built around.</span>
@@ -3430,120 +3429,184 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {partner === "NYG" && quickWins.length > 0 && (
-        <article className="lululemon-forecast-section quick-wins">
+      {partner === "NYG" && (
+        <article className="lululemon-forecast-section market-size">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">START HERE</p>
-              <h3>The fastest realistic first wins</h3>
+              <p className="eyebrow">02 · LULULEMON MARKET</p>
+              <h3>The largest markets, in order</h3>
             </div>
-            <span>Existing relationships create the easiest door to open.</span>
+            <span>Estimated 2026 sales · apparel only · {gender === "All" ? "Men + Women" : gender}</span>
           </div>
-          <div className="lululemon-forecast-quick-grid">
-            {quickWins.map((program) => (
-              <div className="lululemon-forecast-quick-card" key={program.id}>
-                <div>
-                  <span>{program.gender} · {program.season}</span>
-                  <strong>{program.program}</strong>
+          <div className={`lululemon-forecast-market-grid ${visibleMarkets.length === 1 ? "single" : ""}`.trim()}>
+            {visibleMarkets.map((market) => {
+              const maxSales = Math.max(...market.rows.map((row) => row.sales), 1);
+              return (
+                <section className={market.gender.toLowerCase()} key={market.gender}>
+                  <header>
+                    <div><span>{market.gender}</span><strong>{formatComparisonValue(market.totalSales, "sales")}</strong></div>
+                    <small>Top franchises · {market.headline}</small>
+                  </header>
+                  <div className="lululemon-forecast-market-bars">
+                    {market.rows.map((row, index) => (
+                      <div key={row.label}>
+                        <b>{index + 1}</b>
+                        <span>{row.label}</span>
+                        <i><em style={{ width: `${(row.sales / maxSales) * 100}%` }} /></i>
+                        <strong>{formatComparisonValue(row.sales, "sales")}</strong>
+                        <small>{formatComparisonValue(row.units, "units")}</small>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        </article>
+      )}
+
+      {partner === "NYG" && (
+        <article className="lululemon-forecast-section keep-extend">
+          <div className="lululemon-forecast-section-heading">
+            <div>
+              <p className="eyebrow">03 · KEEP AND EXTEND</p>
+              <h3>What NYG has, and where it should go next</h3>
+            </div>
+            <span>Use an existing program as the ladder into its next style.</span>
+          </div>
+          <div className={`lululemon-forecast-keep-grid ${keepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
+            {keepExtendGroups.map((group) => (
+              <section className={group.gender.toLowerCase()} key={group.gender}>
+                <div className="lululemon-forecast-gender-heading">
+                  <strong>{group.gender}</strong>
+                  <span>Top 3 by NYG sales</span>
                 </div>
-                <p>{program.reason}</p>
-                <footer><span>Priority</span><strong>Start here</strong></footer>
-              </div>
+                <div>
+                  {group.programs.map((program) => (
+                    <article key={program.name}>
+                      <b>{program.rank}</b>
+                      <div>
+                        <h4>{program.name}</h4>
+                        <p>NYG has · {formatComparisonValue(program.sales, "sales")} · {formatComparisonValue(program.units, "units")} · {program.held}</p>
+                        <strong>Next · {program.next}</strong>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <div className="lululemon-forecast-ranked-heading">
+            <div><span>SS28 / FW28 RANKING</span><strong>Programs NYG should carry forward</strong></div>
+            <small>{filteredPrograms.length} programs · ranked by estimated market sales</small>
+          </div>
+          <div className="lululemon-forecast-program-groups">
+            {programGroups.map((seasonGroup) => (
+              <section className="lululemon-forecast-season-group" key={seasonGroup.season}>
+                <div className="lululemon-forecast-season-heading">
+                  <span>{seasonGroup.season}</span>
+                  <div><strong>{seasonGroup.seasonName}</strong><small>{seasonGroup.genderGroups.reduce((sum, group) => sum + group.programs.length, 0)} programs</small></div>
+                </div>
+                <div className={`lululemon-forecast-gender-grid ${seasonGroup.genderGroups.length === 1 ? "single" : ""}`.trim()}>
+                  {seasonGroup.genderGroups.map((genderGroup) => (
+                    <section className={`lululemon-forecast-gender-group ${genderGroup.gender.toLowerCase()}`} key={genderGroup.gender}>
+                      <div className="lululemon-forecast-gender-heading">
+                        <strong>{genderGroup.gender}</strong>
+                        <span>Top {genderGroup.programs.length}</span>
+                      </div>
+                      <div className="lululemon-forecast-opportunity-list">
+                        {genderGroup.programs.map((program) => (
+                          <article className="lululemon-forecast-opportunity-card nyg" key={program.id}>
+                            <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
+                            <div className="lululemon-forecast-opportunity-copy">
+                              <div className="lululemon-forecast-opportunity-title">
+                                <div><span>Market {formatComparisonValue(program.marketSales, "sales")}</span><h4>{program.program}</h4></div>
+                              </div>
+                              <div className="lululemon-forecast-program-metrics">
+                                <span><small>NYG sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
+                                <span><small>NYG pcs</small><b>{formatComparisonValue(program.nygUnits, "units").replace(" units", "")}</b></span>
+                              </div>
+                              <div className="lululemon-forecast-opportunity-detail">
+                                <span>Why continue</span>
+                                <p>{program.reason}</p>
+                              </div>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </article>
       )}
 
-      {partner === "NYG" && <article className="lululemon-forecast-section">
-        <div className="lululemon-forecast-section-heading">
-          <div>
-            <p className="eyebrow">{partner} FORECAST</p>
-            <h3>{partner === "NYG" ? "Programs NYG should present" : "Fabric directions NYK should bring"}</h3>
+      {partner === "NYG" && (
+        <article className="lululemon-forecast-section whitespace">
+          <div className="lululemon-forecast-section-heading">
+            <div>
+              <p className="eyebrow">04 · WHITE SPACE</p>
+              <h3>Big markets NYG has never been awarded</h3>
+            </div>
+            <span>Enter beside the incumbent, prove capability, then move in.</span>
           </div>
-          <span>Grouped by season and gender · {filteredPrograms.length} plays</span>
-        </div>
-        <div className="lululemon-forecast-program-groups">
-          {programGroups.map((seasonGroup) => (
-            <section className="lululemon-forecast-season-group" key={seasonGroup.season}>
-              <div className="lululemon-forecast-season-heading">
-                <span>{seasonGroup.season}</span>
-                <div><strong>{seasonGroup.seasonName}</strong><small>{seasonGroup.genderGroups.reduce((sum, group) => sum + group.programs.length, 0)} plays</small></div>
-              </div>
-              <div className={`lululemon-forecast-gender-grid ${seasonGroup.genderGroups.length === 1 ? "single" : ""}`.trim()}>
-                {seasonGroup.genderGroups.map((genderGroup) => (
-                  <section className={`lululemon-forecast-gender-group ${genderGroup.gender.toLowerCase()}`} key={genderGroup.gender}>
-                    <div className="lululemon-forecast-gender-heading">
-                      <strong>{genderGroup.gender}</strong>
-                      <span>{genderGroup.programs.length} programs</span>
+          <div className={`lululemon-forecast-whitespace-grid ${whitespaceGroups.length === 1 ? "single" : ""}`.trim()}>
+            {whitespaceGroups.map((group) => (
+              <section className={group.gender.toLowerCase()} key={group.gender}>
+                <div className="lululemon-forecast-gender-heading"><strong>{group.gender}</strong><span>Never awarded</span></div>
+                <div className="lululemon-forecast-whitespace-programs">
+                  {group.programs.map((program) => (
+                    <article key={program.name}>
+                      <div><h4>{program.name}</h4><strong>{formatComparisonValue(program.sales, "sales")}</strong></div>
+                      <span>{formatComparisonValue(program.units, "units")}</span>
+                      <p>{program.detail}</p>
+                    </article>
+                  ))}
+                </div>
+                <div className="lululemon-forecast-whitespace-path">
+                  <h4>Recommended entry path</h4>
+                  {group.path.map((step) => (
+                    <div key={step.step}>
+                      <b>{step.step}</b>
+                      <span><strong>{step.name}</strong><small>{step.action}</small></span>
+                      <em>{formatComparisonValue(step.sales, "sales")}</em>
                     </div>
-                    <div className="lululemon-forecast-opportunity-list">
-                      {genderGroup.programs.map((program) => (
-                        <article className={`lululemon-forecast-opportunity-card ${partner.toLowerCase()}`} key={program.id}>
-                          <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
-                          <div className="lululemon-forecast-opportunity-copy">
-                            <div className="lululemon-forecast-opportunity-title">
-                              <div><span>{program.subtype}</span><h4>{program.program}</h4></div>
-                              <b className={program.tier === "Start here" ? "start" : undefined}>{program.tier}</b>
-                            </div>
-                            {partner === "NYG" ? (
-                              <div className="lululemon-forecast-opportunity-detail">
-                                <span>NYG should present</span>
-                                <p>{program.pitch}</p>
-                              </div>
-                            ) : (
-                              <div className="lululemon-forecast-opportunity-detail fabric">
-                                <span>NYK should bring</span>
-                                <strong>{program.fabric}</strong>
-                                <p>{program.fabricDetail}</p>
-                              </div>
-                            )}
-                          </div>
-                        </article>
-                      ))}
-                    </div>
-                  </section>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </article>
+      )}
+
+      {partner === "NYG" && (
+        <article className="lululemon-forecast-section next-steps nyg-next-steps">
+          <div className="lululemon-forecast-section-heading">
+            <div>
+              <p className="eyebrow">05 · NEXT STEPS</p>
+              <h3>What NYG does next</h3>
+            </div>
+            <span>Refresh when Lululemon opens the actual SS28/FW28 line-list.</span>
+          </div>
+          <div className="lululemon-forecast-action-grid">
+            {(["Men", "Women"]).filter((value) => gender === "All" || gender === value).map((genderKey) => (
+              <section key={genderKey}>
+                <h4>{genderKey}</h4>
+                {forecastActions.filter((action) => action.gender === genderKey).map((action) => (
+                  <article key={action.program}>
+                    <b>{action.rank}</b>
+                    <div><strong>{action.program}</strong><p>{action.action}</p></div>
+                    <span>{action.timing}</span>
+                  </article>
                 ))}
-              </div>
-            </section>
-          ))}
-        </div>
-      </article>}
-
-      {partner === "NYG" && <div className="lululemon-forecast-split">
-        <article className="lululemon-forecast-section flagship">
-          <div className="lululemon-forecast-section-heading">
-            <div>
-              <p className="eyebrow">FLAGSHIP TARGETS</p>
-              <h3>The two biggest whitespace bets</h3>
-            </div>
-          </div>
-          <div className="lululemon-forecast-flagships">
-            {flagshipTargets.map((target) => (
-              <div key={target.program}>
-                <span>{target.gender}</span>
-                <h4>{target.program}</h4>
-                <strong>{target.claim}</strong>
-                <p>{target.rationale}</p>
-                <b>{target.fabric}</b>
-              </div>
+              </section>
             ))}
           </div>
         </article>
-
-        <article className="lululemon-forecast-section next-steps">
-          <div className="lululemon-forecast-section-heading">
-            <div>
-              <p className="eyebrow">ACTION PLAN</p>
-              <h3>What Sales and BD do next</h3>
-            </div>
-          </div>
-          <ol>
-            {LULULEMON_FORECAST_NEXT_STEPS.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-        </article>
-      </div>}
+      )}
 
       {isNykForecast && (
         <>
@@ -3631,7 +3694,7 @@ function LululemonSeasonForecast() {
       <p className="lululemon-forecast-source">
         {isNykForecast
           ? "Source: NYK_Lululemon_Fabric_Forecast_SS28-FW28.pptx. Program-level forecast; the source does not provide a gender split. Milestone content is intentionally excluded from the NYK view."
-          : "Source: NYG_NYK_SS28_FW28_Forecast.pptx. Forecast targets are directional, based on NYG production records versus the Lululemon catalog. Refresh when the actual SS28/FW28 line-list is available."}
+          : "Source: NYG_Forecast_SS28-FW28.pdf. NYG sales cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Gender is inferred from product names and $1.4B of unassigned market sales is excluded. Refresh when the actual SS28/FW28 line-list is available."}
       </p>
       <DashboardAiAssistant context={forecastAiContext} />
     </section>

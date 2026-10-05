@@ -1,17 +1,101 @@
 export const LULULEMON_FORECAST_SUMMARY = {
-  title: "SS28 & FW28 Season Forecast",
-  suppliedPrograms: 72,
+  title: "SS28 & FW28 NYG Forecast",
+  suppliedPrograms: 134.8,
   securelyWonPrograms: 20,
   thesis:
-    "Defend the programs NYG already supplies and win the flagship Lululemon franchises where NYG has no presence today.",
+    "Start with Lululemon's largest markets, extend the programs NYG already makes, then earn a route into the biggest whitespace franchises.",
   methodology:
-    "No SS28/FW28 line-list is available yet. Win targets compare NYG production records with the market-wide Lululemon catalog and pair each whitespace opportunity with a directional NYK fabric story.",
+    "No SS28/FW28 line-list is available yet. The forecast combines NYG sales from FA25-WT27 with estimated 2026 Lululemon market sales, then ranks programs with at least $0.3M in NYG sales by market size.",
 };
 
 export const LULULEMON_FORECAST_MILESTONES = [
   { stage: "Concept", milestones: "BPL" },
   { stage: "Development", milestones: "1st Forecast, 2nd Forecast" },
   { stage: "Production", milestones: "Buy Plan, Final" },
+];
+
+export const LULULEMON_FORECAST_MARKETS = [
+  {
+    gender: "Men",
+    totalSales: 3_500_000_000,
+    headline: "Pace Breaker $801M · ABC $528M",
+    rows: [
+      { label: "Short", sales: 918_000_000, units: 8_400_000 },
+      { label: "Tee", sales: 624_000_000, units: 7_900_000 },
+      { label: "Pant", sales: 583_000_000, units: 5_300_000 },
+      { label: "Pullover", sales: 533_000_000, units: 3_700_000 },
+      { label: "Jogger", sales: 276_000_000, units: 2_700_000 },
+    ],
+  },
+  {
+    gender: "Women",
+    totalSales: 4_800_000_000,
+    headline: "Define $978M · Align $921M",
+    rows: [
+      { label: "Pant", sales: 1_658_000_000, units: 19_100_000 },
+      { label: "Jacket", sales: 934_000_000, units: 4_600_000 },
+      { label: "Short", sales: 563_000_000, units: 10_400_000 },
+      { label: "Tank", sales: 446_000_000, units: 8_000_000 },
+      { label: "Bra / underwear", sales: 391_000_000, units: 8_900_000 },
+    ],
+  },
+];
+
+export const LULULEMON_FORECAST_KEEP_EXTEND = [
+  {
+    gender: "Men",
+    programs: [
+      { rank: 1, name: "Pace Breaker", sales: 17_800_000, units: 1_500_000, held: "5 short programs", next: "Jogger $73M · Jacket $56M · Pant $30M" },
+      { rank: 2, name: "License to Train (incl. DrySense)", sales: 11_800_000, units: 895_000, held: "3 programs", next: "Textured Jogger $22M · Tank $13M" },
+      { rank: 3, name: "Always In Motion", sales: 10_500_000, units: 2_300_000, held: "3 underwear programs", next: "Keep and defend · 5-inch boxer brief $2M" },
+    ],
+  },
+  {
+    gender: "Women",
+    programs: [
+      { rank: 1, name: "Define Jacket", sales: 28_500_000, units: 1_400_000, held: "Nulu", next: "Cropped Define $290M · Hooded $12M" },
+      { rank: 2, name: "Sculpt", sales: 10_400_000, units: 1_100_000, held: "7 tank and top programs", next: "Keep and defend · sister styles are small" },
+      { rank: 3, name: "Rulu", sales: 8_400_000, units: 493_000, held: "10 programs", next: "Drapey Yoga Jogger $13M" },
+    ],
+  },
+];
+
+export const LULULEMON_FORECAST_WHITESPACE = [
+  {
+    gender: "Men",
+    programs: [
+      { name: "ABC", sales: 528_000_000, units: 5_300_000, detail: "Warpstreme woven · Pant $392M · Short $108M · Jogger $28M" },
+      { name: "Zeroed In", sales: 232_000_000, units: 3_100_000, detail: "NYG makes only the graphic long-sleeve · Pant, shirt, short, jogger and jacket remain open" },
+      { name: "Metal Vent Tech Tee", sales: 105_000_000, units: 1_800_000, detail: "Knit tee close to DrySense · the nearest new door for NYG" },
+    ],
+    path: [
+      { step: 1, name: "Metal Vent Tech Tee", sales: 98_000_000, action: "Offer a knit tee beside DrySense first." },
+      { step: 2, name: "ABC Short and Jogger", sales: 136_000_000, action: "Ask whether a knit version exists." },
+      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Pursue only after the first two steps are trusted." },
+    ],
+  },
+  {
+    gender: "Women",
+    programs: [
+      { name: "Align", sales: 921_000_000, units: 12_900_000, detail: "Lululemon signature knit · Pant $664M · Tank $124M · Short $113M" },
+      { name: "Wunder Train", sales: 355_000_000, units: 5_300_000, detail: "Pant $258M · Bra / brief $60M" },
+      { name: "Swiftly", sales: 302_000_000, units: 5_800_000, detail: "Knit tee and tank · Tee $249M · Tank $52M" },
+    ],
+    path: [
+      { step: 1, name: "Align Tank", sales: 124_000_000, action: "Enter through a core NYG skill proven by Sculpt." },
+      { step: 2, name: "Align Short", sales: 113_000_000, action: "Move to the next style on the same fabric platform." },
+      { step: 3, name: "Align Pant", sales: 664_000_000, action: "Earn the largest prize last." },
+    ],
+  },
+];
+
+export const LULULEMON_FORECAST_ACTIONS = [
+  { gender: "Men", rank: 1, program: "Pace Breaker", action: "Show 7-inch and 5-inch shorts, then add Pant and Jogger.", timing: "Now" },
+  { gender: "Men", rank: 2, program: "DrySense and Evolution", action: "Offer new colours and lightweight fabrics.", timing: "SS28" },
+  { gender: "Men", rank: 3, program: "Metal Vent and ABC", action: "Enter with the tee first; approach ABC only if a knit route exists.", timing: "Long game" },
+  { gender: "Women", rank: 1, program: "Define Jacket", action: "Protect the biggest NYG sale in the biggest current market.", timing: "Now" },
+  { gender: "Women", rank: 2, program: "Sculpt and Pace Rival", action: "Offer new tank and skirt styles.", timing: "SS28" },
+  { gender: "Women", rank: 3, program: "Align Tank, then Short", action: "Enter beside the incumbent instead of trying to replace it.", timing: "Long game" },
 ];
 
 export const LULULEMON_NYK_FORECAST_SUMMARY = {
@@ -227,6 +311,29 @@ export const LULULEMON_FORECAST_QUICK_WINS = [
       "NYG already supplies It's Rulu Half-Zip *Updated in the same mid-layer category, creating a warm route into a second construction.",
     fabric: "Scuba & Bonded Structures",
   },
+];
+
+export const LULULEMON_FORECAST_NYG_PROGRAMS = [
+  { id: "ss28-men-1", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 1, program: "Pace Breaker Linerless Short 7-inch", nygSales: 4_900_000, nygUnits: 444_000, marketSales: 289_000_000, reason: "Ran in 6 of 10 seasons and sits in the largest men's category." },
+  { id: "ss28-men-2", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 2, program: "Pace Breaker Linerless Short 5-inch", nygSales: 1_400_000, nygUnits: 128_000, marketSales: 276_000_000, reason: "Ran in 4 of 10 seasons; a large market with room to add." },
+  { id: "ss28-men-3", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 3, program: "License to Train Short-Sleeve Shirt", nygSales: 8_200_000, nygUnits: 685_000, marketSales: 164_000_000, reason: "Ran in 7 of 10 seasons. DrySense shirt; NYG sales may include Women's." },
+  { id: "ss28-men-4", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 4, program: "Evolution Short Sleeve Polo Shirt", nygSales: 1_900_000, nygUnits: 191_000, marketSales: 65_000_000, reason: "Ran in 5 of 10 seasons; clean and repeatable polo." },
+  { id: "ss28-men-5", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 5, program: "Pace Breaker Lined Short 7-inch", nygSales: 6_600_000, nygUnits: 541_000, marketSales: 54_000_000, reason: "Ran in 9 of 10 seasons and is a top Pace Breaker seller." },
+  { id: "ss28-women-1", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 1, program: "Sculpt Tank Top", nygSales: 3_700_000, nygUnits: 481_000, marketSales: 59_000_000, reason: "Ran in 6 of 10 seasons; core tank with very high volume." },
+  { id: "ss28-women-2", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 2, program: "BeCalm V-Neck Tank Top", nygSales: 400_000, nygUnits: 56_000, marketSales: 25_000_000, reason: "Ran in 3 of 10 seasons; soft modal tank." },
+  { id: "ss28-women-3", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 3, program: "Sculpt Short-Sleeve Shirt", nygSales: 1_400_000, nygUnits: 169_000, marketSales: 10_000_000, reason: "Ran in 9 of 10 seasons on the same Sculpt fabric platform." },
+  { id: "ss28-women-4", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 4, program: "Sculpt Cropped Tank Top", nygSales: 4_200_000, nygUnits: 349_000, marketSales: 9_000_000, reason: "Ran in 5 of 10 seasons; a growing NYG tank." },
+  { id: "ss28-women-5", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 5, program: "License to Train Classic-Fit Tank Top", nygSales: 400_000, nygUnits: 48_000, marketSales: 5_000_000, reason: "Ran in 3 of 10 seasons and opens the larger tank market." },
+  { id: "fw28-men-1", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 1, program: "License to Train Hoodie", nygSales: 3_200_000, nygUnits: 178_000, marketSales: 121_000_000, reason: "Ran in 5 of 10 seasons and addresses the largest men's hoodie market." },
+  { id: "fw28-men-2", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 2, program: "Textured Double-Knit Cotton Hoodie", nygSales: 2_500_000, nygUnits: 131_000, marketSales: 77_000_000, reason: "Ran in 2 of 10 seasons and aligns with the texture trend." },
+  { id: "fw28-men-3", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 3, program: "Ease The Day Hoodie", nygSales: 7_000_000, nygUnits: 415_000, marketSales: 34_000_000, reason: "Ran in 6 of 10 seasons; strong soft-touch hoodie since SU26." },
+  { id: "fw28-men-4", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 4, program: "Rulu Fleece Half-Zip Long-Sleeve Shirt", nygSales: 3_700_000, nygUnits: 201_000, marketSales: 21_000_000, reason: "Ran in 9 of 10 seasons and fits the brushed-fleece direction." },
+  { id: "fw28-men-5", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 5, program: "Cotton-Blend Waffle Knit Hoodie", nygSales: 1_800_000, nygUnits: 108_000, marketSales: 13_000_000, reason: "Ran in 5 of 10 seasons and serves a sizeable pullover market." },
+  { id: "fw28-women-1", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 1, program: "Define Jacket *Nulu", nygSales: 28_500_000, nygUnits: 1_425_000, marketSales: 688_000_000, reason: "Ran in all 10 seasons; NYG's largest sale and market." },
+  { id: "fw28-women-2", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 2, program: "It's Rulu Cropped Half Zip *Updated", nygSales: 3_700_000, nygUnits: 233_000, marketSales: 24_000_000, reason: "Ran in 9 of 10 seasons; established brushed Rulu half zip." },
+  { id: "fw28-women-3", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 3, program: "Love Long-Sleeve Shirt *BeCalm", nygSales: 700_000, nygUnits: 64_000, marketSales: 13_000_000, reason: "Ran in 3 of 10 seasons; soft modal top." },
+  { id: "fw28-women-4", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 4, program: "BeCalm Wrap-Front Long-Sleeve Shirt", nygSales: 500_000, nygUnits: 37_000, marketSales: 11_000_000, reason: "Ran in 2 of 10 seasons and provides access to the large tee market." },
+  { id: "fw28-women-5", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 5, program: "Love Modal Fleece Long-Sleeve Shirt", nygSales: 600_000, nygUnits: 59_000, marketSales: 8_000_000, reason: "Ran in 3 of 10 seasons and provides another route into tees." },
 ];
 
 export const LULULEMON_FORECAST_PROGRAMS = [
