@@ -31,6 +31,11 @@ import {
   LULULEMON_FORECAST_PROGRAMS,
   LULULEMON_FORECAST_QUICK_WINS,
   LULULEMON_FORECAST_SUMMARY,
+  LULULEMON_NYK_FABRIC_BRIEFS,
+  LULULEMON_NYK_FORECAST_GROUPS,
+  LULULEMON_NYK_FORECAST_SUMMARY,
+  LULULEMON_NYK_NEXT_STEPS,
+  LULULEMON_NYK_TRENDS,
 } from "./lululemonSeasonForecast";
 import {
   LULULEMON_BUSINESS_METRICS,
@@ -3028,22 +3033,50 @@ function LululemonSeasonForecast() {
       };
     })
     .filter((group) => group.genderGroups.length > 0);
+  const filteredNykGroups = LULULEMON_NYK_FORECAST_GROUPS.filter(
+    (item) => season === "All" || item.season === season,
+  );
+  const filteredNykBriefs = LULULEMON_NYK_FABRIC_BRIEFS.filter(
+    (item) => season === "All" || item.season === season,
+  );
+  const nykSeasonGroups = ["SS28", "FW28"]
+    .filter((seasonKey) => season === "All" || season === seasonKey)
+    .map((seasonKey) => ({
+      season: seasonKey,
+      seasonName:
+        filteredNykGroups.find((item) => item.season === seasonKey)?.seasonName || seasonKey,
+      items: filteredNykGroups.filter((item) => item.season === seasonKey),
+    }))
+    .filter((group) => group.items.length > 0);
+  const isNykForecast = partner === "NYK";
   const forecastAiContext = useMemo(
     () => ({
       dashboard: "Lululemon SS28 & FW28 Season Forecast",
       selectedPartner: partner,
       selectedSeason: season,
-      selectedGender: gender,
-      summary: LULULEMON_FORECAST_SUMMARY,
-      visiblePrograms: filteredPrograms,
-      quickWins,
-      flagshipTargets,
-      fabricDirections,
-      nextSteps: LULULEMON_FORECAST_NEXT_STEPS,
+      selectedGender: isNykForecast ? "Program level (no gender split in source)" : gender,
+      summary: isNykForecast ? LULULEMON_NYK_FORECAST_SUMMARY : LULULEMON_FORECAST_SUMMARY,
+      visiblePrograms: isNykForecast ? filteredNykGroups : filteredPrograms,
+      quickWins: isNykForecast ? [] : quickWins,
+      flagshipTargets: isNykForecast ? [] : flagshipTargets,
+      fabricDirections: isNykForecast ? filteredNykBriefs : fabricDirections,
+      trends: isNykForecast ? LULULEMON_NYK_TRENDS : [],
+      nextSteps: isNykForecast ? LULULEMON_NYK_NEXT_STEPS : LULULEMON_FORECAST_NEXT_STEPS,
       caveat:
         "This is a directional forecast. The actual SS28/FW28 Lululemon line-list is not available yet.",
     }),
-    [partner, season, gender, filteredPrograms, quickWins, flagshipTargets, fabricDirections],
+    [
+      partner,
+      season,
+      gender,
+      isNykForecast,
+      filteredNykGroups,
+      filteredPrograms,
+      quickWins,
+      flagshipTargets,
+      filteredNykBriefs,
+      fabricDirections,
+    ],
   );
 
   return (
@@ -3051,34 +3084,45 @@ function LululemonSeasonForecast() {
       <article className="lululemon-forecast-hero">
         <div className="lululemon-forecast-hero-copy">
           <p className="eyebrow">NAN YANG TEXTILE GROUP x LULULEMON</p>
-          <h2>{LULULEMON_FORECAST_SUMMARY.title}</h2>
-          <p>{LULULEMON_FORECAST_SUMMARY.thesis}</p>
+          <h2>
+            {isNykForecast
+              ? LULULEMON_NYK_FORECAST_SUMMARY.title
+              : LULULEMON_FORECAST_SUMMARY.title}
+          </h2>
+          <p>
+            {isNykForecast
+              ? LULULEMON_NYK_FORECAST_SUMMARY.thesis
+              : LULULEMON_FORECAST_SUMMARY.thesis}
+          </p>
           <span>Directional forecast · September 2026 · Confidential</span>
         </div>
         <div className="lululemon-forecast-hero-metrics">
-          <div>
-            <strong>{LULULEMON_FORECAST_SUMMARY.suppliedPrograms}</strong>
-            <span>Programs NYG supplies today</span>
-          </div>
-          <div>
-            <strong>{LULULEMON_FORECAST_SUMMARY.securelyWonPrograms}</strong>
-            <span>Programs securely won</span>
-          </div>
-          <div>
-            <strong>{LULULEMON_FORECAST_PROGRAMS.length}</strong>
-            <span>Seasonal win plays</span>
-          </div>
-          <div>
-            <strong>{LULULEMON_FORECAST_FABRICS.length}</strong>
-            <span>{partner === "NYG" ? "NYK directions paired" : "NYK fabric directions"}</span>
-          </div>
+          {isNykForecast ? (
+            <>
+              <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.nykShare}%</strong><span>NYK overall share</span></div>
+              <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.totalYards}M</strong><span>Total NYG fabric PO yards</span></div>
+              <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.outsideYards}M</strong><span>Yards supplied outside NYK</span></div>
+              <div><strong>{LULULEMON_NYK_FORECAST_GROUPS.length}</strong><span>SS28 and FW28 fabric plays</span></div>
+            </>
+          ) : (
+            <>
+              <div><strong>{LULULEMON_FORECAST_SUMMARY.suppliedPrograms}</strong><span>Programs NYG supplies today</span></div>
+              <div><strong>{LULULEMON_FORECAST_SUMMARY.securelyWonPrograms}</strong><span>Programs securely won</span></div>
+              <div><strong>{LULULEMON_FORECAST_PROGRAMS.length}</strong><span>Seasonal win plays</span></div>
+              <div><strong>{LULULEMON_FORECAST_FABRICS.length}</strong><span>NYK directions paired</span></div>
+            </>
+          )}
         </div>
       </article>
 
       <article className="lululemon-forecast-method">
         <div>
           <span>FORECAST BASIS</span>
-          <p>{LULULEMON_FORECAST_SUMMARY.methodology}</p>
+          <p>
+            {isNykForecast
+              ? "Fabric priorities are taken from the NYK SS28/FW28 forecast deck and grounded in NYG fabric purchase-order whitespace."
+              : LULULEMON_FORECAST_SUMMARY.methodology}
+          </p>
         </div>
         <div className="lululemon-forecast-controls">
           <fieldset>
@@ -3087,7 +3131,10 @@ function LululemonSeasonForecast() {
               <button
                 className={partner === value ? "active" : undefined}
                 type="button"
-                onClick={() => setPartner(value)}
+                onClick={() => {
+                  setPartner(value);
+                  if (value === "NYK") setGender("All");
+                }}
                 key={value}
               >
                 {value}
@@ -3107,25 +3154,27 @@ function LululemonSeasonForecast() {
               </button>
             ))}
           </fieldset>
-          <fieldset>
-            <legend>Gender</legend>
-            {["All", "Men", "Women"].map((value) => (
-              <button
-                className={gender === value ? "active" : undefined}
-                type="button"
-                onClick={() => setGender(value)}
-                key={value}
-              >
-                {value}
-              </button>
-            ))}
-          </fieldset>
+          {!isNykForecast && (
+            <fieldset>
+              <legend>Gender</legend>
+              {["All", "Men", "Women"].map((value) => (
+                <button
+                  className={gender === value ? "active" : undefined}
+                  type="button"
+                  onClick={() => setGender(value)}
+                  key={value}
+                >
+                  {value}
+                </button>
+              ))}
+            </fieldset>
+          )}
         </div>
         <div className="lululemon-forecast-filter-status">
           <span>{partner}</span>
           <b>{season === "All" ? "SS28 + FW28" : season}</b>
-          <b>{gender === "All" ? "Men + Women" : gender}</b>
-          <small>{filteredPrograms.length} priority plays</small>
+          <b>{isNykForecast ? "Program level · No gender split" : gender === "All" ? "Men + Women" : gender}</b>
+          <small>{isNykForecast ? filteredNykGroups.length : filteredPrograms.length} priority plays</small>
         </div>
       </article>
 
@@ -3178,7 +3227,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      <article className="lululemon-forecast-section">
+      {partner === "NYG" && <article className="lululemon-forecast-section">
         <div className="lululemon-forecast-section-heading">
           <div>
             <p className="eyebrow">{partner} FORECAST</p>
@@ -3231,7 +3280,7 @@ function LululemonSeasonForecast() {
             </section>
           ))}
         </div>
-      </article>
+      </article>}
 
       {partner === "NYG" && <div className="lululemon-forecast-split">
         <article className="lululemon-forecast-section flagship">
@@ -3269,30 +3318,93 @@ function LululemonSeasonForecast() {
         </article>
       </div>}
 
-      {partner === "NYK" && <article className="lululemon-forecast-section fabric-glossary">
-        <div className="lululemon-forecast-section-heading">
-          <div>
-            <p className="eyebrow">NYK FABRIC PLAYBOOK</p>
-            <h3>Fabric directions matched to the selected opportunities</h3>
-          </div>
-          <span>{fabricDirections.length} directions</span>
-        </div>
-        <div className="lululemon-forecast-fabrics">
-          {fabricDirections.map((fabric, index) => (
-            <div key={fabric.name}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{fabric.name}</strong>
-              <p>{fabric.description}</p>
+      {isNykForecast && (
+        <>
+          <article className="lululemon-forecast-section nyk-programs">
+            <div className="lululemon-forecast-section-heading">
+              <div>
+                <p className="eyebrow">NYK FABRIC FORECAST</p>
+                <h3>Fabric groups NYK should present</h3>
+              </div>
+              <span>Grouped by season · {filteredNykGroups.length} priority plays</span>
             </div>
-          ))}
-        </div>
-      </article>}
+            <div className="lululemon-nyk-forecast-groups">
+              {nykSeasonGroups.map((seasonGroup) => (
+                <section className="lululemon-nyk-forecast-season" key={seasonGroup.season}>
+                  <div className="lululemon-forecast-season-heading">
+                    <span>{seasonGroup.season}</span>
+                    <div>
+                      <strong>{seasonGroup.seasonName}</strong>
+                      <small>{seasonGroup.items.length} fabric groups</small>
+                    </div>
+                  </div>
+                  <div className="lululemon-nyk-forecast-list">
+                    {seasonGroup.items.map((item) => (
+                      <article className="lululemon-nyk-forecast-row" key={item.id}>
+                        <span className="rank">{String(item.rank).padStart(2, "0")}</span>
+                        <div className="program">
+                          <small>{item.category}</small>
+                          <h4>{item.group}</h4>
+                          <b>{item.tier}</b>
+                        </div>
+                        <div className="why">
+                          <small>Why this group</small>
+                          <p>{item.reason}</p>
+                        </div>
+                        <div className="direction">
+                          <small>NYK should develop</small>
+                          <strong>{item.fabric}</strong>
+                          <p>{item.fabricDetail}</p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </article>
+
+          <article className="lululemon-forecast-section nyk-briefs">
+            <div className="lululemon-forecast-section-heading">
+              <div>
+                <p className="eyebrow">FABRIC BRIEFS</p>
+                <h3>Surface and construction direction</h3>
+              </div>
+              <span>{filteredNykBriefs.length} source swatches</span>
+            </div>
+            <div className="lululemon-nyk-brief-grid">
+              {filteredNykBriefs.map((brief) => (
+                <article key={`${brief.season}-${brief.fabric}`}>
+                  <img src={brief.image} alt={`${brief.fabric} source swatch`} />
+                  <div className="title"><span>{brief.season}</span><h4>{brief.fabric}</h4></div>
+                  <div><small>Surface / hand</small><p>{brief.surface}</p></div>
+                  <div><small>Target construction</small><p>{brief.construction}</p></div>
+                </article>
+              ))}
+            </div>
+          </article>
+
+          <div className="lululemon-forecast-split nyk-support">
+            <article className="lululemon-forecast-section nyk-trends">
+              <div className="lululemon-forecast-section-heading">
+                <div><p className="eyebrow">2026 DIRECTION</p><h3>Trend signals behind the forecast</h3></div>
+              </div>
+              <div>{LULULEMON_NYK_TRENDS.map((trend, index) => <span key={trend}><b>{String(index + 1).padStart(2, "0")}</b>{trend}</span>)}</div>
+            </article>
+            <article className="lululemon-forecast-section next-steps">
+              <div className="lululemon-forecast-section-heading">
+                <div><p className="eyebrow">NYK ACTION PLAN</p><h3>What the mill does next</h3></div>
+              </div>
+              <ol>{LULULEMON_NYK_NEXT_STEPS.map((step) => <li key={step}>{step}</li>)}</ol>
+            </article>
+          </div>
+        </>
+      )}
 
       <p className="lululemon-forecast-source">
-        Source: NYG_NYK_SS28_FW28_Forecast.pptx. Forecast targets are directional,
-        based on NYG production records versus the Lululemon catalog. Fabric directions
-        reflect general performance-fabric trend knowledge and are not a live WGSN or
-        ISPO subscription pull. Refresh when the actual SS28/FW28 line-list is available.
+        {isNykForecast
+          ? "Source: NYK_Lululemon_Fabric_Forecast_SS28-FW28.pptx. Program-level forecast; the source does not provide a gender split. Milestone content is intentionally excluded from the NYK view."
+          : "Source: NYG_NYK_SS28_FW28_Forecast.pptx. Forecast targets are directional, based on NYG production records versus the Lululemon catalog. Refresh when the actual SS28/FW28 line-list is available."}
       </p>
       <DashboardAiAssistant context={forecastAiContext} />
     </section>
