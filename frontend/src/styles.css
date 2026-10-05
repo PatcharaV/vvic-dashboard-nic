@@ -2374,36 +2374,152 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-style-season-options {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
+  position: relative;
+  min-width: 230px;
 }
 
-.lululemon-style-season-options button {
-  min-height: 30px;
-  padding: 0 11px;
-  color: #6f6266;
+.lululemon-style-season-dropdown {
+  position: relative;
+}
+
+.lululemon-style-season-dropdown > summary {
+  min-height: 38px;
+  padding: 7px 34px 7px 11px;
+  display: grid;
+  align-content: center;
+  gap: 2px;
+  color: #433a3d;
   background: #fff;
   border: 1px solid #dfd4d7;
-  border-radius: 999px;
-  font: inherit;
-  font-size: 8px;
-  font-weight: 850;
+  border-radius: 8px;
+  list-style: none;
   cursor: pointer;
-  transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
 }
 
-.lululemon-style-season-options button:hover {
-  color: var(--lululemon-red);
+.lululemon-style-season-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.lululemon-style-season-dropdown > summary:hover,
+.lululemon-style-season-dropdown[open] > summary {
   border-color: #dba8b4;
 }
 
-.lululemon-style-season-options button.active {
-  color: #fff;
-  background: var(--lululemon-red);
+.lululemon-style-season-dropdown > summary > span {
+  color: #8c7d81;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-season-dropdown > summary > strong {
+  overflow: hidden;
+  font-size: 9px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lululemon-style-season-dropdown > summary > i {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid #675d60;
+  border-bottom: 1.5px solid #675d60;
+  transform: translateY(-68%) rotate(45deg);
+  transition: transform 140ms ease;
+}
+
+.lululemon-style-season-dropdown[open] > summary > i {
+  transform: translateY(-32%) rotate(225deg);
+}
+
+.lululemon-style-season-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 120;
+  width: min(300px, calc(100vw - 36px));
+  padding: 7px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  background: #fff;
+  border: 1px solid #e1d6d9;
+  border-radius: 10px;
+  box-shadow: 0 16px 35px rgba(48, 29, 35, 0.18);
+}
+
+.lululemon-style-season-menu button {
+  min-height: 34px;
+  padding: 7px 9px;
+  display: grid;
+  grid-template-columns: 15px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+  color: #4d4346;
+  background: #faf8f9;
+  border: 1px solid #eee7e9;
+  border-radius: 7px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lululemon-style-season-menu button:first-child {
+  grid-column: 1 / -1;
+}
+
+.lululemon-style-season-menu button:hover {
+  border-color: #dba8b4;
+}
+
+.lululemon-style-season-menu button > span {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #cfc4c7;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.lululemon-style-season-menu button.active > span {
+  position: relative;
   border-color: var(--lululemon-red);
-  box-shadow: 0 4px 10px rgba(208, 0, 55, 0.16);
+  background: var(--lululemon-red);
+}
+
+.lululemon-style-season-menu button.active > span::after {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  width: 4px;
+  height: 7px;
+  content: "";
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+}
+
+.lululemon-style-season-menu b {
+  font-size: 9px;
+}
+
+.lululemon-style-season-menu small {
+  color: #968b8e;
+  font-size: 8px;
+}
+
+.lululemon-style-season-menu > p {
+  grid-column: 1 / -1;
+  margin: 2px 2px 0;
+  padding-top: 7px;
+  color: #7c7174;
+  border-top: 1px solid #eee7e9;
+  font-size: 8px;
+  text-align: right;
 }
 
 .lululemon-revenue-period-note {

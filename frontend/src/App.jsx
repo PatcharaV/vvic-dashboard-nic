@@ -1630,29 +1630,49 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           })}
         </div>
       </div>
-      <div className="lululemon-style-season-options" role="group" aria-label="Filter partner data by season">
-        <button
-          className={selectedYear === "all" ? "active" : undefined}
-          type="button"
-          aria-pressed={selectedYear === "all"}
-          onClick={() => {
-            setSelectedYear("all");
-            setSelectedSeasons(availableSeasons);
-          }}
-        >
-          All seasons
-        </button>
-        {visibleYearSeasons.map((season) => (
-          <button
-            className={selectedSeasons.includes(season) ? "active" : undefined}
-            type="button"
-            key={season}
-            aria-pressed={selectedSeasons.includes(season)}
-            onClick={() => toggleSeason(season)}
-          >
-            {season}
-          </button>
-        ))}
+      <div className="lululemon-style-season-options">
+        <details className="lululemon-style-season-dropdown">
+          <summary aria-label="Choose seasons">
+            <span>Seasons</span>
+            <strong>
+              {selectedSeasons.length === availableSeasons.length
+                ? "All seasons"
+                : selectedSeasons.join(", ")}
+            </strong>
+            <i aria-hidden="true" />
+          </summary>
+          <div className="lululemon-style-season-menu" role="group" aria-label="Filter partner data by season">
+            <button
+              className={selectedSeasons.length === availableSeasons.length ? "active" : undefined}
+              type="button"
+              aria-pressed={selectedSeasons.length === availableSeasons.length}
+              onClick={() => {
+                setSelectedYear("all");
+                setSelectedSeasons(availableSeasons);
+              }}
+            >
+              <span aria-hidden="true" />
+              <b>All seasons</b>
+              <small>{availableSeasons.length}</small>
+            </button>
+            {visibleYearSeasons.map((season) => {
+              const isSelected = selectedSeasons.includes(season);
+              return (
+                <button
+                  className={isSelected ? "active" : undefined}
+                  type="button"
+                  key={season}
+                  aria-pressed={isSelected}
+                  onClick={() => toggleSeason(season)}
+                >
+                  <span aria-hidden="true" />
+                  <b>{season}</b>
+                </button>
+              );
+            })}
+            <p>{selectedSeasons.length} seasons selected</p>
+          </div>
+        </details>
       </div>
       <p className="lululemon-revenue-period-note">
         <strong>Lululemon revenue period:</strong> 1 SEP 25 - 31 AUG 26
