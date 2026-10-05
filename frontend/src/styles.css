@@ -2166,13 +2166,13 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-style-coverage-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .lululemon-style-coverage-grid.opportunity-only {
-  grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .lululemon-style-card-heading {
@@ -2272,6 +2272,16 @@ button.lululemon-bar-row.selected > strong {
   display: grid;
   align-content: start;
   gap: 16px;
+}
+
+.lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining {
+  width: 100%;
+}
+
+.lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+  .lululemon-style-opportunity-groups {
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  align-items: start;
 }
 
 .lululemon-style-secured-column > .lululemon-style-portfolio-list.secured {
@@ -2495,6 +2505,7 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-nyk-fabric-list {
   margin-top: 12px;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: 7px;
 }
 

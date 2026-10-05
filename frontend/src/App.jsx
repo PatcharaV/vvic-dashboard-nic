@@ -1923,7 +1923,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                 </div>
                 <div className="lululemon-no-secured-styles">
                   <strong>No secured styles yet</strong>
-                  <span>The programs on the left are the current opportunities for NYG.</span>
+                  <span>The programs above are the current opportunities for NYG.</span>
                 </div>
               </div>
             ) : (
