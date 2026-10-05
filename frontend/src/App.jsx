@@ -1442,9 +1442,9 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
 
 const LULULEMON_DEFAULT_STYLE_SEASONS = ["FA25", "WT25", "SP26", "SU26"];
 const LULULEMON_STYLE_YEAR_FILTERS = [
-  { year: "2025", seasons: LULULEMON_DEFAULT_STYLE_SEASONS },
-  { year: "2026", seasons: ["FA26", "WT26", "SP27", "SU27"] },
-  { year: "2027", seasons: ["FA27", "WT27"] },
+  { year: "2025", seasons: ["FA25", "WT25"] },
+  { year: "2026", seasons: ["SP26", "SU26", "FA26", "WT26"] },
+  { year: "2027", seasons: ["SP27", "SU27", "FA27", "WT27"] },
 ];
 
 function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
@@ -1483,12 +1483,12 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const [partnerView, setPartnerView] = useState("nyg");
   const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
   const [selectedNygSeason, setSelectedNygSeason] = useState(null);
-  const [selectedYear, setSelectedYear] = useState("2025");
+  const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSeasons, setSelectedSeasons] = useState(LULULEMON_DEFAULT_STYLE_SEASONS);
   const selectedYearFilter = LULULEMON_STYLE_YEAR_FILTERS.find(
     ({ year }) => year === selectedYear,
-  ) || LULULEMON_STYLE_YEAR_FILTERS[0];
-  const visibleYearSeasons = selectedYearFilter.seasons.filter(
+  );
+  const visibleYearSeasons = (selectedYearFilter?.seasons || LULULEMON_DEFAULT_STYLE_SEASONS).filter(
     (season) => availableSeasons.includes(season),
   );
   const styles = useMemo(() => (
@@ -1529,7 +1529,8 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
 
   useEffect(() => {
     setSelectedSeasons(
-      selectedYearFilter.seasons.filter((season) => availableSeasons.includes(season)),
+      (selectedYearFilter?.seasons || LULULEMON_DEFAULT_STYLE_SEASONS)
+        .filter((season) => availableSeasons.includes(season)),
     );
   }, [subtypeKey, availableSeasons, selectedYear]);
 
