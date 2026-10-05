@@ -55,7 +55,7 @@ export const LULULEMON_SALES_MIX = [
 export const LULULEMON_NYG_COMPARISON = [
   {
     "key": "overall",
-    "label": "All sub-types",
+    "label": "All product types",
     "fobMultiplier": 6.97011496,
     "lululemonSales": 9645778875.11662,
     "lululemonUnits": 111603854,

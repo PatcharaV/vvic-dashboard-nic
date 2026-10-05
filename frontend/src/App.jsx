@@ -955,7 +955,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
           <table className="lululemon-subtype-table">
             <thead>
               <tr>
-                <th>Sub-type</th>
+                <th>Product type</th>
                 <th>NYG</th>
                 <th>{tableLabel}</th>
               </tr>
@@ -1222,14 +1222,14 @@ function LululemonNykFabricPanel({ subtypeKey }) {
           <span>FA25-SU26 recorded usage</span>
           <b>{formatNumber.format(Math.round(recordedYards))} YDS</b>
         </div>
-        {renderStyles(recordedStyles, "No recorded NYK usage for this sub-type.")}
+        {renderStyles(recordedStyles, "No recorded NYK usage for this product type.")}
       </div>
       <div className="lululemon-nyk-period future">
         <div className="lululemon-nyk-period-heading">
           <span>FA26-SP27 ordered fabric</span>
           <b>{formatNumber.format(Math.round(futureYards))} YDS</b>
         </div>
-        {renderStyles(futureStyles, "No matched NYK fabric PO for this sub-type.", true)}
+        {renderStyles(futureStyles, "No matched NYK fabric PO for this product type.", true)}
       </div>
     </div>
   );
@@ -1283,9 +1283,9 @@ function LululemonNygStyleComparison({
         <div>
           <span>
             {overview
-              ? "All sub-types · Overall comparison"
+              ? "All product types · Overall comparison"
               : aggregate
-                ? `${style.name} sub-type · Overall comparison`
+                ? `${style.name} product type · Overall comparison`
                 : "Selected NYG style · Overall comparison"}
           </span>
           <h4>{style.name}</h4>
@@ -1366,7 +1366,7 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
     <section className="lululemon-style-linked-comparison lululemon-nyk-linked-comparison" aria-live="polite">
       <div className="lululemon-style-linked-heading">
         <div>
-          <span>{overview ? "All sub-types · NYK fabric summary" : `${summary.name} · NYK fabric summary`}</span>
+          <span>{overview ? "All product types · NYK fabric summary" : `${summary.name} · NYK fabric summary`}</span>
           <h4>{summary.name}</h4>
           <p>{summary.season} · NYK fabric coverage</p>
         </div>
@@ -1509,7 +1509,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           {[
             { key: "nyg", label: "NYG" },
             { key: "nyk", label: "NYK" },
-            { key: "map", label: "MY MAP" },
+            { key: "map", label: "PRODUCT MAP" },
           ].map((option) => (
             <button
               className={partnerView === option.key ? "active" : undefined}
@@ -1532,7 +1532,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         Reset
       </button>
       <label>
-        <span>Sub-type</span>
+        <span>Product type</span>
         <select
           value={subtypeKey}
           onChange={(event) => onSelect(event.target.value)}
@@ -1592,7 +1592,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         </select>
       </label>
       <label>
-        <span>Sub-type</span>
+        <span>Product type</span>
         <select value={subtypeKey} onChange={(event) => onSelect(event.target.value)}>
           {LULULEMON_NYG_COMPARISON.map((row) => (
             <option key={row.key} value={row.key}>{row.label}</option>
@@ -1607,7 +1607,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       <article className="lululemon-overview-card lululemon-style-card">
         <div className="lululemon-style-card-heading">
           <div>
-            <h3>{subtypeLabel} NYG My Map</h3>
+            <h3>{subtypeLabel} NYG Product Map</h3>
             <p>Explore the NYG product hierarchy from Group through Style Name.</p>
           </div>
           {subtypeControls}
@@ -1674,7 +1674,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     });
     const overviewSummary = {
       key: "all-subtypes-summary",
-      name: "All sub-types",
+      name: "All product types",
       season: selectedSeasons.length === 0
         ? `All ${availableSeasons.length} seasons`
         : selectedSeasons.join(", "),
@@ -1694,8 +1694,8 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       <article className="lululemon-overview-card lululemon-style-card">
         <div className="lululemon-style-card-heading">
           <div>
-            <h3>All sub-types style overview</h3>
-            <p>Compare opportunity size and partner coverage, then select a sub-type for style-level detail.</p>
+            <h3>All product types style overview</h3>
+            <p>Compare opportunity size and partner coverage, then select a product type for style-level detail.</p>
           </div>
           {subtypeControls}
         </div>
@@ -1757,7 +1757,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         <div className="lululemon-style-card-heading">
           <div>
             <h3>Sales coverage by style</h3>
-            <p>No style coverage is available for this sub-type.</p>
+            <p>No style coverage is available for this product type.</p>
           </div>
           {subtypeControls}
         </div>
@@ -2077,7 +2077,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       </div>
       {taxonomyDifference > 0 && (
         <p className="lululemon-style-taxonomy-note">
-          {formatNumber.format(taxonomyDifference)} NYG {taxonomyDifference === 1 ? "style is" : "styles are"} classified under a different Sub-Type in All Product and included as secured in this overview.
+          {formatNumber.format(taxonomyDifference)} NYG {taxonomyDifference === 1 ? "style is" : "styles are"} classified under a different Product Type in All Product and included as secured in this overview.
         </p>
       )}
       <p className="lululemon-style-taxonomy-note">
@@ -2118,7 +2118,7 @@ function LululemonNygComparison({ metric, selectedKey }) {
           <p className="eyebrow">INTERACTIVE COMPARISON</p>
           <h3>NYG share of Lululemon</h3>
           <p>
-            Choose a sub-type. Every card and chart below updates together.
+            Choose a product type. Every card and chart below updates together.
           </p>
         </div>
       </div>
@@ -2404,17 +2404,17 @@ const LULULEMON_AI_SUGGESTIONS = {
   auto: [
     "จากข้อมูลทั้งหมด ควรนำเสนอผ้าอะไรเพิ่มอีกไหม",
     "What are the top five opportunities for Sales and BD?",
-    "Sub-type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
+    "Product type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
   ],
   th: [
     "จากข้อมูลทั้งหมด ควรนำเสนอผ้าอะไรเพิ่มอีกไหม",
     "สรุปโอกาสสำคัญ 5 อันดับสำหรับทีม Sales และ BD",
-    "Sub-type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
+    "Product type ใดมีช่องว่างระหว่าง Lululemon กับ NYG มากที่สุด",
   ],
   en: [
     "Based on all available data, which fabrics should we propose next?",
     "Summarize the top five opportunities for Sales and BD.",
-    "Which sub-type has the largest opportunity gap between Lululemon and NYG?",
+    "Which product type has the largest opportunity gap between Lululemon and NYG?",
   ],
 };
 
@@ -2774,7 +2774,7 @@ function NygMyMap({ subtypeKey }) {
           <span>NYG product architecture</span>
           <strong>{selectedProductType || "All product types"}</strong>
           <p>
-            Select a card to reveal the next level. The Sub-type control above filters
+            Select a card to reveal the next level. The Product type control above filters
             this map and remains synchronized with the other partner views.
           </p>
         </div>
@@ -3376,11 +3376,11 @@ function LululemonBrandOverview() {
           <article className="lululemon-overview-card lululemon-subtype-card">
             <div className="lululemon-subtype-card-heading">
               <div>
-                <h3>NYG vs. Lululemon sub-type size</h3>
+                <h3>NYG vs. Lululemon product type size</h3>
                 <p>
                   {comparisonMetric === "sales"
                     ? "NYG sales compared with Lululemon FOB Spend (Sale Total ÷ AVG FOB) - click a row to filter"
-                    : "NYG compared with the full Lululemon sub-type - click a row to filter"}
+                    : "NYG compared with the full Lululemon product type - click a row to filter"}
                 </p>
               </div>
               <div className="lululemon-comparison-controls lululemon-style-controls lululemon-chart-controls">
@@ -3393,7 +3393,7 @@ function LululemonBrandOverview() {
                   Reset
                 </button>
                 <label>
-                  <span>Sub-type</span>
+                  <span>Product type</span>
                   <select
                     value={comparisonSubtype}
                     onChange={(event) => setComparisonSubtype(event.target.value)}
