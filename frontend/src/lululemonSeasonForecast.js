@@ -1,18 +1,24 @@
 export const LULULEMON_FORECAST_SUMMARY = {
-  title: "FW27 & SS28 Season Forecast",
-  suppliedPrograms: 59,
-  securelyWonPrograms: 13,
+  title: "SS28 & FW28 Season Forecast",
+  suppliedPrograms: 72,
+  securelyWonPrograms: 20,
   thesis:
     "Defend the programs NYG already supplies and win the flagship Lululemon franchises where NYG has no presence today.",
   methodology:
-    "No FW27/SS28 line-list is available yet. Win targets compare NYG production records with the market-wide Lululemon catalog and pair the whitespace with a directional NYK fabric story.",
+    "No SS28/FW28 line-list is available yet. Win targets compare NYG production records with the market-wide Lululemon catalog and pair each whitespace opportunity with a directional NYK fabric story.",
 };
+
+export const LULULEMON_FORECAST_MILESTONES = [
+  { stage: "Concept", milestones: "BPL" },
+  { stage: "Development", milestones: "1st Forecast, 2nd Forecast" },
+  { stage: "Production", milestones: "Buy Plan, Final" },
+];
 
 export const LULULEMON_FORECAST_QUICK_WINS = [
   {
     id: "pace-breaker-jogger",
     gender: "Men",
-    season: "FW27",
+    season: "FW28",
     program: "Pace Breaker Jogger",
     reason:
       "NYG already makes the Pace Breaker Short, so the jogger is a line extension to an existing franchise and buying relationship.",
@@ -21,7 +27,7 @@ export const LULULEMON_FORECAST_QUICK_WINS = [
   {
     id: "scuba-half-zip",
     gender: "Women",
-    season: "FW27",
+    season: "FW28",
     program: "Scuba Oversized Half-Zip Hoodie",
     reason:
       "NYG already supplies It's Rulu Half-Zip *Updated in the same mid-layer category, creating a warm route into a second construction.",
@@ -31,9 +37,9 @@ export const LULULEMON_FORECAST_QUICK_WINS = [
 
 export const LULULEMON_FORECAST_PROGRAMS = [
   {
-    id: "fw27-men-pace-breaker-jogger",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-men-pace-breaker-jogger",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Men",
     rank: 1,
     program: "Pace Breaker Jogger",
@@ -45,9 +51,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     fabricDetail: "Fleece-back jogger knit with light insulation and low bulk.",
   },
   {
-    id: "fw27-men-abc-trouser",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-men-abc-trouser",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Men",
     rank: 2,
     program: "ABC Trouser Franchise",
@@ -59,9 +65,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     fabricDetail: "Recycled 4-way-stretch woven with a matte, tailored hand.",
   },
   {
-    id: "fw27-men-pace-breaker-jacket",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-men-pace-breaker-jacket",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Men",
     rank: 3,
     program: "Pace Breaker Jacket",
@@ -73,9 +79,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     fabricDetail: "Lightweight wind-resistant woven shell with DWR finish.",
   },
   {
-    id: "fw27-men-smooth-spacer",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-men-smooth-spacer",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Men",
     rank: 4,
     program: "Smooth Spacer Jogger & Hoodie",
@@ -87,9 +93,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     fabricDetail: "French-terry loop-back knit with visible spacer texture.",
   },
   {
-    id: "fw27-women-scuba-half-zip",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-women-scuba-half-zip",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Women",
     rank: 1,
     program: "Scuba Oversized Half-Zip Hoodie",
@@ -101,9 +107,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     fabricDetail: "Bonded double-face fleece with a clean scuba hand.",
   },
   {
-    id: "fw27-women-align",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-women-align",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Women",
     rank: 2,
     program: "Align High-Rise Pant Family",
@@ -115,9 +121,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     fabricDetail: "Buttery-soft compressive knit in the Nulu/Everlux direction.",
   },
   {
-    id: "fw27-women-wunder-train",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-women-wunder-train",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Women",
     rank: 3,
     program: "Wunder Train High-Rise Tight",
@@ -129,9 +135,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     fabricDetail: "Sweat-wicking compression knit with body-mapped mesh zones.",
   },
   {
-    id: "fw27-women-fast-free",
-    season: "FW27",
-    seasonName: "Fall/Winter 2027",
+    id: "fw28-women-fast-free",
+    season: "FW28",
+    seasonName: "Fall/Winter 2028",
     gender: "Women",
     rank: 4,
     program: "Fast and Free High-Rise Tight",
@@ -152,7 +158,7 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     subtype: "Pant",
     tier: "Tier 1",
     pitch:
-      "Carry the FW27 sample into a summer-weight version so one capability story covers both seasons.",
+      "Lead with the summer-weight sample so the same capability story carries directly into FW28.",
     fabric: "Technical Circularity",
     fabricDetail: "Recycled 4-way-stretch woven with a lighter summer hand.",
   },
@@ -208,7 +214,7 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     subtype: "Pant",
     tier: "Tier 1",
     pitch:
-      "Carry the FW27 capability presentation into a lighter summer-weight execution once the relationship is open.",
+      "Lead with the lighter summer-weight capability presentation, then carry the same story into FW28.",
     fabric: "Second-Skin Compression",
     fabricDetail: "Nulu/Everlux-direction knit in a lighter summer weight.",
   },
@@ -250,7 +256,7 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     subtype: "Tight",
     tier: "Tier 2",
     pitch:
-      "Carry the FW27 relationship into the new season without opening a separate capability pitch.",
+      "Introduce the summer-weight version now to open the relationship before the FW28 pitch.",
     fabric: "Zoned Performance Engineering",
     fabricDetail: "Sweat-wicking compression knit in a lighter summer weight.",
   },
@@ -270,7 +276,7 @@ export const LULULEMON_FORECAST_FLAGSHIPS = [
     program: "ABC Trouser",
     claim: "No. 1 men's pant franchise",
     rationale:
-      "A year-round office-to-travel core franchise across both FW27 and SS28 where NYG has zero presence today.",
+      "A year-round office-to-travel core franchise across both SS28 and FW28 where NYG has zero presence today.",
     fabric: "Technical Circularity",
   },
 ];
@@ -290,5 +296,5 @@ export const LULULEMON_FORECAST_NEXT_STEPS = [
   "Protect the programs NYG already holds securely before chasing new whitespace.",
   "Lead with Align Pant for Women and ABC Trouser for Men.",
   "Pair each program pitch with its matching NYK fabric-direction card, not a generic swatch book.",
-  "Refresh the forecast when Lululemon's actual FW27 line-list becomes available.",
+  "Refresh the forecast when Lululemon's actual SS28/FW28 line-list becomes available.",
 ];
