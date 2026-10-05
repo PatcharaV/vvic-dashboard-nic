@@ -1483,7 +1483,14 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const [partnerView, setPartnerView] = useState("nyg");
   const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
   const [selectedNygSeason, setSelectedNygSeason] = useState(null);
+  const [selectedYear, setSelectedYear] = useState("2025");
   const [selectedSeasons, setSelectedSeasons] = useState(LULULEMON_DEFAULT_STYLE_SEASONS);
+  const selectedYearFilter = LULULEMON_STYLE_YEAR_FILTERS.find(
+    ({ year }) => year === selectedYear,
+  ) || LULULEMON_STYLE_YEAR_FILTERS[0];
+  const visibleYearSeasons = selectedYearFilter.seasons.filter(
+    (season) => availableSeasons.includes(season),
+  );
   const styles = useMemo(() => (
     selectedSeasons.length === 0
       ? allStyles
@@ -1522,18 +1529,19 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
 
   useEffect(() => {
     setSelectedSeasons(
-      LULULEMON_DEFAULT_STYLE_SEASONS.filter((season) => availableSeasons.includes(season)),
+      selectedYearFilter.seasons.filter((season) => availableSeasons.includes(season)),
     );
-  }, [subtypeKey, availableSeasons]);
+  }, [subtypeKey, availableSeasons, selectedYear]);
 
   const toggleSeason = (season) => {
     setSelectedSeasons((current) => (
       current.includes(season)
-        ? current.filter((item) => item !== season)
-        : availableSeasons.filter((item) => [...current, season].includes(item))
+        ? current.length > 1 ? current.filter((item) => item !== season) : current
+        : visibleYearSeasons.filter((item) => [...current, season].includes(item))
     ));
   };
-  const selectYear = (seasons) => {
+  const selectYear = (year, seasons) => {
+    setSelectedYear(year);
     setSelectedSeasons(seasons.filter((season) => availableSeasons.includes(season)));
   };
 
@@ -1597,9 +1605,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         <div role="group" aria-label="Filter by product year">
           {LULULEMON_STYLE_YEAR_FILTERS.map(({ year, seasons }) => {
             const availableYearSeasons = seasons.filter((season) => availableSeasons.includes(season));
-            const isActive = availableYearSeasons.length > 0
-              && selectedSeasons.length === availableYearSeasons.length
-              && availableYearSeasons.every((season) => selectedSeasons.includes(season));
+            const isActive = selectedYear === year;
             return (
               <button
                 className={isActive ? "active" : undefined}
@@ -1607,7 +1613,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                 key={year}
                 aria-pressed={isActive}
                 disabled={availableYearSeasons.length === 0}
-                onClick={() => selectYear(seasons)}
+                onClick={() => selectYear(year, seasons)}
               >
                 {year}
               </button>
@@ -1617,14 +1623,18 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       </div>
       <div className="lululemon-style-season-options" role="group" aria-label="Filter partner data by season">
         <button
-          className={selectedSeasons.length === 0 ? "active" : undefined}
+          className={selectedSeasons.length === visibleYearSeasons.length
+            && visibleYearSeasons.every((season) => selectedSeasons.includes(season))
+            ? "active"
+            : undefined}
           type="button"
-          aria-pressed={selectedSeasons.length === 0}
-          onClick={() => setSelectedSeasons([])}
+          aria-pressed={selectedSeasons.length === visibleYearSeasons.length
+            && visibleYearSeasons.every((season) => selectedSeasons.includes(season))}
+          onClick={() => setSelectedSeasons(visibleYearSeasons)}
         >
           All seasons
         </button>
-        {availableSeasons.map((season) => (
+        {visibleYearSeasons.map((season) => (
           <button
             className={selectedSeasons.includes(season) ? "active" : undefined}
             type="button"
