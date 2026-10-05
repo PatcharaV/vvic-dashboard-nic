@@ -403,6 +403,11 @@ main {
   gap: 18px;
 }
 
+.brand-block.lululemon-title-only h1 {
+  color: #151112;
+  font-size: clamp(28px, 3vw, 38px);
+}
+
 .brand-mark {
   flex: 0 0 auto;
   width: 58px;

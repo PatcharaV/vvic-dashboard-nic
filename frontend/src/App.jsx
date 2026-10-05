@@ -5232,17 +5232,23 @@ function App() {
     <main className={isLululemonWorkspace ? "brand-theme-lululemon" : undefined}>
       <MaintenanceOverlay maintenance={maintenance} />
       <header className="topbar">
-        <div className="brand-block">
-          <div className="brand-mark">M</div>
-          <div>
-            <p className="eyebrow">PUBLIC CLOTHING CATALOG ANALYTICS</p>
-            <h1>
-              {brandOptions.find((brand) => brand.value === routeBrand)?.label || "Brand"} Dashboard
-            </h1>
-            <p className="page-description">
-              Monthly product analytics for the selected public clothing catalog.
-            </p>
-          </div>
+        <div className={`brand-block ${isLululemonWorkspace ? "lululemon-title-only" : ""}`.trim()}>
+          {isLululemonWorkspace ? (
+            <h1>Lululemon Dashboard</h1>
+          ) : (
+            <>
+              <div className="brand-mark">M</div>
+              <div>
+                <p className="eyebrow">PUBLIC CLOTHING CATALOG ANALYTICS</p>
+                <h1>
+                  {brandOptions.find((brand) => brand.value === routeBrand)?.label || "Brand"} Dashboard
+                </h1>
+                <p className="page-description">
+                  Monthly product analytics for the selected public clothing catalog.
+                </p>
+              </div>
+            </>
+          )}
         </div>
         <div className="header-actions">
           <button className="secondary-link home-link" type="button" onClick={navigateHome}>
