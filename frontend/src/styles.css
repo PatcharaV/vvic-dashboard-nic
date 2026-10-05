@@ -6462,9 +6462,113 @@ footer a {
 
 /* Keep the stacked opportunity and partner panels inside a desktop viewport. */
 @media (min-width: 981px) {
+  .lululemon-style-linked-comparison {
+    margin: 6px 0 9px;
+    padding: 7px 8px;
+    gap: 5px;
+  }
+
+  .lululemon-style-linked-heading {
+    gap: 10px;
+  }
+
+  .lululemon-style-linked-heading > div {
+    gap: 1px;
+  }
+
+  .lululemon-style-linked-heading span,
+  .lululemon-style-linked-heading p,
+  .lululemon-style-summary-filters label > span {
+    font-size: 9px !important;
+    line-height: 1.15;
+  }
+
+  .lululemon-style-linked-heading h4 {
+    font-size: 13px !important;
+    line-height: 1.1;
+  }
+
+  .lululemon-style-linked-actions,
+  .lululemon-style-summary-filters {
+    gap: 5px;
+  }
+
+  .lululemon-style-summary-filters label {
+    gap: 1px;
+  }
+
+  .lululemon-style-summary-filters select {
+    min-height: 26px;
+  }
+
+  .lululemon-style-linked-heading button {
+    min-height: 28px;
+    padding-inline: 10px;
+  }
+
+  .lululemon-style-coverage-chart {
+    padding: 5px 8px;
+    gap: 3px;
+  }
+
+  .lululemon-style-coverage-chart-heading span,
+  .lululemon-style-coverage-chart-heading small,
+  .lululemon-style-mirror-heading span,
+  .lululemon-style-mirror-value small,
+  .lululemon-style-mirror-formula,
+  .lululemon-style-mirror-axis span {
+    font-size: 9px !important;
+    line-height: 1.1;
+  }
+
+  .lululemon-style-coverage-chart-grid {
+    gap: 2px;
+  }
+
+  .lululemon-style-mirror-heading,
+  .lululemon-style-mirror-row {
+    grid-template-columns: minmax(0, 1fr) 130px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .lululemon-style-mirror-heading {
+    padding-bottom: 2px;
+  }
+
+  .lululemon-style-mirror-side {
+    gap: 2px;
+  }
+
+  .lululemon-style-mirror-value {
+    gap: 5px;
+    line-height: 1;
+  }
+
+  .lululemon-style-mirror-track {
+    height: 12px;
+  }
+
+  .lululemon-style-mirror-axis {
+    min-height: 34px;
+    gap: 1px;
+  }
+
+  .lululemon-style-mirror-axis strong {
+    font-size: 14px !important;
+    line-height: 1;
+  }
+
+  .lululemon-nyk-fabric-chart-grid {
+    gap: 6px;
+  }
+
+  .lululemon-nyk-fabric-chart-grid i {
+    height: 12px;
+  }
+
   .lululemon-style-coverage-grid {
-    height: clamp(480px, calc(100dvh - 315px), 620px);
-    grid-template-rows: minmax(260px, 1.15fr) minmax(200px, 0.85fr);
+    height: clamp(520px, calc(100dvh - 250px), 680px);
+    grid-template-rows: minmax(290px, 1.15fr) minmax(210px, 0.85fr);
     gap: 12px;
     align-items: stretch;
   }
