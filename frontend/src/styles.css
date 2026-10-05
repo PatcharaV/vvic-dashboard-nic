@@ -6460,6 +6460,157 @@ footer a {
   color: #151515;
 }
 
+/* Keep the stacked opportunity and partner panels inside a desktop viewport. */
+@media (min-width: 981px) {
+  .lululemon-style-coverage-grid {
+    height: clamp(480px, calc(100dvh - 315px), 620px);
+    grid-template-rows: minmax(260px, 1.15fr) minmax(200px, 0.85fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining,
+  .lululemon-style-coverage-grid > .lululemon-style-secured-column {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining {
+    padding: 12px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-style-portfolio-heading {
+    padding-bottom: 7px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-style-family-note {
+    margin-top: 6px;
+    line-height: 1.25;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-search {
+    margin-top: 7px;
+    padding: 6px 8px;
+    gap: 3px 7px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-search label {
+    gap: 3px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-style-family-search,
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-search button {
+    min-height: 30px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-style-opportunity-groups.ranked-list {
+    min-height: 0;
+    margin-top: 7px;
+    padding-right: 5px;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-style-gender-group {
+    gap: 4px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-style-gender-heading {
+    padding: 5px 8px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining ol {
+    gap: 2px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining li {
+    min-height: 40px;
+    padding: 2px 5px;
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+    gap: 5px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-product-link {
+    grid-template-columns: 43px minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-images {
+    width: 43px;
+    height: 39px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-images img,
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-image-placeholder {
+    left: calc(var(--image-index, 0) * 10px);
+    width: 32px;
+    height: 39px;
+    border-radius: 6px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-images img:only-child,
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-image-placeholder {
+    left: 5px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-secured-column {
+    overflow: auto;
+    align-content: stretch;
+    scrollbar-gutter: stable;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-secured-column
+    > .lululemon-style-portfolio-list {
+    min-height: 100%;
+    padding: 12px;
+  }
+
+  .lululemon-style-coverage-grid .lululemon-secured-periods {
+    margin-top: 8px;
+    gap: 8px;
+  }
+
+  .lululemon-style-coverage-grid .lululemon-secured-period {
+    padding: 7px;
+    gap: 7px;
+  }
+
+  .lululemon-style-coverage-grid .lululemon-secured-period-heading {
+    padding-bottom: 6px;
+  }
+
+  .lululemon-style-coverage-grid .lululemon-style-gender-heading {
+    padding-block: 5px;
+  }
+
+  .lululemon-style-coverage-grid .lululemon-style-secured-list
+    .lululemon-style-gender-items {
+    max-height: 150px;
+  }
+
+  .lululemon-style-coverage-grid .lululemon-no-secured-styles {
+    min-height: 150px;
+  }
+}
+
 @media (max-width: 980px) {
   .topbar,
   .header-actions {
