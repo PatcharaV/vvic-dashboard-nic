@@ -1488,9 +1488,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     ({ year }) => year === selectedYear,
   );
   const visibleYearSeasons = (
-    selectedYear === "all"
+    selectedYear === "all" || selectedYear === null
       ? availableSeasons
-      : selectedYearFilter?.seasons || LULULEMON_DEFAULT_STYLE_SEASONS
+      : selectedYearFilter?.seasons || availableSeasons
   ).filter((season) => availableSeasons.includes(season));
   const styles = useMemo(() => (
     selectedSeasons.length === 0
