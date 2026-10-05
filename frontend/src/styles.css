@@ -8701,6 +8701,32 @@ footer a {
   box-shadow: 0 0 0 46px rgba(255, 255, 255, 0.035), 0 0 0 92px rgba(255, 255, 255, 0.025);
 }
 
+.lululemon-forecast-hero.nyg-intro {
+  min-height: 330px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  background: linear-gradient(120deg, #aa1830 0%, #b51c35 58%, #a9152d 100%);
+}
+
+.lululemon-forecast-hero.nyg-intro .lululemon-forecast-hero-copy {
+  max-width: none;
+}
+
+.lululemon-forecast-hero.nyg-intro h2 {
+  max-width: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(40px, 4.8vw, 70px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  text-transform: none;
+}
+
+.lululemon-forecast-hero.nyg-intro .lululemon-forecast-hero-copy > p:not(.eyebrow) {
+  max-width: 1050px;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.45;
+}
+
 .lululemon-forecast-hero-copy,
 .lululemon-forecast-hero-metrics { position: relative; z-index: 1; }
 

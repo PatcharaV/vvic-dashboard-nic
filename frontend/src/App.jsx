@@ -3307,38 +3307,37 @@ function LululemonSeasonForecast() {
 
   return (
     <section className="lululemon-forecast-page">
-      <article className="lululemon-forecast-hero">
+      <article className={`lululemon-forecast-hero ${isNykForecast ? "" : "nyg-intro"}`.trim()}>
         <div className="lululemon-forecast-hero-copy">
-          <p className="eyebrow">NAN YANG TEXTILE GROUP x LULULEMON</p>
+          <p className="eyebrow">
+            {isNykForecast ? "NAN YANG TEXTILE GROUP x LULULEMON" : "NYG · GARMENT · LULULEMON"}
+          </p>
           <h2>
             {isNykForecast
               ? LULULEMON_NYK_FORECAST_SUMMARY.title
-              : LULULEMON_FORECAST_SUMMARY.title}
+              : "NYG Forecast: SS28 and FW28"}
           </h2>
           <p>
             {isNykForecast
               ? LULULEMON_NYK_FORECAST_SUMMARY.thesis
-              : LULULEMON_FORECAST_SUMMARY.thesis}
+              : "Where lululemon sells, which programs NYG should pitch, in what order, and what to do next. Men's and Women's are separate on every page."}
           </p>
-          <span>Directional forecast · September 2026 · Confidential</span>
+          <span>
+            {isNykForecast
+              ? "Directional forecast · September 2026 · Confidential"
+              : "MKT · USD and pieces only · NYG sales FA25-WT27 · Confidential"}
+          </span>
         </div>
-        <div className="lululemon-forecast-hero-metrics">
-          {isNykForecast ? (
+        {isNykForecast && (
+          <div className="lululemon-forecast-hero-metrics">
             <>
               <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.nykShare}%</strong><span>NYK overall share</span></div>
               <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.totalYards}M</strong><span>Total NYG fabric PO yards</span></div>
               <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.outsideYards}M</strong><span>Yards supplied outside NYK</span></div>
               <div><strong>{LULULEMON_NYK_FORECAST_GROUPS.length}</strong><span>SS28 and FW28 fabric plays</span></div>
             </>
-          ) : (
-            <>
-              <div><strong>$8.3B</strong><span>Assigned Men + Women market</span></div>
-              <div><strong>$134.8M</strong><span>NYG sales · FA25-WT27</span></div>
-              <div><strong>{LULULEMON_FORECAST_NYG_PROGRAMS.length}</strong><span>Ranked SS28/FW28 programs</span></div>
-              <div><strong>6</strong><span>Whitespace franchises</span></div>
-            </>
-          )}
-        </div>
+          </div>
+        )}
       </article>
 
       <article className="lululemon-forecast-method">
@@ -3433,8 +3432,8 @@ function LululemonSeasonForecast() {
         <article className="lululemon-forecast-section market-size">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">02 · LULULEMON MARKET</p>
-              <h3>The largest markets, in order</h3>
+              <p className="eyebrow">02 · LULULEMON 2026 MARKET</p>
+              <h3>Lululemon 2026 Top 5 Markets</h3>
             </div>
             <span>Estimated 2026 sales · apparel only · {gender === "All" ? "Men + Women" : gender}</span>
           </div>
