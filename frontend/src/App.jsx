@@ -1,11 +1,18 @@
 ﻿import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  CartesianGrid,
   Cell,
+  LabelList,
   Pie,
   PieChart,
   ResponsiveContainer,
+  Scatter,
+  ScatterChart,
   Tooltip,
   Treemap,
+  XAxis,
+  YAxis,
+  ZAxis,
 } from "recharts";
 import { demoDashboard, demoOptions } from "./demoData";
 import {
@@ -1467,6 +1474,121 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
   );
 }
 
+function LululemonOverviewBubbleTooltip({ active, payload, partnerView }) {
+  if (!active || !payload?.length) return null;
+  const row = payload[0].payload;
+  return (
+    <div className="lululemon-overview-bubble-tooltip">
+      <strong>{row.label}</strong>
+      <dl>
+        <div><dt>Lululemon sales</dt><dd>{formatComparisonValue(row.lululemonSales, "sales")}</dd></div>
+        <div><dt>Opportunities</dt><dd>{formatNumber.format(row.opportunityCount)}</dd></div>
+        {partnerView === "nyg" ? (
+          <>
+            <div><dt>NYG secured</dt><dd>{formatComparisonValue(row.sales, "sales")}</dd></div>
+            <div><dt>NYG units</dt><dd>{formatComparisonValue(row.units, "units")}</dd></div>
+            <div><dt>Secured styles</dt><dd>{formatNumber.format(row.securedStyles)}</dd></div>
+          </>
+        ) : (
+          <>
+            <div><dt>NYK fabric coverage</dt><dd>{formatNumber.format(Math.round(row.nykFabricYards))} YDS</dd></div>
+            <div><dt>Matched styles</dt><dd>{formatNumber.format(row.nykMatchedStyles)}</dd></div>
+          </>
+        )}
+      </dl>
+      <div className="lululemon-overview-bubble-opportunity">
+        <span>Top opportunity</span>
+        <b>{row.topOpportunity?.name || "No opportunity data"}</b>
+        {row.topOpportunity?.sales > 0 && (
+          <small>{formatComparisonValue(row.topOpportunity.sales, "sales")}</small>
+        )}
+      </div>
+      <p>Click the bubble to view detail</p>
+    </div>
+  );
+}
+
+function LululemonOverviewBubbleChart({ rows, partnerView, onSelect }) {
+  const isNyg = partnerView === "nyg";
+  const data = rows.map((row) => ({
+    ...row,
+    partnerValue: isNyg ? row.sales : row.nykFabricYards,
+    bubbleValue: isNyg ? Math.max(row.units, 1) : Math.max(row.nykMatchedStyles, 1),
+  }));
+  const bubbleValues = data.map((row) => row.bubbleValue);
+  const minBubbleValue = Math.min(...bubbleValues);
+  const maxBubbleValue = Math.max(...bubbleValues);
+  const zDomain = [minBubbleValue, maxBubbleValue === minBubbleValue ? minBubbleValue + 1 : maxBubbleValue];
+
+  return (
+    <div className="lululemon-overview-bubble-chart">
+      <div className="lululemon-overview-bubble-legend">
+        <span><i className="x-axis" />X: Lululemon sales</span>
+        <span><i className="y-axis" />Y: {isNyg ? "NYG secured sales" : "NYK fabric yards"}</span>
+        <span><i className="size" />Bubble: {isNyg ? "NYG units" : "Matched styles"}</span>
+      </div>
+      <ResponsiveContainer width="100%" height={430}>
+        <ScatterChart margin={{ top: 28, right: 30, bottom: 20, left: 8 }}>
+          <CartesianGrid stroke="#eee7e9" strokeDasharray="3 5" />
+          <XAxis
+            type="number"
+            dataKey="lululemonSales"
+            name="Lululemon sales"
+            tickFormatter={(value) => formatComparisonValue(value, "sales")}
+            tick={{ fill: "#766d70", fontSize: 9 }}
+            axisLine={{ stroke: "#d9cfd2" }}
+            tickLine={false}
+          />
+          <YAxis
+            type="number"
+            dataKey="partnerValue"
+            name={isNyg ? "NYG secured" : "NYK fabric coverage"}
+            tickFormatter={(value) => (
+              isNyg
+                ? formatComparisonValue(value, "sales")
+                : `${formatComparisonValue(value, "units").replace(" units", "")} YDS`
+            )}
+            tick={{ fill: "#766d70", fontSize: 9 }}
+            axisLine={{ stroke: "#d9cfd2" }}
+            tickLine={false}
+            width={72}
+          />
+          <ZAxis type="number" dataKey="bubbleValue" domain={zDomain} range={[110, 720]} />
+          <Tooltip
+            cursor={{ stroke: "#d1003a", strokeDasharray: "3 4" }}
+            content={<LululemonOverviewBubbleTooltip partnerView={partnerView} />}
+          />
+          <Scatter
+            data={data}
+            fill="#d1003a"
+            onClick={(entry) => {
+              const key = entry.payload?.key || entry.key;
+              if (key) onSelect(key);
+            }}
+            className="lululemon-overview-bubbles"
+          >
+            {data.map((row) => (
+              <Cell
+                key={row.key}
+                fill={row.partnerValue > 0 ? "#d1003a" : "#aaa1a3"}
+                stroke="#fff"
+                strokeWidth={2}
+              />
+            ))}
+            <LabelList
+              dataKey="label"
+              position="top"
+              fill="#4c4245"
+              fontSize={9}
+              fontWeight={800}
+            />
+          </Scatter>
+        </ScatterChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
 const LULULEMON_DEFAULT_STYLE_SEASONS = ["FA25", "WT25", "SP26", "SU26"];
 const LULULEMON_STYLE_YEAR_FILTERS = [
   { year: "2025", seasons: ["FA25", "WT25"] },
@@ -1506,6 +1628,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   );
   const [expandedOpportunityGenders, setExpandedOpportunityGenders] = useState({});
   const [partnerView, setPartnerView] = useState("nyg");
+  const [overviewDisplay, setOverviewDisplay] = useState("chart");
   const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
   const [selectedNygSeason, setSelectedNygSeason] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
@@ -1826,7 +1949,39 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         {partnerView === "nyk" && (
           <LululemonNykComparison summary={overviewSummary} overview filters={summaryFilters} />
         )}
-        <div className="lululemon-style-overview-grid">
+        <div className="lululemon-overview-visual-heading">
+          <div>
+            <span>PRODUCT TYPE OPPORTUNITY MAP</span>
+            <strong>Market size vs. {partnerView === "nyg" ? "NYG secured business" : "NYK fabric coverage"}</strong>
+            <p>Use the chart to spot large whitespace opportunities, then click a bubble for style-level detail.</p>
+          </div>
+          <div role="group" aria-label="Overview display">
+            <button
+              className={overviewDisplay === "chart" ? "active" : undefined}
+              type="button"
+              aria-pressed={overviewDisplay === "chart"}
+              onClick={() => setOverviewDisplay("chart")}
+            >
+              Chart
+            </button>
+            <button
+              className={overviewDisplay === "cards" ? "active" : undefined}
+              type="button"
+              aria-pressed={overviewDisplay === "cards"}
+              onClick={() => setOverviewDisplay("cards")}
+            >
+              Cards
+            </button>
+          </div>
+        </div>
+        {overviewDisplay === "chart" ? (
+          <LululemonOverviewBubbleChart
+            rows={overviewRows}
+            partnerView={partnerView}
+            onSelect={onSelect}
+          />
+        ) : (
+          <div className="lululemon-style-overview-grid">
           {overviewRows.map((row) => (
             <button
               className="lululemon-style-overview-item"
@@ -1866,7 +2021,8 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
               </span>
             </button>
           ))}
-        </div>
+          </div>
+        )}
       </article>
     );
   }

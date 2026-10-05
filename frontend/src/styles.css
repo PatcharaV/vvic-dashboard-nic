@@ -2543,6 +2543,210 @@ button.lululemon-bar-row.selected > strong {
   color: #3e3034;
 }
 
+.lululemon-overview-visual-heading {
+  margin-top: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: #f8f5f6;
+  border: 1px solid #eadde0;
+  border-radius: 10px;
+}
+
+.lululemon-overview-visual-heading > div:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-overview-visual-heading > div:first-child > span {
+  color: var(--lululemon-red);
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.lululemon-overview-visual-heading > div:first-child > strong {
+  color: #35151e;
+  font-size: 12px;
+}
+
+.lululemon-overview-visual-heading p {
+  margin: 0;
+  color: #776d70;
+  font-size: 8px;
+}
+
+.lululemon-overview-visual-heading > div:last-child {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.lululemon-overview-visual-heading button {
+  min-height: 31px;
+  padding: 0 13px;
+  color: #706568;
+  background: #fff;
+  border: 1px solid #dfd4d7;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.lululemon-overview-visual-heading button:first-child {
+  border-radius: 7px 0 0 7px;
+}
+
+.lululemon-overview-visual-heading button:last-child {
+  margin-left: -1px;
+  border-radius: 0 7px 7px 0;
+}
+
+.lululemon-overview-visual-heading button.active {
+  z-index: 1;
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
+.lululemon-overview-bubble-chart {
+  margin-top: 10px;
+  padding: 12px 10px 2px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eadde0;
+  border-radius: 10px;
+}
+
+.lululemon-overview-bubble-legend {
+  padding: 0 10px 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  color: #756b6e;
+  font-size: 8px;
+}
+
+.lululemon-overview-bubble-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lululemon-overview-bubble-legend i {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #d1003a;
+}
+
+.lululemon-overview-bubble-legend i.x-axis {
+  border-radius: 1px;
+  background: #bdb3b6;
+}
+
+.lululemon-overview-bubble-legend i.size {
+  width: 12px;
+  height: 12px;
+  background: rgba(209, 0, 58, 0.3);
+  border: 1px solid #d1003a;
+}
+
+.lululemon-overview-bubbles {
+  cursor: pointer;
+}
+
+.lululemon-overview-bubbles circle {
+  fill-opacity: 0.78;
+  transition: fill-opacity 120ms ease;
+}
+
+.lululemon-overview-bubbles circle:hover {
+  fill-opacity: 1;
+}
+
+.lululemon-overview-bubble-tooltip {
+  width: min(280px, calc(100vw - 36px));
+  padding: 12px;
+  color: #443a3d;
+  background: #fff;
+  border: 1px solid #dfc4ca;
+  border-top: 3px solid var(--lululemon-red);
+  border-radius: 9px;
+  box-shadow: 0 14px 32px rgba(56, 25, 34, 0.18);
+}
+
+.lululemon-overview-bubble-tooltip > strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #32121b;
+  font-size: 12px;
+}
+
+.lululemon-overview-bubble-tooltip dl {
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.lululemon-overview-bubble-tooltip dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 9px;
+}
+
+.lululemon-overview-bubble-tooltip dt {
+  color: #81777a;
+}
+
+.lululemon-overview-bubble-tooltip dd {
+  margin: 0;
+  color: var(--lululemon-red);
+  font-weight: 850;
+  text-align: right;
+}
+
+.lululemon-overview-bubble-opportunity {
+  margin-top: 9px;
+  padding: 8px;
+  display: grid;
+  gap: 2px;
+  background: #f8f5f6;
+  border-radius: 6px;
+}
+
+.lululemon-overview-bubble-opportunity span {
+  color: #8b7f82;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lululemon-overview-bubble-opportunity b {
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.lululemon-overview-bubble-opportunity small {
+  color: var(--lululemon-red);
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.lululemon-overview-bubble-tooltip > p {
+  margin: 8px 0 0;
+  color: #95898c;
+  font-size: 7px;
+  text-align: right;
+}
+
 .lululemon-style-overview-grid {
   margin-top: 16px;
   display: grid;
@@ -7159,6 +7363,24 @@ footer a {
 
   .lululemon-style-overview-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lululemon-overview-visual-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lululemon-overview-visual-heading > div:last-child {
+    align-self: flex-start;
+  }
+
+  .lululemon-overview-bubble-chart {
+    padding-inline: 4px;
+  }
+
+  .lululemon-overview-bubble-legend {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .lululemon-revenue-period-note {
