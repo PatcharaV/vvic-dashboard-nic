@@ -7694,6 +7694,34 @@ footer a {
   white-space: nowrap;
 }
 
+.nyg-map-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+}
+
+.nyg-map-expand {
+  min-height: 36px;
+  padding: 0 15px;
+  color: #fff;
+  background: var(--lululemon-red);
+  border: 1px solid var(--lululemon-red);
+  border-radius: 9px;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 850;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(208, 0, 55, 0.16);
+}
+
+.nyg-map-expand:hover {
+  background: var(--lululemon-dark-red);
+  border-color: var(--lululemon-dark-red);
+}
+
 .nyg-map-reset:disabled {
   color: #aaa1a3;
   background: #f6f4f4;
@@ -8000,6 +8028,152 @@ footer a {
 
 .nyg-map-source {
   margin-top: 14px;
+}
+
+.nyg-map-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  padding: 3vh 2vw;
+  display: grid;
+  place-items: center;
+  background: rgba(29, 19, 22, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.nyg-map-modal {
+  width: min(96vw, 1800px);
+  height: 94vh;
+  min-height: 0;
+  padding: 16px;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 11px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e8dfe1;
+  border-top: 4px solid var(--lululemon-red);
+  border-radius: 14px;
+  box-shadow: 0 26px 70px rgba(24, 9, 14, 0.3);
+}
+
+.nyg-map-modal > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 2px;
+}
+
+.nyg-map-modal > header > div {
+  min-width: 0;
+}
+
+.nyg-map-modal > header span {
+  display: block;
+  color: var(--lululemon-red);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nyg-map-modal > header h3 {
+  margin: 3px 0 2px;
+  color: #251e20;
+  font-size: 20px;
+}
+
+.nyg-map-modal > header p {
+  max-width: calc(96vw - 150px);
+  margin: 0;
+  overflow: hidden;
+  color: #756b6e;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nyg-map-modal > header button {
+  min-height: 34px;
+  padding: 0 14px;
+  color: var(--lululemon-red);
+  background: #fff;
+  border: 1px solid #ddb1bb;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 850;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nyg-map-modal-progress {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.nyg-map-modal-progress span {
+  min-height: 28px;
+  padding: 5px 7px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #9a9194;
+  background: #f4f1f2;
+  border-radius: 6px;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.nyg-map-modal-progress span.visible {
+  color: #67172a;
+  background: #fff0f3;
+}
+
+.nyg-map-modal-progress b {
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: #fff;
+  background: #b9b1b3;
+  border-radius: 50%;
+  font-size: 7px;
+}
+
+.nyg-map-modal-progress span.visible b {
+  background: var(--lululemon-red);
+}
+
+.nyg-map-modal-canvas {
+  min-height: 0;
+  padding: 11px;
+  overflow: auto;
+  background:
+    linear-gradient(#f8f7f7 1px, transparent 1px),
+    linear-gradient(90deg, #f8f7f7 1px, transparent 1px),
+    #fcfbfb;
+  background-size: 24px 24px;
+  border: 1px solid #e6dfe1;
+  border-radius: 10px;
+}
+
+.nyg-map-columns.expanded {
+  width: 100%;
+  min-width: calc(var(--nyg-visible-levels, 1) * 180px);
+  grid-auto-columns: minmax(180px, 1fr);
+  gap: 10px;
+}
+
+.nyg-map-modal .nyg-map-column {
+  max-height: calc(94vh - 145px);
+}
+
+.nyg-map-modal .nyg-map-nodes button {
+  min-height: 72px;
 }
 
 @keyframes nyg-map-reveal {
@@ -8810,11 +8984,16 @@ footer a {
   .nyg-map-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nyg-map-workspace { padding: 14px; }
   .nyg-map-toolbar { align-items: stretch; flex-direction: column; }
-  .nyg-map-reset { align-self: flex-start; }
+  .nyg-map-toolbar-actions { align-self: flex-start; }
   .nyg-map-canvas { min-height: 460px; padding: 10px; }
   .nyg-map-columns { grid-auto-columns: minmax(215px, 78vw); gap: 12px; }
   .nyg-map-selection { grid-template-columns: 1fr; }
   .nyg-map-selection > span { grid-row: auto; }
+  .nyg-map-modal-backdrop { padding: 0; }
+  .nyg-map-modal { width: 100vw; height: 100vh; border: 0; border-radius: 0; }
+  .nyg-map-modal-progress { overflow-x: auto; grid-template-columns: repeat(7, minmax(120px, 1fr)); }
+  .nyg-map-columns.expanded { grid-auto-columns: minmax(215px, 78vw); }
+  .nyg-map-modal .nyg-map-column { max-height: calc(100vh - 150px); }
   .lululemon-forecast-hero-metrics,
   .lululemon-forecast-quick-grid,
   .lululemon-forecast-flagships,

@@ -2786,6 +2786,7 @@ function formatNygMapFob(value) {
 
 function NygMyMap({ subtypeKey, selectedSeasons }) {
   const [selectedPath, setSelectedPath] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(false);
   const mapCanvasRef = useRef(null);
   const selectedProductType = NYG_MAP_PRODUCT_TYPES[subtypeKey];
   const mapRows = useMemo(() => NYG_MY_MAP_ROWS
@@ -2840,7 +2841,93 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
 
   useEffect(() => {
     setSelectedPath([]);
+    setIsExpanded(false);
   }, [subtypeKey, selectedSeasons]);
+
+  useEffect(() => {
+    if (!isExpanded) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setIsExpanded(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isExpanded]);
+
+  const renderMapColumns = (expanded = false) => (
+    <div className={`nyg-map-columns${expanded ? " expanded" : ""}`}>
+      {NYG_MAP_LEVELS.slice(0, visibleLevelCount).map((level, levelIndex) => {
+        const scopedRows = rowsAtLevel(levelIndex);
+        const values = uniqueMapValues(scopedRows, level.key).sort((a, b) => {
+          const salesFor = (value) => scopedRows
+            .filter((row) => row[level.key] === value)
+            .reduce((sum, row) => sum + row.salesRevenue, 0);
+          return salesFor(b) - salesFor(a) || a.localeCompare(b);
+        });
+        const nextLevel = NYG_MAP_LEVELS[levelIndex + 1];
+        return (
+          <section className="nyg-map-column" key={level.key}>
+            <div className="nyg-map-column-heading">
+              <span>Level {levelIndex + 1}</span>
+              <strong>{level.label}</strong>
+              <small>{values.length} {values.length === 1 ? "option" : "options"}</small>
+            </div>
+            <div className="nyg-map-nodes">
+              {values.map((value) => {
+                const nodeRows = scopedRows.filter((row) => row[level.key] === value);
+                const styleCount = new Set(nodeRows.map((row) => row.styleNo)).size;
+                const nodeSales = nodeRows.reduce((sum, row) => sum + row.salesRevenue, 0);
+                const nodeUnits = nodeRows.reduce((sum, row) => sum + row.units, 0);
+                const nodeFob = nodeUnits > 0 ? nodeSales / nodeUnits : 0;
+                const childCount = nextLevel
+                  ? new Set(nodeRows.map((row) => row[nextLevel.key])).size
+                  : 0;
+                const isSelected = selectedPath[levelIndex] === value;
+                const isStyle = level.key === "styleNo";
+                return (
+                  <button
+                    className={`${isSelected ? "selected" : ""} ${isStyle ? "style-node" : ""}`.trim() || undefined}
+                    type="button"
+                    key={value}
+                    aria-pressed={isSelected}
+                    onClick={() => handleNodeClick(levelIndex, value)}
+                  >
+                    <span>{isStyle ? value : level.label}</span>
+                    {isStyle && (
+                      <span className="nyg-map-style-statuses">
+                        {nodeRows[0].statuses.map((status) => (
+                          <b
+                            className={status === "NEW" ? "new" : "carryover"}
+                            key={status}
+                          >
+                            {status}
+                          </b>
+                        ))}
+                      </span>
+                    )}
+                    <strong>{isStyle ? nodeRows[0].styleName : value}</strong>
+                    <small className="nyg-map-node-metrics">
+                      {!isStyle && (
+                        <b>{styleCount} {styleCount === 1 ? "style" : "styles"}</b>
+                      )}
+                      <b>{formatComparisonValue(nodeSales, "sales")}</b>
+                      <b>{formatNygMapUnits(nodeUnits)}</b>
+                      {isStyle && <b>{formatNygMapFob(nodeFob)}</b>}
+                    </small>
+                    {nextLevel && <i aria-hidden="true">{isSelected ? "−" : "+"}</i>}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  );
 
   return (
     <section className="nyg-map-workspace embedded">
@@ -2878,14 +2965,23 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
               ))}
             </div>
           </div>
-          <button
-            className="nyg-map-reset"
-            type="button"
-            disabled={selectedPath.length === 0}
-            onClick={() => setSelectedPath([])}
-          >
-            Collapse all
-          </button>
+          <div className="nyg-map-toolbar-actions">
+            <button
+              className="nyg-map-expand"
+              type="button"
+              onClick={() => setIsExpanded(true)}
+            >
+              Expand all
+            </button>
+            <button
+              className="nyg-map-reset"
+              type="button"
+              disabled={selectedPath.length === 0}
+              onClick={() => setSelectedPath([])}
+            >
+              Collapse all
+            </button>
+          </div>
         </div>
 
         <div className="nyg-map-progress" aria-label="Map hierarchy">
@@ -2904,75 +3000,46 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
         </p>
 
         <div className="nyg-map-canvas" ref={mapCanvasRef} tabIndex="0">
-          <div className="nyg-map-columns">
-            {NYG_MAP_LEVELS.slice(0, visibleLevelCount).map((level, levelIndex) => {
-              const scopedRows = rowsAtLevel(levelIndex);
-              const values = uniqueMapValues(scopedRows, level.key).sort((a, b) => {
-                const salesFor = (value) => scopedRows
-                  .filter((row) => row[level.key] === value)
-                  .reduce((sum, row) => sum + row.salesRevenue, 0);
-                return salesFor(b) - salesFor(a) || a.localeCompare(b);
-              });
-              const nextLevel = NYG_MAP_LEVELS[levelIndex + 1];
-              return (
-                <section className="nyg-map-column" key={level.key}>
-                  <div className="nyg-map-column-heading">
-                    <span>Level {levelIndex + 1}</span>
-                    <strong>{level.label}</strong>
-                    <small>{values.length} {values.length === 1 ? "option" : "options"}</small>
-                  </div>
-                  <div className="nyg-map-nodes">
-                    {values.map((value) => {
-                      const nodeRows = scopedRows.filter((row) => row[level.key] === value);
-                      const styleCount = new Set(nodeRows.map((row) => row.styleNo)).size;
-                      const nodeSales = nodeRows.reduce((sum, row) => sum + row.salesRevenue, 0);
-                      const nodeUnits = nodeRows.reduce((sum, row) => sum + row.units, 0);
-                      const nodeFob = nodeUnits > 0 ? nodeSales / nodeUnits : 0;
-                      const childCount = nextLevel
-                        ? new Set(nodeRows.map((row) => row[nextLevel.key])).size
-                        : 0;
-                      const isSelected = selectedPath[levelIndex] === value;
-                      const isStyle = level.key === "styleNo";
-                      return (
-                        <button
-                          className={`${isSelected ? "selected" : ""} ${isStyle ? "style-node" : ""}`.trim() || undefined}
-                          type="button"
-                          key={value}
-                          aria-pressed={isSelected}
-                          onClick={() => handleNodeClick(levelIndex, value)}
-                        >
-                          <span>{isStyle ? value : level.label}</span>
-                          {isStyle && (
-                            <span className="nyg-map-style-statuses">
-                              {nodeRows[0].statuses.map((status) => (
-                                <b
-                                  className={status === "NEW" ? "new" : "carryover"}
-                                  key={status}
-                                >
-                                  {status}
-                                </b>
-                              ))}
-                            </span>
-                          )}
-                          <strong>{isStyle ? nodeRows[0].styleName : value}</strong>
-                          <small className="nyg-map-node-metrics">
-                            {!isStyle && (
-                              <b>{styleCount} {styleCount === 1 ? "style" : "styles"}</b>
-                            )}
-                            <b>{formatComparisonValue(nodeSales, "sales")}</b>
-                            <b>{formatNygMapUnits(nodeUnits)}</b>
-                            {isStyle && <b>{formatNygMapFob(nodeFob)}</b>}
-                          </small>
-                          {nextLevel && <i aria-hidden="true">{isSelected ? "−" : "+"}</i>}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </section>
-              );
-            })}
-          </div>
+          {renderMapColumns()}
         </div>
+
+        {isExpanded && (
+          <div
+            className="nyg-map-modal-backdrop"
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setIsExpanded(false);
+            }}
+          >
+            <section
+              className="nyg-map-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="nyg-map-modal-title"
+            >
+              <header>
+                <div>
+                  <span>Expanded product architecture</span>
+                  <h3 id="nyg-map-modal-title">{selectedProductType || "All product types"}</h3>
+                  <p>{selectedPath.length > 0 ? selectedPath.join(" / ") : "Select a card to reveal the next level."}</p>
+                </div>
+                <button type="button" onClick={() => setIsExpanded(false)} aria-label="Close expanded map">
+                  Close
+                </button>
+              </header>
+              <div className="nyg-map-modal-progress">
+                {NYG_MAP_LEVELS.map((level, index) => (
+                  <span className={index < visibleLevelCount ? "visible" : undefined} key={level.key}>
+                    <b>{index + 1}</b>{level.label}
+                  </span>
+                ))}
+              </div>
+              <div className="nyg-map-modal-canvas">
+                {renderMapColumns(true)}
+              </div>
+            </section>
+          </div>
+        )}
 
         {selectedPath.length === NYG_MAP_LEVELS.length && (
           <div className="nyg-map-selection">
