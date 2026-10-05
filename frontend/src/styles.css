@@ -1872,7 +1872,76 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-chart-controls {
-  flex: 0 0 min(330px, 42%);
+  flex: 0 0 min(520px, 58%);
+  flex-wrap: wrap;
+}
+
+.lululemon-chart-gender-filter {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  border: 0;
+}
+
+.lululemon-chart-gender-filter legend {
+  padding: 0;
+  color: #807679;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lululemon-chart-gender-filter > div {
+  display: flex;
+}
+
+.lululemon-chart-gender-filter button {
+  min-width: 42px;
+  min-height: 31px;
+  padding: 0 10px;
+  color: #6f6568;
+  background: #fff;
+  border: 1px solid #dfd4d7;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.lululemon-chart-gender-filter button:first-child {
+  border-radius: 7px 0 0 7px;
+}
+
+.lululemon-chart-gender-filter button:not(:first-child) {
+  margin-left: -1px;
+}
+
+.lululemon-chart-gender-filter button:last-child {
+  border-radius: 0 7px 7px 0;
+}
+
+.lululemon-chart-gender-filter button.active {
+  position: relative;
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
+.lululemon-chart-gender-note {
+  margin: -5px 0 12px;
+  padding: 7px 9px;
+  color: #756b6e;
+  background: #faf6f7;
+  border-left: 2px solid var(--lululemon-red);
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.lululemon-subtype-table-controls button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
 }
 
 .lululemon-subtype-legend {
@@ -2612,17 +2681,17 @@ button.lululemon-bar-row.selected > strong {
   border-color: var(--lululemon-red);
 }
 
-.lululemon-overview-bubble-chart {
+.lululemon-overview-fob-chart {
   margin-top: 10px;
-  padding: 12px 10px 2px;
-  overflow: hidden;
+  padding: 12px 14px 14px;
+  overflow: visible;
   background: #fff;
   border: 1px solid #eadde0;
   border-radius: 10px;
 }
 
-.lululemon-overview-bubble-legend {
-  padding: 0 10px 8px;
+.lululemon-overview-fob-legend {
+  padding: 0 4px 9px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -2631,120 +2700,182 @@ button.lululemon-bar-row.selected > strong {
   font-size: 8px;
 }
 
-.lululemon-overview-bubble-legend span {
+.lululemon-overview-fob-legend span {
   display: inline-flex;
   align-items: center;
   gap: 5px;
 }
 
-.lululemon-overview-bubble-legend i {
-  width: 8px;
-  height: 8px;
+.lululemon-overview-fob-legend i {
+  width: 13px;
+  height: 7px;
   display: inline-block;
-  border-radius: 50%;
-  background: #d1003a;
+  border-radius: 2px;
 }
 
-.lululemon-overview-bubble-legend i.x-axis {
-  border-radius: 1px;
-  background: #bdb3b6;
+.lululemon-overview-fob-legend i.fob { background: #eadde0; }
+.lululemon-overview-fob-legend i.nyg { background: var(--lululemon-red); }
+
+.lululemon-overview-fob-legend small {
+  margin-left: auto;
+  color: #978b8e;
+  font-size: 7px;
 }
 
-.lululemon-overview-bubble-legend i.size {
-  width: 12px;
-  height: 12px;
-  background: rgba(209, 0, 58, 0.3);
-  border: 1px solid #d1003a;
+.lululemon-overview-fob-rows {
+  display: grid;
+  gap: 2px;
 }
 
-.lululemon-overview-bubbles {
+.lululemon-overview-fob-rows > button {
+  position: relative;
+  width: 100%;
+  min-height: 38px;
+  padding: 5px 7px;
+  display: grid;
+  grid-template-columns: 100px minmax(120px, 1fr) 58px;
+  align-items: center;
+  gap: 10px;
+  color: #4b4144;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font: inherit;
   cursor: pointer;
 }
 
-.lululemon-overview-bubbles circle {
-  fill-opacity: 0.78;
-  transition: fill-opacity 120ms ease;
+.lululemon-overview-fob-rows > button:hover,
+.lululemon-overview-fob-rows > button:focus-visible {
+  z-index: 4;
+  background: #fff6f8;
+  border-color: #efc8d0;
+  outline: none;
 }
 
-.lululemon-overview-bubbles circle:hover {
-  fill-opacity: 1;
+.lululemon-overview-fob-rows > button > strong {
+  font-size: 8px;
+  font-weight: 850;
+  text-align: right;
+  text-transform: uppercase;
 }
 
-.lululemon-overview-bubble-tooltip {
-  width: min(280px, calc(100vw - 36px));
-  padding: 12px;
+.lululemon-overview-fob-rows .track {
+  height: 18px;
+  display: block;
+  overflow: visible;
+  background-image: linear-gradient(to right, #f3edef 1px, transparent 1px);
+  background-size: 25% 100%;
+}
+
+.lululemon-overview-fob-rows .fob-bar {
+  height: 100%;
+  min-width: 2px;
+  display: block;
+  overflow: hidden;
+  background: #eadde0;
+  border-radius: 3px;
+}
+
+.lululemon-overview-fob-rows .fob-bar > i {
+  height: 100%;
+  min-width: 2px;
+  display: block;
+  background: linear-gradient(90deg, #b50035, var(--lululemon-red));
+}
+
+.lululemon-overview-fob-rows .fob-bar > i.empty { min-width: 0; }
+
+.lululemon-overview-fob-rows > button > b {
+  color: var(--lululemon-red);
+  font-size: 8px;
+  text-align: right;
+}
+
+.lululemon-overview-fob-rows > button > b.empty { color: #9b9093; }
+
+.lululemon-overview-fob-tooltip {
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  width: min(310px, calc(100% - 18px));
+  padding: 11px;
+  display: grid;
+  gap: 5px;
   color: #443a3d;
   background: #fff;
   border: 1px solid #dfc4ca;
   border-top: 3px solid var(--lululemon-red);
   border-radius: 9px;
   box-shadow: 0 14px 32px rgba(56, 25, 34, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition: opacity 120ms ease, transform 120ms ease;
 }
 
-.lululemon-overview-bubble-tooltip > strong {
-  display: block;
-  margin-bottom: 8px;
+.lululemon-overview-fob-rows > button:hover .lululemon-overview-fob-tooltip,
+.lululemon-overview-fob-rows > button:focus-visible .lululemon-overview-fob-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.lululemon-overview-fob-tooltip > em {
+  padding-bottom: 5px;
   color: #32121b;
-  font-size: 12px;
-}
-
-.lululemon-overview-bubble-tooltip dl {
-  margin: 0;
-  display: grid;
-  gap: 4px;
-}
-
-.lululemon-overview-bubble-tooltip dl > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  font-size: 9px;
-}
-
-.lululemon-overview-bubble-tooltip dt {
-  color: #81777a;
-}
-
-.lululemon-overview-bubble-tooltip dd {
-  margin: 0;
-  color: var(--lululemon-red);
+  border-bottom: 1px solid #eee4e6;
+  font-size: 11px;
+  font-style: normal;
   font-weight: 850;
+  text-align: left;
+}
+
+.lululemon-overview-fob-tooltip > span {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.lululemon-overview-fob-tooltip small {
+  color: #81777a;
+  font-size: 8px;
+  text-align: left;
+}
+
+.lululemon-overview-fob-tooltip b {
+  color: var(--lululemon-red);
+  font-size: 9px;
   text-align: right;
 }
 
-.lululemon-overview-bubble-opportunity {
-  margin-top: 9px;
-  padding: 8px;
-  display: grid;
-  gap: 2px;
+.lululemon-overview-fob-tooltip .top-opportunity {
+  margin-top: 3px;
+  padding: 7px;
+  grid-template-columns: minmax(0, 1fr) auto;
   background: #f8f5f6;
   border-radius: 6px;
 }
 
-.lululemon-overview-bubble-opportunity span {
-  color: #8b7f82;
-  font-size: 7px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+.lululemon-overview-fob-tooltip .top-opportunity small {
+  grid-column: 1 / -1;
+  font-weight: 850;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.lululemon-overview-bubble-opportunity b {
-  font-size: 9px;
-  line-height: 1.35;
+.lululemon-overview-fob-tooltip .top-opportunity b {
+  min-width: 0;
+  color: #443a3d;
+  overflow-wrap: anywhere;
+  text-align: left;
 }
 
-.lululemon-overview-bubble-opportunity small {
+.lululemon-overview-fob-tooltip .top-opportunity i {
   color: var(--lululemon-red);
   font-size: 8px;
-  font-weight: 800;
-}
-
-.lululemon-overview-bubble-tooltip > p {
-  margin: 8px 0 0;
-  color: #95898c;
-  font-size: 7px;
-  text-align: right;
+  font-style: normal;
+  font-weight: 850;
 }
 
 .lululemon-style-overview-grid {
@@ -7374,13 +7505,27 @@ footer a {
     align-self: flex-start;
   }
 
-  .lululemon-overview-bubble-chart {
-    padding-inline: 4px;
+  .lululemon-overview-fob-chart {
+    padding-inline: 6px;
   }
 
-  .lululemon-overview-bubble-legend {
+  .lululemon-overview-fob-legend {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .lululemon-overview-fob-legend small {
+    margin-left: 0;
+  }
+
+  .lululemon-overview-fob-rows > button {
+    padding-inline: 3px;
+    grid-template-columns: 72px minmax(80px, 1fr) 46px;
+    gap: 6px;
+  }
+
+  .lululemon-overview-fob-tooltip {
+    width: min(290px, calc(100vw - 38px));
   }
 
   .lululemon-revenue-period-note {

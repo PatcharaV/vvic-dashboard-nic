@@ -11,6 +11,9 @@ if (!workbookPath) {
 }
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
+const snapshotData = JSON.parse(
+  fs.readFileSync(path.resolve(scriptDirectory, "../src/snapshotData.json"), "utf8"),
+);
 const subtypeDefinitions = [
   ["jacket", "Jacket", "JACKET"],
   ["short", "Short", "SHORT"],
@@ -52,11 +55,15 @@ function findSheet(workbook, expectedName) {
 }
 
 function allProductRevenue(row) {
-  return number(firstValue(row, ["Total Revenue USD (all zones)", "Total"]));
+  return number(firstValue(row, ["Total Revenue USD (all zones)", "Total USD", "Total"]));
 }
 
 function allProductUnits(row) {
-  return number(firstValue(row, ["Total Units (all zones)", "Total Units (quantity, preserved)"]));
+  return number(firstValue(row, [
+    "Total Units (all zones)",
+    "Total Units (quantity, preserved)",
+    "Total Units ",
+  ]));
 }
 
 function allProductType(row) {
@@ -84,6 +91,61 @@ function normalizeName(value = "") {
     .replace(/[^a-z0-9*'\"]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function normalizeAudienceName(value = "") {
+  return normalizeName(value)
+    .replace(/\b(?:women'?s|men'?s)\b/g, "")
+    .replace(/\b(?:23|25|26|27|28|29|30|31|32|34|35|36)l?\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const womenStyleTerms = [
+  "high rise", "mid rise", "super high rise", "low rise", "align", "wunder",
+  "groove", "dance studio", "softstreme", "swift speed", "fast and free",
+  "tight", "legging", "flare", "flared", "palazzo", "wide leg", "barrel leg",
+  "city sleek", "adapted state", "ready to rulu", "nulu", "skirt", "bra",
+];
+const menStyleTerms = [
+  "abc", "slim fit", "classic fit", "relaxed fit", "zeroed in", "commission",
+  "utilitech", "golf", "jogger", "trouser", "license to train", "pace breaker",
+  "steady state", "smooth spacer", "balancer", "surge", "bowline", "boxer", "polo",
+];
+const scrapedAudienceByStyle = new Map();
+for (const product of snapshotData.brands?.lululemon?.dashboard?.products || []) {
+  const name = normalizeAudienceName(product.title);
+  if (!scrapedAudienceByStyle.has(name)) scrapedAudienceByStyle.set(name, new Set());
+  (product.audience_labels || [])
+    .filter((gender) => gender === "Men" || gender === "Women")
+    .forEach((gender) => scrapedAudienceByStyle.get(name).add(gender));
+}
+
+function inferAllProductGender(row) {
+  const title = allProductTitle(row);
+  const normalizedName = normalizeAudienceName(title);
+  const matchedGenders = scrapedAudienceByStyle.get(normalizedName) || new Set();
+  if (matchedGenders.size === 1) return [...matchedGenders][0];
+  if (/\bwomen'?s\b/i.test(title)) return "Women";
+  if (/\bmen'?s\b/i.test(title)) return "Men";
+  if (womenStyleTerms.some((term) => normalizedName.includes(term))) return "Women";
+  if (menStyleTerms.some((term) => normalizedName.includes(term))) return "Men";
+  const subtype = allProductSubtype(row);
+  if (subtype === "SKIRT" || subtype === "TANK TOP") return "Women";
+  if (subtype === "BOXER BRIEF") return "Men";
+  return "Unclassified";
+}
+
+function aggregateLululemonGenderSales(rows) {
+  const totals = { Men: 0, Women: 0, Unclassified: 0 };
+  rows.forEach((row) => {
+    totals[inferAllProductGender(row)] += allProductRevenue(row);
+  });
+  return {
+    lululemonMenSales: totals.Men,
+    lululemonWomenSales: totals.Women,
+    lululemonUnclassifiedSales: totals.Unclassified,
+  };
 }
 
 function displayFamilyName(value = "") {
@@ -219,6 +281,7 @@ const comparisons = [
     lululemonUnits: totalUnits,
     lululemonProducts: allProducts.length,
     fobMultiplier,
+    ...aggregateLululemonGenderSales(allProducts),
     ...aggregateNygRows(nygRows),
   },
   ...subtypeDefinitions.map(([key, label, worksheetSubtype]) => {
@@ -245,6 +308,7 @@ const comparisons = [
       ),
       lululemonProducts: productRows.length,
       fobMultiplier: averageFobMultiplier(matchingNygRows),
+      ...aggregateLululemonGenderSales(productRows),
       ...aggregateNygRows(matchingNygRows),
     };
   }),

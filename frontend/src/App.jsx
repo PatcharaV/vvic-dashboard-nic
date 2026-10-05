@@ -1,18 +1,11 @@
 ﻿import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  CartesianGrid,
   Cell,
-  LabelList,
   Pie,
   PieChart,
   ResponsiveContainer,
-  Scatter,
-  ScatterChart,
   Tooltip,
   Treemap,
-  XAxis,
-  YAxis,
-  ZAxis,
 } from "recharts";
 import { demoDashboard, demoOptions } from "./demoData";
 import {
@@ -844,7 +837,7 @@ function LululemonNygMetricGrid({ selectedKey }) {
   return <LululemonMetricGrid metrics={metrics} compact />;
 }
 
-function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
+function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", onSelect }) {
   const [tableMetric, setTableMetric] = useState("sales");
   const isSales = metric === "sales";
   const isUnits = metric === "units";
@@ -858,21 +851,39 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
     : isUnits
       ? "nygUnits"
       : "nygProducts";
+  const lululemonGenderField = gender === "men"
+    ? "lululemonMenSales"
+    : gender === "women"
+      ? "lululemonWomenSales"
+      : null;
+  const nygGenderField = gender === "men"
+    ? "menSales"
+    : gender === "women"
+      ? "womenSales"
+      : null;
   const rows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall")
     .map((row) => {
       const fobMultiplier = row.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
+      const lululemonValue = isSales && lululemonGenderField
+        ? row[lululemonGenderField] || 0
+        : row[lululemonField];
+      const nygValue = isSales && nygGenderField
+        ? row[nygGenderField] || 0
+        : row[nygField];
       return {
         ...row,
         fobMultiplier,
+        displayLululemonValue: lululemonValue,
+        displayNygValue: nygValue,
         comparisonBase: getLululemonComparisonBase(
-          row[lululemonField],
+          lululemonValue,
           metric,
           fobMultiplier,
         ),
-        nygValue: row[nygField],
+        nygValue,
         share: getNygShare(
-          row[nygField],
-          row[lululemonField],
+          nygValue,
+          lululemonValue,
           metric,
           fobMultiplier,
         ),
@@ -883,7 +894,8 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
   const baseLabel = isSales
     ? "Lululemon FOB Spend"
     : `Lululemon ${isUnits ? "Total Units" : "Products"}`;
-  const tableIsSales = tableMetric === "sales";
+  const effectiveTableMetric = gender === "all" ? tableMetric : "sales";
+  const tableIsSales = effectiveTableMetric === "sales";
   const tableNygField = tableIsSales ? "nygSales" : "nygUnits";
   const tableLululemonField = tableIsSales ? "lululemonSales" : "lululemonUnits";
   const tableLabel = tableIsSales ? "Total Sale" : "Total Unit";
@@ -936,12 +948,12 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                       <span>
                         <i className="nyg-key" />
                         NYG
-                        <b>{formatComparisonValue(row.nygSales, "sales")}</b>
+                        <b>{formatComparisonValue(row.displayNygValue, "sales")}</b>
                       </span>
                       <span>
                         <i className="total-sale-key" />
                         Lululemon Total Sale
-                        <b>{formatComparisonValue(row.lululemonSales, "sales")}</b>
+                        <b>{formatComparisonValue(row.displayLululemonValue, "sales")}</b>
                       </span>
                       <span>
                         <i className="lululemon-key" />
@@ -976,10 +988,12 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
               { value: "units", label: "Units" },
             ].map((option) => (
               <button
-                className={tableMetric === option.value ? "active" : undefined}
+                className={effectiveTableMetric === option.value ? "active" : undefined}
                 key={option.value}
                 type="button"
-                aria-pressed={tableMetric === option.value}
+                aria-pressed={effectiveTableMetric === option.value}
+                disabled={gender !== "all" && option.value === "units"}
+                title={gender !== "all" && option.value === "units" ? "Gender-specific units are not available in the source." : undefined}
                 onClick={() => setTableMetric(option.value)}
               >
                 {option.label}
@@ -1002,8 +1016,8 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, onSelect }) {
                       {row.label}
                     </button>
                   </td>
-                  <td>{formatComparisonValue(row[tableNygField], tableMetric)}</td>
-                  <td>{formatComparisonValue(row[tableLululemonField], tableMetric)}</td>
+                  <td>{formatComparisonValue(tableIsSales ? row.displayNygValue : row[tableNygField], effectiveTableMetric)}</td>
+                  <td>{formatComparisonValue(tableIsSales ? row.displayLululemonValue : row[tableLululemonField], effectiveTableMetric)}</td>
                 </tr>
               ))}
             </tbody>
@@ -1474,117 +1488,68 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
   );
 }
 
-function LululemonOverviewBubbleTooltip({ active, payload, partnerView }) {
-  if (!active || !payload?.length) return null;
-  const row = payload[0].payload;
-  return (
-    <div className="lululemon-overview-bubble-tooltip">
-      <strong>{row.label}</strong>
-      <dl>
-        <div><dt>Lululemon sales</dt><dd>{formatComparisonValue(row.lululemonSales, "sales")}</dd></div>
-        <div><dt>Opportunities</dt><dd>{formatNumber.format(row.opportunityCount)}</dd></div>
-        {partnerView === "nyg" ? (
-          <>
-            <div><dt>NYG secured</dt><dd>{formatComparisonValue(row.sales, "sales")}</dd></div>
-            <div><dt>NYG units</dt><dd>{formatComparisonValue(row.units, "units")}</dd></div>
-            <div><dt>Secured styles</dt><dd>{formatNumber.format(row.securedStyles)}</dd></div>
-          </>
-        ) : (
-          <>
-            <div><dt>NYK fabric coverage</dt><dd>{formatNumber.format(Math.round(row.nykFabricYards))} YDS</dd></div>
-            <div><dt>Matched styles</dt><dd>{formatNumber.format(row.nykMatchedStyles)}</dd></div>
-          </>
-        )}
-      </dl>
-      <div className="lululemon-overview-bubble-opportunity">
-        <span>Top opportunity</span>
-        <b>{row.topOpportunity?.name || "No opportunity data"}</b>
-        {row.topOpportunity?.sales > 0 && (
-          <small>{formatComparisonValue(row.topOpportunity.sales, "sales")}</small>
-        )}
-      </div>
-      <p>Click the bubble to view detail</p>
-    </div>
-  );
-}
-
-function LululemonOverviewBubbleChart({ rows, partnerView, onSelect }) {
-  const isNyg = partnerView === "nyg";
-  const data = rows.map((row) => ({
-    ...row,
-    partnerValue: isNyg ? row.sales : row.nykFabricYards,
-    bubbleValue: isNyg ? Math.max(row.units, 1) : Math.max(row.nykMatchedStyles, 1),
-  }));
-  const bubbleValues = data.map((row) => row.bubbleValue);
-  const minBubbleValue = Math.min(...bubbleValues);
-  const maxBubbleValue = Math.max(...bubbleValues);
-  const zDomain = [minBubbleValue, maxBubbleValue === minBubbleValue ? minBubbleValue + 1 : maxBubbleValue];
+function LululemonOverviewFobBarChart({ rows, onSelect }) {
+  const data = rows
+    .map((row) => {
+      const fobMultiplier = row.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
+      const fobSpend = fobMultiplier > 0 ? row.lululemonSales / fobMultiplier : 0;
+      return {
+        ...row,
+        fobSpend,
+        share: fobSpend > 0 ? (row.sales / fobSpend) * 100 : 0,
+      };
+    })
+    .sort((left, right) => right.fobSpend - left.fobSpend);
+  const maxFobSpend = Math.max(...data.map((row) => row.fobSpend), 1);
 
   return (
-    <div className="lululemon-overview-bubble-chart">
-      <div className="lululemon-overview-bubble-legend">
-        <span><i className="x-axis" />X: Lululemon sales</span>
-        <span><i className="y-axis" />Y: {isNyg ? "NYG secured sales" : "NYK fabric yards"}</span>
-        <span><i className="size" />Bubble: {isNyg ? "NYG units" : "Matched styles"}</span>
+    <div className="lululemon-overview-fob-chart">
+      <div className="lululemon-overview-fob-legend">
+        <span><i className="fob" />Lululemon FOB Spend</span>
+        <span><i className="nyg" />NYG Sale</span>
+        <small>Hover for full detail · click a row to open the product type</small>
       </div>
-      <ResponsiveContainer width="100%" height={430}>
-        <ScatterChart margin={{ top: 28, right: 30, bottom: 20, left: 8 }}>
-          <CartesianGrid stroke="#eee7e9" strokeDasharray="3 5" />
-          <XAxis
-            type="number"
-            dataKey="lululemonSales"
-            name="Lululemon sales"
-            tickFormatter={(value) => formatComparisonValue(value, "sales")}
-            tick={{ fill: "#766d70", fontSize: 9 }}
-            axisLine={{ stroke: "#d9cfd2" }}
-            tickLine={false}
-          />
-          <YAxis
-            type="number"
-            dataKey="partnerValue"
-            name={isNyg ? "NYG secured" : "NYK fabric coverage"}
-            tickFormatter={(value) => (
-              isNyg
-                ? formatComparisonValue(value, "sales")
-                : `${formatComparisonValue(value, "units").replace(" units", "")} YDS`
-            )}
-            tick={{ fill: "#766d70", fontSize: 9 }}
-            axisLine={{ stroke: "#d9cfd2" }}
-            tickLine={false}
-            width={72}
-          />
-          <ZAxis type="number" dataKey="bubbleValue" domain={zDomain} range={[110, 720]} />
-          <Tooltip
-            cursor={{ stroke: "#d1003a", strokeDasharray: "3 4" }}
-            content={<LululemonOverviewBubbleTooltip partnerView={partnerView} />}
-          />
-          <Scatter
-            data={data}
-            fill="#d1003a"
-            onClick={(entry) => {
-              const key = entry.payload?.key || entry.key;
-              if (key) onSelect(key);
-            }}
-            className="lululemon-overview-bubbles"
-          >
-            {data.map((row) => (
-              <Cell
-                key={row.key}
-                fill={row.partnerValue > 0 ? "#d1003a" : "#aaa1a3"}
-                stroke="#fff"
-                strokeWidth={2}
-              />
-            ))}
-            <LabelList
-              dataKey="label"
-              position="top"
-              fill="#4c4245"
-              fontSize={9}
-              fontWeight={800}
-            />
-          </Scatter>
-        </ScatterChart>
-      </ResponsiveContainer>
+      <div className="lululemon-overview-fob-rows">
+        {data.map((row) => {
+          const tooltipId = `lululemon-overview-fob-tooltip-${row.key}`;
+          return (
+            <button
+              type="button"
+              key={row.key}
+              aria-describedby={tooltipId}
+              onClick={() => onSelect(row.key)}
+            >
+              <strong>{row.label}</strong>
+              <span className="track">
+                <span
+                  className="fob-bar"
+                  style={{ width: `${(row.fobSpend / maxFobSpend) * 100}%` }}
+                >
+                  <i
+                    className={row.share <= 0 ? "empty" : undefined}
+                    style={{ width: `${Math.min(row.share, 100)}%` }}
+                  />
+                </span>
+              </span>
+              <b className={row.share <= 0 ? "empty" : undefined}>{formatComparisonShare(row.share)}</b>
+              <span className="lululemon-overview-fob-tooltip" id={tooltipId} role="tooltip">
+                <em>{row.label}</em>
+                <span><small>Lululemon Total Sale</small><b>{formatComparisonValue(row.lululemonSales, "sales")}</b></span>
+                <span><small>Lululemon FOB Spend</small><b>{formatComparisonValue(row.fobSpend, "sales")}</b></span>
+                <span><small>NYG Sale</small><b>{formatComparisonValue(row.sales, "sales")}</b></span>
+                <span><small>NYG Units</small><b>{formatComparisonValue(row.units, "units")}</b></span>
+                <span><small>Secured Styles</small><b>{formatNumber.format(row.securedStyles)}</b></span>
+                <span><small>Opportunities</small><b>{formatNumber.format(row.opportunityCount)}</b></span>
+                <span className="top-opportunity">
+                  <small>Top Opportunity</small>
+                  <b>{row.topOpportunity?.name || "No opportunity data"}</b>
+                  {row.topOpportunity?.sales > 0 && <i>{formatComparisonValue(row.topOpportunity.sales, "sales")}</i>}
+                </span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -1949,37 +1914,35 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         {partnerView === "nyk" && (
           <LululemonNykComparison summary={overviewSummary} overview filters={summaryFilters} />
         )}
-        <div className="lululemon-overview-visual-heading">
-          <div>
-            <span>PRODUCT TYPE OPPORTUNITY MAP</span>
-            <strong>Market size vs. {partnerView === "nyg" ? "NYG secured business" : "NYK fabric coverage"}</strong>
-            <p>Use the chart to spot large whitespace opportunities, then click a bubble for style-level detail.</p>
+        {partnerView === "nyg" && (
+          <div className="lululemon-overview-visual-heading">
+            <div>
+              <span>PRODUCT TYPE OPPORTUNITY MAP</span>
+              <strong>Lululemon FOB Spend vs. NYG Sale</strong>
+              <p>Compare wallet size and secured sales, then click a row for style-level detail.</p>
+            </div>
+            <div role="group" aria-label="Overview display">
+              <button
+                className={overviewDisplay === "chart" ? "active" : undefined}
+                type="button"
+                aria-pressed={overviewDisplay === "chart"}
+                onClick={() => setOverviewDisplay("chart")}
+              >
+                Chart
+              </button>
+              <button
+                className={overviewDisplay === "cards" ? "active" : undefined}
+                type="button"
+                aria-pressed={overviewDisplay === "cards"}
+                onClick={() => setOverviewDisplay("cards")}
+              >
+                Cards
+              </button>
+            </div>
           </div>
-          <div role="group" aria-label="Overview display">
-            <button
-              className={overviewDisplay === "chart" ? "active" : undefined}
-              type="button"
-              aria-pressed={overviewDisplay === "chart"}
-              onClick={() => setOverviewDisplay("chart")}
-            >
-              Chart
-            </button>
-            <button
-              className={overviewDisplay === "cards" ? "active" : undefined}
-              type="button"
-              aria-pressed={overviewDisplay === "cards"}
-              onClick={() => setOverviewDisplay("cards")}
-            >
-              Cards
-            </button>
-          </div>
-        </div>
-        {overviewDisplay === "chart" ? (
-          <LululemonOverviewBubbleChart
-            rows={overviewRows}
-            partnerView={partnerView}
-            onSelect={onSelect}
-          />
+        )}
+        {partnerView === "nyg" && overviewDisplay === "chart" ? (
+          <LululemonOverviewFobBarChart rows={overviewRows} onSelect={onSelect} />
         ) : (
           <div className="lululemon-style-overview-grid">
           {overviewRows.map((row) => (
@@ -3678,6 +3641,7 @@ function LululemonSeasonForecast() {
 function LululemonBrandOverview() {
   const comparisonMetric = "sales";
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
+  const [comparisonGender, setComparisonGender] = useState("all");
   const [selectedProductType, setSelectedProductType] = useState("");
   const selectedProductMix = LULULEMON_SALES_MIX.find(
     (row) => row.label === selectedProductType,
@@ -3760,6 +3724,7 @@ function LululemonBrandOverview() {
       dashboard: "Lululemon Business Overview",
       reportingPeriod: "1 SEP 25 - 31 AUG 26",
       selectedProductType: selectedProductMix?.label || "All product types",
+      selectedComparisonGender: comparisonGender,
       selectedSubtype: selectedComparison,
       businessMetrics: LULULEMON_BUSINESS_METRICS,
       salesMixByProductType: LULULEMON_SALES_MIX,
@@ -3774,7 +3739,7 @@ function LululemonBrandOverview() {
         "External material recommendations must be identified as recommendations unless a source confirms the BOM.",
       ],
     };
-  }, [comparisonSubtype, selectedComparison, selectedProductMix]);
+  }, [comparisonGender, comparisonSubtype, selectedComparison, selectedProductMix]);
 
   return (
     <section className="lululemon-brand-overview">
@@ -3877,6 +3842,26 @@ function LululemonBrandOverview() {
                 </p>
               </div>
               <div className="lululemon-comparison-controls lululemon-style-controls lululemon-chart-controls">
+                <fieldset className="lululemon-chart-gender-filter">
+                  <legend>Gender</legend>
+                  <div role="group" aria-label="Filter product type chart by gender">
+                    {[
+                      { key: "all", label: "All" },
+                      { key: "men", label: "Men" },
+                      { key: "women", label: "Women" },
+                    ].map((option) => (
+                      <button
+                        className={comparisonGender === option.key ? "active" : undefined}
+                        type="button"
+                        key={option.key}
+                        aria-pressed={comparisonGender === option.key}
+                        onClick={() => setComparisonGender(option.key)}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
                 <button
                   className="lululemon-comparison-reset"
                   type="button"
@@ -3903,8 +3888,15 @@ function LululemonBrandOverview() {
             <LululemonSubtypeComparisonChart
               metric={comparisonMetric}
               selectedKey={comparisonSubtype}
+              gender={comparisonGender}
               onSelect={setComparisonSubtype}
             />
+            {comparisonGender !== "all" && (
+              <p className="lululemon-chart-gender-note">
+                Lululemon gender sales are classified from scraped audience labels and product-title taxonomy.
+                Unclassified products are included only in All. NYG gender uses the workbook Gender column.
+              </p>
+            )}
             <LululemonMixCard
               title={`${selectedComparison.label} gender mix`}
               subtitle="Share of selected NYTG sales"
@@ -3931,7 +3923,9 @@ function LululemonBrandOverview() {
           fabric use and 4 contain a non-zero NYK value. Future NYK fabric is
           matched by Style, NYK supplier, and season from the NYK sheet in
           Lululemon Wallet Size &amp; Share (1).xlsx; ordered yards use PO_QTY for
-          FA26, WT26, SU27, and SP27. Gender mix uses the Gender and NYG Sale columns.
+          FA26, WT26, SU27, and SP27. NYG gender uses the Gender and NYG Sale
+          columns. Lululemon gender sales are classified from audience labels and
+          product-title taxonomy; unclassified products remain in All only.
         </p>
       </article>
 
