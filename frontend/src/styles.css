@@ -2296,7 +2296,7 @@ button.lululemon-bar-row.selected > strong {
   margin-top: 14px;
   padding: 11px 13px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
   background: #f8f5f6;
@@ -2321,6 +2321,56 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-style-season-summary strong {
   color: #39121c;
   font-size: 10px;
+}
+
+.lululemon-style-year-filter {
+  display: grid;
+  gap: 3px;
+}
+
+.lululemon-style-year-filter > span {
+  color: #8c7d81;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lululemon-style-year-filter > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lululemon-style-year-filter button {
+  min-height: 30px;
+  padding: 0 11px;
+  color: #6f6266;
+  background: #fff;
+  border: 1px solid #dfd4d7;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.lululemon-style-year-filter button:hover:not(:disabled) {
+  color: var(--lululemon-red);
+  border-color: #dba8b4;
+}
+
+.lululemon-style-year-filter button.active {
+  color: #fff;
+  background: var(--lululemon-dark-red);
+  border-color: var(--lululemon-dark-red);
+  box-shadow: 0 4px 10px rgba(113, 21, 42, 0.16);
+}
+
+.lululemon-style-year-filter button:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
 }
 
 .lululemon-style-season-options {
@@ -6828,6 +6878,10 @@ footer a {
 
   .lululemon-style-season-filter {
     grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .lululemon-style-season-options {
+    grid-column: 1 / -1;
   }
 
   .lululemon-style-overview-grid {

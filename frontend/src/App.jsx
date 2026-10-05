@@ -1160,10 +1160,27 @@ function LululemonOpportunityList({
   );
 }
 
-function LululemonNykFabricPanel({ subtypeKey }) {
+function getNykFabricYardsForSeasons(style, selectedSeasons) {
+  if (selectedSeasons.length === 0) return style.nykFabricYards || 0;
+  if (style.period === "future" && style.nykFabricSeasons?.length) {
+    return style.nykFabricSeasons
+      .filter(({ season }) => selectedSeasons.includes(season))
+      .reduce((sum, row) => sum + row.yards, 0);
+  }
+  return style.nykFabricYards || 0;
+}
+
+function LululemonNykFabricPanel({ subtypeKey, selectedSeasons }) {
+  const selectedSeasonSet = new Set(selectedSeasons);
+  const includesSelectedSeason = (style) => selectedSeasons.length === 0 || style.season
+    .split(",")
+    .map((season) => season.trim())
+    .some((season) => selectedSeasonSet.has(season));
   const recordedStyles = LULULEMON_NYG_STYLES.filter(
     (style) => style.subtype === subtypeKey && style.nykFabricYards > 0,
-  ).sort((left, right) => right.nykFabricYards - left.nykFabricYards);
+  )
+    .filter(includesSelectedSeason)
+    .sort((left, right) => right.nykFabricYards - left.nykFabricYards);
   const recordedYards = recordedStyles.reduce(
     (sum, style) => sum + style.nykFabricYards,
     0,
@@ -1171,6 +1188,17 @@ function LululemonNykFabricPanel({ subtypeKey }) {
   const futureStyles = LULULEMON_NYG_FUTURE_STYLES_WITH_NYK(
     LULULEMON_NYG_FUTURE_STYLES.filter((style) => style.subtype === subtypeKey),
   )
+    .map((style) => {
+      if (selectedSeasons.length === 0 || !style.nykFabricSeasons?.length) return style;
+      const nykFabricSeasons = style.nykFabricSeasons.filter(
+        ({ season }) => selectedSeasonSet.has(season),
+      );
+      return {
+        ...style,
+        nykFabricSeasons,
+        nykFabricYards: nykFabricSeasons.reduce((sum, row) => sum + row.yards, 0),
+      };
+    })
     .filter((style) => style.nykFabricYards > 0)
     .sort((left, right) => right.nykFabricYards - left.nykFabricYards);
   const futureYards = futureStyles.reduce(
@@ -1219,14 +1247,14 @@ function LululemonNykFabricPanel({ subtypeKey }) {
       </div>
       <div className="lululemon-nyk-period">
         <div className="lululemon-nyk-period-heading">
-          <span>FA25-SU26 recorded usage</span>
+          <span>{selectedSeasons.length === 0 ? "All seasons" : selectedSeasons.join(" / ")} recorded usage</span>
           <b>{formatNumber.format(Math.round(recordedYards))} YDS</b>
         </div>
         {renderStyles(recordedStyles, "No recorded NYK usage for this product type.")}
       </div>
       <div className="lululemon-nyk-period future">
         <div className="lululemon-nyk-period-heading">
-          <span>FA26-SP27 ordered fabric</span>
+          <span>{selectedSeasons.length === 0 ? "All seasons" : selectedSeasons.join(" / ")} ordered fabric</span>
           <b>{formatNumber.format(Math.round(futureYards))} YDS</b>
         </div>
         {renderStyles(futureStyles, "No matched NYK fabric PO for this product type.", true)}
@@ -1413,6 +1441,11 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
 }
 
 const LULULEMON_DEFAULT_STYLE_SEASONS = ["FA25", "WT25", "SP26", "SU26"];
+const LULULEMON_STYLE_YEAR_FILTERS = [
+  { year: "2025", seasons: LULULEMON_DEFAULT_STYLE_SEASONS },
+  { year: "2026", seasons: ["FA26", "WT26", "SP27", "SU27"] },
+  { year: "2027", seasons: ["FA27", "WT27"] },
+];
 
 function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const allStyles = useMemo(
@@ -1452,13 +1485,13 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const [selectedNygSeason, setSelectedNygSeason] = useState(null);
   const [selectedSeasons, setSelectedSeasons] = useState(LULULEMON_DEFAULT_STYLE_SEASONS);
   const styles = useMemo(() => (
-    selectedSeasons.length === 0 || partnerView !== "nyg"
+    selectedSeasons.length === 0
       ? allStyles
       : allStyles.filter((style) => style.season
         .split(",")
         .map((value) => value.trim())
         .some((season) => selectedSeasons.includes(season)))
-  ), [allStyles, partnerView, selectedSeasons]);
+  ), [allStyles, selectedSeasons]);
   const activeSelectedSeasons = selectedSeasons.length === 0 ? availableSeasons : selectedSeasons;
   const aggregateStyleForSelectedSeasons = (style) => {
     const styleSeasons = style.season.split(",").map((season) => season.trim());
@@ -1499,6 +1532,9 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         ? current.filter((item) => item !== season)
         : availableSeasons.filter((item) => [...current, season].includes(item))
     ));
+  };
+  const selectYear = (seasons) => {
+    setSelectedSeasons(seasons.filter((season) => availableSeasons.includes(season)));
   };
 
   const subtypeControls = (
@@ -1546,7 +1582,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       </label>
     </div>
   );
-  const seasonFilter = partnerView === "nyg" && (
+  const seasonFilter = (
     <div className="lululemon-style-season-filter">
       <div className="lululemon-style-season-summary">
         <span>Season filter</span>
@@ -1556,7 +1592,30 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             : `${selectedSeasons.length} seasons selected`}
         </strong>
       </div>
-      <div className="lululemon-style-season-options" role="group" aria-label="Filter NYG secured styles by season">
+      <div className="lululemon-style-year-filter">
+        <span>Year</span>
+        <div role="group" aria-label="Filter by product year">
+          {LULULEMON_STYLE_YEAR_FILTERS.map(({ year, seasons }) => {
+            const availableYearSeasons = seasons.filter((season) => availableSeasons.includes(season));
+            const isActive = availableYearSeasons.length > 0
+              && selectedSeasons.length === availableYearSeasons.length
+              && availableYearSeasons.every((season) => selectedSeasons.includes(season));
+            return (
+              <button
+                className={isActive ? "active" : undefined}
+                type="button"
+                key={year}
+                aria-pressed={isActive}
+                disabled={availableYearSeasons.length === 0}
+                onClick={() => selectYear(seasons)}
+              >
+                {year}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="lululemon-style-season-options" role="group" aria-label="Filter partner data by season">
         <button
           className={selectedSeasons.length === 0 ? "active" : undefined}
           type="button"
@@ -1612,7 +1671,8 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           </div>
           {subtypeControls}
         </div>
-        <NygMyMap subtypeKey={subtypeKey} />
+        {seasonFilter}
+        <NygMyMap subtypeKey={subtypeKey} selectedSeasons={selectedSeasons} />
       </article>
     );
   }
@@ -1624,18 +1684,19 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         const rowCoverage = LULULEMON_STYLE_COVERAGE.find((item) => item.key === row.key);
         const rowStyles = styles.filter((style) => style.subtype === row.key);
         const partnerMetrics = rowStyles.reduce((summary, style) => {
+          const nykFabricYards = getNykFabricYardsForSeasons(style, selectedSeasons);
           const seasonMetrics = selectedSeasons.length === 0
             ? style.seasonMetrics
             : style.seasonMetrics.filter((metric) => selectedSeasons.includes(metric.season));
           summary.sales += seasonMetrics.reduce((sum, metric) => sum + metric.nygSales, 0);
           summary.units += seasonMetrics.reduce((sum, metric) => sum + metric.nygUnits, 0);
-          summary.nykFabricYards += style.nykFabricYards || 0;
-          if ((style.nykFabricYards || 0) > 0) {
+          summary.nykFabricYards += nykFabricYards;
+          if (nykFabricYards > 0) {
             summary.nykMatchedStyles += 1;
             if (style.period === "future") {
-              summary.nykFutureYards += style.nykFabricYards;
+              summary.nykFutureYards += nykFabricYards;
             } else {
-              summary.nykRecordedYards += style.nykFabricYards;
+              summary.nykRecordedYards += nykFabricYards;
             }
           }
           return summary;
@@ -1865,10 +1926,15 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     nygUnits: subtypeNygTotals.units,
     fobMultiplier: getAverageFobMultiplier(styles),
   };
-  const subtypeNykStyles = allStyles.filter((style) => (style.nykFabricYards || 0) > 0);
+  const subtypeNykStyles = styles
+    .map((style) => ({
+      ...style,
+      nykFabricYards: getNykFabricYardsForSeasons(style, selectedSeasons),
+    }))
+    .filter((style) => style.nykFabricYards > 0);
   const subtypeNykSummary = {
     name: subtypeLabel,
-    season: "All available seasons",
+    season: selectedSeasonLabel,
     lululemonRevenue: subtypeComparison?.lululemonSales || 0,
     lululemonUnits: subtypeComparison?.lululemonUnits || 0,
     nykFabricYards: subtypeNykStyles.reduce((sum, style) => sum + style.nykFabricYards, 0),
@@ -1927,7 +1993,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                 </div>
               </div>
             ) : (
-              <LululemonNykFabricPanel subtypeKey={subtypeKey} />
+              <LululemonNykFabricPanel subtypeKey={subtypeKey} selectedSeasons={selectedSeasons} />
             )}
           </div>
         </div>
@@ -2060,7 +2126,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             </div>
             </div>
           ) : (
-            <LululemonNykFabricPanel subtypeKey={subtypeKey} />
+            <LululemonNykFabricPanel subtypeKey={subtypeKey} selectedSeasons={selectedSeasons} />
           )}
         </div>
 
@@ -2700,9 +2766,8 @@ function formatNygMapFob(value) {
   return `FOB $${value.toFixed(2)}`;
 }
 
-function NygMyMap({ subtypeKey }) {
+function NygMyMap({ subtypeKey, selectedSeasons }) {
   const [selectedPath, setSelectedPath] = useState([]);
-  const [selectedSeasons, setSelectedSeasons] = useState([]);
   const mapCanvasRef = useRef(null);
   const selectedProductType = NYG_MAP_PRODUCT_TYPES[subtypeKey];
   const mapRows = useMemo(() => NYG_MY_MAP_ROWS
@@ -2745,14 +2810,6 @@ function NygMyMap({ subtypeKey }) {
     ));
   };
 
-  const toggleSeason = (season) => {
-    setSelectedSeasons((current) => (
-      current.includes(season)
-        ? current.filter((item) => item !== season)
-        : NYG_MY_MAP_SEASONS.filter((item) => [...current, season].includes(item))
-    ));
-  };
-
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       mapCanvasRef.current?.scrollTo({
@@ -2783,38 +2840,6 @@ function NygMyMap({ subtypeKey }) {
           <div><strong>{formatComparisonValue(totalSales, "sales")}</strong><span>Sales</span></div>
           <div><strong>{formatNygMapUnits(totalUnits)}</strong><span>Units</span></div>
           <div><strong>${averageFob.toFixed(2)}</strong><span>Average FOB</span></div>
-        </div>
-      </div>
-
-      <div className="nyg-map-season-filter">
-        <div>
-          <span>Season filter</span>
-          <strong>
-            {selectedSeasons.length === 0
-              ? `All ${NYG_MY_MAP_SEASONS.length} seasons`
-              : `${selectedSeasons.length} selected`}
-          </strong>
-        </div>
-        <div className="nyg-map-season-options" role="group" aria-label="Filter NYG map by season">
-          <button
-            className={selectedSeasons.length === 0 ? "active" : undefined}
-            type="button"
-            aria-pressed={selectedSeasons.length === 0}
-            onClick={() => setSelectedSeasons([])}
-          >
-            All seasons
-          </button>
-          {NYG_MY_MAP_SEASONS.map((season) => (
-            <button
-              className={selectedSeasons.includes(season) ? "active" : undefined}
-              type="button"
-              key={season}
-              aria-pressed={selectedSeasons.includes(season)}
-              onClick={() => toggleSeason(season)}
-            >
-              {season}
-            </button>
-          ))}
         </div>
       </div>
 
