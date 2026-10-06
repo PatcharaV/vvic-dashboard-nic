@@ -2906,35 +2906,6 @@ button.lululemon-bar-row.selected > strong {
   text-align: right;
 }
 
-.lululemon-overview-fob-tooltip .top-opportunity {
-  margin-top: 3px;
-  padding: 7px;
-  grid-template-columns: minmax(0, 1fr) auto;
-  background: #f8f5f6;
-  border-radius: 6px;
-}
-
-.lululemon-overview-fob-tooltip .top-opportunity small {
-  grid-column: 1 / -1;
-  font-weight: 850;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.lululemon-overview-fob-tooltip .top-opportunity b {
-  min-width: 0;
-  color: #443a3d;
-  overflow-wrap: anywhere;
-  text-align: left;
-}
-
-.lululemon-overview-fob-tooltip .top-opportunity i {
-  color: var(--lululemon-red);
-  font-size: 8px;
-  font-style: normal;
-  font-weight: 850;
-}
-
 .lululemon-style-overview-grid {
   margin-top: 16px;
   display: grid;

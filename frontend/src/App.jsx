@@ -1541,17 +1541,9 @@ function LululemonOverviewFobBarChart({ rows, onSelect }) {
               <b className={row.share <= 0 ? "empty" : undefined}>{formatComparisonShare(row.share)}</b>
               <span className="lululemon-overview-fob-tooltip" id={tooltipId} role="tooltip">
                 <em>{row.label}</em>
-                <span><small>Lululemon Total Sale</small><b>{formatComparisonValue(row.lululemonSales, "sales")}</b></span>
                 <span><small>Lululemon FOB Spend</small><b>{formatComparisonValue(row.fobSpend, "sales")}</b></span>
-                <span><small>NYG Sale</small><b>{formatComparisonValue(row.sales, "sales")}</b></span>
+                <span><small>NYG Sold</small><b>{formatComparisonValue(row.sales, "sales")}</b></span>
                 <span><small>NYG Units</small><b>{formatComparisonValue(row.units, "units")}</b></span>
-                <span><small>Secured Styles</small><b>{formatNumber.format(row.securedStyles)}</b></span>
-                <span><small>Opportunities</small><b>{formatNumber.format(row.opportunityCount)}</b></span>
-                <span className="top-opportunity">
-                  <small>Top Opportunity</small>
-                  <b>{row.topOpportunity?.name || "No opportunity data"}</b>
-                  {row.topOpportunity?.sales > 0 && <i>{formatComparisonValue(row.topOpportunity.sales, "sales")}</i>}
-                </span>
               </span>
             </button>
           );
@@ -1612,8 +1604,6 @@ function LululemonOverviewNykFabricBarChart({ rows, onSelect }) {
                 <em>{row.label}</em>
                 <span><small>NYG Fabric Used</small><b>{formatFabricYards(row.nygFabric, true)}</b></span>
                 <span><small>NYK Fabric Sold</small><b>{formatFabricYards(row.fabricSold, true)}</b></span>
-                <span><small>Matched Styles</small><b>{formatNumber.format(row.nykMatchedStyles || 0)}</b></span>
-                <span><small>Lululemon FOB Spend</small><b>{formatComparisonValue(row.fobSpend, "sales")}</b></span>
               </span>
             </button>
           );
