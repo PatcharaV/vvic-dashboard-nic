@@ -607,6 +607,10 @@ function formatComparisonShare(value) {
   return `${value.toFixed(2)}%`;
 }
 
+function formatForecastMarketValue(value) {
+  return `$${Math.round(value / 1_000_000)}M`;
+}
+
 function formatFabricYards(value, compact = false) {
   if (compact && value >= 1_000_000) return `${(value / 1_000_000).toFixed(2)}M YDS`;
   if (compact && value >= 100_000) return `${(value / 1_000).toFixed(1)}K YDS`;
@@ -3763,26 +3767,47 @@ function LululemonSeasonForecast() {
 
           <article className="lululemon-forecast-section whitespace nyk-whitespace">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">04 · WHITE SPACE</p><h3>Programs NYG Has Not Won Yet, but Should</h3></div>
-              <span>NYK prepares the fabric route so NYG can enter beside the incumbent.</span>
+              <div><p className="eyebrow">NYK · WHITESPACE</p><h3>Big markets NYG has not been awarded: the fabric needed</h3></div>
             </div>
-            <div className={`lululemon-forecast-whitespace-grid ${nykWhitespaceGroups.length === 1 ? "single" : ""}`.trim()}>
+            <div className="lululemon-nyk-slide-tags">
+              <span>NYK</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
+            </div>
+            <div className={`lululemon-nyk-market-grid ${nykWhitespaceGroups.length === 1 ? "single" : ""}`.trim()}>
               {nykWhitespaceGroups.map((group) => (
                 <section className={group.gender.toLowerCase()} key={group.gender}>
-                  <div className="lululemon-forecast-gender-heading"><strong>{group.gender}</strong><span>{group.programs.length} target programs</span></div>
-                  <div className="lululemon-forecast-whitespace-programs">
-                    {group.programs.map((program) => (
-                      <article key={program.name}>
-                        <div><h4>{program.name}</h4><strong>{formatComparisonValue(program.sales, "sales")}</strong></div>
-                        <span>{program.fabric}</span>
-                        <p>{program.detail}</p>
-                      </article>
-                    ))}
-                  </div>
-                  <div className="lululemon-forecast-whitespace-path">
-                    <h4>Recommended fabric entry path</h4>
+                  <h4>{group.gender}'s</h4>
+                  {group.programs.map((program) => (
+                    <article key={program.name}>
+                      <div><strong>{program.name}</strong><b>{formatForecastMarketValue(program.sales)}</b></div>
+                      <span>{program.fabric}</span>
+                      <p>{program.detail}</p>
+                    </article>
+                  ))}
+                </section>
+              ))}
+            </div>
+            <p className="lululemon-nyk-market-note">Others hold these markets. NYK enters beside them. Spec needs are our reading.</p>
+          </article>
+
+          <article className="lululemon-forecast-section nyk-whitespace-path-section">
+            <div className="lululemon-forecast-section-heading">
+              <div><p className="eyebrow">NYK · WHITESPACE PATH</p><h3>The long game: fabric swatch first, program later</h3></div>
+            </div>
+            <div className="lululemon-nyk-slide-tags">
+              <span>NYK</span><span>FY29+</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
+            </div>
+            <div className="lululemon-nyk-path-groups">
+              {nykWhitespaceGroups.map((group) => (
+                <section className={group.gender.toLowerCase()} key={group.gender}>
+                  <h4>{group.gender}'s</h4>
+                  <div className="lululemon-nyk-path-cards">
                     {group.path.map((step) => (
-                      <div key={step.step}><b>{step.step}</b><span><strong>{step.name}</strong><small>{step.action}</small></span><em>{formatComparisonValue(step.sales, "sales")}</em></div>
+                      <article key={step.step}>
+                        <span>Step {step.step}</span>
+                        <strong>{step.name}</strong>
+                        <b>{formatForecastMarketValue(step.sales)}</b>
+                        <p>{step.action}</p>
+                      </article>
                     ))}
                   </div>
                 </section>
@@ -3790,17 +3815,22 @@ function LululemonSeasonForecast() {
             </div>
           </article>
 
-          <article className="lululemon-forecast-section next-steps nyg-next-steps nyk-next-steps">
+          <article className="lululemon-forecast-section nyk-next-steps">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">05 · NEXT STEPS</p><h3>What NYK does next, in step with NYG</h3></div>
-              <span>Bring physical swatches and lab dips; confirm yarn, machine and lead time.</span>
+              <div><p className="eyebrow">NYK · NEXT STEPS</p><h3>What NYK does next, in step with NYG</h3></div>
             </div>
-            <div className="lululemon-forecast-action-grid">
+            <div className="lululemon-nyk-slide-tags">
+              <span>NYK</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
+            </div>
+            <div className={`lululemon-nyk-action-grid ${gender !== "All" ? "single" : ""}`.trim()}>
               {["Men", "Women"].filter((genderKey) => gender === "All" || gender === genderKey).map((genderKey) => (
-                <section key={genderKey}>
-                  <h4>{genderKey}</h4>
+                <section className={genderKey.toLowerCase()} key={genderKey}>
+                  <h4>{genderKey}'s</h4>
                   {nykActions.filter((action) => action.gender === genderKey).map((action) => (
-                    <article key={`${action.gender}-${action.rank}`}><b>{action.rank}</b><div><strong>{action.program}</strong><p>{action.action}</p></div><span>{action.timing}</span></article>
+                    <article key={`${action.gender}-${action.rank}`}>
+                      <div><strong>{action.rank}. {action.program}</strong><p>{action.action}</p></div>
+                      <span>{action.timing}</span>
+                    </article>
                   ))}
                 </section>
               ))}

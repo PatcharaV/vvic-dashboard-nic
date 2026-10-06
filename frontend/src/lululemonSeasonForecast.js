@@ -361,27 +361,27 @@ export const LULULEMON_NYK_WHITESPACE = [
   {
     gender: "Men",
     programs: [
-      { name: "ABC", sales: 528_000_000, fabric: "Warpstreme stretch woven", detail: "NYG makes knit only; check woven capability first." },
-      { name: "Zeroed In", sales: 232_000_000, fabric: "Pant, shirt, short, jogger and jacket fabrics", detail: "NYG currently makes only the graphic long-sleeve waffle." },
-      { name: "Metal Vent Tech Tee", sales: 105_000_000, fabric: "Light cooling mesh knit", detail: "The closest entry door is beside DrySense." },
+      { name: "ABC", sales: 528_000_000, fabric: "Warpstreme stretch woven", detail: "NYG makes knit only; check woven first." },
+      { name: "Zeroed In (men's)", sales: 232_000_000, fabric: "Pant, shirt, short, jogger and jacket", detail: "NYG makes only the graphic LS (waffle)." },
+      { name: "Metal Vent Tech Tee", sales: 105_000_000, fabric: "Light mesh knit tee", detail: "Closest door: cooling mesh (Joyrise)." },
     ],
     path: [
       { step: 1, name: "Cooling mesh swatch", sales: 98_000_000, action: "Show beside DrySense for Metal Vent Tee." },
-      { step: 2, name: "Knit version of ABC", sales: 136_000_000, action: "Start with ABC Short and Jogger; ask whether a knit spec exists." },
-      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Pursue only after woven capability and trust are established." },
+      { step: 2, name: "Knit version of ABC", sales: 136_000_000, action: "ABC Short, Jogger. Ask if a knit spec exists." },
+      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Only with woven capability and trust." },
     ],
   },
   {
     gender: "Women",
     programs: [
       { name: "Align", sales: 921_000_000, fabric: "Nulu-type brushed nylon / lycra", detail: "Use the same fabric family as Define: 81/19, 214gsm." },
-      { name: "Wunder Train", sales: 355_000_000, fabric: "Luxtreme-type 87/13, 201gsm", detail: "Target Pant first, then bra and brief." },
-      { name: "Swiftly", sales: 302_000_000, fabric: "Light recycled cooling jersey", detail: "Build a shared Tee and Tank platform." },
+      { name: "Wunder Train", sales: 355_000_000, fabric: "Pant $258M · bra and brief $60M", detail: "Luxtreme-type 87/13, 201gsm (seen in POs)." },
+      { name: "Swiftly", sales: 302_000_000, fabric: "Tee $249M · tank $52M", detail: "Light recycled jersey, cooling." },
     ],
     path: [
-      { step: 1, name: "Nulu-type tank fabric", sales: 124_000_000, action: "Start with Align Tank from the Define fabric platform." },
-      { step: 2, name: "Align Short fabric", sales: 113_000_000, action: "Move to the next style on the same Nulu-type platform." },
-      { step: 3, name: "Align Pant fabric", sales: 664_000_000, action: "Earn the largest prize last." },
+      { step: 1, name: "Nulu-type tank fabric", sales: 124_000_000, action: "Align Tank. Start from the Define fabric." },
+      { step: 2, name: "Align Short fabric", sales: 113_000_000, action: "Same Nulu-type, next style." },
+      { step: 3, name: "Align Pant fabric", sales: 664_000_000, action: "Largest prize. Earn it last." },
     ],
   },
 ];
@@ -408,12 +408,12 @@ export const LULULEMON_NYK_TREND_DIRECTIONS = [
 ];
 
 export const LULULEMON_NYK_ACTIONS = [
-  { gender: "Men", rank: 1, program: "Pace Breaker", action: "Develop a light cooling stretch swatch; ask for Jogger and Jacket specs.", timing: "Now" },
-  { gender: "Men", rank: 2, program: "DrySense and Evolution", action: "Prepare slub-look jersey and Tencel pique swatches.", timing: "SS28" },
-  { gender: "Men", rank: 3, program: "Hoodies and Rulu", action: "Prepare brushed double-knit and fleece swatches.", timing: "FW28" },
-  { gender: "Women", rank: 1, program: "Define Jacket", action: "Run a Nulu-type trial lot; confirm machine and yarn capability.", timing: "Now" },
-  { gender: "Women", rank: 2, program: "Sculpt, BeCalm and Love", action: "Prepare rib, pointelle and modal-terry swatches.", timing: "SS28" },
-  { gender: "Women", rank: 3, program: "Align Tank, then Short", action: "Show a Nulu-type swatch beside Define and enter beside the incumbent.", timing: "Long game" },
+  { gender: "Men", rank: 1, program: "Pace Breaker", action: "Light cooling stretch swatch; ask jogger and jacket spec.", timing: "Now" },
+  { gender: "Men", rank: 2, program: "DrySense, Evolution", action: "Slub-look and Tencel pique swatches.", timing: "SS28" },
+  { gender: "Men", rank: 3, program: "Hoodies and Rulu", action: "Brushed double-knit and fleece swatches.", timing: "FW28" },
+  { gender: "Women", rank: 1, program: "Define Jacket", action: "Nulu-type trial lot; confirm machine and yarn.", timing: "Now" },
+  { gender: "Women", rank: 2, program: "Sculpt, BeCalm, Love", action: "Rib, pointelle and modal terry swatches.", timing: "SS28" },
+  { gender: "Women", rank: 3, program: "Align tank, then short", action: "Nulu-type swatch beside Define.", timing: "Long game" },
 ];
 
 export const LULULEMON_FORECAST_QUICK_WINS = [

@@ -10135,6 +10135,151 @@ footer a {
 .lululemon-nyk-trend-table p { margin: 0; color: #453c3f; font-size: 9px; line-height: 1.35; }
 .lululemon-nyk-trend-table small { display: block; margin-bottom: 3px; color: #9a8e91; font-size: 7px; font-weight: 900; text-transform: uppercase; }
 
+.lululemon-nyk-slide-tags {
+  margin: -4px 0 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lululemon-nyk-slide-tags span {
+  padding: 5px 13px;
+  color: #ad1834;
+  background: #f5cbd3;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.lululemon-nyk-market-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.lululemon-nyk-market-grid.single { grid-template-columns: minmax(0, 1fr); }
+
+.lululemon-nyk-market-grid > section {
+  min-width: 0;
+  padding: 18px 22px;
+  border: 1px solid #e6dedb;
+  border-top: 7px solid #181412;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.lululemon-nyk-market-grid > section.women { border-top-color: #b21b36; }
+
+.lululemon-nyk-market-grid > section > h4,
+.lululemon-nyk-path-groups > section > h4,
+.lululemon-nyk-action-grid > section > h4 {
+  margin: 0;
+  color: #161112;
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lululemon-nyk-market-grid > section.women > h4,
+.lululemon-nyk-path-groups > section.women > h4,
+.lululemon-nyk-action-grid > section.women > h4 { color: #ad1834; }
+
+.lululemon-nyk-market-grid article {
+  padding: 10px 0;
+  border-bottom: 1px solid #e4dcd9;
+}
+
+.lululemon-nyk-market-grid article > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lululemon-nyk-market-grid article strong { color: #161112; font-size: 14px; }
+.lululemon-nyk-market-grid article b { color: #161112; font-size: 17px; white-space: nowrap; }
+.lululemon-nyk-market-grid article span { display: block; margin-top: 2px; color: #756b68; font-size: 10px; }
+.lululemon-nyk-market-grid article p { margin: 4px 0 0; color: #ad1834; font-size: 11px; font-weight: 850; }
+
+.lululemon-nyk-market-note {
+  margin: 16px 0 0;
+  padding: 15px 20px;
+  color: #fff;
+  background: #181412;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.lululemon-nyk-path-groups {
+  display: grid;
+  gap: 18px;
+}
+
+.lululemon-nyk-path-groups > section > h4 {
+  padding-top: 10px;
+  border-top: 7px solid #181412;
+}
+
+.lululemon-nyk-path-groups > section.women > h4 { border-top-color: #b21b36; }
+
+.lululemon-nyk-path-cards {
+  margin-top: 9px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lululemon-nyk-path-cards article {
+  min-width: 0;
+  min-height: 142px;
+  padding: 16px 18px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  border: 1px solid #e5ddda;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.lululemon-nyk-path-cards article > span { color: #ad1834; font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.lululemon-nyk-path-cards article > strong { color: #171213; font-size: 14px; }
+.lululemon-nyk-path-cards article > b { color: #171213; font-size: 20px; }
+.lululemon-nyk-path-cards article > p { margin: 0; color: #675d5a; font-size: 10px; line-height: 1.4; }
+
+.lululemon-nyk-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.lululemon-nyk-action-grid.single { grid-template-columns: minmax(0, 1fr); }
+
+.lululemon-nyk-action-grid > section {
+  min-width: 0;
+  padding: 18px 24px;
+  border: 1px solid #e6dedb;
+  border-top: 7px solid #181412;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.lululemon-nyk-action-grid > section.women { border-top-color: #b21b36; }
+
+.lululemon-nyk-action-grid article {
+  min-height: 66px;
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid #e4dcd9;
+}
+
+.lululemon-nyk-action-grid article strong { color: #171213; font-size: 14px; }
+.lululemon-nyk-action-grid article p { margin: 3px 0 0; color: #716662; font-size: 10px; }
+.lululemon-nyk-action-grid article > span { color: #ad1834; font-size: 14px; font-weight: 900; white-space: nowrap; }
+
 @media (max-width: 1100px) {
   .nyg-map-summary { grid-template-columns: 1fr; }
   .nyg-map-hero { grid-template-columns: 1fr; }
@@ -10192,6 +10337,10 @@ footer a {
   .lululemon-forecast-whitespace-grid { grid-template-columns: 1fr; }
   .lululemon-nyk-purchase-grid,
   .lululemon-nyk-trend-grid { grid-template-columns: 1fr; }
+  .lululemon-nyk-market-grid,
+  .lululemon-nyk-action-grid,
+  .lululemon-nyk-path-cards { grid-template-columns: 1fr; }
+  .lululemon-nyk-path-cards article { min-height: 0; }
   .lululemon-nyk-purchase-total { flex-direction: column; gap: 5px; }
   .lululemon-nyk-program-columns { display: none; }
   .lululemon-nyk-program-row {
