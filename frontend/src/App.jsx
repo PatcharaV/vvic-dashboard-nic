@@ -3653,8 +3653,8 @@ function LululemonSeasonForecast() {
                       <span>{share.toFixed(1)}% supplied by NYK</span>
                     </div>
                     <div className="lululemon-nyk-purchase-metrics">
-                      <div><small>NYG fabric bought</small><strong>{formatFabricYards(group.boughtYards, true)}</strong><span>{formatComparisonValue(group.boughtSales, "sales")}</span></div>
-                      <div><small>Supplied by NYK</small><strong>{formatFabricYards(group.suppliedYards, true)}</strong><span>{formatComparisonValue(group.suppliedSales, "sales")}</span></div>
+                      <div><small>NYG fabric bought</small><strong>{formatFabricYards(group.boughtYards, true)}</strong></div>
+                      <div><small>Supplied by NYK</small><strong>{formatFabricYards(group.suppliedYards, true)}</strong></div>
                     </div>
                     <div className="lululemon-nyk-season-split">
                       <span>SS <b>{formatFabricYards(group.ssYards, true)}</b></span>
@@ -3666,8 +3666,8 @@ function LululemonSeasonForecast() {
               })}
             </div>
             <div className="lululemon-nyk-purchase-total">
-              <span>Total NYG fabric bought <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nygBoughtYards, true)}</strong> · {formatComparisonValue(LULULEMON_NYK_FORECAST_SUMMARY.nygBoughtSales, "sales")}</span>
-              <span>NYK supplied <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nykSuppliedYards, true)}</strong> · {formatComparisonValue(LULULEMON_NYK_FORECAST_SUMMARY.nykSuppliedSales, "sales")}</span>
+              <span>Total NYG fabric bought <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nygBoughtYards, true)}</strong></span>
+              <span>NYK supplied <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nykSuppliedYards, true)}</strong></span>
             </div>
           </article>
 
@@ -3763,7 +3763,7 @@ function LululemonSeasonForecast() {
 
           <article className="lululemon-forecast-section whitespace nyk-whitespace">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">04 · WHITE SPACE</p><h3>โปรแกรมที่ NYG ยังไม่ได้ และควรได้</h3></div>
+              <div><p className="eyebrow">04 · WHITE SPACE</p><h3>Programs NYG Has Not Won Yet, but Should</h3></div>
               <span>NYK prepares the fabric route so NYG can enter beside the incumbent.</span>
             </div>
             <div className={`lululemon-forecast-whitespace-grid ${nykWhitespaceGroups.length === 1 ? "single" : ""}`.trim()}>
