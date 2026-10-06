@@ -90,12 +90,54 @@ export const LULULEMON_FORECAST_WHITESPACE = [
 ];
 
 export const LULULEMON_FORECAST_ACTIONS = [
-  { gender: "Men", rank: 1, program: "Pace Breaker", action: "Show 7-inch and 5-inch shorts, then add Pant and Jogger.", timing: "Now" },
-  { gender: "Men", rank: 2, program: "DrySense and Evolution", action: "Offer new colours and lightweight fabrics.", timing: "SS28" },
-  { gender: "Men", rank: 3, program: "Metal Vent and ABC", action: "Enter with the tee first; approach ABC only if a knit route exists.", timing: "Long game" },
-  { gender: "Women", rank: 1, program: "Define Jacket", action: "Protect the biggest NYG sale in the biggest current market.", timing: "Now" },
-  { gender: "Women", rank: 2, program: "Sculpt and Pace Rival", action: "Offer new tank and skirt styles.", timing: "SS28" },
-  { gender: "Women", rank: 3, program: "Align Tank, then Short", action: "Enter beside the incumbent instead of trying to replace it.", timing: "Long game" },
+  {
+    gender: "Men",
+    rank: 1,
+    program: "Expand Pace Breaker",
+    owner: "BD + Garment",
+    action: "BD requests the SS28 line list and buyer meeting; Garment presents 5-inch and 7-inch Shorts, then Pant and Jogger samples.",
+    timing: "Now",
+  },
+  {
+    gender: "Men",
+    rank: 2,
+    program: "Refresh DrySense and Evolution",
+    owner: "Garment + BD",
+    action: "Build a lightweight fabric and colour capsule with costing and lead time; BD pitches it for SS28 adoption.",
+    timing: "SS28",
+  },
+  {
+    gender: "Men",
+    rank: 3,
+    program: "Open Metal Vent, then ABC",
+    owner: "BD + Garment/R&D",
+    action: "Present a cooling-mesh tee beside DrySense first; use wear-test results to earn Metal Vent, then request a knit ABC trial.",
+    timing: "Pilot",
+  },
+  {
+    gender: "Women",
+    rank: 1,
+    program: "Defend and Extend Define",
+    owner: "BD + Garment",
+    action: "BD requests adjacent styles; Garment presents updated Define, Cropped and Hooded prototypes with a capacity plan.",
+    timing: "Now",
+  },
+  {
+    gender: "Women",
+    rank: 2,
+    program: "Build a Sculpt and Pace Rival Capsule",
+    owner: "Garment + BD",
+    action: "Develop coordinated Tank and Skirt samples; BD presents pricing, MOQ and lead time for an SS28 nomination.",
+    timing: "SS28",
+  },
+  {
+    gender: "Women",
+    rank: 3,
+    program: "Enter Align through Tank, then Short",
+    owner: "BD + Garment/R&D",
+    action: "Use a Nulu-type Tank sample to prove handfeel and fit beside the incumbent; after approval, pitch Align Short.",
+    timing: "Pilot",
+  },
 ];
 
 export const LULULEMON_NYK_FORECAST_SUMMARY = {

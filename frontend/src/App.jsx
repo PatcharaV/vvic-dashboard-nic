@@ -3578,7 +3578,7 @@ function LululemonSeasonForecast() {
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">04 · WHITE SPACE</p>
-              <h3>โปรแกรมที่ NYG ยังไม่ได้ และควรได้</h3>
+              <h3>Programs NYG Has Not Yet Won, but Should</h3>
             </div>
             <span>Enter beside the incumbent, prove capability, then move in.</span>
           </div>
@@ -3616,9 +3616,9 @@ function LululemonSeasonForecast() {
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">05 · NEXT STEPS</p>
-              <h3>What NYG does next</h3>
+              <h3>How NYG Wins the Next Programs</h3>
             </div>
-            <span>Refresh when Lululemon opens the actual SS28/FW28 line-list.</span>
+            <span>BD opens the door; Garment turns each target into a credible product proposal.</span>
           </div>
           <div className="lululemon-forecast-action-grid">
             {(["Men", "Women"]).filter((value) => gender === "All" || gender === value).map((genderKey) => (
@@ -3627,7 +3627,11 @@ function LululemonSeasonForecast() {
                 {forecastActions.filter((action) => action.gender === genderKey).map((action) => (
                   <article key={action.program}>
                     <b>{action.rank}</b>
-                    <div><strong>{action.program}</strong><p>{action.action}</p></div>
+                    <div>
+                      <strong>{action.program}</strong>
+                      <small>{action.owner}</small>
+                      <p>{action.action}</p>
+                    </div>
                     <span>{action.timing}</span>
                   </article>
                 ))}

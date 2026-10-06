@@ -9469,8 +9469,22 @@ footer a {
 }
 
 .lululemon-forecast-action-grid article div strong {
+  display: block;
   color: #fff;
   font-size: 10px;
+}
+
+.lululemon-forecast-action-grid article div small {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 5px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 3px;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .lululemon-forecast-action-grid article p {
