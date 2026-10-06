@@ -99,13 +99,13 @@ export const LULULEMON_FORECAST_ACTIONS = [
 ];
 
 export const LULULEMON_NYK_FORECAST_SUMMARY = {
-  title: "NYK Fabric Forecast",
+  title: "NYK Fabric Forecast: SS28 and FW28",
   thesis:
-    "Fabric groups NYK should present to Lululemon for SS28 and FW28, grounded in NYG's fabric purchase orders and published 2026 industry direction.",
-  nykShare: 2.4,
-  totalYards: 45.6,
-  outsideYards: 44.5,
-  casualShare: 31,
+    "Which fabrics to develop and pitch, with spec, look and trend, so Development can start. Men's and Women's are separate on every page.",
+  nygBoughtYards: 7_610_000,
+  nygBoughtSales: 41_700_000,
+  nykSuppliedYards: 558_000,
+  nykSuppliedSales: 3_300_000,
 };
 
 export const LULULEMON_NYK_FORECAST_GROUPS = [
@@ -290,6 +290,130 @@ export const LULULEMON_NYK_NEXT_STEPS = [
   "Bring physical swatches for all eight fabric briefs to the SS28 and FW28 meetings.",
   "Confirm machinery, yarn access and lead times for modal, nylon and mesh before pitching.",
   "Line up PFAS-free finish options now as major markets phase out PFAS treatments.",
+];
+
+export const LULULEMON_NYK_PURCHASES = [
+  {
+    gender: "Men",
+    boughtYards: 4_970_000,
+    boughtSales: 24_500_000,
+    ssYards: 1_830_000,
+    fwYards: 3_140_000,
+    suppliedYards: 558_000,
+    suppliedSales: 3_300_000,
+    note: "NYK currently supplies waffle knit only.",
+  },
+  {
+    gender: "Women",
+    boughtYards: 2_630_000,
+    boughtSales: 17_300_000,
+    ssYards: 930_000,
+    fwYards: 1_700_000,
+    suppliedYards: 0,
+    suppliedSales: 0,
+    note: "The whole women's side is open for NYK.",
+  },
+];
+
+export const LULULEMON_NYK_KEEP_EXTEND = [
+  {
+    gender: "Men",
+    programs: [
+      { rank: 1, name: "Pace Breaker", sales: 17_800_000, yards: 1_660_000, nykYards: 0, fabric: "86% rPET / 14% elastane, 124gsm", next: "Jogger and Jacket" },
+      { rank: 2, name: "License to Train / DrySense", sales: 11_800_000, yards: 754_000, nykYards: 0, fabric: "60% rPET / 32% nylon / 4% lycra, 160gsm", next: "Textured Jogger" },
+      { rank: 3, name: "Always In Motion", sales: 10_500_000, yards: 614_000, nykYards: 0, fabric: "91% modal / 9% elastane, 185gsm", next: "Keep and defend" },
+    ],
+  },
+  {
+    gender: "Women",
+    programs: [
+      { rank: 1, name: "Define Jacket", sales: 28_500_000, yards: 1_670_000, nykYards: 0, fabric: "Nulu-type 81% nylon / 19% lycra, 214gsm", next: "Cropped Define" },
+      { rank: 2, name: "Sculpt", sales: 10_400_000, yards: 56_000, nykYards: 0, fabric: "76% polyamide / 24% spandex, 125gsm", next: "Keep and defend" },
+      { rank: 3, name: "Rulu", sales: 8_400_000, yards: 293_000, nykYards: 0, fabric: "92% recycled nylon / 8% lycra, 219gsm", next: "Yoga Jogger" },
+    ],
+  },
+];
+
+export const LULULEMON_NYK_FORECAST_PROGRAMS = [
+  { id: "ss28-men-1", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 1, program: "Pace Breaker Linerless Short 7-inch", nygSales: 4_900_000, nygYards: 397_000, nykYards: 0, current: "86% rPET / 14% elastane, 124gsm, 52-inch", pitch: "Light cooling stretch and ultra-light mesh (Joyrise)." },
+  { id: "ss28-men-2", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 2, program: "Pace Breaker Linerless Short 5-inch", nygSales: 1_400_000, nygYards: 131_000, nykYards: 0, current: "86% rPET / 14% elastane", pitch: "Light crinkle stretch with easy care (Chaosync)." },
+  { id: "ss28-men-3", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 3, program: "License to Train Short-Sleeve Shirt", nygSales: 8_200_000, nygYards: 478_000, nykYards: 0, current: "60% rPET / 32% nylon / 4% lycra, 160gsm, 61-inch", pitch: "Slub-look cooling jersey (Newstalgia)." },
+  { id: "ss28-men-4", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 4, program: "Evolution Short Sleeve Polo Shirt", nygSales: 1_900_000, nygYards: 175_000, nykYards: 0, current: "85% rPET / 10% lyocell / 5% elastane, 160gsm", pitch: "Washed Tencel heather pique (Newstalgia)." },
+  { id: "ss28-men-5", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 5, program: "Pace Breaker Lined Short 7-inch", nygSales: 6_600_000, nygYards: 651_000, nykYards: 0, current: "86% rPET / 14% elastane, 124gsm", pitch: "Cooling stretch with subtle sheen (Joyrise)." },
+  { id: "ss28-women-1", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 1, program: "Sculpt Tank Top", nygSales: 3_700_000, nygYards: 23_000, nykYards: 0, current: "76% polyamide / 24% spandex, UPF multifilament", pitch: "Fine-rib compression knit (Sensoreset)." },
+  { id: "ss28-women-2", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 2, program: "BeCalm V-Neck Tank Top", nygSales: 400_000, nygYards: 28_000, nykYards: 0, current: "95% modal / 5% elastane terry, 256-265gsm, 60-inch", pitch: "Light modal jersey for summer (Chaosync)." },
+  { id: "ss28-women-3", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 3, program: "Sculpt Short-Sleeve Shirt", nygSales: 1_400_000, nygYards: 10_000, nykYards: 0, current: "76% polyamide / 24% spandex, 125gsm, 57-inch", pitch: "Cooling mesh-zoned jersey (Joyrise)." },
+  { id: "ss28-women-4", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 4, program: "Sculpt Cropped Tank Top", nygSales: 4_200_000, nygYards: 16_000, nykYards: 0, current: "76% nylon / 24% elastane, 125gsm, 57-inch", pitch: "Pointelle or fine-rib light knit (Newstalgia)." },
+  { id: "ss28-women-5", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 5, program: "License to Train Classic-Fit Tank", nygSales: 400_000, nygYards: 18_000, nykYards: 0, current: "60% rPET / 33% nylon / 5% lycra, 160gsm, 60-inch", pitch: "Cooling single jersey with subtle sheen (Joyrise)." },
+  { id: "fw28-men-1", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 1, program: "License to Train Hoodie", nygSales: 3_200_000, nygYards: 254_000, nykYards: 0, current: "60% rPET / 32% nylon / 4% lycra, 160gsm, 61-inch", pitch: "Light brushed-back fleece." },
+  { id: "fw28-men-2", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 2, program: "Textured Double-Knit Cotton Hoodie", nygSales: 2_500_000, nygYards: 223_000, nykYards: 0, current: "63% cotton / 32% polyester / 5% elastane, 285gsm, 60-inch", pitch: "Brushed-back cotton double-knit with marl." },
+  { id: "fw28-men-3", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 3, program: "Ease The Day Hoodie", nygSales: 7_000_000, nygYards: 369_000, nykYards: 0, current: "63% cotton / 32% rPET / 5% elastane, 285gsm, 60-inch", pitch: "The same double-knit with a softer felted hand." },
+  { id: "fw28-men-4", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 4, program: "Rulu Fleece Half-Zip", nygSales: 3_700_000, nygYards: 206_000, nykYards: 0, current: "88% polyester / 12% lycra, 256gsm, 62-inch, brushed back", pitch: "Milled brushed fleece with a marl option." },
+  { id: "fw28-men-5", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 5, program: "Waffle Knit Hoodie", nygSales: 1_800_000, nygYards: 163_000, nykYards: 163_000, current: "58% organic cotton / 37% rPET / 5% elastane, 355gsm", pitch: "Keep the base; add 3D and velour-face waffle." },
+  { id: "fw28-women-1", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 1, program: "Define Jacket *Nulu", nygSales: 28_500_000, nygYards: 1_670_000, nykYards: 0, current: "81% nylon / 19% lycra, 214gsm, 46-inch Nulu 28gg", pitch: "Ultra-matte suede-brushed Nulu-type knit." },
+  { id: "fw28-women-2", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 2, program: "It's Rulu Cropped Half Zip", nygSales: 3_700_000, nygYards: 131_000, nykYards: 0, current: "92% recycled nylon / 8% lycra, 219gsm, 58-inch", pitch: "Moss jersey with a light brushed finish." },
+  { id: "fw28-women-3", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 3, program: "Love Long-Sleeve Shirt *BeCalm", nygSales: 700_000, nygYards: 55_000, nykYards: 0, current: "95% modal / 5% elastane, 256gsm, 60-inch", pitch: "Plush brushed modal terry." },
+  { id: "fw28-women-4", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 4, program: "BeCalm Wrap-Front Long-Sleeve", nygSales: 500_000, nygYards: 34_000, nykYards: 0, current: "95% modal / 5% elastane, 265gsm, 60-inch", pitch: "The same terry with a felted plush hand." },
+  { id: "fw28-women-5", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 5, program: "Love Modal Fleece Long-Sleeve", nygSales: 600_000, nygYards: 50_000, nykYards: 0, current: "93% micro modal / 7% elastane, 250gsm, 58-inch", pitch: "Micro-modal fleece with a powdery brushed hand." },
+];
+
+export const LULULEMON_NYK_WHITESPACE = [
+  {
+    gender: "Men",
+    programs: [
+      { name: "ABC", sales: 528_000_000, fabric: "Warpstreme stretch woven", detail: "NYG makes knit only; check woven capability first." },
+      { name: "Zeroed In", sales: 232_000_000, fabric: "Pant, shirt, short, jogger and jacket fabrics", detail: "NYG currently makes only the graphic long-sleeve waffle." },
+      { name: "Metal Vent Tech Tee", sales: 105_000_000, fabric: "Light cooling mesh knit", detail: "The closest entry door is beside DrySense." },
+    ],
+    path: [
+      { step: 1, name: "Cooling mesh swatch", sales: 98_000_000, action: "Show beside DrySense for Metal Vent Tee." },
+      { step: 2, name: "Knit version of ABC", sales: 136_000_000, action: "Start with ABC Short and Jogger; ask whether a knit spec exists." },
+      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Pursue only after woven capability and trust are established." },
+    ],
+  },
+  {
+    gender: "Women",
+    programs: [
+      { name: "Align", sales: 921_000_000, fabric: "Nulu-type brushed nylon / lycra", detail: "Use the same fabric family as Define: 81/19, 214gsm." },
+      { name: "Wunder Train", sales: 355_000_000, fabric: "Luxtreme-type 87/13, 201gsm", detail: "Target Pant first, then bra and brief." },
+      { name: "Swiftly", sales: 302_000_000, fabric: "Light recycled cooling jersey", detail: "Build a shared Tee and Tank platform." },
+    ],
+    path: [
+      { step: 1, name: "Nulu-type tank fabric", sales: 124_000_000, action: "Start with Align Tank from the Define fabric platform." },
+      { step: 2, name: "Align Short fabric", sales: 113_000_000, action: "Move to the next style on the same Nulu-type platform." },
+      { step: 3, name: "Align Pant fabric", sales: 664_000_000, action: "Earn the largest prize last." },
+    ],
+  },
+];
+
+export const LULULEMON_NYK_TREND_DIRECTIONS = [
+  {
+    season: "SS28",
+    rows: [
+      { direction: "Sensoreset", fabric: "Brushed, waffle, 3D texture and fine rib", men: "Waffle Hoodie", women: "Sculpt Tank / Cropped Tank" },
+      { direction: "Newstalgia", fabric: "Slub jersey, washed finish and pointelle", men: "DrySense / Evolution", women: "Sculpt Cropped Tank" },
+      { direction: "Joyrise", fabric: "Light cooling mesh with subtle sheen", men: "Pace Breaker", women: "Sculpt / License to Train" },
+      { direction: "Chaosync", fabric: "Tencel, modal, crinkle and wool blend", men: "Pace Breaker 5-inch", women: "BeCalm V-Neck Tank" },
+    ],
+  },
+  {
+    season: "FW28",
+    rows: [
+      { direction: "Enveloping comfort", fabric: "Brushed, napped and felted", men: "License to Train Hoodie", women: "Define / Love Modal Fleece" },
+      { direction: "Quiet smooth touch", fabric: "Fine gauge and ultra matte", men: "Double-Knit Hoodie / Rulu", women: "Define Jacket" },
+      { direction: "Texture and relief", fabric: "Waffle, jacquard and velour", men: "Waffle Hoodie", women: "Rulu Cropped Half Zip" },
+      { direction: "Nature texture", fabric: "Flecked marl and powdery brushing", men: "Ease The Day Hoodie", women: "Rulu Cropped Half Zip" },
+    ],
+  },
+];
+
+export const LULULEMON_NYK_ACTIONS = [
+  { gender: "Men", rank: 1, program: "Pace Breaker", action: "Develop a light cooling stretch swatch; ask for Jogger and Jacket specs.", timing: "Now" },
+  { gender: "Men", rank: 2, program: "DrySense and Evolution", action: "Prepare slub-look jersey and Tencel pique swatches.", timing: "SS28" },
+  { gender: "Men", rank: 3, program: "Hoodies and Rulu", action: "Prepare brushed double-knit and fleece swatches.", timing: "FW28" },
+  { gender: "Women", rank: 1, program: "Define Jacket", action: "Run a Nulu-type trial lot; confirm machine and yarn capability.", timing: "Now" },
+  { gender: "Women", rank: 2, program: "Sculpt, BeCalm and Love", action: "Prepare rib, pointelle and modal-terry swatches.", timing: "SS28" },
+  { gender: "Women", rank: 3, program: "Align Tank, then Short", action: "Show a Nulu-type swatch beside Define and enter beside the incumbent.", timing: "Long game" },
 ];
 
 export const LULULEMON_FORECAST_QUICK_WINS = [

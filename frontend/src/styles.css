@@ -9929,6 +9929,212 @@ footer a {
   font-size: 9px;
 }
 
+.lululemon-nyk-purchase-grid,
+.lululemon-nyk-trend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lululemon-nyk-purchase-grid.single,
+.lululemon-nyk-trend-grid.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.lululemon-nyk-purchase-grid > section,
+.lululemon-nyk-trend-grid > section {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e6dde0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.lululemon-nyk-purchase-metrics {
+  padding: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lululemon-nyk-purchase-metrics > div {
+  min-width: 0;
+  padding: 12px;
+  display: grid;
+  gap: 4px;
+  background: #f8f5f6;
+  border-radius: 7px;
+}
+
+.lululemon-nyk-purchase-metrics small,
+.lululemon-nyk-program-value small {
+  color: #8a7d81;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.lululemon-nyk-purchase-metrics strong {
+  color: #30282a;
+  font-size: 20px;
+}
+
+.lululemon-nyk-purchase-metrics span {
+  color: var(--lululemon-red);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.lululemon-nyk-season-split {
+  padding: 0 14px 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.lululemon-nyk-season-split span {
+  padding: 6px 9px;
+  color: #766b6e;
+  background: #f7f3f4;
+  border-radius: 5px;
+  font-size: 9px;
+}
+
+.lululemon-nyk-season-split b { color: #3a3134; }
+
+.lululemon-nyk-purchase-grid > section > p {
+  margin: 0;
+  padding: 10px 14px;
+  color: #685e61;
+  background: #fcfafb;
+  border-top: 1px solid #eee7e9;
+  font-size: 9px;
+}
+
+.lululemon-nyk-purchase-total {
+  margin-top: 12px;
+  padding: 11px 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #665b5e;
+  background: #f5f1f2;
+  border-left: 3px solid var(--lululemon-red);
+  font-size: 10px;
+}
+
+.lululemon-nyk-purchase-total strong { color: var(--lululemon-red); }
+
+.lululemon-nyk-program-columns,
+.lululemon-nyk-program-row {
+  display: grid;
+  grid-template-columns: 30px minmax(180px, 1.9fr) repeat(3, minmax(68px, 0.55fr));
+  align-items: center;
+  gap: 8px;
+}
+
+.lululemon-nyk-program-columns {
+  min-height: 28px;
+  padding: 5px 10px;
+  color: #918589;
+  background: #faf7f8;
+  border-bottom: 1px solid #ebe3e5;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lululemon-nyk-program-columns span:not(:nth-child(2)) { text-align: right; }
+
+.lululemon-nyk-program-row {
+  min-height: 94px;
+  padding: 10px;
+  border-top: 1px solid #eee7e9;
+}
+
+.lululemon-nyk-program-row:first-child { border-top: 0; }
+.lululemon-nyk-program-summary { min-width: 0; }
+
+.lululemon-nyk-program-summary h4 {
+  margin: 0;
+  color: #292224;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.lululemon-nyk-program-summary p,
+.lululemon-nyk-program-summary strong {
+  margin: 4px 0 0;
+  display: block;
+  color: #746a6d;
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.lululemon-nyk-program-summary strong { color: var(--lululemon-dark-red); }
+
+.lululemon-nyk-program-summary p span,
+.lululemon-nyk-program-summary strong span {
+  margin-right: 5px;
+  color: #978b8e;
+  font-size: 7px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lululemon-nyk-program-value {
+  min-width: 0;
+  padding-left: 8px;
+  display: grid;
+  gap: 3px;
+  border-left: 1px solid #eee7e9;
+  text-align: right;
+}
+
+.lululemon-nyk-program-value small { display: none; }
+
+.lululemon-nyk-program-value b {
+  color: var(--lululemon-red);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.lululemon-nyk-program-value.secured b { color: #126e50; }
+
+.lululemon-nyk-trend-grid > section > header {
+  min-height: 50px;
+  padding: 10px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #fff;
+  background: linear-gradient(110deg, #211d1e, #4b4245);
+}
+
+.lululemon-nyk-trend-grid header strong { font-size: 15px; }
+.lululemon-nyk-trend-grid header span { color: #d9d1d3; font-size: 8px; }
+
+.lululemon-nyk-trend-table article {
+  min-height: 70px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: minmax(150px, 1.25fr) repeat(2, minmax(100px, 0.75fr));
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #eee7e9;
+}
+
+.lululemon-nyk-trend-table article:first-child { border-top: 0; }
+.lululemon-nyk-trend-table.single-gender article { grid-template-columns: minmax(170px, 1fr) minmax(130px, 0.8fr); }
+
+.lululemon-nyk-trend-table article > div { display: grid; gap: 3px; }
+.lululemon-nyk-trend-table article > div strong { color: var(--lululemon-dark-red); font-size: 10px; }
+.lululemon-nyk-trend-table article > div span { color: #776d70; font-size: 8px; line-height: 1.35; }
+.lululemon-nyk-trend-table p { margin: 0; color: #453c3f; font-size: 9px; line-height: 1.35; }
+.lululemon-nyk-trend-table small { display: block; margin-bottom: 3px; color: #9a8e91; font-size: 7px; font-weight: 900; text-transform: uppercase; }
+
 @media (max-width: 1100px) {
   .nyg-map-summary { grid-template-columns: 1fr; }
   .nyg-map-hero { grid-template-columns: 1fr; }
@@ -9984,6 +10190,20 @@ footer a {
   .lululemon-forecast-market-grid,
   .lululemon-forecast-keep-grid,
   .lululemon-forecast-whitespace-grid { grid-template-columns: 1fr; }
+  .lululemon-nyk-purchase-grid,
+  .lululemon-nyk-trend-grid { grid-template-columns: 1fr; }
+  .lululemon-nyk-purchase-total { flex-direction: column; gap: 5px; }
+  .lululemon-nyk-program-columns { display: none; }
+  .lululemon-nyk-program-row {
+    grid-template-columns: 30px repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+  .lululemon-nyk-program-row .lululemon-forecast-opportunity-rank { grid-row: 1 / span 2; }
+  .lululemon-nyk-program-summary { grid-column: 2 / -1; }
+  .lululemon-nyk-program-value { text-align: left; }
+  .lululemon-nyk-program-value small { display: block; }
+  .lululemon-nyk-trend-table article,
+  .lululemon-nyk-trend-table.single-gender article { grid-template-columns: 1fr; }
   .lululemon-forecast-market-bars > div { grid-template-columns: 16px 68px minmax(52px, 1fr) 52px; }
   .lululemon-forecast-market-bars > div > small { display: none; }
   .lululemon-forecast-ranked-heading { align-items: flex-start; flex-direction: column; }

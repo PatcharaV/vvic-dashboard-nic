@@ -31,11 +31,13 @@ import {
   LULULEMON_FORECAST_NYG_PROGRAMS,
   LULULEMON_FORECAST_SUMMARY,
   LULULEMON_FORECAST_WHITESPACE,
-  LULULEMON_NYK_FABRIC_BRIEFS,
-  LULULEMON_NYK_FORECAST_GROUPS,
+  LULULEMON_NYK_ACTIONS,
+  LULULEMON_NYK_FORECAST_PROGRAMS,
   LULULEMON_NYK_FORECAST_SUMMARY,
-  LULULEMON_NYK_NEXT_STEPS,
-  LULULEMON_NYK_TRENDS,
+  LULULEMON_NYK_KEEP_EXTEND,
+  LULULEMON_NYK_PURCHASES,
+  LULULEMON_NYK_TREND_DIRECTIONS,
+  LULULEMON_NYK_WHITESPACE,
 } from "./lululemonSeasonForecast";
 import {
   LULULEMON_BUSINESS_METRICS,
@@ -3257,36 +3259,58 @@ function LululemonSeasonForecast() {
       };
     })
     .filter((group) => group.genderGroups.length > 0);
-  const filteredNykGroups = LULULEMON_NYK_FORECAST_GROUPS.filter(
-    (item) => season === "All" || item.season === season,
+  const filteredNykPrograms = LULULEMON_NYK_FORECAST_PROGRAMS.filter(
+    (program) =>
+      (season === "All" || program.season === season) &&
+      (gender === "All" || program.gender === gender),
   );
-  const filteredNykBriefs = LULULEMON_NYK_FABRIC_BRIEFS.filter(
-    (item) => season === "All" || item.season === season,
-  );
-  const nykSeasonGroups = ["SS28", "FW28"]
+  const nykProgramGroups = ["SS28", "FW28"]
     .filter((seasonKey) => season === "All" || season === seasonKey)
-    .map((seasonKey) => ({
-      season: seasonKey,
-      seasonName:
-        filteredNykGroups.find((item) => item.season === seasonKey)?.seasonName || seasonKey,
-      items: filteredNykGroups.filter((item) => item.season === seasonKey),
-    }))
-    .filter((group) => group.items.length > 0);
+    .map((seasonKey) => {
+      const seasonPrograms = filteredNykPrograms.filter((program) => program.season === seasonKey);
+      return {
+        season: seasonKey,
+        seasonName: seasonPrograms[0]?.seasonName || seasonKey,
+        genderGroups: ["Men", "Women"]
+          .filter((genderKey) => gender === "All" || gender === genderKey)
+          .map((genderKey) => ({
+            gender: genderKey,
+            programs: seasonPrograms.filter((program) => program.gender === genderKey),
+          }))
+          .filter((group) => group.programs.length > 0),
+      };
+    })
+    .filter((group) => group.genderGroups.length > 0);
+  const nykPurchaseGroups = LULULEMON_NYK_PURCHASES.filter(
+    (group) => gender === "All" || group.gender === gender,
+  );
+  const nykKeepExtendGroups = LULULEMON_NYK_KEEP_EXTEND.filter(
+    (group) => gender === "All" || group.gender === gender,
+  );
+  const nykWhitespaceGroups = LULULEMON_NYK_WHITESPACE.filter(
+    (group) => gender === "All" || group.gender === gender,
+  );
+  const nykTrendGroups = LULULEMON_NYK_TREND_DIRECTIONS.filter(
+    (group) => season === "All" || group.season === season,
+  );
+  const nykActions = LULULEMON_NYK_ACTIONS.filter(
+    (action) => gender === "All" || action.gender === gender,
+  );
   const isNykForecast = partner === "NYK";
   const forecastAiContext = useMemo(
     () => ({
       dashboard: "Lululemon SS28 & FW28 Season Forecast",
       selectedPartner: partner,
       selectedSeason: season,
-      selectedGender: isNykForecast ? "Program level (no gender split in source)" : gender,
+      selectedGender: gender,
       summary: isNykForecast ? LULULEMON_NYK_FORECAST_SUMMARY : LULULEMON_FORECAST_SUMMARY,
-      visiblePrograms: isNykForecast ? filteredNykGroups : filteredPrograms,
-      marketSize: isNykForecast ? [] : visibleMarkets,
-      keepAndExtend: isNykForecast ? [] : keepExtendGroups,
-      whitespace: isNykForecast ? [] : whitespaceGroups,
-      fabricDirections: isNykForecast ? filteredNykBriefs : [],
-      trends: isNykForecast ? LULULEMON_NYK_TRENDS : [],
-      nextSteps: isNykForecast ? LULULEMON_NYK_NEXT_STEPS : forecastActions,
+      visiblePrograms: isNykForecast ? filteredNykPrograms : filteredPrograms,
+      marketSize: isNykForecast ? nykPurchaseGroups : visibleMarkets,
+      keepAndExtend: isNykForecast ? nykKeepExtendGroups : keepExtendGroups,
+      whitespace: isNykForecast ? nykWhitespaceGroups : whitespaceGroups,
+      fabricDirections: isNykForecast ? nykTrendGroups : [],
+      trends: isNykForecast ? nykTrendGroups : [],
+      nextSteps: isNykForecast ? nykActions : forecastActions,
       caveat:
         "This is a directional forecast. The actual SS28/FW28 Lululemon line-list is not available yet.",
     }),
@@ -3295,19 +3319,23 @@ function LululemonSeasonForecast() {
       season,
       gender,
       isNykForecast,
-      filteredNykGroups,
+      filteredNykPrograms,
       filteredPrograms,
       visibleMarkets,
       keepExtendGroups,
       whitespaceGroups,
       forecastActions,
-      filteredNykBriefs,
+      nykPurchaseGroups,
+      nykKeepExtendGroups,
+      nykWhitespaceGroups,
+      nykTrendGroups,
+      nykActions,
     ],
   );
 
   return (
     <section className="lululemon-forecast-page">
-      <article className={`lululemon-forecast-hero ${isNykForecast ? "" : "nyg-intro"}`.trim()}>
+      <article className="lululemon-forecast-hero nyg-intro">
         <div className="lululemon-forecast-hero-copy">
           <p className="eyebrow">
             {isNykForecast ? "NAN YANG TEXTILE GROUP x LULULEMON" : "NYG · GARMENT · LULULEMON"}
@@ -3328,16 +3356,6 @@ function LululemonSeasonForecast() {
               : "MKT · USD and pieces only · NYG sales FA25-WT27 · Confidential"}
           </span>
         </div>
-        {isNykForecast && (
-          <div className="lululemon-forecast-hero-metrics">
-            <>
-              <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.nykShare}%</strong><span>NYK overall share</span></div>
-              <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.totalYards}M</strong><span>Total NYG fabric PO yards</span></div>
-              <div><strong>{LULULEMON_NYK_FORECAST_SUMMARY.outsideYards}M</strong><span>Yards supplied outside NYK</span></div>
-              <div><strong>{LULULEMON_NYK_FORECAST_GROUPS.length}</strong><span>SS28 and FW28 fabric plays</span></div>
-            </>
-          </div>
-        )}
       </article>
 
       <article className="lululemon-forecast-method">
@@ -3345,7 +3363,7 @@ function LululemonSeasonForecast() {
           <span>FORECAST BASIS</span>
           <p>
             {isNykForecast
-              ? "Fabric priorities are taken from the NYK SS28/FW28 forecast deck and grounded in NYG fabric purchase-order whitespace."
+              ? "Fabric priorities use NYG fabric purchase orders from FA25-WT27. Values are PO_QTY in yards; USD is estimated as yards multiplied by item price."
               : LULULEMON_FORECAST_SUMMARY.methodology}
           </p>
         </div>
@@ -3379,27 +3397,25 @@ function LululemonSeasonForecast() {
               </button>
             ))}
           </fieldset>
-          {!isNykForecast && (
-            <fieldset>
-              <legend>Gender</legend>
-              {["All", "Men", "Women"].map((value) => (
-                <button
-                  className={gender === value ? "active" : undefined}
-                  type="button"
-                  onClick={() => setGender(value)}
-                  key={value}
-                >
-                  {value}
-                </button>
-              ))}
-            </fieldset>
-          )}
+          <fieldset>
+            <legend>Gender</legend>
+            {["All", "Men", "Women"].map((value) => (
+              <button
+                className={gender === value ? "active" : undefined}
+                type="button"
+                onClick={() => setGender(value)}
+                key={value}
+              >
+                {value}
+              </button>
+            ))}
+          </fieldset>
         </div>
         <div className="lululemon-forecast-filter-status">
           <span>{partner}</span>
           <b>{season === "All" ? "SS28 + FW28" : season}</b>
-          <b>{isNykForecast ? "Program level · No gender split" : gender === "All" ? "Men + Women" : gender}</b>
-          <small>{isNykForecast ? filteredNykGroups.length : filteredPrograms.length} priority plays</small>
+          <b>{gender === "All" ? "Men + Women" : gender}</b>
+          <small>{isNykForecast ? filteredNykPrograms.length : filteredPrograms.length} priority plays</small>
         </div>
       </article>
 
@@ -3619,42 +3635,124 @@ function LululemonSeasonForecast() {
 
       {isNykForecast && (
         <>
-          <article className="lululemon-forecast-section nyk-programs">
+          <article className="lululemon-forecast-section nyk-purchases">
             <div className="lululemon-forecast-section-heading">
               <div>
-                <p className="eyebrow">NYK FABRIC FORECAST</p>
-                <h3>Fabric groups NYK should present</h3>
+                <p className="eyebrow">01 · FABRIC BOUGHT</p>
+                <h3>What NYG bought, and what NYK supplied</h3>
               </div>
-              <span>Grouped by season · {filteredNykGroups.length} priority plays</span>
+              <span>FA25-WT27 · PO quantity in yards · {gender === "All" ? "Men + Women" : gender}</span>
             </div>
-            <div className="lululemon-nyk-forecast-groups">
-              {nykSeasonGroups.map((seasonGroup) => (
-                <section className="lululemon-nyk-forecast-season" key={seasonGroup.season}>
+            <div className={`lululemon-nyk-purchase-grid ${nykPurchaseGroups.length === 1 ? "single" : ""}`.trim()}>
+              {nykPurchaseGroups.map((group) => {
+                const share = group.boughtYards > 0 ? (group.suppliedYards / group.boughtYards) * 100 : 0;
+                return (
+                  <section className={group.gender.toLowerCase()} key={group.gender}>
+                    <div className="lululemon-forecast-gender-heading">
+                      <strong>{group.gender}</strong>
+                      <span>{share.toFixed(1)}% supplied by NYK</span>
+                    </div>
+                    <div className="lululemon-nyk-purchase-metrics">
+                      <div><small>NYG fabric bought</small><strong>{formatFabricYards(group.boughtYards, true)}</strong><span>{formatComparisonValue(group.boughtSales, "sales")}</span></div>
+                      <div><small>Supplied by NYK</small><strong>{formatFabricYards(group.suppliedYards, true)}</strong><span>{formatComparisonValue(group.suppliedSales, "sales")}</span></div>
+                    </div>
+                    <div className="lululemon-nyk-season-split">
+                      <span>SS <b>{formatFabricYards(group.ssYards, true)}</b></span>
+                      <span>FW <b>{formatFabricYards(group.fwYards, true)}</b></span>
+                    </div>
+                    <p>{group.note}</p>
+                  </section>
+                );
+              })}
+            </div>
+            <div className="lululemon-nyk-purchase-total">
+              <span>Total NYG fabric bought <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nygBoughtYards, true)}</strong> · {formatComparisonValue(LULULEMON_NYK_FORECAST_SUMMARY.nygBoughtSales, "sales")}</span>
+              <span>NYK supplied <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nykSuppliedYards, true)}</strong> · {formatComparisonValue(LULULEMON_NYK_FORECAST_SUMMARY.nykSuppliedSales, "sales")}</span>
+            </div>
+          </article>
+
+          <article className="lululemon-forecast-section keep-extend nyk-keep-extend">
+            <div className="lululemon-forecast-section-heading">
+              <div>
+                <p className="eyebrow">02 · KEEP AND EXTEND</p>
+                <h3>Follow the NYG programs, one fabric at a time</h3>
+              </div>
+              <span>NYK supplies none of these six priority programs today.</span>
+            </div>
+            <div className={`lululemon-forecast-keep-grid ${nykKeepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
+              {nykKeepExtendGroups.map((group) => (
+                <section className={group.gender.toLowerCase()} key={group.gender}>
+                  <div className="lululemon-forecast-gender-heading"><strong>{group.gender}</strong><span>Top 3 by NYG sales</span></div>
+                  <div>
+                    {group.programs.map((program) => (
+                      <article key={program.name}>
+                        <b>{program.rank}</b>
+                        <div>
+                          <h4>{program.name}</h4>
+                          <p>NYG buys · {formatFabricYards(program.yards, true)} · {formatComparisonValue(program.sales, "sales")} · NYK {formatFabricYards(program.nykYards, true)}</p>
+                          <strong>Fabric · {program.fabric}<br />Next · {program.next}</strong>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+
+            <div className="lululemon-forecast-ranked-heading">
+              <div><span>SS28 / FW28 RANKING</span><strong>NYG programs and the fabric NYK should pitch</strong></div>
+              <small>{filteredNykPrograms.length} programs · {gender === "All" ? "Men + Women" : gender}</small>
+            </div>
+            <div className="lululemon-forecast-program-groups">
+              {nykProgramGroups.map((seasonGroup) => (
+                <section className="lululemon-forecast-season-group" key={seasonGroup.season}>
                   <div className="lululemon-forecast-season-heading">
                     <span>{seasonGroup.season}</span>
-                    <div>
-                      <strong>{seasonGroup.seasonName}</strong>
-                      <small>{seasonGroup.items.length} fabric groups</small>
-                    </div>
+                    <div><strong>{seasonGroup.seasonName}</strong><small>{seasonGroup.genderGroups.reduce((sum, group) => sum + group.programs.length, 0)} programs</small></div>
                   </div>
-                  <div className="lululemon-nyk-forecast-list">
-                    {seasonGroup.items.map((item) => (
-                      <article className="lululemon-nyk-forecast-row" key={item.id}>
-                        <span className="rank">{String(item.rank).padStart(2, "0")}</span>
-                        <div className="program">
-                          <small>{item.category}</small>
-                          <h4>{item.group}</h4>
-                          <b>{item.tier}</b>
+                  <div className={`lululemon-forecast-gender-grid ${seasonGroup.genderGroups.length === 1 ? "single" : ""}`.trim()}>
+                    {seasonGroup.genderGroups.map((genderGroup) => (
+                      <section className={`lululemon-forecast-gender-group ${genderGroup.gender.toLowerCase()}`} key={genderGroup.gender}>
+                        <div className="lululemon-forecast-gender-heading"><strong>{genderGroup.gender}</strong><span>Top {genderGroup.programs.length}</span></div>
+                        <div className="lululemon-nyk-program-columns" aria-hidden="true"><span /><span>Program / Fabric direction</span><span>NYG Sales</span><span>NYG Fabric</span><span>NYK Fabric</span></div>
+                        <div className="lululemon-forecast-opportunity-list">
+                          {genderGroup.programs.map((program) => (
+                            <article className="lululemon-nyk-program-row" key={program.id}>
+                              <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
+                              <div className="lululemon-nyk-program-summary">
+                                <h4>{program.program}</h4>
+                                <p><span>Today</span>{program.current}</p>
+                                <strong><span>NYK pitch</span>{program.pitch}</strong>
+                              </div>
+                              <span className="lululemon-nyk-program-value"><small>NYG Sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
+                              <span className="lululemon-nyk-program-value"><small>NYG Fabric</small><b>{formatFabricYards(program.nygYards, true)}</b></span>
+                              <span className={`lululemon-nyk-program-value ${program.nykYards > 0 ? "secured" : ""}`.trim()}><small>NYK Fabric</small><b>{formatFabricYards(program.nykYards, true)}</b></span>
+                            </article>
+                          ))}
                         </div>
-                        <div className="why">
-                          <small>Why this group</small>
-                          <p>{item.reason}</p>
-                        </div>
-                        <div className="direction">
-                          <small>NYK should develop</small>
-                          <strong>{item.fabric}</strong>
-                          <p>{item.fabricDetail}</p>
-                        </div>
+                      </section>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </article>
+
+          <article className="lululemon-forecast-section nyk-trend-direction">
+            <div className="lululemon-forecast-section-heading">
+              <div><p className="eyebrow">03 · FABRIC DIRECTION</p><h3>Trend direction mapped to program</h3></div>
+              <span>Directional references only · develop physical swatches before presenting</span>
+            </div>
+            <div className={`lululemon-nyk-trend-grid ${nykTrendGroups.length === 1 ? "single" : ""}`.trim()}>
+              {nykTrendGroups.map((group) => (
+                <section key={group.season}>
+                  <header><strong>{group.season}</strong><span>{group.season === "SS28" ? "Nanyang S/S 2028" : "F/W 2027 direction used for FW28"}</span></header>
+                  <div className={`lululemon-nyk-trend-table ${gender !== "All" ? "single-gender" : ""}`.trim()}>
+                    {group.rows.map((row) => (
+                      <article key={row.direction}>
+                        <div><strong>{row.direction}</strong><span>{row.fabric}</span></div>
+                        {(gender === "All" || gender === "Men") && <p><small>Men</small>{row.men}</p>}
+                        {(gender === "All" || gender === "Women") && <p><small>Women</small>{row.women}</p>}
                       </article>
                     ))}
                   </div>
@@ -3663,46 +3761,57 @@ function LululemonSeasonForecast() {
             </div>
           </article>
 
-          <article className="lululemon-forecast-section nyk-briefs">
+          <article className="lululemon-forecast-section whitespace nyk-whitespace">
             <div className="lululemon-forecast-section-heading">
-              <div>
-                <p className="eyebrow">FABRIC BRIEFS</p>
-                <h3>Surface and construction direction</h3>
-              </div>
-              <span>{filteredNykBriefs.length} source swatches</span>
+              <div><p className="eyebrow">04 · WHITE SPACE</p><h3>โปรแกรมที่ NYG ยังไม่ได้ และควรได้</h3></div>
+              <span>NYK prepares the fabric route so NYG can enter beside the incumbent.</span>
             </div>
-            <div className="lululemon-nyk-brief-grid">
-              {filteredNykBriefs.map((brief) => (
-                <article key={`${brief.season}-${brief.fabric}`}>
-                  <img src={brief.image} alt={`${brief.fabric} source swatch`} />
-                  <div className="title"><span>{brief.season}</span><h4>{brief.fabric}</h4></div>
-                  <div><small>Surface / hand</small><p>{brief.surface}</p></div>
-                  <div><small>Target construction</small><p>{brief.construction}</p></div>
-                </article>
+            <div className={`lululemon-forecast-whitespace-grid ${nykWhitespaceGroups.length === 1 ? "single" : ""}`.trim()}>
+              {nykWhitespaceGroups.map((group) => (
+                <section className={group.gender.toLowerCase()} key={group.gender}>
+                  <div className="lululemon-forecast-gender-heading"><strong>{group.gender}</strong><span>{group.programs.length} target programs</span></div>
+                  <div className="lululemon-forecast-whitespace-programs">
+                    {group.programs.map((program) => (
+                      <article key={program.name}>
+                        <div><h4>{program.name}</h4><strong>{formatComparisonValue(program.sales, "sales")}</strong></div>
+                        <span>{program.fabric}</span>
+                        <p>{program.detail}</p>
+                      </article>
+                    ))}
+                  </div>
+                  <div className="lululemon-forecast-whitespace-path">
+                    <h4>Recommended fabric entry path</h4>
+                    {group.path.map((step) => (
+                      <div key={step.step}><b>{step.step}</b><span><strong>{step.name}</strong><small>{step.action}</small></span><em>{formatComparisonValue(step.sales, "sales")}</em></div>
+                    ))}
+                  </div>
+                </section>
               ))}
             </div>
           </article>
 
-          <div className="lululemon-forecast-split nyk-support">
-            <article className="lululemon-forecast-section nyk-trends">
-              <div className="lululemon-forecast-section-heading">
-                <div><p className="eyebrow">2026 DIRECTION</p><h3>Trend signals behind the forecast</h3></div>
-              </div>
-              <div>{LULULEMON_NYK_TRENDS.map((trend, index) => <span key={trend}><b>{String(index + 1).padStart(2, "0")}</b>{trend}</span>)}</div>
-            </article>
-            <article className="lululemon-forecast-section next-steps">
-              <div className="lululemon-forecast-section-heading">
-                <div><p className="eyebrow">NYK ACTION PLAN</p><h3>What the mill does next</h3></div>
-              </div>
-              <ol>{LULULEMON_NYK_NEXT_STEPS.map((step) => <li key={step}>{step}</li>)}</ol>
-            </article>
-          </div>
+          <article className="lululemon-forecast-section next-steps nyg-next-steps nyk-next-steps">
+            <div className="lululemon-forecast-section-heading">
+              <div><p className="eyebrow">05 · NEXT STEPS</p><h3>What NYK does next, in step with NYG</h3></div>
+              <span>Bring physical swatches and lab dips; confirm yarn, machine and lead time.</span>
+            </div>
+            <div className="lululemon-forecast-action-grid">
+              {["Men", "Women"].filter((genderKey) => gender === "All" || gender === genderKey).map((genderKey) => (
+                <section key={genderKey}>
+                  <h4>{genderKey}</h4>
+                  {nykActions.filter((action) => action.gender === genderKey).map((action) => (
+                    <article key={`${action.gender}-${action.rank}`}><b>{action.rank}</b><div><strong>{action.program}</strong><p>{action.action}</p></div><span>{action.timing}</span></article>
+                  ))}
+                </section>
+              ))}
+            </div>
+          </article>
         </>
       )}
 
       <p className="lululemon-forecast-source">
         {isNykForecast
-          ? "Source: NYK_Lululemon_Fabric_Forecast_SS28-FW28.pptx. Program-level forecast; the source does not provide a gender split. Milestone content is intentionally excluded from the NYK view."
+          ? "Source: NYK_Fabric_Forecast_SS28-FW28.pdf. NYG fabric purchases use PO_QTY in yards for FA25-WT27; USD is estimated as yards multiplied by item price. SS28/FW28 trend directions are directional because the final line-list is not available. Milestones remain excluded from the NYK view."
           : "Source: NYG_Forecast_SS28-FW28.pdf. NYG sales cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Gender is inferred from product names and $1.4B of unassigned market sales is excluded. Refresh when the actual SS28/FW28 line-list is available."}
       </p>
       <DashboardAiAssistant context={forecastAiContext} />
