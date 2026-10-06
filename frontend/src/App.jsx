@@ -3514,23 +3514,33 @@ function LululemonSeasonForecast() {
                         <strong>{genderGroup.gender}</strong>
                         <span>Top {genderGroup.programs.length}</span>
                       </div>
+                      <div className="lululemon-forecast-program-columns" aria-hidden="true">
+                        <span />
+                        <span>Program / Why continue</span>
+                        <span>Market 2026</span>
+                        <span>NYG Sales</span>
+                        <span>NYG PCS</span>
+                      </div>
                       <div className="lululemon-forecast-opportunity-list">
                         {genderGroup.programs.map((program) => (
-                          <article className="lululemon-forecast-opportunity-card nyg" key={program.id}>
+                          <article className="lululemon-forecast-program-row" key={program.id}>
                             <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
-                            <div className="lululemon-forecast-opportunity-copy">
-                              <div className="lululemon-forecast-opportunity-title">
-                                <div><span>Market {formatComparisonValue(program.marketSales, "sales")}</span><h4>{program.program}</h4></div>
-                              </div>
-                              <div className="lululemon-forecast-program-metrics">
-                                <span><small>NYG sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
-                                <span><small>NYG pcs</small><b>{formatComparisonValue(program.nygUnits, "units").replace(" units", "")}</b></span>
-                              </div>
-                              <div className="lululemon-forecast-opportunity-detail">
-                                <span>Why continue</span>
-                                <p>{program.reason}</p>
-                              </div>
+                            <div className="lululemon-forecast-program-summary">
+                              <h4>{program.program}</h4>
+                              <p>{program.reason}</p>
                             </div>
+                            <span className="lululemon-forecast-program-value market">
+                              <small>Market 2026</small>
+                              <b>{formatComparisonValue(program.marketSales, "sales")}</b>
+                            </span>
+                            <span className="lululemon-forecast-program-value">
+                              <small>NYG Sales</small>
+                              <b>{formatComparisonValue(program.nygSales, "sales")}</b>
+                            </span>
+                            <span className="lululemon-forecast-program-value">
+                              <small>NYG PCS</small>
+                              <b>{formatComparisonValue(program.nygUnits, "units").replace(" units", "")}</b>
+                            </span>
                           </article>
                         ))}
                       </div>
