@@ -3778,7 +3778,19 @@ function LululemonSeasonForecast() {
             </p>
             <div className="lululemon-forecast-ranked-heading nyk-trend-map-heading">
               <div><span>TREND MAPPING</span><strong>How each fabric direction connects to an NYG program</strong></div>
-              <small>{season === "All" ? "SS28 + FW28" : season}</small>
+              <div className="lululemon-nyk-trend-downloads">
+                {(season === "All" || season === "SS28") && (
+                  <a href="/trend-decks/Nanyang_Trend_SS28_Web.pdf" download>
+                    Download SS28 Trend PDF
+                  </a>
+                )}
+                {(season === "All" || season === "FW28") && (
+                  <a href="/trend-decks/Nanyang_Trend_FW27_Reference_for_FW28_Web.pdf" download>
+                    Download FW27 Trend PDF
+                    <small>Reference for FW28</small>
+                  </a>
+                )}
+              </div>
             </div>
             <div className={`lululemon-nyk-trend-grid ${nykTrendGroups.length === 1 ? "single" : ""}`.trim()}>
               {nykTrendGroups.map((group) => (
