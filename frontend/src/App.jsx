@@ -829,7 +829,7 @@ function LululemonNygMetricGrid({ selectedKey }) {
     },
     {
       icon: "YDS",
-      label: `${scopeLabel}NYG fabric used`,
+      label: `${scopeLabel}NYG Norminate Fabric`,
       value: formatFabricYards(selected.nygFabricYards, true),
       note: `${formatNumber.format(selected.nygFabricProducts)} NYG products with recorded fabric use`,
     },
@@ -1441,7 +1441,7 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
   const recordedYards = summary.nykRecordedYards || 0;
   const maxYards = Math.max(nygFabricYards, recordedYards, 1);
   const fabricRows = [
-    { key: "nyg", label: "NYG Fabric Used", value: nygFabricYards },
+    { key: "nyg", label: "NYG Norminate Fabric", value: nygFabricYards },
     { key: "nyk", label: "NYK Fabric Sold", value: recordedYards },
   ];
 
@@ -1458,7 +1458,7 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
       <div className="lululemon-style-comparison-body">
         <div className="lululemon-style-coverage-chart lululemon-nyk-fabric-chart">
           <div className="lululemon-style-coverage-chart-heading">
-            <span>{summary.name} · NYG fabric used vs. NYK fabric sold</span>
+            <span>{summary.name} · NYG Norminate Fabric vs. NYK Fabric Sold</span>
             <small>Same YDS scale</small>
           </div>
           <div className="lululemon-nyk-fabric-chart-grid">
@@ -1473,7 +1473,7 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
         </div>
       </div>
       <small className="lululemon-style-partner-source">
-        Fabric quantities are compared in yards for the selected seasons.
+        NYG Norminate Fabric covers FA25, WT25, SP26 and SU26; NYK Fabric Sold follows the selected seasons.
       </small>
     </section>
   );
@@ -1554,7 +1554,7 @@ function LululemonOverviewNykFabricBarChart({ rows, onSelect }) {
   return (
     <div className="lululemon-overview-fob-chart nyk-fabric-type-chart">
       <div className="lululemon-overview-fob-legend">
-        <span><i className="nyg-fabric" />NYG Fabric Used (YDS)</span>
+        <span><i className="nyg-fabric" />NYG Norminate Fabric (YDS)</span>
         <span><i className="nyk-fabric" />NYK Fabric Sold (YDS)</span>
         <small>Hover for full detail · click a row to open the product type</small>
       </div>
@@ -1566,7 +1566,7 @@ function LululemonOverviewNykFabricBarChart({ rows, onSelect }) {
               type="button"
               key={row.key}
               aria-describedby={tooltipId}
-              aria-label={`${row.label}: ${formatFabricYards(row.nygFabric, true)} NYG fabric used; ${formatFabricYards(row.fabricSold, true)} NYK fabric sold`}
+              aria-label={`${row.label}: ${formatFabricYards(row.nygFabric, true)} NYG Norminate Fabric; ${formatFabricYards(row.fabricSold, true)} NYK Fabric Sold`}
               onClick={() => onSelect(row.key)}
             >
               <strong>{row.label}</strong>
@@ -1586,7 +1586,7 @@ function LululemonOverviewNykFabricBarChart({ rows, onSelect }) {
               </span>
               <span className="lululemon-overview-fob-tooltip" id={tooltipId} role="tooltip">
                 <em>{row.label}</em>
-                <span><small>NYG Fabric Used</small><b>{formatFabricYards(row.nygFabric, true)}</b></span>
+                <span><small>NYG Norminate Fabric</small><b>{formatFabricYards(row.nygFabric, true)}</b></span>
                 <span><small>NYK Fabric Sold</small><b>{formatFabricYards(row.fabricSold, true)}</b></span>
               </span>
             </button>
@@ -1880,7 +1880,6 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             : style.seasonMetrics.filter((metric) => selectedSeasons.includes(metric.season));
           summary.sales += seasonMetrics.reduce((sum, metric) => sum + metric.nygSales, 0);
           summary.units += seasonMetrics.reduce((sum, metric) => sum + metric.nygUnits, 0);
-          summary.nygFabricYards += style.nygFabricYards || 0;
           summary.nykFabricYards += nykFabricYards;
           if (nykFabricYards > 0) {
             summary.nykMatchedStyles += 1;
@@ -1908,6 +1907,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           topOpportunity,
           fobMultiplier: getAverageFobMultiplier(rowStyles),
           ...partnerMetrics,
+          nygFabricYards: row.nygFabricYards || 0,
         };
       });
     const overviewTotals = overviewRows.reduce((summary, row) => ({
@@ -1964,7 +1964,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         <div className="lululemon-overview-visual-heading">
           <div>
             <span>{partnerView === "nyg" ? "PRODUCT TYPE OPPORTUNITY MAP" : "NYK FABRIC SOLD BY PRODUCT TYPE"}</span>
-            <strong>{partnerView === "nyg" ? "Lululemon FOB Spend vs. NYG Sale" : "NYG Fabric Used vs. NYK Fabric Sold"}</strong>
+            <strong>{partnerView === "nyg" ? "Lululemon FOB Spend vs. NYG Sale" : "NYG Norminate Fabric vs. NYK Fabric Sold"}</strong>
             <p>
               {partnerView === "nyg"
                 ? "Compare wallet size and secured sales, then click a row for style-level detail."
@@ -2168,7 +2168,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     season: selectedSeasonLabel,
     lululemonRevenue: subtypeComparison?.lululemonSales || 0,
     lululemonUnits: subtypeComparison?.lululemonUnits || 0,
-    nygFabricYards: styles.reduce((sum, style) => sum + (style.nygFabricYards || 0), 0),
+    nygFabricYards: subtypeComparison?.nygFabricYards || 0,
     nykFabricYards: subtypeNykStyles.reduce((sum, style) => sum + style.nykFabricYards, 0),
     nykMatchedStyles: subtypeNykStyles.length,
     nykRecordedYards: subtypeNykStyles
