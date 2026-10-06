@@ -2648,8 +2648,8 @@ function LululemonTimeline() {
     <article className="lululemon-overview-section lululemon-timeline-section">
       <div className="lululemon-overview-heading">
         <div>
-          <p className="eyebrow">NYG DATA COVERAGE · SS25-WT27</p>
-          <h2>NYG Timeline</h2>
+          <p className="eyebrow">NYTG DATA COVERAGE · SS25-WT27</p>
+          <h2>NYTG Timeline</h2>
         </div>
         <LululemonOverviewLogo />
       </div>
