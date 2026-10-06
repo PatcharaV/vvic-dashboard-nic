@@ -1938,6 +1938,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       lululemonUnits: overallComparison?.lululemonUnits || 0,
       nygSales: overviewTotals.sales,
       nygUnits: overviewTotals.units,
+      nygFabricYards: overallComparison?.nygFabricYards || 0,
       nykFabricYards: overviewTotals.nykFabricYards,
       nykMatchedStyles: overviewTotals.nykMatchedStyles,
       nykRecordedYards: overviewTotals.nykRecordedYards,

@@ -3676,7 +3676,7 @@ button.lululemon-bar-row.selected > strong {
 .lululemon-nyk-fabric-chart-grid > div {
   min-width: 0;
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr) 92px;
+  grid-template-columns: 160px minmax(0, 1fr) 92px;
   align-items: center;
   gap: 10px;
 }
