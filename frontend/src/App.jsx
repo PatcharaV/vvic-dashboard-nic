@@ -3353,6 +3353,20 @@ function LululemonSeasonForecast() {
     (action) => gender === "All" || action.gender === gender,
   );
   const isNykForecast = partner === "NYK";
+  const forecastSectionLinks = isNykForecast
+    ? [
+      { id: "forecast-nyk-programs", number: "01", label: "Programs" },
+      { id: "forecast-nyk-fabrics", number: "02", label: "Fabrics" },
+      { id: "forecast-nyk-whitespace", number: "03", label: "Whitespace" },
+      { id: "forecast-nyk-actions", number: "04", label: "Next steps" },
+    ]
+    : [
+      { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
+      { id: "forecast-nyg-market", number: "02", label: "Market" },
+      { id: "forecast-nyg-programs", number: "03", label: "Programs" },
+      { id: "forecast-nyg-whitespace", number: "04", label: "Whitespace" },
+      { id: "forecast-nyg-actions", number: "05", label: "Next steps" },
+    ];
   const forecastAiContext = useMemo(
     () => ({
       dashboard: "Lululemon SS28 & FW28 Season Forecast",
@@ -3392,7 +3406,7 @@ function LululemonSeasonForecast() {
   );
 
   return (
-    <section className="lululemon-forecast-page">
+    <section className={`lululemon-forecast-page ${isNykForecast ? "nyk-view" : "nyg-view"}`}>
       <article className="lululemon-forecast-hero nyg-intro">
         <div className="lululemon-forecast-hero-copy">
           <p className="eyebrow">
@@ -3468,6 +3482,17 @@ function LululemonSeasonForecast() {
               </button>
             ))}
           </fieldset>
+          <button
+            className="lululemon-forecast-reset"
+            type="button"
+            disabled={season === "All" && gender === "All"}
+            onClick={() => {
+              setSeason("All");
+              setGender("All");
+            }}
+          >
+            Reset
+          </button>
         </div>
         <div className="lululemon-forecast-filter-status">
           <span>{partner}</span>
@@ -3477,8 +3502,24 @@ function LululemonSeasonForecast() {
         </div>
       </article>
 
+      <nav className="lululemon-forecast-jump-nav" aria-label="Season forecast sections">
+        <span>Jump to</span>
+        <div>
+          {forecastSectionLinks.map((link) => (
+            <button
+              type="button"
+              key={link.id}
+              onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            >
+              <b>{link.number}</b>
+              {link.label}
+            </button>
+          ))}
+        </div>
+      </nav>
+
       {partner === "NYG" && (
-        <article className="lululemon-forecast-section milestones">
+        <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">01 · MILESTONES</p>
@@ -3503,7 +3544,7 @@ function LululemonSeasonForecast() {
       )}
 
       {partner === "NYG" && (
-        <article className="lululemon-forecast-section market-size">
+        <article className="lululemon-forecast-section market-size" id="forecast-nyg-market">
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">02 · LULULEMON 2026 MARKET</p>
@@ -3539,7 +3580,7 @@ function LululemonSeasonForecast() {
       )}
 
       {partner === "NYG" && (
-        <article className="lululemon-forecast-section keep-extend">
+        <article className="lululemon-forecast-section keep-extend" id="forecast-nyg-programs">
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">03 · KEEP AND EXTEND</p>
@@ -3628,7 +3669,7 @@ function LululemonSeasonForecast() {
       )}
 
       {partner === "NYG" && (
-        <article className="lululemon-forecast-section whitespace">
+        <article className="lululemon-forecast-section whitespace" id="forecast-nyg-whitespace">
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">04 · WHITE SPACE</p>
@@ -3666,7 +3707,7 @@ function LululemonSeasonForecast() {
       )}
 
       {partner === "NYG" && (
-        <article className="lululemon-forecast-section next-steps nyg-next-steps">
+        <article className="lululemon-forecast-section next-steps nyg-next-steps" id="forecast-nyg-actions">
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">05 · NEXT STEPS</p>
@@ -3697,7 +3738,7 @@ function LululemonSeasonForecast() {
 
       {isNykForecast && (
         <>
-          <article className="lululemon-forecast-section keep-extend nyk-keep-extend">
+          <article className="lululemon-forecast-section keep-extend nyk-keep-extend" id="forecast-nyk-programs">
             <div className="lululemon-forecast-section-heading">
               <div>
                 <p className="eyebrow">01 · KEEP AND EXTEND</p>
@@ -3764,7 +3805,7 @@ function LululemonSeasonForecast() {
             </div>
           </article>
 
-          <article className="lululemon-forecast-section nyk-trend-direction">
+          <article className="lululemon-forecast-section nyk-trend-direction" id="forecast-nyk-fabrics">
             <div className="lululemon-forecast-section-heading">
               <div><p className="eyebrow">02 · FABRIC TO DEVELOP</p><h3>Develop these fabrics for SS28 and FW28</h3></div>
               <span>Photorealistic development references · confirm against physical swatches and lab dips</span>
@@ -3822,7 +3863,7 @@ function LululemonSeasonForecast() {
             </div>
           </article>
 
-          <article className="lululemon-forecast-section whitespace nyk-whitespace">
+          <article className="lululemon-forecast-section whitespace nyk-whitespace" id="forecast-nyk-whitespace">
             <div className="lululemon-forecast-section-heading">
               <div><p className="eyebrow">NYK · WHITESPACE</p><h3>Big markets NYG has not been awarded: the fabric needed</h3></div>
             </div>
@@ -3846,7 +3887,7 @@ function LululemonSeasonForecast() {
             <p className="lululemon-nyk-market-note">Others hold these markets. NYK enters beside them. Spec needs are our reading.</p>
           </article>
 
-          <article className="lululemon-forecast-section nyk-next-steps">
+          <article className="lululemon-forecast-section nyk-next-steps" id="forecast-nyk-actions">
             <div className="lululemon-forecast-section-heading">
               <div><p className="eyebrow">NYK · NEXT STEPS</p><h3>What NYK does next, in step with NYG</h3></div>
             </div>
