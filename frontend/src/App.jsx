@@ -3697,46 +3697,10 @@ function LululemonSeasonForecast() {
 
       {isNykForecast && (
         <>
-          <article className="lululemon-forecast-section nyk-purchases">
-            <div className="lululemon-forecast-section-heading">
-              <div>
-                <p className="eyebrow">01 · FABRIC BOUGHT</p>
-                <h3>What NYG bought, and what NYK supplied</h3>
-              </div>
-              <span>FA25-WT27 · PO quantity in yards · {gender === "All" ? "Men + Women" : gender}</span>
-            </div>
-            <div className={`lululemon-nyk-purchase-grid ${nykPurchaseGroups.length === 1 ? "single" : ""}`.trim()}>
-              {nykPurchaseGroups.map((group) => {
-                const share = group.boughtYards > 0 ? (group.suppliedYards / group.boughtYards) * 100 : 0;
-                return (
-                  <section className={group.gender.toLowerCase()} key={group.gender}>
-                    <div className="lululemon-forecast-gender-heading">
-                      <strong>{group.gender}</strong>
-                      <span>{share.toFixed(1)}% supplied by NYK</span>
-                    </div>
-                    <div className="lululemon-nyk-purchase-metrics">
-                      <div><small>NYG fabric bought</small><strong>{formatFabricYards(group.boughtYards, true)}</strong></div>
-                      <div><small>Supplied by NYK</small><strong>{formatFabricYards(group.suppliedYards, true)}</strong></div>
-                    </div>
-                    <div className="lululemon-nyk-season-split">
-                      <span>SS <b>{formatFabricYards(group.ssYards, true)}</b></span>
-                      <span>FW <b>{formatFabricYards(group.fwYards, true)}</b></span>
-                    </div>
-                    <p>{group.note}</p>
-                  </section>
-                );
-              })}
-            </div>
-            <div className="lululemon-nyk-purchase-total">
-              <span>Total NYG fabric bought <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nygBoughtYards, true)}</strong></span>
-              <span>NYK supplied <strong>{formatFabricYards(LULULEMON_NYK_FORECAST_SUMMARY.nykSuppliedYards, true)}</strong></span>
-            </div>
-          </article>
-
           <article className="lululemon-forecast-section keep-extend nyk-keep-extend">
             <div className="lululemon-forecast-section-heading">
               <div>
-                <p className="eyebrow">02 · KEEP AND EXTEND</p>
+                <p className="eyebrow">01 · KEEP AND EXTEND</p>
                 <h3>Follow the NYG programs, one fabric at a time</h3>
               </div>
               <span>NYK supplies none of these six priority programs today.</span>
@@ -3802,7 +3766,7 @@ function LululemonSeasonForecast() {
 
           <article className="lululemon-forecast-section nyk-trend-direction">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">03 · FABRIC TO DEVELOP</p><h3>Develop these fabrics for SS28 and FW28</h3></div>
+              <div><p className="eyebrow">02 · FABRIC TO DEVELOP</p><h3>Develop these fabrics for SS28 and FW28</h3></div>
               <span>Photorealistic development references · confirm against physical swatches and lab dips</span>
             </div>
             <div className="lululemon-nyk-fabric-brief-grid">
