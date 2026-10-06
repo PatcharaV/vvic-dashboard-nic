@@ -834,7 +834,7 @@ function LululemonNygMetricGrid({ selectedKey }) {
     },
     {
       icon: "YDS",
-      label: `${scopeLabel}NYK fabric used`,
+      label: `${scopeLabel}NYK fabric sold`,
       value: formatFabricYards(selected.nykFabricYards, true),
       note: `${formatNumber.format(selected.nykFabricProducts)} NYG products with NYK fabric`,
     },
@@ -1301,10 +1301,10 @@ function LululemonNykFabricPanel({ subtypeKey, selectedSeasons }) {
       </div>
       <div className="lululemon-nyk-period">
         <div className="lululemon-nyk-period-heading">
-          <span>{selectedSeasons.length === 0 ? "All seasons" : selectedSeasons.join(" / ")} recorded usage</span>
+          <span>{selectedSeasons.length === 0 ? "All seasons" : selectedSeasons.join(" / ")} fabric sold</span>
           <b>{formatNumber.format(Math.round(recordedYards))} YDS</b>
         </div>
-        {renderStyles(recordedStyles, "No recorded NYK usage for this product type.")}
+        {renderStyles(recordedStyles, "No NYK fabric sold for this product type.")}
       </div>
       <div className="lululemon-nyk-period future">
         <div className="lululemon-nyk-period-heading">
@@ -1440,7 +1440,7 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
   const futureYards = summary.nykFutureYards || 0;
   const maxYards = Math.max(recordedYards, futureYards, 1);
   const fabricRows = [
-    { key: "recorded", label: "Recorded usage", value: recordedYards },
+    { key: "recorded", label: "Fabric sold", value: recordedYards },
     { key: "future", label: "Future orders", value: futureYards },
   ];
 
@@ -1488,7 +1488,7 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
         </div>
       </div>
       <small className="lululemon-style-partner-source">
-        NYK source contains fabric usage and purchase orders; sales and garment units are not available.
+        NYK source contains fabric sold and purchase orders; sales and garment units are not available.
       </small>
     </section>
   );
@@ -2210,7 +2210,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           <p>
             {partnerView === "nyg"
               ? "Click an NYG secured style to view its overall Sales and Units comparison."
-              : "Review recorded NYK fabric usage and future NYK fabric orders by matched style."}
+              : "Review NYK fabric sold and future NYK fabric orders by matched style."}
           </p>
         </div>
         {subtypeControls}
@@ -3946,7 +3946,7 @@ function LululemonBrandOverview() {
       nygFutureSecuredStyles: futureStyles,
       notes: [
         "Lululemon values are estimates from the workbook and dashboard methodology.",
-        "NYG and NYK fabric fields are recorded usage in yards, not confirmed fiber compositions.",
+        "NYG fabric fields are recorded usage in yards; NYK fabric fields represent fabric sold in yards, not confirmed fiber compositions.",
         "External material recommendations must be identified as recommendations unless a source confirms the BOM.",
       ],
     };
@@ -4129,9 +4129,9 @@ function LululemonBrandOverview() {
           FA25-SU26. Style wallet share uses Brand Wallet Size and each style&apos;s
           FOB Multiplier. The second NYG Secured table uses Commercial Name, sales,
           units, and seasons FA26, WT26, SU27, and SP27 from the Raw Data
-          sheet. Fabric usage uses Total Fabric Value NYG Used (YDS) and
-          Total NYK Fabric Value Used (YDS); 55 products contain recorded NYG
-          fabric use and 4 contain a non-zero NYK value. Future NYK fabric is
+          sheet. NYG fabric usage uses Total Fabric Value NYG Used (YDS); NYK
+          fabric sold uses the corresponding NYK yard value. 55 products contain
+          recorded NYG fabric use and 4 contain a non-zero NYK fabric sold value. Future NYK fabric is
           matched by Style, NYK supplier, and season from the NYK sheet in
           Lululemon Wallet Size &amp; Share (1).xlsx; ordered yards use PO_QTY for
           FA26, WT26, SU27, and SP27. NYG gender uses the Gender and NYG Sale
