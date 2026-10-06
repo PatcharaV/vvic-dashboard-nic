@@ -261,7 +261,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "SS28",
     fabric: "Airy Cotton-Touch Jersey",
-    image: "/forecast-swatches/airy-cotton-touch-v2.webp",
+    image: "/forecast-swatches/airy-cotton-touch-v3.webp",
     suitableProducts: "Lounge T-shirts, Tank Tops and lightweight Long-Sleeve Tops",
     surface: "Matte, light and dry-cool; fine rib with a slightly sheer option.",
     construction: "Cotton-rich BCI or organic blend with rPET or modal, 3–5% elastane, 130–150gsm. Reference: Lounge 140gsm BCI jersey.",
@@ -269,7 +269,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "SS28",
     fabric: "Cool Piqué & Heather",
-    image: "/forecast-swatches/cool-pique-heather-v2.webp",
+    image: "/forecast-swatches/cool-pique-heather-v3.webp",
     suitableProducts: "Evolution Polo, Tennis Polo and performance Polo Shirts",
     surface: "Fine piqué texture, tonal heather, cool hand and UPF.",
     construction: "Recycled poly / lyocell / elastane near 85/10/5, 150–170gsm with wicking. Reference: Evolution 154gsm.",
@@ -277,7 +277,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "SS28",
     fabric: "Modal Cooling Jersey",
-    image: "/forecast-swatches/modal-cooling-jersey-v2.webp",
+    image: "/forecast-swatches/modal-cooling-jersey-v3.webp",
     suitableProducts: "Always In Motion Underwear, BeCalm Tank and soft Lounge Tops",
     surface: "Silky, smooth and cool to the touch with soft drape.",
     construction: "About 91% modal with 9% elastane, or a bio-based blend, 170–190gsm. Reference: AIM 185gsm.",
@@ -285,7 +285,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "SS28",
     fabric: "Tonal Recycled Mesh",
-    image: "/forecast-swatches/tonal-recycled-mesh-v2.webp",
+    image: "/forecast-swatches/tonal-recycled-mesh-v3.webp",
     suitableProducts: "Pace Breaker Shorts and Liners, Pace Rival Skirt and Training Tanks",
     surface: "Fine tonal micro-mesh with sheer-to-opaque zones.",
     construction: "rPET/elastane 86–90/10–14, 90–146gsm, 4-way stretch and PFAS-free quick-dry finish. Reference: Pace Breaker mesh.",
@@ -293,7 +293,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "FW28",
     fabric: "Warm Textured Jersey",
-    image: "/forecast-swatches/warm-textured-jersey-v2.webp",
+    image: "/forecast-swatches/warm-textured-jersey-v3.webp",
     suitableProducts: "Heatwave Hoodie and Jogger, Ease The Day Hoodie and Sweatshirts",
     surface: "Soft brushed back, subtle heather and low bulk.",
     construction: "Cotton / rPET / elastane near 65/31/4, 260–290gsm with brushed back. Reference: Heatwave jersey 285gsm.",
@@ -301,7 +301,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "FW28",
     fabric: "Waffle & Brushed Terry",
-    image: "/forecast-swatches/waffle-brushed-terry-v2.webp",
+    image: "/forecast-swatches/waffle-brushed-terry-v3.webp",
     suitableProducts: "Waffle Hoodie, Lounge Pullover and Jogger, BeCalm Long-Sleeve Tops",
     surface: "Deep waffle or rib relief, soft loopback and intentional melange.",
     construction: "Organic cotton / rPET / elastane 58/37/5 waffle near 375gsm, or modal 95/5 brushed terry near 256gsm.",
@@ -309,7 +309,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "FW28",
     fabric: "Buttery Brushed Stretch",
-    image: "/forecast-swatches/buttery-brushed-stretch-v2.webp",
+    image: "/forecast-swatches/buttery-brushed-stretch-v3.webp",
     suitableProducts: "Rulu Half-Zip, Rulu Jogger and lightweight Mid-Layer Tops",
     surface: "Matte, fine-nap brushed surface with second-skin comfort.",
     construction: "High-filament poly or nylon blend with elastane, brushed, 146–200gsm. Reference: Rulu 146gsm.",
@@ -317,7 +317,7 @@ export const LULULEMON_NYK_FABRIC_BRIEFS = [
   {
     season: "FW28",
     fabric: "Brushed Second-Skin Knit",
-    image: "/forecast-swatches/brushed-second-skin-v2.webp",
+    image: "/forecast-swatches/brushed-second-skin-v3.webp",
     suitableProducts: "Define Jacket, Cropped Define and future Align Tank or Short trials",
     surface: "Smooth matte face, brushed inside and stable stretch.",
     construction: "Nylon / elastane near 81/19 with recycled or bio-based option, near 214gsm. Reference: Define 214gsm.",
