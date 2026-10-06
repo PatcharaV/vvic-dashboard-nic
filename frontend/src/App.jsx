@@ -3766,6 +3766,7 @@ function LululemonSeasonForecast() {
                   </figure>
                   <div>
                     <h4>{brief.fabric}</h4>
+                    <p className="suitable-products"><strong>Suitable products</strong>{brief.suitableProducts}</p>
                     <p><strong>Look &amp; hand</strong>{brief.surface}</p>
                     <p><strong>Target construction</strong>{brief.construction}</p>
                   </div>

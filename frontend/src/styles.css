@@ -9583,6 +9583,16 @@ footer a {
   text-transform: uppercase;
 }
 
+.lululemon-nyk-fabric-brief p.suitable-products {
+  margin: 0 0 9px;
+  padding: 7px 8px;
+  color: #3d3437;
+  background: #f6f1f2;
+  border-left: 2px solid var(--lululemon-red);
+  border-radius: 0 5px 5px 0;
+  font-weight: 750;
+}
+
 .lululemon-nyk-fabric-reference-note {
   margin: 12px 0 0;
   padding: 9px 11px;
