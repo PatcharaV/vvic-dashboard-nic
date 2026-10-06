@@ -1561,6 +1561,57 @@ function LululemonOverviewFobBarChart({ rows, onSelect }) {
   );
 }
 
+function LululemonOverviewNykFabricBarChart({ rows, onSelect }) {
+  const data = rows
+    .map((row) => ({
+      ...row,
+      fabricSold: row.nykRecordedYards || 0,
+      fobSpend: row.lululemonSales / (row.fobMultiplier || LULULEMON_FOB_MULTIPLIER),
+    }))
+    .sort((left, right) => right.fabricSold - left.fabricSold || right.fobSpend - left.fobSpend);
+  const maxFabricSold = Math.max(...data.map((row) => row.fabricSold), 1);
+
+  return (
+    <div className="lululemon-overview-fob-chart nyk-fabric-type-chart">
+      <div className="lululemon-overview-fob-legend">
+        <span><i className="nyk-fabric" />NYK Fabric Sold (YDS)</span>
+        <small>Hover for full detail · click a row to open the product type</small>
+      </div>
+      <div className="lululemon-overview-fob-rows">
+        {data.map((row) => {
+          const tooltipId = `lululemon-overview-nyk-fabric-tooltip-${row.key}`;
+          return (
+            <button
+              type="button"
+              key={row.key}
+              aria-describedby={tooltipId}
+              aria-label={`${row.label}: ${formatFabricYards(row.fabricSold, true)} NYK fabric sold`}
+              onClick={() => onSelect(row.key)}
+            >
+              <strong>{row.label}</strong>
+              <span className="track">
+                <span
+                  className={`nyk-fabric-bar ${row.fabricSold <= 0 ? "empty" : ""}`.trim()}
+                  style={{ width: `${(row.fabricSold / maxFabricSold) * 100}%` }}
+                />
+              </span>
+              <b className={row.fabricSold <= 0 ? "empty" : undefined}>
+                {formatFabricYards(row.fabricSold, true)}
+              </b>
+              <span className="lululemon-overview-fob-tooltip" id={tooltipId} role="tooltip">
+                <em>{row.label}</em>
+                <span><small>NYK Fabric Sold</small><b>{formatFabricYards(row.fabricSold, true)}</b></span>
+                <span><small>Matched Styles</small><b>{formatNumber.format(row.nykMatchedStyles || 0)}</b></span>
+                <span><small>Lululemon FOB Spend</small><b>{formatComparisonValue(row.fobSpend, "sales")}</b></span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 const LULULEMON_DEFAULT_STYLE_SEASONS = ["FA25", "WT25", "SP26", "SU26"];
 const LULULEMON_STYLE_YEAR_FILTERS = [
   { year: "2025", seasons: ["FA25", "WT25"] },
@@ -1921,35 +1972,41 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         {partnerView === "nyk" && (
           <LululemonNykComparison summary={overviewSummary} overview filters={summaryFilters} />
         )}
-        {partnerView === "nyg" && (
-          <div className="lululemon-overview-visual-heading">
-            <div>
-              <span>PRODUCT TYPE OPPORTUNITY MAP</span>
-              <strong>Lululemon FOB Spend vs. NYG Sale</strong>
-              <p>Compare wallet size and secured sales, then click a row for style-level detail.</p>
-            </div>
-            <div role="group" aria-label="Overview display">
-              <button
-                className={overviewDisplay === "chart" ? "active" : undefined}
-                type="button"
-                aria-pressed={overviewDisplay === "chart"}
-                onClick={() => setOverviewDisplay("chart")}
-              >
-                Chart
-              </button>
-              <button
-                className={overviewDisplay === "cards" ? "active" : undefined}
-                type="button"
-                aria-pressed={overviewDisplay === "cards"}
-                onClick={() => setOverviewDisplay("cards")}
-              >
-                Cards
-              </button>
-            </div>
+        <div className="lululemon-overview-visual-heading">
+          <div>
+            <span>{partnerView === "nyg" ? "PRODUCT TYPE OPPORTUNITY MAP" : "NYK FABRIC SOLD BY PRODUCT TYPE"}</span>
+            <strong>{partnerView === "nyg" ? "Lululemon FOB Spend vs. NYG Sale" : "How much fabric NYK sold for each product type"}</strong>
+            <p>
+              {partnerView === "nyg"
+                ? "Compare wallet size and secured sales, then click a row for style-level detail."
+                : "Compare recorded fabric sold in yards, then click a row for matched-style detail."}
+            </p>
           </div>
-        )}
-        {partnerView === "nyg" && overviewDisplay === "chart" ? (
-          <LululemonOverviewFobBarChart rows={overviewRows} onSelect={onSelect} />
+          <div role="group" aria-label="Overview display">
+            <button
+              className={overviewDisplay === "chart" ? "active" : undefined}
+              type="button"
+              aria-pressed={overviewDisplay === "chart"}
+              onClick={() => setOverviewDisplay("chart")}
+            >
+              Chart
+            </button>
+            <button
+              className={overviewDisplay === "cards" ? "active" : undefined}
+              type="button"
+              aria-pressed={overviewDisplay === "cards"}
+              onClick={() => setOverviewDisplay("cards")}
+            >
+              Cards
+            </button>
+          </div>
+        </div>
+        {overviewDisplay === "chart" ? (
+          partnerView === "nyg" ? (
+            <LululemonOverviewFobBarChart rows={overviewRows} onSelect={onSelect} />
+          ) : (
+            <LululemonOverviewNykFabricBarChart rows={overviewRows} onSelect={onSelect} />
+          )
         ) : (
           <div className="lululemon-style-overview-grid">
           {overviewRows.map((row) => (
