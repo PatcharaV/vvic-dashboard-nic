@@ -32,6 +32,7 @@ import {
   LULULEMON_FORECAST_SUMMARY,
   LULULEMON_FORECAST_WHITESPACE,
   LULULEMON_NYK_ACTIONS,
+  LULULEMON_NYK_FABRIC_BRIEFS,
   LULULEMON_NYK_FORECAST_PROGRAMS,
   LULULEMON_NYK_FORECAST_SUMMARY,
   LULULEMON_NYK_KEEP_EXTEND,
@@ -3297,6 +3298,9 @@ function LululemonSeasonForecast() {
   const nykTrendGroups = LULULEMON_NYK_TREND_DIRECTIONS.filter(
     (group) => season === "All" || group.season === season,
   );
+  const nykFabricBriefs = LULULEMON_NYK_FABRIC_BRIEFS.filter(
+    (brief) => season === "All" || brief.season === season,
+  );
   const nykActions = LULULEMON_NYK_ACTIONS.filter(
     (action) => gender === "All" || action.gender === gender,
   );
@@ -3313,6 +3317,7 @@ function LululemonSeasonForecast() {
       keepAndExtend: isNykForecast ? nykKeepExtendGroups : keepExtendGroups,
       whitespace: isNykForecast ? nykWhitespaceGroups : whitespaceGroups,
       fabricDirections: isNykForecast ? nykTrendGroups : [],
+      fabricBriefs: isNykForecast ? nykFabricBriefs : [],
       trends: isNykForecast ? nykTrendGroups : [],
       nextSteps: isNykForecast ? nykActions : forecastActions,
       caveat:
@@ -3333,6 +3338,7 @@ function LululemonSeasonForecast() {
       nykKeepExtendGroups,
       nykWhitespaceGroups,
       nykTrendGroups,
+      nykFabricBriefs,
       nykActions,
     ],
   );
@@ -3748,8 +3754,30 @@ function LululemonSeasonForecast() {
 
           <article className="lululemon-forecast-section nyk-trend-direction">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">03 · FABRIC DIRECTION</p><h3>Trend direction mapped to program</h3></div>
-              <span>Directional references only · develop physical swatches before presenting</span>
+              <div><p className="eyebrow">03 · FABRIC TO DEVELOP</p><h3>Develop these fabrics for SS28 and FW28</h3></div>
+              <span>Photorealistic development references · confirm against physical swatches and lab dips</span>
+            </div>
+            <div className="lululemon-nyk-fabric-brief-grid">
+              {nykFabricBriefs.map((brief) => (
+                <article className="lululemon-nyk-fabric-brief" key={`${brief.season}-${brief.fabric}`}>
+                  <figure>
+                    <img src={brief.image} alt={`${brief.fabric} development reference`} loading="lazy" />
+                    <figcaption>{brief.season}</figcaption>
+                  </figure>
+                  <div>
+                    <h4>{brief.fabric}</h4>
+                    <p><strong>Look &amp; hand</strong>{brief.surface}</p>
+                    <p><strong>Target construction</strong>{brief.construction}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p className="lululemon-nyk-fabric-reference-note">
+              Visual references approximate the intended surface, construction and drape. Final development must be approved from a physical swatch, lab dip and test result.
+            </p>
+            <div className="lululemon-forecast-ranked-heading nyk-trend-map-heading">
+              <div><span>TREND MAPPING</span><strong>How each fabric direction connects to an NYG program</strong></div>
+              <small>{season === "All" ? "SS28 + FW28" : season}</small>
             </div>
             <div className={`lululemon-nyk-trend-grid ${nykTrendGroups.length === 1 ? "single" : ""}`.trim()}>
               {nykTrendGroups.map((group) => (

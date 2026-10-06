@@ -9509,6 +9509,94 @@ footer a {
   gap: 16px;
 }
 
+.lululemon-nyk-fabric-brief-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lululemon-nyk-fabric-brief {
+  min-width: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e5dade;
+  border-radius: 10px;
+}
+
+.lululemon-nyk-fabric-brief figure {
+  position: relative;
+  height: 150px;
+  margin: 0;
+  overflow: hidden;
+  background: #ece8e7;
+}
+
+.lululemon-nyk-fabric-brief img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+
+.lululemon-nyk-fabric-brief:hover img {
+  transform: scale(1.035);
+}
+
+.lululemon-nyk-fabric-brief figcaption {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  padding: 4px 7px;
+  color: #fff;
+  background: rgba(21, 17, 18, 0.78);
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.lululemon-nyk-fabric-brief > div {
+  padding: 11px 12px 13px;
+}
+
+.lululemon-nyk-fabric-brief h4 {
+  margin: 0 0 8px;
+  color: #272123;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.lululemon-nyk-fabric-brief p {
+  margin: 6px 0 0;
+  color: #71676a;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.lululemon-nyk-fabric-brief p strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #a70b32;
+  font-size: 7px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.lululemon-nyk-fabric-reference-note {
+  margin: 12px 0 0;
+  padding: 9px 11px;
+  color: #746a6d;
+  background: #f6f2f3;
+  border-left: 3px solid var(--lululemon-red);
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.lululemon-forecast-ranked-heading.nyk-trend-map-heading {
+  margin-top: 16px;
+}
+
 .lululemon-forecast-season-group {
   overflow: hidden;
   background: #fff;
@@ -10311,6 +10399,7 @@ footer a {
   .lululemon-forecast-program { grid-template-columns: 62px minmax(180px, 0.7fr) minmax(0, 1.3fr); }
   .lululemon-forecast-program-fabric { grid-column: 2 / -1; border-top: 1px solid #e9e3e5; }
   .lululemon-forecast-fabrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lululemon-nyk-fabric-brief-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lululemon-nyk-forecast-row { grid-template-columns: 40px minmax(160px, 0.7fr) minmax(0, 1.3fr); }
   .lululemon-nyk-forecast-row .why { border-right: 0; }
   .lululemon-nyk-forecast-row .direction { grid-column: 2 / -1; border-top: 1px solid #eee7e9; }
@@ -10340,6 +10429,8 @@ footer a {
   .lululemon-forecast-quick-grid,
   .lululemon-forecast-flagships,
   .lululemon-forecast-fabrics { grid-template-columns: 1fr; }
+  .lululemon-nyk-fabric-brief-grid { grid-template-columns: 1fr; }
+  .lululemon-nyk-fabric-brief figure { height: 190px; }
   .lululemon-forecast-controls { width: 100%; flex-direction: column; }
   .lululemon-forecast-controls fieldset,
   .lululemon-forecast-controls button { flex: 1; }
