@@ -1565,15 +1565,20 @@ function LululemonOverviewNykFabricBarChart({ rows, onSelect }) {
   const data = rows
     .map((row) => ({
       ...row,
+      nygFabric: row.nygFabricYards || 0,
       fabricSold: row.nykRecordedYards || 0,
       fobSpend: row.lululemonSales / (row.fobMultiplier || LULULEMON_FOB_MULTIPLIER),
     }))
-    .sort((left, right) => right.fabricSold - left.fabricSold || right.fobSpend - left.fobSpend);
-  const maxFabricSold = Math.max(...data.map((row) => row.fabricSold), 1);
+    .sort((left, right) => right.fabricSold - left.fabricSold || right.nygFabric - left.nygFabric || right.fobSpend - left.fobSpend);
+  const maxFabricYards = Math.max(
+    ...data.flatMap((row) => [row.nygFabric, row.fabricSold]),
+    1,
+  );
 
   return (
     <div className="lululemon-overview-fob-chart nyk-fabric-type-chart">
       <div className="lululemon-overview-fob-legend">
+        <span><i className="nyg-fabric" />NYG Fabric Used (YDS)</span>
         <span><i className="nyk-fabric" />NYK Fabric Sold (YDS)</span>
         <small>Hover for full detail · click a row to open the product type</small>
       </div>
@@ -1585,21 +1590,27 @@ function LululemonOverviewNykFabricBarChart({ rows, onSelect }) {
               type="button"
               key={row.key}
               aria-describedby={tooltipId}
-              aria-label={`${row.label}: ${formatFabricYards(row.fabricSold, true)} NYK fabric sold`}
+              aria-label={`${row.label}: ${formatFabricYards(row.nygFabric, true)} NYG fabric used; ${formatFabricYards(row.fabricSold, true)} NYK fabric sold`}
               onClick={() => onSelect(row.key)}
             >
               <strong>{row.label}</strong>
-              <span className="track">
+              <span className="track fabric-pair">
+                <span
+                  className={`nyg-fabric-bar ${row.nygFabric <= 0 ? "empty" : ""}`.trim()}
+                  style={{ width: `${(row.nygFabric / maxFabricYards) * 100}%` }}
+                />
                 <span
                   className={`nyk-fabric-bar ${row.fabricSold <= 0 ? "empty" : ""}`.trim()}
-                  style={{ width: `${(row.fabricSold / maxFabricSold) * 100}%` }}
+                  style={{ width: `${(row.fabricSold / maxFabricYards) * 100}%` }}
                 />
               </span>
-              <b className={row.fabricSold <= 0 ? "empty" : undefined}>
-                {formatFabricYards(row.fabricSold, true)}
-              </b>
+              <span className="fabric-values">
+                <b className={row.nygFabric <= 0 ? "empty" : undefined}>{formatFabricYards(row.nygFabric, true)}</b>
+                <b className={row.fabricSold <= 0 ? "empty" : undefined}>{formatFabricYards(row.fabricSold, true)}</b>
+              </span>
               <span className="lululemon-overview-fob-tooltip" id={tooltipId} role="tooltip">
                 <em>{row.label}</em>
+                <span><small>NYG Fabric Used</small><b>{formatFabricYards(row.nygFabric, true)}</b></span>
                 <span><small>NYK Fabric Sold</small><b>{formatFabricYards(row.fabricSold, true)}</b></span>
                 <span><small>Matched Styles</small><b>{formatNumber.format(row.nykMatchedStyles || 0)}</b></span>
                 <span><small>Lululemon FOB Spend</small><b>{formatComparisonValue(row.fobSpend, "sales")}</b></span>
@@ -1895,6 +1906,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             : style.seasonMetrics.filter((metric) => selectedSeasons.includes(metric.season));
           summary.sales += seasonMetrics.reduce((sum, metric) => sum + metric.nygSales, 0);
           summary.units += seasonMetrics.reduce((sum, metric) => sum + metric.nygUnits, 0);
+          summary.nygFabricYards += style.nygFabricYards || 0;
           summary.nykFabricYards += nykFabricYards;
           if (nykFabricYards > 0) {
             summary.nykMatchedStyles += 1;
@@ -1908,6 +1920,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         }, {
           sales: 0,
           units: 0,
+          nygFabricYards: 0,
           nykFabricYards: 0,
           nykMatchedStyles: 0,
           nykRecordedYards: 0,
@@ -1926,6 +1939,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     const overviewTotals = overviewRows.reduce((summary, row) => ({
       sales: summary.sales + row.sales,
       units: summary.units + row.units,
+      nygFabricYards: summary.nygFabricYards + row.nygFabricYards,
       nykFabricYards: summary.nykFabricYards + row.nykFabricYards,
       nykMatchedStyles: summary.nykMatchedStyles + row.nykMatchedStyles,
       nykRecordedYards: summary.nykRecordedYards + row.nykRecordedYards,
@@ -1933,6 +1947,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     }), {
       sales: 0,
       units: 0,
+      nygFabricYards: 0,
       nykFabricYards: 0,
       nykMatchedStyles: 0,
       nykRecordedYards: 0,
@@ -1975,11 +1990,11 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         <div className="lululemon-overview-visual-heading">
           <div>
             <span>{partnerView === "nyg" ? "PRODUCT TYPE OPPORTUNITY MAP" : "NYK FABRIC SOLD BY PRODUCT TYPE"}</span>
-            <strong>{partnerView === "nyg" ? "Lululemon FOB Spend vs. NYG Sale" : "How much fabric NYK sold for each product type"}</strong>
+            <strong>{partnerView === "nyg" ? "Lululemon FOB Spend vs. NYG Sale" : "NYG Fabric Used vs. NYK Fabric Sold"}</strong>
             <p>
               {partnerView === "nyg"
                 ? "Compare wallet size and secured sales, then click a row for style-level detail."
-                : "Compare recorded fabric sold in yards, then click a row for matched-style detail."}
+                : "Compare both partners on the same YDS scale, then click a row for matched-style detail."}
             </p>
           </div>
           <div role="group" aria-label="Overview display">

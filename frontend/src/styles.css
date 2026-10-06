@@ -2720,6 +2720,7 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-overview-fob-legend i.fob { background: #eadde0; }
 .lululemon-overview-fob-legend i.nyg { background: var(--lululemon-red); }
+.lululemon-overview-fob-legend i.nyg-fabric { background: var(--lululemon-red); }
 .lululemon-overview-fob-legend i.nyk-fabric { background: #4d4447; }
 
 .lululemon-overview-fob-legend small {
@@ -2791,18 +2792,54 @@ button.lululemon-bar-row.selected > strong {
 
 .lululemon-overview-fob-rows .fob-bar > i.empty { min-width: 0; }
 
+.lululemon-overview-fob-rows .fabric-pair {
+  height: 26px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+}
+
+.lululemon-overview-fob-rows .nyg-fabric-bar,
 .lululemon-overview-fob-rows .nyk-fabric-bar {
-  height: 100%;
+  height: 9px;
   min-width: 2px;
   display: block;
-  background: linear-gradient(90deg, #3f383a, #71676a);
   border-radius: 3px;
 }
 
+.lululemon-overview-fob-rows .nyg-fabric-bar {
+  background: linear-gradient(90deg, #b50035, var(--lululemon-red));
+}
+
+.lululemon-overview-fob-rows .nyk-fabric-bar {
+  background: linear-gradient(90deg, #3f383a, #71676a);
+}
+
+.lululemon-overview-fob-rows .nyg-fabric-bar.empty,
 .lululemon-overview-fob-rows .nyk-fabric-bar.empty { min-width: 0; }
 
 .nyk-fabric-type-chart .lululemon-overview-fob-rows > button {
-  grid-template-columns: 100px minmax(120px, 1fr) 78px;
+  min-height: 46px;
+  grid-template-columns: 100px minmax(120px, 1fr) 92px;
+}
+
+.lululemon-overview-fob-rows .fabric-values {
+  display: grid;
+  gap: 3px;
+  text-align: right;
+}
+
+.lululemon-overview-fob-rows .fabric-values b {
+  color: var(--lululemon-red);
+  font-size: 8px;
+}
+
+.lululemon-overview-fob-rows .fabric-values b:last-child {
+  color: #544b4e;
+}
+
+.lululemon-overview-fob-rows .fabric-values b.empty {
+  color: #9b9093;
 }
 
 .lululemon-overview-fob-rows > button > b {
@@ -7545,7 +7582,7 @@ footer a {
   }
 
   .nyk-fabric-type-chart .lululemon-overview-fob-rows > button {
-    grid-template-columns: 72px minmax(80px, 1fr) 66px;
+    grid-template-columns: 72px minmax(80px, 1fr) 74px;
   }
 
   .lululemon-overview-fob-tooltip {
