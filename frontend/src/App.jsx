@@ -3834,32 +3834,6 @@ function LululemonSeasonForecast() {
             <p className="lululemon-nyk-market-note">Others hold these markets. NYK enters beside them. Spec needs are our reading.</p>
           </article>
 
-          <article className="lululemon-forecast-section nyk-whitespace-path-section">
-            <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">NYK · WHITESPACE PATH</p><h3>The long game: fabric swatch first, program later</h3></div>
-            </div>
-            <div className="lululemon-nyk-slide-tags">
-              <span>NYK</span><span>FY29+</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
-            </div>
-            <div className="lululemon-nyk-path-groups">
-              {nykWhitespaceGroups.map((group) => (
-                <section className={group.gender.toLowerCase()} key={group.gender}>
-                  <h4>{group.gender}'s</h4>
-                  <div className="lululemon-nyk-path-cards">
-                    {group.path.map((step) => (
-                      <article key={step.step}>
-                        <span>Step {step.step}</span>
-                        <strong>{step.name}</strong>
-                        <b>{formatForecastMarketValue(step.sales)}</b>
-                        <p>{step.action}</p>
-                      </article>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </article>
-
           <article className="lululemon-forecast-section nyk-next-steps">
             <div className="lululemon-forecast-section-heading">
               <div><p className="eyebrow">NYK · NEXT STEPS</p><h3>What NYK does next, in step with NYG</h3></div>
