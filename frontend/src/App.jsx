@@ -1437,12 +1437,12 @@ function LululemonNygStyleComparison({
 }
 
 function LululemonNykComparison({ summary, overview = false, filters = null }) {
+  const nygFabricYards = summary.nygFabricYards || 0;
   const recordedYards = summary.nykRecordedYards || 0;
-  const futureYards = summary.nykFutureYards || 0;
-  const maxYards = Math.max(recordedYards, futureYards, 1);
+  const maxYards = Math.max(nygFabricYards, recordedYards, 1);
   const fabricRows = [
-    { key: "recorded", label: "Fabric sold", value: recordedYards },
-    { key: "future", label: "Future orders", value: futureYards },
+    { key: "nyg", label: "NYG Fabric Used", value: nygFabricYards },
+    { key: "nyk", label: "NYK Fabric Sold", value: recordedYards },
   ];
 
   return (
@@ -1456,30 +1456,14 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
         {filters && <div className="lululemon-style-linked-actions">{filters}</div>}
       </div>
       <div className="lululemon-style-comparison-body">
-        <div className="lululemon-style-partner-summary-grid">
-          <article className="lululemon-style-partner-summary lululemon">
-            <span className="lululemon-style-partner-name">Lululemon</span>
-            <div className="lululemon-style-partner-values">
-              <span><small>Sales</small><strong>{formatComparisonValue(summary.lululemonRevenue, "sales")}</strong></span>
-              <span><small>Units</small><strong>{formatComparisonValue(summary.lululemonUnits, "units").replace(" units", " pcs")}</strong></span>
-            </div>
-          </article>
-          <article className="lululemon-style-partner-summary nyk">
-            <span className="lululemon-style-partner-name">NYK</span>
-            <div className="lululemon-style-partner-values">
-              <span><small>Fabric</small><strong>{formatFabricYards(summary.nykFabricYards || 0, true)}</strong></span>
-              <span><small>Matched styles</small><strong>{formatNumber.format(summary.nykMatchedStyles || 0)}</strong></span>
-            </div>
-          </article>
-        </div>
         <div className="lululemon-style-coverage-chart lululemon-nyk-fabric-chart">
           <div className="lululemon-style-coverage-chart-heading">
-            <span>{summary.name} · NYK fabric by period</span>
-            <small>Total {formatFabricYards(summary.nykFabricYards || 0, true)}</small>
+            <span>{summary.name} · NYG fabric used vs. NYK fabric sold</span>
+            <small>Same YDS scale</small>
           </div>
           <div className="lululemon-nyk-fabric-chart-grid">
             {fabricRows.map((row) => (
-              <div key={row.key}>
+              <div className={row.key} key={row.key}>
                 <span>{row.label}</span>
                 <i><b style={{ width: `${(row.value / maxYards) * 100}%` }} /></i>
                 <strong>{formatFabricYards(row.value, true)}</strong>
@@ -1489,7 +1473,7 @@ function LululemonNykComparison({ summary, overview = false, filters = null }) {
         </div>
       </div>
       <small className="lululemon-style-partner-source">
-        NYK source contains fabric sold and purchase orders; sales and garment units are not available.
+        Fabric quantities are compared in yards for the selected seasons.
       </small>
     </section>
   );
@@ -2184,6 +2168,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     season: selectedSeasonLabel,
     lululemonRevenue: subtypeComparison?.lululemonSales || 0,
     lululemonUnits: subtypeComparison?.lululemonUnits || 0,
+    nygFabricYards: styles.reduce((sum, style) => sum + (style.nygFabricYards || 0), 0),
     nykFabricYards: subtypeNykStyles.reduce((sum, style) => sum + style.nykFabricYards, 0),
     nykMatchedStyles: subtypeNykStyles.length,
     nykRecordedYards: subtypeNykStyles

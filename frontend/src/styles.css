@@ -3445,6 +3445,10 @@ button.lululemon-bar-row.selected > strong {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.lululemon-nyk-linked-comparison .lululemon-style-comparison-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .nytg-section {
   overflow: visible;
 }
@@ -3695,13 +3699,13 @@ button.lululemon-bar-row.selected > strong {
   width: 0;
   height: 100%;
   display: block;
-  background: linear-gradient(90deg, #4a4245, #766d70);
+  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
   border-radius: inherit;
   transition: width 220ms ease;
 }
 
-.lululemon-nyk-fabric-chart-grid > div:last-child i b {
-  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
+.lululemon-nyk-fabric-chart-grid > div.nyk i b {
+  background: linear-gradient(90deg, #4a4245, #766d70);
 }
 
 .lululemon-nyk-fabric-chart-grid strong {
