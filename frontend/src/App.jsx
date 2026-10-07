@@ -39,6 +39,11 @@ import {
   LULULEMON_NYK_PURCHASES,
   LULULEMON_NYK_TREND_DIRECTIONS,
   LULULEMON_NYK_WHITESPACE,
+  LULULEMON_ABC_VI_CHECKS,
+  LULULEMON_ABC_VI_FABRICS,
+  LULULEMON_ABC_VI_PHASES,
+  LULULEMON_ABC_VI_STYLES,
+  LULULEMON_ABC_VI_SUMMARY,
 } from "./lululemonSeasonForecast";
 import {
   LULULEMON_BUSINESS_METRICS,
@@ -3359,6 +3364,7 @@ function LululemonSeasonForecast() {
       { id: "forecast-nyk-fabrics", number: "02", label: "Fabrics" },
       { id: "forecast-nyk-whitespace", number: "03", label: "Whitespace" },
       { id: "forecast-nyk-actions", number: "04", label: "Next steps" },
+      { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
     ]
     : [
       { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
@@ -3366,6 +3372,7 @@ function LululemonSeasonForecast() {
       { id: "forecast-nyg-programs", number: "03", label: "Programs" },
       { id: "forecast-nyg-whitespace", number: "04", label: "Whitespace" },
       { id: "forecast-nyg-actions", number: "05", label: "Next steps" },
+      { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
     ];
   const forecastAiContext = useMemo(
     () => ({
@@ -3910,6 +3917,93 @@ function LululemonSeasonForecast() {
           </article>
         </>
       )}
+
+      <article className="lululemon-forecast-section nytg-abc-playbook" id="forecast-nytg-abc">
+        <div className="lululemon-forecast-section-heading">
+          <div>
+            <p className="eyebrow">NYTG · ABC VI PLAYBOOK</p>
+            <h3>ABC Collection: one sample kit, one owner</h3>
+          </div>
+          <span>Joint NYG + NYK route · Short first, Pant last</span>
+        </div>
+
+        <div className="nytg-abc-summary">
+          <div className="nytg-abc-summary-copy">
+            <span>WHY ABC</span>
+            <h4>Turn NYTG's vertical integration into one commercial offer.</h4>
+            <p>{LULULEMON_ABC_VI_SUMMARY.thesis}</p>
+          </div>
+          <div><strong>{formatComparisonValue(LULULEMON_ABC_VI_SUMMARY.marketSales, "sales")}</strong><span>Estimated 2026 ABC market</span></div>
+          <div><strong>{formatComparisonValue(LULULEMON_ABC_VI_SUMMARY.nygSales, "sales")}</strong><span>NYG ABC sales today</span></div>
+        </div>
+
+        <div className="nytg-abc-block-heading">
+          <div><span>01 · GARMENT ENTRY LADDER</span><h4>Show the style, then earn the next program</h4></div>
+          <small>Public product images are visual references, not confirmed SS28/FW28 line-list styles.</small>
+        </div>
+        <div className="nytg-abc-style-grid">
+          {LULULEMON_ABC_VI_STYLES.map((style) => (
+            <article key={style.program}>
+              <a href={style.url} target="_blank" rel="noreferrer" aria-label={`Open ${style.referenceStyle} product reference`}>
+                <img src={style.image} alt={`${style.referenceStyle} product reference`} />
+                <span>{style.timing}</span>
+              </a>
+              <div>
+                <small>STEP {style.step} · {formatComparisonValue(style.marketSales, "sales")} MARKET</small>
+                <h4>{style.program}</h4>
+                <b>{style.referenceStyle}</b>
+                <p>{style.rationale}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="nytg-abc-block-heading">
+          <div><span>02 · FABRIC DEVELOPMENT</span><h4>What NYK should develop for each garment</h4></div>
+          <small>Directional briefs only · confirm against purchased samples, lab tests and mill capability.</small>
+        </div>
+        <div className="nytg-abc-fabric-grid">
+          {LULULEMON_ABC_VI_FABRICS.map((fabric) => (
+            <article key={fabric.name}>
+              <div className="nytg-abc-fabric-image">
+                <img src={fabric.image} alt={`${fabric.name} development reference`} />
+                <span>{fabric.timing}</span>
+              </div>
+              <div>
+                <small>FOR {fabric.product}</small>
+                <h4>{fabric.name}</h4>
+                <p><b>Target hand</b>{fabric.target}</p>
+                <p><b>Construction</b>{fabric.construction}</p>
+                <em>{fabric.validation}</em>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="nytg-abc-block-heading">
+          <div><span>03 · EXECUTION ROADMAP</span><h4>Who does what before NYTG presents</h4></div>
+          <small>BD owns the customer conversation; NYG and NYK deliver one joined-up answer.</small>
+        </div>
+        <div className="nytg-abc-phase-grid">
+          {LULULEMON_ABC_VI_PHASES.map((phase) => (
+            <article key={phase.phase}>
+              <header><span>{phase.phase}</span><div><small>{phase.timing}</small><h4>{phase.title}</h4></div></header>
+              <p><b>NYG</b>{phase.nyg}</p>
+              <p><b>NYK</b>{phase.nyk}</p>
+              <p><b>BD</b>{phase.bd}</p>
+              <footer><span>DONE WHEN</span>{phase.done}</footer>
+            </article>
+          ))}
+        </div>
+
+        <div className="nytg-abc-decision">
+          <div><span>DECISION TO APPROVE</span><strong>Joint ABC Short sample kit + one NYTG pitch owner</strong></div>
+          <div><span>CONFIRM BEFORE THE PITCH</span><ul>{LULULEMON_ABC_VI_CHECKS.map((item) => <li key={item}>{item}</li>)}</ul></div>
+        </div>
+        <p className="nytg-abc-caveat">
+          Source basis: ABC_Collection_VI_NYG_NYK.pptx. Market figures are directional estimates from Share_4; product images come from the public Lululemon catalog. Fabric images are development visualizations generated for this dashboard and must be validated with physical swatches and lab dips.
+        </p>
+      </article>
 
       <p className="lululemon-forecast-source">
         {isNykForecast

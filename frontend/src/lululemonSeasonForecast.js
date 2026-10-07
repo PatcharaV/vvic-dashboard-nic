@@ -773,3 +773,110 @@ export const LULULEMON_FORECAST_NEXT_STEPS = [
   "Pair each program pitch with its matching NYK fabric-direction card, not a generic swatch book.",
   "Refresh the forecast when Lululemon's actual SS28/FW28 line-list becomes available.",
 ];
+
+export const LULULEMON_ABC_VI_SUMMARY = {
+  marketSales: 528_000_000,
+  nygSales: 0,
+  thesis:
+    "Enter as one vertically integrated NYTG team: NYK develops the fabric, NYG builds the garment, and BD presents one sample kit, one cost and one lead time.",
+};
+
+export const LULULEMON_ABC_VI_STYLES = [
+  {
+    step: 1,
+    timing: "NOW",
+    program: "ABC Short",
+    referenceStyle: 'ABC Classic-Fit Short 7"',
+    marketSales: 108_000_000,
+    rationale: "Closest construction bridge from Pace Breaker. Sample 7-inch and 5-inch options first.",
+    image: "/lululemon-opportunities/short-men-abc-classic-fit-short-7.webp",
+    url: "https://shop.lululemon.com/p/men-shorts/ABC-Classic-Fit-Short-7-WovenAir-MD/_/prod11772624",
+  },
+  {
+    step: 2,
+    timing: "NEXT",
+    program: "ABC Jogger",
+    referenceStyle: "ABC Jogger",
+    marketSales: 28_000_000,
+    rationale: "Use the approved short fabric platform as the natural second style, adjusted for weight and recovery.",
+    image: "/lululemon-opportunities/jogger-men-abc-jogger.webp",
+    url: "https://shop.lululemon.com/p/men-joggers/Abc-Jogger-MD/_/prod9660994",
+  },
+  {
+    step: 3,
+    timing: "LATER",
+    program: "ABC Pant",
+    referenceStyle: "ABC Classic-Fit Trouser",
+    marketSales: 392_000_000,
+    rationale: "Largest prize and hardest route. Pursue after woven capability, quality and delivery trust are proven.",
+    image: "/lululemon-opportunities/pant-men-abc-classic-fit-trouser.webp",
+    url: "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-28-Warpstreme/_/prod11500066",
+  },
+];
+
+export const LULULEMON_ABC_VI_FABRICS = [
+  {
+    timing: "NOW",
+    name: "Light Stretch Double Knit",
+    product: 'ABC Short 7" / 5"',
+    image: "/forecast-abc/abc-short-light-stretch-knit.jpg",
+    target: "Matte, cool hand, 4-way stretch and fast recovery",
+    construction: "Recycled nylon/polyester + elastane direction · target 150-190gsm",
+    validation: "Confirm whether Lululemon will accept a knit route for ABC Short.",
+  },
+  {
+    timing: "NEXT",
+    name: "Stable Stretch Interlock",
+    product: "ABC Jogger",
+    image: "/forecast-abc/abc-jogger-stable-interlock.jpg",
+    target: "Smooth face, controlled drape, shape retention and abrasion resistance",
+    construction: "Recycled nylon/polyester + elastane direction · target 210-250gsm",
+    validation: "Tune weight only after the short platform passes wear testing.",
+  },
+  {
+    timing: "LATER",
+    name: "Technical Stretch Woven",
+    product: "ABC Pant / Trouser",
+    image: "/forecast-abc/abc-pant-stretch-woven.jpg",
+    target: "Fine twill, matte hand, 4-way comfort stretch and crease recovery",
+    construction: "Recycled nylon/polyester + elastane direction · target 170-210gsm",
+    validation: "NYK mill team must confirm woven capability, MOQ and lead time first.",
+  },
+];
+
+export const LULULEMON_ABC_VI_PHASES = [
+  {
+    phase: "01",
+    timing: "NOW",
+    title: "Build the short sample kit",
+    nyg: 'Pattern and sew ABC-inspired 7" and 5" short prototypes; prepare fit and construction notes.',
+    nyk: "Develop 2-3 light stretch options, TCX lab dips and an initial test matrix.",
+    bd: "Name one pitch owner and secure the correct Lululemon ABC buying contact.",
+    done: "One kit arrives with garments, swatches and a single VI capability story.",
+  },
+  {
+    phase: "02",
+    timing: "NEXT",
+    title: "Test, cost and present as one offer",
+    nyg: "Issue one quote per style including NYK fabric and garment lead time.",
+    nyk: "Complete stretch recovery, pilling and colourfastness tests; confirm MOQ and capacity.",
+    bd: "Lead the meeting with the finished sample, then agree wear-test feedback and decision dates.",
+    done: "Sample, cost, test report, MOQ and lead time are submitted together.",
+  },
+  {
+    phase: "03",
+    timing: "LATER",
+    title: "Extend to jogger, then earn the pant",
+    nyg: "Convert the approved platform into a jogger before opening the trouser pattern route.",
+    nyk: "Tune jogger weight and confirm whether the group can deliver a commercial stretch woven.",
+    bd: "Use short and jogger performance as proof before requesting the ABC Pant program.",
+    done: "The pant route is formally confirmed, partnered or dropped based on capability.",
+  },
+];
+
+export const LULULEMON_ABC_VI_CHECKS = [
+  "Buy and test current ABC Short and Jogger samples to confirm fabric construction.",
+  "Confirm NYK or group-mill stretch-woven capability for the pant route.",
+  "Confirm NYG woven sewing capability, machinery and sample capacity.",
+  "Confirm the Lululemon team that owns ABC, plus sample-kit timing and MOQ.",
+];
