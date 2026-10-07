@@ -36,7 +36,6 @@ import {
   LULULEMON_NYK_FORECAST_PROGRAMS,
   LULULEMON_NYK_FORECAST_SUMMARY,
   LULULEMON_NYK_KEEP_EXTEND,
-  LULULEMON_NYK_PURCHASES,
   LULULEMON_NYK_TREND_DIRECTIONS,
   LULULEMON_NYK_WHITESPACE,
   LULULEMON_ABC_VI_CHECKS,
@@ -3280,7 +3279,6 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
 }
 
 function LululemonSeasonForecast() {
-  const [partner, setPartner] = useState("NYG");
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
   const filteredPrograms = LULULEMON_FORECAST_NYG_PROGRAMS.filter(
@@ -3339,9 +3337,6 @@ function LululemonSeasonForecast() {
       };
     })
     .filter((group) => group.genderGroups.length > 0);
-  const nykPurchaseGroups = LULULEMON_NYK_PURCHASES.filter(
-    (group) => gender === "All" || group.gender === gender,
-  );
   const nykKeepExtendGroups = LULULEMON_NYK_KEEP_EXTEND.filter(
     (group) => gender === "All" || group.gender === gender,
   );
@@ -3357,53 +3352,49 @@ function LululemonSeasonForecast() {
   const nykActions = LULULEMON_NYK_ACTIONS.filter(
     (action) => gender === "All" || action.gender === gender,
   );
-  const isNykForecast = partner === "NYK";
-  const forecastSectionLinks = isNykForecast
-    ? [
-      { id: "forecast-nyk-programs", number: "01", label: "Programs" },
-      { id: "forecast-nyk-fabrics", number: "02", label: "Fabrics" },
-      { id: "forecast-nyk-whitespace", number: "03", label: "Whitespace" },
-      { id: "forecast-nyk-actions", number: "04", label: "Next steps" },
-      { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
-    ]
-    : [
-      { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
-      { id: "forecast-nyg-market", number: "02", label: "Market" },
-      { id: "forecast-nyg-programs", number: "03", label: "Programs" },
-      { id: "forecast-nyg-whitespace", number: "04", label: "Whitespace" },
-      { id: "forecast-nyg-actions", number: "05", label: "Next steps" },
-      { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
-    ];
+  const forecastSectionLinks = [
+    { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
+    { id: "forecast-nyg-market", number: "02", label: "Market" },
+    { id: "forecast-nyg-programs", number: "03", label: "Product priorities" },
+    { id: "forecast-nyk-programs", number: "04", label: "Fabric opportunities" },
+    { id: "forecast-nyk-fabrics", number: "05", label: "Fabric development" },
+    { id: "forecast-nyg-whitespace", number: "06", label: "Whitespace" },
+    { id: "forecast-nyg-actions", number: "07", label: "Joint next steps" },
+    { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
+  ];
   const forecastAiContext = useMemo(
     () => ({
-      dashboard: "Lululemon SS28 & FW28 Season Forecast",
-      selectedPartner: partner,
+      dashboard: "NYTG x Lululemon SS28 & FW28 Season Forecast",
+      selectedPartner: "NYTG (NYG Garment + NYK Fabric)",
       selectedSeason: season,
       selectedGender: gender,
-      summary: isNykForecast ? LULULEMON_NYK_FORECAST_SUMMARY : LULULEMON_FORECAST_SUMMARY,
-      visiblePrograms: isNykForecast ? filteredNykPrograms : filteredPrograms,
-      marketSize: isNykForecast ? nykPurchaseGroups : visibleMarkets,
-      keepAndExtend: isNykForecast ? nykKeepExtendGroups : keepExtendGroups,
-      whitespace: isNykForecast ? nykWhitespaceGroups : whitespaceGroups,
-      fabricDirections: isNykForecast ? nykTrendGroups : [],
-      fabricBriefs: isNykForecast ? nykFabricBriefs : [],
-      trends: isNykForecast ? nykTrendGroups : [],
-      nextSteps: isNykForecast ? nykActions : forecastActions,
+      summary: {
+        product: LULULEMON_FORECAST_SUMMARY,
+        fabric: LULULEMON_NYK_FORECAST_SUMMARY,
+      },
+      visiblePrograms: filteredPrograms,
+      fabricOpportunities: filteredNykPrograms,
+      marketSize: visibleMarkets,
+      keepAndExtend: keepExtendGroups,
+      fabricKeepAndExtend: nykKeepExtendGroups,
+      whitespace: whitespaceGroups,
+      fabricWhitespace: nykWhitespaceGroups,
+      fabricDirections: nykTrendGroups,
+      fabricBriefs: nykFabricBriefs,
+      trends: nykTrendGroups,
+      nextSteps: { garment: forecastActions, fabric: nykActions },
       caveat:
         "This is a directional forecast. The actual SS28/FW28 Lululemon line-list is not available yet.",
     }),
     [
-      partner,
       season,
       gender,
-      isNykForecast,
       filteredNykPrograms,
       filteredPrograms,
       visibleMarkets,
       keepExtendGroups,
       whitespaceGroups,
       forecastActions,
-      nykPurchaseGroups,
       nykKeepExtendGroups,
       nykWhitespaceGroups,
       nykTrendGroups,
@@ -3413,56 +3404,22 @@ function LululemonSeasonForecast() {
   );
 
   return (
-    <section className={`lululemon-forecast-page ${isNykForecast ? "nyk-view" : "nyg-view"}`}>
+    <section className="lululemon-forecast-page nytg-view">
       <article className="lululemon-forecast-hero nyg-intro">
         <div className="lululemon-forecast-hero-copy">
-          <p className="eyebrow">
-            {isNykForecast ? "NAN YANG TEXTILE GROUP x LULULEMON" : "NYG · GARMENT · LULULEMON"}
-          </p>
-          <h2>
-            {isNykForecast
-              ? LULULEMON_NYK_FORECAST_SUMMARY.title
-              : "NYG Forecast: SS28 and FW28"}
-          </h2>
-          <p>
-            {isNykForecast
-              ? LULULEMON_NYK_FORECAST_SUMMARY.thesis
-              : "Where lululemon sells, which programs NYG should pitch, in what order, and what to do next. Men's and Women's are separate on every page."}
-          </p>
-          <span>
-            {isNykForecast
-              ? "Directional forecast · September 2026 · Confidential"
-              : "MKT · USD and pieces only · NYG sales FA25-WT27 · Confidential"}
-          </span>
+          <p className="eyebrow">NAN YANG TEXTILE GROUP · GARMENT + FABRIC · LULULEMON</p>
+          <h2>NYTG Forecast: SS28 and FW28</h2>
+          <p>One commercial direction connecting Lululemon's largest markets, NYG garment opportunities and the fabrics NYK should develop to win them.</p>
+          <span>Directional forecast · September 2026 · Confidential</span>
         </div>
       </article>
 
       <article className="lululemon-forecast-method">
         <div>
           <span>FORECAST BASIS</span>
-          <p>
-            {isNykForecast
-              ? "Fabric priorities use NYG fabric purchase orders from FA25-WT27. Values are PO_QTY in yards; USD is estimated as yards multiplied by item price."
-              : LULULEMON_FORECAST_SUMMARY.methodology}
-          </p>
+          <p>{LULULEMON_FORECAST_SUMMARY.methodology} Fabric priorities connect those product opportunities to NYG purchase history, NYK capability and Nanyang trend direction.</p>
         </div>
         <div className="lululemon-forecast-controls">
-          <fieldset>
-            <legend>Partner</legend>
-            {["NYG", "NYK"].map((value) => (
-              <button
-                className={partner === value ? "active" : undefined}
-                type="button"
-                onClick={() => {
-                  setPartner(value);
-                  if (value === "NYK") setGender("All");
-                }}
-                key={value}
-              >
-                {value}
-              </button>
-            ))}
-          </fieldset>
           <fieldset>
             <legend>Season</legend>
             {["All", "SS28", "FW28"].map((value) => (
@@ -3502,10 +3459,10 @@ function LululemonSeasonForecast() {
           </button>
         </div>
         <div className="lululemon-forecast-filter-status">
-          <span>{partner}</span>
+          <span>NYTG</span>
           <b>{season === "All" ? "SS28 + FW28" : season}</b>
           <b>{gender === "All" ? "Men + Women" : gender}</b>
-          <small>{isNykForecast ? filteredNykPrograms.length : filteredPrograms.length} priority plays</small>
+          <small>{filteredPrograms.length} product plays · {nykFabricBriefs.length} fabric developments</small>
         </div>
       </article>
 
@@ -3525,7 +3482,7 @@ function LululemonSeasonForecast() {
         </div>
       </nav>
 
-      {partner === "NYG" && (
+      {(
         <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3550,7 +3507,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {partner === "NYG" && (
+      {(
         <article className="lululemon-forecast-section market-size" id="forecast-nyg-market">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3586,7 +3543,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {partner === "NYG" && (
+      {(
         <article className="lululemon-forecast-section keep-extend" id="forecast-nyg-programs">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3675,11 +3632,11 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {partner === "NYG" && (
+      {(
         <article className="lululemon-forecast-section whitespace" id="forecast-nyg-whitespace">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">04 · WHITE SPACE</p>
+              <p className="eyebrow">06 · WHITE SPACE</p>
               <h3>Programs NYG Has Not Yet Won, but Should</h3>
             </div>
             <span>Enter beside the incumbent, prove capability, then move in.</span>
@@ -3713,12 +3670,12 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {partner === "NYG" && (
+      {(
         <article className="lululemon-forecast-section next-steps nyg-next-steps" id="forecast-nyg-actions">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">05 · NEXT STEPS</p>
-              <h3>How NYG Wins the Next Programs</h3>
+              <p className="eyebrow">07 · JOINT NEXT STEPS</p>
+              <h3>Garment lane: how NYG wins the next programs</h3>
             </div>
             <span>BD opens the door; Garment turns each target into a credible product proposal.</span>
           </div>
@@ -3743,13 +3700,13 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {isNykForecast && (
+      {(
         <>
           <article className="lululemon-forecast-section keep-extend nyk-keep-extend" id="forecast-nyk-programs">
             <div className="lululemon-forecast-section-heading">
               <div>
-                <p className="eyebrow">01 · KEEP AND EXTEND</p>
-                <h3>Follow the NYG programs, one fabric at a time</h3>
+                <p className="eyebrow">04 · FABRIC OPPORTUNITIES</p>
+                <h3>Turn NYG priority programs into NYK fabric pitches</h3>
               </div>
               <span>NYK supplies none of these six priority programs today.</span>
             </div>
@@ -3814,7 +3771,7 @@ function LululemonSeasonForecast() {
 
           <article className="lululemon-forecast-section nyk-trend-direction" id="forecast-nyk-fabrics">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">02 · FABRIC TO DEVELOP</p><h3>Develop these fabrics for SS28 and FW28</h3></div>
+              <div><p className="eyebrow">05 · FABRIC TO DEVELOP</p><h3>Develop these fabrics for SS28 and FW28</h3></div>
               <span>Photorealistic development references · confirm against physical swatches and lab dips</span>
             </div>
             <div className="lululemon-nyk-fabric-brief-grid">
@@ -3872,7 +3829,7 @@ function LululemonSeasonForecast() {
 
           <article className="lululemon-forecast-section whitespace nyk-whitespace" id="forecast-nyk-whitespace">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">NYK · WHITESPACE</p><h3>Big markets NYG has not been awarded: the fabric needed</h3></div>
+              <div><p className="eyebrow">06B · FABRIC FOR WHITESPACE</p><h3>The fabric NYTG needs to enter each whitespace program</h3></div>
             </div>
             <div className="lululemon-nyk-slide-tags">
               <span>NYK</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
@@ -3896,7 +3853,7 @@ function LululemonSeasonForecast() {
 
           <article className="lululemon-forecast-section nyk-next-steps" id="forecast-nyk-actions">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">NYK · NEXT STEPS</p><h3>What NYK does next, in step with NYG</h3></div>
+              <div><p className="eyebrow">07B · JOINT NEXT STEPS</p><h3>Fabric lane: what NYK does in step with NYG and BD</h3></div>
             </div>
             <div className="lululemon-nyk-slide-tags">
               <span>NYK</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
@@ -4006,9 +3963,7 @@ function LululemonSeasonForecast() {
       </article>
 
       <p className="lululemon-forecast-source">
-        {isNykForecast
-          ? "Source: NYK_Fabric_Forecast_SS28-FW28.pdf. NYG fabric purchases use PO_QTY in yards for FA25-WT27; USD is estimated as yards multiplied by item price. SS28/FW28 trend directions are directional because the final line-list is not available. Milestones remain excluded from the NYK view."
-          : "Source: NYG_Forecast_SS28-FW28.pdf. NYG sales cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Gender is inferred from product names and $1.4B of unassigned market sales is excluded. Refresh when the actual SS28/FW28 line-list is available."}
+        Source: NYG_Forecast_SS28-FW28.pdf and NYK_Fabric_Forecast_SS28-FW28.pdf. NYG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical fabric developments are approved.
       </p>
       <DashboardAiAssistant context={forecastAiContext} />
     </section>
