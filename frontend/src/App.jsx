@@ -3365,7 +3365,7 @@ function LululemonSeasonForecast() {
   const forecastAiContext = useMemo(
     () => ({
       dashboard: "NYTG x Lululemon SS28 & FW28 Season Forecast",
-      selectedPartner: "NYTG (NYG Garment + NYK Fabric)",
+      selectedPartner: "NYTG",
       selectedSeason: season,
       selectedGender: gender,
       summary: {
@@ -3409,7 +3409,7 @@ function LululemonSeasonForecast() {
         <div className="lululemon-forecast-hero-copy">
           <p className="eyebrow">NAN YANG TEXTILE GROUP · GARMENT + FABRIC · LULULEMON</p>
           <h2>NYTG Forecast: SS28 and FW28</h2>
-          <p>One commercial direction connecting Lululemon's largest markets, NYG garment opportunities and the fabrics NYK should develop to win them.</p>
+          <p>One NYTG commercial direction connecting Lululemon's largest markets, garment opportunities and the fabrics the group should develop to win them.</p>
           <span>Directional forecast · September 2026 · Confidential</span>
         </div>
       </article>
@@ -3417,7 +3417,7 @@ function LululemonSeasonForecast() {
       <article className="lululemon-forecast-method">
         <div>
           <span>FORECAST BASIS</span>
-          <p>{LULULEMON_FORECAST_SUMMARY.methodology} Fabric priorities connect those product opportunities to NYG purchase history, NYK capability and Nanyang trend direction.</p>
+          <p>{LULULEMON_FORECAST_SUMMARY.methodology} Fabric priorities connect those product opportunities to NYTG purchase history, group capability and Nanyang trend direction.</p>
         </div>
         <div className="lululemon-forecast-controls">
           <fieldset>
@@ -3548,7 +3548,7 @@ function LululemonSeasonForecast() {
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">03 · KEEP AND EXTEND</p>
-              <h3>What NYG has, and where it should go next</h3>
+              <h3>What NYTG has, and where it should go next</h3>
             </div>
             <span>Use an existing program as the ladder into its next style.</span>
           </div>
@@ -3557,7 +3557,7 @@ function LululemonSeasonForecast() {
               <section className={group.gender.toLowerCase()} key={group.gender}>
                 <div className="lululemon-forecast-gender-heading">
                   <strong>{group.gender}</strong>
-                  <span>Top 3 by NYG sales</span>
+                  <span>Top 3 by NYTG sales</span>
                 </div>
                 <div>
                   {group.programs.map((program) => (
@@ -3565,7 +3565,7 @@ function LululemonSeasonForecast() {
                       <b>{program.rank}</b>
                       <div>
                         <h4>{program.name}</h4>
-                        <p>NYG has · {formatComparisonValue(program.sales, "sales")} · {formatComparisonValue(program.units, "units")} · {program.held}</p>
+                        <p>NYTG has · {formatComparisonValue(program.sales, "sales")} · {formatComparisonValue(program.units, "units")} · {program.held}</p>
                         <strong>Next · {program.next}</strong>
                       </div>
                     </article>
@@ -3576,7 +3576,7 @@ function LululemonSeasonForecast() {
           </div>
 
           <div className="lululemon-forecast-ranked-heading">
-            <div><span>SS28 / FW28 RANKING</span><strong>Programs NYG should carry forward</strong></div>
+            <div><span>SS28 / FW28 RANKING</span><strong>Programs NYTG should carry forward</strong></div>
             <small>{filteredPrograms.length} programs · ranked by estimated market sales</small>
           </div>
           <div className="lululemon-forecast-program-groups">
@@ -3597,8 +3597,8 @@ function LululemonSeasonForecast() {
                         <span />
                         <span>Program / Why continue</span>
                         <span>Market 2026</span>
-                        <span>NYG Sales</span>
-                        <span>NYG PCS</span>
+                        <span>NYTG Sales</span>
+                        <span>NYTG PCS</span>
                       </div>
                       <div className="lululemon-forecast-opportunity-list">
                         {genderGroup.programs.map((program) => (
@@ -3613,11 +3613,11 @@ function LululemonSeasonForecast() {
                               <b>{formatComparisonValue(program.marketSales, "sales")}</b>
                             </span>
                             <span className="lululemon-forecast-program-value">
-                              <small>NYG Sales</small>
+                              <small>NYTG Sales</small>
                               <b>{formatComparisonValue(program.nygSales, "sales")}</b>
                             </span>
                             <span className="lululemon-forecast-program-value">
-                              <small>NYG PCS</small>
+                              <small>NYTG PCS</small>
                               <b>{formatComparisonValue(program.nygUnits, "units").replace(" units", "")}</b>
                             </span>
                           </article>
@@ -3637,7 +3637,7 @@ function LululemonSeasonForecast() {
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">06 · WHITE SPACE</p>
-              <h3>Programs NYG Has Not Yet Won, but Should</h3>
+              <h3>Programs NYTG Has Not Yet Won, but Should</h3>
             </div>
             <span>Enter beside the incumbent, prove capability, then move in.</span>
           </div>
@@ -3674,8 +3674,8 @@ function LululemonSeasonForecast() {
         <article className="lululemon-forecast-section next-steps nyg-next-steps" id="forecast-nyg-actions">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">07 · JOINT NEXT STEPS</p>
-              <h3>Garment lane: how NYG wins the next programs</h3>
+              <p className="eyebrow">07 · NYTG NEXT STEPS</p>
+              <h3>How NYTG wins the next programs</h3>
             </div>
             <span>BD opens the door; Garment turns each target into a credible product proposal.</span>
           </div>
@@ -3706,21 +3706,21 @@ function LululemonSeasonForecast() {
             <div className="lululemon-forecast-section-heading">
               <div>
                 <p className="eyebrow">04 · FABRIC OPPORTUNITIES</p>
-                <h3>Turn NYG priority programs into NYK fabric pitches</h3>
+                <h3>Turn NYTG priority programs into fabric pitches</h3>
               </div>
-              <span>NYK supplies none of these six priority programs today.</span>
+              <span>No group fabric supply is recorded for these six priority programs today.</span>
             </div>
             <div className={`lululemon-forecast-keep-grid ${nykKeepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
               {nykKeepExtendGroups.map((group) => (
                 <section className={group.gender.toLowerCase()} key={group.gender}>
-                  <div className="lululemon-forecast-gender-heading"><strong>{group.gender}</strong><span>Top 3 by NYG sales</span></div>
+                  <div className="lululemon-forecast-gender-heading"><strong>{group.gender}</strong><span>Top 3 by NYTG sales</span></div>
                   <div>
                     {group.programs.map((program) => (
                       <article key={program.name}>
                         <b>{program.rank}</b>
                         <div>
                           <h4>{program.name}</h4>
-                          <p>NYG buys · {formatFabricYards(program.yards, true)} · {formatComparisonValue(program.sales, "sales")} · NYK {formatFabricYards(program.nykYards, true)}</p>
+                          <p>Garment demand · {formatFabricYards(program.yards, true)} · {formatComparisonValue(program.sales, "sales")} · Group fabric {formatFabricYards(program.nykYards, true)}</p>
                           <strong>Fabric · {program.fabric}<br />Next · {program.next}</strong>
                         </div>
                       </article>
@@ -3731,7 +3731,7 @@ function LululemonSeasonForecast() {
             </div>
 
             <div className="lululemon-forecast-ranked-heading">
-              <div><span>SS28 / FW28 RANKING</span><strong>NYG programs and the fabric NYK should pitch</strong></div>
+              <div><span>SS28 / FW28 RANKING</span><strong>NYTG programs and the fabric direction to pitch</strong></div>
               <small>{filteredNykPrograms.length} programs · {gender === "All" ? "Men + Women" : gender}</small>
             </div>
             <div className="lululemon-forecast-program-groups">
@@ -3745,7 +3745,7 @@ function LululemonSeasonForecast() {
                     {seasonGroup.genderGroups.map((genderGroup) => (
                       <section className={`lululemon-forecast-gender-group ${genderGroup.gender.toLowerCase()}`} key={genderGroup.gender}>
                         <div className="lululemon-forecast-gender-heading"><strong>{genderGroup.gender}</strong><span>Top {genderGroup.programs.length}</span></div>
-                        <div className="lululemon-nyk-program-columns" aria-hidden="true"><span /><span>Program / Fabric direction</span><span>NYG Sales</span><span>NYG Fabric</span><span>NYK Fabric</span></div>
+                        <div className="lululemon-nyk-program-columns" aria-hidden="true"><span /><span>Program / Fabric direction</span><span>NYTG Sales</span><span>Fabric Demand</span><span>Group Supply</span></div>
                         <div className="lululemon-forecast-opportunity-list">
                           {genderGroup.programs.map((program) => (
                             <article className="lululemon-nyk-program-row" key={program.id}>
@@ -3753,11 +3753,11 @@ function LululemonSeasonForecast() {
                               <div className="lululemon-nyk-program-summary">
                                 <h4>{program.program}</h4>
                                 <p><span>Today</span>{program.current}</p>
-                                <strong><span>NYK pitch</span>{program.pitch}</strong>
+                                <strong><span>Fabric pitch</span>{program.pitch}</strong>
                               </div>
-                              <span className="lululemon-nyk-program-value"><small>NYG Sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
-                              <span className="lululemon-nyk-program-value"><small>NYG Fabric</small><b>{formatFabricYards(program.nygYards, true)}</b></span>
-                              <span className={`lululemon-nyk-program-value ${program.nykYards > 0 ? "secured" : ""}`.trim()}><small>NYK Fabric</small><b>{formatFabricYards(program.nykYards, true)}</b></span>
+                              <span className="lululemon-nyk-program-value"><small>NYTG Sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
+                              <span className="lululemon-nyk-program-value"><small>Fabric Demand</small><b>{formatFabricYards(program.nygYards, true)}</b></span>
+                              <span className={`lululemon-nyk-program-value ${program.nykYards > 0 ? "secured" : ""}`.trim()}><small>Group Supply</small><b>{formatFabricYards(program.nykYards, true)}</b></span>
                             </article>
                           ))}
                         </div>
@@ -3794,7 +3794,7 @@ function LululemonSeasonForecast() {
               Visual references approximate the intended surface, construction and drape. Final development must be approved from a physical swatch, lab dip and test result.
             </p>
             <div className="lululemon-forecast-ranked-heading nyk-trend-map-heading">
-              <div><span>TREND MAPPING</span><strong>How each fabric direction connects to an NYG program</strong></div>
+              <div><span>TREND MAPPING</span><strong>How each fabric direction connects to an NYTG program</strong></div>
               <div className="lululemon-nyk-trend-downloads">
                 {(season === "All" || season === "SS28") && (
                   <a href="/trend-decks/Nanyang_Trend_SS28_Web.pdf" download>
@@ -3832,7 +3832,7 @@ function LululemonSeasonForecast() {
               <div><p className="eyebrow">06B · FABRIC FOR WHITESPACE</p><h3>The fabric NYTG needs to enter each whitespace program</h3></div>
             </div>
             <div className="lululemon-nyk-slide-tags">
-              <span>NYK</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
+              <span>NYTG</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
             </div>
             <div className={`lululemon-nyk-market-grid ${nykWhitespaceGroups.length === 1 ? "single" : ""}`.trim()}>
               {nykWhitespaceGroups.map((group) => (
@@ -3848,15 +3848,15 @@ function LululemonSeasonForecast() {
                 </section>
               ))}
             </div>
-            <p className="lululemon-nyk-market-note">Others hold these markets. NYK enters beside them. Spec needs are our reading.</p>
+            <p className="lululemon-nyk-market-note">Others hold these markets. NYTG enters beside them with one garment-and-fabric offer. Spec needs are our reading.</p>
           </article>
 
           <article className="lululemon-forecast-section nyk-next-steps" id="forecast-nyk-actions">
             <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">07B · JOINT NEXT STEPS</p><h3>Fabric lane: what NYK does in step with NYG and BD</h3></div>
+              <div><p className="eyebrow">07B · DEVELOPMENT ACTIONS</p><h3>What NYTG develops next with Product and BD</h3></div>
             </div>
             <div className="lululemon-nyk-slide-tags">
-              <span>NYK</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
+              <span>NYTG</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
             </div>
             <div className={`lululemon-nyk-action-grid ${gender !== "All" ? "single" : ""}`.trim()}>
               {["Men", "Women"].filter((genderKey) => gender === "All" || gender === genderKey).map((genderKey) => (
@@ -3881,7 +3881,7 @@ function LululemonSeasonForecast() {
             <p className="eyebrow">NYTG · ABC VI PLAYBOOK</p>
             <h3>ABC Collection: one sample kit, one owner</h3>
           </div>
-          <span>Joint NYG + NYK route · Short first, Pant last</span>
+          <span>One NYTG route · Short first, Pant last</span>
         </div>
 
         <div className="nytg-abc-summary">
@@ -3891,7 +3891,7 @@ function LululemonSeasonForecast() {
             <p>{LULULEMON_ABC_VI_SUMMARY.thesis}</p>
           </div>
           <div><strong>{formatComparisonValue(LULULEMON_ABC_VI_SUMMARY.marketSales, "sales")}</strong><span>Estimated 2026 ABC market</span></div>
-          <div><strong>{formatComparisonValue(LULULEMON_ABC_VI_SUMMARY.nygSales, "sales")}</strong><span>NYG ABC sales today</span></div>
+          <div><strong>{formatComparisonValue(LULULEMON_ABC_VI_SUMMARY.nygSales, "sales")}</strong><span>NYTG ABC sales today</span></div>
         </div>
 
         <div className="nytg-abc-block-heading">
@@ -3916,7 +3916,7 @@ function LululemonSeasonForecast() {
         </div>
 
         <div className="nytg-abc-block-heading">
-          <div><span>02 · FABRIC DEVELOPMENT</span><h4>What NYK should develop for each garment</h4></div>
+          <div><span>02 · FABRIC DEVELOPMENT</span><h4>What NYTG should develop for each garment</h4></div>
           <small>Directional briefs only · confirm against purchased samples, lab tests and mill capability.</small>
         </div>
         <div className="nytg-abc-fabric-grid">
@@ -3939,14 +3939,14 @@ function LululemonSeasonForecast() {
 
         <div className="nytg-abc-block-heading">
           <div><span>03 · EXECUTION ROADMAP</span><h4>Who does what before NYTG presents</h4></div>
-          <small>BD owns the customer conversation; NYG and NYK deliver one joined-up answer.</small>
+          <small>BD owns the customer conversation; Garment and Fabric deliver one NYTG answer.</small>
         </div>
         <div className="nytg-abc-phase-grid">
           {LULULEMON_ABC_VI_PHASES.map((phase) => (
             <article key={phase.phase}>
               <header><span>{phase.phase}</span><div><small>{phase.timing}</small><h4>{phase.title}</h4></div></header>
-              <p><b>NYG</b>{phase.nyg}</p>
-              <p><b>NYK</b>{phase.nyk}</p>
+              <p><b>GARMENT</b>{phase.nyg}</p>
+              <p><b>FABRIC</b>{phase.nyk}</p>
               <p><b>BD</b>{phase.bd}</p>
               <footer><span>DONE WHEN</span>{phase.done}</footer>
             </article>
@@ -3958,12 +3958,12 @@ function LululemonSeasonForecast() {
           <div><span>CONFIRM BEFORE THE PITCH</span><ul>{LULULEMON_ABC_VI_CHECKS.map((item) => <li key={item}>{item}</li>)}</ul></div>
         </div>
         <p className="nytg-abc-caveat">
-          Source basis: ABC_Collection_VI_NYG_NYK.pptx. Market figures are directional estimates from Share_4; product images come from the public Lululemon catalog. Fabric images are development visualizations generated for this dashboard and must be validated with physical swatches and lab dips.
+          Source basis: attached ABC Collection VI deck. Market figures are directional estimates from Share_4; product images come from the public Lululemon catalog. Fabric images are development visualizations generated for this dashboard and must be validated with physical swatches and lab dips.
         </p>
       </article>
 
       <p className="lululemon-forecast-source">
-        Source: NYG_Forecast_SS28-FW28.pdf and NYK_Fabric_Forecast_SS28-FW28.pdf. NYG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical fabric developments are approved.
+        Source: NYTG garment and fabric forecast inputs. Historical NYTG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical fabric developments are approved.
       </p>
       <DashboardAiAssistant context={forecastAiContext} />
     </section>

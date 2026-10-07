@@ -1,11 +1,11 @@
 export const LULULEMON_FORECAST_SUMMARY = {
-  title: "SS28 & FW28 NYG Forecast",
+  title: "SS28 & FW28 NYTG Forecast",
   suppliedPrograms: 134.8,
   securelyWonPrograms: 20,
   thesis:
-    "Start with Lululemon's largest markets, extend the programs NYG already makes, then earn a route into the biggest whitespace franchises.",
+    "Start with Lululemon's largest markets, extend the programs NYTG already makes, then earn a route into the biggest whitespace franchises.",
   methodology:
-    "No SS28/FW28 line-list is available yet. The forecast combines NYG sales from FA25-WT27 with estimated 2026 Lululemon market sales, then ranks programs with at least $0.3M in NYG sales by market size.",
+    "No SS28/FW28 line-list is available yet. The forecast combines NYTG sales from FA25-WT27 with estimated 2026 Lululemon market sales, then ranks programs with at least $0.3M in NYTG sales by market size.",
 };
 
 export const LULULEMON_FORECAST_MILESTONES = [
@@ -65,8 +65,8 @@ export const LULULEMON_FORECAST_WHITESPACE = [
     gender: "Men",
     programs: [
       { name: "ABC", sales: 528_000_000, units: 5_300_000, detail: "Warpstreme woven · Pant $392M · Short $108M · Jogger $28M" },
-      { name: "Zeroed In", sales: 232_000_000, units: 3_100_000, detail: "NYG makes only the graphic long-sleeve · Pant, shirt, short, jogger and jacket remain open" },
-      { name: "Metal Vent Tech Tee", sales: 105_000_000, units: 1_800_000, detail: "Knit tee close to DrySense · the nearest new door for NYG" },
+      { name: "Zeroed In", sales: 232_000_000, units: 3_100_000, detail: "NYTG makes only the graphic long-sleeve · Pant, shirt, short, jogger and jacket remain open" },
+      { name: "Metal Vent Tech Tee", sales: 105_000_000, units: 1_800_000, detail: "Knit tee close to DrySense · the nearest new door for NYTG" },
     ],
     path: [
       { step: 1, name: "Metal Vent Tech Tee", sales: 98_000_000, action: "Offer a knit tee beside DrySense first." },
@@ -82,7 +82,7 @@ export const LULULEMON_FORECAST_WHITESPACE = [
       { name: "Swiftly", sales: 302_000_000, units: 5_800_000, detail: "Knit tee and tank · Tee $249M · Tank $52M" },
     ],
     path: [
-      { step: 1, name: "Align Tank", sales: 124_000_000, action: "Enter through a core NYG skill proven by Sculpt." },
+      { step: 1, name: "Align Tank", sales: 124_000_000, action: "Enter through a core NYTG skill proven by Sculpt." },
       { step: 2, name: "Align Short", sales: 113_000_000, action: "Move to the next style on the same fabric platform." },
       { step: 3, name: "Align Pant", sales: 664_000_000, action: "Earn the largest prize last." },
     ],
@@ -141,7 +141,7 @@ export const LULULEMON_FORECAST_ACTIONS = [
 ];
 
 export const LULULEMON_NYK_FORECAST_SUMMARY = {
-  title: "NYK Fabric Forecast: SS28 and FW28",
+  title: "NYTG Fabric Forecast: SS28 and FW28",
   thesis:
     "Which fabrics to develop and pitch, with spec, look and trend, so Development can start. Men's and Women's are separate on every page.",
   nygBoughtYards: 7_610_000,
@@ -160,7 +160,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Tees & Tanks",
     tier: "Tier 1",
     reason:
-      "Lounge is NYG's fastest-growing line: 13 styles in SU27 versus 2 in SU26. The core 140gsm BCI-cotton jersey is still bought outside NYK.",
+      "Lounge is NYTG's fastest-growing line: 13 styles in SU27 versus 2 in SU26. The core 140gsm BCI-cotton jersey is still bought outside the group's fabric supply.",
     fabric: "Airy Cotton-Touch Jersey",
     fabricDetail: "Light, breathable jersey and fine rib with a dry, cool hand.",
   },
@@ -173,7 +173,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Polo / Tennis",
     tier: "Tier 1",
     reason:
-      "NYG's Polo used 1.12M yards from one outside mill, while Tennis grew from zero to six styles in SU27.",
+      "NYTG's Polo used 1.12M yards from one outside mill, while Tennis grew from zero to six styles in SU27.",
     fabric: "Cool Piqué & Heather",
     fabricDetail: "Poly/lyocell textured knit with UPF protection and a cool hand.",
   },
@@ -186,7 +186,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Underwear",
     tier: "Tier 2",
     reason:
-      "AIM is NYG's No. 2 fabric program at 9.0M yards, concentrated in one outside mill group and led by a 91% modal / 9% elastane specification.",
+      "AIM is NYTG's No. 2 fabric program at 9.0M yards, concentrated in one outside mill group and led by a 91% modal / 9% elastane specification.",
     fabric: "Modal Cooling Jersey",
     fabricDetail: "Smooth, cool-to-touch cellulosic jersey with soft drape.",
   },
@@ -199,7 +199,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Mesh / Shorts",
     tier: "Tier 2",
     reason:
-      "The largest combined volume is 15.8M yards with no NYK supply. Core specifications are recycled-poly mesh at 90–146gsm.",
+      "The largest combined volume is 15.8M yards with no group fabric supply. Core specifications are recycled-poly mesh at 90–146gsm.",
     fabric: "Tonal Recycled Mesh",
     fabricDetail: "Fine recycled mesh with a PFAS-free quick-dry finish.",
   },
@@ -212,7 +212,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Hoodie / Jogger",
     tier: "Tier 1",
     reason:
-      "Heatwave is NYG's newest line, growing from 4 styles in FA27 to 9 in WT27. Very little fabric is booked, so the supplier position is still open.",
+      "Heatwave is NYTG's newest line, growing from 4 styles in FA27 to 9 in WT27. Very little fabric is booked, so the supplier position is still open.",
     fabric: "Warm Textured Jersey",
     fabricDetail: "Brushed-back cotton/rPET jersey with a light thermal hand.",
   },
@@ -225,7 +225,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Textured",
     tier: "Tier 1",
     reason:
-      "NYK already supplied 31% of Casual waffle and rib. Transfer that proven capability into Lounge as Casual has had no styles since SP27.",
+      "NYTG already has proven supply in Casual waffle and rib. Transfer that capability into Lounge as Casual has had no styles since SP27.",
     fabric: "Waffle & Brushed Terry",
     fabricDetail: "Deep waffle relief and soft brushed modal terry.",
   },
@@ -238,7 +238,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Mid-Layer",
     tier: "Tier 2",
     reason:
-      "Rulu is NYG's biggest line with 11 styles in WT27, but 69% of its 1.76M yards comes from one outside mill and none from NYK.",
+      "Rulu is NYTG's biggest line with 11 styles in WT27, but 69% of its 1.76M yards comes from one outside mill and none from the group's fabric supply.",
     fabric: "Buttery Brushed Stretch",
     fabricDetail: "Fine-nap brushed knit with a matte, second-skin feel.",
   },
@@ -251,7 +251,7 @@ export const LULULEMON_NYK_FORECAST_GROUPS = [
     category: "Knit · Jacket",
     tier: "Tier 2",
     reason:
-      "Define represents 4.46M yards, 87% from one outside mill, while NYG's styles fell to one per season from SU27.",
+      "Define represents 4.46M yards, 87% from one outside mill, while NYTG's styles fell to one per season from SU27.",
     fabric: "Brushed Second-Skin Knit",
     fabricDetail: "Smooth face, brushed inside and stable stretch.",
   },
@@ -336,7 +336,7 @@ export const LULULEMON_NYK_TRENDS = [
 ];
 
 export const LULULEMON_NYK_NEXT_STEPS = [
-  "Start with cotton/rPET textured knits for Lounge and Heatwave, where NYK already has relevant capability.",
+  "Start with cotton/rPET textured knits for Lounge and Heatwave, where NYTG already has relevant fabric capability.",
   "Bring physical swatches for all eight fabric briefs to the SS28 and FW28 meetings.",
   "Confirm machinery, yarn access and lead times for modal, nylon and mesh before pitching.",
   "Line up PFAS-free finish options now as major markets phase out PFAS treatments.",
@@ -351,7 +351,7 @@ export const LULULEMON_NYK_PURCHASES = [
     fwYards: 3_140_000,
     suppliedYards: 558_000,
     suppliedSales: 3_300_000,
-    note: "NYK currently supplies waffle knit only.",
+    note: "NYTG currently supplies waffle knit only.",
   },
   {
     gender: "Women",
@@ -361,7 +361,7 @@ export const LULULEMON_NYK_PURCHASES = [
     fwYards: 1_700_000,
     suppliedYards: 0,
     suppliedSales: 0,
-    note: "The whole women's side is open for NYK.",
+    note: "The whole women's side remains open for NYTG fabric supply.",
   },
 ];
 
@@ -411,8 +411,8 @@ export const LULULEMON_NYK_WHITESPACE = [
   {
     gender: "Men",
     programs: [
-      { name: "ABC", sales: 528_000_000, fabric: "Warpstreme stretch woven", detail: "NYG makes knit only; check woven first." },
-      { name: "Zeroed In (men's)", sales: 232_000_000, fabric: "Pant, shirt, short, jogger and jacket", detail: "NYG makes only the graphic LS (waffle)." },
+      { name: "ABC", sales: 528_000_000, fabric: "Warpstreme stretch woven", detail: "NYTG garment supply is knit only; check woven capability first." },
+      { name: "Zeroed In (men's)", sales: 232_000_000, fabric: "Pant, shirt, short, jogger and jacket", detail: "NYTG makes only the graphic LS (waffle)." },
       { name: "Metal Vent Tech Tee", sales: 105_000_000, fabric: "Light mesh knit tee", detail: "Closest door: cooling mesh (Joyrise)." },
     ],
     path: [
@@ -473,7 +473,7 @@ export const LULULEMON_FORECAST_QUICK_WINS = [
     season: "FW28",
     program: "Pace Breaker Jogger",
     reason:
-      "NYG already makes the Pace Breaker Short, so the jogger is a line extension to an existing franchise and buying relationship.",
+      "NYTG already makes the Pace Breaker Short, so the jogger is a line extension to an existing franchise and buying relationship.",
     fabric: "Brushed Thermal Comfort",
   },
   {
@@ -482,7 +482,7 @@ export const LULULEMON_FORECAST_QUICK_WINS = [
     season: "FW28",
     program: "Scuba Oversized Half-Zip Hoodie",
     reason:
-      "NYG already supplies It's Rulu Half-Zip *Updated in the same mid-layer category, creating a warm route into a second construction.",
+      "NYTG already supplies It's Rulu Half-Zip *Updated in the same mid-layer category, creating a warm route into a second construction.",
     fabric: "Scuba & Bonded Structures",
   },
 ];
@@ -490,20 +490,20 @@ export const LULULEMON_FORECAST_QUICK_WINS = [
 export const LULULEMON_FORECAST_NYG_PROGRAMS = [
   { id: "ss28-men-1", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 1, program: "Pace Breaker Linerless Short 7-inch", nygSales: 4_900_000, nygUnits: 444_000, marketSales: 289_000_000, reason: "Ran in 6 of 10 seasons and sits in the largest men's category." },
   { id: "ss28-men-2", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 2, program: "Pace Breaker Linerless Short 5-inch", nygSales: 1_400_000, nygUnits: 128_000, marketSales: 276_000_000, reason: "Ran in 4 of 10 seasons; a large market with room to add." },
-  { id: "ss28-men-3", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 3, program: "License to Train Short-Sleeve Shirt", nygSales: 8_200_000, nygUnits: 685_000, marketSales: 164_000_000, reason: "Ran in 7 of 10 seasons. DrySense shirt; NYG sales may include Women's." },
+  { id: "ss28-men-3", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 3, program: "License to Train Short-Sleeve Shirt", nygSales: 8_200_000, nygUnits: 685_000, marketSales: 164_000_000, reason: "Ran in 7 of 10 seasons. DrySense shirt; NYTG sales may include Women's." },
   { id: "ss28-men-4", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 4, program: "Evolution Short Sleeve Polo Shirt", nygSales: 1_900_000, nygUnits: 191_000, marketSales: 65_000_000, reason: "Ran in 5 of 10 seasons; clean and repeatable polo." },
   { id: "ss28-men-5", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Men", rank: 5, program: "Pace Breaker Lined Short 7-inch", nygSales: 6_600_000, nygUnits: 541_000, marketSales: 54_000_000, reason: "Ran in 9 of 10 seasons and is a top Pace Breaker seller." },
   { id: "ss28-women-1", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 1, program: "Sculpt Tank Top", nygSales: 3_700_000, nygUnits: 481_000, marketSales: 59_000_000, reason: "Ran in 6 of 10 seasons; core tank with very high volume." },
   { id: "ss28-women-2", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 2, program: "BeCalm V-Neck Tank Top", nygSales: 400_000, nygUnits: 56_000, marketSales: 25_000_000, reason: "Ran in 3 of 10 seasons; soft modal tank." },
   { id: "ss28-women-3", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 3, program: "Sculpt Short-Sleeve Shirt", nygSales: 1_400_000, nygUnits: 169_000, marketSales: 10_000_000, reason: "Ran in 9 of 10 seasons on the same Sculpt fabric platform." },
-  { id: "ss28-women-4", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 4, program: "Sculpt Cropped Tank Top", nygSales: 4_200_000, nygUnits: 349_000, marketSales: 9_000_000, reason: "Ran in 5 of 10 seasons; a growing NYG tank." },
+  { id: "ss28-women-4", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 4, program: "Sculpt Cropped Tank Top", nygSales: 4_200_000, nygUnits: 349_000, marketSales: 9_000_000, reason: "Ran in 5 of 10 seasons; a growing NYTG tank." },
   { id: "ss28-women-5", season: "SS28", seasonName: "Spring/Summer 2028", gender: "Women", rank: 5, program: "License to Train Classic-Fit Tank Top", nygSales: 400_000, nygUnits: 48_000, marketSales: 5_000_000, reason: "Ran in 3 of 10 seasons and opens the larger tank market." },
   { id: "fw28-men-1", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 1, program: "License to Train Hoodie", nygSales: 3_200_000, nygUnits: 178_000, marketSales: 121_000_000, reason: "Ran in 5 of 10 seasons and addresses the largest men's hoodie market." },
   { id: "fw28-men-2", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 2, program: "Textured Double-Knit Cotton Hoodie", nygSales: 2_500_000, nygUnits: 131_000, marketSales: 77_000_000, reason: "Ran in 2 of 10 seasons and aligns with the texture trend." },
   { id: "fw28-men-3", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 3, program: "Ease The Day Hoodie", nygSales: 7_000_000, nygUnits: 415_000, marketSales: 34_000_000, reason: "Ran in 6 of 10 seasons; strong soft-touch hoodie since SU26." },
   { id: "fw28-men-4", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 4, program: "Rulu Fleece Half-Zip Long-Sleeve Shirt", nygSales: 3_700_000, nygUnits: 201_000, marketSales: 21_000_000, reason: "Ran in 9 of 10 seasons and fits the brushed-fleece direction." },
   { id: "fw28-men-5", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Men", rank: 5, program: "Cotton-Blend Waffle Knit Hoodie", nygSales: 1_800_000, nygUnits: 108_000, marketSales: 13_000_000, reason: "Ran in 5 of 10 seasons and serves a sizeable pullover market." },
-  { id: "fw28-women-1", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 1, program: "Define Jacket *Nulu", nygSales: 28_500_000, nygUnits: 1_425_000, marketSales: 688_000_000, reason: "Ran in all 10 seasons; NYG's largest sale and market." },
+  { id: "fw28-women-1", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 1, program: "Define Jacket *Nulu", nygSales: 28_500_000, nygUnits: 1_425_000, marketSales: 688_000_000, reason: "Ran in all 10 seasons; NYTG's largest sale and market." },
   { id: "fw28-women-2", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 2, program: "It's Rulu Cropped Half Zip *Updated", nygSales: 3_700_000, nygUnits: 233_000, marketSales: 24_000_000, reason: "Ran in 9 of 10 seasons; established brushed Rulu half zip." },
   { id: "fw28-women-3", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 3, program: "Love Long-Sleeve Shirt *BeCalm", nygSales: 700_000, nygUnits: 64_000, marketSales: 13_000_000, reason: "Ran in 3 of 10 seasons; soft modal top." },
   { id: "fw28-women-4", season: "FW28", seasonName: "Fall/Winter 2028", gender: "Women", rank: 4, program: "BeCalm Wrap-Front Long-Sleeve Shirt", nygSales: 500_000, nygUnits: 37_000, marketSales: 11_000_000, reason: "Ran in 2 of 10 seasons and provides access to the large tee market." },
@@ -743,7 +743,7 @@ export const LULULEMON_FORECAST_FLAGSHIPS = [
     program: "Align High-Rise Pant",
     claim: "Biggest target on the board",
     rationale:
-      "Lululemon's iconic year-round legging franchise and the largest true whitespace where NYG has zero share today.",
+      "Lululemon's iconic year-round legging franchise and the largest true whitespace where NYTG has zero share today.",
     fabric: "Second-Skin Compression",
   },
   {
@@ -751,7 +751,7 @@ export const LULULEMON_FORECAST_FLAGSHIPS = [
     program: "ABC Trouser",
     claim: "No. 1 men's pant franchise",
     rationale:
-      "A year-round office-to-travel core franchise across both SS28 and FW28 where NYG has zero presence today.",
+      "A year-round office-to-travel core franchise across both SS28 and FW28 where NYTG has zero presence today.",
     fabric: "Technical Circularity",
   },
 ];
@@ -768,9 +768,9 @@ export const LULULEMON_FORECAST_FABRICS = [
 ].map(([name, description]) => ({ name, description }));
 
 export const LULULEMON_FORECAST_NEXT_STEPS = [
-  "Protect the programs NYG already holds securely before chasing new whitespace.",
+  "Protect the programs NYTG already holds securely before chasing new whitespace.",
   "Lead with Align Pant for Women and ABC Trouser for Men.",
-  "Pair each program pitch with its matching NYK fabric-direction card, not a generic swatch book.",
+  "Pair each program pitch with its matching NYTG fabric-direction card, not a generic swatch book.",
   "Refresh the forecast when Lululemon's actual SS28/FW28 line-list becomes available.",
 ];
 
@@ -778,7 +778,7 @@ export const LULULEMON_ABC_VI_SUMMARY = {
   marketSales: 528_000_000,
   nygSales: 0,
   thesis:
-    "Enter as one vertically integrated NYTG team: NYK develops the fabric, NYG builds the garment, and BD presents one sample kit, one cost and one lead time.",
+    "Enter as one vertically integrated NYTG team: Fabric develops the material, Garment builds the product, and BD presents one sample kit, one cost and one lead time.",
 };
 
 export const LULULEMON_ABC_VI_STYLES = [
@@ -840,7 +840,7 @@ export const LULULEMON_ABC_VI_FABRICS = [
     image: "/forecast-abc/abc-pant-stretch-woven.jpg",
     target: "Fine twill, matte hand, 4-way comfort stretch and crease recovery",
     construction: "Recycled nylon/polyester + elastane direction · target 170-210gsm",
-    validation: "NYK mill team must confirm woven capability, MOQ and lead time first.",
+    validation: "The NYTG fabric team must confirm woven capability, MOQ and lead time first.",
   },
 ];
 
@@ -858,7 +858,7 @@ export const LULULEMON_ABC_VI_PHASES = [
     phase: "02",
     timing: "NEXT",
     title: "Test, cost and present as one offer",
-    nyg: "Issue one quote per style including NYK fabric and garment lead time.",
+    nyg: "Issue one quote per style including group fabric and garment lead time.",
     nyk: "Complete stretch recovery, pilling and colourfastness tests; confirm MOQ and capacity.",
     bd: "Lead the meeting with the finished sample, then agree wear-test feedback and decision dates.",
     done: "Sample, cost, test report, MOQ and lead time are submitted together.",
@@ -876,7 +876,7 @@ export const LULULEMON_ABC_VI_PHASES = [
 
 export const LULULEMON_ABC_VI_CHECKS = [
   "Buy and test current ABC Short and Jogger samples to confirm fabric construction.",
-  "Confirm NYK or group-mill stretch-woven capability for the pant route.",
-  "Confirm NYG woven sewing capability, machinery and sample capacity.",
+  "Confirm NYTG or partner-mill stretch-woven capability for the pant route.",
+  "Confirm NYTG woven sewing capability, machinery and sample capacity.",
   "Confirm the Lululemon team that owns ABC, plus sample-kit timing and MOQ.",
 ];
