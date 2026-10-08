@@ -27,7 +27,6 @@ import {
   LULULEMON_FORECAST_ACTIONS,
   LULULEMON_FORECAST_KEEP_EXTEND,
   LULULEMON_FORECAST_MARKETS,
-  LULULEMON_FORECAST_MILESTONES,
   LULULEMON_FORECAST_NYG_PROGRAMS,
   LULULEMON_FORECAST_SUMMARY,
   LULULEMON_FORECAST_WHITESPACE,
@@ -43,6 +42,10 @@ import {
   LULULEMON_ABC_VI_PHASES,
   LULULEMON_ABC_VI_STYLES,
   LULULEMON_ABC_VI_SUMMARY,
+  LULULEMON_NYTG_COLOUR_DIRECTIONS,
+  LULULEMON_NYTG_RANKING_METHOD,
+  LULULEMON_NYTG_ROADMAP,
+  LULULEMON_NYTG_TAKEAWAYS,
 } from "./lululemonSeasonForecast";
 import {
   LULULEMON_BUSINESS_METRICS,
@@ -76,6 +79,56 @@ const DEFAULT_BRAND_OPTIONS = [
   { value: "tommybahama", label: "Tommy Bahama" },
   { value: "travismathew", label: "TravisMathew" },
 ];
+
+const FORECAST_PRODUCT_VISUALS = [
+  [["pace breaker"], "/lululemon-opportunities/short-men-abc-classic-fit-short-7.webp"],
+  [["license to train", "hoodie"], "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp"],
+  [["license to train", "tank"], "/lululemon-opportunities/tank-top-women-swiftly-tech-racerback-tank-top-2-0.webp"],
+  [["license to train"], "/lululemon-opportunities/tee-men-metal-vent-tech-short-sleeve-shirt.webp"],
+  [["evolution"], "/lululemon-opportunities/polo-men-cotton-pique-short-sleeve-polo-shirt.webp"],
+  [["sculpt", "cropped"], "/lululemon-opportunities/tank-top-women-lululemon-align-cropped-tank-top.webp"],
+  [["sculpt", "short"], "/lululemon-opportunities/tee-women-swiftly-tech-short-sleeve-shirt-2-0.webp"],
+  [["sculpt"], "/lululemon-opportunities/tank-top-women-lululemon-align-tank-top.webp"],
+  [["becalm", "tank"], "/lululemon-opportunities/tank-top-women-ebb-to-street-tank-top.webp"],
+  [["becalm"], "/lululemon-opportunities/tee-women-hold-tight-long-sleeve-shirt.webp"],
+  [["textured double-knit"], "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp"],
+  [["ease the day"], "/lululemon-opportunities/pullover-men-steady-state-pullover-hoodie.webp"],
+  [["waffle"], "/lululemon-opportunities/pullover-men-steady-state-pullover-hoodie.webp"],
+  [["rulu", "cropped"], "/lululemon-opportunities/pullover-women-scuba-cropped-funnel-neck-half-zip.webp"],
+  [["rulu"], "/lululemon-opportunities/pullover-men-soft-jersey-half-zip.webp"],
+  [["define"], "/lululemon-opportunities/jacket-women-nulu-cropped-define-jacket.webp"],
+  [["love"], "/lululemon-opportunities/tee-women-hold-tight-long-sleeve-shirt.webp"],
+  [["abc", "pant"], "/lululemon-opportunities/pant-men-abc-classic-fit-trouser.webp"],
+  [["abc"], "/lululemon-opportunities/short-men-abc-classic-fit-short-7.webp"],
+  [["zeroed in"], "/lululemon-opportunities/pant-men-zeroed-in-slim-fit-pant.webp"],
+  [["metal vent"], "/lululemon-opportunities/tee-men-metal-vent-tech-short-sleeve-shirt.webp"],
+  [["align"], "/lululemon-opportunities/pant-women-lululemon-align-high-rise-pant.webp"],
+  [["wunder train"], "/lululemon-opportunities/pant-women-wunder-train-high-rise-tight.webp"],
+  [["swiftly"], "/lululemon-opportunities/tee-women-swiftly-tech-short-sleeve-shirt-2-0.webp"],
+  [["always in motion"], "/lululemon-opportunities/boxer-brief-men-always-in-motion-boxer-brief-5.webp"],
+];
+
+const FORECAST_FABRIC_VISUALS = [
+  [["define"], "/forecast-swatches/brushed-second-skin-v3.webp"],
+  [["sculpt"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
+  [["becalm"], "/forecast-swatches/modal-cooling-jersey-v3.webp"],
+  [["rulu"], "/forecast-swatches/buttery-brushed-stretch-v3.webp"],
+  [["waffle"], "/forecast-swatches/waffle-brushed-terry-v3.webp"],
+  [["hoodie"], "/forecast-swatches/warm-textured-jersey-v3.webp"],
+  [["polo"], "/forecast-swatches/cool-pique-heather-v3.webp"],
+  [["dry"], "/forecast-swatches/cool-pique-heather-v3.webp"],
+  [["license to train"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
+  [["pace breaker"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
+  [["abc"], "/forecast-abc/abc-short-light-stretch-knit.jpg"],
+  [["align"], "/forecast-swatches/brushed-second-skin-v3.webp"],
+  [["wunder train"], "/forecast-swatches/buttery-brushed-stretch-v3.webp"],
+  [["swiftly"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
+];
+
+function forecastVisual(name, mappings, fallback) {
+  const normalized = String(name || "").toLowerCase();
+  return mappings.find(([terms]) => terms.every((term) => normalized.includes(term)))?.[1] || fallback;
+}
 
 const BRAND_WORKSPACE_PAGES = [
   { value: "profile", label: "Brand Profile" },
@@ -3353,13 +3406,14 @@ function LululemonSeasonForecast() {
     (action) => gender === "All" || action.gender === gender,
   );
   const forecastSectionLinks = [
-    { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
+    { id: "forecast-nyg-milestones", number: "01", label: "How ranked" },
     { id: "forecast-nyg-market", number: "02", label: "Market" },
     { id: "forecast-nyg-programs", number: "03", label: "Product priorities" },
     { id: "forecast-nyk-programs", number: "04", label: "Fabric opportunities" },
     { id: "forecast-nyk-fabrics", number: "05", label: "Fabric development" },
     { id: "forecast-nyg-whitespace", number: "06", label: "Whitespace" },
     { id: "forecast-nyg-actions", number: "07", label: "Joint next steps" },
+    { id: "forecast-nytg-roadmap", number: "08", label: "One timeline" },
     { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
   ];
   const forecastAiContext = useMemo(
@@ -3408,8 +3462,8 @@ function LululemonSeasonForecast() {
       <article className="lululemon-forecast-hero nyg-intro">
         <div className="lululemon-forecast-hero-copy">
           <p className="eyebrow">NAN YANG TEXTILE GROUP · GARMENT + FABRIC · LULULEMON</p>
-          <h2>NYTG Forecast: SS28 and FW28</h2>
-          <p>One NYTG commercial direction connecting Lululemon's largest markets, garment opportunities and the fabrics the group should develop to win them.</p>
+          <h2>One Plan: Garment and Fabric, SS28 and FW28</h2>
+          <p>NYTG protects the programs that work, pitches the next garment opportunity, develops its fabric in parallel and takes one commercial offer to Lululemon.</p>
           <span>Directional forecast · September 2026 · Confidential</span>
         </div>
       </article>
@@ -3486,23 +3540,23 @@ function LululemonSeasonForecast() {
         <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">01 · MILESTONES</p>
-              <h3>Product development milestones</h3>
+              <p className="eyebrow">01 · HOW WE RANKED</p>
+              <h3>Three numbers decide the order</h3>
             </div>
-            <span>The three stages this forecast is built around.</span>
+            <span>Traceable product evidence before directional recommendations.</span>
           </div>
-          <div className="lululemon-forecast-milestone-table">
-            <div className="header"><span>Stage</span><span>Milestones</span></div>
-            {LULULEMON_FORECAST_MILESTONES.map((row, index) => (
-              <div className="row" key={row.stage}>
+          <div className="lululemon-forecast-milestone-table nytg-ranking-method">
+            <div className="header"><span>Number</span><span>Source / What it tells us</span></div>
+            {LULULEMON_NYTG_RANKING_METHOD.map((row, index) => (
+              <div className="row" key={row.metric}>
                 <span className="step">{String(index + 1).padStart(2, "0")}</span>
-                <strong>{row.stage}</strong>
-                <span>{row.milestones}</span>
+                <strong>{row.metric}</strong>
+                <span><b>{row.source}</b>{row.meaning}</span>
               </div>
             ))}
           </div>
           <p className="lululemon-forecast-milestone-note">
-            <strong>BPL</strong> = Business Planning
+            Rule: include programs with at least $0.3M in historical NYTG sales, then rank by estimated 2026 market value. SS28 prioritizes warm-weather styles; FW28 prioritizes cold-weather styles.
           </p>
         </article>
       )}
@@ -3563,6 +3617,7 @@ function LululemonSeasonForecast() {
                   {group.programs.map((program) => (
                     <article key={program.name}>
                       <b>{program.rank}</b>
+                      <img className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} visual reference`} loading="lazy" />
                       <div>
                         <h4>{program.name}</h4>
                         <p>NYTG has · {formatComparisonValue(program.sales, "sales")} · {formatComparisonValue(program.units, "units")} · {program.held}</p>
@@ -3605,8 +3660,8 @@ function LululemonSeasonForecast() {
                           <article className="lululemon-forecast-program-row" key={program.id}>
                             <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
                             <div className="lululemon-forecast-program-summary">
-                              <h4>{program.program}</h4>
-                              <p>{program.reason}</p>
+                              <img className="nytg-product-thumb" src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} visual reference`} loading="lazy" />
+                              <div><h4>{program.program}</h4><p>{program.reason}</p></div>
                             </div>
                             <span className="lululemon-forecast-program-value market">
                               <small>Market 2026</small>
@@ -3648,9 +3703,8 @@ function LululemonSeasonForecast() {
                 <div className="lululemon-forecast-whitespace-programs">
                   {group.programs.map((program) => (
                     <article key={program.name}>
-                      <div><h4>{program.name}</h4><strong>{formatComparisonValue(program.sales, "sales")}</strong></div>
-                      <span>{formatComparisonValue(program.units, "units")}</span>
-                      <p>{program.detail}</p>
+                      <img className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} visual reference`} loading="lazy" />
+                      <div className="nytg-whitespace-copy"><div><h4>{program.name}</h4><strong>{formatComparisonValue(program.sales, "sales")}</strong></div><span>{formatComparisonValue(program.units, "units")}</span><p>{program.detail}</p></div>
                     </article>
                   ))}
                 </div>
@@ -3718,6 +3772,7 @@ function LululemonSeasonForecast() {
                     {group.programs.map((program) => (
                       <article key={program.name}>
                         <b>{program.rank}</b>
+                        <img className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} visual reference`} loading="lazy" />
                         <div>
                           <h4>{program.name}</h4>
                           <p>Garment demand · {formatFabricYards(program.yards, true)} · {formatComparisonValue(program.sales, "sales")} · Group fabric {formatFabricYards(program.nykYards, true)}</p>
@@ -3751,9 +3806,11 @@ function LululemonSeasonForecast() {
                             <article className="lululemon-nyk-program-row" key={program.id}>
                               <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
                               <div className="lululemon-nyk-program-summary">
-                                <h4>{program.program}</h4>
-                                <p><span>Today</span>{program.current}</p>
-                                <strong><span>Fabric pitch</span>{program.pitch}</strong>
+                                <div className="nytg-visual-pair">
+                                  <figure><img src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} product reference`} loading="lazy" /><figcaption>Product</figcaption></figure>
+                                  <figure><img src={forecastVisual(program.program, FORECAST_FABRIC_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.program} fabric development reference`} loading="lazy" /><figcaption>Fabric</figcaption></figure>
+                                </div>
+                                <div><h4>{program.program}</h4><p><span>Today</span>{program.current}</p><strong><span>Fabric pitch</span>{program.pitch}</strong></div>
                               </div>
                               <span className="lululemon-nyk-program-value"><small>NYTG Sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
                               <span className="lululemon-nyk-program-value"><small>Fabric Demand</small><b>{formatFabricYards(program.nygYards, true)}</b></span>
@@ -3825,6 +3882,25 @@ function LululemonSeasonForecast() {
                 </section>
               ))}
             </div>
+            <div className="lululemon-forecast-ranked-heading nytg-colour-heading">
+              <div><span>COLOUR DIRECTION</span><strong>TCX direction to carry into lab dips</strong></div>
+              <small>Illustrative screen colour · approve from physical TCX standards</small>
+            </div>
+            <div className="nytg-colour-grid">
+              {LULULEMON_NYTG_COLOUR_DIRECTIONS.filter((group) => season === "All" || season === group.season).map((group) => (
+                <section key={group.season}>
+                  <header><strong>{group.season}</strong><span>{group.season === "SS28" ? "Nanyang S/S 2028" : "Nanyang F/W 2027 reference for FW28"}</span></header>
+                  <div>{group.groups.map((colourGroup) => (
+                    <article key={colourGroup.name}>
+                      <h4>{colourGroup.name}</h4>
+                      <div>{colourGroup.colors.map(([name, hex, tcx]) => (
+                        <span key={tcx}><i style={{ background: hex }} /><b>{name}</b><small>{tcx}</small></span>
+                      ))}</div>
+                    </article>
+                  ))}</div>
+                </section>
+              ))}
+            </div>
           </article>
 
           <article className="lululemon-forecast-section whitespace nyk-whitespace" id="forecast-nyk-whitespace">
@@ -3840,9 +3916,8 @@ function LululemonSeasonForecast() {
                   <h4>{group.gender}'s</h4>
                   {group.programs.map((program) => (
                     <article key={program.name}>
-                      <div><strong>{program.name}</strong><b>{formatForecastMarketValue(program.sales)}</b></div>
-                      <span>{program.fabric}</span>
-                      <p>{program.detail}</p>
+                      <div className="nytg-visual-pair compact"><figure><img src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} loading="lazy" /><figcaption>Product</figcaption></figure><figure><img src={forecastVisual(program.name, FORECAST_FABRIC_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.name} fabric direction`} loading="lazy" /><figcaption>Fabric</figcaption></figure></div>
+                      <div className="nytg-whitespace-copy"><div><strong>{program.name}</strong><b>{formatForecastMarketValue(program.sales)}</b></div><span>{program.fabric}</span><p>{program.detail}</p></div>
                     </article>
                   ))}
                 </section>
@@ -3874,6 +3949,33 @@ function LululemonSeasonForecast() {
           </article>
         </>
       )}
+
+      <article className="lululemon-forecast-section nytg-roadmap" id="forecast-nytg-roadmap">
+        <div className="lululemon-forecast-section-heading">
+          <div><p className="eyebrow">08 · ONE TIMELINE</p><h3>Product and fabric move together, season by season</h3></div>
+          <span>Every fabric direction is presented inside the NYTG product above it.</span>
+        </div>
+        <div className={`nytg-roadmap-grid ${gender !== "All" ? "single" : ""}`.trim()}>
+          {LULULEMON_NYTG_ROADMAP.filter((group) => gender === "All" || gender === group.gender).map((group) => (
+            <section key={group.gender} className={group.gender.toLowerCase()}>
+              <header><strong>{group.gender}</strong><span>Now → FY29+</span></header>
+              <div>{group.rows.map((row) => (
+                <article key={row.timing}>
+                  <b>{row.timing}</b>
+                  <p><span>Product</span>{row.product}</p>
+                  <p><span>Fabric</span>{row.fabric}</p>
+                </article>
+              ))}</div>
+            </section>
+          ))}
+        </div>
+        <div className="nytg-takeaway-grid">
+          {LULULEMON_NYTG_TAKEAWAYS.map((item) => (
+            <article key={item.number}><b>{item.number}</b><div><strong>{item.title}</strong><p>{item.detail}</p></div></article>
+          ))}
+        </div>
+        <p className="nytg-roadmap-rule">Target seasons are NYTG's proposal and depend on Lululemon's actual line-list, physical swatch approval and mill lead time.</p>
+      </article>
 
       <article className="lululemon-forecast-section nytg-abc-playbook" id="forecast-nytg-abc">
         <div className="lululemon-forecast-section-heading">
@@ -3963,7 +4065,7 @@ function LululemonSeasonForecast() {
       </article>
 
       <p className="lululemon-forecast-source">
-        Source: NYTG garment and fabric forecast inputs. Historical NYTG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical fabric developments are approved.
+        Source: NYTG_One_Plan_NYG_NYK_SS28_FW28.pdf. Historical NYTG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Product pictures are public-catalog visual references. Fabric pictures are photorealistic development references. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical samples, lab dips and test results are approved.
       </p>
       <DashboardAiAssistant context={forecastAiContext} />
     </section>

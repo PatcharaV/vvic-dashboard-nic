@@ -880,3 +880,70 @@ export const LULULEMON_ABC_VI_CHECKS = [
   "Confirm NYTG woven sewing capability, machinery and sample capacity.",
   "Confirm the Lululemon team that owns ABC, plus sample-kit timing and MOQ.",
 ];
+
+export const LULULEMON_NYTG_RANKING_METHOD = [
+  {
+    metric: "NYTG sales and pieces",
+    source: "Historical garment business · FA25-WT27",
+    meaning: "Proves NYTG can already make the program and Lululemon buys it.",
+  },
+  {
+    metric: "Estimated 2026 market",
+    source: "Lululemon All Product market estimate",
+    meaning: "Shows the commercial prize and sets the ranking order.",
+  },
+  {
+    metric: "Seasons repeated",
+    source: "Historical Season field · 10 seasons",
+    meaning: "A repeat program is a safer development and capacity commitment.",
+  },
+];
+
+export const LULULEMON_NYTG_COLOUR_DIRECTIONS = [
+  {
+    season: "SS28",
+    groups: [
+      { name: "Sensoreset", colors: [["Nurturing Pink", "#d9a7aa", "13-1504"], ["Wisteria Mist", "#a89bb9", "15-3817"], ["Pristine Blue", "#c8d6df", "13-4200"], ["Vapour Grey", "#bdc0c2", "14-4106"]] },
+      { name: "Newstalgia", colors: [["Almond Butter", "#aa7952", "17-0949"], ["Golden Kelp", "#7f743b", "17-0636"], ["Brown Bark", "#5d3630", "19-1224"], ["Classic Navy", "#29364d", "19-4029"]] },
+      { name: "Joyrise", colors: [["Positively Yellow", "#f5d94e", "12-0752"], ["Light Lime", "#cedb55", "13-0645"], ["Glowing Red", "#d73c48", "18-1762"], ["Neon Orchid", "#b068b5", "16-3828"]] },
+      { name: "Chaosync", colors: [["Digital Mist", "#b7c8ca", "13-4303"], ["Elephant Grey", "#77747d", "17-3906"], ["Clay", "#b87f78", "16-1516"], ["Carbon Grey", "#454653", "19-3917"]] },
+    ],
+  },
+  {
+    season: "FW28",
+    groups: [
+      { name: "Soft pastels & warm neutrals", colors: [["Ginger Biscuit", "#a95f3d", "18-1250"], ["Classic Beige", "#c3a58f", "15-1217"], ["Nurturing Pink", "#d9a7aa", "13-1504"], ["Peaceful Lilac", "#b3a2c3", "14-3812"]] },
+      { name: "Timeless ground", colors: [["Deep Green", "#1c554b", "19-5230"], ["Russet Red", "#813c42", "19-1532"], ["Ground Coffee", "#49372f", "19-1109"], ["Grounded Green", "#4d523f", "19-0323"]] },
+      { name: "Adaptive harmony", colors: [["Dusted Taupe", "#aa9693", "15-1506"], ["Digital Mist", "#b7c8ca", "13-4303"], ["Classic Navy", "#29364d", "19-4029"], ["Dark Bergamot", "#a66b32", "16-1150"]] },
+      { name: "Bold expression", colors: [["Light Lime", "#cedb55", "13-0645"], ["Dynamic Teal", "#167b73", "18-5610"], ["Energy Orange", "#e5682a", "16-1362"], ["Vibrant Red", "#c42f3c", "18-1662"]] },
+    ],
+  },
+];
+
+export const LULULEMON_NYTG_ROADMAP = [
+  {
+    gender: "Men",
+    rows: [
+      { timing: "Now", product: 'Pace Breaker 7-inch and 5-inch shorts; start ABC-style short sample.', fabric: "Light cooling stretch swatch for Pace Breaker and the ABC-style short." },
+      { timing: "SS28", product: "DrySense, Evolution polo and Metal Vent tee offer; show ABC Short.", fabric: "Slub-look, Tencel pique and mesh swatches; ABC Short fabric ready." },
+      { timing: "FW28", product: "License to Train hoodie, Rulu fleece and ABC Jogger.", fabric: "Brushed double-knit, Rulu fleece and ABC Jogger fabric." },
+      { timing: "FY29+", product: "ABC Pant only if the pant fabric route is confirmed.", fabric: "Commercial woven-stretch route for ABC Pant; confirm capability." },
+    ],
+  },
+  {
+    gender: "Women",
+    rows: [
+      { timing: "Now", product: "Keep Define Jacket and add Cropped Define.", fabric: "Nulu-type trial lot for Define; confirm yarn and machine." },
+      { timing: "SS28", product: "Sculpt and BeCalm tanks; first Align Tank offer.", fabric: "Rib, pointelle, modal and Nulu-type tank swatches." },
+      { timing: "FW28", product: "Love modal tops, Rulu half zip and Define Jacket.", fabric: "Modal terry and fleece, waffle texture and moss jersey." },
+      { timing: "FY29+", product: "Align Short, then Align Pant.", fabric: "Nulu-type fabric for Align Short, then Pant." },
+    ],
+  },
+];
+
+export const LULULEMON_NYTG_TAKEAWAYS = [
+  ["Protect the core", "Keep Pace Breaker, License to Train, Always In Motion, Define, Sculpt and Rulu."],
+  ["Pitch the next program", "Men: ABC Short, Jogger, Pant. Women: Align Tank, Short, Pant."],
+  ["Develop fabric with the product", "Every fabric direction is shown as a finished NYTG garment, not a loose swatch alone."],
+  ["Run one timeline", "Now, SS28, FW28 and FY29+ use one owner, one sample kit, one cost and one lead time."],
+].map(([title, detail], index) => ({ number: index + 1, title, detail }));
