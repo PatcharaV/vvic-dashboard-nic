@@ -10874,7 +10874,7 @@ footer a {
   .nytg-abc-decision ul { grid-template-columns: 1fr; }
 }
 
-/* NYTG One Plan visual system */
+/* NYTG forecast visual system */
 .lululemon-forecast-page.nytg-view > #forecast-nytg-roadmap { order: 75; }
 .lululemon-forecast-page.nytg-view > #forecast-nytg-abc { order: 80; }
 .lululemon-forecast-page.nytg-view > .lululemon-forecast-source { order: 100; }

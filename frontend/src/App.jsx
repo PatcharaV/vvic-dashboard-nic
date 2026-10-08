@@ -27,6 +27,7 @@ import {
   LULULEMON_FORECAST_ACTIONS,
   LULULEMON_FORECAST_KEEP_EXTEND,
   LULULEMON_FORECAST_MARKETS,
+  LULULEMON_FORECAST_MILESTONES,
   LULULEMON_FORECAST_NYG_PROGRAMS,
   LULULEMON_FORECAST_SUMMARY,
   LULULEMON_FORECAST_WHITESPACE,
@@ -43,7 +44,6 @@ import {
   LULULEMON_ABC_VI_STYLES,
   LULULEMON_ABC_VI_SUMMARY,
   LULULEMON_NYTG_COLOUR_DIRECTIONS,
-  LULULEMON_NYTG_RANKING_METHOD,
   LULULEMON_NYTG_ROADMAP,
   LULULEMON_NYTG_TAKEAWAYS,
 } from "./lululemonSeasonForecast";
@@ -3456,7 +3456,7 @@ function LululemonSeasonForecast() {
     (action) => gender === "All" || action.gender === gender,
   );
   const forecastSectionLinks = [
-    { id: "forecast-nyg-milestones", number: "01", label: "How ranked" },
+    { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
     { id: "forecast-nyg-market", number: "02", label: "Market" },
     { id: "forecast-nyg-programs", number: "03", label: "Product priorities" },
     { id: "forecast-nyk-programs", number: "04", label: "Fabric opportunities" },
@@ -3512,7 +3512,7 @@ function LululemonSeasonForecast() {
       <article className="lululemon-forecast-hero nyg-intro">
         <div className="lululemon-forecast-hero-copy">
           <p className="eyebrow">NAN YANG TEXTILE GROUP · GARMENT + FABRIC · LULULEMON</p>
-          <h2>One Plan: Garment and Fabric, SS28 and FW28</h2>
+          <h2>NYTG Forecast: Garment and Fabric, SS28 and FW28</h2>
           <p>NYTG protects the programs that work, pitches the next garment opportunity, develops its fabric in parallel and takes one commercial offer to Lululemon.</p>
           <span>Directional forecast · September 2026 · Confidential</span>
         </div>
@@ -3590,23 +3590,23 @@ function LululemonSeasonForecast() {
         <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">01 · HOW WE RANKED</p>
-              <h3>Three numbers decide the order</h3>
+              <p className="eyebrow">01 · MILESTONES</p>
+              <h3>Product development milestones</h3>
             </div>
-            <span>Traceable product evidence before directional recommendations.</span>
+            <span>The three stages that guide the SS28 and FW28 forecast.</span>
           </div>
-          <div className="lululemon-forecast-milestone-table nytg-ranking-method">
-            <div className="header"><span>Number</span><span>Source / What it tells us</span></div>
-            {LULULEMON_NYTG_RANKING_METHOD.map((row, index) => (
-              <div className="row" key={row.metric}>
+          <div className="lululemon-forecast-milestone-table">
+            <div className="header"><span>Stage</span><span>Milestones</span></div>
+            {LULULEMON_FORECAST_MILESTONES.map((row, index) => (
+              <div className="row" key={row.stage}>
                 <span className="step">{String(index + 1).padStart(2, "0")}</span>
-                <strong>{row.metric}</strong>
-                <span><b>{row.source}</b>{row.meaning}</span>
+                <strong>{row.stage}</strong>
+                <span>{row.milestones}</span>
               </div>
             ))}
           </div>
           <p className="lululemon-forecast-milestone-note">
-            Rule: include programs with at least $0.3M in historical NYTG sales, then rank by estimated 2026 market value. SS28 prioritizes warm-weather styles; FW28 prioritizes cold-weather styles.
+            <strong>BPL</strong> = Business Planning
           </p>
         </article>
       )}
@@ -4115,7 +4115,7 @@ function LululemonSeasonForecast() {
       </article>
 
       <p className="lululemon-forecast-source">
-        Source: NYTG_One_Plan_NYG_NYK_SS28_FW28.pdf. Historical NYTG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Product pictures are public-catalog visual references. Fabric pictures are photorealistic development references. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical samples, lab dips and test results are approved.
+        Source: latest NYTG SS28/FW28 forecast PDF. Historical NYTG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Product pictures are public-catalog visual references. Fabric pictures are photorealistic development references. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical samples, lab dips and test results are approved.
       </p>
       {imagePreview && (
         <div
