@@ -125,9 +125,45 @@ const FORECAST_FABRIC_VISUALS = [
   [["swiftly"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
 ];
 
+const FORECAST_FABRIC_PITCH_VISUALS = [
+  [["light cooling stretch"], "/forecast-fabric-pitches/performance-stretch-woven.jpg"],
+  [["light crinkle stretch"], "/forecast-fabric-pitches/crinkle-stretch-woven.jpg"],
+  [["slub-look cooling jersey"], "/forecast-fabric-pitches/slub-cooling-jersey.jpg"],
+  [["washed tencel heather pique"], "/forecast-fabric-pitches/washed-heather-pique.jpg"],
+  [["cooling stretch with subtle sheen"], "/forecast-fabric-pitches/performance-stretch-woven.jpg"],
+  [["fine-rib compression"], "/forecast-fabric-pitches/fine-rib-compression.jpg"],
+  [["light modal jersey"], "/forecast-fabric-pitches/light-modal-jersey.jpg"],
+  [["cooling mesh-zoned"], "/forecast-fabric-pitches/zoned-cooling-mesh.jpg"],
+  [["pointelle or fine-rib"], "/forecast-fabric-pitches/fine-rib-compression.jpg"],
+  [["cooling single jersey"], "/forecast-fabric-pitches/cooling-single-jersey.jpg"],
+  [["light brushed-back fleece"], "/forecast-swatches/warm-textured-jersey-v3.webp"],
+  [["brushed-back cotton double-knit"], "/forecast-swatches/warm-textured-jersey-v3.webp"],
+  [["same double-knit"], "/forecast-swatches/warm-textured-jersey-v3.webp"],
+  [["milled brushed fleece"], "/forecast-swatches/buttery-brushed-stretch-v3.webp"],
+  [["waffle"], "/forecast-swatches/waffle-brushed-terry-v3.webp"],
+  [["ultra-matte suede-brushed"], "/forecast-swatches/brushed-second-skin-v3.webp"],
+  [["moss jersey"], "/forecast-swatches/buttery-brushed-stretch-v3.webp"],
+  [["modal terry"], "/forecast-swatches/modal-cooling-jersey-v3.webp"],
+  [["same terry"], "/forecast-swatches/modal-cooling-jersey-v3.webp"],
+  [["micro-modal fleece"], "/forecast-swatches/warm-textured-jersey-v3.webp"],
+];
+
 function forecastVisual(name, mappings, fallback) {
   const normalized = String(name || "").toLowerCase();
   return mappings.find(([terms]) => terms.every((term) => normalized.includes(term)))?.[1] || fallback;
+}
+
+function ForecastZoomImage({ src, alt, className, onOpen }) {
+  return (
+    <button
+      className="nytg-image-trigger"
+      type="button"
+      onClick={() => onOpen({ src, alt })}
+      aria-label={`View larger image: ${alt}`}
+    >
+      <img className={className} src={src} alt={alt} loading="lazy" />
+    </button>
+  );
 }
 
 const BRAND_WORKSPACE_PAGES = [
@@ -3334,6 +3370,20 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
 function LululemonSeasonForecast() {
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
+  const [imagePreview, setImagePreview] = useState(null);
+  useEffect(() => {
+    if (!imagePreview) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setImagePreview(null);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [imagePreview]);
   const filteredPrograms = LULULEMON_FORECAST_NYG_PROGRAMS.filter(
     (program) =>
       (season === "All" || program.season === season) &&
@@ -3617,7 +3667,7 @@ function LululemonSeasonForecast() {
                   {group.programs.map((program) => (
                     <article key={program.name}>
                       <b>{program.rank}</b>
-                      <img className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} visual reference`} loading="lazy" />
+                      <ForecastZoomImage className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} onOpen={setImagePreview} />
                       <div>
                         <h4>{program.name}</h4>
                         <p>NYTG has · {formatComparisonValue(program.sales, "sales")} · {formatComparisonValue(program.units, "units")} · {program.held}</p>
@@ -3660,7 +3710,7 @@ function LululemonSeasonForecast() {
                           <article className="lululemon-forecast-program-row" key={program.id}>
                             <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
                             <div className="lululemon-forecast-program-summary">
-                              <img className="nytg-product-thumb" src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} visual reference`} loading="lazy" />
+                              <ForecastZoomImage className="nytg-product-thumb" src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} product reference`} onOpen={setImagePreview} />
                               <div><h4>{program.program}</h4><p>{program.reason}</p></div>
                             </div>
                             <span className="lululemon-forecast-program-value market">
@@ -3703,7 +3753,7 @@ function LululemonSeasonForecast() {
                 <div className="lululemon-forecast-whitespace-programs">
                   {group.programs.map((program) => (
                     <article key={program.name}>
-                      <img className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} visual reference`} loading="lazy" />
+                      <ForecastZoomImage className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} onOpen={setImagePreview} />
                       <div className="nytg-whitespace-copy"><div><h4>{program.name}</h4><strong>{formatComparisonValue(program.sales, "sales")}</strong></div><span>{formatComparisonValue(program.units, "units")}</span><p>{program.detail}</p></div>
                     </article>
                   ))}
@@ -3772,7 +3822,7 @@ function LululemonSeasonForecast() {
                     {group.programs.map((program) => (
                       <article key={program.name}>
                         <b>{program.rank}</b>
-                        <img className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} visual reference`} loading="lazy" />
+                        <ForecastZoomImage className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} onOpen={setImagePreview} />
                         <div>
                           <h4>{program.name}</h4>
                           <p>Garment demand · {formatFabricYards(program.yards, true)} · {formatComparisonValue(program.sales, "sales")} · Group fabric {formatFabricYards(program.nykYards, true)}</p>
@@ -3807,8 +3857,8 @@ function LululemonSeasonForecast() {
                               <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
                               <div className="lululemon-nyk-program-summary">
                                 <div className="nytg-visual-pair">
-                                  <figure><img src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} product reference`} loading="lazy" /><figcaption>Product</figcaption></figure>
-                                  <figure><img src={forecastVisual(program.program, FORECAST_FABRIC_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.program} fabric development reference`} loading="lazy" /><figcaption>Fabric</figcaption></figure>
+                                  <figure><ForecastZoomImage src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} product reference`} onOpen={setImagePreview} /><figcaption>Product</figcaption></figure>
+                                  <figure><ForecastZoomImage src={forecastVisual(program.pitch, FORECAST_FABRIC_PITCH_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.pitch} fabric development reference`} onOpen={setImagePreview} /><figcaption>Fabric</figcaption></figure>
                                 </div>
                                 <div><h4>{program.program}</h4><p><span>Today</span>{program.current}</p><strong><span>Fabric pitch</span>{program.pitch}</strong></div>
                               </div>
@@ -3835,7 +3885,7 @@ function LululemonSeasonForecast() {
               {nykFabricBriefs.map((brief) => (
                 <article className="lululemon-nyk-fabric-brief" key={`${brief.season}-${brief.fabric}`}>
                   <figure>
-                    <img src={brief.image} alt={`${brief.fabric} development reference`} loading="lazy" />
+                    <ForecastZoomImage src={brief.image} alt={`${brief.fabric} development reference`} onOpen={setImagePreview} />
                     <figcaption>{brief.season}</figcaption>
                   </figure>
                   <div>
@@ -3916,7 +3966,7 @@ function LululemonSeasonForecast() {
                   <h4>{group.gender}'s</h4>
                   {group.programs.map((program) => (
                     <article key={program.name}>
-                      <div className="nytg-visual-pair compact"><figure><img src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} loading="lazy" /><figcaption>Product</figcaption></figure><figure><img src={forecastVisual(program.name, FORECAST_FABRIC_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.name} fabric direction`} loading="lazy" /><figcaption>Fabric</figcaption></figure></div>
+                      <div className="nytg-visual-pair compact"><figure><ForecastZoomImage src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} onOpen={setImagePreview} /><figcaption>Product</figcaption></figure><figure><ForecastZoomImage src={forecastVisual(program.name, FORECAST_FABRIC_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.name} fabric direction`} onOpen={setImagePreview} /><figcaption>Fabric</figcaption></figure></div>
                       <div className="nytg-whitespace-copy"><div><strong>{program.name}</strong><b>{formatForecastMarketValue(program.sales)}</b></div><span>{program.fabric}</span><p>{program.detail}</p></div>
                     </article>
                   ))}
@@ -4067,6 +4117,21 @@ function LululemonSeasonForecast() {
       <p className="lululemon-forecast-source">
         Source: NYTG_One_Plan_NYG_NYK_SS28_FW28.pdf. Historical NYTG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Product pictures are public-catalog visual references. Fabric pictures are photorealistic development references. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical samples, lab dips and test results are approved.
       </p>
+      {imagePreview && (
+        <div
+          className="nytg-image-lightbox"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setImagePreview(null);
+          }}
+        >
+          <section role="dialog" aria-modal="true" aria-label={imagePreview.alt}>
+            <button type="button" autoFocus onClick={() => setImagePreview(null)} aria-label="Close image preview">Close</button>
+            <img src={imagePreview.src} alt={imagePreview.alt} />
+            <p>{imagePreview.alt}</p>
+          </section>
+        </div>
+      )}
       <DashboardAiAssistant context={forecastAiContext} />
     </section>
   );
