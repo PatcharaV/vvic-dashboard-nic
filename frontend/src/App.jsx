@@ -54,6 +54,7 @@ import {
   LULULEMON_SALES_MIX,
 } from "./lululemonWorkbookData";
 import { NYG_MY_MAP_ROWS, NYG_MY_MAP_SEASONS } from "./nygMyMapData";
+import { MARKET_BRAND_SUMMARY, MARKET_SEGMENTS } from "./marketSegmentData";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -4929,6 +4930,7 @@ function MainPage({
   brandOptions,
   maintenance,
   navigateToBrand,
+  navigateToMarketSegment,
 }) {
   return (
     <main className="landing-page">
@@ -4948,6 +4950,10 @@ function MainPage({
         <div className="landing-hero-note">
           <span>{brandOptions.length} brand workspaces</span>
           <span>Monthly catalog archive</span>
+          <button type="button" onClick={navigateToMarketSegment}>
+            Market Segment
+            <small>5 segments · 8 brands</small>
+          </button>
         </div>
       </header>
 
@@ -4981,6 +4987,153 @@ function MainPage({
           );
         })}
       </section>
+    </main>
+  );
+}
+
+function MarketSegmentPlot({ segment }) {
+  return (
+    <div className="market-segment-plot" aria-label={`${segment.name} price versus innovation map`}>
+      <span className="quadrant top-left">Basic · High price</span>
+      <span className="quadrant top-right">Innovation · High price</span>
+      <span className="quadrant bottom-left">Basic · Low price</span>
+      <span className="quadrant bottom-right">Innovation · Low price</span>
+      <span className="market-axis market-axis-x"><b>Basic</b><b>Innovation</b></span>
+      <span className="market-axis market-axis-y"><b>Low price</b><b>High price</b></span>
+      {segment.points.map(([name, x, y, owned]) => (
+        <span
+          className={`market-segment-point ${owned ? "owned" : "competitor"} ${x > 77 ? "align-right" : ""}`.trim()}
+          style={{ left: `${x}%`, bottom: `${y}%` }}
+          title={`${name}: ${owned ? "NYTG portfolio brand" : "market reference"}`}
+          key={name}
+        >
+          <i />
+          <b>{name}</b>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function MarketSegmentPage({ navigateHome }) {
+  const [selectedSegmentId, setSelectedSegmentId] = useState("all");
+  const selectedSegment = MARKET_SEGMENTS.find((segment) => segment.id === selectedSegmentId);
+
+  return (
+    <main className="market-segment-page">
+      <header className="market-segment-hero">
+        <button type="button" onClick={navigateHome}>← Dashboard home</button>
+        <div>
+          <p className="eyebrow">NYTG · MARKET SEGMENT</p>
+          <h1>Textile and Apparel Market</h1>
+          <p>Five market segments, eight portfolio brands and the closest names around them.</p>
+        </div>
+        <div className="market-segment-hero-stats">
+          <span><b>5</b>Segments</span>
+          <span><b>8</b>Brands</span>
+          <span><b>2</b>Market axes</span>
+        </div>
+      </header>
+
+      <section className="market-segment-overview">
+        <div className="market-segment-section-heading">
+          <div><p className="eyebrow">PORTFOLIO VIEW</p><h2>Where each brand competes</h2></div>
+          <p>Select a segment to explore its Price × Innovation map.</p>
+        </div>
+        <div className="market-segment-cards">
+          {MARKET_SEGMENTS.map((segment, index) => (
+            <button
+              className={selectedSegmentId === segment.id ? "active" : undefined}
+              type="button"
+              onClick={() => setSelectedSegmentId(segment.id)}
+              key={segment.id}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{segment.name}</strong>
+              <p>{segment.description}</p>
+              <small>{segment.brands.join(" · ")}</small>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <nav className="market-segment-tabs" aria-label="Market segment view">
+        {[{ id: "all", name: "All segments" }, ...MARKET_SEGMENTS].map((segment) => (
+          <button
+            className={selectedSegmentId === segment.id ? "active" : undefined}
+            type="button"
+            onClick={() => setSelectedSegmentId(segment.id)}
+            key={segment.id}
+          >
+            {segment.name}
+          </button>
+        ))}
+      </nav>
+
+      {selectedSegment ? (
+        <section className="market-segment-detail">
+          <div className="market-segment-chart-card">
+            <header><div><p className="eyebrow">{selectedSegment.name.toUpperCase()} · MARKET VIEW</p><h2>Price vs. Innovation</h2></div><span><i /> NYTG portfolio brand</span></header>
+            <MarketSegmentPlot segment={selectedSegment} />
+          </div>
+          <aside className="market-segment-insights">
+            <article className="owned"><span>Our brands</span><strong>{selectedSegment.brands.join(" · ")}</strong></article>
+            <article><span>Closest to ours</span><strong>{selectedSegment.closest.join(", ")}</strong></article>
+            <article><span>Typical products</span><p>{selectedSegment.products}</p></article>
+            <article><span>What the fabric must do</span><p>{selectedSegment.fabric}</p></article>
+            <article><span>Other brands</span><p>{selectedSegment.competitors.join(", ")}</p></article>
+          </aside>
+        </section>
+      ) : (
+        <section className="market-segment-all-view">
+          <div className="market-segment-map-card">
+            <header><div><p className="eyebrow">5 SEGMENTS · POSITIONING MAP</p><h2>Style vs. Performance</h2></div><span>Basic → Innovation</span></header>
+            <div className="market-segment-map">
+              <span className="quadrant top-left">Basic · Style</span>
+              <span className="quadrant top-right">Innovation · Style</span>
+              <span className="quadrant bottom-left">Basic · Performance</span>
+              <span className="quadrant bottom-right">Innovation · Performance</span>
+              <span className="market-axis market-axis-x"><b>Basic</b><b>Innovation</b></span>
+              <span className="market-axis market-axis-y"><b>Performance</b><b>Style</b></span>
+              {MARKET_SEGMENTS.map((segment) => (
+                <button
+                  type="button"
+                  style={{ left: `${segment.map.x}%`, bottom: `${segment.map.y}%` }}
+                  onClick={() => setSelectedSegmentId(segment.id)}
+                  key={segment.id}
+                >
+                  <strong>{segment.name}</strong>
+                  <small>{segment.brands.join(" · ")}</small>
+                </button>
+              ))}
+            </div>
+          </div>
+          <aside className="market-segment-read-guide">
+            <article><span>How to read</span><p>Left to right: Basic to Innovation</p><p>Bottom to top: Performance to Style</p></article>
+            <article><span>What it shows</span><p>Corporate and Casual lead with style. Athleisure combines style and innovation. Active and Outdoor lead with performance.</p></article>
+            <article><span>Open space</span><p>Basic + Performance: accessible sport fabrics with dependable function.</p></article>
+          </aside>
+        </section>
+      )}
+
+      <section className="market-brand-summary">
+        <div className="market-segment-section-heading">
+          <div><p className="eyebrow">8 BRAND SUMMARY</p><h2>Closest names in the market</h2></div>
+          <p>Use these references to frame competitor reviews and fabric positioning.</p>
+        </div>
+        <div className="market-brand-summary-grid">
+          {MARKET_BRAND_SUMMARY.map((row) => (
+            <article key={row.brand}>
+              <span>{row.segment}</span>
+              <h3>{row.brand}</h3>
+              <strong>{row.closest}</strong>
+              <p>{row.reason}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <p className="market-segment-source">Source: NYTG_Market_Segment_8_Brands.pdf. Segment definitions, positions and competitor references are team judgement, not measured market data. Replace positioning with average price per piece when verified data becomes available.</p>
     </main>
   );
 }
@@ -5174,6 +5327,7 @@ function FilterGroup({
 function App() {
   const [routePath, setRoutePath] = useState(window.location.pathname);
   const routeBrand = getBrandFromPath(routePath);
+  const isMarketSegmentRoute = routePath === "/market-segment";
   const initialSnapshot = snapshotForBrand(routeBrand);
   const [options, setOptions] = useState(initialSnapshot?.options || demoOptions);
   const [dashboard, setDashboard] = useState(
@@ -5615,12 +5769,17 @@ function App() {
     });
   }
 
+  if (isMarketSegmentRoute) {
+    return <MarketSegmentPage navigateHome={navigateHome} />;
+  }
+
   if (!routeBrand) {
     return (
       <MainPage
         brandOptions={brandOptions}
         maintenance={maintenance}
         navigateToBrand={navigateToBrand}
+        navigateToMarketSegment={() => navigateTo("/market-segment")}
       />
     );
   }
