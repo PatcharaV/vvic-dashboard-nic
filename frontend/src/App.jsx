@@ -4032,7 +4032,6 @@ function LululemonSeasonForecast() {
         <div className="lululemon-forecast-section-heading">
           <div>
             <p className="eyebrow">NYTG · ABC VI PLAYBOOK</p>
-            <h3>ABC Collection: one sample kit, one owner</h3>
           </div>
           <span>One NYTG route · Short first, Pant last</span>
         </div>
