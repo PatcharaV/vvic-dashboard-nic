@@ -1088,7 +1088,16 @@ h2 {
 .market-segment-read-guide .ownership-guide .market-owner-legend { display: grid; justify-content: start; gap: 8px; }
 .market-segment-read-guide .ownership-guide .market-owner-legend span { margin: 0; color: #554b4e; font-size: 9px; letter-spacing: 0; text-transform: none; }
 
-.market-segment-map { height: 500px; }
+.market-segment-map {
+  height: 500px;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    #f8e3e7 0 25%,
+    #ebe8e4 25% 50%,
+    #fbfaf8 50% 75%,
+    #f1ebe5 75% 100%
+  );
+}
 .market-segment-map > button {
   position: absolute;
   z-index: 2;
@@ -1104,8 +1113,9 @@ h2 {
   cursor: pointer;
   box-shadow: 0 7px 18px rgba(32, 21, 25, .16);
 }
-.market-segment-map > button:nth-of-type(2),
-.market-segment-map > button:nth-of-type(4) { background: #b41339; }
+.market-segment-map > button.segment-active,
+.market-segment-map > button.segment-athleisure,
+.market-segment-map > button.segment-outdoor { background: #b41339; }
 .market-segment-map > button strong { font-size: 11px; }
 .market-segment-map > button small { color: rgba(255,255,255,.68); font-size: 7px; }
 

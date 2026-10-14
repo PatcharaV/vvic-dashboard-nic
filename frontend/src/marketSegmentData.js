@@ -9,7 +9,7 @@ export const MARKET_SEGMENTS = [
     accounts: [{ name: "LSKD", owner: "NYK" }, { name: "DSG", owner: "NYG" }],
     closest: ["Gymshark", "Puma"],
     competitors: ["Nike", "Adidas", "Under Armour", "Puma", "New Balance", "ASICS", "Gymshark", "Decathlon Domyos"],
-    map: { x: 66, y: 35 },
+    map: { x: 66, y: 38 },
     points: [
       ["Nike", 76, 80], ["New Balance", 52, 66], ["ASICS", 80, 64], ["Adidas", 46, 54],
       ["LSKD", 66, 55, "NYK"], ["Under Armour", 56, 44], ["Puma", 36, 36],
@@ -26,7 +26,7 @@ export const MARKET_SEGMENTS = [
     accounts: [{ name: "Lululemon", owner: "NYTG" }, { name: "Travis Mathew", owner: "NYTG" }, { name: "Rhone", owner: "NYK" }, { name: "Peter Millar", owner: "NYG" }],
     closest: ["Nike", "Adidas", "Under Armour", "Lacoste"],
     competitors: ["Alo Yoga", "Vuori", "Nike", "Adidas", "Under Armour", "Lacoste", "Athleta", "Fabletics", "Gymshark"],
-    map: { x: 68, y: 72 },
+    map: { x: 68, y: 74 },
     points: [
       ["Lacoste", 28, 83], ["Peter Millar", 34, 92, "NYG"], ["Alo Yoga", 63, 89], ["Lululemon", 78, 80, "NYTG"],
       ["Travis Mathew", 40, 74, "NYTG"], ["Rhone", 65, 68, "NYK"], ["Vuori", 46, 62],
@@ -44,7 +44,7 @@ export const MARKET_SEGMENTS = [
     accounts: [{ name: "Tommy Bahama", owner: "NYTG" }, { name: "Fanatics", owner: "NYG" }],
     closest: ["Ralph Lauren", "Tommy Hilfiger"],
     competitors: ["Ralph Lauren", "Lacoste", "Tommy Hilfiger", "Vineyard Vines", "Levi's", "Uniqlo", "Zara", "Gap"],
-    map: { x: 31, y: 62 },
+    map: { x: 30, y: 72 },
     points: [
       ["Ralph Lauren", 18, 87], ["Lacoste", 36, 78], ["Tommy Bahama", 27, 66, "NYTG"],
       ["Vineyard Vines", 10, 58], ["Tommy Hilfiger", 30, 50], ["Levi's", 21, 43],
@@ -78,7 +78,7 @@ export const MARKET_SEGMENTS = [
     accounts: [{ name: "Hakro", owner: "NYTG" }, { name: "Engelbert Strauss", owner: "NYK" }],
     closest: ["Dickies", "Fristads", "Carhartt", "Snickers Workwear"],
     competitors: ["Carhartt", "Dickies", "Snickers Workwear", "Fristads", "Blaklader", "Kubler"],
-    map: { x: 22, y: 80 },
+    map: { x: 29, y: 25 },
     points: [
       ["Snickers Workwear", 63, 75], ["Fristads", 55, 68], ["Carhartt", 33, 63],
       ["Blaklader", 49, 57], ["Hakro", 28, 50, "NYTG"], ["Kubler", 53, 50],

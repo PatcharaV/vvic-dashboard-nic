@@ -120,18 +120,18 @@ const FORECAST_FABRIC_VISUALS = [
   [["dry"], "/forecast-swatches/cool-pique-heather-v3.webp"],
   [["license to train"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
   [["pace breaker"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
-  [["abc"], "/forecast-abc/abc-short-light-stretch-knit.jpg"],
+  [["abc"], "/forecast-abc/abc-pant-woven-look-knit-v3.webp"],
   [["align"], "/forecast-swatches/brushed-second-skin-v3.webp"],
   [["wunder train"], "/forecast-swatches/buttery-brushed-stretch-v3.webp"],
   [["swiftly"], "/forecast-swatches/tonal-recycled-mesh-v3.webp"],
 ];
 
 const FORECAST_FABRIC_PITCH_VISUALS = [
-  [["light cooling stretch"], "/forecast-fabric-pitches/performance-stretch-woven.jpg"],
-  [["light crinkle stretch"], "/forecast-fabric-pitches/crinkle-stretch-woven.jpg"],
+  [["light cooling stretch"], "/forecast-abc/abc-short-light-stretch-knit-v2.webp"],
+  [["light crinkle stretch"], "/forecast-abc/abc-short-light-stretch-knit-v2.webp"],
   [["slub-look cooling jersey"], "/forecast-fabric-pitches/slub-cooling-jersey.jpg"],
   [["washed tencel heather pique"], "/forecast-fabric-pitches/washed-heather-pique.jpg"],
-  [["cooling stretch with subtle sheen"], "/forecast-fabric-pitches/performance-stretch-woven.jpg"],
+  [["cooling stretch with subtle sheen"], "/forecast-abc/abc-short-light-stretch-knit-v2.webp"],
   [["fine-rib compression"], "/forecast-fabric-pitches/fine-rib-compression.jpg"],
   [["light modal jersey"], "/forecast-fabric-pitches/light-modal-jersey.jpg"],
   [["cooling mesh-zoned"], "/forecast-fabric-pitches/zoned-cooling-mesh.jpg"],
@@ -4070,7 +4070,7 @@ function LululemonSeasonForecast() {
 
         <div className="nytg-abc-block-heading">
           <div><span>02 · FABRIC DEVELOPMENT</span><h4>What NYTG should develop for each garment</h4></div>
-          <small>Directional briefs only · confirm against purchased samples, lab tests and mill capability.</small>
+          <small>Knit-first briefs · use woven only as a visual benchmark, then confirm with purchased samples and lab tests.</small>
         </div>
         <div className="nytg-abc-fabric-grid">
           {LULULEMON_ABC_VI_FABRICS.map((fabric) => (
@@ -5116,16 +5116,17 @@ function MarketSegmentPage({ navigateHome }) {
       ) : (
         <section className="market-segment-all-view">
           <div className="market-segment-map-card">
-            <header><div><p className="eyebrow">5 SEGMENTS · POSITIONING MAP</p><h2>Style vs. Performance</h2></div><span>Basic → Innovation</span></header>
+            <header><div><p className="eyebrow">5 SEGMENTS · POSITIONING MAP</p><h2>Fashion vs. Function</h2></div><span>Basic → Innovation</span></header>
             <div className="market-segment-map">
-              <span className="quadrant top-left">Basic · Style</span>
-              <span className="quadrant top-right">Innovation · Style</span>
-              <span className="quadrant bottom-left">Basic · Performance</span>
-              <span className="quadrant bottom-right">Innovation · Performance</span>
+              <span className="quadrant top-left">Basic · Fashion</span>
+              <span className="quadrant top-right">Innovation · Fashion</span>
+              <span className="quadrant bottom-left">Basic · Function</span>
+              <span className="quadrant bottom-right">Innovation · Function</span>
               <span className="market-axis market-axis-x"><b>Basic</b><b>Innovation</b></span>
-              <span className="market-axis market-axis-y"><b>Performance</b><b>Style</b></span>
+              <span className="market-axis market-axis-y"><b>Function</b><b>Fashion</b></span>
               {MARKET_SEGMENTS.map((segment) => (
                 <button
+                  className={`segment-${segment.id}`}
                   type="button"
                   style={{ left: `${segment.map.x}%`, bottom: `${segment.map.y}%` }}
                   onClick={() => setSelectedSegmentId(segment.id)}
@@ -5138,8 +5139,8 @@ function MarketSegmentPage({ navigateHome }) {
             </div>
           </div>
           <aside className="market-segment-read-guide">
-            <article><span>How to read</span><p>Left to right: Basic to Innovation</p><p>Bottom to top: Performance to Style</p></article>
-            <article><span>What it shows</span><p>Corporate and Casual lead with style. Athleisure combines style and innovation. Active and Outdoor lead with performance.</p></article>
+            <article><span>How to read</span><p>Left to right: Basic to Innovation</p><p>Bottom to top: Function to Fashion</p></article>
+            <article><span>What it shows</span><p>Casual leads with fashion. Athleisure combines fashion and innovation. Corporate, Active and Outdoor move toward function.</p></article>
             <article className="ownership-guide"><span>Colour key</span><MarketOwnerLegend includeOther={false} /></article>
           </aside>
         </section>

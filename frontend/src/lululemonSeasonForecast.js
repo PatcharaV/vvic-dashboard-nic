@@ -64,14 +64,14 @@ export const LULULEMON_FORECAST_WHITESPACE = [
   {
     gender: "Men",
     programs: [
-      { name: "ABC", sales: 528_000_000, units: 5_300_000, detail: "Warpstreme woven · Pant $392M · Short $108M · Jogger $28M" },
+      { name: "ABC", sales: 528_000_000, units: 5_300_000, detail: "Warpstreme woven benchmark · NYTG route: woven-look knit · Pant $392M · Short $108M · Jogger $28M" },
       { name: "Zeroed In", sales: 232_000_000, units: 3_100_000, detail: "NYTG makes only the graphic long-sleeve · Pant, shirt, short, jogger and jacket remain open" },
       { name: "Metal Vent Tech Tee", sales: 105_000_000, units: 1_800_000, detail: "Knit tee close to DrySense · the nearest new door for NYTG" },
     ],
     path: [
       { step: 1, name: "Metal Vent Tech Tee", sales: 98_000_000, action: "Offer a knit tee beside DrySense first." },
-      { step: 2, name: "ABC Short and Jogger", sales: 136_000_000, action: "Ask whether a knit version exists." },
-      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Pursue only after the first two steps are trusted." },
+      { step: 2, name: "ABC Short and Jogger", sales: 136_000_000, action: "Present compact knit and woven-look knit options." },
+      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Earn the pant with a tailored woven-look knit platform." },
     ],
   },
   {
@@ -411,14 +411,14 @@ export const LULULEMON_NYK_WHITESPACE = [
   {
     gender: "Men",
     programs: [
-      { name: "ABC", sales: 528_000_000, fabric: "Warpstreme stretch woven", detail: "NYTG garment supply is knit only; check woven capability first." },
+      { name: "ABC", sales: 528_000_000, fabric: "Warpstreme woven benchmark", detail: "NYTG route: compact woven-look knit with tailored recovery." },
       { name: "Zeroed In (men's)", sales: 232_000_000, fabric: "Pant, shirt, short, jogger and jacket", detail: "NYTG makes only the graphic LS (waffle)." },
       { name: "Metal Vent Tech Tee", sales: 105_000_000, fabric: "Light mesh knit tee", detail: "Closest door: cooling mesh (Joyrise)." },
     ],
     path: [
       { step: 1, name: "Cooling mesh swatch", sales: 98_000_000, action: "Show beside DrySense for Metal Vent Tee." },
-      { step: 2, name: "Knit version of ABC", sales: 136_000_000, action: "ABC Short, Jogger. Ask if a knit spec exists." },
-      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Only with woven capability and trust." },
+      { step: 2, name: "Knit version of ABC", sales: 136_000_000, action: "Develop ABC Short and Jogger from compact knit platforms." },
+      { step: 3, name: "ABC Pant", sales: 392_000_000, action: "Offer woven-look double knit after the first two steps are trusted." },
     ],
   },
   {
@@ -536,8 +536,8 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     tier: "Tier 1",
     pitch:
       "Lead with a finished sample that proves tailoring precision and stretch recovery against the incumbent supplier.",
-    fabric: "Technical Circularity",
-    fabricDetail: "Recycled 4-way-stretch woven with a matte, tailored hand.",
+    fabric: "Woven-Look Knit Tailoring",
+    fabricDetail: "Recycled compact double knit with a matte micro-twill face and tailored recovery.",
   },
   {
     id: "fw28-men-pace-breaker-jacket",
@@ -550,8 +550,8 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     tier: "Tier 2",
     pitch:
       "Pitch the jacket and jogger as one franchise set in one meeting instead of opening a separate conversation.",
-    fabric: "Technical Utility Wovens",
-    fabricDetail: "Lightweight wind-resistant woven shell with DWR finish.",
+    fabric: "Technical Knit Utility",
+    fabricDetail: "Dense lightweight knit shell with a woven-like face, wind resistance and DWR finish.",
   },
   {
     id: "fw28-men-smooth-spacer",
@@ -634,8 +634,8 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     tier: "Tier 1",
     pitch:
       "Lead with the summer-weight sample so the same capability story carries directly into FW28.",
-    fabric: "Technical Circularity",
-    fabricDetail: "Recycled 4-way-stretch woven with a lighter summer hand.",
+    fabric: "Woven-Look Knit Tailoring",
+    fabricDetail: "Lightweight recycled double knit with a woven-like matte face for summer tailoring.",
   },
   {
     id: "ss28-men-metal-vent",
@@ -662,8 +662,8 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     tier: "Tier 2",
     pitch:
       "Bundle it into the ABC Trouser meeting as the matching bottoms range instead of pitching it alone.",
-    fabric: "Technical Circularity",
-    fabricDetail: "The same recycled woven platform as the trouser, tuned for shorts.",
+    fabric: "Woven-Look Knit Tailoring",
+    fabricDetail: "The same compact woven-look knit platform as the trouser, tuned lighter for shorts.",
   },
   {
     id: "ss28-men-swiftly",
@@ -703,9 +703,9 @@ export const LULULEMON_FORECAST_PROGRAMS = [
     subtype: "Short",
     tier: "Tier 1",
     pitch:
-      "Bring a finished prototype combining the woven shell and knit liner; the two-layer construction is the proof.",
+      "Bring a knit-first prototype combining a lightweight woven-look knit shell and soft knit liner.",
     fabric: "Second-Skin Compression",
-    fabricDetail: "Lined 4-way-stretch woven-and-knit hybrid.",
+    fabricDetail: "Lightweight 4-way-stretch woven-look knit shell with a soft knit liner.",
   },
   {
     id: "ss28-women-swiftly",
@@ -752,16 +752,16 @@ export const LULULEMON_FORECAST_FLAGSHIPS = [
     claim: "No. 1 men's pant franchise",
     rationale:
       "A year-round office-to-travel core franchise across both SS28 and FW28 where NYTG has zero presence today.",
-    fabric: "Technical Circularity",
+    fabric: "Woven-Look Knit Tailoring",
   },
 ];
 
 export const LULULEMON_FORECAST_FABRICS = [
-  ["Technical Circularity", "Recycled technical wovens with matte finishes and visible eco-credentials."],
+  ["Woven-Look Knit Tailoring", "Compact double knits engineered with matte micro-twill faces, tailored drape and recovery."],
   ["Second-Skin Compression", "Compressive knits and bonded support that feel like a second layer without bulk."],
   ["Zoned Performance Engineering", "Body-mapped mesh and panel placement for targeted ventilation and compression."],
   ["Brushed Thermal Comfort", "Brushed-back fleece and double knits delivering warmth with a soft, low-bulk hand."],
-  ["Technical Utility Wovens", "Lightweight technical wovens with DWR and wind-resistant finishes."],
+  ["Technical Knit Utility", "Dense lightweight knits engineered for a woven-like face, DWR and wind resistance."],
   ["Textural Knit Comfort", "Rib, waffle and loop structures that add tactile interest to lifestyle-athletic pieces."],
   ["Scuba & Bonded Structures", "Bonded double-face knits with a scuba hand and clean silhouettes."],
   ["Active Base-Layer Engineering", "Moisture-wicking, quick-dry knits engineered for high-output activity."],
@@ -808,7 +808,7 @@ export const LULULEMON_ABC_VI_STYLES = [
     program: "ABC Pant",
     referenceStyle: "ABC Classic-Fit Trouser",
     marketSales: 392_000_000,
-    rationale: "Largest prize and hardest route. Pursue after woven capability, quality and delivery trust are proven.",
+    rationale: "Largest prize and hardest route. Pursue after woven-look knit performance, tailoring quality and delivery trust are proven.",
     image: "/lululemon-opportunities/pant-men-abc-classic-fit-trouser.webp",
     url: "https://shop.lululemon.com/p/mens-trousers/ABC-Classic-Fit-Trouser-28-Warpstreme/_/prod11500066",
   },
@@ -821,8 +821,8 @@ export const LULULEMON_ABC_VI_FABRICS = [
     product: 'ABC Short 7" / 5"',
     image: "/forecast-abc/abc-short-light-stretch-knit-v2.webp",
     target: "Matte, cool hand, 4-way stretch and fast recovery",
-    construction: "Recycled nylon/polyester + elastane direction · target 150-190gsm",
-    validation: "Confirm whether Lululemon will accept a knit route for ABC Short.",
+    construction: "Fine-gauge lightweight double knit · recycled nylon/polyester + elastane · target 150-190gsm",
+    validation: "Validate the knit route against the purchased ABC Short for hand, stretch and tailored appearance.",
   },
   {
     timing: "NEXT",
@@ -830,17 +830,17 @@ export const LULULEMON_ABC_VI_FABRICS = [
     product: "ABC Jogger",
     image: "/forecast-abc/abc-jogger-stable-interlock-v2.webp",
     target: "Smooth face, controlled drape, shape retention and abrasion resistance",
-    construction: "Recycled nylon/polyester + elastane direction · target 210-250gsm",
+    construction: "Compact interlock knit · recycled nylon/polyester + elastane · target 210-250gsm",
     validation: "Tune weight only after the short platform passes wear testing.",
   },
   {
     timing: "LATER",
-    name: "Technical Stretch Woven",
+    name: "Technical Woven-Look Double Knit",
     product: "ABC Pant / Trouser",
-    image: "/forecast-abc/abc-pant-stretch-woven-v2.webp",
-    target: "Fine twill, matte hand, 4-way comfort stretch and crease recovery",
-    construction: "Recycled nylon/polyester + elastane direction · target 170-210gsm",
-    validation: "The NYTG fabric team must confirm woven capability, MOQ and lead time first.",
+    image: "/forecast-abc/abc-pant-woven-look-knit-v3.webp",
+    target: "Fine micro-twill look, matte hand, tailored drape and 4-way recovery",
+    construction: "Fine-gauge compact double knit or ponte direction · recycled nylon/polyester + elastane · target 190-230gsm",
+    validation: "Confirm the knit still reads tailored after sewing, wear testing and repeated recovery tests.",
   },
 ];
 
@@ -868,7 +868,7 @@ export const LULULEMON_ABC_VI_PHASES = [
     timing: "LATER",
     title: "Extend to jogger, then earn the pant",
     nyg: "Convert the approved platform into a jogger before opening the trouser pattern route.",
-    nyk: "Tune jogger weight and confirm whether the group can deliver a commercial stretch woven.",
+    nyk: "Tune jogger weight, then engineer a compact woven-look double knit for the pant route.",
     bd: "Use short and jogger performance as proof before requesting the ABC Pant program.",
     done: "The pant route is formally confirmed, partnered or dropped based on capability.",
   },
@@ -876,8 +876,8 @@ export const LULULEMON_ABC_VI_PHASES = [
 
 export const LULULEMON_ABC_VI_CHECKS = [
   "Buy and test current ABC Short and Jogger samples to confirm fabric construction.",
-  "Confirm NYTG or partner-mill stretch-woven capability for the pant route.",
-  "Confirm NYTG woven sewing capability, machinery and sample capacity.",
+  "Confirm fine-gauge double-knit capability, micro-twill appearance and recovery for the pant route.",
+  "Confirm Garment can tailor woven-look knit cleanly with the available machinery and sample capacity.",
   "Confirm the Lululemon team that owns ABC, plus sample-kit timing and MOQ.",
 ];
 
@@ -927,7 +927,7 @@ export const LULULEMON_NYTG_ROADMAP = [
       { timing: "Now", product: 'Pace Breaker 7-inch and 5-inch shorts; start ABC-style short sample.', fabric: "Light cooling stretch swatch for Pace Breaker and the ABC-style short." },
       { timing: "SS28", product: "DrySense, Evolution polo and Metal Vent tee offer; show ABC Short.", fabric: "Slub-look, Tencel pique and mesh swatches; ABC Short fabric ready." },
       { timing: "FW28", product: "License to Train hoodie, Rulu fleece and ABC Jogger.", fabric: "Brushed double-knit, Rulu fleece and ABC Jogger fabric." },
-      { timing: "FY29+", product: "ABC Pant only if the pant fabric route is confirmed.", fabric: "Commercial woven-stretch route for ABC Pant; confirm capability." },
+      { timing: "FY29+", product: "ABC Pant after the knit platform is approved.", fabric: "Commercial woven-look double-knit route for ABC Pant; confirm tailored appearance and recovery." },
     ],
   },
   {
