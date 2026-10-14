@@ -3402,23 +3402,6 @@ function LululemonSeasonForecast() {
   const forecastActions = LULULEMON_FORECAST_ACTIONS.filter(
     (action) => gender === "All" || action.gender === gender,
   );
-  const programGroups = ["SS28", "FW28"]
-    .filter((seasonKey) => season === "All" || season === seasonKey)
-    .map((seasonKey) => {
-      const seasonPrograms = filteredPrograms.filter((program) => program.season === seasonKey);
-      return {
-        season: seasonKey,
-        seasonName: seasonPrograms[0]?.seasonName || seasonKey,
-        genderGroups: ["Men", "Women"]
-          .filter((genderKey) => gender === "All" || gender === genderKey)
-          .map((genderKey) => ({
-            gender: genderKey,
-            programs: seasonPrograms.filter((program) => program.gender === genderKey),
-          }))
-          .filter((group) => group.programs.length > 0),
-      };
-    })
-    .filter((group) => group.genderGroups.length > 0);
   const filteredNykPrograms = LULULEMON_NYK_FORECAST_PROGRAMS.filter(
     (program) =>
       (season === "All" || program.season === season) &&
@@ -3459,8 +3442,7 @@ function LululemonSeasonForecast() {
   const forecastSectionLinks = [
     { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
     { id: "forecast-nyg-market", number: "02", label: "Market" },
-    { id: "forecast-nyg-programs", number: "03", label: "Product priorities" },
-    { id: "forecast-nyk-programs", number: "04", label: "Fabric opportunities" },
+    { id: "forecast-nyg-programs", number: "03–04", label: "Product + fabric priorities" },
     { id: "forecast-nyk-fabrics", number: "05", label: "Fabric development" },
     { id: "forecast-nyg-whitespace", number: "06", label: "Whitespace" },
     { id: "forecast-nyg-actions", number: "07", label: "Joint next steps" },
@@ -3652,13 +3634,13 @@ function LululemonSeasonForecast() {
         <article className="lululemon-forecast-section keep-extend" id="forecast-nyg-programs">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">03 · KEEP AND EXTEND</p>
-              <h3>What NYTG has, and where it should go next</h3>
+              <p className="eyebrow">03–04 · PRODUCT + FABRIC PRIORITIES</p>
+              <h3>What NYTG should carry forward and which fabric to pitch</h3>
             </div>
-            <span>Use an existing program as the ladder into its next style.</span>
+            <span>One shared priority list for Garment, Fabric and BD.</span>
           </div>
-          <div className={`lululemon-forecast-keep-grid ${keepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
-            {keepExtendGroups.map((group) => (
+          <div className={`lululemon-forecast-keep-grid ${nykKeepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
+            {nykKeepExtendGroups.map((group) => (
               <section className={group.gender.toLowerCase()} key={group.gender}>
                 <div className="lululemon-forecast-gender-heading">
                   <strong>{group.gender}</strong>
@@ -3671,8 +3653,8 @@ function LululemonSeasonForecast() {
                       <ForecastZoomImage className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} onOpen={setImagePreview} />
                       <div>
                         <h4>{program.name}</h4>
-                        <p>NYTG has · {formatComparisonValue(program.sales, "sales")} · {formatComparisonValue(program.units, "units")} · {program.held}</p>
-                        <strong>Next · {program.next}</strong>
+                        <p>NYTG sales · {formatComparisonValue(program.sales, "sales")} · Fabric demand {formatFabricYards(program.yards, true)}</p>
+                        <strong>Fabric · {program.fabric}<br />Next · {program.next}</strong>
                       </div>
                     </article>
                   ))}
@@ -3682,11 +3664,11 @@ function LululemonSeasonForecast() {
           </div>
 
           <div className="lululemon-forecast-ranked-heading">
-            <div><span>SS28 / FW28 RANKING</span><strong>Programs NYTG should carry forward</strong></div>
-            <small>{filteredPrograms.length} programs · ranked by estimated market sales</small>
+            <div><span>SS28 / FW28 SHARED PRIORITY LIST</span><strong>Product opportunity and fabric pitch in one row</strong></div>
+            <small>{filteredNykPrograms.length} programs · {gender === "All" ? "Men + Women" : gender}</small>
           </div>
           <div className="lululemon-forecast-program-groups">
-            {programGroups.map((seasonGroup) => (
+            {nykProgramGroups.map((seasonGroup) => (
               <section className="lululemon-forecast-season-group" key={seasonGroup.season}>
                 <div className="lululemon-forecast-season-heading">
                   <span>{seasonGroup.season}</span>
@@ -3699,33 +3681,21 @@ function LululemonSeasonForecast() {
                         <strong>{genderGroup.gender}</strong>
                         <span>Top {genderGroup.programs.length}</span>
                       </div>
-                      <div className="lululemon-forecast-program-columns" aria-hidden="true">
-                        <span />
-                        <span>Program / Why continue</span>
-                        <span>Market 2026</span>
-                        <span>NYTG Sales</span>
-                        <span>NYTG PCS</span>
-                      </div>
+                      <div className="lululemon-nyk-program-columns" aria-hidden="true"><span /><span>Program / Fabric direction</span><span>NYTG Sales</span><span>Fabric Demand</span><span>Group Supply</span></div>
                       <div className="lululemon-forecast-opportunity-list">
                         {genderGroup.programs.map((program) => (
-                          <article className="lululemon-forecast-program-row" key={program.id}>
+                          <article className="lululemon-nyk-program-row" key={program.id}>
                             <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
-                            <div className="lululemon-forecast-program-summary">
-                              <ForecastZoomImage className="nytg-product-thumb" src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} product reference`} onOpen={setImagePreview} />
-                              <div><h4>{program.program}</h4><p>{program.reason}</p></div>
+                            <div className="lululemon-nyk-program-summary">
+                              <div className="nytg-visual-pair">
+                                <figure><ForecastZoomImage src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} product reference`} onOpen={setImagePreview} /><figcaption>Product</figcaption></figure>
+                                <figure><ForecastZoomImage src={forecastVisual(program.pitch, FORECAST_FABRIC_PITCH_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.pitch} fabric development reference`} onOpen={setImagePreview} /><figcaption>Fabric</figcaption></figure>
+                              </div>
+                              <div><h4>{program.program}</h4><p><span>Today</span>{program.current}</p><strong><span>Fabric pitch</span>{program.pitch}</strong></div>
                             </div>
-                            <span className="lululemon-forecast-program-value market">
-                              <small>Market 2026</small>
-                              <b>{formatComparisonValue(program.marketSales, "sales")}</b>
-                            </span>
-                            <span className="lululemon-forecast-program-value">
-                              <small>NYTG Sales</small>
-                              <b>{formatComparisonValue(program.nygSales, "sales")}</b>
-                            </span>
-                            <span className="lululemon-forecast-program-value">
-                              <small>NYTG PCS</small>
-                              <b>{formatComparisonValue(program.nygUnits, "units").replace(" units", "")}</b>
-                            </span>
+                            <span className="lululemon-nyk-program-value"><small>NYTG Sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
+                            <span className="lululemon-nyk-program-value"><small>Fabric Demand</small><b>{formatFabricYards(program.nygYards, true)}</b></span>
+                            <span className={`lululemon-nyk-program-value ${program.nykYards > 0 ? "secured" : ""}`.trim()}><small>Group Supply</small><b>{formatFabricYards(program.nykYards, true)}</b></span>
                           </article>
                         ))}
                       </div>
@@ -3807,76 +3777,6 @@ function LululemonSeasonForecast() {
 
       {(
         <>
-          <article className="lululemon-forecast-section keep-extend nyk-keep-extend" id="forecast-nyk-programs">
-            <div className="lululemon-forecast-section-heading">
-              <div>
-                <p className="eyebrow">04 · FABRIC OPPORTUNITIES</p>
-                <h3>Turn NYTG priority programs into fabric pitches</h3>
-              </div>
-              <span>No group fabric supply is recorded for these six priority programs today.</span>
-            </div>
-            <div className={`lululemon-forecast-keep-grid ${nykKeepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
-              {nykKeepExtendGroups.map((group) => (
-                <section className={group.gender.toLowerCase()} key={group.gender}>
-                  <div className="lululemon-forecast-gender-heading"><strong>{group.gender}</strong><span>Top 3 by NYTG sales</span></div>
-                  <div>
-                    {group.programs.map((program) => (
-                      <article key={program.name}>
-                        <b>{program.rank}</b>
-                        <ForecastZoomImage className="nytg-product-thumb" src={forecastVisual(program.name, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.name} product reference`} onOpen={setImagePreview} />
-                        <div>
-                          <h4>{program.name}</h4>
-                          <p>Garment demand · {formatFabricYards(program.yards, true)} · {formatComparisonValue(program.sales, "sales")} · Group fabric {formatFabricYards(program.nykYards, true)}</p>
-                          <strong>Fabric · {program.fabric}<br />Next · {program.next}</strong>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-
-            <div className="lululemon-forecast-ranked-heading">
-              <div><span>SS28 / FW28 RANKING</span><strong>NYTG programs and the fabric direction to pitch</strong></div>
-              <small>{filteredNykPrograms.length} programs · {gender === "All" ? "Men + Women" : gender}</small>
-            </div>
-            <div className="lululemon-forecast-program-groups">
-              {nykProgramGroups.map((seasonGroup) => (
-                <section className="lululemon-forecast-season-group" key={seasonGroup.season}>
-                  <div className="lululemon-forecast-season-heading">
-                    <span>{seasonGroup.season}</span>
-                    <div><strong>{seasonGroup.seasonName}</strong><small>{seasonGroup.genderGroups.reduce((sum, group) => sum + group.programs.length, 0)} programs</small></div>
-                  </div>
-                  <div className={`lululemon-forecast-gender-grid ${seasonGroup.genderGroups.length === 1 ? "single" : ""}`.trim()}>
-                    {seasonGroup.genderGroups.map((genderGroup) => (
-                      <section className={`lululemon-forecast-gender-group ${genderGroup.gender.toLowerCase()}`} key={genderGroup.gender}>
-                        <div className="lululemon-forecast-gender-heading"><strong>{genderGroup.gender}</strong><span>Top {genderGroup.programs.length}</span></div>
-                        <div className="lululemon-nyk-program-columns" aria-hidden="true"><span /><span>Program / Fabric direction</span><span>NYTG Sales</span><span>Fabric Demand</span><span>Group Supply</span></div>
-                        <div className="lululemon-forecast-opportunity-list">
-                          {genderGroup.programs.map((program) => (
-                            <article className="lululemon-nyk-program-row" key={program.id}>
-                              <div className="lululemon-forecast-opportunity-rank">{program.rank}</div>
-                              <div className="lululemon-nyk-program-summary">
-                                <div className="nytg-visual-pair">
-                                  <figure><ForecastZoomImage src={forecastVisual(program.program, FORECAST_PRODUCT_VISUALS, "/lululemon-opportunities/pullover-men-smooth-spacer-classic-fit-pullover-hoodie.webp")} alt={`${program.program} product reference`} onOpen={setImagePreview} /><figcaption>Product</figcaption></figure>
-                                  <figure><ForecastZoomImage src={forecastVisual(program.pitch, FORECAST_FABRIC_PITCH_VISUALS, "/forecast-swatches/airy-cotton-touch-v3.webp")} alt={`${program.pitch} fabric development reference`} onOpen={setImagePreview} /><figcaption>Fabric</figcaption></figure>
-                                </div>
-                                <div><h4>{program.program}</h4><p><span>Today</span>{program.current}</p><strong><span>Fabric pitch</span>{program.pitch}</strong></div>
-                              </div>
-                              <span className="lululemon-nyk-program-value"><small>NYTG Sales</small><b>{formatComparisonValue(program.nygSales, "sales")}</b></span>
-                              <span className="lululemon-nyk-program-value"><small>Fabric Demand</small><b>{formatFabricYards(program.nygYards, true)}</b></span>
-                              <span className={`lululemon-nyk-program-value ${program.nykYards > 0 ? "secured" : ""}`.trim()}><small>Group Supply</small><b>{formatFabricYards(program.nykYards, true)}</b></span>
-                            </article>
-                          ))}
-                        </div>
-                      </section>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          </article>
-
           <article className="lululemon-forecast-section nyk-trend-direction" id="forecast-nyk-fabrics">
             <div className="lululemon-forecast-section-heading">
               <div><p className="eyebrow">05 · FABRIC TO DEVELOP</p><h3>Develop these fabrics for SS28 and FW28</h3></div>
