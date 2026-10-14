@@ -403,9 +403,79 @@ main {
   gap: 18px;
 }
 
-.brand-block.lululemon-title-only h1 {
-  color: #151112;
-  font-size: clamp(28px, 3vw, 38px);
+.brand-block.lululemon-title-only {
+  position: relative;
+  min-width: min(390px, 100%);
+  min-height: 94px;
+  padding: 20px 26px;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 100% 0, rgba(255,255,255,.16), transparent 44%),
+    linear-gradient(125deg, #c90032, #e31345);
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(211, 19, 52, .2);
+}
+
+.brand-block.lululemon-title-only::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  right: -66px;
+  top: -72px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px rgba(255,255,255,.04);
+}
+
+.lululemon-dashboard-lockup {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+
+.lululemon-dashboard-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.lululemon-dashboard-wordmark img {
+  width: 41px;
+  height: 41px;
+  filter: brightness(0) invert(1);
+}
+
+.lululemon-dashboard-wordmark strong {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(29px, 3vw, 38px);
+  font-weight: 750;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+
+.lululemon-dashboard-label {
+  padding-left: 52px;
+  color: rgba(255,255,255,.78);
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .brand-mark {
@@ -1753,8 +1823,55 @@ h2 {
 }
 
 .brand-theme-lululemon .topbar {
+  padding: 16px 18px;
+  background:
+    radial-gradient(circle at 13% 100%, rgba(211, 19, 52, .055), transparent 22rem),
+    #fff;
   border-color: var(--lululemon-line);
-  box-shadow: 0 10px 32px rgba(211, 19, 52, 0.08);
+  box-shadow: 0 12px 36px rgba(95, 17, 38, 0.09);
+}
+
+.brand-theme-lululemon .header-actions {
+  gap: 10px;
+}
+
+.brand-theme-lululemon .status,
+.brand-theme-lululemon .scrape-scheduler {
+  background: #fff8f9;
+  border-color: var(--lululemon-line);
+}
+
+.brand-theme-lululemon .home-link {
+  color: var(--lululemon-red);
+  border-color: #e9bfc7;
+}
+
+.brand-theme-lululemon .home-link:hover {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+}
+
+@media (max-width: 640px) {
+  .brand-block.lululemon-title-only {
+    min-width: 0;
+    min-height: 84px;
+    padding: 18px 20px;
+    border-radius: 13px;
+  }
+
+  .lululemon-dashboard-wordmark img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .lululemon-dashboard-wordmark strong {
+    font-size: 30px;
+  }
+
+  .lululemon-dashboard-label {
+    padding-left: 46px;
+  }
 }
 
 .brand-theme-lululemon .brand-mark,

@@ -5879,7 +5879,14 @@ function App() {
       <header className="topbar">
         <div className={`brand-block ${isLululemonWorkspace ? "lululemon-title-only" : ""}`.trim()}>
           {isLululemonWorkspace ? (
-            <h1>Lululemon Dashboard</h1>
+            <div className="lululemon-dashboard-lockup">
+              <span className="lululemon-dashboard-wordmark">
+                <img src="/brand-logos/lululemon.svg" alt="" aria-hidden="true" />
+                <strong>lululemon</strong>
+              </span>
+              <span className="lululemon-dashboard-label">Product Dashboard</span>
+              <h1 className="visually-hidden">Lululemon Product Dashboard</h1>
+            </div>
           ) : (
             <>
               <div className="brand-mark">M</div>
