@@ -54,7 +54,7 @@ import {
   LULULEMON_SALES_MIX,
 } from "./lululemonWorkbookData";
 import { NYG_MY_MAP_ROWS, NYG_MY_MAP_SEASONS } from "./nygMyMapData";
-import { MARKET_BRAND_SUMMARY, MARKET_SEGMENTS } from "./marketSegmentData";
+import { MARKET_BRAND_SUMMARY, MARKET_CUSTOMERS, MARKET_SEGMENTS } from "./marketSegmentData";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -4991,6 +4991,23 @@ function MainPage({
   );
 }
 
+const MARKET_OWNER_LABELS = {
+  NYTG: "NYTG (NYG + NYK)",
+  NYK: "NYK",
+  NYG: "NYG",
+};
+
+function MarketOwnerLegend({ includeOther = true }) {
+  return (
+    <div className="market-owner-legend" aria-label="Brand ownership colour key">
+      {Object.entries(MARKET_OWNER_LABELS).map(([owner, label]) => (
+        <span className={`owner-${owner.toLowerCase()}`} key={owner}><i />{label}</span>
+      ))}
+      {includeOther ? <span className="owner-other"><i />Other brands</span> : null}
+    </div>
+  );
+}
+
 function MarketSegmentPlot({ segment }) {
   return (
     <div className="market-segment-plot" aria-label={`${segment.name} price versus innovation map`}>
@@ -5000,11 +5017,11 @@ function MarketSegmentPlot({ segment }) {
       <span className="quadrant bottom-right">Innovation · Low price</span>
       <span className="market-axis market-axis-x"><b>Basic</b><b>Innovation</b></span>
       <span className="market-axis market-axis-y"><b>Low price</b><b>High price</b></span>
-      {segment.points.map(([name, x, y, owned]) => (
+      {segment.points.map(([name, x, y, owner]) => (
         <span
-          className={`market-segment-point ${owned ? "owned" : "competitor"} ${x > 77 ? "align-right" : ""}`.trim()}
+          className={`market-segment-point ${owner ? `owned owner-${owner.toLowerCase()}` : "competitor"} ${x > 77 ? "align-right" : ""}`.trim()}
           style={{ left: `${x}%`, bottom: `${y}%` }}
-          title={`${name}: ${owned ? "NYTG portfolio brand" : "market reference"}`}
+          title={`${name}: ${owner ? MARKET_OWNER_LABELS[owner] : "market reference"}`}
           key={name}
         >
           <i />
@@ -5073,11 +5090,19 @@ function MarketSegmentPage({ navigateHome }) {
       {selectedSegment ? (
         <section className="market-segment-detail">
           <div className="market-segment-chart-card">
-            <header><div><p className="eyebrow">{selectedSegment.name.toUpperCase()} · MARKET VIEW</p><h2>Price vs. Innovation</h2></div><span><i /> NYTG portfolio brand</span></header>
+            <header><div><p className="eyebrow">{selectedSegment.name.toUpperCase()} · MARKET VIEW</p><h2>Price vs. Innovation</h2></div><MarketOwnerLegend /></header>
             <MarketSegmentPlot segment={selectedSegment} />
           </div>
           <aside className="market-segment-insights">
-            <article className="owned"><span>Our brands</span><strong>{selectedSegment.brands.join(" · ")}</strong></article>
+            {["NYTG", "NYK", "NYG"].map((owner) => {
+              const accounts = selectedSegment.accounts.filter((account) => account.owner === owner);
+              return accounts.length ? (
+                <article className={`owner-card owner-${owner.toLowerCase()}`} key={owner}>
+                  <span>{MARKET_OWNER_LABELS[owner]}</span>
+                  <strong>{accounts.map((account) => account.name).join(" · ")}</strong>
+                </article>
+              ) : null;
+            })}
             <article><span>Closest to ours</span><strong>{selectedSegment.closest.join(", ")}</strong></article>
             <article><span>Typical products</span><p>{selectedSegment.products}</p></article>
             <article><span>What the fabric must do</span><p>{selectedSegment.fabric}</p></article>
@@ -5111,10 +5136,35 @@ function MarketSegmentPage({ navigateHome }) {
           <aside className="market-segment-read-guide">
             <article><span>How to read</span><p>Left to right: Basic to Innovation</p><p>Bottom to top: Performance to Style</p></article>
             <article><span>What it shows</span><p>Corporate and Casual lead with style. Athleisure combines style and innovation. Active and Outdoor lead with performance.</p></article>
-            <article><span>Open space</span><p>Basic + Performance: accessible sport fabrics with dependable function.</p></article>
+            <article className="ownership-guide"><span>Colour key</span><MarketOwnerLegend includeOther={false} /></article>
           </aside>
         </section>
       )}
+
+      <section className="market-customer-summary">
+        <div className="market-segment-section-heading">
+          <div><p className="eyebrow">CUSTOMER COVERAGE</p><h2>Who NYG and NYK look after</h2></div>
+          <p>Four shared customers are shown as NYTG. JR286 is not placed in a segment yet.</p>
+        </div>
+        <div className="market-customer-columns">
+          {Object.entries(MARKET_CUSTOMERS).map(([owner, customers]) => (
+            <article className={`owner-${owner.toLowerCase()}`} key={owner}>
+              <header><h3>{owner}</h3><span>{customers.length} customers</span></header>
+              <div>
+                {customers.map(([name, segment]) => {
+                  const shared = MARKET_CUSTOMERS.NYG.some(([nygName]) => nygName === name)
+                    && MARKET_CUSTOMERS.NYK.some(([nykName]) => nykName === name);
+                  return (
+                    <p className={shared ? "shared" : undefined} key={`${owner}-${name}`}>
+                      <strong>{name}</strong><span>{segment}</span>{shared ? <small>NYTG</small> : null}
+                    </p>
+                  );
+                })}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="market-brand-summary">
         <div className="market-segment-section-heading">
@@ -5124,16 +5174,16 @@ function MarketSegmentPage({ navigateHome }) {
         <div className="market-brand-summary-grid">
           {MARKET_BRAND_SUMMARY.map((row) => (
             <article key={row.brand}>
-              <span>{row.segment}</span>
+              <div className="market-brand-summary-meta"><span>{row.segment}</span><small className={`owner-${row.owner.toLowerCase()}`}>{row.owner}</small></div>
               <h3>{row.brand}</h3>
-              <strong>{row.closest}</strong>
-              <p>{row.reason}</p>
+              <strong>Closest names</strong>
+              <p>{row.closest}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <p className="market-segment-source">Source: NYTG_Market_Segment_8_Brands.pdf. Segment definitions, positions and competitor references are team judgement, not measured market data. Replace positioning with average price per piece when verified data becomes available.</p>
+      <p className="market-segment-source">Source: NYTG_Market_Segment_8_Brands (2).pdf. Segment definitions, positions and competitor references are team judgement, not measured market data. Replace positioning with average price per piece when verified data becomes available.</p>
     </main>
   );
 }
