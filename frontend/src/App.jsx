@@ -4076,7 +4076,11 @@ function LululemonSeasonForecast() {
           {LULULEMON_ABC_VI_FABRICS.map((fabric) => (
             <article key={fabric.name}>
               <div className="nytg-abc-fabric-image">
-                <img src={fabric.image} alt={`${fabric.name} development reference`} />
+                <ForecastZoomImage
+                  src={fabric.image}
+                  alt={`${fabric.name} for ${fabric.product}`}
+                  onOpen={setImagePreview}
+                />
                 <span>{fabric.timing}</span>
               </div>
               <div>

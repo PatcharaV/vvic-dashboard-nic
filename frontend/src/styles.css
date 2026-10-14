@@ -9669,6 +9669,7 @@ footer a {
 
 .nytg-abc-fabric-grid > article { display: grid; grid-template-rows: 168px 1fr; }
 .nytg-abc-fabric-image { position: relative; overflow: hidden; background: #252123; }
+.nytg-abc-fabric-image .nytg-image-trigger { width: 100%; height: 100%; border-radius: 0; }
 .nytg-abc-fabric-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .nytg-abc-fabric-grid > article > div:last-child { padding: 16px; }
 .nytg-abc-fabric-grid h4 { margin: 7px 0 12px; color: #211b1d; font-size: 16px; }
