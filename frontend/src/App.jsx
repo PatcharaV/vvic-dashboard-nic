@@ -31,7 +31,6 @@ import {
   LULULEMON_FORECAST_NYG_PROGRAMS,
   LULULEMON_FORECAST_SUMMARY,
   LULULEMON_FORECAST_WHITESPACE,
-  LULULEMON_NYK_ACTIONS,
   LULULEMON_NYK_FABRIC_BRIEFS,
   LULULEMON_NYK_FORECAST_PROGRAMS,
   LULULEMON_NYK_FORECAST_SUMMARY,
@@ -3436,9 +3435,6 @@ function LululemonSeasonForecast() {
   const nykFabricBriefs = LULULEMON_NYK_FABRIC_BRIEFS.filter(
     (brief) => season === "All" || brief.season === season,
   );
-  const nykActions = LULULEMON_NYK_ACTIONS.filter(
-    (action) => gender === "All" || action.gender === gender,
-  );
   const forecastSectionLinks = [
     { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
     { id: "forecast-nyg-market", number: "02", label: "Market" },
@@ -3469,7 +3465,7 @@ function LululemonSeasonForecast() {
       fabricDirections: nykTrendGroups,
       fabricBriefs: nykFabricBriefs,
       trends: nykTrendGroups,
-      nextSteps: { garment: forecastActions, fabric: nykActions },
+      nextSteps: { garment: forecastActions },
       caveat:
         "This is a directional forecast. The actual SS28/FW28 Lululemon line-list is not available yet.",
     }),
@@ -3486,7 +3482,6 @@ function LululemonSeasonForecast() {
       nykWhitespaceGroups,
       nykTrendGroups,
       nykFabricBriefs,
-      nykActions,
     ],
   );
 
@@ -3877,27 +3872,6 @@ function LululemonSeasonForecast() {
             <p className="lululemon-nyk-market-note">Others hold these markets. NYTG enters beside them with one garment-and-fabric offer. Spec needs are our reading.</p>
           </article>
 
-          <article className="lululemon-forecast-section nyk-next-steps" id="forecast-nyk-actions">
-            <div className="lululemon-forecast-section-heading">
-              <div><p className="eyebrow">07B · DEVELOPMENT ACTIONS</p><h3>What NYTG develops next with Product and BD</h3></div>
-            </div>
-            <div className="lululemon-nyk-slide-tags">
-              <span>NYTG</span><span>{season === "All" ? "SS28 · FW28" : season}</span><span>{gender === "All" ? "Men's | Women's" : `${gender}'s`}</span>
-            </div>
-            <div className={`lululemon-nyk-action-grid ${gender !== "All" ? "single" : ""}`.trim()}>
-              {["Men", "Women"].filter((genderKey) => gender === "All" || gender === genderKey).map((genderKey) => (
-                <section className={genderKey.toLowerCase()} key={genderKey}>
-                  <h4>{genderKey}'s</h4>
-                  {nykActions.filter((action) => action.gender === genderKey).map((action) => (
-                    <article key={`${action.gender}-${action.rank}`}>
-                      <div><strong>{action.rank}. {action.program}</strong><p>{action.action}</p></div>
-                      <span>{action.timing}</span>
-                    </article>
-                  ))}
-                </section>
-              ))}
-            </div>
-          </article>
         </>
       )}
 
