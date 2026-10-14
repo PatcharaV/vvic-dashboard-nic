@@ -54,7 +54,7 @@ import {
   LULULEMON_SALES_MIX,
 } from "./lululemonWorkbookData";
 import { NYG_MY_MAP_ROWS, NYG_MY_MAP_SEASONS } from "./nygMyMapData";
-import { MARKET_BRAND_SUMMARY, MARKET_CUSTOMERS, MARKET_SEGMENTS } from "./marketSegmentData";
+import { MARKET_SEGMENTS } from "./marketSegmentData";
 import snapshotData from "./snapshotData.json";
 
 const COLORS = [
@@ -5144,48 +5144,6 @@ function MarketSegmentPage({ navigateHome }) {
           </aside>
         </section>
       )}
-
-      <section className="market-customer-summary">
-        <div className="market-segment-section-heading">
-          <div><p className="eyebrow">CUSTOMER COVERAGE</p><h2>Who NYG and NYK look after</h2></div>
-          <p>Four shared customers are shown as NYTG. JR286 is not placed in a segment yet.</p>
-        </div>
-        <div className="market-customer-columns">
-          {Object.entries(MARKET_CUSTOMERS).map(([owner, customers]) => (
-            <article className={`owner-${owner.toLowerCase()}`} key={owner}>
-              <header><h3>{owner}</h3><span>{customers.length} customers</span></header>
-              <div>
-                {customers.map(([name, segment]) => {
-                  const shared = MARKET_CUSTOMERS.NYG.some(([nygName]) => nygName === name)
-                    && MARKET_CUSTOMERS.NYK.some(([nykName]) => nykName === name);
-                  return (
-                    <p className={shared ? "shared" : undefined} key={`${owner}-${name}`}>
-                      <strong>{name}</strong><span>{segment}</span>{shared ? <small>NYTG</small> : null}
-                    </p>
-                  );
-                })}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="market-brand-summary">
-        <div className="market-segment-section-heading">
-          <div><p className="eyebrow">8 BRAND SUMMARY</p><h2>Closest names in the market</h2></div>
-          <p>Use these references to frame competitor reviews and fabric positioning.</p>
-        </div>
-        <div className="market-brand-summary-grid">
-          {MARKET_BRAND_SUMMARY.map((row) => (
-            <article key={row.brand}>
-              <div className="market-brand-summary-meta"><span>{row.segment}</span><small className={`owner-${row.owner.toLowerCase()}`}>{row.owner}</small></div>
-              <h3>{row.brand}</h3>
-              <strong>Closest names</strong>
-              <p>{row.closest}</p>
-            </article>
-          ))}
-        </div>
-      </section>
 
       <p className="market-segment-source">Source: NYTG_Market_Segment_8_Brands (2).pdf. Segment definitions, positions and competitor references are team judgement, not measured market data. Replace positioning with average price per piece when verified data becomes available.</p>
     </main>
