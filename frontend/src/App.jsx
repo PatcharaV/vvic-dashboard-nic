@@ -5116,7 +5116,7 @@ function MarketSegmentPage({ navigateHome }) {
       ) : (
         <section className="market-segment-all-view">
           <div className="market-segment-map-card">
-            <header><div><p className="eyebrow">5 SEGMENTS · POSITIONING MAP</p><h2>Fashion vs. Function</h2></div><span>Basic → Innovation</span></header>
+            <header><div><p className="eyebrow">5 SEGMENTS · POSITIONING MAP</p></div><span>Basic → Innovation</span></header>
             <div className="market-segment-map">
               <span className="quadrant top-left">Basic · Fashion</span>
               <span className="quadrant top-right">Innovation · Fashion</span>
