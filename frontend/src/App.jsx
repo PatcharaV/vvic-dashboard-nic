@@ -843,6 +843,13 @@ const LULULEMON_MEN_STYLE_TERMS = [
 ];
 
 function inferLululemonStyleGender(styleName, subtypeKey) {
+  const explicitGenderName = String(styleName)
+    .trim()
+    .toLowerCase()
+    .replace(/[']/g, "");
+  if (/^(?:lululemon\s+)?womens\b/.test(explicitGenderName)) return "Women";
+  if (/^(?:lululemon\s+)?mens\b/.test(explicitGenderName)) return "Men";
+
   const normalizedName = normalizeLululemonStyleName(styleName);
   const matchedGenders = new Set();
 
