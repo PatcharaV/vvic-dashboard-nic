@@ -971,17 +971,22 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
   const rows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall")
     .map((row) => {
       const fobMultiplier = row.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
-      const lululemonValue = isSales && lululemonGenderField
+      const tableLululemonSales = lululemonGenderField
         ? row[lululemonGenderField] || 0
-        : row[lululemonField];
-      const nygValue = isSales && nygGenderField
+        : row.lululemonSales;
+      const tableNygSales = nygGenderField
         ? row[nygGenderField] || 0
-        : row[nygField];
+        : row.nygSales;
+      const lululemonValue = isSales ? tableLululemonSales : row[lululemonField];
+      const nygValue = isSales ? tableNygSales : row[nygField];
       return {
         ...row,
         fobMultiplier,
         displayLululemonValue: lululemonValue,
         displayNygValue: nygValue,
+        tableLululemonSales,
+        tableNygSales,
+        tableLululemonFobSpend: tableLululemonSales / fobMultiplier,
         comparisonBase: getLululemonComparisonBase(
           lululemonValue,
           metric,
@@ -1001,11 +1006,18 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
   const baseLabel = isSales
     ? "Lululemon FOB Spend"
     : `Lululemon ${isUnits ? "Total Units" : "Products"}`;
-  const effectiveTableMetric = gender === "all" ? tableMetric : "sales";
+  const effectiveTableMetric = gender !== "all" && tableMetric === "units"
+    ? "sales"
+    : tableMetric;
   const tableIsSales = effectiveTableMetric === "sales";
-  const tableNygField = tableIsSales ? "nygSales" : "nygUnits";
-  const tableLululemonField = tableIsSales ? "lululemonSales" : "lululemonUnits";
-  const tableLabel = tableIsSales ? "Total Sale" : "Total Unit";
+  const tableIsFobSpend = effectiveTableMetric === "fob";
+  const tableValueMetric = effectiveTableMetric === "units" ? "units" : "sales";
+  const tableNygLabel = tableIsFobSpend ? "NYG Sale" : "NYG";
+  const tableLabel = tableIsSales
+    ? "Total Sale"
+    : tableIsFobSpend
+      ? "FOB Spend"
+      : "Total Unit";
   const tooltipMetricLabel = isSales
     ? "Sales"
     : isUnits
@@ -1092,6 +1104,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
           <div className="lululemon-subtype-table-controls" aria-label="Table value">
             {[
               { value: "sales", label: "Sale" },
+              { value: "fob", label: "FOB Spend" },
               { value: "units", label: "Units" },
             ].map((option) => (
               <button
@@ -1111,7 +1124,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
             <thead>
               <tr>
                 <th>Product type</th>
-                <th>NYG</th>
+                <th>{tableNygLabel}</th>
                 <th>{tableLabel}</th>
               </tr>
             </thead>
@@ -1123,8 +1136,22 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
                       {row.label}
                     </button>
                   </td>
-                  <td>{formatComparisonValue(tableIsSales ? row.displayNygValue : row[tableNygField], effectiveTableMetric)}</td>
-                  <td>{formatComparisonValue(tableIsSales ? row.displayLululemonValue : row[tableLululemonField], effectiveTableMetric)}</td>
+                  <td>
+                    {formatComparisonValue(
+                      effectiveTableMetric === "units" ? row.nygUnits : row.tableNygSales,
+                      tableValueMetric,
+                    )}
+                  </td>
+                  <td>
+                    {formatComparisonValue(
+                      effectiveTableMetric === "units"
+                        ? row.lululemonUnits
+                        : tableIsFobSpend
+                          ? row.tableLululemonFobSpend
+                          : row.tableLululemonSales,
+                      tableValueMetric,
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
