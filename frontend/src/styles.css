@@ -5152,13 +5152,41 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-opportunity-product-link {
+  width: 100%;
   min-width: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: 58px minmax(0, 1fr);
   align-items: center;
   gap: 9px;
   color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.lululemon-opportunity-product-cell {
+  min-width: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.lululemon-opportunity-external-link {
+  width: fit-content;
+  margin-left: 67px;
+  color: #9a6470;
+  font-size: 8px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.lululemon-opportunity-external-link:hover,
+.lululemon-opportunity-external-link:focus-visible {
+  color: var(--lululemon-red);
+  text-decoration: underline;
 }
 
 .lululemon-opportunity-images {
@@ -7662,6 +7690,11 @@ footer a {
     .lululemon-opportunity-product-link {
     grid-template-columns: 43px minmax(0, 1fr);
     gap: 6px;
+  }
+
+  .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining
+    .lululemon-opportunity-external-link {
+    margin-left: 49px;
   }
 
   .lululemon-style-coverage-grid > .lululemon-style-portfolio-list.remaining

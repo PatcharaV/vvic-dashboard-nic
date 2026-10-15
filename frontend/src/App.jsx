@@ -1134,6 +1134,8 @@ function LululemonOpportunityList({
   total,
   expandedGenders,
   onToggleGender,
+  onSelectStyle,
+  selectedStyleName,
   selectionKey,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -1154,9 +1156,12 @@ function LululemonOpportunityList({
     (sum, group) => sum + group.styles.length,
     0,
   );
-  const selectedMatch = groups
-    .flatMap((group) => group.styles.map((style) => ({ ...style, gender: group.gender })))
-    .find((style) => style.linkedSelection);
+  const groupedStyles = groups
+    .flatMap((group) => group.styles.map((style) => ({ ...style, gender: group.gender })));
+  const selectedMatch = groupedStyles.find(
+    (style) => selectedStyleName
+      && normalizeLululemonProductName(style.name) === normalizeLululemonProductName(selectedStyleName),
+  ) || groupedStyles.find((style) => style.linkedSelection);
 
   useEffect(() => {
     setSearchQuery("");
@@ -1219,7 +1224,13 @@ function LululemonOpportunityList({
       <div className="lululemon-style-opportunity-groups ranked-list">
         {filteredGroups.map((group) => {
           const isExpanded = expandedGenders[group.gender];
-          const hasSelectedStyle = group.styles.some((style) => style.linkedSelection);
+          const hasSelectedStyle = group.styles.some(
+            (style) => style.linkedSelection || (
+              selectedStyleName
+              && normalizeLululemonProductName(style.name)
+                === normalizeLululemonProductName(selectedStyleName)
+            ),
+          );
           const displayedStyles = isSearching || isExpanded || hasSelectedStyle
             ? group.styles
             : group.styles.slice(0, 5);
@@ -1237,7 +1248,12 @@ function LululemonOpportunityList({
               </div>
               <ol className={isSearching || isExpanded || hasSelectedStyle ? "expanded" : undefined}>
                 {displayedStyles.map((style) => {
-                  const isSelectedStyle = Boolean(style.linkedSelection);
+                  const isSelectedStyle = Boolean(style.linkedSelection) || Boolean(
+                    selectedStyleName
+                    && normalizeLululemonProductName(style.name)
+                      === normalizeLululemonProductName(selectedStyleName),
+                  );
+                  const selectStyle = () => onSelectStyle?.(style);
                   return (
                   <li
                     className={isSelectedStyle ? "selected" : undefined}
@@ -1245,33 +1261,42 @@ function LululemonOpportunityList({
                     key={style.name}
                     ref={isSelectedStyle ? selectedItemRef : undefined}
                   >
-                    <a
-                      className="lululemon-opportunity-product-link"
-                      href={style.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`Open ${style.productTitle} on Lululemon`}
-                    >
-                      <span className="lululemon-opportunity-images" aria-hidden="true">
-                        {style.images.length > 0 ? (
-                          style.images.map((imageUrl, imageIndex) => (
-                            <img
-                              alt=""
-                              key={imageUrl}
-                              loading="lazy"
-                              src={imageUrl}
-                              style={{ "--image-index": imageIndex }}
-                            />
-                          ))
-                        ) : (
-                          <span className="lululemon-opportunity-image-placeholder">L</span>
-                        )}
-                      </span>
-                      <span className="lululemon-opportunity-product-name">
-                        <strong>{style.name}</strong>
-                        <small>View on Lululemon</small>
-                      </span>
-                    </a>
+                    <span className="lululemon-opportunity-product-cell">
+                      <button
+                        className="lululemon-opportunity-product-link"
+                        type="button"
+                        aria-pressed={isSelectedStyle}
+                        onClick={selectStyle}
+                      >
+                        <span className="lululemon-opportunity-images" aria-hidden="true">
+                          {style.images.length > 0 ? (
+                            style.images.map((imageUrl, imageIndex) => (
+                              <img
+                                alt=""
+                                key={imageUrl}
+                                loading="lazy"
+                                src={imageUrl}
+                                style={{ "--image-index": imageIndex }}
+                              />
+                            ))
+                          ) : (
+                            <span className="lululemon-opportunity-image-placeholder">L</span>
+                          )}
+                        </span>
+                        <span className="lululemon-opportunity-product-name">
+                          <strong>{style.name}</strong>
+                          <small>Compare above</small>
+                        </span>
+                      </button>
+                      <a
+                        className="lululemon-opportunity-external-link"
+                        href={style.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View on Lululemon
+                      </a>
+                    </span>
                     <span className="lululemon-style-opportunity-value">
                       {style.sales !== null && (
                         <strong>{formatComparisonValue(style.sales, "sales")}</strong>
@@ -1462,7 +1487,9 @@ function LululemonNygStyleComparison({
               ? "All product types · Overall comparison"
               : aggregate
                 ? `${style.name} product type · Overall comparison`
-                : "Selected NYG style · Overall comparison"}
+                : style.comparisonSource === "lululemon"
+                  ? "Selected Lululemon style · Overall comparison"
+                  : "Selected NYG style · Overall comparison"}
           </span>
           <h4>{style.name}</h4>
           <p>
@@ -1732,6 +1759,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const [overviewDisplay, setOverviewDisplay] = useState("chart");
   const [selectedNygStyleKey, setSelectedNygStyleKey] = useState(null);
   const [selectedNygSeason, setSelectedNygSeason] = useState(null);
+  const [selectedOpportunityName, setSelectedOpportunityName] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSeasons, setSelectedSeasons] = useState(LULULEMON_DEFAULT_STYLE_SEASONS);
   const selectedYearFilter = LULULEMON_STYLE_YEAR_FILTERS.find(
@@ -1776,6 +1804,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     setExpandedOpportunityGenders({});
     setSelectedNygStyleKey(null);
     setSelectedNygSeason(null);
+    setSelectedOpportunityName(null);
   }, [styles]);
 
   useEffect(() => {
@@ -2207,6 +2236,12 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
 
     linkedOpportunityStyles.sort((left, right) => (right.sales ?? 0) - (left.sales ?? 0));
   }
+  const selectedOpportunityStyle = selectedOpportunityName
+    ? linkedOpportunityStyles.find(
+      (style) => normalizeLululemonProductName(style.name)
+        === normalizeLululemonProductName(selectedOpportunityName),
+    )
+    : null;
   const opportunityGenderGroups = LULULEMON_GENDERS.map((gender) => ({
     gender,
     styles: linkedOpportunityStyles
@@ -2251,6 +2286,20 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
     nygUnits: subtypeNygTotals.units,
     fobMultiplier: getAverageFobMultiplier(styles),
   };
+  const selectedOpportunityComparison = selectedOpportunityStyle
+    ? {
+        key: `lululemon-opportunity-${normalizeLululemonProductName(selectedOpportunityStyle.name)}`,
+        name: selectedOpportunityStyle.name,
+        season: "1 SEP 25 - 31 AUG 26",
+        gender: selectedOpportunityStyle.gender,
+        lululemonRevenue: selectedOpportunityStyle.sales || 0,
+        lululemonUnits: selectedOpportunityStyle.units || 0,
+        nygSales: 0,
+        nygUnits: 0,
+        fobMultiplier: getAverageFobMultiplier(styles),
+        comparisonSource: "lululemon",
+      }
+    : null;
   const subtypeNykStyles = styles
     .map((style) => ({
       ...style,
@@ -2290,9 +2339,10 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
         {seasonFilter}
         {partnerView === "nyg" && (
           <LululemonNygStyleComparison
-            style={subtypeNygSummary}
-            aggregate
+            style={selectedOpportunityComparison || subtypeNygSummary}
+            aggregate={!selectedOpportunityComparison}
             filters={summaryFilters}
+            onClear={selectedOpportunityComparison ? () => setSelectedOpportunityName(null) : null}
           />
         )}
         {partnerView === "nyk" && (
@@ -2305,6 +2355,14 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             total={normalizedOpportunityStyles.length}
             expandedGenders={expandedOpportunityGenders}
             onToggleGender={toggleOpportunityGender}
+            onSelectStyle={partnerView === "nyg" ? (style) => {
+              const isSelected = selectedOpportunityName
+                && normalizeLululemonProductName(selectedOpportunityName)
+                  === normalizeLululemonProductName(style.name);
+              setSelectedOpportunityName(isSelected ? null : style.name);
+            } : undefined}
+            selectedStyleName={partnerView === "nyg" ? selectedOpportunityName : null}
+            selectionKey={partnerView === "nyg" ? selectedOpportunityName || "" : ""}
           />
           <div className="lululemon-style-secured-column">
             {partnerView === "nyg" ? (
@@ -2360,11 +2418,12 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
       {seasonFilter}
       {partnerView === "nyg" && (
         <LululemonNygStyleComparison
-          style={selectedNygStyle || subtypeNygSummary}
-          aggregate={!selectedNygStyle}
+          style={selectedOpportunityComparison || selectedNygStyle || subtypeNygSummary}
+          aggregate={!selectedOpportunityComparison && !selectedNygStyle}
           filters={summaryFilters}
-          onClear={selectedNygStyle
+          onClear={selectedOpportunityComparison || selectedNygStyle
             ? () => {
+              setSelectedOpportunityName(null);
               setSelectedNygStyleKey(null);
               setSelectedNygSeason(null);
             }
@@ -2410,6 +2469,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
                               onClick={() => {
                                 const isSelected = selectedNygStyleKey === style.key
                                   && selectedNygSeason === style.season;
+                                setSelectedOpportunityName(null);
                                 setSelectedNygStyleKey(isSelected ? null : style.key);
                                 setSelectedNygSeason(isSelected ? null : style.season);
                               }}
@@ -2462,8 +2522,17 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           total={linkedOpportunityStyles.length}
           expandedGenders={expandedOpportunityGenders}
           onToggleGender={toggleOpportunityGender}
-          selectionKey={partnerView === "nyg" && selectedNygStyle
-            ? `${selectedNygStyle.key}|${selectedNygStyle.season}`
+          onSelectStyle={partnerView === "nyg" ? (style) => {
+            const isSelected = selectedOpportunityName
+              && normalizeLululemonProductName(selectedOpportunityName)
+                === normalizeLululemonProductName(style.name);
+            setSelectedOpportunityName(isSelected ? null : style.name);
+            setSelectedNygStyleKey(null);
+            setSelectedNygSeason(null);
+          } : undefined}
+          selectedStyleName={partnerView === "nyg" ? selectedOpportunityName : null}
+          selectionKey={partnerView === "nyg" && (selectedOpportunityName || selectedNygStyle)
+            ? selectedOpportunityName || `${selectedNygStyle.key}|${selectedNygStyle.season}`
             : ""}
         />
       </div>
