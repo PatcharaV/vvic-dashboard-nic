@@ -4551,7 +4551,24 @@ function getMaterialValues(product) {
   const bodyValues = values.filter((value) =>
     value.toLowerCase().startsWith("body:")
   );
-  return [...new Set(bodyValues)];
+  return [...new Set(bodyValues.length ? bodyValues : values)];
+}
+
+function hasVerifiedProductDetails(product) {
+  return Boolean(
+    product.image
+    || product.color_variants?.length
+    || getMaterialValues(product).length
+    || product.innovations?.length
+    || product.price_known,
+  );
+}
+
+function isProductAvailabilityKnown(product) {
+  if (typeof product.availability_known === "boolean") {
+    return product.availability_known;
+  }
+  return product.brand !== "lululemon" || hasVerifiedProductDetails(product);
 }
 
 function colorNameToSwatch(colorName = "") {
@@ -4666,7 +4683,7 @@ function resolveVariantProductUrl(productUrl, product, variant) {
   }
 }
 
-function ProductImageBlock({ product, productUrl, isLululemonView }) {
+function ProductImageBlock({ product, productUrl, showColorSwatches }) {
   if (product.color_variants?.length) {
     return (
       <>
@@ -4699,7 +4716,7 @@ function ProductImageBlock({ product, productUrl, isLululemonView }) {
               </span>
             </a>
           ))}
-          {isLululemonView && product.color_variants.length > 3 && (
+          {showColorSwatches && product.color_variants.length > 3 && (
             <span
               className="product-image-count"
               title={`${product.color_variants.length - 3} more product images`}
@@ -4708,7 +4725,7 @@ function ProductImageBlock({ product, productUrl, isLululemonView }) {
             </span>
           )}
         </div>
-        {isLululemonView && <ColorSwatches product={product} />}
+        {showColorSwatches && <ColorSwatches product={product} />}
       </>
     );
   }
@@ -4723,15 +4740,15 @@ function ProductImageBlock({ product, productUrl, isLululemonView }) {
             <strong>{product.title}</strong>
           </span>
         </a>
-        {isLululemonView && <ColorSwatches product={product} />}
+        {showColorSwatches && <ColorSwatches product={product} />}
       </>
     );
   }
 
   return (
     <>
-      <span className="product-image-placeholder">No image</span>
-      {isLululemonView && <ColorSwatches product={product} />}
+      <span className="product-image-placeholder">Image not captured</span>
+      {showColorSwatches && <ColorSwatches product={product} />}
     </>
   );
 }
@@ -4780,7 +4797,10 @@ async function exportProductsToExcel(products) {
     "Price Min": product.price_min,
     "Price Max": product.price_max,
     "Price Range": formatPrice(product),
-    Status: product.available ? "Available" : "Unavailable",
+    "Detail Status": hasVerifiedProductDetails(product) ? "Detailed" : "Catalog data only",
+    Status: isProductAvailabilityKnown(product)
+      ? product.available ? "Available" : "Unavailable"
+      : "Not verified",
     URL: product.url,
   }));
   const worksheet = XLSX.utils.json_to_sheet(rows);
@@ -5411,6 +5431,7 @@ function App() {
   const isLululemonView =
     effectiveFilters.brands.length === 1 &&
     effectiveFilters.brands[0] === "lululemon";
+  const isDetailedProductView = Boolean(routeBrand);
   const showCategoryTreemap = effectiveFilters.brands.includes("lululemon");
   const treemapRows = showCategoryTreemap
     ? dashboard.categories || []
@@ -5448,6 +5469,11 @@ function App() {
   const hasSeasonData = dashboard.products.some(
     (product) => Boolean(String(product.season_range || "").trim()),
   );
+  const showProductImageData = isDetailedProductView || hasProductImageData;
+  const showSubcategoryData = isDetailedProductView || hasSubcategoryData;
+  const showCollectionData = isDetailedProductView || hasCollectionData;
+  const showMaterialData = isDetailedProductView || hasMaterialData;
+  const showInnovationData = isDetailedProductView || hasInnovationData;
   const hasSubcategoryFilter =
     (options.subcategories || []).length > 0 || filters.subcategories.length > 0;
   const hasCollectionFilter =
@@ -6490,17 +6516,17 @@ function App() {
           </div>
 
           {dashboard.products.length ? (
-            <div className={`table-wrap ${isLululemonView ? "particl-table-wrap" : ""}`}>
-                <table className={isLululemonView ? "particl-product-table" : undefined}>
+            <div className={`table-wrap ${isDetailedProductView ? "particl-table-wrap" : ""}`}>
+                <table className={isDetailedProductView ? "particl-product-table" : undefined}>
                   <thead>
                     <tr className="table-heading-row">
                       <th className="number-heading">No.</th>
-                      {hasProductImageData && !isLululemonView && (
+                      {showProductImageData && !isDetailedProductView && (
                         <th className="image-heading">Image</th>
                       )}
                       <th
                         className={
-                          isLululemonView
+                          isDetailedProductView
                             ? "product-heading product-media-heading"
                             : "product-heading"
                         }
@@ -6510,11 +6536,11 @@ function App() {
                       {hasSeasonData && <th className="season-heading">Season</th>}
                       <th>Gender</th>
                       <th>Category</th>
-                      {hasSubcategoryData && <th>Sub category</th>}
-                      {hasCollectionData && <th>Collection</th>}
-                      {!isLululemonView && <th>Color</th>}
-                      {hasMaterialData && <th>Material</th>}
-                      {hasInnovationData && <th>Innovation</th>}
+                      {showSubcategoryData && <th>Sub category</th>}
+                      {showCollectionData && <th>Collection</th>}
+                      {!isDetailedProductView && <th>Color</th>}
+                      {showMaterialData && <th>Material</th>}
+                      {showInnovationData && <th>Innovation</th>}
                       {hasTechnicalFeatureData && <th>Technical features</th>}
                       {hasFabricTreatmentData && <th>Fabric treatment</th>}
                       {hasConstructionData && <th>Construction</th>}
@@ -6531,27 +6557,27 @@ function App() {
                           <td className="number-cell">
                             {(currentProductPage - 1) * productsPerPage + index + 1}
                           </td>
-                          {hasProductImageData && !isLululemonView && (
+                          {showProductImageData && !isDetailedProductView && (
                             <td className="product-image-cell">
                               <ProductImageBlock
                                 product={product}
                                 productUrl={productUrl}
-                                isLululemonView={isLululemonView}
+                                showColorSwatches={false}
                               />
                             </td>
                           )}
                           <td
                             className={
-                              isLululemonView
+                              isDetailedProductView
                                 ? "product-title-cell product-media-cell"
                                 : "product-title-cell"
                             }
                           >
-                            {isLululemonView && hasProductImageData && (
+                            {isDetailedProductView && (
                               <ProductImageBlock
                                 product={product}
                                 productUrl={productUrl}
-                                isLululemonView={isLululemonView}
+                                showColorSwatches
                               />
                             )}
                             <a
@@ -6562,6 +6588,9 @@ function App() {
                             >
                               {product.title}
                             </a>
+                            {!hasVerifiedProductDetails(product) && (
+                              <span className="product-data-status">Catalog data only</span>
+                            )}
                           </td>
                         {hasSeasonData && (
                           <td className="season-cell">
@@ -6613,7 +6642,7 @@ function App() {
                             ),
                           )}
                         </td>
-                        {hasSubcategoryData && (
+                        {showSubcategoryData && (
                           <td>
                             {product.subcategories?.length
                               ? product.subcategories.map((subcategory, index) => (
@@ -6636,7 +6665,7 @@ function App() {
                               : "Not specified"}
                           </td>
                         )}
-                        {hasCollectionData && (
+                        {showCollectionData && (
                           <td className="collection-cell">
                             {product.collections?.length
                               ? product.collections.map((collection, index) => (
@@ -6654,7 +6683,7 @@ function App() {
                               : "No named collection"}
                           </td>
                         )}
-                        {!isLululemonView && (
+                        {!isDetailedProductView && (
                           <td className="color-cell">
                             <DetailList
                               values={
@@ -6671,15 +6700,21 @@ function App() {
                             ) : null}
                           </td>
                         )}
-                        {hasMaterialData && (
+                        {showMaterialData && (
                           <td className="material-cell">
-                            <DetailList values={getMaterialValues(product)} />
+                            <DetailList
+                              values={getMaterialValues(product)}
+                              fallback={hasVerifiedProductDetails(product) ? "Not specified" : "Not captured"}
+                            />
                           </td>
                         )}
-                        {hasInnovationData && (
+                        {showInnovationData && (
                           <td className="detail-cell innovation-cell">
-                            {isLululemonView ? (
-                              <InnovationChips values={product.innovations} />
+                            {isDetailedProductView ? (
+                              <InnovationChips
+                                values={product.innovations}
+                                fallback={hasVerifiedProductDetails(product) ? "Not specified" : "Not captured"}
+                              />
                             ) : (
                               <DetailList values={product.innovations} />
                             )}
@@ -6717,6 +6752,8 @@ function App() {
                                 {highlight}
                               </button>
                             ))
+                          ) : !hasVerifiedProductDetails(product) ? (
+                            <span className="muted-detail">Not captured</span>
                           ) : (
                             <button
                               type="button"
@@ -6734,24 +6771,28 @@ function App() {
                         </td>
                         <td className="price-cell">{formatPrice(product)}</td>
                         <td>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setFilters({
-                                ...filters,
-                                availability: product.available
-                                  ? "available"
-                                  : "unavailable",
-                              })
-                            }
-                            className={
-                              product.available
-                                ? "availability yes"
-                                : "availability no"
-                            }
-                          >
-                            {product.available ? "Available" : "Unavailable"}
-                          </button>
+                          {!isProductAvailabilityKnown(product) ? (
+                            <span className="availability unknown">Not verified</span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setFilters({
+                                  ...filters,
+                                  availability: product.available
+                                    ? "available"
+                                    : "unavailable",
+                                })
+                              }
+                              className={
+                                product.available
+                                  ? "availability yes"
+                                  : "availability no"
+                              }
+                            >
+                              {product.available ? "Available" : "Unavailable"}
+                            </button>
+                          )}
                         </td>
                         </tr>
                       );

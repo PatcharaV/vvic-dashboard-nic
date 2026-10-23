@@ -335,12 +335,16 @@ def _clothing_products(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
         ]
         if product.get("top_seller") and "Topseller" not in shop_highlights:
             shop_highlights.append("Topseller")
+        subcategories = product.get("subcategories") or []
+        if not subcategories and product.get("brand") == "lululemon":
+            subcategories = [matched_categories[0]]
         clothing.append(
             _normalize_arcteryx_product_types(
                 {
                     **product,
                     "category": matched_categories[0],
                     "categories": matched_categories,
+                    "subcategories": subcategories,
                     "features": features,
                     "shop_highlights": shop_highlights,
                     "top_seller": "Topseller" in shop_highlights,
@@ -868,12 +872,8 @@ def _enrich_brand_detail_fields(products: list[dict[str, Any]]) -> list[dict[str
     enriched: list[dict[str, Any]] = []
     for product in products:
         brand = product.get("brand")
-        if brand not in {"tommybahama", "travismathew"}:
-            enriched.append(product)
-            continue
-
         material_details = _dedupe_strings(product.get("material_details") or [])
-        if not material_details:
+        if not material_details and brand in {"tommybahama", "travismathew"}:
             material_details = (
                 _infer_tommy_bahama_material(product)
                 if brand == "tommybahama"
@@ -1058,6 +1058,8 @@ def _apply_lululemon_detail_cache(
                 "all_colors": all_colors,
                 "color": " / ".join(available_colors or all_colors),
                 "available": bool(available_colors) if all_colors else product.get("available", True),
+                "availability_known": bool(all_colors) or bool(detail.get("price_known")),
+                "detail_status": "enriched",
                 "variant_count": max(
                     1,
                     len(color_variants) or product.get("variant_count", 1),
@@ -1107,6 +1109,11 @@ def _merge_cached_detail_fields(
         "unavailable_colors",
         "all_colors",
         "color_variants",
+        "price_min",
+        "price_max",
+        "price_known",
+        "availability_known",
+        "detail_status",
         "season_code",
         "season_year",
         "season_range",

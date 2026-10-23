@@ -238,6 +238,20 @@ def _feed_image(item: dict[str, Any]) -> str:
     return ""
 
 
+def _feed_prices(feed: list[dict[str, Any]]) -> list[float]:
+    prices: list[float] = []
+    for item in feed:
+        raw_price = item.get("price") or item.get("salePrice") or item.get("listPrice")
+        match = re.search(r"\d[\d,]*(?:\.\d+)?", str(raw_price or ""))
+        if not match:
+            continue
+        try:
+            prices.append(float(match.group(0).replace(",", "")))
+        except ValueError:
+            continue
+    return prices
+
+
 def _color_variants_from_feed(feed: list[dict[str, Any]]) -> list[dict[str, Any]]:
     variants: list[dict[str, Any]] = []
     for item in feed:
@@ -579,6 +593,7 @@ async def _normalize_url_with_detail(
     unavailable_colors = _dedupe(
         [variant["color"] for variant in color_variants if not variant.get("available")]
     )
+    prices = _feed_prices(feed)
     if color:
         product["color"] = color
     if color_variants:
@@ -591,6 +606,17 @@ async def _normalize_url_with_detail(
                 "available": _feed_available(feed_item) if feed_item else product["available"],
                 "variant_count": max(len(color_variants), product.get("variant_count", 1)),
                 "image": _feed_image(feed_item) if feed_item else product["image"],
+                "availability_known": True,
+                "detail_status": "enriched",
+            }
+        )
+    if prices:
+        product.update(
+            {
+                "price_min": min(prices),
+                "price_max": max(prices),
+                "price_known": True,
+                "detail_status": "enriched",
             }
         )
 

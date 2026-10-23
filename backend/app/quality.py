@@ -73,6 +73,8 @@ def summarize_brand(products: list[dict[str, Any]]) -> dict[str, Any]:
             "image": missing_field_count(products, "image"),
             "color": missing_field_count(products, "color"),
             "material": missing_field_count(products, "material"),
+            "innovation": missing_field_count(products, "innovations"),
+            "subcategory": missing_field_count(products, "subcategories"),
             "price": sum(
                 1
                 for product in products

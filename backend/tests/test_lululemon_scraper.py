@@ -21,10 +21,12 @@ class LululemonScraperTests(unittest.TestCase):
         self.assertEqual(product["brand"], "lululemon")
         self.assertEqual(product["audiences"], ["men"])
         self.assertEqual(product["categories"], ["Short Sleeve Shirts"])
-        self.assertEqual(product["subcategories"], [])
+        self.assertEqual(product["subcategories"], ["Short Sleeve Shirts"])
         self.assertEqual(product["material_details"], [])
         self.assertEqual(product["material"], "")
         self.assertEqual(product["price_known"], False)
+        self.assertEqual(product["availability_known"], False)
+        self.assertEqual(product["detail_status"], "catalog_only")
 
     def test_excludes_non_clothing_products(self):
         product = _normalize(
@@ -106,6 +108,8 @@ class LululemonScraperTests(unittest.TestCase):
         self.assertEqual(product["price_min"], 68)
         self.assertEqual(product["price_max"], 78)
         self.assertTrue(product["price_known"])
+        self.assertTrue(product["availability_known"])
+        self.assertEqual(product["detail_status"], "enriched")
 
     def test_applies_schema_details(self):
         product = _normalize(

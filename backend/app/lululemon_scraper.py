@@ -598,6 +598,8 @@ def _apply_schema_details(product: dict[str, Any], product_group: dict[str, Any]
         product["color"] = " / ".join(available_colors or all_colors)
         product["variant_count"] = max(1, len(color_variants))
         product["available"] = bool(available_colors)
+        product["availability_known"] = True
+        product["detail_status"] = "enriched"
     _apply_prices(product, prices)
 
 
@@ -686,6 +688,11 @@ def _apply_pdp_details(product: dict[str, Any], pdp_data: dict[str, Any]) -> Non
     product["material"] = " | ".join(product["material_details"])
     product["innovations"] = innovations
     _apply_prices(product, _collect_prices(pdp_data))
+    if color_variants or materials or product.get("price_known"):
+        product["availability_known"] = bool(
+            product.get("color_variants") or product.get("price_known")
+        )
+        product["detail_status"] = "enriched"
 
 
 async def _enrich_product(client: httpx.AsyncClient, product: dict[str, Any]) -> dict[str, Any]:
@@ -770,7 +777,7 @@ def _normalize(url: str, lastmod: str | None = None) -> dict[str, Any] | None:
         "description": "",
         "category": category,
         "categories": [category],
-        "subcategories": [],
+        "subcategories": [category],
         "collections": collections,
         "features": [],
         "shop_highlights": [],
@@ -782,6 +789,7 @@ def _normalize(url: str, lastmod: str | None = None) -> dict[str, Any] | None:
         "price_max": 0,
         "price_known": False,
         "available": True,
+        "availability_known": False,
         "variant_count": 1,
         "color": "",
         "available_colors": [],
@@ -796,6 +804,7 @@ def _normalize(url: str, lastmod: str | None = None) -> dict[str, Any] | None:
         "fabric_treatment": [],
         "construction": [],
         "innovations": [],
+        "detail_status": "catalog_only",
         "product_functions": [],
         "top_seller": False,
         "published_at": None,

@@ -11,6 +11,7 @@ from app.tommy_bahama_scraper import (
     _color_variants_from_feed,
     _detail_bullets,
     _feed_color,
+    _feed_prices,
     _material_bullets,
 )
 
@@ -186,6 +187,15 @@ class RuntimeSafetyTests(unittest.TestCase):
             ],
         )
 
+    def test_tommy_bahama_feed_prices_are_parsed(self):
+        feed = [
+            {"price": "$188.00", "listPrice": "198.00"},
+            {"price": "$1,088.50"},
+            {"price": None, "salePrice": "88.00", "listPrice": "128.00"},
+        ]
+
+        self.assertEqual(_feed_prices(feed), [188.0, 1088.5, 88.0])
+
     def test_travismathew_cached_products_get_detail_enrichment(self):
         products = _clothing_products(
             [
@@ -207,3 +217,25 @@ class RuntimeSafetyTests(unittest.TestCase):
 
         self.assertIn("Tour Guide performance fabric", products[0]["material_details"])
         self.assertIn("Golf performance fabric", products[0]["innovations"])
+
+    def test_rhone_cached_products_get_innovation_enrichment(self):
+        products = _clothing_products(
+            [
+                {
+                    "id": "rhone:test",
+                    "brand": "rhone",
+                    "brand_label": "Rhone",
+                    "title": "Training Shirt",
+                    "category": "Tees",
+                    "categories": ["Tees"],
+                    "collections": [],
+                    "description": "Lightweight, breathable and moisture-wicking.",
+                    "tags": [],
+                    "material": "88% Recycled Polyester, 12% Elastane",
+                    "material_details": [],
+                }
+            ]
+        )
+
+        self.assertIn("Breathable / cooling comfort", products[0]["innovations"])
+        self.assertIn("Quick-dry / moisture-wicking", products[0]["innovations"])

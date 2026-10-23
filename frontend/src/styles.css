@@ -7154,6 +7154,27 @@ td a:hover {
   background: #f9e4e5;
 }
 
+.availability.unknown {
+  display: inline-flex;
+  color: #6f686a;
+  background: #efedeb;
+  cursor: default;
+}
+
+.product-data-status {
+  width: fit-content;
+  margin-top: 6px;
+  padding: 3px 6px;
+  display: block;
+  color: #7a6469;
+  background: #f4eff0;
+  border-radius: 5px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
 .particl-table-wrap {
   border-color: #dedede;
   border-radius: 6px;
