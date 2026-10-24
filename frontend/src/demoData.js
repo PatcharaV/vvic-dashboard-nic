@@ -37,6 +37,7 @@ export const demoOptions = {
     "Spring Favorite",
     "STRAUSS Pick",
   ],
+  innovations: [],
   colors: ["Black", "Blue", "Grey", "Red"],
   material_keywords: ["Cotton", "Nylon", "Polyester", "Elastane"],
   categories: [

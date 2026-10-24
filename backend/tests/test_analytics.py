@@ -1,12 +1,28 @@
 import unittest
 
-from app.analytics import build_dashboard
+from app.analytics import build_dashboard, build_options, filter_products
 from app.catalog import _apply_season_classification
 from app.quality import validate_brand
 from app.rhone_scraper import _is_public_catalog_product
 
 
 class StraussVariantAggregationTests(unittest.TestCase):
+    def test_filters_and_lists_innovations(self):
+        products = [
+            {"id": "one", "innovations": ["Scuba", "Waffle-Knit"]},
+            {"id": "two", "innovations": []},
+        ]
+
+        self.assertEqual(
+            [product["id"] for product in filter_products(products, innovation="Scuba")],
+            ["one"],
+        )
+        self.assertEqual(
+            [product["id"] for product in filter_products(products, innovation="missing")],
+            ["two"],
+        )
+        self.assertEqual(build_options(products)["innovations"], ["Scuba", "Waffle-Knit"])
+
     def test_rhone_filters_internal_wholesale_products(self):
         self.assertFalse(
             _is_public_catalog_product(

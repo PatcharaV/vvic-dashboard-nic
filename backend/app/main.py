@@ -887,6 +887,7 @@ async def options(
     top_seller: str | None = Query(default=None, pattern="^(yes|no)$"),
     shop_highlight: str | None = None,
     material: str | None = None,
+    innovation: str | None = None,
     season: str | None = None,
 ) -> dict[str, Any]:
     if min_price is not None and max_price is not None and min_price > max_price:
@@ -913,6 +914,7 @@ async def options(
         top_seller=top_seller,
         shop_highlight=shop_highlight,
         material=material,
+        innovation=innovation,
         season=season,
     )
     options = build_options(products, selected_categories)
@@ -955,6 +957,7 @@ async def dashboard(
     top_seller: str | None = Query(default=None, pattern="^(yes|no)$"),
     shop_highlight: str | None = None,
     material: str | None = None,
+    innovation: str | None = None,
     season: str | None = None,
 ) -> dict[str, Any]:
     if min_price is not None and max_price is not None and min_price > max_price:
@@ -981,6 +984,7 @@ async def dashboard(
         top_seller=top_seller,
         shop_highlight=shop_highlight,
         material=material,
+        innovation=innovation,
         season=season,
     )
     return build_dashboard(
@@ -1011,6 +1015,7 @@ async def products(
     top_seller: str | None = Query(default=None, pattern="^(yes|no)$"),
     shop_highlight: str | None = None,
     material: str | None = None,
+    innovation: str | None = None,
     season: str | None = None,
     limit: int = Query(default=100, ge=1, le=500),
 ) -> dict[str, Any]:
@@ -1034,6 +1039,7 @@ async def products(
         top_seller=top_seller,
         shop_highlight=shop_highlight,
         material=material,
+        innovation=innovation,
         season=season,
     )
     return {"total": len(rows), "products": rows[:limit]}

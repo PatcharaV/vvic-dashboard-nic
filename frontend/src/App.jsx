@@ -4866,6 +4866,9 @@ function buildQuery(filters, period) {
   if (filters.material !== "all") {
     params.set("material", filters.material);
   }
+  if (filters.innovation !== "all") {
+    params.set("innovation", filters.innovation);
+  }
   if (filters.season !== "all") {
     params.set("season", filters.season);
   }
@@ -5356,6 +5359,7 @@ function App() {
     availability: "all",
     shopHighlight: "all",
     material: "all",
+    innovation: "all",
     season: "all",
   });
   const sections = DEFAULT_SECTIONS;
@@ -5425,6 +5429,7 @@ function App() {
     )?.label || "Product Dashboard";
   const productCategories = options.categories;
   const availableShopHighlights = options.shop_highlights || [];
+  const availableInnovations = options.innovations || [];
   const activityOptions = options.activities || [];
   const materialKeywords = options.material_keywords || [];
   const seasonOptions = options.seasons || [];
@@ -5481,9 +5486,15 @@ function App() {
   const hasActivityFilter =
     activityOptions.length > 0 || filters.activities.length > 0;
   const hasShopHighlightFilter =
-    availableShopHighlights.length > 0 || filters.shopHighlight !== "all";
+    isDetailedProductView ||
+    availableShopHighlights.length > 0 ||
+    filters.shopHighlight !== "all";
   const hasMaterialFilter =
     filters.material !== "all" || materialKeywords.length > 0;
+  const hasInnovationFilter =
+    isDetailedProductView ||
+    availableInnovations.length > 0 ||
+    filters.innovation !== "all";
   const hasSeasonFilter =
     filters.season !== "all" || seasonOptions.length > 0;
   const hasUnavailableProducts = dashboard.products.some(
@@ -5570,6 +5581,7 @@ function App() {
       availability: "all",
       shopHighlight: "all",
       material: "all",
+      innovation: "all",
       season: "all",
     }));
     setBrandWorkspacePage(routeBrand === "lululemon" ? "overview" : "product");
@@ -5780,6 +5792,7 @@ function App() {
       availability: "all",
       shopHighlight: "all",
       material: "all",
+      innovation: "all",
       season: "all",
     });
   }
@@ -6222,6 +6235,27 @@ function App() {
                       {keyword}
                     </option>
                   ))}
+                </select>
+              </label>
+            )}
+
+            {hasInnovationFilter && (
+              <label>
+                <span className="filter-title">Innovation</span>
+                <select
+                  value={filters.innovation}
+                  onChange={(event) =>
+                    setFilters({ ...filters, innovation: event.target.value })
+                  }
+                >
+                  <option value="all">All innovations</option>
+                  {availableInnovations.map((innovation) => (
+                    <option key={innovation} value={innovation}>
+                      {innovation}
+                    </option>
+                  ))}
+                  <option value="specified">Has innovation</option>
+                  <option value="missing">Not captured</option>
                 </select>
               </label>
             )}

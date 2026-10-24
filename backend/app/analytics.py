@@ -307,6 +307,7 @@ def filter_products(
     top_seller: str | None = None,
     shop_highlight: str | None = None,
     material: str | None = None,
+    innovation: str | None = None,
     season: str | None = None,
 ) -> list[dict[str, Any]]:
     selected_brands = set(brands or [])
@@ -344,6 +345,8 @@ def filter_products(
                     " ".join(product.get("technical_features", [])),
                     " ".join(product.get("fabric_treatment", [])),
                     " ".join(product.get("construction", [])),
+                    " ".join(product.get("innovations", [])),
+                    " ".join(_product_shop_highlights(product)),
                     " ".join(_product_functions(product)),
                 ]
             ).lower()
@@ -408,6 +411,17 @@ def filter_products(
             material
             and material not in {"all", "specified", "missing"}
             and material.lower() not in material_text.lower()
+        ):
+            return False
+        product_innovations = product.get("innovations") or []
+        if innovation == "specified" and not product_innovations:
+            return False
+        if innovation == "missing" and product_innovations:
+            return False
+        if (
+            innovation
+            and innovation not in {"all", "specified", "missing"}
+            and innovation not in product_innovations
         ):
             return False
         if selected_season and selected_season != "all":
@@ -742,6 +756,15 @@ def build_options(
                 highlight
                 for product in products
                 for highlight in _product_shop_highlights(product)
+            },
+            key=str.lower,
+        ),
+        "innovations": sorted(
+            {
+                innovation
+                for product in products
+                for innovation in product.get("innovations", [])
+                if innovation
             },
             key=str.lower,
         ),

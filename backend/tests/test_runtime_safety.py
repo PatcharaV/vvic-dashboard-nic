@@ -239,3 +239,25 @@ class RuntimeSafetyTests(unittest.TestCase):
 
         self.assertIn("Breathable / cooling comfort", products[0]["innovations"])
         self.assertIn("Quick-dry / moisture-wicking", products[0]["innovations"])
+
+    def test_lululemon_catalog_title_gets_innovation_keywords(self):
+        products = _clothing_products(
+            [
+                {
+                    "id": "lululemon:test",
+                    "brand": "lululemon",
+                    "brand_label": "lululemon",
+                    "title": "Scuba Cropped Funnel Neck Half Zip Waffle",
+                    "category": "Quarter Zips",
+                    "categories": ["Quarter Zips"],
+                    "collections": ["Scuba"],
+                    "description": "",
+                    "tags": [],
+                    "material": "",
+                    "material_details": [],
+                }
+            ]
+        )
+
+        self.assertIn("Scuba", products[0]["innovations"])
+        self.assertIn("Waffle-Knit", products[0]["innovations"])
