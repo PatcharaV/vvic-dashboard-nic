@@ -1103,8 +1103,11 @@ def _apply_lululemon_detail_cache(
         material_details = detail.get("material_details") or product.get(
             "material_details", []
         )
-        innovations = clean_lululemon_innovations(
-            detail.get("innovations") or product.get("innovations", [])
+        innovations = _canonical_innovations(
+            [
+                *(product.get("innovations") or []),
+                *clean_lululemon_innovations(detail.get("innovations") or []),
+            ]
         )
         style_number = product.get("style_number") or _lululemon_style_number(
             color_variants

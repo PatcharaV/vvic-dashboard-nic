@@ -5,7 +5,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from app import main
-from app.catalog import _clothing_products
+from app.catalog import _apply_lululemon_detail_cache, _clothing_products
 from app.tommy_bahama_scraper import (
     _candidate_url,
     _color_variants_from_feed,
@@ -286,3 +286,25 @@ class RuntimeSafetyTests(unittest.TestCase):
         )
 
         self.assertEqual(products[0]["innovations"], [])
+
+    def test_lululemon_detail_cache_does_not_restore_fabric_names_as_innovation(self):
+        products = _apply_lululemon_detail_cache(
+            [
+                {
+                    "id": "lululemon:test",
+                    "brand": "lululemon",
+                    "product_id": "prod-test",
+                    "innovations": ["Breathable"],
+                    "material_details": [],
+                }
+            ],
+            {
+                "prod-test": {
+                    "innovations": ["Nulu", "Waffle-Knit", "Four-Way Stretch"],
+                    "material_details": [],
+                    "color_variants": [],
+                }
+            },
+        )
+
+        self.assertEqual(products[0]["innovations"], ["Breathable", "Four Way Stretch"])
