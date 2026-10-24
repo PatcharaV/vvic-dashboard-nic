@@ -847,43 +847,96 @@ def _infer_brand_innovations(product: dict[str, Any]) -> list[str]:
             " ".join(product.get("collections") or []),
             " ".join(product.get("tags") or []),
             " ".join(product.get("product_functions") or []),
+            " ".join(product.get("innovations") or []),
         ]
     ).lower()
     innovations: list[str] = []
     for pattern, label in (
-        (r"\bnulu\b", "Nulu"),
-        (r"\bnulux\b", "Nulux"),
-        (r"\beverlux\b", "Everlux"),
-        (r"\bluxtreme\b", "Luxtreme"),
-        (r"\bluon\b", "Luon"),
-        (r"\bsoftstreme\b", "Softstreme"),
-        (r"\bwarpstreme\b", "Warpstreme"),
-        (r"\bwovenair\b", "WovenAir"),
-        (r"\butilitech\b", "Utilitech"),
-        (r"\bsenseknit\b", "SenseKnit"),
-        (r"\bsilverescent\b", "Silverescent"),
-        (r"\bmetal vent tech\b", "Metal Vent Tech"),
-        (r"\bswiftly\b", "Swiftly"),
-        (r"\bscuba\b", "Scuba"),
-        (r"\bwaffle(?:[- ]knit)?\b", "Waffle-Knit"),
-        (r"\bfrench terry\b", "French Terry"),
-        (r"\bripstop\b", "Ripstop"),
-        (r"\bmesh\b", "Mesh"),
-        (r"\bislandzone\b|cool|breathable|ventilat", "Breathable / cooling comfort"),
-        (r"\bstretch\b|spandex|elastane|open to close|boracay", "Stretch comfort"),
-        (r"\bquick[- ]?dry|dries quickly|moisture[- ]?wick|wicking", "Quick-dry / moisture-wicking"),
-        (r"\bupf|sun protection|rash guard", "Sun protection"),
-        (r"\blightweight\b|skyloft", "Lightweight comfort"),
-        (r"\bwrinkle\b|travel\b", "Travel-ready wrinkle resistance"),
-        (r"\bwaterproof|water[- ]?repellent|water resistant", "Water protection"),
-        (r"\binsulat|thermal|heater", "Warmth / thermal comfort"),
-        (r"\bcloud\b|cloud waffle", "Soft handfeel"),
-        (r"\bmoveknit|active collection|active top|active bottom", "Active performance"),
-        (r"\btour guide\b", "Golf performance fabric"),
+        (r"\bislandzone\b|\bcool(?:ing)?\b|\bbreathable\b|ventilat", "Breathable"),
+        (r"\bfour[- ]way stretch\b|\b4[- ]way stretch\b", "Four Way Stretch"),
+        (r"\bsweat[- ]?wick|moisture[- ]?wick|\bwicking\b|\bislandzone\b", "Sweat Wicking"),
+        (r"\bquick[- ]?dry|dries quickly|\bislandzone\b", "Quick Drying"),
+        (r"\bupf|sun protection|rash guard", "Sun Protection"),
+        (r"\blightweight\b|skyloft", "Lightweight"),
+        (r"\bwrinkle\b|travel\b", "Wrinkle Resistant"),
+        (r"\bwaterproof|water[- ]?repellent|water resistant", "Water Resistant"),
+        (r"\binsulat|thermal|heater", "Thermal Insulation"),
+        (r"\bcloud\b|cloud waffle|soft handfeel", "Soft Handfeel"),
+        (r"\banti[- ]?(?:stink|odor|odour)\b|\bgoldfusion\b", "Anti Odor"),
+        (r"\babrasion[- ]?resistant\b", "Abrasion Resistant"),
+        (r"\bshape retention\b", "Shape Retention"),
     ):
         if re.search(pattern, text, re.I) and label not in innovations:
             innovations.append(label)
     return innovations
+
+
+NON_FUNCTIONAL_INNOVATIONS = {
+    "ABC",
+    "Align",
+    "Dance Studio",
+    "Everlux",
+    "Fast and Free",
+    "French Terry",
+    "License to Train",
+    "Luon",
+    "Luxtreme",
+    "Mesh",
+    "Metal Vent Tech",
+    "Nulu",
+    "Nulux",
+    "Pace Breaker",
+    "Pima Cotton",
+    "Ripstop",
+    "Scuba",
+    "SenseKnit",
+    "Silverescent",
+    "Softstreme",
+    "Swiftly",
+    "Ultralu",
+    "Utilitech",
+    "VersaTwill",
+    "Waffle-Knit",
+    "Warpstreme",
+    "WovenAir",
+    "Wunder Train",
+    "Zeroed In",
+}
+
+INNOVATION_ALIASES = {
+    "Abrasion-Resistant": ("Abrasion Resistant",),
+    "Anti-Stink": ("Anti Odor",),
+    "Breathable / cooling comfort": ("Breathable",),
+    "Four-Way Stretch": ("Four Way Stretch",),
+    "Lightweight comfort": ("Lightweight",),
+    "Quick-Drying": ("Quick Drying",),
+    "Quick-dry / moisture-wicking": ("Quick Drying", "Sweat Wicking"),
+    "Shape Retention": ("Shape Retention",),
+    "Soft handfeel": ("Soft Handfeel",),
+    "Stretch comfort": (),
+    "Sweat-Wicking": ("Sweat Wicking",),
+    "Sun protection": ("Sun Protection",),
+    "Travel-ready wrinkle resistance": ("Wrinkle Resistant",),
+    "Warmth / thermal comfort": ("Thermal Insulation",),
+    "Water protection": ("Water Resistant",),
+    "Water-Resistant": ("Water Resistant",),
+    "Wrinkle-Resistant": ("Wrinkle Resistant",),
+    "Everyday Performance": (),
+    "Active performance": (),
+    "Golf performance fabric": (),
+}
+
+
+def _canonical_innovations(values: list[str]) -> list[str]:
+    canonical: list[str] = []
+    for value in _dedupe_strings(values):
+        if value in NON_FUNCTIONAL_INNOVATIONS:
+            continue
+        mapped = INNOVATION_ALIASES.get(value, (value,))
+        for label in mapped:
+            if label and label not in canonical:
+                canonical.append(label)
+    return canonical
 
 
 def _enrich_brand_detail_fields(products: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -910,8 +963,9 @@ def _enrich_brand_detail_fields(products: list[dict[str, Any]]) -> list[dict[str
             "material_details": material_details,
             "product_functions": product_functions,
         }
-        innovations = _dedupe_strings(
-            [*(product.get("innovations") or []), *_infer_brand_innovations(innovation_input)]
+        source_innovations = _canonical_innovations(product.get("innovations") or [])
+        innovations = _canonical_innovations(
+            [*source_innovations, *_infer_brand_innovations(innovation_input)]
         )
         enriched.append(
             {

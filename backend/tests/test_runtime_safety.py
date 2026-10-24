@@ -119,7 +119,7 @@ class RuntimeSafetyTests(unittest.TestCase):
         )
 
         self.assertIn("Polyester performance fabric", products[0]["material_details"])
-        self.assertIn("Breathable / cooling comfort", products[0]["innovations"])
+        self.assertIn("Breathable", products[0]["innovations"])
 
     def test_tommy_bahama_material_and_care_bullets_are_split(self):
         detail = {
@@ -216,7 +216,7 @@ class RuntimeSafetyTests(unittest.TestCase):
         )
 
         self.assertIn("Tour Guide performance fabric", products[0]["material_details"])
-        self.assertIn("Golf performance fabric", products[0]["innovations"])
+        self.assertIn("Breathable", products[0]["innovations"])
 
     def test_rhone_cached_products_get_innovation_enrichment(self):
         products = _clothing_products(
@@ -237,10 +237,10 @@ class RuntimeSafetyTests(unittest.TestCase):
             ]
         )
 
-        self.assertIn("Breathable / cooling comfort", products[0]["innovations"])
-        self.assertIn("Quick-dry / moisture-wicking", products[0]["innovations"])
+        self.assertIn("Breathable", products[0]["innovations"])
+        self.assertIn("Sweat Wicking", products[0]["innovations"])
 
-    def test_lululemon_catalog_title_gets_innovation_keywords(self):
+    def test_lululemon_innovations_only_include_performance_keywords(self):
         products = _clothing_products(
             [
                 {
@@ -251,13 +251,38 @@ class RuntimeSafetyTests(unittest.TestCase):
                     "category": "Quarter Zips",
                     "categories": ["Quarter Zips"],
                     "collections": ["Scuba"],
-                    "description": "",
+                    "description": "Breathable, sweat-wicking fabric with four-way stretch.",
                     "tags": [],
                     "material": "",
                     "material_details": [],
+                    "innovations": ["Scuba", "Waffle-Knit"],
                 }
             ]
         )
 
-        self.assertIn("Scuba", products[0]["innovations"])
-        self.assertIn("Waffle-Knit", products[0]["innovations"])
+        self.assertEqual(
+            products[0]["innovations"],
+            ["Breathable", "Four Way Stretch", "Sweat Wicking"],
+        )
+
+    def test_lululemon_catalog_name_does_not_invent_performance(self):
+        products = _clothing_products(
+            [
+                {
+                    "id": "lululemon:catalog-only",
+                    "brand": "lululemon",
+                    "brand_label": "lululemon",
+                    "title": "Scuba High Rise Short 5 Waffle",
+                    "category": "Shorts",
+                    "categories": ["Shorts"],
+                    "collections": ["Scuba"],
+                    "description": "",
+                    "tags": [],
+                    "material": "",
+                    "material_details": [],
+                    "innovations": ["Scuba", "Waffle-Knit"],
+                }
+            ]
+        )
+
+        self.assertEqual(products[0]["innovations"], [])
