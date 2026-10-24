@@ -6248,7 +6248,7 @@ function App() {
                     setFilters({ ...filters, innovation: event.target.value })
                   }
                 >
-                  <option value="all">All innovations</option>
+                  <option value="all">All performance innovations</option>
                   {availableInnovations.map((innovation) => (
                     <option key={innovation} value={innovation}>
                       {innovation}
