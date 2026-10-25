@@ -6321,12 +6321,13 @@ function App() {
                   filters.availability === "available" ? "all" : "available",
               })
             }
-            title="Toggle available products"
+            title="Toggle products currently purchasable online"
           >
-            <span>Available products</span>
+            <span>Online availability</span>
             <strong>{dashboard.summary.availability_rate}%</strong>
             <small>
-              {formatNumber.format(dashboard.summary.available_products)} available
+              {formatNumber.format(dashboard.summary.available_products)} of{" "}
+              {formatNumber.format(dashboard.summary.total_products)} listings purchasable
             </small>
           </button>
         </section>
