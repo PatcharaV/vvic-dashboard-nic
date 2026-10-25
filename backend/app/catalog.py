@@ -1765,6 +1765,96 @@ async def refresh_lululemon_products(
     return payload
 
 
+async def refresh_lskd_products(
+    scrape_period: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    cached = load_period_cache(scrape_period) or load_cache() or {}
+    cached_products = cached.get("products", [])
+    cached_lskd = [
+        product for product in cached_products if product.get("brand") == "lskd"
+    ]
+
+    result = await _scrape_brand_with_timeout(
+        "LSKD",
+        scrape_lskd_products(),
+        SCRAPE_BRAND_TIMEOUT_SECONDS,
+    )
+    lskd_products = _apply_season_classification(
+        _merge_cached_detail_fields(
+            _clothing_products(result.get("products", [])),
+            cached_lskd,
+        ),
+        scrape_period,
+    )
+    result["products"] = lskd_products
+    result["product_count"] = len(lskd_products)
+
+    audit = validate_brand(
+        "lskd",
+        "LSKD",
+        lskd_products,
+        cached_lskd,
+    )
+    if audit["decision"] == "fallback" and cached_lskd:
+        lskd_products = cached_lskd
+
+    products = [
+        product for product in cached_products if product.get("brand") != "lskd"
+    ] + lskd_products
+    products.sort(
+        key=lambda item: (
+            item.get("brand_label", "").lower(),
+            item.get("title", "").lower(),
+        )
+    )
+
+    cached_sources = [
+        source
+        for source in cached.get("sources", [])
+        if source.get("brand") != "lskd"
+    ]
+    source_urls = list(cached.get("source") or [])
+    if result["source"] not in source_urls:
+        source_urls.append(result["source"])
+    payload = {
+        **cached,
+        "source": source_urls,
+        "sources": [
+            *cached_sources,
+            {
+                "brand": "lskd",
+                "label": "LSKD",
+                "url": result["source"],
+                "product_count": len(lskd_products),
+                "scraped_at": result["scraped_at"],
+                "collection_options": result.get("collection_options", []),
+            },
+        ],
+        "scraped_at": datetime.now(timezone.utc).isoformat(),
+        "scrape_period": scrape_period or cached.get("scrape_period") or {},
+        "product_count": len(products),
+        "products": products,
+        "quality_audit": {
+            "status": "published" if audit["decision"] == "publish" else "published_with_fallback",
+            "brands": [audit],
+        },
+    }
+
+    stamp = utc_stamp()
+    write_json(_staging_path(scrape_period, stamp), payload)
+    backup_file(CACHE_PATH, BACKUP_DIR, stamp)
+    _write_payload(CACHE_PATH, payload)
+    if scrape_period:
+        backup_file(period_cache_path(scrape_period), BACKUP_DIR, stamp)
+        _write_payload(period_cache_path(scrape_period), payload)
+    write_brand_archives(payload, [audit])
+    write_json(
+        _audit_path(scrape_period, stamp),
+        build_audit_report(scrape_period, [audit], products),
+    )
+    return payload
+
+
 def load_cache() -> dict[str, Any] | None:
     if not CACHE_PATH.exists():
         return None

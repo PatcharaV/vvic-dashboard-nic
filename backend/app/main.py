@@ -26,6 +26,7 @@ from .catalog import (
     load_latest_period_cache,
     load_period_cache,
     normalize_csv,
+    refresh_lskd_products,
     refresh_lululemon_products,
     scrape_products,
 )
@@ -849,6 +850,28 @@ async def auto_scrape_monthly_status() -> dict[str, Any]:
 async def auto_scrape_lululemon_prices(token: str | None = None) -> dict[str, Any]:
     validate_scrape_access(token)
     return start_lululemon_price_scrape("manual-price-refresh")
+
+
+@app.post("/api/auto-scrape/lskd")
+async def auto_scrape_lskd(token: str | None = None) -> dict[str, Any]:
+    validate_scrape_access(token)
+    period = current_scrape_period()
+    try:
+        data = await refresh_lskd_products(scrape_period=period)
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"LSKD scraping failed: {exc}") from exc
+    store["data"] = data
+    store[f"data:{period['label']}"] = data
+    lskd_count = sum(
+        1 for product in data.get("products", []) if product.get("brand") == "lskd"
+    )
+    return {
+        "status": "completed",
+        "brand": "lskd",
+        "product_count": lskd_count,
+        "scraped_at": data.get("scraped_at"),
+        "scrape_period": period,
+    }
 
 
 @app.get("/api/audits/latest")

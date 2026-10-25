@@ -271,7 +271,11 @@ async def _all_products(client: httpx.AsyncClient) -> list[dict[str, Any]]:
             break
         response.raise_for_status()
         batch = response.json().get("products", [])
-        products.extend(batch)
+        products.extend(
+            normalized
+            for normalized in (_normalize(product) for product in batch)
+            if normalized is not None
+        )
         if len(batch) < PAGE_SIZE:
             break
         await asyncio.sleep(0.25)
@@ -290,13 +294,7 @@ async def scrape_lskd_products() -> dict[str, Any]:
         timeout=timeout,
         follow_redirects=True,
     ) as client:
-        raw_products = await _all_products(client)
-
-    products = [
-        normalized
-        for normalized in (_normalize(product) for product in raw_products)
-        if normalized is not None
-    ]
+        products = await _all_products(client)
     products.sort(key=lambda item: item["title"].lower())
     return {
         "source": BASE_URL,
