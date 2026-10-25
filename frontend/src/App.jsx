@@ -1010,14 +1010,8 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
     ? "sales"
     : tableMetric;
   const tableIsSales = effectiveTableMetric === "sales";
-  const tableIsFobSpend = effectiveTableMetric === "fob";
   const tableValueMetric = effectiveTableMetric === "units" ? "units" : "sales";
-  const tableNygLabel = tableIsFobSpend ? "NYG Sale" : "NYG";
-  const tableLabel = tableIsSales
-    ? "Total Sale"
-    : tableIsFobSpend
-      ? "FOB Spend"
-      : "Total Unit";
+  const tableLabel = tableIsSales ? "Total Sale" : "Total Unit";
   const tooltipMetricLabel = isSales
     ? "Sales"
     : isUnits
@@ -1104,7 +1098,6 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
           <div className="lululemon-subtype-table-controls" aria-label="Table value">
             {[
               { value: "sales", label: "Sale" },
-              { value: "fob", label: "FOB Spend" },
               { value: "units", label: "Units" },
             ].map((option) => (
               <button
@@ -1124,7 +1117,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
             <thead>
               <tr>
                 <th>Product type</th>
-                <th>{tableNygLabel}</th>
+                <th>NYG</th>
                 <th>{tableLabel}</th>
               </tr>
             </thead>
@@ -1143,13 +1136,16 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
                     )}
                   </td>
                   <td>
-                    {formatComparisonValue(
-                      effectiveTableMetric === "units"
-                        ? row.lululemonUnits
-                        : tableIsFobSpend
-                          ? row.tableLululemonFobSpend
-                          : row.tableLululemonSales,
-                      tableValueMetric,
+                    {tableIsSales ? (
+                      <span className="lululemon-table-value-stack">
+                        <strong>{formatComparisonValue(row.tableLululemonSales, "sales")}</strong>
+                        <small>
+                          <span>FOB Spend</span>
+                          {formatComparisonValue(row.tableLululemonFobSpend, "sales")}
+                        </small>
+                      </span>
+                    ) : (
+                      formatComparisonValue(row.lululemonUnits, tableValueMetric)
                     )}
                   </td>
                 </tr>
