@@ -851,12 +851,18 @@ def _infer_brand_innovations(product: dict[str, Any]) -> list[str]:
         ]
     ).lower()
     innovations: list[str] = []
+    if product.get("brand") == "lululemon" and re.search(r"\bscuba\b", text, re.I):
+        innovations.extend(
+            ["Breathable", "Soft Against Skin", "Lightweight Warmth"]
+        )
     for pattern, label in (
         (r"\bislandzone\b|\bcool(?:ing)?\b|\bbreathable\b|ventilat", "Breathable"),
         (r"\bfour[- ]way stretch\b|\b4[- ]way stretch\b", "Four Way Stretch"),
         (r"\bsweat[- ]?wick|moisture[- ]?wick|\bwicking\b|\bislandzone\b", "Sweat Wicking"),
         (r"\bquick[- ]?dry|dries quickly|\bislandzone\b", "Quick Drying"),
         (r"\bupf|sun protection|rash guard", "Sun Protection"),
+        (r"\bsoft against skin\b", "Soft Against Skin"),
+        (r"\blightweight warmth\b", "Lightweight Warmth"),
         (r"\blightweight\b|skyloft", "Lightweight"),
         (r"\bwrinkle\b|travel\b", "Wrinkle Resistant"),
         (r"\bwaterproof|water[- ]?repellent|water resistant", "Water Resistant"),
@@ -936,6 +942,12 @@ def _canonical_innovations(values: list[str]) -> list[str]:
         for label in mapped:
             if label and label not in canonical:
                 canonical.append(label)
+    if "Lightweight Warmth" in canonical:
+        canonical = [
+            label
+            for label in canonical
+            if label not in {"Lightweight", "Thermal Insulation"}
+        ]
     return canonical
 
 

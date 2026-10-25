@@ -262,10 +262,16 @@ class RuntimeSafetyTests(unittest.TestCase):
 
         self.assertEqual(
             products[0]["innovations"],
-            ["Breathable", "Four Way Stretch", "Sweat Wicking"],
+            [
+                "Breathable",
+                "Soft Against Skin",
+                "Lightweight Warmth",
+                "Four Way Stretch",
+                "Sweat Wicking",
+            ],
         )
 
-    def test_lululemon_catalog_name_does_not_invent_performance(self):
+    def test_lululemon_scuba_catalog_uses_verified_family_fallback(self):
         products = _clothing_products(
             [
                 {
@@ -285,7 +291,10 @@ class RuntimeSafetyTests(unittest.TestCase):
             ]
         )
 
-        self.assertEqual(products[0]["innovations"], [])
+        self.assertEqual(
+            products[0]["innovations"],
+            ["Breathable", "Soft Against Skin", "Lightweight Warmth"],
+        )
 
     def test_lululemon_detail_cache_does_not_restore_fabric_names_as_innovation(self):
         products = _apply_lululemon_detail_cache(

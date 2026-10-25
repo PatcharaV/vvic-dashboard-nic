@@ -72,7 +72,10 @@ class LululemonScraperTests(unittest.TestCase):
                                             "items": ["95% Cotton", "5% Elastane"],
                                         },
                                         "text": "",
-                                    }
+                                    },
+                                    {"text": "Naturally breathable", "list": None},
+                                    {"text": "Soft against skin", "list": None},
+                                    {"text": "Lightweight warmth", "list": None},
                                 ]
                             }
                         ]
@@ -103,7 +106,12 @@ class LululemonScraperTests(unittest.TestCase):
         self.assertEqual(product["material_details"], ["Body: 61% Organic Cotton, 32% Polyester"])
         self.assertEqual(
             product["innovations"],
-            ["Four-Way Stretch"],
+            [
+                "Breathable",
+                "Soft Against Skin",
+                "Lightweight Warmth",
+                "Four-Way Stretch",
+            ],
         )
         self.assertEqual(product["price_min"], 68)
         self.assertEqual(product["price_max"], 78)
@@ -212,7 +220,7 @@ class LululemonScraperTests(unittest.TestCase):
         )
         self.assertEqual(
             enriched["innovations"],
-            ["Four-Way Stretch", "Sweat-Wicking", "UPF 40+"],
+            ["Four Way Stretch", "Sweat Wicking", "UPF 40+"],
         )
         self.assertEqual(enriched["price_min"], 68)
         self.assertEqual(enriched["price_max"], 78)

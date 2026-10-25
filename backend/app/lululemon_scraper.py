@@ -125,6 +125,8 @@ INNOVATION_PATTERNS = [
     (r"\bAbrasion[- ]?Resistant\b", "Abrasion-Resistant"),
     (r"\bBreathable\b", "Breathable"),
     (r"\bVentilation\b|\bVentilated\b", "Ventilation"),
+    (r"\bSoft Against Skin\b", "Soft Against Skin"),
+    (r"\bLightweight Warmth\b", "Lightweight Warmth"),
     (r"\bLightweight\b", "Lightweight"),
     (r"\bAnti[- ]?Stink\b|\bOdou?r[- ]?Control\b", "Anti-Stink"),
 ]
@@ -165,6 +167,8 @@ def clean_lululemon_innovations(values: Any) -> list[str]:
                 _append_unique(cleaned, label)
     if any(value.startswith("UPF ") for value in cleaned):
         cleaned = [value for value in cleaned if value != "UV Protection"]
+    if "Lightweight Warmth" in cleaned:
+        cleaned = [value for value in cleaned if value != "Lightweight"]
     return cleaned
 
 
@@ -361,6 +365,10 @@ def _material_values(color_attributes: list[dict[str, Any]]) -> list[str]:
 def _innovation_values(color_attributes: list[dict[str, Any]]) -> list[str]:
     values: list[str] = []
     for attribute in color_attributes:
+        care = attribute.get("careAndContent")
+        if isinstance(care, dict):
+            _append_unique(values, care.get("title"))
+            _append_unique(values, _panel_text_values(care))
         fabric = attribute.get("fabricOrBenefits")
         if isinstance(fabric, dict):
             _append_unique(values, fabric.get("title"))
