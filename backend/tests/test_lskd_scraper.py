@@ -117,7 +117,7 @@ class LskdScraperTests(unittest.TestCase):
         self.assertEqual(normalized["audiences"], ["men", "women"])
         self.assertEqual(normalized["audience_labels"], ["Men", "Women"])
 
-    def test_separate_lskd_cache_is_merged_into_catalog(self):
+    def test_separate_lskd_cache_loads_independently(self):
         product = {
             "id": "lskd:1",
             "brand": "lskd",
@@ -143,9 +143,7 @@ class LskdScraperTests(unittest.TestCase):
                 encoding="utf-8",
             )
             try:
-                payload = catalog._normalize_cached_payload(
-                    {"source": [], "sources": [], "products": []}
-                )
+                payload = catalog.load_lskd_cache()
             finally:
                 catalog.LSKD_CACHE_PATH = original_path
 

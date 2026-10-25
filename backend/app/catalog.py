@@ -1272,18 +1272,6 @@ def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
     raw_products = list(payload.get("products", []))
     sources = list(payload.get("sources", []))
     source_urls = list(payload.get("source", []))
-    if not any(product.get("brand") == "lskd" for product in raw_products):
-        try:
-            lskd_cache = json.loads(LSKD_CACHE_PATH.read_text(encoding="utf-8"))
-        except (FileNotFoundError, json.JSONDecodeError, OSError):
-            lskd_cache = {}
-        raw_products.extend(lskd_cache.get("products", []))
-        lskd_source = next(iter(lskd_cache.get("sources", [])), None)
-        if lskd_source:
-            sources.append(lskd_source)
-        for source_url in lskd_cache.get("source", []):
-            if source_url not in source_urls:
-                source_urls.append(source_url)
     products = _apply_season_classification(
         _apply_lululemon_detail_cache(
             _clothing_products(
@@ -1787,11 +1775,8 @@ async def refresh_lskd_products(
     scrape_period: dict[str, Any] | None = None,
     cached_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    cached = cached_payload or load_period_cache(scrape_period) or load_cache() or {}
-    cached_products = cached.get("products", [])
-    cached_lskd = [
-        product for product in cached_products if product.get("brand") == "lskd"
-    ]
+    cached = load_lskd_cache() or {}
+    cached_lskd = cached.get("products", [])
 
     result = await _scrape_brand_with_timeout(
         "LSKD",
@@ -1817,57 +1802,25 @@ async def refresh_lskd_products(
     if audit["decision"] == "fallback" and cached_lskd:
         lskd_products = cached_lskd
 
-    products = [
-        product for product in cached_products if product.get("brand") != "lskd"
-    ] + lskd_products
-    products.sort(
-        key=lambda item: (
-            item.get("brand_label", "").lower(),
-            item.get("title", "").lower(),
-        )
-    )
-
-    cached_sources = [
-        source
-        for source in cached.get("sources", [])
-        if source.get("brand") != "lskd"
-    ]
-    source_urls = list(cached.get("source") or [])
-    if result["source"] not in source_urls:
-        source_urls.append(result["source"])
-    payload = {
-        **cached,
-        "source": source_urls,
-        "sources": [
-            *cached_sources,
-            {
-                "brand": "lskd",
-                "label": "LSKD",
-                "url": result["source"],
-                "product_count": len(lskd_products),
-                "scraped_at": result["scraped_at"],
-                "collection_options": result.get("collection_options", []),
-            },
-        ],
+    stamp = utc_stamp()
+    lskd_payload = {
+        "source": [result["source"]],
+        "sources": [{
+            "brand": "lskd",
+            "label": "LSKD",
+            "url": result["source"],
+            "product_count": len(lskd_products),
+            "scraped_at": result["scraped_at"],
+            "collection_options": result.get("collection_options", []),
+        }],
         "scraped_at": datetime.now(timezone.utc).isoformat(),
         "scrape_period": scrape_period or cached.get("scrape_period") or {},
-        "product_count": len(products),
-        "products": products,
+        "product_count": len(lskd_products),
+        "products": lskd_products,
         "quality_audit": {
             "status": "published" if audit["decision"] == "publish" else "published_with_fallback",
             "brands": [audit],
         },
-    }
-
-    stamp = utc_stamp()
-    lskd_payload = {
-        "source": [result["source"]],
-        "sources": [payload["sources"][-1]],
-        "scraped_at": payload["scraped_at"],
-        "scrape_period": payload["scrape_period"],
-        "product_count": len(lskd_products),
-        "products": lskd_products,
-        "quality_audit": payload["quality_audit"],
     }
     backup_file(LSKD_CACHE_PATH, BACKUP_DIR, stamp)
     _write_payload(LSKD_CACHE_PATH, lskd_payload)
@@ -1875,7 +1828,18 @@ async def refresh_lskd_products(
         _audit_path(scrape_period, stamp),
         build_audit_report(scrape_period, [audit], lskd_products),
     )
-    return payload
+    return lskd_payload
+
+
+def load_lskd_cache() -> dict[str, Any] | None:
+    if not LSKD_CACHE_PATH.exists():
+        return None
+    try:
+        return _normalize_cached_payload(
+            json.loads(LSKD_CACHE_PATH.read_text(encoding="utf-8"))
+        )
+    except (json.JSONDecodeError, OSError):
+        return None
 
 
 def load_cache() -> dict[str, Any] | None:

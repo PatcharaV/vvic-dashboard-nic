@@ -23,6 +23,7 @@ from .catalog import (
     HISTORY_START_YEAR,
     available_periods,
     load_cache,
+    load_lskd_cache,
     load_latest_period_cache,
     load_period_cache,
     normalize_csv,
@@ -595,6 +596,26 @@ async def get_data(
     return store[cache_key]
 
 
+async def get_data_for_brands(
+    selected_brands: list[str],
+    scrape_period: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    data = await get_data(scrape_period=scrape_period)
+    if "lskd" not in selected_brands:
+        return data
+    lskd_data = load_lskd_cache()
+    if not lskd_data:
+        return data
+    if set(selected_brands) == {"lskd"}:
+        return lskd_data
+    return {
+        **data,
+        "source": [*data.get("source", []), *lskd_data.get("source", [])],
+        "sources": [*data.get("sources", []), *lskd_data.get("sources", [])],
+        "products": [*data.get("products", []), *lskd_data.get("products", [])],
+    }
+
+
 async def monthly_auto_scrape_loop() -> None:
     while True:
         now = datetime.now(LOCAL_TZ)
@@ -864,15 +885,10 @@ async def auto_scrape_lskd(token: str | None = None) -> dict[str, Any]:
         )
     except Exception as exc:
         raise HTTPException(status_code=502, detail=f"LSKD scraping failed: {exc}") from exc
-    store["data"] = data
-    store[f"data:{period['label']}"] = data
-    lskd_count = sum(
-        1 for product in data.get("products", []) if product.get("brand") == "lskd"
-    )
     return {
         "status": "completed",
         "brand": "lskd",
-        "product_count": lskd_count,
+        "product_count": data.get("product_count", 0),
         "scraped_at": data.get("scraped_at"),
         "scrape_period": period,
     }
@@ -921,9 +937,9 @@ async def options(
         raise HTTPException(status_code=400, detail="min_price must not exceed max_price")
 
     scrape_period = make_scrape_period(month, year)
-    data = await get_data(scrape_period=scrape_period)
     selected_categories = normalize_csv(categories)
     selected_brand_values = normalize_csv(brands)
+    data = await get_data_for_brands(selected_brand_values, scrape_period)
     products = filter_products(
         data["products"],
         search,
@@ -945,7 +961,10 @@ async def options(
         season=season,
     )
     options = build_options(products, selected_categories)
-    options["brands"] = build_options(data["products"])["brands"]
+    all_brands = build_options((await get_data(scrape_period=scrape_period))["products"])["brands"]
+    if not any(brand.get("value") == "lskd" for brand in all_brands):
+        all_brands.append({"value": "lskd", "label": "LSKD"})
+    options["brands"] = all_brands
     selected_brands = set(selected_brand_values)
     extra_collections = [
         collection
@@ -991,9 +1010,9 @@ async def dashboard(
         raise HTTPException(status_code=400, detail="min_price must not exceed max_price")
 
     scrape_period = make_scrape_period(month, year)
-    data = await get_data(scrape_period=scrape_period)
     selected_categories = normalize_csv(categories)
     selected_brand_values = normalize_csv(brands)
+    data = await get_data_for_brands(selected_brand_values, scrape_period)
     products = filter_products(
         data["products"],
         search=search,
@@ -1047,8 +1066,8 @@ async def products(
     limit: int = Query(default=100, ge=1, le=500),
 ) -> dict[str, Any]:
     scrape_period = make_scrape_period(month, year)
-    data = await get_data(scrape_period=scrape_period)
     selected_brand_values = normalize_csv(brands)
+    data = await get_data_for_brands(selected_brand_values, scrape_period)
     rows = filter_products(
         data["products"],
         search=search,
