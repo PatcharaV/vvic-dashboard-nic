@@ -2701,32 +2701,9 @@ button.lululemon-bar-row.selected > strong {
   font-weight: 800;
 }
 
-.lululemon-table-value-stack {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
-}
-
-.lululemon-table-value-stack > strong {
-  color: #171315;
-  font-size: 10px;
-}
-
-.lululemon-table-value-stack > small {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
+.lululemon-subtype-table .fob-spend-cell {
   color: var(--lululemon-red);
-  font-size: 8px;
   font-weight: 800;
-}
-
-.lululemon-table-value-stack > small span {
-  color: #756b6e;
-  font-size: 7px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
 }
 
 .lululemon-subtype-table button {

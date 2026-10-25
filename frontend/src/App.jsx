@@ -1118,6 +1118,7 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
               <tr>
                 <th>Product type</th>
                 <th>NYG</th>
+                {tableIsSales && <th>FOB Spend</th>}
                 <th>{tableLabel}</th>
               </tr>
             </thead>
@@ -1135,17 +1136,15 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
                       tableValueMetric,
                     )}
                   </td>
+                  {tableIsSales && (
+                    <td className="fob-spend-cell">
+                      {formatComparisonValue(row.tableLululemonFobSpend, "sales")}
+                    </td>
+                  )}
                   <td>
-                    {tableIsSales ? (
-                      <span className="lululemon-table-value-stack">
-                        <strong>{formatComparisonValue(row.tableLululemonSales, "sales")}</strong>
-                        <small>
-                          <span>FOB Spend</span>
-                          {formatComparisonValue(row.tableLululemonFobSpend, "sales")}
-                        </small>
-                      </span>
-                    ) : (
-                      formatComparisonValue(row.lululemonUnits, tableValueMetric)
+                    {formatComparisonValue(
+                      tableIsSales ? row.tableLululemonSales : row.lululemonUnits,
+                      tableValueMetric,
                     )}
                   </td>
                 </tr>
