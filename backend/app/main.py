@@ -52,6 +52,8 @@ scrape_lock = asyncio.Lock()
 auto_scrape_task: asyncio.Task | None = None
 monthly_scrape_task: asyncio.Task | None = None
 lululemon_price_scrape_task: asyncio.Task | None = None
+lskd_scrape_task: asyncio.Task | None = None
+lskd_scrape_status: dict[str, Any] = {"status": "not_started"}
 LOCAL_TZ = ZoneInfo("Asia/Bangkok")
 AUTO_SCRAPE_RUNS_PATH = CACHE_PATH.parent / "auto_scrape_runs.json"
 MONTHLY_AUTO_STATUS_PATH = CACHE_PATH.parent / "monthly_auto_scrape_status.json"
@@ -499,6 +501,48 @@ def start_lululemon_price_scrape(triggered_by: str = "manual") -> dict[str, Any]
     }
 
 
+async def run_lskd_scrape() -> dict[str, Any]:
+    global lskd_scrape_status
+    period = current_scrape_period()
+    lskd_scrape_status = {
+        "status": "running",
+        "brand": "lskd",
+        "started_at": datetime.now(timezone.utc).isoformat(),
+        "scrape_period": period,
+    }
+    try:
+        data = await refresh_lskd_products(scrape_period=period)
+    except Exception as exc:
+        lskd_scrape_status = {
+            **lskd_scrape_status,
+            "status": "failed",
+            "completed_at": datetime.now(timezone.utc).isoformat(),
+            "error": str(exc),
+        }
+        raise
+    lskd_scrape_status = {
+        **lskd_scrape_status,
+        "status": "completed",
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+        "product_count": data.get("product_count", 0),
+        "scraped_at": data.get("scraped_at"),
+    }
+    return lskd_scrape_status
+
+
+def start_lskd_scrape() -> dict[str, Any]:
+    global lskd_scrape_task
+    if lskd_scrape_task and not lskd_scrape_task.done():
+        return {"status": "already_running", "latest_run": lskd_scrape_status}
+    lskd_scrape_task = asyncio.create_task(run_lskd_scrape())
+    lskd_scrape_task.add_done_callback(consume_task_exception)
+    return {
+        "status": "started",
+        "brand": "lskd",
+        "scrape_period": current_scrape_period(),
+    }
+
+
 def start_monthly_auto_scrape(
     triggered_by: str = "scheduler",
     force: bool = False,
@@ -876,22 +920,12 @@ async def auto_scrape_lululemon_prices(token: str | None = None) -> dict[str, An
 @app.post("/api/auto-scrape/lskd")
 async def auto_scrape_lskd(token: str | None = None) -> dict[str, Any]:
     validate_scrape_access(token)
-    period = current_scrape_period()
-    cached = store.get(f"data:{period['label']}") or store.get("data")
-    try:
-        data = await refresh_lskd_products(
-            scrape_period=period,
-            cached_payload=cached,
-        )
-    except Exception as exc:
-        raise HTTPException(status_code=502, detail=f"LSKD scraping failed: {exc}") from exc
-    return {
-        "status": "completed",
-        "brand": "lskd",
-        "product_count": data.get("product_count", 0),
-        "scraped_at": data.get("scraped_at"),
-        "scrape_period": period,
-    }
+    return start_lskd_scrape()
+
+
+@app.get("/api/auto-scrape/lskd/status")
+async def auto_scrape_lskd_status() -> dict[str, Any]:
+    return lskd_scrape_status
 
 
 @app.get("/api/audits/latest")
