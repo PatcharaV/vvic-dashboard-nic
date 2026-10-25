@@ -30,6 +30,7 @@ from .travis_mathew_scraper import scrape_travis_mathew_products
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 CACHE_PATH = DATA_DIR / "products.json"
 LULULEMON_DETAIL_PATH = DATA_DIR / "lululemon_details.json"
+LSKD_CACHE_PATH = DATA_DIR / "lskd_products.json"
 HISTORY_DIR = DATA_DIR / "history"
 STAGING_DIR = DATA_DIR / "staging"
 AUDIT_DIR = DATA_DIR / "audits"
@@ -1268,6 +1269,21 @@ def _merge_cached_detail_fields(
 
 
 def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    raw_products = list(payload.get("products", []))
+    sources = list(payload.get("sources", []))
+    source_urls = list(payload.get("source", []))
+    if not any(product.get("brand") == "lskd" for product in raw_products):
+        try:
+            lskd_cache = json.loads(LSKD_CACHE_PATH.read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            lskd_cache = {}
+        raw_products.extend(lskd_cache.get("products", []))
+        lskd_source = next(iter(lskd_cache.get("sources", [])), None)
+        if lskd_source:
+            sources.append(lskd_source)
+        for source_url in lskd_cache.get("source", []):
+            if source_url not in source_urls:
+                source_urls.append(source_url)
     products = _apply_season_classification(
         _apply_lululemon_detail_cache(
             _clothing_products(
@@ -1275,7 +1291,7 @@ def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
                     _normalize_arcteryx_product_types(
                         _normalize_strauss_categories(product)
                     )
-                    for product in payload.get("products", [])
+                    for product in raw_products
                 ]
             )
         ),
@@ -1283,6 +1299,8 @@ def _normalize_cached_payload(payload: dict[str, Any]) -> dict[str, Any]:
     )
     return {
         **payload,
+        "source": source_urls,
+        "sources": sources,
         "products": products,
         "product_count": len(products),
     }
@@ -1841,16 +1859,20 @@ async def refresh_lskd_products(
     }
 
     stamp = utc_stamp()
-    write_json(_staging_path(scrape_period, stamp), payload)
-    backup_file(CACHE_PATH, BACKUP_DIR, stamp)
-    _write_payload(CACHE_PATH, payload)
-    if scrape_period:
-        backup_file(period_cache_path(scrape_period), BACKUP_DIR, stamp)
-        _write_payload(period_cache_path(scrape_period), payload)
-    write_brand_archives(payload, [audit])
+    lskd_payload = {
+        "source": [result["source"]],
+        "sources": [payload["sources"][-1]],
+        "scraped_at": payload["scraped_at"],
+        "scrape_period": payload["scrape_period"],
+        "product_count": len(lskd_products),
+        "products": lskd_products,
+        "quality_audit": payload["quality_audit"],
+    }
+    backup_file(LSKD_CACHE_PATH, BACKUP_DIR, stamp)
+    _write_payload(LSKD_CACHE_PATH, lskd_payload)
     write_json(
         _audit_path(scrape_period, stamp),
-        build_audit_report(scrape_period, [audit], products),
+        build_audit_report(scrape_period, [audit], lskd_products),
     )
     return payload
 

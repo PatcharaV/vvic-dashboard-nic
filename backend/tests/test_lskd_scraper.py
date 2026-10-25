@@ -1,5 +1,9 @@
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
+from app import catalog
 from app.catalog import _clothing_products
 from app.lskd_scraper import _normalize
 
@@ -107,6 +111,42 @@ class LskdScraperTests(unittest.TestCase):
 
         self.assertEqual(normalized["audiences"], ["men", "women"])
         self.assertEqual(normalized["audience_labels"], ["Men", "Women"])
+
+    def test_separate_lskd_cache_is_merged_into_catalog(self):
+        product = {
+            "id": "lskd:1",
+            "brand": "lskd",
+            "brand_label": "LSKD",
+            "title": "Rep Tee",
+            "category": "Tees",
+            "categories": ["Tees"],
+            "subcategories": ["Tees"],
+            "audiences": ["men"],
+            "audience_labels": ["Men"],
+        }
+        original_path = catalog.LSKD_CACHE_PATH
+        with tempfile.TemporaryDirectory() as directory:
+            catalog.LSKD_CACHE_PATH = Path(directory) / "lskd_products.json"
+            catalog.LSKD_CACHE_PATH.write_text(
+                json.dumps(
+                    {
+                        "source": ["https://us.lskd.co"],
+                        "sources": [{"brand": "lskd", "label": "LSKD"}],
+                        "products": [product],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            try:
+                payload = catalog._normalize_cached_payload(
+                    {"source": [], "sources": [], "products": []}
+                )
+            finally:
+                catalog.LSKD_CACHE_PATH = original_path
+
+        self.assertEqual(payload["product_count"], 1)
+        self.assertEqual(payload["products"][0]["brand"], "lskd")
+        self.assertEqual(payload["sources"][0]["brand"], "lskd")
 
 
 if __name__ == "__main__":
