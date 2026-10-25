@@ -856,8 +856,12 @@ async def auto_scrape_lululemon_prices(token: str | None = None) -> dict[str, An
 async def auto_scrape_lskd(token: str | None = None) -> dict[str, Any]:
     validate_scrape_access(token)
     period = current_scrape_period()
+    cached = store.get(f"data:{period['label']}") or store.get("data")
     try:
-        data = await refresh_lskd_products(scrape_period=period)
+        data = await refresh_lskd_products(
+            scrape_period=period,
+            cached_payload=cached,
+        )
     except Exception as exc:
         raise HTTPException(status_code=502, detail=f"LSKD scraping failed: {exc}") from exc
     store["data"] = data

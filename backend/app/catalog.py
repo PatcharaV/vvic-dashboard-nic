@@ -1785,8 +1785,9 @@ async def refresh_lululemon_products(
 
 async def refresh_lskd_products(
     scrape_period: dict[str, Any] | None = None,
+    cached_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    cached = load_period_cache(scrape_period) or load_cache() or {}
+    cached = cached_payload or load_period_cache(scrape_period) or load_cache() or {}
     cached_products = cached.get("products", [])
     cached_lskd = [
         product for product in cached_products if product.get("brand") == "lskd"
