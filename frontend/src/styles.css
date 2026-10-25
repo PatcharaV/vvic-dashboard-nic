@@ -9886,6 +9886,30 @@ footer a {
   outline: 0;
 }
 
+.lululemon-forecast-jump-nav.forecast-page-tabs > div {
+  width: min(100%, 520px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lululemon-forecast-jump-nav.forecast-page-tabs button {
+  justify-content: center;
+  min-height: 42px;
+  font-size: 12px;
+}
+
+.lululemon-forecast-jump-nav.forecast-page-tabs button.active {
+  color: #fff;
+  background: var(--lululemon-red);
+  border-color: var(--lululemon-red);
+  box-shadow: 0 6px 14px rgba(212, 0, 57, 0.2);
+}
+
+.lululemon-forecast-jump-nav.forecast-page-tabs button.active b {
+  color: var(--lululemon-red);
+  background: #fff;
+}
+
 .lululemon-forecast-section.milestones {
   display: grid;
   grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);

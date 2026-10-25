@@ -3469,6 +3469,7 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
 }
 
 function LululemonSeasonForecast() {
+  const [forecastPage, setForecastPage] = useState("overview");
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
   const [imagePreview, setImagePreview] = useState(null);
@@ -3537,14 +3538,8 @@ function LululemonSeasonForecast() {
     (brief) => season === "All" || brief.season === season,
   );
   const forecastSectionLinks = [
-    { id: "forecast-nyg-milestones", number: "01", label: "Milestones" },
-    { id: "forecast-nyg-market", number: "02", label: "Market" },
-    { id: "forecast-nyg-programs", number: "03–04", label: "Product + fabric priorities" },
-    { id: "forecast-nyk-fabrics", number: "05", label: "Fabric development" },
-    { id: "forecast-nyg-whitespace", number: "06", label: "Whitespace" },
-    { id: "forecast-nyg-actions", number: "07", label: "Joint next steps" },
-    { id: "forecast-nytg-roadmap", number: "08", label: "One timeline" },
-    { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
+    { id: "overview", number: "01–02", label: "Overview" },
+    { id: "strategy", number: "03–08 · VI", label: "Strategy" },
   ];
   const forecastAiContext = useMemo(
     () => ({
@@ -3649,14 +3644,16 @@ function LululemonSeasonForecast() {
         </div>
       </article>
 
-      <nav className="lululemon-forecast-jump-nav" aria-label="Season forecast sections">
-        <span>Jump to</span>
+      <nav className="lululemon-forecast-jump-nav forecast-page-tabs" aria-label="Season forecast pages">
+        <span>Forecast page</span>
         <div>
           {forecastSectionLinks.map((link) => (
             <button
               type="button"
               key={link.id}
-              onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              className={forecastPage === link.id ? "active" : undefined}
+              aria-pressed={forecastPage === link.id}
+              onClick={() => setForecastPage(link.id)}
             >
               <b>{link.number}</b>
               {link.label}
@@ -3665,7 +3662,7 @@ function LululemonSeasonForecast() {
         </div>
       </nav>
 
-      {(
+      {forecastPage === "overview" && (
         <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3690,7 +3687,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {(
+      {forecastPage === "overview" && (
         <article className="lululemon-forecast-section market-size" id="forecast-nyg-market">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3726,7 +3723,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {(
+      {forecastPage === "strategy" && (
         <article className="lululemon-forecast-section keep-extend" id="forecast-nyg-programs">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3804,7 +3801,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {(
+      {forecastPage === "strategy" && (
         <article className="lululemon-forecast-section whitespace" id="forecast-nyg-whitespace">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3841,7 +3838,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {(
+      {forecastPage === "strategy" && (
         <article className="lululemon-forecast-section next-steps nyg-next-steps" id="forecast-nyg-actions">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3871,7 +3868,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {(
+      {forecastPage === "strategy" && (
         <>
           <article className="lululemon-forecast-section nyk-trend-direction" id="forecast-nyk-fabrics">
             <div className="lululemon-forecast-section-heading">
@@ -3976,6 +3973,8 @@ function LululemonSeasonForecast() {
         </>
       )}
 
+      {forecastPage === "strategy" && (
+        <>
       <article className="lululemon-forecast-section nytg-roadmap" id="forecast-nytg-roadmap">
         <div className="lululemon-forecast-section-heading">
           <div><p className="eyebrow">08 · ONE TIMELINE</p><h3>Product and fabric move together, season by season</h3></div>
@@ -4092,6 +4091,8 @@ function LululemonSeasonForecast() {
           Source basis: attached ABC Collection VI deck. Market figures are directional estimates from Share_4; product images come from the public Lululemon catalog. Fabric images are development visualizations generated for this dashboard and must be validated with physical swatches and lab dips.
         </p>
       </article>
+        </>
+      )}
 
       <p className="lululemon-forecast-source">
         Source: latest NYTG SS28/FW28 forecast PDF. Historical NYTG sales and fabric purchases cover FA25-WT27; estimated 2026 market values cover Sep 2025-Sep 2026. Product pictures are public-catalog visual references. Fabric pictures are photorealistic development references. SS28/FW28 priorities remain directional until Lululemon releases the actual line-list and physical samples, lab dips and test results are approved.
