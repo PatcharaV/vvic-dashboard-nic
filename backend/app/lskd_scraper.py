@@ -12,7 +12,7 @@ from .scraper import _plain_text, extract_product_functions
 BASE_URL = "https://us.lskd.co"
 PRODUCT_FEED_PATH = "/collections/all/products.json"
 PAGE_SIZE = 50
-MAX_PAGES = 30
+MAX_PAGES = 100
 MAX_RETRIES = 5
 
 APPAREL_CATEGORIES = {
