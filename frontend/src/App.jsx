@@ -3731,7 +3731,7 @@ function LululemonSeasonForecast() {
           <div className="lululemon-forecast-section-heading">
             <div>
               <p className="eyebrow">03–04 · PRODUCT + FABRIC PRIORITIES</p>
-              <h3>What NYTG should carry forward and which fabric to pitch</h3>
+              <h3>What NYTG should carry forward and which product to pitch</h3>
             </div>
             <span>One shared priority list for Garment, Fabric and BD.</span>
           </div>
