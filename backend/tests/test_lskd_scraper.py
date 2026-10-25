@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from app import catalog
+from app.analytics import build_options
 from app.catalog import _clothing_products
 from app.lskd_scraper import _normalize
 
@@ -67,7 +68,7 @@ class LskdScraperTests(unittest.TestCase):
         self.assertEqual(normalized["activities"], ["Training"])
         self.assertEqual(
             normalized["material_details"],
-            ["Fabric: Rep Fabric", "71% Recycled Nylon, 29% Elastane"],
+            ["Body: Rep Fabric", "Body: 71% Recycled Nylon, 29% Elastane"],
         )
         self.assertEqual(
             normalized["innovations"],
@@ -81,6 +82,10 @@ class LskdScraperTests(unittest.TestCase):
         clothing = _clothing_products([normalized])
         self.assertEqual(len(clothing), 1)
         self.assertEqual(clothing[0]["brand"], "lskd")
+        self.assertEqual(
+            build_options(clothing)["material_keywords"],
+            ["Nylon", "Elastane"],
+        )
 
     def test_excludes_non_apparel_products(self):
         product = {

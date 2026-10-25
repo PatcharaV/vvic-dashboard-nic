@@ -97,12 +97,12 @@ def _audiences(product_type: str, tags: list[str]) -> tuple[list[str], list[str]
 
 
 def _material_details(html: str, tags: list[str]) -> list[str]:
-    details = [f"Fabric: {value}" for value in _tag_values(tags, ("fabric:", "fabric_"))]
+    details = [f"Body: {value}" for value in _tag_values(tags, ("fabric:", "fabric_"))]
     soup = BeautifulSoup(html or "", "html.parser")
     for value in soup.stripped_strings:
         text = re.sub(r"\s+", " ", value).strip()
         if FIBER_PATTERN.search(text) and ("%" in text or len(text) <= 90):
-            details.append(text)
+            details.append(f"Body: {text}")
     return _dedupe(details)
 
 
