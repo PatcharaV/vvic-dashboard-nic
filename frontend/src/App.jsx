@@ -78,6 +78,7 @@ const DEFAULT_BRAND_OPTIONS = [
   { value: "lululemon", label: "lululemon" },
   { value: "tommybahama", label: "Tommy Bahama" },
   { value: "travismathew", label: "TravisMathew" },
+  { value: "lskd", label: "LSKD" },
 ];
 
 const FORECAST_PRODUCT_VISUALS = [
@@ -187,6 +188,7 @@ const BRAND_LOGOS = {
   lululemon: { mark: "L", wordmark: "LULULEMON", subline: "ATHLETIC", src: "/brand-logos/lululemon.svg" },
   tommybahama: { mark: "TB", wordmark: "TOMMY BAHAMA", subline: "ISLAND", src: "/brand-logos/tommy-bahama.svg" },
   travismathew: { mark: "TM", wordmark: "TRAVISMATHEW", subline: "GOLF", src: "/brand-logos/travismathew.svg" },
+  lskd: { mark: "LSKD", wordmark: "LSKD", subline: "TRAIN / RUN / ALL DAY", src: "/brand-logos/lskd.svg" },
 };
 
 const BRAND_BASE_URLS = {
@@ -196,6 +198,7 @@ const BRAND_BASE_URLS = {
   lululemon: "https://shop.lululemon.com",
   tommybahama: "https://www.tommybahama.com",
   travismathew: "https://www.travismathew.com",
+  lskd: "https://us.lskd.co",
 };
 
 const ARCTERYX_PROFILE_STATS = [
@@ -6784,9 +6787,13 @@ function App() {
         <a href="https://arcteryx.com/us/en" target="_blank" rel="noreferrer">
           Arc&apos;teryx
         </a>
-        {" "}and{" "}
+        ,{" "}
         <a href="https://shop.lululemon.com" target="_blank" rel="noreferrer">
           lululemon
+        </a>
+        {" "}and{" "}
+        <a href="https://us.lskd.co" target="_blank" rel="noreferrer">
+          LSKD
         </a>
         . Product names and data belong to their respective owners.
       </footer>

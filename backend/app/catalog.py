@@ -12,6 +12,7 @@ from .lululemon_scraper import (
     enrich_lululemon_product_details,
     scrape_lululemon_products,
 )
+from .lskd_scraper import scrape_lskd_products
 from .quality import (
     backup_file,
     build_audit_report,
@@ -43,6 +44,7 @@ BRAND_ARCHIVE_FOLDERS = {
     "lululemon": "Lululemon",
     "tommybahama": "Tommy Bahama",
     "travismathew": "Travis Mathew",
+    "lskd": "LSKD",
 }
 MONTH_CODES = [
     "JAN",
@@ -305,6 +307,20 @@ CLOTHING_CATEGORIES = {
         "Quarter Zips",
         "Shorts",
         "Skorts & Skirts",
+        "Tanks",
+        "Tees",
+        "Underwear",
+    },
+    "lskd": {
+        "Bodysuits",
+        "Hoodies & Sweatshirts",
+        "Leggings",
+        "Outerwear",
+        "Pants",
+        "Shorts",
+        "Skirts",
+        "Sports Bras",
+        "Sweaters",
         "Tanks",
         "Tees",
         "Underwear",
@@ -1467,6 +1483,7 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         ("lululemon", scrape_lululemon_products()),
         ("Tommy Bahama", scrape_tommy_bahama_products()),
         ("TravisMathew", scrape_travis_mathew_products()),
+        ("LSKD", scrape_lskd_products()),
     )
     scraped_results = await asyncio.wait_for(
         asyncio.gather(
@@ -1489,6 +1506,7 @@ async def scrape_products(scrape_period: dict[str, Any] | None = None) -> dict[s
         ("lululemon", "lululemon", "https://shop.lululemon.com"),
         ("tommybahama", "Tommy Bahama", "https://www.tommybahama.com"),
         ("travismathew", "TravisMathew", "https://travismathew.com"),
+        ("lskd", "LSKD", "https://us.lskd.co"),
     )
     results: list[dict[str, Any]] = []
     errors: list[str] = []

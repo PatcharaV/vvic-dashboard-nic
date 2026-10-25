@@ -6,6 +6,7 @@ export const demoOptions = {
     { value: "lululemon", label: "lululemon" },
     { value: "tommybahama", label: "Tommy Bahama" },
     { value: "travismathew", label: "TravisMathew" },
+    { value: "lskd", label: "LSKD" },
   ],
   audiences: [
     { value: "men", label: "Men" },
