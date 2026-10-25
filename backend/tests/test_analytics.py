@@ -1,12 +1,28 @@
 import unittest
 
-from app.analytics import build_dashboard, build_options, filter_products
+from app.analytics import (
+    _product_shop_highlights,
+    build_dashboard,
+    build_options,
+    filter_products,
+)
 from app.catalog import _apply_season_classification
 from app.quality import validate_brand
 from app.rhone_scraper import _is_public_catalog_product
 
 
 class StraussVariantAggregationTests(unittest.TestCase):
+    def test_normalizes_shop_highlight_labels(self):
+        product = {
+            "shop_highlights": ["Topseller", "New Arrival"],
+            "features": ["Bestsellers"],
+        }
+
+        self.assertEqual(
+            _product_shop_highlights(product),
+            ["Best Sellers", "New Arrivals"],
+        )
+
     def test_filters_and_lists_innovations(self):
         products = [
             {"id": "one", "innovations": ["Scuba", "Waffle-Knit"]},

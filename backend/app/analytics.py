@@ -143,8 +143,11 @@ FEATURE_HIGHLIGHT_LABELS = {
     "best sellers": "Best Sellers",
     "bestsellers": "Best Sellers",
     "best seller": "Best Sellers",
+    "bestseller": "Best Sellers",
+    "topseller": "Best Sellers",
     "new arrivals": "New Arrivals",
     "new arrival": "New Arrivals",
+    "new": "New Arrivals",
 }
 
 
@@ -156,6 +159,7 @@ def _product_shop_highlights(product: dict[str, Any]) -> list[str]:
         label = str(highlight).strip()
         if not label:
             continue
+        label = FEATURE_HIGHLIGHT_LABELS.get(label.lower(), label)
         key = label.lower()
         if key not in seen:
             seen.add(key)

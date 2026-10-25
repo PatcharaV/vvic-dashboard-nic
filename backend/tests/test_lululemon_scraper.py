@@ -96,6 +96,7 @@ class LululemonScraperTests(unittest.TestCase):
                 "currentPrice": "$68.00",
                 "listPrice": "$78.00",
             },
+            "badges": [{"label": "Best Seller"}, {"label": "New Arrival"}],
         }
 
         _apply_pdp_details(product, pdp_data)
@@ -115,9 +116,27 @@ class LululemonScraperTests(unittest.TestCase):
         )
         self.assertEqual(product["price_min"], 68)
         self.assertEqual(product["price_max"], 78)
+        self.assertEqual(product["shop_highlights"], ["Best Sellers", "New Arrivals"])
+        self.assertTrue(product["top_seller"])
         self.assertTrue(product["price_known"])
         self.assertTrue(product["availability_known"])
         self.assertEqual(product["detail_status"], "enriched")
+
+    def test_reads_shop_highlight_boolean_flags(self):
+        product = {"shop_highlights": [], "top_seller": False}
+
+        _apply_pdp_details(
+            product,
+            {
+                "productFlags": {
+                    "isBestSeller": True,
+                    "isNewArrival": True,
+                }
+            },
+        )
+
+        self.assertEqual(product["shop_highlights"], ["Best Sellers", "New Arrivals"])
+        self.assertTrue(product["top_seller"])
 
     def test_applies_schema_details(self):
         product = _normalize(
@@ -203,6 +222,8 @@ class LululemonScraperTests(unittest.TestCase):
                     "UV protective",
                     "UPF 40+ provides very good UV protection",
                 ],
+                "shop_highlights": ["Best Sellers", "New Arrivals"],
+                "top_seller": True,
                 "price_min": 68,
                 "price_max": 78,
                 "price_known": True,
@@ -225,6 +246,11 @@ class LululemonScraperTests(unittest.TestCase):
         self.assertEqual(enriched["price_min"], 68)
         self.assertEqual(enriched["price_max"], 78)
         self.assertTrue(enriched["price_known"])
+        self.assertEqual(
+            enriched["shop_highlights"],
+            ["Best Sellers", "New Arrivals"],
+        )
+        self.assertTrue(enriched["top_seller"])
 
 
 if __name__ == "__main__":

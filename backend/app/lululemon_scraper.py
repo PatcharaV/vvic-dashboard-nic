@@ -378,6 +378,53 @@ def _innovation_values(color_attributes: list[dict[str, Any]]) -> list[str]:
     return values
 
 
+def _shop_highlights_from_pdp(pdp_data: dict[str, Any]) -> list[str]:
+    highlights: list[str] = []
+
+    def add_from_text(value: Any) -> None:
+        text = re.sub(r"\s+", " ", str(value or "")).strip()
+        if re.search(r"\bbest\s*seller(?:s)?\b", text, re.I):
+            _append_unique(highlights, "Best Sellers")
+        if re.search(r"\bnew\s*arrival(?:s)?\b", text, re.I):
+            _append_unique(highlights, "New Arrivals")
+
+    def visit(node: Any, parent_key: str = "") -> None:
+        if isinstance(node, dict):
+            for key, value in node.items():
+                normalized_key = re.sub(r"[^a-z]", "", str(key).lower())
+                if value is True and normalized_key in {
+                    "bestseller",
+                    "isbestseller",
+                }:
+                    _append_unique(highlights, "Best Sellers")
+                if value is True and normalized_key in {
+                    "new",
+                    "isnew",
+                    "newarrival",
+                    "isnewarrival",
+                }:
+                    _append_unique(highlights, "New Arrivals")
+                if any(
+                    token in normalized_key
+                    for token in ("badge", "flag", "highlight", "label", "tag")
+                ):
+                    if isinstance(value, (str, int, float)):
+                        add_from_text(value)
+                    elif isinstance(value, list):
+                        for item in value:
+                            if isinstance(item, (str, int, float)):
+                                add_from_text(item)
+                visit(value, normalized_key)
+        elif isinstance(node, list):
+            for item in node:
+                visit(item, parent_key)
+        elif parent_key in {"badge", "badges", "flag", "flags"}:
+            add_from_text(node)
+
+    visit(pdp_data)
+    return highlights
+
+
 def _extract_next_data(html: str) -> dict[str, Any] | None:
     match = re.search(
         r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>',
@@ -675,6 +722,7 @@ def _apply_pdp_details(product: dict[str, Any], pdp_data: dict[str, Any]) -> Non
 
     materials = _material_values(color_attributes)
     innovations = clean_lululemon_innovations(_innovation_values(color_attributes))
+    shop_highlights = _shop_highlights_from_pdp(pdp_data)
     style_number = _style_number(color_attributes)
     product["style_number"] = style_number or product.get("style_number", "")
     existing_variants = product.get("color_variants")
@@ -695,6 +743,12 @@ def _apply_pdp_details(product: dict[str, Any], pdp_data: dict[str, Any]) -> Non
     product["material_details"] = materials or product.get("material_details", [])
     product["material"] = " | ".join(product["material_details"])
     product["innovations"] = innovations
+    product["shop_highlights"] = list(
+        dict.fromkeys([*(product.get("shop_highlights") or []), *shop_highlights])
+    )
+    product["top_seller"] = bool(product.get("top_seller")) or (
+        "Best Sellers" in product["shop_highlights"]
+    )
     _apply_prices(product, _collect_prices(pdp_data))
     if color_variants or materials or product.get("price_known"):
         product["availability_known"] = bool(

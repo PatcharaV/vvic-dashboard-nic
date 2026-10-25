@@ -1070,6 +1070,8 @@ def load_lululemon_detail_cache(
             "innovations": clean_lululemon_innovations(
                 _dedupe_strings(row.get("innovations") or [])
             ),
+            "shop_highlights": _dedupe_strings(row.get("shop_highlights") or []),
+            "top_seller": bool(row.get("top_seller")),
         }
         for key in keys:
             details[key] = detail
@@ -1121,6 +1123,15 @@ def _apply_lululemon_detail_cache(
                 *clean_lululemon_innovations(detail.get("innovations") or []),
             ]
         )
+        shop_highlights = _dedupe_strings(
+            [
+                *(product.get("shop_highlights") or []),
+                *(detail.get("shop_highlights") or []),
+            ]
+        )
+        top_seller = bool(product.get("top_seller")) or bool(
+            detail.get("top_seller")
+        ) or "Best Sellers" in shop_highlights
         style_number = product.get("style_number") or _lululemon_style_number(
             color_variants
         )
@@ -1154,6 +1165,8 @@ def _apply_lululemon_detail_cache(
                 "material_details": material_details,
                 "material": " | ".join(material_details),
                 "innovations": innovations,
+                "shop_highlights": shop_highlights,
+                "top_seller": top_seller,
                 "price_min": price_min,
                 "price_max": price_max,
                 "price_known": price_known,
