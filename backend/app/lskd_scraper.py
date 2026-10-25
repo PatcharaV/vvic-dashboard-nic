@@ -1,4 +1,5 @@
 import asyncio
+import gc
 import re
 from datetime import datetime, timezone
 from typing import Any
@@ -10,7 +11,7 @@ from .scraper import _plain_text, extract_product_functions
 
 BASE_URL = "https://us.lskd.co"
 PRODUCT_FEED_PATH = "/collections/all/products.json"
-PAGE_SIZE = 250
+PAGE_SIZE = 50
 MAX_PAGES = 30
 MAX_RETRIES = 5
 
@@ -236,7 +237,6 @@ def _normalize(product: dict[str, Any]) -> dict[str, Any] | None:
         "unavailable_colors": unavailable_colors,
         "all_colors": all_colors,
         "color_variants": color_variants,
-        "tags": tags,
         "image": image_url,
         "url": f"{BASE_URL}/products/{handle}",
         "material": " | ".join(materials),
@@ -278,6 +278,9 @@ async def _all_products(client: httpx.AsyncClient) -> list[dict[str, Any]]:
         )
         if len(batch) < PAGE_SIZE:
             break
+        del batch
+        del response
+        gc.collect()
         await asyncio.sleep(0.25)
     return products
 
