@@ -4793,7 +4793,6 @@ async function exportProductsToExcel(products) {
     "Technical Features": formatMultilineList(product.technical_features),
     "Fabric Treatment": formatMultilineList(product.fabric_treatment),
     Construction: formatMultilineList(product.construction),
-    "Shop Highlights": (product.shop_highlights || []).join(", "),
     "Price Min": product.price_min,
     "Price Max": product.price_max,
     "Price Range": formatPrice(product),
@@ -4859,9 +4858,6 @@ function buildQuery(filters, period) {
   if (filters.maxPrice !== "") params.set("max_price", filters.maxPrice);
   if (filters.availability !== "all") {
     params.set("availability", filters.availability);
-  }
-  if (filters.shopHighlight !== "all") {
-    params.set("shop_highlight", filters.shopHighlight);
   }
   if (filters.material !== "all") {
     params.set("material", filters.material);
@@ -5357,7 +5353,6 @@ function App() {
     minPrice: "",
     maxPrice: "",
     availability: "all",
-    shopHighlight: "all",
     material: "all",
     innovation: "all",
     season: "all",
@@ -5428,7 +5423,6 @@ function App() {
       (page) => page.value === brandWorkspacePage,
     )?.label || "Product Dashboard";
   const productCategories = options.categories;
-  const availableShopHighlights = options.shop_highlights || [];
   const availableInnovations = options.innovations || [];
   const activityOptions = options.activities || [];
   const materialKeywords = options.material_keywords || [];
@@ -5485,10 +5479,6 @@ function App() {
     (options.collections || []).length > 0 || filters.collections.length > 0;
   const hasActivityFilter =
     activityOptions.length > 0 || filters.activities.length > 0;
-  const hasShopHighlightFilter =
-    isDetailedProductView ||
-    availableShopHighlights.length > 0 ||
-    filters.shopHighlight !== "all";
   const hasMaterialFilter =
     filters.material !== "all" || materialKeywords.length > 0;
   const hasInnovationFilter =
@@ -5579,7 +5569,6 @@ function App() {
       minPrice: "",
       maxPrice: "",
       availability: "all",
-      shopHighlight: "all",
       material: "all",
       innovation: "all",
       season: "all",
@@ -5790,7 +5779,6 @@ function App() {
       minPrice: "",
       maxPrice: "",
       availability: "all",
-      shopHighlight: "all",
       material: "all",
       innovation: "all",
       season: "all",
@@ -6178,29 +6166,6 @@ function App() {
               </label>
             )}
 
-            {hasShopHighlightFilter && (
-              <label>
-                <span className="filter-title">Shop Highlights</span>
-                <select
-                  value={filters.shopHighlight}
-                  onChange={(event) =>
-                    setFilters({
-                      ...filters,
-                      shopHighlight: event.target.value,
-                    })
-                  }
-                >
-                  <option value="all">All products</option>
-                  {availableShopHighlights.map((highlight) => (
-                    <option key={highlight} value={highlight}>
-                      {highlight}
-                    </option>
-                  ))}
-                  <option value="none">No highlights</option>
-                </select>
-              </label>
-            )}
-
             {hasUnavailableProducts && (
               <label>
                 <span className="filter-title">Availability</span>
@@ -6578,7 +6543,6 @@ function App() {
                       {hasTechnicalFeatureData && <th>Technical features</th>}
                       {hasFabricTreatmentData && <th>Fabric treatment</th>}
                       {hasConstructionData && <th>Construction</th>}
-                      <th>Shop Highlights</th>
                       <th>Price range</th>
                       <th>Status</th>
                     </tr>
@@ -6769,40 +6733,6 @@ function App() {
                             <DetailList values={product.construction} />
                           </td>
                         )}
-                        <td>
-                          {product.shop_highlights?.length ? (
-                            product.shop_highlights.map((highlight) => (
-                              <button
-                                key={highlight}
-                                type="button"
-                                onClick={() =>
-                                  setFilters({
-                                    ...filters,
-                                    shopHighlight: highlight,
-                                  })
-                                }
-                                className="seller-badge yes"
-                              >
-                                {highlight}
-                              </button>
-                            ))
-                          ) : !hasVerifiedProductDetails(product) ? (
-                            <span className="muted-detail">Not captured</span>
-                          ) : (
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setFilters({
-                                  ...filters,
-                                  shopHighlight: "none",
-                                })
-                              }
-                              className="seller-badge no"
-                            >
-                              No highlights
-                            </button>
-                          )}
-                        </td>
                         <td className="price-cell">{formatPrice(product)}</td>
                         <td>
                           {!isProductAvailabilityKnown(product) ? (
