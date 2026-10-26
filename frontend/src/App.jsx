@@ -2877,8 +2877,8 @@ function LululemonCompetitors() {
                   );
                 })}
               </g>
-              <text className="map-axis-caption high" x="296" y="22" textAnchor="middle">HIGH</text>
-              <text className="map-axis-caption low" x="296" y="333" textAnchor="middle">LOW</text>
+              <text className="map-axis-caption high" x="296" y="22" textAnchor="middle">HIGH PRICE</text>
+              <text className="map-axis-caption low" x="296" y="333" textAnchor="middle">LOW PRICE</text>
               <text className="map-axis-title" x="20" y="170" transform="rotate(-90 20 170)">Price of a flagship legging · US$ list</text>
               <text className="map-axis-caption basic" x="70" y="163" textAnchor="start">BASIC</text>
               <text className="map-axis-caption innovation" x="522" y="163" textAnchor="end">INNOVATION</text>
