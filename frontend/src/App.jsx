@@ -2795,7 +2795,6 @@ function LululemonCompetitors() {
     <article className="lululemon-overview-section lululemon-competitors-section">
       <div className="lululemon-overview-heading">
         <div>
-          <p className="eyebrow">PUBLIC AND PRIVATE PEERS · ANNUAL REVENUE · USD</p>
           <h2>Competitors of Lululemon</h2>
         </div>
         <LululemonOverviewLogo />
