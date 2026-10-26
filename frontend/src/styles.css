@@ -5778,8 +5778,8 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-competitor-bar-row.featured .lululemon-competitor-bar-track i {
-  background: linear-gradient(90deg, #171315, #322b2e);
-  box-shadow: 0 4px 10px rgba(33, 29, 31, 0.18);
+  background: linear-gradient(90deg, var(--lululemon-dark-red), var(--lululemon-red));
+  box-shadow: 0 4px 10px rgba(153, 15, 41, 0.22);
 }
 
 .lululemon-competitor-bar-row.featured strong,
@@ -5872,8 +5872,8 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-positioning-map .map-bubble.lululemon circle {
-  fill: #211d1f;
-  stroke: #211d1f;
+  fill: var(--lululemon-dark-red);
+  stroke: #74091e;
 }
 
 .lululemon-positioning-map .map-bubble.nike circle {
@@ -5892,8 +5892,12 @@ button.lululemon-bar-row.selected > strong {
   font-size: 10px;
 }
 
+.lululemon-positioning-map .map-bubble.lululemon text {
+  fill: var(--lululemon-dark-red);
+}
+
 .lululemon-positioning-map .marker-line {
-  stroke: #686063;
+  stroke: var(--lululemon-dark-red);
   stroke-width: 2;
 }
 
