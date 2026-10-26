@@ -3679,12 +3679,12 @@ function LululemonSeasonForecast() {
     (brief) => season === "All" || brief.season === season,
   );
   const strategySectionLinks = [
-    { id: "forecast-nyg-actions", number: "03", label: "Joint next steps" },
-    { id: "forecast-nytg-roadmap", number: "04", label: "One timeline" },
-    { id: "forecast-nyg-programs", number: "05–06", label: "Product + fabric priorities" },
-    { id: "forecast-nyk-fabrics", number: "07", label: "Fabric development" },
-    { id: "forecast-nyg-whitespace", number: "08", label: "Whitespace" },
-    { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
+    { id: "forecast-nyg-actions", label: "Joint next steps" },
+    { id: "forecast-nytg-roadmap", label: "One timeline" },
+    { id: "forecast-nyg-programs", label: "Product + fabric priorities" },
+    { id: "forecast-nyk-fabrics", label: "Fabric development" },
+    { id: "forecast-nyg-whitespace", label: "Whitespace" },
+    { id: "forecast-nytg-abc", label: "ABC playbook" },
   ];
   const forecastAiContext = useMemo(
     () => ({
@@ -3824,7 +3824,7 @@ function LululemonSeasonForecast() {
             >
               {strategySectionLinks.map((link) => (
                 <option value={link.id} key={link.id}>
-                  {link.number} · {link.label}
+                  {link.label}
                 </option>
               ))}
             </select>
