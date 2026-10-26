@@ -3534,6 +3534,8 @@ function LululemonSeasonForecast() {
     (brief) => season === "All" || brief.season === season,
   );
   const strategySectionLinks = [
+    { id: "forecast-nyg-actions", number: "03", label: "Joint next steps" },
+    { id: "forecast-nytg-roadmap", number: "04", label: "One timeline" },
     { id: "forecast-nyg-programs", number: "05–06", label: "Product + fabric priorities" },
     { id: "forecast-nyk-fabrics", number: "07", label: "Fabric development" },
     { id: "forecast-nyg-whitespace", number: "08", label: "Whitespace" },
@@ -3861,7 +3863,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {forecastPage === "overview" && (
+      {forecastPage === "strategy" && (
         <article className="lululemon-forecast-section next-steps nyg-next-steps" id="forecast-nyg-actions">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3996,7 +3998,7 @@ function LululemonSeasonForecast() {
         </>
       )}
 
-      {forecastPage === "overview" && (
+      {forecastPage === "strategy" && (
       <article className="lululemon-forecast-section nytg-roadmap" id="forecast-nytg-roadmap">
         <div className="lululemon-forecast-section-heading">
           <div><p className="eyebrow">04 · ONE TIMELINE</p><h3>Product and fabric move together, season by season</h3></div>
