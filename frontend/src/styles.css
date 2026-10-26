@@ -9290,13 +9290,14 @@ footer a {
 
 .lululemon-forecast-page.nytg-view > #forecast-nyg-milestones { order: 10; }
 .lululemon-forecast-page.nytg-view > #forecast-nyg-market { order: 20; }
-.lululemon-forecast-page.nytg-view > #forecast-nyg-programs { order: 30; }
-.lululemon-forecast-page.nytg-view > #forecast-nyk-programs { order: 40; }
-.lululemon-forecast-page.nytg-view > #forecast-nyk-fabrics { order: 50; }
-.lululemon-forecast-page.nytg-view > #forecast-nyg-whitespace { order: 60; }
-.lululemon-forecast-page.nytg-view > #forecast-nyk-whitespace { order: 61; }
-.lululemon-forecast-page.nytg-view > #forecast-nyg-actions { order: 70; }
-.lululemon-forecast-page.nytg-view > #forecast-nyk-actions { order: 71; }
+.lululemon-forecast-page.nytg-view > #forecast-nyg-actions { order: 30; }
+.lululemon-forecast-page.nytg-view > #forecast-nytg-roadmap { order: 40; }
+.lululemon-forecast-page.nytg-view > #forecast-nyg-programs { order: 50; }
+.lululemon-forecast-page.nytg-view > #forecast-nyk-programs { order: 51; }
+.lululemon-forecast-page.nytg-view > #forecast-nyk-fabrics { order: 60; }
+.lululemon-forecast-page.nytg-view > #forecast-nyg-whitespace { order: 70; }
+.lululemon-forecast-page.nytg-view > #forecast-nyk-whitespace { order: 71; }
+.lululemon-forecast-page.nytg-view > #forecast-nyk-actions { order: 72; }
 .lululemon-forecast-page.nytg-view > #forecast-nytg-abc { order: 80; }
 .lululemon-forecast-page.nytg-view > .lululemon-forecast-source { order: 90; }
 
@@ -11488,7 +11489,7 @@ footer a {
 }
 
 /* NYTG forecast visual system */
-.lululemon-forecast-page.nytg-view > #forecast-nytg-roadmap { order: 75; }
+.lululemon-forecast-page.nytg-view > #forecast-nytg-roadmap { order: 40; }
 .lululemon-forecast-page.nytg-view > #forecast-nytg-abc { order: 80; }
 .lululemon-forecast-page.nytg-view > .lululemon-forecast-source { order: 100; }
 
