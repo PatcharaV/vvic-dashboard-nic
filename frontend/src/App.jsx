@@ -175,7 +175,8 @@ const BRAND_WORKSPACE_PAGES = [
 
 const LULULEMON_WORKSPACE_PAGES = [
   { value: "overview", label: "Brand Overview" },
-  { value: "forecast", label: "Season Forecast" },
+  { value: "forecast-overview", label: "Forecast Overview" },
+  { value: "forecast-strategy", label: "Strategy" },
   { value: "product", label: "Product Dashboard" },
 ];
 
@@ -3463,8 +3464,8 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
   );
 }
 
-function LululemonSeasonForecast() {
-  const [forecastPage, setForecastPage] = useState("overview");
+function LululemonSeasonForecast({ view = "overview" }) {
+  const [strategySection, setStrategySection] = useState("forecast-nyg-programs");
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
   const [imagePreview, setImagePreview] = useState(null);
@@ -3532,9 +3533,13 @@ function LululemonSeasonForecast() {
   const nykFabricBriefs = LULULEMON_NYK_FABRIC_BRIEFS.filter(
     (brief) => season === "All" || brief.season === season,
   );
-  const forecastSectionLinks = [
-    { id: "overview", number: "01–02", label: "Overview" },
-    { id: "strategy", number: "03–08 · VI", label: "Strategy" },
+  const strategySectionLinks = [
+    { id: "forecast-nyg-programs", number: "03–04", label: "Product + fabric priorities" },
+    { id: "forecast-nyk-fabrics", number: "05", label: "Fabric development" },
+    { id: "forecast-nyg-whitespace", number: "06", label: "Whitespace" },
+    { id: "forecast-nyg-actions", number: "07", label: "Joint next steps" },
+    { id: "forecast-nytg-roadmap", number: "08", label: "One timeline" },
+    { id: "forecast-nytg-abc", number: "VI", label: "ABC playbook" },
   ];
   const forecastAiContext = useMemo(
     () => ({
@@ -3639,20 +3644,31 @@ function LululemonSeasonForecast() {
         </div>
       </article>
 
-      <nav className="lululemon-forecast-jump-nav forecast-section-selector" aria-label="Season forecast section range">
-        <label>
-          <span>Go to</span>
-          <select value={forecastPage} onChange={(event) => setForecastPage(event.target.value)}>
-            {forecastSectionLinks.map((link) => (
-              <option value={link.id} key={link.id}>
-                {link.number} · {link.label}
-              </option>
-            ))}
-          </select>
-        </label>
-      </nav>
+      {view === "strategy" && (
+        <nav className="lululemon-forecast-jump-nav forecast-section-selector" aria-label="Strategy section range">
+          <label>
+            <span>Go to</span>
+            <select
+              value={strategySection}
+              onChange={(event) => {
+                const sectionId = event.target.value;
+                setStrategySection(sectionId);
+                window.requestAnimationFrame(() => {
+                  document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+              }}
+            >
+              {strategySectionLinks.map((link) => (
+                <option value={link.id} key={link.id}>
+                  {link.number} · {link.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </nav>
+      )}
 
-      {forecastPage === "overview" && (
+      {view === "overview" && (
         <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3677,7 +3693,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {forecastPage === "overview" && (
+      {view === "overview" && (
         <article className="lululemon-forecast-section market-size" id="forecast-nyg-market">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3713,7 +3729,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {forecastPage === "strategy" && (
+      {view === "strategy" && (
         <article className="lululemon-forecast-section keep-extend" id="forecast-nyg-programs">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3791,7 +3807,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {forecastPage === "strategy" && (
+      {view === "strategy" && (
         <article className="lululemon-forecast-section whitespace" id="forecast-nyg-whitespace">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3828,7 +3844,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {forecastPage === "strategy" && (
+      {view === "strategy" && (
         <article className="lululemon-forecast-section next-steps nyg-next-steps" id="forecast-nyg-actions">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3858,7 +3874,7 @@ function LululemonSeasonForecast() {
         </article>
       )}
 
-      {forecastPage === "strategy" && (
+      {view === "strategy" && (
         <>
           <article className="lululemon-forecast-section nyk-trend-direction" id="forecast-nyk-fabrics">
             <div className="lululemon-forecast-section-heading">
@@ -3963,7 +3979,7 @@ function LululemonSeasonForecast() {
         </>
       )}
 
-      {forecastPage === "strategy" && (
+      {view === "strategy" && (
         <>
       <article className="lululemon-forecast-section nytg-roadmap" id="forecast-nytg-roadmap">
         <div className="lululemon-forecast-section-heading">
@@ -5965,8 +5981,10 @@ function App() {
 
       {isLululemonWorkspace && brandWorkspacePage === "overview" ? (
         <LululemonBrandOverview />
-      ) : isLululemonWorkspace && brandWorkspacePage === "forecast" ? (
-        <LululemonSeasonForecast />
+      ) : isLululemonWorkspace && brandWorkspacePage === "forecast-overview" ? (
+        <LululemonSeasonForecast view="overview" />
+      ) : isLululemonWorkspace && brandWorkspacePage === "forecast-strategy" ? (
+        <LululemonSeasonForecast view="strategy" />
       ) : isProfileWorkspace && brandWorkspacePage === "profile" ? (
         routeBrand === "travismathew" ? (
           <TravisMathewBrandProfile />
