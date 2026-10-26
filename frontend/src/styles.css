@@ -2350,8 +2350,11 @@ button.lululemon-bar-row.selected > strong {
   font-size: 11px;
 }
 
-.lululemon-chart-controls {
-  flex: 0 0 min(520px, 58%);
+.lululemon-style-controls.lululemon-chart-controls {
+  width: min(100%, 760px);
+  min-width: 680px;
+  flex: 0 0 min(760px, 68%);
+  grid-template-columns: minmax(160px, 0.9fr) 76px repeat(2, minmax(155px, 1fr));
   flex-wrap: wrap;
 }
 
@@ -2373,13 +2376,15 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-chart-gender-filter > div {
-  display: flex;
+  min-height: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(46px, 1fr));
 }
 
 .lululemon-chart-gender-filter button {
-  min-width: 42px;
-  min-height: 31px;
-  padding: 0 10px;
+  min-width: 0;
+  min-height: 40px;
+  padding: 0 9px;
   color: #6f6568;
   background: #fff;
   border: 1px solid #dfd4d7;
@@ -2387,6 +2392,11 @@ button.lululemon-bar-row.selected > strong {
   font-size: 8px;
   font-weight: 850;
   cursor: pointer;
+}
+
+.lululemon-chart-controls .lululemon-comparison-reset {
+  width: 100%;
+  min-height: 40px;
 }
 
 .lululemon-chart-gender-filter button:first-child {
@@ -8171,6 +8181,13 @@ footer a {
     flex-basis: auto;
   }
 
+  .lululemon-style-controls.lululemon-chart-controls {
+    width: 100%;
+    min-width: 0;
+    flex-basis: auto;
+    grid-template-columns: minmax(160px, 1fr) 76px repeat(2, minmax(145px, 1fr));
+  }
+
   .lululemon-style-season-filter {
     grid-template-columns: auto minmax(0, 1fr);
   }
@@ -8666,6 +8683,14 @@ footer a {
 
   .lululemon-comparison-controls {
     grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .lululemon-style-controls.lululemon-chart-controls {
+    grid-template-columns: minmax(150px, 1fr) 76px;
+  }
+
+  .lululemon-chart-controls > label {
+    min-width: 0;
   }
 
   .lululemon-style-controls .lululemon-partner-filter {

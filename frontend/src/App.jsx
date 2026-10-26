@@ -339,6 +339,14 @@ const LULULEMON_COMPETITOR_POSITIONING = [
   { brand: "Gymshark", x: 30, price: 54, radius: 7, labelX: 0, labelY: 25, anchor: "middle" },
 ];
 
+const LULULEMON_PRODUCT_CATEGORIES = [
+  { key: "all", label: "All categories", subtypeKeys: [] },
+  { key: "bottoms", label: "Bottoms", subtypeKeys: ["pant", "short", "jogger", "skirt"] },
+  { key: "outerwear", label: "Outerwear", subtypeKeys: ["jacket"] },
+  { key: "tops", label: "Tops", subtypeKeys: ["pullover", "tee", "tank-top", "polo", "button-down"] },
+  { key: "underwear", label: "Underwear", subtypeKeys: ["boxer-brief"] },
+];
+
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
 
 function mergeBrandOptions(options = []) {
@@ -969,7 +977,7 @@ function LululemonNygMetricGrid({ selectedKey }) {
   return <LululemonMetricGrid metrics={metrics} compact />;
 }
 
-function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", onSelect }) {
+function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", category = "all", onSelect }) {
   const [tableMetric, setTableMetric] = useState("sales");
   const isSales = metric === "sales";
   const isUnits = metric === "units";
@@ -993,7 +1001,11 @@ function LululemonSubtypeComparisonChart({ metric, selectedKey, gender = "all", 
     : gender === "women"
       ? "womenSales"
       : null;
-  const rows = LULULEMON_NYG_COMPARISON.filter((row) => row.key !== "overall")
+  const categoryFilter = LULULEMON_PRODUCT_CATEGORIES.find((option) => option.key === category);
+  const categorySubtypeKeys = new Set(categoryFilter?.subtypeKeys || []);
+  const rows = LULULEMON_NYG_COMPARISON.filter((row) => (
+    row.key !== "overall" && (category === "all" || categorySubtypeKeys.has(row.key))
+  ))
     .map((row) => {
       const fobMultiplier = row.fobMultiplier || LULULEMON_FOB_MULTIPLIER;
       const tableLululemonSales = lululemonGenderField
@@ -4305,7 +4317,16 @@ function LululemonBrandOverview() {
   const comparisonMetric = "sales";
   const [comparisonSubtype, setComparisonSubtype] = useState("overall");
   const [comparisonGender, setComparisonGender] = useState("all");
+  const [comparisonCategory, setComparisonCategory] = useState("all");
   const [selectedProductType, setSelectedProductType] = useState("");
+  const selectedComparisonCategory = LULULEMON_PRODUCT_CATEGORIES.find(
+    (option) => option.key === comparisonCategory,
+  ) || LULULEMON_PRODUCT_CATEGORIES[0];
+  const comparisonSubtypeOptions = LULULEMON_NYG_COMPARISON.filter((row) => (
+    row.key === "overall" ||
+    comparisonCategory === "all" ||
+    selectedComparisonCategory.subtypeKeys.includes(row.key)
+  ));
   const selectedProductMix = LULULEMON_SALES_MIX.find(
     (row) => row.label === selectedProductType,
   );
@@ -4388,6 +4409,7 @@ function LululemonBrandOverview() {
       reportingPeriod: "1 SEP 25 - 31 AUG 26",
       selectedProductType: selectedProductMix?.label || "All product types",
       selectedComparisonGender: comparisonGender,
+      selectedComparisonCategory: selectedComparisonCategory.label,
       selectedSubtype: selectedComparison,
       businessMetrics: LULULEMON_BUSINESS_METRICS,
       salesMixByProductType: LULULEMON_SALES_MIX,
@@ -4402,7 +4424,7 @@ function LululemonBrandOverview() {
         "External material recommendations must be identified as recommendations unless a source confirms the BOM.",
       ],
     };
-  }, [comparisonGender, comparisonSubtype, selectedComparison, selectedProductMix]);
+  }, [comparisonGender, comparisonSubtype, selectedComparison, selectedComparisonCategory, selectedProductMix]);
 
   return (
     <section className="lululemon-brand-overview">
@@ -4529,18 +4551,37 @@ function LululemonBrandOverview() {
                 <button
                   className="lululemon-comparison-reset"
                   type="button"
-                  onClick={() => setComparisonSubtype("overall")}
-                  disabled={comparisonSubtype === "overall"}
+                  onClick={() => {
+                    setComparisonCategory("all");
+                    setComparisonSubtype("overall");
+                  }}
+                  disabled={comparisonSubtype === "overall" && comparisonCategory === "all"}
                 >
                   Reset
                 </button>
+                <label>
+                  <span>Product category</span>
+                  <select
+                    value={comparisonCategory}
+                    onChange={(event) => {
+                      setComparisonCategory(event.target.value);
+                      setComparisonSubtype("overall");
+                    }}
+                  >
+                    {LULULEMON_PRODUCT_CATEGORIES.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
                 <label>
                   <span>Product type</span>
                   <select
                     value={comparisonSubtype}
                     onChange={(event) => setComparisonSubtype(event.target.value)}
                   >
-                    {LULULEMON_NYG_COMPARISON.map((row) => (
+                    {comparisonSubtypeOptions.map((row) => (
                       <option key={row.key} value={row.key}>
                         {row.label}
                       </option>
@@ -4553,6 +4594,7 @@ function LululemonBrandOverview() {
               metric={comparisonMetric}
               selectedKey={comparisonSubtype}
               gender={comparisonGender}
+              category={comparisonCategory}
               onSelect={setComparisonSubtype}
             />
             {comparisonGender !== "all" && (
