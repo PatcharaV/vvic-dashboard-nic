@@ -1223,11 +1223,6 @@ function LululemonOpportunityList({
             : `Top 5 each / ${formatNumber.format(total)}`}
         </strong>
       </div>
-      {coverage.rawRemaining && (
-        <p className="lululemon-style-family-note">
-          {formatNumber.format(coverage.rawRemaining)} raw Base Styles consolidated into {formatNumber.format(coverage.remaining)} grouped styles; {formatNumber.format(coverage.consolidatedVariants)} length variants grouped (25&quot;, 28&quot;, 30L, Tall, Regular, Shorter).
-        </p>
-      )}
       <div className="lululemon-opportunity-search">
         <label htmlFor={`lululemon-style-search-${coverage.key}`}>
           <span>Find a Lululemon style</span>
