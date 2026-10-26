@@ -3644,22 +3644,17 @@ function LululemonSeasonForecast() {
         </div>
       </article>
 
-      <nav className="lululemon-forecast-jump-nav forecast-page-tabs" aria-label="Season forecast pages">
-        <span>Forecast page</span>
-        <div>
-          {forecastSectionLinks.map((link) => (
-            <button
-              type="button"
-              key={link.id}
-              className={forecastPage === link.id ? "active" : undefined}
-              aria-pressed={forecastPage === link.id}
-              onClick={() => setForecastPage(link.id)}
-            >
-              <b>{link.number}</b>
-              {link.label}
-            </button>
-          ))}
-        </div>
+      <nav className="lululemon-forecast-jump-nav forecast-section-selector" aria-label="Season forecast section range">
+        <label>
+          <span>Go to</span>
+          <select value={forecastPage} onChange={(event) => setForecastPage(event.target.value)}>
+            {forecastSectionLinks.map((link) => (
+              <option value={link.id} key={link.id}>
+                {link.number} · {link.label}
+              </option>
+            ))}
+          </select>
+        </label>
       </nav>
 
       {forecastPage === "overview" && (
