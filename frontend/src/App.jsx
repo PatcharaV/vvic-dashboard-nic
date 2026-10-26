@@ -175,8 +175,7 @@ const BRAND_WORKSPACE_PAGES = [
 
 const LULULEMON_WORKSPACE_PAGES = [
   { value: "overview", label: "Brand Overview" },
-  { value: "forecast-overview", label: "Forecast Overview" },
-  { value: "forecast-strategy", label: "Strategy" },
+  { value: "forecast", label: "Season Forecast" },
   { value: "product", label: "Product Dashboard" },
 ];
 
@@ -3464,7 +3463,8 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
   );
 }
 
-function LululemonSeasonForecast({ view = "overview" }) {
+function LululemonSeasonForecast() {
+  const [forecastPage, setForecastPage] = useState("overview");
   const [strategySection, setStrategySection] = useState("forecast-nyg-programs");
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
@@ -3644,7 +3644,30 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </div>
       </article>
 
-      {view === "strategy" && (
+      <nav className="lululemon-forecast-subpage-nav" aria-label="Season Forecast subpages">
+        <button
+          type="button"
+          className={forecastPage === "overview" ? "active" : undefined}
+          aria-pressed={forecastPage === "overview"}
+          onClick={() => setForecastPage("overview")}
+        >
+          <b>01</b>
+          <span>Overview</span>
+          <small>Milestones + Market</small>
+        </button>
+        <button
+          type="button"
+          className={forecastPage === "strategy" ? "active" : undefined}
+          aria-pressed={forecastPage === "strategy"}
+          onClick={() => setForecastPage("strategy")}
+        >
+          <b>02</b>
+          <span>Strategy</span>
+          <small>03–08 + VI</small>
+        </button>
+      </nav>
+
+      {forecastPage === "strategy" && (
         <nav className="lululemon-forecast-jump-nav forecast-section-selector" aria-label="Strategy section range">
           <label>
             <span>Go to</span>
@@ -3668,7 +3691,7 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </nav>
       )}
 
-      {view === "overview" && (
+      {forecastPage === "overview" && (
         <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3693,7 +3716,7 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </article>
       )}
 
-      {view === "overview" && (
+      {forecastPage === "overview" && (
         <article className="lululemon-forecast-section market-size" id="forecast-nyg-market">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3729,7 +3752,7 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </article>
       )}
 
-      {view === "strategy" && (
+      {forecastPage === "strategy" && (
         <article className="lululemon-forecast-section keep-extend" id="forecast-nyg-programs">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3807,7 +3830,7 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </article>
       )}
 
-      {view === "strategy" && (
+      {forecastPage === "strategy" && (
         <article className="lululemon-forecast-section whitespace" id="forecast-nyg-whitespace">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3844,7 +3867,7 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </article>
       )}
 
-      {view === "strategy" && (
+      {forecastPage === "strategy" && (
         <article className="lululemon-forecast-section next-steps nyg-next-steps" id="forecast-nyg-actions">
           <div className="lululemon-forecast-section-heading">
             <div>
@@ -3874,7 +3897,7 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </article>
       )}
 
-      {view === "strategy" && (
+      {forecastPage === "strategy" && (
         <>
           <article className="lululemon-forecast-section nyk-trend-direction" id="forecast-nyk-fabrics">
             <div className="lululemon-forecast-section-heading">
@@ -3979,7 +4002,7 @@ function LululemonSeasonForecast({ view = "overview" }) {
         </>
       )}
 
-      {view === "strategy" && (
+      {forecastPage === "strategy" && (
         <>
       <article className="lululemon-forecast-section nytg-roadmap" id="forecast-nytg-roadmap">
         <div className="lululemon-forecast-section-heading">
@@ -5981,10 +6004,8 @@ function App() {
 
       {isLululemonWorkspace && brandWorkspacePage === "overview" ? (
         <LululemonBrandOverview />
-      ) : isLululemonWorkspace && brandWorkspacePage === "forecast-overview" ? (
-        <LululemonSeasonForecast view="overview" />
-      ) : isLululemonWorkspace && brandWorkspacePage === "forecast-strategy" ? (
-        <LululemonSeasonForecast view="strategy" />
+      ) : isLululemonWorkspace && brandWorkspacePage === "forecast" ? (
+        <LululemonSeasonForecast />
       ) : isProfileWorkspace && brandWorkspacePage === "profile" ? (
         routeBrand === "travismathew" ? (
           <TravisMathewBrandProfile />
