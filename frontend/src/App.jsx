@@ -3651,9 +3651,7 @@ function LululemonSeasonForecast() {
           aria-pressed={forecastPage === "overview"}
           onClick={() => setForecastPage("overview")}
         >
-          <b>01</b>
           <span>Overview</span>
-          <small>Milestones + Market</small>
         </button>
         <button
           type="button"
@@ -3661,9 +3659,7 @@ function LululemonSeasonForecast() {
           aria-pressed={forecastPage === "strategy"}
           onClick={() => setForecastPage("strategy")}
         >
-          <b>02</b>
           <span>Strategy</span>
-          <small>03–08 + VI</small>
         </button>
       </nav>
 

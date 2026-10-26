@@ -9829,28 +9829,16 @@ footer a {
   min-width: 0;
   min-height: 52px;
   padding: 8px 14px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
   color: #4f4548;
   background: #faf7f8;
   border: 1px solid transparent;
   border-radius: 10px;
   font: inherit;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
-}
-
-.lululemon-forecast-subpage-nav button b {
-  width: 28px;
-  height: 28px;
-  display: grid;
-  place-items: center;
-  color: var(--lululemon-red);
-  background: #f8e9ed;
-  border-radius: 8px;
-  font-size: 9px;
 }
 
 .lululemon-forecast-subpage-nav button span {
@@ -9858,25 +9846,10 @@ footer a {
   font-weight: 900;
 }
 
-.lululemon-forecast-subpage-nav button small {
-  color: #8a7e81;
-  font-size: 9px;
-  font-weight: 800;
-}
-
 .lululemon-forecast-subpage-nav button.active {
   color: #fff;
   background: var(--lululemon-red);
   box-shadow: 0 7px 16px rgba(212, 0, 57, 0.2);
-}
-
-.lululemon-forecast-subpage-nav button.active b {
-  color: var(--lululemon-red);
-  background: #fff;
-}
-
-.lululemon-forecast-subpage-nav button.active small {
-  color: rgba(255, 255, 255, 0.76);
 }
 
 .lululemon-forecast-jump-nav {
@@ -11426,10 +11399,7 @@ footer a {
   .lululemon-forecast-subpage-nav button {
     min-height: 46px;
     padding: 7px 9px;
-    grid-template-columns: auto 1fr;
-    gap: 7px;
   }
-  .lululemon-forecast-subpage-nav button small { display: none; }
   .lululemon-forecast-jump-nav {
     top: 54px;
     padding: 7px;
