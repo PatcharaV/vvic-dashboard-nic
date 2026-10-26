@@ -317,6 +317,27 @@ const LULULEMON_REGIONAL_REVENUE = [
   },
 ];
 
+const LULULEMON_COMPETITOR_REVENUE = [
+  { brand: "Nike", value: 46.4, display: "$46.4B" },
+  { brand: "adidas", value: 28.0, display: "$28.0B" },
+  { brand: "Lululemon", value: 11.1, display: "$11.10B", featured: true },
+  { brand: "Under Armour", value: 4.97, display: "$4.97B" },
+  { brand: "Alo Yoga", value: 2.0, display: "~$2.0B", estimate: true },
+  { brand: "Athleta", value: 1.22, display: "$1.22B" },
+  { brand: "Vuori", value: 1.0, display: "~$1.0B", estimate: true },
+  { brand: "Gymshark", value: 0.85, display: "$0.85B" },
+];
+
+const LULULEMON_COMPETITOR_POSITIONING = [
+  { brand: "Nike", multiple: "4.2x", note: "Broad sport giant; running and training women's range" },
+  { brand: "adidas", multiple: "2.5x", note: "Sport and lifestyle; strong in studio and training" },
+  { brand: "Under Armour", multiple: "0.4x", note: "Performance roots; shrinking sales" },
+  { brand: "Alo Yoga", multiple: "0.2x", note: "Premium yoga and studio; closest on price" },
+  { brand: "Athleta", multiple: "0.1x", note: "Women's active under Gap; sales fell" },
+  { brand: "Vuori", multiple: "0.1x", note: "Performance leisure; fastest challenger" },
+  { brand: "Gymshark", multiple: "0.1x", note: "UK online fitness brand" },
+];
+
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
 
 function mergeBrandOptions(options = []) {
@@ -2766,6 +2787,89 @@ function LululemonRevenueHistory() {
   );
 }
 
+function LululemonCompetitors() {
+  const maxRevenue = Math.max(...LULULEMON_COMPETITOR_REVENUE.map((row) => row.value));
+
+  return (
+    <article className="lululemon-overview-section lululemon-competitors-section">
+      <div className="lululemon-overview-heading">
+        <div>
+          <p className="eyebrow">PUBLIC AND PRIVATE PEERS · ANNUAL REVENUE · USD</p>
+          <h2>Competitors of Lululemon</h2>
+        </div>
+        <LululemonOverviewLogo />
+      </div>
+
+      <div className="lululemon-competitor-grid">
+        <section className="lululemon-competitor-card revenue">
+          <div className="lululemon-competitor-card-heading">
+            <h3>Annual revenue</h3>
+            <p>USD billions, latest fiscal year</p>
+          </div>
+          <div className="lululemon-competitor-bars" aria-label="Annual revenue by competitor">
+            {LULULEMON_COMPETITOR_REVENUE.map((row) => (
+              <div
+                className={`lululemon-competitor-bar-row${row.featured ? " featured" : ""}${row.estimate ? " estimate" : ""}`}
+                key={row.brand}
+              >
+                <strong>{row.brand}</strong>
+                <span className="lululemon-competitor-bar-track">
+                  <i style={{ width: `${Math.max((row.value / maxRevenue) * 100, 1.5)}%` }} />
+                </span>
+                <b>{row.display}</b>
+              </div>
+            ))}
+          </div>
+          <p className="lululemon-competitor-legend">
+            Solid = reported. Dashed = analyst or press estimate. Black bar = Lululemon.
+          </p>
+        </section>
+
+        <section className="lululemon-competitor-card positioning">
+          <div className="lululemon-competitor-card-heading">
+            <h3>Size and positioning</h3>
+            <p>× Lululemon revenue · team judgement</p>
+          </div>
+          <div className="lululemon-competitor-positioning-list">
+            {LULULEMON_COMPETITOR_POSITIONING.map((row) => (
+              <div key={row.brand}>
+                <strong>{row.brand}</strong>
+                <b>{row.multiple}</b>
+                <span>{row.note}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <div className="lululemon-competitor-insights">
+        <section>
+          <p className="eyebrow">BUSINESS HIGHLIGHTS</p>
+          <h3>Lululemon sits between giants and challengers</h3>
+          <ul>
+            <li><strong>Giants:</strong> Nike is 4.2x and adidas 2.5x Lululemon's size.</li>
+            <li><strong>Slowing:</strong> Nike flat, Under Armour down, Athleta down.</li>
+            <li><strong>Challengers:</strong> Alo about $2.0B and Vuori about $1.0B, both private.</li>
+          </ul>
+        </section>
+        <section>
+          <p className="eyebrow">STRATEGIC CONTEXT</p>
+          <h3>Fast-growing rivals are the closest threat</h3>
+          <ul>
+            <li><strong>Alo and Vuori</strong> target the same premium customer on price.</li>
+            <li><strong>Estimates:</strong> Alo and Vuori are not audited; Alo figure is the parent group.</li>
+            <li><strong>Lululemon</strong> is the only pure-play premium name with audited accounts.</li>
+          </ul>
+        </section>
+      </div>
+
+      <p className="lululemon-source-note">
+        Source: Nike 8-K (Jun 2026); adidas FY2025 results (€24.81bn × 1.1306 US$/€, FRED); Under Armour 8-K; Gap Inc. results (Athleta); Gymshark (£646M × 1.3192 US$/£, FRED); Forbes via TheIndustry (Alo); CNBC (Vuori). Fiscal years differ.
+      </p>
+    </article>
+  );
+}
+
 function LululemonMixCard({ title, rows, subtitle, featured = false, embedded = false }) {
   const Card = embedded ? "div" : "article";
   return (
@@ -4248,6 +4352,7 @@ function LululemonBrandOverview() {
   return (
     <section className="lululemon-brand-overview">
       <LululemonRevenueHistory />
+      <LululemonCompetitors />
       <article className="lululemon-overview-section">
         <div className="lululemon-overview-heading">
           <div>
