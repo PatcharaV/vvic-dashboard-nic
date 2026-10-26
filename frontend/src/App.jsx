@@ -339,12 +339,40 @@ const LULULEMON_COMPETITOR_POSITIONING = [
   { brand: "Gymshark", x: 30, price: 54, radius: 7, labelX: 0, labelY: 25, anchor: "middle" },
 ];
 
+const LULULEMON_COMPARISON_KEY_BY_NYG_PRODUCT_TYPE = {
+  PANT: "pant",
+  JACKET: "jacket",
+  SHORT: "short",
+  TEE: "tee",
+  PULLOVER: "pullover",
+  JOGGER: "jogger",
+  "TANK TOP": "tank-top",
+  "BOXER BRIEF": "boxer-brief",
+  POLO: "polo",
+  SKIRT: "skirt",
+  "SHIRT BUTTON DOWN": "button-down",
+};
+
+const lululemonProductCategoryMap = new Map();
+NYG_MY_MAP_ROWS.forEach((row) => {
+  const category = String(row.productCategory || "").trim();
+  const productType = String(row.productType || "").trim().toUpperCase();
+  const subtypeKey = LULULEMON_COMPARISON_KEY_BY_NYG_PRODUCT_TYPE[productType];
+  if (!category || !subtypeKey) return;
+
+  if (!lululemonProductCategoryMap.has(category)) {
+    lululemonProductCategoryMap.set(category, new Set());
+  }
+  lululemonProductCategoryMap.get(category).add(subtypeKey);
+});
+
 const LULULEMON_PRODUCT_CATEGORIES = [
   { key: "all", label: "All categories", subtypeKeys: [] },
-  { key: "bottoms", label: "Bottoms", subtypeKeys: ["pant", "short", "jogger", "skirt"] },
-  { key: "outerwear", label: "Outerwear", subtypeKeys: ["jacket"] },
-  { key: "tops", label: "Tops", subtypeKeys: ["pullover", "tee", "tank-top", "polo", "button-down"] },
-  { key: "underwear", label: "Underwear", subtypeKeys: ["boxer-brief"] },
+  ...Array.from(lululemonProductCategoryMap, ([category, subtypeKeys]) => ({
+    key: category,
+    label: category,
+    subtypeKeys: Array.from(subtypeKeys),
+  })),
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
