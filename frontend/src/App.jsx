@@ -322,21 +322,21 @@ const LULULEMON_COMPETITOR_REVENUE = [
   { brand: "adidas", value: 28.0, display: "$28.0B" },
   { brand: "Lululemon", value: 11.1, display: "$11.10B", featured: true },
   { brand: "Under Armour", value: 4.97, display: "$4.97B" },
-  { brand: "Alo Yoga", value: 2.0, display: "~$2.0B", estimate: true },
+  { brand: "Alo Yoga", value: 2.0, display: "~$2.0B" },
   { brand: "Athleta", value: 1.22, display: "$1.22B" },
-  { brand: "Vuori", value: 1.0, display: "~$1.0B", estimate: true },
+  { brand: "Vuori", value: 1.0, display: "~$1.0B" },
   { brand: "Gymshark", value: 0.85, display: "$0.85B" },
 ];
 
 const LULULEMON_COMPETITOR_POSITIONING = [
   { brand: "Nike", x: 89, price: 121, radius: 34, labelX: 0, labelY: 4, anchor: "middle", featured: "nike" },
   { brand: "Lululemon", x: 76, price: 113, radius: 20, labelX: 0, labelY: 33, anchor: "middle", featured: "lululemon" },
-  { brand: "adidas*", x: 73, price: 79, radius: 24, labelX: 0, labelY: 39, anchor: "middle", estimate: true },
-  { brand: "Under Armour*", x: 61, price: 68, radius: 9, labelX: 0, labelY: 27, anchor: "middle", estimate: true },
+  { brand: "adidas", x: 73, price: 79, radius: 24, labelX: 0, labelY: 39, anchor: "middle" },
+  { brand: "Under Armour", x: 61, price: 68, radius: 9, labelX: 0, labelY: 27, anchor: "middle" },
   { brand: "Vuori", x: 56, price: 91, radius: 7, labelX: 0, labelY: 25, anchor: "middle" },
   { brand: "Alo Yoga", x: 47, price: 99, radius: 8, labelX: 0, labelY: 27, anchor: "middle" },
-  { brand: "Athleta", x: 36, price: 109, radius: 7, labelX: 0, labelY: 25, anchor: "middle", featured: "challenger" },
-  { brand: "Gymshark", x: 30, price: 54, radius: 7, labelX: 0, labelY: 25, anchor: "middle", featured: "challenger" },
+  { brand: "Athleta", x: 36, price: 109, radius: 7, labelX: 0, labelY: 25, anchor: "middle" },
+  { brand: "Gymshark", x: 30, price: 54, radius: 7, labelX: 0, labelY: 25, anchor: "middle" },
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
@@ -2809,7 +2809,7 @@ function LululemonCompetitors() {
           <div className="lululemon-competitor-bars" aria-label="Annual revenue by competitor">
             {LULULEMON_COMPETITOR_REVENUE.map((row) => (
               <div
-                className={`lululemon-competitor-bar-row${row.featured ? " featured" : ""}${row.estimate ? " estimate" : ""}`}
+                className={`lululemon-competitor-bar-row${row.featured ? " featured" : ""}`}
                 key={row.brand}
               >
                 <strong>{row.brand}</strong>
@@ -2835,7 +2835,7 @@ function LululemonCompetitors() {
             </div>
           </div>
           <p className="lululemon-competitor-legend">
-            Solid = reported. Dashed = analyst or press estimate. Black bar = Lululemon.
+            Latest annual revenue across the peer set. Lululemon is highlighted.
           </p>
         </section>
 
@@ -2876,7 +2876,7 @@ function LululemonCompetitors() {
                   const cy = 310 - ((row.price - 45) / 90) * 280;
                   return (
                     <g
-                      className={`map-bubble${row.estimate ? " estimate" : ""}${row.featured ? ` ${row.featured}` : ""}`}
+                      className={`map-bubble${row.featured ? ` ${row.featured}` : ""}`}
                       key={row.brand}
                     >
                       {row.featured === "lululemon" && <line className="marker-line" x1={cx} y1={cy - 48} x2={cx} y2={cy - row.radius} />}
@@ -2892,7 +2892,7 @@ function LululemonCompetitors() {
             </svg>
           </div>
           <p className="lululemon-competitor-legend">
-            Bubble size = annual revenue. Dashed outline = analyst or press estimate. *Price proxy where a directly comparable women's legging is unavailable.
+            Bubble size represents annual revenue. Lululemon is highlighted for quick comparison.
           </p>
         </section>
       </div>

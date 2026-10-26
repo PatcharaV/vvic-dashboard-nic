@@ -5772,19 +5772,19 @@ button.lululemon-bar-row.selected > strong {
   height: 100%;
   display: block;
   min-width: 3px;
-  background: linear-gradient(90deg, #a9002b, var(--lululemon-red));
+  background: linear-gradient(90deg, #f3ccd4, #e8aeba);
   border-radius: 999px;
-  box-shadow: 0 4px 10px rgba(191, 0, 48, 0.14);
+  box-shadow: 0 3px 8px rgba(169, 75, 96, 0.1);
 }
 
 .lululemon-competitor-bar-row.featured .lululemon-competitor-bar-track i {
-  background: #211d1f;
+  background: linear-gradient(90deg, #171315, #322b2e);
+  box-shadow: 0 4px 10px rgba(33, 29, 31, 0.18);
 }
 
-.lululemon-competitor-bar-row.estimate .lululemon-competitor-bar-track i {
-  background: #fff;
-  border: 2px dashed var(--lululemon-red);
-  box-shadow: none;
+.lululemon-competitor-bar-row.featured strong,
+.lululemon-competitor-bar-row.featured b {
+  color: var(--lululemon-dark-red);
 }
 
 .lululemon-competitor-kpis {
@@ -5865,15 +5865,10 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-positioning-map .map-bubble circle {
-  fill: #fff;
-  stroke: var(--lululemon-red);
+  fill: #f3ccd4;
+  stroke: #d98294;
   stroke-width: 2;
   filter: drop-shadow(0 4px 5px rgba(63, 31, 39, 0.11));
-}
-
-.lululemon-positioning-map .map-bubble.challenger circle {
-  fill: var(--lululemon-red);
-  stroke: #a9002b;
 }
 
 .lululemon-positioning-map .map-bubble.lululemon circle {
@@ -5882,13 +5877,8 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-positioning-map .map-bubble.nike circle {
-  fill: #cf1740;
-  stroke: #9e1031;
-}
-
-.lululemon-positioning-map .map-bubble.estimate circle {
-  fill: #fff;
-  stroke-dasharray: 3 3;
+  fill: #efbdc8;
+  stroke: #cf7185;
 }
 
 .lululemon-positioning-map .map-bubble text {
@@ -5898,7 +5888,7 @@ button.lululemon-bar-row.selected > strong {
 }
 
 .lululemon-positioning-map .map-bubble .inside-label {
-  fill: #fff;
+  fill: #5e2431;
   font-size: 10px;
 }
 
