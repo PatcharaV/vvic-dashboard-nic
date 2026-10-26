@@ -2820,6 +2820,20 @@ function LululemonCompetitors() {
               </div>
             ))}
           </div>
+          <div className="lululemon-competitor-kpis" aria-label="Competitor revenue summary">
+            <div>
+              <span>Peer revenue rank</span>
+              <strong>#3</strong>
+            </div>
+            <div>
+              <span>Lululemon revenue</span>
+              <strong>$11.10B</strong>
+            </div>
+            <div>
+              <span>Nike scale</span>
+              <strong>4.2x</strong>
+            </div>
+          </div>
           <p className="lululemon-competitor-legend">
             Solid = reported. Dashed = analyst or press estimate. Black bar = Lululemon.
           </p>
