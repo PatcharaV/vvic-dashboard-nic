@@ -2865,11 +2865,11 @@ function LululemonCompetitors() {
                   );
                 })}
               </g>
-              <text className="map-axis-caption high" x="68" y="22">HIGH PRICE</text>
-              <text className="map-axis-caption low" x="68" y="333">LOW PRICE</text>
+              <text className="map-axis-caption high" x="62" y="22" textAnchor="middle">HIGH PRICE</text>
+              <text className="map-axis-caption low" x="62" y="333" textAnchor="middle">LOW PRICE</text>
               <text className="map-axis-title" x="20" y="170" transform="rotate(-90 20 170)">Price of a flagship legging · US$ list</text>
-              <text className="map-axis-caption basic" x="208" y="348">BASIC ←</text>
-              <text className="map-axis-caption innovation" x="350" y="348">→ INNOVATION</text>
+              <text className="map-axis-caption basic" x="179" y="348" textAnchor="middle">BASIC</text>
+              <text className="map-axis-caption innovation" x="413" y="348" textAnchor="middle">INNOVATION</text>
               <g className="map-bubbles">
                 {LULULEMON_COMPETITOR_POSITIONING.map((row) => {
                   const cx = 62 + (row.x / 100) * 468;
