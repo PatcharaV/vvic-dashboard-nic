@@ -5797,41 +5797,6 @@ button.lululemon-bar-row.selected > strong {
   color: var(--lululemon-dark-red);
 }
 
-.lululemon-competitor-kpis {
-  margin-top: auto;
-  padding-top: 18px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  border-top: 1px solid #eee4e7;
-}
-
-.lululemon-competitor-kpis > div {
-  min-width: 0;
-  padding: 12px 10px;
-  display: grid;
-  align-content: center;
-  gap: 5px;
-  background: #faf7f8;
-  border: 1px solid #eee6e8;
-  border-radius: 12px;
-}
-
-.lululemon-competitor-kpis span {
-  color: #7b7376;
-  font-size: 8px;
-  font-weight: 750;
-  letter-spacing: 0.04em;
-  line-height: 1.25;
-  text-transform: uppercase;
-}
-
-.lululemon-competitor-kpis strong {
-  color: var(--lululemon-dark-red);
-  font-size: 19px;
-  letter-spacing: -0.03em;
-}
-
 .lululemon-competitor-legend {
   margin: 12px 0 0;
   color: #777174;
@@ -8300,15 +8265,6 @@ footer a {
   .lululemon-competitor-card,
   .lululemon-competitor-insights > section {
     padding: 19px;
-  }
-
-  .lululemon-competitor-kpis {
-    grid-template-columns: 1fr;
-  }
-
-  .lululemon-competitor-kpis > div {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
   }
 
   .lululemon-competitor-bar-row {
