@@ -329,13 +329,14 @@ const LULULEMON_COMPETITOR_REVENUE = [
 ];
 
 const LULULEMON_COMPETITOR_POSITIONING = [
-  { brand: "Nike", multiple: "4.2x", note: "Broad sport giant; running and training women's range" },
-  { brand: "adidas", multiple: "2.5x", note: "Sport and lifestyle; strong in studio and training" },
-  { brand: "Under Armour", multiple: "0.4x", note: "Performance roots; shrinking sales" },
-  { brand: "Alo Yoga", multiple: "0.2x", note: "Premium yoga and studio; closest on price" },
-  { brand: "Athleta", multiple: "0.1x", note: "Women's active under Gap; sales fell" },
-  { brand: "Vuori", multiple: "0.1x", note: "Performance leisure; fastest challenger" },
-  { brand: "Gymshark", multiple: "0.1x", note: "UK online fitness brand" },
+  { brand: "Nike", x: 89, price: 121, radius: 34, labelX: 0, labelY: 4, anchor: "middle", featured: "nike" },
+  { brand: "Lululemon", x: 76, price: 113, radius: 20, labelX: 0, labelY: 33, anchor: "middle", featured: "lululemon" },
+  { brand: "adidas*", x: 73, price: 79, radius: 24, labelX: 0, labelY: 39, anchor: "middle", estimate: true },
+  { brand: "Under Armour*", x: 61, price: 68, radius: 9, labelX: 0, labelY: 27, anchor: "middle", estimate: true },
+  { brand: "Vuori", x: 56, price: 91, radius: 7, labelX: 0, labelY: 25, anchor: "middle" },
+  { brand: "Alo Yoga", x: 47, price: 99, radius: 8, labelX: 0, labelY: 27, anchor: "middle" },
+  { brand: "Athleta", x: 36, price: 109, radius: 7, labelX: 0, labelY: 25, anchor: "middle", featured: "challenger" },
+  { brand: "Gymshark", x: 30, price: 54, radius: 7, labelX: 0, labelY: 25, anchor: "middle", featured: "challenger" },
 ];
 
 const BRAND_ROUTES = new Set(DEFAULT_BRAND_OPTIONS.map((brand) => brand.value));
@@ -2827,18 +2828,59 @@ function LululemonCompetitors() {
 
         <section className="lululemon-competitor-card positioning">
           <div className="lululemon-competitor-card-heading">
-            <h3>Size and positioning</h3>
-            <p>× Lululemon revenue · team judgement</p>
+            <h3>Positioning map</h3>
+            <p>Price of flagship legging · US$ list</p>
           </div>
-          <div className="lululemon-competitor-positioning-list">
-            {LULULEMON_COMPETITOR_POSITIONING.map((row) => (
-              <div key={row.brand}>
-                <strong>{row.brand}</strong>
-                <b>{row.multiple}</b>
-                <span>{row.note}</span>
-              </div>
-            ))}
+          <div className="lululemon-positioning-map">
+            <svg viewBox="0 0 560 360" role="img" aria-labelledby="lululemon-positioning-title lululemon-positioning-description">
+              <title id="lululemon-positioning-title">Lululemon competitor positioning map</title>
+              <desc id="lululemon-positioning-description">
+                Competitors positioned from basic to innovation by flagship legging list price. Bubble size indicates annual revenue.
+              </desc>
+              <g className="map-grid">
+                <line x1="62" y1="30" x2="62" y2="310" />
+                <line x1="62" y1="310" x2="530" y2="310" />
+                <line className="guide" x1="296" y1="30" x2="296" y2="310" />
+                <line className="guide" x1="62" y1="170" x2="530" y2="170" />
+                {[50, 75, 100, 125].map((tick) => {
+                  const y = 310 - ((tick - 45) / 90) * 280;
+                  return (
+                    <g className="price-tick" key={tick}>
+                      <line x1="58" y1={y} x2="62" y2={y} />
+                      <text x="54" y={y + 4} textAnchor="end">${tick}</text>
+                    </g>
+                  );
+                })}
+              </g>
+              <text className="map-axis-caption high" x="68" y="22">HIGH PRICE</text>
+              <text className="map-axis-caption low" x="68" y="333">LOW PRICE</text>
+              <text className="map-axis-title" x="20" y="170" transform="rotate(-90 20 170)">Price of a flagship legging · US$ list</text>
+              <text className="map-axis-caption basic" x="208" y="348">BASIC ←</text>
+              <text className="map-axis-caption innovation" x="350" y="348">→ INNOVATION</text>
+              <g className="map-bubbles">
+                {LULULEMON_COMPETITOR_POSITIONING.map((row) => {
+                  const cx = 62 + (row.x / 100) * 468;
+                  const cy = 310 - ((row.price - 45) / 90) * 280;
+                  return (
+                    <g
+                      className={`map-bubble${row.estimate ? " estimate" : ""}${row.featured ? ` ${row.featured}` : ""}`}
+                      key={row.brand}
+                    >
+                      {row.featured === "lululemon" && <line className="marker-line" x1={cx} y1={cy - 48} x2={cx} y2={cy - row.radius} />}
+                      <circle cx={cx} cy={cy} r={row.radius} />
+                      {row.featured === "nike" && <text className="inside-label" x={cx} y={cy + 4} textAnchor="middle">Nike</text>}
+                      {row.featured !== "nike" && (
+                        <text x={cx + row.labelX} y={cy + row.labelY} textAnchor={row.anchor}>{row.brand}</text>
+                      )}
+                    </g>
+                  );
+                })}
+              </g>
+            </svg>
           </div>
+          <p className="lululemon-competitor-legend">
+            Bubble size = annual revenue. Dashed outline = analyst or press estimate. *Price proxy where a directly comparable women's legging is unavailable.
+          </p>
         </section>
       </div>
 
@@ -2864,7 +2906,7 @@ function LululemonCompetitors() {
       </div>
 
       <p className="lululemon-source-note">
-        Source: Nike 8-K (Jun 2026); adidas FY2025 results (€24.81bn × 1.1306 US$/€, FRED); Under Armour 8-K; Gap Inc. results (Athleta); Gymshark (£646M × 1.3192 US$/£, FRED); Forbes via TheIndustry (Alo); CNBC (Vuori). Fiscal years differ.
+        Positioning source: ShopBack (Sep 2026) and NBC Select leggings test. Revenue source: Nike 8-K (Jun 2026); adidas FY2025 results (€24.81bn × 1.1306 US$/€, FRED); Under Armour 8-K; Gap Inc. results (Athleta); Gymshark (£646M × 1.3192 US$/£, FRED); Forbes via TheIndustry (Alo); CNBC (Vuori). Fiscal years differ.
       </p>
     </article>
   );

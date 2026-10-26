@@ -5752,32 +5752,81 @@ button.lululemon-bar-row.selected > strong {
   line-height: 1.45;
 }
 
-.lululemon-competitor-positioning-list {
-  margin-top: 18px;
-  display: grid;
-  gap: 12px;
+.lululemon-positioning-map {
+  width: 100%;
+  margin-top: 10px;
 }
 
-.lululemon-competitor-positioning-list > div {
-  display: grid;
-  grid-template-columns: 104px 44px minmax(0, 1fr);
-  align-items: start;
-  gap: 10px;
+.lululemon-positioning-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
 }
 
-.lululemon-competitor-positioning-list strong,
-.lululemon-competitor-positioning-list b {
-  font-size: 11px;
+.lululemon-positioning-map .map-grid line {
+  stroke: #d9d1d3;
+  stroke-width: 1.2;
 }
 
-.lululemon-competitor-positioning-list b {
-  color: var(--lululemon-red);
+.lululemon-positioning-map .map-grid .guide {
+  stroke: #e4dcde;
+  stroke-dasharray: 4 4;
 }
 
-.lululemon-competitor-positioning-list span {
-  color: #5f595b;
+.lululemon-positioning-map .price-tick text,
+.lululemon-positioning-map .map-axis-title {
+  fill: #81797c;
+  font-size: 9px;
+}
+
+.lululemon-positioning-map .map-axis-caption {
+  fill: #6b6466;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.lululemon-positioning-map .map-bubble circle {
+  fill: #fff;
+  stroke: var(--lululemon-red);
+  stroke-width: 2;
+}
+
+.lululemon-positioning-map .map-bubble.challenger circle {
+  fill: var(--lululemon-red);
+  stroke: #a9002b;
+}
+
+.lululemon-positioning-map .map-bubble.lululemon circle {
+  fill: #211d1f;
+  stroke: #211d1f;
+}
+
+.lululemon-positioning-map .map-bubble.nike circle {
+  fill: #cf1740;
+  stroke: #9e1031;
+}
+
+.lululemon-positioning-map .map-bubble.estimate circle {
+  fill: #fff;
+  stroke-dasharray: 3 3;
+}
+
+.lululemon-positioning-map .map-bubble text {
+  fill: #2e292b;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.lululemon-positioning-map .map-bubble .inside-label {
+  fill: #fff;
   font-size: 10px;
-  line-height: 1.45;
+}
+
+.lululemon-positioning-map .marker-line {
+  stroke: #686063;
+  stroke-width: 2;
 }
 
 .lululemon-competitor-insights {
@@ -8144,9 +8193,9 @@ footer a {
     gap: 7px;
   }
 
-  .lululemon-competitor-positioning-list > div {
-    grid-template-columns: 82px 38px minmax(0, 1fr);
-    gap: 7px;
+  .lululemon-positioning-map {
+    margin-inline: -4px;
+    width: calc(100% + 8px);
   }
 
   .lululemon-style-mirror-heading,
