@@ -3747,6 +3747,243 @@ function NygMyMap({ subtypeKey, selectedSeasons }) {
   );
 }
 
+const FORECAST_TREND_MAP_LEVELS = [
+  { key: "season", label: "Season" },
+  { key: "gender", label: "Gender" },
+  { key: "productType", label: "Product Type" },
+  { key: "product", label: "Product Opportunity" },
+  { key: "trend", label: "Future Trend" },
+  { key: "fabricForecast", label: "Fabric Forecast" },
+];
+
+function forecastProductType(programName) {
+  const name = programName.toLowerCase();
+  if (name.includes("jacket")) return "Jacket";
+  if (name.includes("short")) return "Short";
+  if (name.includes("tank")) return "Tank";
+  if (name.includes("polo")) return "Polo";
+  if (name.includes("hoodie")) return "Hoodie";
+  if (name.includes("half zip") || name.includes("half-zip")) return "Half zip";
+  if (name.includes("shirt")) return "Shirt";
+  return "Apparel";
+}
+
+function forecastTrendDirection(pitch) {
+  const namedDirection = pitch.match(/\(([^)]+)\)\.?$/)?.[1];
+  if (namedDirection) return namedDirection;
+  const value = pitch.toLowerCase();
+  if (value.includes("nulu") || value.includes("matte") || value.includes("suede")) return "Second-skin performance";
+  if (value.includes("waffle") || value.includes("3d") || value.includes("velour")) return "Dimensional texture";
+  if (value.includes("modal") || value.includes("plush") || value.includes("powdery")) return "Soft comfort";
+  if (value.includes("brushed") || value.includes("fleece") || value.includes("felted") || value.includes("moss")) return "Tactile warmth";
+  return "Performance evolution";
+}
+
+function NytgTrendForecastMap({ programs }) {
+  const [selectedPath, setSelectedPath] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const mapCanvasRef = useRef(null);
+  const mapRows = useMemo(() => programs.map((program) => ({
+    ...program,
+    productType: forecastProductType(program.program),
+    product: program.program,
+    trend: forecastTrendDirection(program.pitch),
+    fabricForecast: program.pitch.replace(/\s*\([^)]+\)\.?$/, ""),
+  })), [programs]);
+  const visibleLevelCount = Math.min(selectedPath.length + 1, FORECAST_TREND_MAP_LEVELS.length);
+  const totalSales = mapRows.reduce((sum, row) => sum + row.nygSales, 0);
+  const totalDemand = mapRows.reduce((sum, row) => sum + row.nygYards, 0);
+  const trendCount = new Set(mapRows.map((row) => row.trend)).size;
+
+  const rowsAtLevel = (levelIndex) => mapRows.filter((row) =>
+    selectedPath.slice(0, levelIndex).every(
+      (value, pathIndex) => row[FORECAST_TREND_MAP_LEVELS[pathIndex].key] === value,
+    ),
+  );
+
+  const handleNodeClick = (levelIndex, value) => {
+    setSelectedPath((current) => (
+      current[levelIndex] === value
+        ? current.slice(0, levelIndex)
+        : [...current.slice(0, levelIndex), value]
+    ));
+  };
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      mapCanvasRef.current?.scrollTo({
+        left: mapCanvasRef.current.scrollWidth,
+        behavior: "smooth",
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [selectedPath]);
+
+  useEffect(() => {
+    setSelectedPath([]);
+    setIsExpanded(false);
+  }, [programs]);
+
+  useEffect(() => {
+    if (!isExpanded) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setIsExpanded(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isExpanded]);
+
+  const renderMapColumns = (expanded = false) => (
+    <div
+      className={`nyg-map-columns${expanded ? " expanded" : ""}`}
+      style={{ "--nyg-visible-levels": visibleLevelCount }}
+    >
+      {FORECAST_TREND_MAP_LEVELS.slice(0, visibleLevelCount).map((level, levelIndex) => {
+        const scopedRows = rowsAtLevel(levelIndex);
+        const values = uniqueMapValues(scopedRows, level.key).sort((a, b) => {
+          if (level.key === "season") return ["SS28", "FW28"].indexOf(a) - ["SS28", "FW28"].indexOf(b);
+          if (level.key === "gender") return ["Men", "Women"].indexOf(a) - ["Men", "Women"].indexOf(b);
+          const salesFor = (value) => scopedRows
+            .filter((row) => row[level.key] === value)
+            .reduce((sum, row) => sum + row.nygSales, 0);
+          return salesFor(b) - salesFor(a) || a.localeCompare(b);
+        });
+        const nextLevel = FORECAST_TREND_MAP_LEVELS[levelIndex + 1];
+        return (
+          <section className="nyg-map-column" key={level.key}>
+            <div className="nyg-map-column-heading">
+              <span>Level {levelIndex + 1}</span>
+              <strong>{level.label}</strong>
+              <small>{values.length} {values.length === 1 ? "option" : "options"}</small>
+            </div>
+            <div className="nyg-map-nodes">
+              {values.map((value) => {
+                const nodeRows = scopedRows.filter((row) => row[level.key] === value);
+                const nodeSales = nodeRows.reduce((sum, row) => sum + row.nygSales, 0);
+                const nodeDemand = nodeRows.reduce((sum, row) => sum + row.nygYards, 0);
+                const childCount = nextLevel ? new Set(nodeRows.map((row) => row[nextLevel.key])).size : 0;
+                const isSelected = selectedPath[levelIndex] === value;
+                const isFinal = levelIndex === FORECAST_TREND_MAP_LEVELS.length - 1;
+                return (
+                  <button
+                    className={`${isSelected ? "selected" : ""} ${isFinal ? "trend-final-node" : ""}`.trim() || undefined}
+                    type="button"
+                    key={value}
+                    aria-pressed={isSelected}
+                    onClick={() => handleNodeClick(levelIndex, value)}
+                  >
+                    <span>{level.label}</span>
+                    <strong>{value}</strong>
+                    <small className="nyg-map-node-metrics">
+                      <b>{nodeRows.length} {nodeRows.length === 1 ? "program" : "programs"}</b>
+                      <b>{formatComparisonValue(nodeSales, "sales")}</b>
+                      <b>{formatFabricYards(nodeDemand, true)}</b>
+                    </small>
+                    {nextLevel && <i aria-hidden="true">{isSelected ? "−" : "+"}</i>}
+                    {nextLevel && <small>{childCount} next {childCount === 1 ? "option" : "options"}</small>}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  );
+
+  const selectedRows = rowsAtLevel(FORECAST_TREND_MAP_LEVELS.length);
+
+  return (
+    <section className="nyg-map-workspace embedded nytg-trend-map">
+      <div className="nyg-map-summary">
+        <div>
+          <span>NYTG FUTURE PRODUCT + FABRIC ARCHITECTURE</span>
+          <strong>Trend forecast</strong>
+          <p>Select a card to reveal the next future trend level. Season and Gender controls above keep this forecast synchronized with the product strategy.</p>
+        </div>
+        <div className="nyg-map-summary-metrics">
+          <div><strong>{mapRows.length}</strong><span>Programs</span></div>
+          <div><strong>{formatComparisonValue(totalSales, "sales")}</strong><span>Sales base</span></div>
+          <div><strong>{formatFabricYards(totalDemand, true)}</strong><span>Fabric demand</span></div>
+          <div><strong>{trendCount}</strong><span>Trend directions</span></div>
+        </div>
+      </div>
+
+      <div className="nyg-map-toolbar">
+        <div>
+          <span>Navigation path</span>
+          <div className="nyg-map-breadcrumbs">
+            <button type="button" onClick={() => setSelectedPath([])}>All future trends</button>
+            {selectedPath.map((value, index) => (
+              <button
+                type="button"
+                key={`${FORECAST_TREND_MAP_LEVELS[index].key}-${value}`}
+                onClick={() => setSelectedPath((current) => current.slice(0, index + 1))}
+              >
+                <small>{FORECAST_TREND_MAP_LEVELS[index].label}</small>
+                {value}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="nyg-map-toolbar-actions">
+          <button className="nyg-map-expand" type="button" onClick={() => setIsExpanded(true)}>Expand view</button>
+          <button className="nyg-map-reset" type="button" disabled={selectedPath.length === 0} onClick={() => setSelectedPath([])}>Collapse all</button>
+        </div>
+      </div>
+
+      <div className="nyg-map-progress" aria-label="Future trend hierarchy">
+        {FORECAST_TREND_MAP_LEVELS.map((level, index) => (
+          <span className={`${index < selectedPath.length ? "complete" : ""} ${index === selectedPath.length ? "current" : ""}`} key={level.key}>
+            <b>{index + 1}</b>{level.label}
+          </span>
+        ))}
+      </div>
+
+      <p className="nyg-map-guidance">Click a card to open the next forecast level. Click the selected card again to fold the map back.</p>
+      <div className="nyg-map-canvas" ref={mapCanvasRef} tabIndex="0">{renderMapColumns()}</div>
+
+      {isExpanded && (
+        <div className="nyg-map-modal-backdrop" role="presentation" onMouseDown={(event) => {
+          if (event.target === event.currentTarget) setIsExpanded(false);
+        }}>
+          <section className="nyg-map-modal" role="dialog" aria-modal="true" aria-labelledby="trend-map-modal-title">
+            <header>
+              <div>
+                <span>Expanded future trend forecast</span>
+                <h3 id="trend-map-modal-title">Trend forecast</h3>
+                <p>{selectedPath.length > 0 ? selectedPath.join(" / ") : "Select a card to reveal the next forecast level."}</p>
+              </div>
+              <button type="button" onClick={() => setIsExpanded(false)} aria-label="Close expanded trend forecast">Close</button>
+            </header>
+            <div className="nyg-map-modal-progress">
+              {FORECAST_TREND_MAP_LEVELS.map((level, index) => (
+                <span className={index < visibleLevelCount ? "visible" : undefined} key={level.key}><b>{index + 1}</b>{level.label}</span>
+              ))}
+            </div>
+            <div className="nyg-map-modal-canvas">{renderMapColumns(true)}</div>
+          </section>
+        </div>
+      )}
+
+      {selectedPath.length === FORECAST_TREND_MAP_LEVELS.length && selectedRows[0] && (
+        <div className="nyg-map-selection">
+          <span>Selected forecast</span>
+          <strong>{selectedRows[0].product}</strong>
+          <small>{selectedRows[0].season} · {selectedRows[0].gender} · {selectedRows[0].trend} · Priority {selectedRows[0].rank}</small>
+        </div>
+      )}
+
+      <p className="lululemon-source-note nyg-map-source">Directional SS28/FW28 trend forecast based on NYTG&apos;s product sales base, fabric demand, group capability and proposed fabric developments.</p>
+    </section>
+  );
+}
+
 function LululemonSeasonForecast() {
   const [forecastPage, setForecastPage] = useState("overview");
   const [strategySection, setStrategySection] = useState("forecast-nyg-programs");
@@ -3805,45 +4042,6 @@ function LululemonSeasonForecast() {
       };
     })
     .filter((group) => group.genderGroups.length > 0);
-  const productMapRows = [];
-  const productMapSeasonNodes = [];
-  const productMapGenderNodes = [];
-  nykProgramGroups.forEach((seasonGroup) => {
-    const seasonStart = productMapRows.length + 1;
-    seasonGroup.genderGroups.forEach((genderGroup) => {
-      const genderStart = productMapRows.length + 1;
-      genderGroup.programs.forEach((program) => {
-        const name = program.program.toLowerCase();
-        let productType = "Apparel";
-        if (name.includes("jacket")) productType = "Jacket";
-        else if (name.includes("short")) productType = "Short";
-        else if (name.includes("tank")) productType = "Tank";
-        else if (name.includes("polo")) productType = "Polo";
-        else if (name.includes("hoodie")) productType = "Hoodie";
-        else if (name.includes("half zip") || name.includes("half-zip")) productType = "Half zip";
-        else if (name.includes("shirt")) productType = "Shirt";
-        const directionMatch = program.pitch.match(/\(([^)]+)\)\.?$/);
-        productMapRows.push({
-          ...program,
-          row: productMapRows.length + 1,
-          productType,
-          direction: program.pitch.replace(/\s*\([^)]+\)\.?$/, ""),
-          trend: directionMatch?.[1] || "Core development",
-        });
-      });
-      productMapGenderNodes.push({
-        gender: genderGroup.gender,
-        start: genderStart,
-        span: genderGroup.programs.length,
-      });
-    });
-    productMapSeasonNodes.push({
-      season: seasonGroup.season,
-      seasonName: seasonGroup.seasonName,
-      start: seasonStart,
-      span: seasonGroup.genderGroups.reduce((sum, group) => sum + group.programs.length, 0),
-    });
-  });
   const nykKeepExtendGroups = LULULEMON_NYK_KEEP_EXTEND.filter(
     (group) => gender === "All" || group.gender === gender,
   );
@@ -3986,11 +4184,11 @@ function LululemonSeasonForecast() {
         </button>
         <button
           type="button"
-          className={forecastPage === "product-map" ? "active" : undefined}
-          aria-pressed={forecastPage === "product-map"}
-          onClick={() => setForecastPage("product-map")}
+          className={forecastPage === "trend-forecast" ? "active" : undefined}
+          aria-pressed={forecastPage === "trend-forecast"}
+          onClick={() => setForecastPage("trend-forecast")}
         >
-          <span>Product map</span>
+          <span>Trend forecast</span>
         </button>
       </nav>
 
@@ -4018,91 +4216,8 @@ function LululemonSeasonForecast() {
         </nav>
       )}
 
-      {forecastPage === "product-map" && (
-        <article className="lululemon-forecast-section nytg-product-map-section" id="forecast-product-map">
-          <div className="lululemon-forecast-section-heading">
-            <div>
-              <p className="eyebrow">PRODUCT MAP</p>
-              <h3>What NYTG will propose</h3>
-            </div>
-            <span>One connected view from season and audience to product and fabric direction.</span>
-          </div>
-          <div className="nytg-product-map-summary">
-            <div><span>Programs</span><strong>{productMapRows.length}</strong></div>
-            <div><span>Seasons</span><strong>{productMapSeasonNodes.length}</strong></div>
-            <div><span>Audience</span><strong>{gender === "All" ? "Men + Women" : gender}</strong></div>
-            <p>Use the map from left to right: select the commercial program, confirm today&apos;s fabric base, then pitch the NYTG fabric direction.</p>
-          </div>
-          <div className="nytg-product-map-scroll">
-            <div className="nytg-product-map">
-              <div className="nytg-product-map-head" aria-hidden="true">
-                <span>Portfolio</span>
-                <span>Season</span>
-                <span>Audience</span>
-                <span>Product type</span>
-                <span>Product to pitch</span>
-                <span>Current fabric base</span>
-                <span>NYTG fabric direction</span>
-              </div>
-              <div className="nytg-product-map-canvas" style={{ "--product-map-rows": productMapRows.length }}>
-                <article
-                  className="nytg-product-map-node root"
-                  style={{ gridColumn: 1, gridRow: `1 / span ${Math.max(productMapRows.length, 1)}` }}
-                >
-                  <span>NYTG PORTFOLIO</span>
-                  <strong>Product pitch</strong>
-                  <small>{productMapRows.length} programs</small>
-                </article>
-                {productMapSeasonNodes.map((node) => (
-                  <article
-                    className="nytg-product-map-node season"
-                    style={{ gridColumn: 2, gridRow: `${node.start} / span ${node.span}` }}
-                    key={node.season}
-                  >
-                    <span>SEASON</span>
-                    <strong>{node.season}</strong>
-                    <small>{node.seasonName}</small>
-                  </article>
-                ))}
-                {productMapGenderNodes.map((node, index) => (
-                  <article
-                    className={`nytg-product-map-node audience ${node.gender.toLowerCase()}`}
-                    style={{ gridColumn: 3, gridRow: `${node.start} / span ${node.span}` }}
-                    key={`${node.gender}-${node.start}-${index}`}
-                  >
-                    <span>AUDIENCE</span>
-                    <strong>{node.gender}</strong>
-                    <small>{node.span} programs</small>
-                  </article>
-                ))}
-                {productMapRows.map((program) => (
-                  <div className="nytg-product-map-row" style={{ gridColumn: "4 / -1", gridRow: program.row }} key={program.id}>
-                    <article className="nytg-product-map-card type">
-                      <span>PRODUCT TYPE</span>
-                      <strong>{program.productType}</strong>
-                      <small>Priority {program.rank}</small>
-                    </article>
-                    <article className="nytg-product-map-card product">
-                      <span>PRODUCT NAME</span>
-                      <strong>{program.program}</strong>
-                      <small>{formatComparisonValue(program.nygSales, "sales")} sales · {formatFabricYards(program.nygYards, true)}</small>
-                    </article>
-                    <article className="nytg-product-map-card current">
-                      <span>CURRENT FABRIC BASE</span>
-                      <strong>{program.current}</strong>
-                    </article>
-                    <article className="nytg-product-map-card direction">
-                      <span>NYTG FABRIC DIRECTION</span>
-                      <strong>{program.direction}</strong>
-                      <small>{program.trend}</small>
-                    </article>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <p className="lululemon-source-note">Directional SS28/FW28 proposal map based on the shared product and fabric priority list. Filters above update this view.</p>
-        </article>
+      {forecastPage === "trend-forecast" && (
+        <NytgTrendForecastMap programs={filteredNykPrograms} />
       )}
 
       {forecastPage === "overview" && (
