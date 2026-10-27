@@ -4143,7 +4143,7 @@ function LululemonSeasonForecast() {
       <article className="lululemon-forecast-hero nyg-intro">
         <div className="lululemon-forecast-hero-copy">
           <p className="eyebrow">NAN YANG TEXTILE GROUP · GARMENT + FABRIC · LULULEMON</p>
-          <h2>NYTG Forecast: Garment and Fabric, SS28 and FW28</h2>
+          <h2>Trend Forecast</h2>
           <p>NYTG protects the programs that work, pitches the next garment opportunity, develops its fabric in parallel and takes one commercial offer to Lululemon.</p>
           <span>Directional forecast · September 2026 · Confidential</span>
         </div>
