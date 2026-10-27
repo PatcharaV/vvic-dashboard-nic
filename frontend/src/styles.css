@@ -12345,3 +12345,81 @@ main > *,
     font-size: 12px;
   }
 }
+
+/* Keep the product-type explanation and values side by side on tablets. */
+@media (min-width: 700px) and (max-width: 1180px) {
+  .lululemon-subtype-chart-layout {
+    grid-template-columns: minmax(300px, 1.35fr) minmax(290px, 0.9fr);
+    gap: 10px;
+  }
+
+  .lululemon-subtype-plot {
+    padding: 9px;
+    gap: 2px;
+  }
+
+  .lululemon-subtype-plot > button {
+    min-height: 30px;
+    padding: 3px 4px;
+    grid-template-columns: 68px minmax(70px, 1fr) 42px;
+    gap: 6px;
+  }
+
+  .lululemon-subtype-plot strong,
+  .lululemon-subtype-plot b {
+    font-size: 8px;
+  }
+
+  .lululemon-subtype-scale {
+    height: 15px;
+  }
+
+  .lululemon-subtype-table-wrap {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .lululemon-subtype-table-controls {
+    padding: 6px;
+  }
+
+  .lululemon-subtype-table-controls button {
+    padding: 5px 8px;
+    font-size: 8px;
+  }
+
+  .lululemon-subtype-table {
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 8px;
+  }
+
+  .lululemon-subtype-table th,
+  .lululemon-subtype-table td {
+    padding: 7px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lululemon-subtype-table th {
+    font-size: 7px;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .lululemon-subtype-table th:first-child,
+  .lululemon-subtype-table td:first-child {
+    width: 31%;
+    white-space: normal;
+  }
+
+  .lululemon-subtype-table th:not(:first-child),
+  .lululemon-subtype-table td:not(:first-child) {
+    width: 23%;
+  }
+
+  .lululemon-subtype-table button {
+    line-height: 1.2;
+    text-align: left;
+  }
+}
