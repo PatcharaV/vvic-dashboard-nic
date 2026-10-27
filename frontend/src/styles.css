@@ -10101,7 +10101,7 @@ footer a {
 .lululemon-forecast-subpage-nav {
   padding: 8px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   background: #fff;
   border: 1px solid #e4d6da;
@@ -10138,6 +10138,10 @@ footer a {
 
 .nytg-trend-map {
   margin-top: 0;
+}
+
+.keep-extend > .nytg-trend-map {
+  margin-bottom: 18px;
 }
 
 .nytg-trend-map .nyg-map-progress,

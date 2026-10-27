@@ -3939,7 +3939,7 @@ function NytgTrendForecastMap({ programs }) {
       <div className="nyg-map-summary">
         <div>
           <span>NYTG FUTURE PRODUCT + FABRIC ARCHITECTURE</span>
-          <strong>Future product map</strong>
+          <strong>Product Trend forecast</strong>
           <p>Select a card to reveal the next level, from product opportunity through design, composition and fabric features. Season and Gender controls above remain synchronized.</p>
         </div>
         <div className="nyg-map-summary-metrics">
@@ -3992,7 +3992,7 @@ function NytgTrendForecastMap({ programs }) {
             <header>
               <div>
                 <span>Expanded future product architecture</span>
-                <h3 id="trend-map-modal-title">Future product map</h3>
+                <h3 id="trend-map-modal-title">Product Trend forecast</h3>
                 <p>{selectedPath.length > 0 ? selectedPath.join(" / ") : "Select a card to reveal the next forecast level."}</p>
               </div>
               <button type="button" onClick={() => setIsExpanded(false)} aria-label="Close expanded future product map">Close</button>
@@ -4218,14 +4218,6 @@ function LululemonSeasonForecast() {
         >
           <span>Product strategy</span>
         </button>
-        <button
-          type="button"
-          className={forecastPage === "trend-forecast" ? "active" : undefined}
-          aria-pressed={forecastPage === "trend-forecast"}
-          onClick={() => setForecastPage("trend-forecast")}
-        >
-          <span>Product map</span>
-        </button>
       </nav>
 
       {forecastPage === "strategy" && (
@@ -4250,10 +4242,6 @@ function LululemonSeasonForecast() {
             </select>
           </label>
         </nav>
-      )}
-
-      {forecastPage === "trend-forecast" && (
-        <NytgTrendForecastMap programs={filteredNykPrograms} />
       )}
 
       {forecastPage === "overview" && (
@@ -4346,6 +4334,7 @@ function LululemonSeasonForecast() {
             </div>
             <span>One shared priority list for Garment, Fabric and BD.</span>
           </div>
+          <NytgTrendForecastMap programs={filteredNykPrograms} />
           <div className={`lululemon-forecast-keep-grid ${nykKeepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
             {nykKeepExtendGroups.map((group) => (
               <section className={group.gender.toLowerCase()} key={group.gender}>
