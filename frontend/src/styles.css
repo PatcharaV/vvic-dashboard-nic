@@ -10696,6 +10696,45 @@ footer a {
   font-size: 8px;
 }
 
+.lululemon-forecast-ranked-heading > .lululemon-priority-view-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.lululemon-priority-view-filter {
+  padding: 3px;
+  display: inline-flex;
+  gap: 3px;
+  background: #eee8ea;
+  border: 1px solid #e1d7da;
+  border-radius: 8px;
+}
+
+.lululemon-priority-view-filter button {
+  min-width: 94px;
+  padding: 7px 12px;
+  color: #645a5d;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.lululemon-priority-view-filter button.active {
+  color: #fff;
+  background: var(--lululemon-red);
+  box-shadow: 0 4px 10px rgba(201, 0, 53, 0.18);
+}
+
+.lululemon-priority-view-filter button:focus-visible {
+  outline: 2px solid var(--lululemon-dark-red);
+  outline-offset: 2px;
+}
+
 .lululemon-forecast-program-metrics {
   display: flex;
   gap: 6px;
@@ -11903,6 +11942,12 @@ footer a {
   .lululemon-forecast-market-bars > div { grid-template-columns: 16px 68px minmax(52px, 1fr) 52px; }
   .lululemon-forecast-market-bars > div > small { display: none; }
   .lululemon-forecast-ranked-heading { align-items: flex-start; flex-direction: column; }
+  .lululemon-forecast-ranked-heading > .lululemon-priority-view-controls {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .lululemon-priority-view-filter { margin-left: auto; }
   .nyk-trend-map-heading .lululemon-nyk-trend-downloads { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
   .lululemon-nyk-trend-downloads a { flex: 1 1 150px; }
   .lululemon-forecast-program-columns { display: none; }

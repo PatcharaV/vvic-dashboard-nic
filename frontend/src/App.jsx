@@ -4023,6 +4023,7 @@ function NytgTrendForecastMap({ programs }) {
 function LululemonSeasonForecast() {
   const [forecastPage, setForecastPage] = useState("overview");
   const [strategySection, setStrategySection] = useState("forecast-nyg-programs");
+  const [priorityView, setPriorityView] = useState("list");
   const [season, setSeason] = useState("All");
   const [gender, setGender] = useState("All");
   const [imagePreview, setImagePreview] = useState(null);
@@ -4334,7 +4335,6 @@ function LululemonSeasonForecast() {
             </div>
             <span>One shared priority list for Garment, Fabric and BD.</span>
           </div>
-          <NytgTrendForecastMap programs={filteredNykPrograms} />
           <div className={`lululemon-forecast-keep-grid ${nykKeepExtendGroups.length === 1 ? "single" : ""}`.trim()}>
             {nykKeepExtendGroups.map((group) => (
               <section className={group.gender.toLowerCase()} key={group.gender}>
@@ -4361,9 +4361,32 @@ function LululemonSeasonForecast() {
 
           <div className="lululemon-forecast-ranked-heading">
             <div><span>SS28 / FW28 SHARED PRIORITY LIST</span><strong>Product opportunity and fabric pitch in one row</strong></div>
-            <small>{filteredNykPrograms.length} programs · {gender === "All" ? "Men + Women" : gender}</small>
+            <div className="lululemon-priority-view-controls">
+              <small>{filteredNykPrograms.length} programs · {gender === "All" ? "Men + Women" : gender}</small>
+              <div className="lululemon-priority-view-filter" role="group" aria-label="Priority display">
+                <button
+                  type="button"
+                  className={priorityView === "list" ? "active" : undefined}
+                  aria-pressed={priorityView === "list"}
+                  onClick={() => setPriorityView("list")}
+                >
+                  Priority List
+                </button>
+                <button
+                  type="button"
+                  className={priorityView === "map" ? "active" : undefined}
+                  aria-pressed={priorityView === "map"}
+                  onClick={() => setPriorityView("map")}
+                >
+                  Product Map
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="lululemon-forecast-program-groups">
+          {priorityView === "map" ? (
+            <NytgTrendForecastMap programs={filteredNykPrograms} />
+          ) : (
+            <div className="lululemon-forecast-program-groups">
             {nykProgramGroups.map((seasonGroup) => (
               <section className="lululemon-forecast-season-group" key={seasonGroup.season}>
                 <div className="lululemon-forecast-season-heading">
@@ -4400,7 +4423,8 @@ function LululemonSeasonForecast() {
                 </div>
               </section>
             ))}
-          </div>
+            </div>
+          )}
         </article>
       )}
 
