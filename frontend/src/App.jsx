@@ -3935,7 +3935,7 @@ function LululemonSeasonForecast() {
           aria-pressed={forecastPage === "overview"}
           onClick={() => setForecastPage("overview")}
         >
-          <span>Overview</span>
+          <span>Product overview</span>
         </button>
         <button
           type="button"
@@ -3943,12 +3943,12 @@ function LululemonSeasonForecast() {
           aria-pressed={forecastPage === "strategy"}
           onClick={() => setForecastPage("strategy")}
         >
-          <span>Strategy</span>
+          <span>Product strategy</span>
         </button>
       </nav>
 
       {forecastPage === "strategy" && (
-        <nav className="lululemon-forecast-jump-nav forecast-section-selector" aria-label="Strategy section range">
+        <nav className="lululemon-forecast-jump-nav forecast-section-selector" aria-label="Product strategy section range">
           <label>
             <span>Go to</span>
             <select
