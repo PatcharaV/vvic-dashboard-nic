@@ -12499,3 +12499,153 @@ main > *,
     text-align: left;
   }
 }
+
+/* Tablet keeps the desktop information density while fitting the physical viewport. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (min-width: 641px) and (max-width: 1180px) {
+  main {
+    width: calc(121.95% - 20px);
+    max-width: none;
+    margin: 10px 0 0 10px;
+    zoom: 0.82;
+  }
+
+  .topbar {
+    min-height: 86px;
+    padding: 14px 16px;
+    display: flex;
+    grid-template-columns: none;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-block,
+  .brand-block.lululemon-title-only {
+    width: min(320px, 31%);
+    min-width: 250px;
+  }
+
+  .header-actions {
+    min-width: 0;
+    width: auto;
+    margin-left: auto;
+    flex: 1;
+    grid-template-columns: auto minmax(150px, 0.8fr) minmax(240px, 1.2fr) auto;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .header-actions .home-link,
+  .header-actions .primary-button,
+  .header-actions .status,
+  .header-actions .scrape-scheduler {
+    min-height: 40px;
+  }
+
+  .control-panel,
+  .panel,
+  .lululemon-overview-section {
+    padding: 18px;
+  }
+
+  .filter-quick-row {
+    grid-template-columns: minmax(280px, 1fr) auto;
+  }
+
+  .filter-select-grid,
+  .filter-workspace {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .search-card {
+    grid-template-columns: minmax(160px, 0.35fr) minmax(240px, 1fr);
+  }
+
+  .search-card .filter-card-title,
+  .search-card .filter-card-help {
+    grid-column: 1;
+  }
+
+  .search-card input {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .treemap-panel {
+    grid-column: 1 / -1;
+  }
+
+  .profile-hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .profile-stat-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .profile-dna-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .profile-grid {
+    grid-template-columns: 1.25fr 1fr 1fr;
+  }
+
+  .brand-landing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lululemon-metric-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .lululemon-metric-grid.compact {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lululemon-business-grid {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.8fr);
+  }
+
+  .lululemon-revenue-dashboard {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  }
+
+  .lululemon-competitor-grid {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  .lululemon-history-insights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lululemon-comparison-heading,
+  .lululemon-style-card-heading,
+  .lululemon-subtype-card-heading {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+
+  .lululemon-style-comparison-body {
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.65fr);
+  }
+
+  .dashboard-ai-launcher {
+    right: 16px;
+    bottom: 16px;
+    zoom: 0.9;
+  }
+}
