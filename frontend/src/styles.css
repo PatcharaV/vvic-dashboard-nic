@@ -12348,6 +12348,82 @@ main > *,
 
 /* Keep the product-type explanation and values side by side on tablets. */
 @media (min-width: 700px) and (max-width: 1180px) {
+  .lululemon-comparison-compact-summary {
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: minmax(185px, 0.78fr) minmax(0, 2.22fr);
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lululemon-comparison-compact-summary .lululemon-comparison-heading {
+    display: block;
+  }
+
+  .lululemon-comparison-compact-summary .lululemon-comparison-heading h3 {
+    font-size: clamp(18px, 2.5vw, 23px);
+  }
+
+  .lululemon-comparison-compact-summary .lululemon-comparison-heading > div > p:last-child {
+    font-size: 9px;
+  }
+
+  .lululemon-comparison-compact-summary .lululemon-comparison-stats {
+    margin-top: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .lululemon-comparison-compact-summary .lululemon-comparison-stats > div {
+    min-height: 68px;
+    padding: 8px 10px;
+    gap: 3px;
+    border-radius: 9px;
+  }
+
+  .lululemon-comparison-compact-summary .lululemon-comparison-stats strong {
+    font-size: clamp(19px, 2.5vw, 25px);
+  }
+
+  .lululemon-comparison-compact-summary .lululemon-comparison-stats span,
+  .lululemon-comparison-compact-summary .lululemon-comparison-stats small {
+    font-size: 7px;
+    line-height: 1.25;
+  }
+
+  .nytg-section > .lululemon-metric-grid.compact {
+    margin-top: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .nytg-section > .lululemon-metric-grid.compact .lululemon-metric-card {
+    min-height: 108px;
+    padding: 12px;
+    gap: 6px;
+    border-radius: 11px;
+  }
+
+  .nytg-section > .lululemon-metric-grid.compact .lululemon-metric-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 10px;
+  }
+
+  .nytg-section > .lululemon-metric-grid.compact .lululemon-metric-label {
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .nytg-section > .lululemon-metric-grid.compact .lululemon-metric-card strong {
+    font-size: clamp(20px, 3vw, 29px);
+    white-space: nowrap;
+  }
+
+  .nytg-section > .lululemon-metric-grid.compact .lululemon-metric-card small {
+    font-size: 7px;
+  }
+
   .lululemon-subtype-chart-layout {
     grid-template-columns: minmax(300px, 1.35fr) minmax(290px, 0.9fr);
     gap: 10px;
