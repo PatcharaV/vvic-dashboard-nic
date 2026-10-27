@@ -3805,6 +3805,45 @@ function LululemonSeasonForecast() {
       };
     })
     .filter((group) => group.genderGroups.length > 0);
+  const productMapRows = [];
+  const productMapSeasonNodes = [];
+  const productMapGenderNodes = [];
+  nykProgramGroups.forEach((seasonGroup) => {
+    const seasonStart = productMapRows.length + 1;
+    seasonGroup.genderGroups.forEach((genderGroup) => {
+      const genderStart = productMapRows.length + 1;
+      genderGroup.programs.forEach((program) => {
+        const name = program.program.toLowerCase();
+        let productType = "Apparel";
+        if (name.includes("jacket")) productType = "Jacket";
+        else if (name.includes("short")) productType = "Short";
+        else if (name.includes("tank")) productType = "Tank";
+        else if (name.includes("polo")) productType = "Polo";
+        else if (name.includes("hoodie")) productType = "Hoodie";
+        else if (name.includes("half zip") || name.includes("half-zip")) productType = "Half zip";
+        else if (name.includes("shirt")) productType = "Shirt";
+        const directionMatch = program.pitch.match(/\(([^)]+)\)\.?$/);
+        productMapRows.push({
+          ...program,
+          row: productMapRows.length + 1,
+          productType,
+          direction: program.pitch.replace(/\s*\([^)]+\)\.?$/, ""),
+          trend: directionMatch?.[1] || "Core development",
+        });
+      });
+      productMapGenderNodes.push({
+        gender: genderGroup.gender,
+        start: genderStart,
+        span: genderGroup.programs.length,
+      });
+    });
+    productMapSeasonNodes.push({
+      season: seasonGroup.season,
+      seasonName: seasonGroup.seasonName,
+      start: seasonStart,
+      span: seasonGroup.genderGroups.reduce((sum, group) => sum + group.programs.length, 0),
+    });
+  });
   const nykKeepExtendGroups = LULULEMON_NYK_KEEP_EXTEND.filter(
     (group) => gender === "All" || group.gender === gender,
   );
@@ -3945,6 +3984,14 @@ function LululemonSeasonForecast() {
         >
           <span>Product strategy</span>
         </button>
+        <button
+          type="button"
+          className={forecastPage === "product-map" ? "active" : undefined}
+          aria-pressed={forecastPage === "product-map"}
+          onClick={() => setForecastPage("product-map")}
+        >
+          <span>Product map</span>
+        </button>
       </nav>
 
       {forecastPage === "strategy" && (
@@ -3969,6 +4016,93 @@ function LululemonSeasonForecast() {
             </select>
           </label>
         </nav>
+      )}
+
+      {forecastPage === "product-map" && (
+        <article className="lululemon-forecast-section nytg-product-map-section" id="forecast-product-map">
+          <div className="lululemon-forecast-section-heading">
+            <div>
+              <p className="eyebrow">PRODUCT MAP</p>
+              <h3>What NYTG will propose</h3>
+            </div>
+            <span>One connected view from season and audience to product and fabric direction.</span>
+          </div>
+          <div className="nytg-product-map-summary">
+            <div><span>Programs</span><strong>{productMapRows.length}</strong></div>
+            <div><span>Seasons</span><strong>{productMapSeasonNodes.length}</strong></div>
+            <div><span>Audience</span><strong>{gender === "All" ? "Men + Women" : gender}</strong></div>
+            <p>Use the map from left to right: select the commercial program, confirm today&apos;s fabric base, then pitch the NYTG fabric direction.</p>
+          </div>
+          <div className="nytg-product-map-scroll">
+            <div className="nytg-product-map">
+              <div className="nytg-product-map-head" aria-hidden="true">
+                <span>Portfolio</span>
+                <span>Season</span>
+                <span>Audience</span>
+                <span>Product type</span>
+                <span>Product to pitch</span>
+                <span>Current fabric base</span>
+                <span>NYTG fabric direction</span>
+              </div>
+              <div className="nytg-product-map-canvas" style={{ "--product-map-rows": productMapRows.length }}>
+                <article
+                  className="nytg-product-map-node root"
+                  style={{ gridColumn: 1, gridRow: `1 / span ${Math.max(productMapRows.length, 1)}` }}
+                >
+                  <span>NYTG PORTFOLIO</span>
+                  <strong>Product pitch</strong>
+                  <small>{productMapRows.length} programs</small>
+                </article>
+                {productMapSeasonNodes.map((node) => (
+                  <article
+                    className="nytg-product-map-node season"
+                    style={{ gridColumn: 2, gridRow: `${node.start} / span ${node.span}` }}
+                    key={node.season}
+                  >
+                    <span>SEASON</span>
+                    <strong>{node.season}</strong>
+                    <small>{node.seasonName}</small>
+                  </article>
+                ))}
+                {productMapGenderNodes.map((node, index) => (
+                  <article
+                    className={`nytg-product-map-node audience ${node.gender.toLowerCase()}`}
+                    style={{ gridColumn: 3, gridRow: `${node.start} / span ${node.span}` }}
+                    key={`${node.gender}-${node.start}-${index}`}
+                  >
+                    <span>AUDIENCE</span>
+                    <strong>{node.gender}</strong>
+                    <small>{node.span} programs</small>
+                  </article>
+                ))}
+                {productMapRows.map((program) => (
+                  <div className="nytg-product-map-row" style={{ gridColumn: "4 / -1", gridRow: program.row }} key={program.id}>
+                    <article className="nytg-product-map-card type">
+                      <span>PRODUCT TYPE</span>
+                      <strong>{program.productType}</strong>
+                      <small>Priority {program.rank}</small>
+                    </article>
+                    <article className="nytg-product-map-card product">
+                      <span>PRODUCT NAME</span>
+                      <strong>{program.program}</strong>
+                      <small>{formatComparisonValue(program.nygSales, "sales")} sales · {formatFabricYards(program.nygYards, true)}</small>
+                    </article>
+                    <article className="nytg-product-map-card current">
+                      <span>CURRENT FABRIC BASE</span>
+                      <strong>{program.current}</strong>
+                    </article>
+                    <article className="nytg-product-map-card direction">
+                      <span>NYTG FABRIC DIRECTION</span>
+                      <strong>{program.direction}</strong>
+                      <small>{program.trend}</small>
+                    </article>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <p className="lululemon-source-note">Directional SS28/FW28 proposal map based on the shared product and fabric priority list. Filters above update this view.</p>
+        </article>
       )}
 
       {forecastPage === "overview" && (
