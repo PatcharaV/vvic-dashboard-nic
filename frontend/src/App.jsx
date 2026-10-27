@@ -27,7 +27,7 @@ import {
   LULULEMON_FORECAST_ACTIONS,
   LULULEMON_FORECAST_KEEP_EXTEND,
   LULULEMON_FORECAST_MARKETS,
-  LULULEMON_FORECAST_MILESTONES,
+  LULULEMON_FORECAST_TIMELINE,
   LULULEMON_FORECAST_NYG_PROGRAMS,
   LULULEMON_FORECAST_SUMMARY,
   LULULEMON_FORECAST_WHITESPACE,
@@ -3972,27 +3972,47 @@ function LululemonSeasonForecast() {
       )}
 
       {forecastPage === "overview" && (
-        <article className="lululemon-forecast-section milestones" id="forecast-nyg-milestones">
+        <article className="lululemon-forecast-section annual-timeline" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">01 · MILESTONES</p>
-              <h3>Product development milestones</h3>
+              <p className="eyebrow">01 · ANNUAL TIMELINE</p>
+              <h3>Product development timeline</h3>
             </div>
-            <span>The three stages that guide the SS28 and FW28 forecast.</span>
+            <span>One annual view for FW and SS development, showcases, and team capacity.</span>
           </div>
-          <div className="lululemon-forecast-milestone-table">
-            <div className="header"><span>Stage</span><span>Milestones</span></div>
-            {LULULEMON_FORECAST_MILESTONES.map((row, index) => (
-              <div className="row" key={row.stage}>
-                <span className="step">{String(index + 1).padStart(2, "0")}</span>
-                <strong>{row.stage}</strong>
-                <span>{row.milestones}</span>
+          <div className="lululemon-annual-timeline-scroll">
+            <div className="lululemon-annual-timeline">
+              <div className="lululemon-annual-timeline-title">Annual calendar</div>
+              <div className="lululemon-annual-timeline-months" aria-hidden="true">
+                <span />
+                {LULULEMON_FORECAST_TIMELINE.months.map((month) => <b key={month}>{month}</b>)}
               </div>
-            ))}
+              {LULULEMON_FORECAST_TIMELINE.lanes.map((lane) => (
+                <section className={`lululemon-annual-timeline-lane ${lane.key}`} key={lane.key}>
+                  <header>
+                    <strong>{lane.label}</strong>
+                    <span>{lane.subtitle}</span>
+                  </header>
+                  <div className="lululemon-annual-timeline-track">
+                    {lane.events.map((event) => (
+                      <article
+                        className="lululemon-annual-timeline-event"
+                        key={`${event.label}-${event.start}-${event.row}`}
+                        style={{
+                          "--timeline-start": event.start,
+                          "--timeline-span": event.span,
+                          "--timeline-row": event.row,
+                        }}
+                      >
+                        <strong>{event.label}</strong>
+                        {event.note && <small>{event.note}</small>}
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
           </div>
-          <p className="lululemon-forecast-milestone-note">
-            <strong>BPL</strong> = Business Planning
-          </p>
         </article>
       )}
 

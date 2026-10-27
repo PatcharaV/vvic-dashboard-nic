@@ -8,11 +8,59 @@ export const LULULEMON_FORECAST_SUMMARY = {
     "No SS28/FW28 line-list is available yet. The forecast combines NYTG sales from FA25-WT27 with estimated 2026 Lululemon market sales, then ranks programs with at least $0.3M in NYTG sales by market size.",
 };
 
-export const LULULEMON_FORECAST_MILESTONES = [
-  { stage: "Concept", milestones: "BPL" },
-  { stage: "Development", milestones: "1st Forecast, 2nd Forecast" },
-  { stage: "Production", milestones: "Buy Plan, Final" },
-];
+export const LULULEMON_FORECAST_TIMELINE = {
+  months: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+  lanes: [
+    {
+      key: "fw",
+      label: "FW Y+2",
+      subtitle: "Showcase Feb",
+      events: [
+        { label: "Garment Sample", start: 1, span: 1, row: 1 },
+        { label: "Sales Tool", start: 1, span: 1, row: 2, note: "Catalog · Trend book · Fabric & garment" },
+        { label: "Showcase", start: 2, span: 1, row: 1 },
+        { label: "Research", start: 7, span: 1, row: 1 },
+        { label: "Kick-off", start: 8, span: 1, row: 1 },
+        { label: "Ideation", start: 9, span: 1, row: 1 },
+        { label: "Trend FW", start: 9, span: 1, row: 2 },
+        { label: "Fabric dev + Lab proto", start: 10, span: 2, row: 1 },
+        { label: "Garment Sample", start: 12, span: 1, row: 1 },
+      ],
+    },
+    {
+      key: "ss",
+      label: "SS Y+2",
+      subtitle: "Showcase Aug",
+      events: [
+        { label: "Research", start: 1, span: 1, row: 1 },
+        { label: "Kick-off", start: 2, span: 1, row: 1 },
+        { label: "Ideation", start: 3, span: 1, row: 1 },
+        { label: "Trend SS", start: 3, span: 1, row: 2 },
+        { label: "Fabric dev + Lab proto", start: 4, span: 2, row: 1 },
+        { label: "Garment Sample", start: 6, span: 2, row: 1 },
+        { label: "Sales Tool", start: 7, span: 1, row: 2, note: "Catalog · Trend book · Fabric & garment" },
+        { label: "Showcase", start: 8, span: 1, row: 1 },
+      ],
+    },
+    {
+      key: "team",
+      label: "TEAM LOAD",
+      subtitle: "3 research · 2 ideation staff",
+      events: [
+        { label: "Research CCC SS", start: 1, span: 2, row: 1 },
+        { label: "Research Trend SS", start: 3, span: 1, row: 1 },
+        { label: "Trend book SS", start: 4, span: 1, row: 1 },
+        { label: "Sales Catalog Center SS", start: 5, span: 1, row: 1 },
+        { label: "Training Sales SS", start: 5, span: 2, row: 2 },
+        { label: "Research CCC FW", start: 7, span: 2, row: 1 },
+        { label: "Research Trend FW", start: 9, span: 1, row: 1 },
+        { label: "Trend book FW", start: 10, span: 1, row: 1 },
+        { label: "Sales Catalog Center FW", start: 11, span: 1, row: 1 },
+        { label: "Training Sales FW", start: 11, span: 2, row: 2 },
+      ],
+    },
+  ],
+};
 
 export const LULULEMON_FORECAST_MARKETS = [
   {

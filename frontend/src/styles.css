@@ -10244,82 +10244,213 @@ footer a {
   outline: 0;
 }
 
-.lululemon-forecast-section.milestones {
-  display: grid;
-  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
-  gap: 16px 24px;
+.lululemon-forecast-section.annual-timeline {
+  display: block;
 }
 
-.lululemon-forecast-section.milestones .lululemon-forecast-section-heading {
-  align-items: flex-start;
-  align-content: start;
-  flex-direction: column;
-  justify-content: flex-start;
+.lululemon-annual-timeline-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
+
+.lululemon-annual-timeline {
+  min-width: 940px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eadde1;
+  border-radius: 14px;
+  box-shadow: 0 10px 26px rgba(100, 13, 39, 0.06);
+}
+
+.lululemon-annual-timeline-title {
+  min-height: 42px;
+  margin-left: 142px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(110deg, #9f002e, #d40039 66%, #ec496c);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lululemon-annual-timeline-months,
+.lululemon-annual-timeline-lane {
+  display: grid;
+  grid-template-columns: 142px minmax(0, 1fr);
+}
+
+.lululemon-annual-timeline-months > span {
+  border-right: 1px solid #eadde1;
+}
+
+.lululemon-annual-timeline-months {
+  min-height: 34px;
+  background: #fbf7f8;
+  border-bottom: 1px solid #eadde1;
+}
+
+.lululemon-annual-timeline-months b {
+  min-width: 0;
+  padding-top: 10px;
+  color: var(--lululemon-red);
+  border-top: 4px solid var(--lululemon-red);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.lululemon-annual-timeline-months {
+  grid-template-columns: 142px repeat(12, minmax(0, 1fr));
+  gap: 0 8px;
+  padding-right: 8px;
+}
+
+.lululemon-annual-timeline-lane {
+  min-height: 126px;
+  border-bottom: 1px solid #e7dfe1;
+}
+
+.lululemon-annual-timeline-lane:last-child {
   border-bottom: 0;
 }
 
-.lululemon-forecast-milestone-table {
-  overflow: hidden;
-  border: 1px solid #e6dde0;
-  border-radius: 9px;
+.lululemon-annual-timeline-lane > header {
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  background: #fffafb;
+  border-right: 1px solid #eadde1;
 }
 
-.lululemon-forecast-milestone-table .header,
-.lululemon-forecast-milestone-table .row {
-  display: grid;
-  grid-template-columns: 48px minmax(130px, 0.55fr) minmax(0, 1.45fr);
-  align-items: center;
-}
-
-.lululemon-forecast-milestone-table .header {
-  min-height: 38px;
-  padding: 0 14px;
-  color: #fff;
-  background: #171415;
-  font-size: 10px;
-  font-weight: 850;
-}
-
-.lululemon-forecast-milestone-table .header span:first-child {
-  grid-column: 2;
-}
-
-.lululemon-forecast-milestone-table .row {
-  min-height: 52px;
-  padding: 0 14px;
-  background: #fff;
-  border-top: 1px solid #ece4e6;
-}
-
-.lululemon-forecast-milestone-table .row:nth-child(even) {
-  background: #f8f5f6;
-}
-
-.lululemon-forecast-milestone-table .step {
-  color: #e3cbd1;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.lululemon-forecast-milestone-table .row strong {
+.lululemon-annual-timeline-lane > header strong {
   color: var(--lululemon-dark-red);
-  font-size: 13px;
-}
-
-.lululemon-forecast-milestone-table .row > span:last-child {
-  color: #342d2f;
   font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.07em;
 }
 
-.lululemon-forecast-milestone-note {
-  grid-column: 2;
-  margin: -7px 0 0;
-  color: #786e71;
+.lululemon-annual-timeline-lane > header span {
+  color: #a76777;
   font-size: 9px;
+  line-height: 1.35;
 }
 
-.lululemon-forecast-milestone-note strong {
-  color: var(--lululemon-red);
+.lululemon-annual-timeline-track {
+  padding: 10px 8px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(42px, auto));
+  gap: 6px 8px;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(8.3333% - 1px),
+    #eee6e8 calc(8.3333% - 1px),
+    #eee6e8 8.3333%
+  );
+}
+
+.lululemon-annual-timeline-event {
+  min-width: 0;
+  min-height: 36px;
+  padding: 7px 8px;
+  grid-column: var(--timeline-start) / span var(--timeline-span);
+  grid-row: var(--timeline-row);
+  align-self: center;
+  display: grid;
+  place-content: center;
+  gap: 3px;
+  color: #fff;
+  background: linear-gradient(115deg, #8d0029, #c90037);
+  border: 1px solid rgba(104, 0, 30, 0.2);
+  border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(145, 0, 42, 0.14);
+  text-align: center;
+}
+
+.lululemon-annual-timeline-event strong {
+  overflow: hidden;
+  font-size: 8px;
+  font-weight: 850;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+}
+
+.lululemon-annual-timeline-event small {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 6px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+}
+
+.lululemon-annual-timeline-lane.ss .lululemon-annual-timeline-event {
+  color: #750024;
+  background: linear-gradient(115deg, #ffd7df, #f38ba0);
+  border-color: #ec9aab;
+  box-shadow: 0 6px 14px rgba(206, 42, 81, 0.1);
+}
+
+.lululemon-annual-timeline-lane.ss .lululemon-annual-timeline-event small {
+  color: #9c4d60;
+}
+
+.lululemon-annual-timeline-lane.team .lululemon-annual-timeline-event {
+  color: #fff;
+  background: linear-gradient(115deg, #1a1718, #554b4e);
+  border-color: #302a2c;
+  box-shadow: 0 6px 14px rgba(29, 24, 26, 0.12);
+}
+
+.lululemon-annual-timeline-lane.team > header strong {
+  color: #211b1d;
+}
+
+.lululemon-annual-timeline-lane.team > header span {
+  color: #72686b;
+}
+
+@media (max-width: 1100px) {
+  .lululemon-annual-timeline {
+    min-width: 860px;
+  }
+
+  .lululemon-annual-timeline-title {
+    margin-left: 122px;
+  }
+
+  .lululemon-annual-timeline-months,
+  .lululemon-annual-timeline-lane {
+    grid-template-columns: 122px minmax(0, 1fr);
+  }
+
+  .lululemon-annual-timeline-months {
+    grid-template-columns: 122px repeat(12, minmax(0, 1fr));
+    gap: 0 5px;
+    padding-right: 5px;
+  }
+
+  .lululemon-annual-timeline-track {
+    gap-inline: 5px;
+  }
+}
+
+@media (max-width: 700px) {
+  .lululemon-annual-timeline {
+    min-width: 820px;
+  }
+
+  .lululemon-annual-timeline-scroll {
+    margin-inline: -4px;
+    padding-bottom: 6px;
+  }
 }
 
 .lululemon-forecast-market-grid,
