@@ -7775,7 +7775,7 @@ footer a {
 }
 
 /* Keep the stacked opportunity and partner panels inside a desktop viewport. */
-@media (min-width: 981px) {
+@media (min-width: 1181px) {
   .lululemon-style-linked-comparison {
     margin: 6px 0 9px;
     padding: 7px 8px;
@@ -8034,7 +8034,7 @@ footer a {
   }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
   .topbar,
   .header-actions {
     align-items: flex-start;
@@ -11750,7 +11750,7 @@ footer a {
   .lululemon-nyk-trends > div:last-child { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
   .nytg-abc-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nytg-abc-summary-copy { grid-column: 1 / -1; }
   .nytg-abc-style-grid,
@@ -12024,7 +12024,7 @@ footer a {
 .nytg-takeaway-grid p { margin: 4px 0 0; color: #71676a; font-size: 8px; line-height: 1.45; }
 .nytg-roadmap-rule { margin: 12px 0 0; padding: 11px 13px; color: #fff; background: #191516; border-radius: 8px; font-size: 9px; }
 
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
   .nytg-colour-grid,
   .nytg-roadmap-grid { grid-template-columns: 1fr; }
   .nytg-takeaway-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -12046,4 +12046,302 @@ footer a {
   .nytg-roadmap-grid article { grid-template-columns: 42px minmax(0, 1fr); }
   .nytg-roadmap-grid article p:last-child { grid-column: 2; }
   .nytg-takeaway-grid { grid-template-columns: 1fr; }
+}
+
+/* Device layout: desktop, notebook, tablet, and phone. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main,
+main > *,
+.topbar > *,
+.header-actions > *,
+.panel > *,
+.lululemon-overview-section > * {
+  min-width: 0;
+}
+
+.table-wrap,
+.profile-table-wrap,
+.lululemon-timeline-scroll,
+.nyg-map-table-wrap {
+  max-width: 100%;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 1181px) and (max-width: 1440px) {
+  main {
+    width: calc(100% - 32px);
+    margin-top: 16px;
+  }
+
+  .topbar {
+    padding: 16px 18px;
+    gap: 14px;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .brand-block.lululemon-title-only {
+    min-width: 330px;
+  }
+
+  .scrape-scheduler small {
+    max-width: 165px;
+  }
+
+  .lululemon-overview-section,
+  .panel {
+    padding: clamp(20px, 2vw, 26px);
+  }
+}
+
+@media (max-width: 1180px) {
+  main {
+    width: calc(100% - 24px);
+    margin-top: 12px;
+  }
+
+  .topbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .brand-block,
+  .brand-block.lululemon-title-only {
+    width: min(390px, 100%);
+    min-width: 0;
+  }
+
+  .header-actions {
+    width: 100%;
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: auto minmax(190px, 0.8fr) minmax(300px, 1.2fr) auto;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .header-actions .home-link,
+  .header-actions .primary-button,
+  .header-actions .status,
+  .header-actions .scrape-scheduler {
+    min-height: 48px;
+    height: 100%;
+  }
+
+  .scrape-scheduler small {
+    min-width: 0;
+    max-width: none;
+  }
+
+  .page-nav {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .page-nav a,
+  .page-nav button {
+    flex: 0 0 auto;
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  .lululemon-overview-section,
+  .panel {
+    padding: clamp(18px, 2.5vw, 26px);
+  }
+
+  .lululemon-revenue-dashboard,
+  .lululemon-competitor-grid,
+  .lululemon-history-insights {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .product-pagination {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .header-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .header-actions .home-link,
+  .header-actions .primary-button {
+    width: 100%;
+  }
+
+  .scrape-scheduler {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scrape-scheduler small {
+    grid-column: 1 / -1;
+  }
+
+  .lululemon-region-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .panel-heading {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  main {
+    width: calc(100% - 12px);
+    margin-top: 6px;
+  }
+
+  .topbar {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .brand-block,
+  .brand-block.lululemon-title-only {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .header-actions .status,
+  .header-actions .scrape-scheduler,
+  .header-actions .home-link,
+  .header-actions .primary-button {
+    width: 100%;
+  }
+
+  .page-nav {
+    margin-block: 6px;
+    padding: 7px;
+    gap: 4px;
+    scrollbar-width: none;
+  }
+
+  .page-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-nav a,
+  .page-nav button {
+    min-height: 42px;
+    padding: 9px 12px;
+  }
+
+  .lululemon-brand-overview {
+    gap: 10px;
+  }
+
+  .lululemon-overview-section,
+  .panel,
+  .control-panel,
+  .kpi-card {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .lululemon-brand-overview .lululemon-overview-heading {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .lululemon-overview-heading h2 {
+    overflow-wrap: anywhere;
+    font-size: clamp(28px, 9vw, 38px);
+    line-height: 1.02;
+  }
+
+  .lululemon-history-card,
+  .lululemon-history-insights > section,
+  .lululemon-competitor-card,
+  .lululemon-competitor-insights > section {
+    padding: 14px;
+  }
+
+  .lululemon-history-card-heading {
+    flex-wrap: wrap;
+  }
+
+  .lululemon-revenue-kpis {
+    width: 100%;
+    min-width: 0;
+    justify-content: start;
+    text-align: left;
+  }
+
+  .lululemon-revenue-bars {
+    padding-inline: 0;
+    grid-template-columns: repeat(6, minmax(28px, 1fr));
+    gap: 4px;
+  }
+
+  .lululemon-region-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel-heading,
+  .panel-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .panel-actions,
+  .panel-actions > * {
+    width: 100%;
+  }
+
+  .product-pagination {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .product-pagination > div {
+    grid-column: 1 / -1;
+    margin-right: 0;
+  }
+
+  .product-pagination label,
+  .product-pagination button {
+    width: 100%;
+    min-height: 42px;
+    justify-content: center;
+  }
+
+  .table-wrap {
+    margin-top: 14px;
+    border-radius: 8px;
+  }
+
+  .dashboard-ai-launcher {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    padding: 7px;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .dashboard-ai-launcher span {
+    flex: 0 0 34px;
+    font-size: 12px;
+  }
 }
