@@ -4255,7 +4255,7 @@ function LululemonSeasonForecast() {
           </div>
           <div className="lululemon-annual-timeline-scroll">
             <div className="lululemon-annual-timeline">
-              <div className="lululemon-annual-timeline-title">Annual calendar</div>
+              <div className="lululemon-annual-timeline-title">Calendar</div>
               <div className="lululemon-annual-timeline-months" aria-hidden="true">
                 <span />
                 {LULULEMON_FORECAST_TIMELINE.months.map((month) => <b key={month}>{month}</b>)}
