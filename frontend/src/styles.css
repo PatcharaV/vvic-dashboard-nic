@@ -12683,30 +12683,55 @@ html {
   }
 
   .lululemon-comparison-heading,
-  .lululemon-style-card-heading {
-    align-items: flex-start;
-    flex-direction: row;
-  }
-
+  .lululemon-style-card-heading,
   .lululemon-subtype-card-heading {
     display: grid;
-    grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.8fr);
+    grid-template-columns: minmax(210px, 0.65fr) minmax(0, 1.85fr);
     align-items: start;
     gap: 14px;
   }
 
+  .lululemon-comparison-heading > *,
+  .lululemon-style-card-heading > *,
+  .lululemon-subtype-card-heading > * {
+    min-width: 0;
+  }
+
+  .lululemon-style-card-heading .lululemon-style-controls,
+  .lululemon-subtype-card-heading .lululemon-style-controls,
+  .lululemon-comparison-heading .lululemon-comparison-controls {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    flex-basis: auto;
+  }
+
+  .lululemon-style-card-heading h3,
+  .lululemon-comparison-heading h3,
   .lululemon-subtype-card-heading > div:first-child {
     min-width: 0;
   }
 
+  .lululemon-style-card-heading h3,
+  .lululemon-comparison-heading h3,
   .lululemon-subtype-card-heading h3 {
     font-size: 13px;
     line-height: 1.25;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
+  .lululemon-style-card-heading p,
+  .lululemon-comparison-heading p,
   .lululemon-subtype-card-heading p {
     font-size: 9px;
     line-height: 1.4;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .lululemon-overview-card {
+    padding: 16px;
   }
 
   .lululemon-style-controls.lululemon-chart-controls {
