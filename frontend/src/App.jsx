@@ -791,6 +791,46 @@ function normalizeLululemonStyleName(value = "") {
     .trim();
 }
 
+function normalizeNygStyleSearchName(value = "") {
+  return normalizeLululemonProductName(
+    String(value)
+      .replace(/1[_/]2/gi, " half ")
+      .replace(/\bLS\b/gi, " long sleeve ")
+      .replace(/\bSS\b/gi, " short sleeve ")
+      .replace(/\bLL\b/gi, " linerless "),
+  )
+    .replace(/\b(?:solid|heather|htr|black|backer|bright|lycra|ec|ev|ft|q1|q2|q3|q4|sp|su|fa|wt|20\d{2})\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getNygStyleMatchScore(row, style) {
+  const sourceName = normalizeNygStyleSearchName(row.styleName);
+  const targetName = normalizeNygStyleSearchName(style.name);
+  if (!sourceName || !targetName) return -1;
+  if (sourceName === targetName) return 1_000;
+
+  const ignoredTokens = new Set(["top", "tee", "shirt", "short", "long", "sleeve"]);
+  const isMeaningfulToken = (token) => token && !/^\d+$/.test(token) && !ignoredTokens.has(token);
+  const sourceTokens = new Set(sourceName.split(" ").filter(isMeaningfulToken));
+  const targetTokens = targetName.split(" ").filter(isMeaningfulToken);
+  const matchedTokens = targetTokens.filter((token) => sourceTokens.has(token)).length;
+  const categoryTokens = normalizeNygStyleSearchName(row.productCategory).split(" ").filter(Boolean);
+  const matchedCategoryTokens = categoryTokens.filter((token) => targetTokens.includes(token)).length;
+  const containmentBonus = sourceName.includes(targetName) || targetName.includes(sourceName) ? 200 : 0;
+  const nameScore = (matchedTokens / Math.max(targetTokens.length, 1)) * 100
+    + matchedCategoryTokens * 25;
+  if (nameScore === 0 && containmentBonus === 0) return -1;
+  const subtypeBonus = style.subtype
+    === LULULEMON_COMPARISON_KEY_BY_NYG_PRODUCT_TYPE[row.productType] ? 20 : 0;
+  const genderBonus = style.gender.toUpperCase() === row.gender ? 10 : 0;
+
+  return containmentBonus
+    + nameScore
+    + subtypeBonus
+    + genderBonus;
+}
+
 const LULULEMON_SCRAPED_PRODUCTS = (
   snapshotData.brands?.lululemon?.dashboard?.products || []
 ).map((product) => ({
@@ -1226,6 +1266,7 @@ function LululemonOpportunityList({
   coverage,
   groups,
   total,
+  nygStyleMatches = [],
   expandedGenders,
   onToggleGender,
   onSelectStyle,
@@ -1235,17 +1276,36 @@ function LululemonOpportunityList({
   const [searchQuery, setSearchQuery] = useState("");
   const selectedItemRef = useRef(null);
   const normalizedQuery = normalizeLululemonProductName(searchQuery);
+  const normalizedStyleNumberQuery = searchQuery.replace(/[^a-z0-9]/gi, "").toUpperCase();
   const isSearching = normalizedQuery.length > 0;
-  const filteredGroups = groups.map((group) => ({
-    ...group,
-    styles: isSearching
+  const matchingNygStyles = normalizedStyleNumberQuery.length >= 3
+    ? nygStyleMatches
+        .map((style) => ({
+          ...style,
+          styleNumbers: style.styleNumbers.filter(
+            (styleNumber) => styleNumber.replace(/[^a-z0-9]/gi, "").toUpperCase()
+              .includes(normalizedStyleNumberQuery),
+          ),
+        }))
+        .filter((style) => style.styleNumbers.length > 0)
+    : [];
+  const filteredGroups = groups.map((group) => {
+    const nameMatches = isSearching
       ? group.styles.filter((style) =>
           normalizeLululemonProductName(
             `${style.name} ${style.productTitle || ""}`,
           ).includes(normalizedQuery),
         )
-      : group.styles,
-  }));
+      : group.styles;
+    const styleNumberMatches = matchingNygStyles.filter((style) => style.gender === group.gender);
+    const mergedStyles = new Map(
+      [...nameMatches, ...styleNumberMatches].map((style) => [
+        normalizeLululemonProductName(style.name),
+        style,
+      ]),
+    );
+    return { ...group, styles: [...mergedStyles.values()] };
+  });
   const filteredTotal = filteredGroups.reduce(
     (sum, group) => sum + group.styles.length,
     0,
@@ -1287,13 +1347,13 @@ function LululemonOpportunityList({
       </div>
       <div className="lululemon-opportunity-search">
         <label htmlFor={`lululemon-style-search-${coverage.key}`}>
-          <span>Find a Lululemon style</span>
+          <span>Find a Lululemon style or NYG Style No.</span>
           <input
             className="lululemon-style-family-search"
             id={`lululemon-style-search-${coverage.key}`}
             type="search"
             value={searchQuery}
-            placeholder="Search style name to compare with NYG..."
+            placeholder="Search Lululemon style name or NYG Style No..."
             onChange={(event) => setSearchQuery(event.target.value)}
           />
         </label>
@@ -1374,7 +1434,11 @@ function LululemonOpportunityList({
                         </span>
                         <span className="lululemon-opportunity-product-name">
                           <strong>{style.name}</strong>
-                          <small>Compare above</small>
+                          <small>
+                            {style.styleNumbers?.length
+                              ? `NYG Style No. ${style.styleNumbers.join(", ")}`
+                              : "Compare above"}
+                          </small>
                         </span>
                       </button>
                       <a
@@ -1888,6 +1952,36 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
   const selectedNygStyle = selectedNygBaseStyle
     ? aggregateStyleForSelectedSeasons(selectedNygBaseStyle)
     : null;
+  const nygStyleSearchMatches = useMemo(() => {
+    const groupedMatches = new Map();
+    NYG_MY_MAP_ROWS
+      .filter((row) => subtypeKey === "overall"
+        || LULULEMON_COMPARISON_KEY_BY_NYG_PRODUCT_TYPE[row.productType] === subtypeKey)
+      .forEach((row) => {
+        const matchedStyle = allStyles
+          .map((style) => ({ style, score: getNygStyleMatchScore(row, style) }))
+          .filter(({ score }) => score >= 0)
+          .sort((left, right) => right.score - left.score)[0]?.style;
+        if (!matchedStyle) return;
+
+        const comparison = LULULEMON_STYLE_COMPARISON_UNITS[matchedStyle.key];
+        const matchedName = comparison?.matchedProductName || matchedStyle.name;
+        const current = groupedMatches.get(matchedStyle.key) || {
+          ...findLululemonOpportunityProduct(matchedName),
+          name: matchedName,
+          variants: comparison?.matchedTitles || matchedStyle.lululemonTitles || 1,
+          sales: comparison?.lululemonSales ?? matchedStyle.lululemonRevenue ?? null,
+          units: comparison?.lululemonUnits ?? null,
+          gender: matchedStyle.gender,
+          nygStyleKey: matchedStyle.key,
+          rank: "NYG",
+          styleNumbers: [],
+        };
+        if (!current.styleNumbers.includes(row.styleNo)) current.styleNumbers.push(row.styleNo);
+        groupedMatches.set(matchedStyle.key, current);
+      });
+    return [...groupedMatches.values()];
+  }, [allStyles, subtypeKey]);
 
   useEffect(() => {
     setExpandedOpportunityGenders({});
@@ -2442,6 +2536,7 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
             coverage={coverage}
             groups={opportunityGenderGroups}
             total={normalizedOpportunityStyles.length}
+            nygStyleMatches={nygStyleSearchMatches}
             expandedGenders={expandedOpportunityGenders}
             onToggleGender={toggleOpportunityGender}
             onSelectStyle={partnerView === "nyg" ? (style) => {
@@ -2609,9 +2704,16 @@ function LululemonStyleShare({ subtypeKey, subtypeLabel, onSelect }) {
           coverage={coverage}
           groups={opportunityGenderGroups}
           total={linkedOpportunityStyles.length}
+          nygStyleMatches={nygStyleSearchMatches}
           expandedGenders={expandedOpportunityGenders}
           onToggleGender={toggleOpportunityGender}
           onSelectStyle={partnerView === "nyg" ? (style) => {
+            if (style.nygStyleKey) {
+              setSelectedOpportunityName(null);
+              setSelectedNygStyleKey(style.nygStyleKey);
+              setSelectedNygSeason(null);
+              return;
+            }
             const isSelected = selectedOpportunityName
               && normalizeLululemonProductName(selectedOpportunityName)
                 === normalizeLululemonProductName(style.name);
