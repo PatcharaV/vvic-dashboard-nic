@@ -3752,8 +3752,9 @@ const FORECAST_TREND_MAP_LEVELS = [
   { key: "gender", label: "Gender" },
   { key: "productType", label: "Product Type" },
   { key: "product", label: "Product Opportunity" },
-  { key: "trend", label: "Future Trend" },
-  { key: "fabricForecast", label: "Fabric Forecast" },
+  { key: "designFeatures", label: "Design Features" },
+  { key: "fabricComposition", label: "Fabric & Composition" },
+  { key: "fabricFeatures", label: "Fabric Features" },
 ];
 
 function forecastProductType(programName) {
@@ -3768,15 +3769,44 @@ function forecastProductType(programName) {
   return "Apparel";
 }
 
-function forecastTrendDirection(pitch) {
-  const namedDirection = pitch.match(/\(([^)]+)\)\.?$/)?.[1];
-  if (namedDirection) return namedDirection;
+function forecastDesignFeatures(programName, productType) {
+  const name = programName.toLowerCase();
+  if (productType === "Short") {
+    return name.includes("lined") && !name.includes("linerless")
+      ? "Integrated performance liner|Lightweight waistband|Secure pocket system"
+      : "Freedom-of-movement gusset|Lightweight waistband|Secure pocket system";
+  }
+  if (productType === "Tank") return "Streamlined neckline|Ergonomic armholes|Close-to-body athletic fit";
+  if (productType === "Polo") return "Clean performance collar|Low-profile placket|Side-vent hem";
+  if (productType === "Jacket") return "Contoured panel lines|Front zip closure|Streamlined pocketing";
+  if (productType === "Hoodie") return "Articulated sleeves|Adjustable performance hood|Low-bulk seam construction";
+  if (productType === "Half zip") return "Half-zip ventilation|Ergonomic sleeves|Layering-ready fit";
+  if (productType === "Shirt") return "Ergonomic athletic fit|Flatlock seams|Underarm mobility";
+  return "Ergonomic construction|Low-profile seams|Performance fit";
+}
+
+function forecastFabricFeatures(pitch) {
   const value = pitch.toLowerCase();
-  if (value.includes("nulu") || value.includes("matte") || value.includes("suede")) return "Second-skin performance";
-  if (value.includes("waffle") || value.includes("3d") || value.includes("velour")) return "Dimensional texture";
-  if (value.includes("modal") || value.includes("plush") || value.includes("powdery")) return "Soft comfort";
-  if (value.includes("brushed") || value.includes("fleece") || value.includes("felted") || value.includes("moss")) return "Tactile warmth";
-  return "Performance evolution";
+  const features = [];
+  const add = (condition, label) => {
+    if (condition && !features.includes(label)) features.push(label);
+  };
+  add(value.includes("cool"), "Cooling touch");
+  add(value.includes("stretch"), "4-way stretch");
+  add(value.includes("mesh") || value.includes("pointelle"), "Breathable ventilation");
+  add(value.includes("easy care"), "Easy care");
+  add(value.includes("crinkle") || value.includes("moss"), "Textured surface");
+  add(value.includes("sheen"), "Subtle sheen");
+  add(value.includes("modal") || value.includes("plush") || value.includes("powdery") || value.includes("soft"), "Soft handfeel");
+  add(value.includes("brushed") || value.includes("fleece") || value.includes("felted"), "Thermal regulation");
+  add(value.includes("compression"), "Supportive compression");
+  add(value.includes("rib"), "Rib structure");
+  add(value.includes("matte") || value.includes("suede"), "Matte suede handfeel");
+  add(value.includes("waffle") || value.includes("3d") || value.includes("velour"), "Dimensional texture");
+  add(value.includes("tencel"), "Moisture management");
+  if (features.length < 2) features.push("Shape retention");
+  if (features.length < 2) features.push("Breathable comfort");
+  return features.slice(0, 3).join("|");
 }
 
 function NytgTrendForecastMap({ programs }) {
@@ -3787,13 +3817,14 @@ function NytgTrendForecastMap({ programs }) {
     ...program,
     productType: forecastProductType(program.program),
     product: program.program,
-    trend: forecastTrendDirection(program.pitch),
-    fabricForecast: program.pitch.replace(/\s*\([^)]+\)\.?$/, ""),
+    designFeatures: forecastDesignFeatures(program.program, forecastProductType(program.program)),
+    fabricComposition: program.current,
+    fabricFeatures: forecastFabricFeatures(program.pitch),
   })), [programs]);
   const visibleLevelCount = Math.min(selectedPath.length + 1, FORECAST_TREND_MAP_LEVELS.length);
   const totalSales = mapRows.reduce((sum, row) => sum + row.nygSales, 0);
   const totalDemand = mapRows.reduce((sum, row) => sum + row.nygYards, 0);
-  const trendCount = new Set(mapRows.map((row) => row.trend)).size;
+  const productTypeCount = new Set(mapRows.map((row) => row.productType)).size;
 
   const rowsAtLevel = (levelIndex) => mapRows.filter((row) =>
     selectedPath.slice(0, levelIndex).every(
@@ -3869,6 +3900,7 @@ function NytgTrendForecastMap({ programs }) {
                 const childCount = nextLevel ? new Set(nodeRows.map((row) => row[nextLevel.key])).size : 0;
                 const isSelected = selectedPath[levelIndex] === value;
                 const isFinal = levelIndex === FORECAST_TREND_MAP_LEVELS.length - 1;
+                const isFeatureList = level.key === "designFeatures" || level.key === "fabricFeatures";
                 return (
                   <button
                     className={`${isSelected ? "selected" : ""} ${isFinal ? "trend-final-node" : ""}`.trim() || undefined}
@@ -3878,7 +3910,11 @@ function NytgTrendForecastMap({ programs }) {
                     onClick={() => handleNodeClick(levelIndex, value)}
                   >
                     <span>{level.label}</span>
-                    <strong>{value}</strong>
+                    {isFeatureList ? (
+                      <ul className="nytg-forecast-feature-list">
+                        {value.split("|").map((feature) => <li key={feature}>{feature}</li>)}
+                      </ul>
+                    ) : <strong>{value}</strong>}
                     <small className="nyg-map-node-metrics">
                       <b>{nodeRows.length} {nodeRows.length === 1 ? "program" : "programs"}</b>
                       <b>{formatComparisonValue(nodeSales, "sales")}</b>
@@ -3903,14 +3939,14 @@ function NytgTrendForecastMap({ programs }) {
       <div className="nyg-map-summary">
         <div>
           <span>NYTG FUTURE PRODUCT + FABRIC ARCHITECTURE</span>
-          <strong>Trend forecast</strong>
-          <p>Select a card to reveal the next future trend level. Season and Gender controls above keep this forecast synchronized with the product strategy.</p>
+          <strong>Future product map</strong>
+          <p>Select a card to reveal the next level, from product opportunity through design, composition and fabric features. Season and Gender controls above remain synchronized.</p>
         </div>
         <div className="nyg-map-summary-metrics">
           <div><strong>{mapRows.length}</strong><span>Programs</span></div>
           <div><strong>{formatComparisonValue(totalSales, "sales")}</strong><span>Sales base</span></div>
           <div><strong>{formatFabricYards(totalDemand, true)}</strong><span>Fabric demand</span></div>
-          <div><strong>{trendCount}</strong><span>Trend directions</span></div>
+          <div><strong>{productTypeCount}</strong><span>Product types</span></div>
         </div>
       </div>
 
@@ -3918,7 +3954,7 @@ function NytgTrendForecastMap({ programs }) {
         <div>
           <span>Navigation path</span>
           <div className="nyg-map-breadcrumbs">
-            <button type="button" onClick={() => setSelectedPath([])}>All future trends</button>
+            <button type="button" onClick={() => setSelectedPath([])}>All future products</button>
             {selectedPath.map((value, index) => (
               <button
                 type="button"
@@ -3937,7 +3973,7 @@ function NytgTrendForecastMap({ programs }) {
         </div>
       </div>
 
-      <div className="nyg-map-progress" aria-label="Future trend hierarchy">
+      <div className="nyg-map-progress" aria-label="Future product hierarchy">
         {FORECAST_TREND_MAP_LEVELS.map((level, index) => (
           <span className={`${index < selectedPath.length ? "complete" : ""} ${index === selectedPath.length ? "current" : ""}`} key={level.key}>
             <b>{index + 1}</b>{level.label}
@@ -3955,11 +3991,11 @@ function NytgTrendForecastMap({ programs }) {
           <section className="nyg-map-modal" role="dialog" aria-modal="true" aria-labelledby="trend-map-modal-title">
             <header>
               <div>
-                <span>Expanded future trend forecast</span>
-                <h3 id="trend-map-modal-title">Trend forecast</h3>
+                <span>Expanded future product architecture</span>
+                <h3 id="trend-map-modal-title">Future product map</h3>
                 <p>{selectedPath.length > 0 ? selectedPath.join(" / ") : "Select a card to reveal the next forecast level."}</p>
               </div>
-              <button type="button" onClick={() => setIsExpanded(false)} aria-label="Close expanded trend forecast">Close</button>
+              <button type="button" onClick={() => setIsExpanded(false)} aria-label="Close expanded future product map">Close</button>
             </header>
             <div className="nyg-map-modal-progress">
               {FORECAST_TREND_MAP_LEVELS.map((level, index) => (
@@ -3975,11 +4011,11 @@ function NytgTrendForecastMap({ programs }) {
         <div className="nyg-map-selection">
           <span>Selected forecast</span>
           <strong>{selectedRows[0].product}</strong>
-          <small>{selectedRows[0].season} · {selectedRows[0].gender} · {selectedRows[0].trend} · Priority {selectedRows[0].rank}</small>
+          <small>{selectedRows[0].season} · {selectedRows[0].gender} · {selectedRows[0].productType} · Priority {selectedRows[0].rank}</small>
         </div>
       )}
 
-      <p className="lululemon-source-note nyg-map-source">Directional SS28/FW28 trend forecast based on NYTG&apos;s product sales base, fabric demand, group capability and proposed fabric developments.</p>
+      <p className="lululemon-source-note nyg-map-source">Directional SS28/FW28 product architecture based on NYTG&apos;s product sales base, fabric demand, garment design and proposed fabric capabilities.</p>
     </section>
   );
 }
@@ -4188,7 +4224,7 @@ function LululemonSeasonForecast() {
           aria-pressed={forecastPage === "trend-forecast"}
           onClick={() => setForecastPage("trend-forecast")}
         >
-          <span>Trend forecast</span>
+          <span>Product map</span>
         </button>
       </nav>
 
