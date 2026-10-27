@@ -4248,7 +4248,7 @@ function LululemonSeasonForecast() {
         <article className="lululemon-forecast-section annual-timeline" id="forecast-nyg-milestones">
           <div className="lululemon-forecast-section-heading">
             <div>
-              <p className="eyebrow">01 · ANNUAL TIMELINE</p>
+              <p className="eyebrow">TIMELINE</p>
               <h3>Product development timeline</h3>
             </div>
             <span>One annual view for FW and SS development, showcases, and team capacity.</span>
