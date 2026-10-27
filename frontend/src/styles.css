@@ -12508,10 +12508,9 @@ html {
 
 @media (min-width: 641px) and (max-width: 1180px) {
   main {
-    width: calc(121.95% - 20px);
-    max-width: none;
-    margin: 10px 0 0 10px;
-    zoom: 0.82;
+    width: calc(100% - 16px);
+    max-width: 1180px;
+    margin: 8px auto 0;
   }
 
   .topbar {
@@ -12526,8 +12525,8 @@ html {
 
   .brand-block,
   .brand-block.lululemon-title-only {
-    width: min(320px, 31%);
-    min-width: 250px;
+    width: min(280px, 28%);
+    min-width: 220px;
   }
 
   .header-actions {
@@ -12535,7 +12534,7 @@ html {
     width: auto;
     margin-left: auto;
     flex: 1;
-    grid-template-columns: auto minmax(150px, 0.8fr) minmax(240px, 1.2fr) auto;
+    grid-template-columns: auto minmax(130px, 0.75fr) minmax(210px, 1.25fr) auto;
     align-items: stretch;
     gap: 8px;
   }
@@ -12550,7 +12549,33 @@ html {
   .control-panel,
   .panel,
   .lululemon-overview-section {
-    padding: 18px;
+    padding: 14px;
+  }
+
+  .brand-block.lululemon-title-only {
+    min-height: 76px;
+    padding: 14px 18px;
+  }
+
+  .brand-block.lululemon-title-only h1 {
+    font-size: clamp(23px, 3vw, 31px);
+  }
+
+  .page-nav a,
+  .page-nav button {
+    min-height: 36px;
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .lululemon-overview-heading {
+    min-height: 110px;
+    padding: 20px 24px;
+  }
+
+  .lululemon-overview-heading h2,
+  .profile-hero h2 {
+    font-size: clamp(34px, 5vw, 52px);
   }
 
   .filter-quick-row {
@@ -12578,6 +12603,15 @@ html {
 
   .kpi-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .kpi-card {
+    min-height: 112px;
+    padding: 16px;
+  }
+
+  .kpi-card strong {
+    font-size: 32px;
   }
 
   .dashboard-grid {
@@ -12609,11 +12643,27 @@ html {
   }
 
   .lululemon-metric-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
   }
 
   .lululemon-metric-grid.compact {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lululemon-metric-card,
+  .lululemon-metric-grid.no-icons .lululemon-metric-card {
+    min-height: 108px;
+    padding: 14px;
+  }
+
+  .lululemon-metric-card strong {
+    font-size: clamp(25px, 3.4vw, 34px);
+  }
+
+  .lululemon-metric-card span,
+  .lululemon-metric-card small {
+    font-size: 8px;
   }
 
   .lululemon-business-grid {
@@ -12633,10 +12683,46 @@ html {
   }
 
   .lululemon-comparison-heading,
-  .lululemon-style-card-heading,
-  .lululemon-subtype-card-heading {
+  .lululemon-style-card-heading {
     align-items: flex-start;
     flex-direction: row;
+  }
+
+  .lululemon-subtype-card-heading {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.8fr);
+    align-items: start;
+    gap: 14px;
+  }
+
+  .lululemon-subtype-card-heading > div:first-child {
+    min-width: 0;
+  }
+
+  .lululemon-subtype-card-heading h3 {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .lululemon-subtype-card-heading p {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .lululemon-style-controls.lululemon-chart-controls {
+    grid-template-columns: minmax(150px, 1fr) 68px repeat(2, minmax(135px, 1fr));
+    gap: 8px;
+  }
+
+  .lululemon-style-controls label > span,
+  .lululemon-style-controls legend {
+    font-size: 7px;
+  }
+
+  .lululemon-style-controls select,
+  .lululemon-style-controls button {
+    min-height: 34px;
+    font-size: 9px;
   }
 
   .lululemon-style-comparison-body {
@@ -12646,6 +12732,5 @@ html {
   .dashboard-ai-launcher {
     right: 16px;
     bottom: 16px;
-    zoom: 0.9;
   }
 }
